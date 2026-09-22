@@ -16,6 +16,7 @@ El producto reúne un editor por bloques, quizzes configurables, materias, tarea
 | [docs/ruta-de-desarrollo.md](docs/ruta-de-desarrollo.md) | Entregas propuestas, evaluación de tecnologías, diseño y documentación verificable. |
 | [docs/costos-servicios.md](docs/costos-servicios.md) | Planes gratuitos, opciones de pago y fuentes oficiales. |
 | [docs/decisiones/0001-supabase.md](docs/decisiones/0001-supabase.md) | Selección de PostgreSQL, Auth y Storage de Supabase y comprobaciones pendientes. |
+| [docs/estado-del-desarrollo.md](docs/estado-del-desarrollo.md) | Estado comprobado, pendientes y siguiente entrega. |
 
 ## Estado
 
