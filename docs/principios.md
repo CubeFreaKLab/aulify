@@ -2,7 +2,7 @@
 
 **Estado: borrador.**
 
-Este documento define los principios de diseño y desarrollo. El contexto general está en [CONTEXT.md](CONTEXT.md) y los requisitos en [specification.md](specification.md).
+Este documento define los principios de diseño y desarrollo. El contexto general está en [producto y vocabulario](producto.md) y los requisitos en [specification.md](../specification.md).
 
 ## 1. Propósito y público
 

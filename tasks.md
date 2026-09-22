@@ -8,11 +8,11 @@ Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md
 
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |
 |---|---|---|---|---|
-| T-01 | Comprobar despliegue gratuito y acceso privado a datos y archivos | RF-01, RF-02, RF-10, RNF-04 | — | Prueba mínima con cuentas ficticias, permisos comprobados, cuotas y elección de proveedores registradas. |
+| T-01 | Comprobar Supabase Free, despliegue, correo y acceso privado a datos y archivos | RF-01, RF-02, RF-10, RNF-03, RNF-04 | — | Prueba con cuentas ficticias, RLS y Storage comprobados, recuperación por SMTP y transporte de sincronización evaluados frente a cuotas y carga objetivo. |
 | T-02 | Precisar reglas de evaluación, estados y visibilidad pendientes | RF-05 a RF-08, RF-13 a RF-16 | — | Ejemplos de resultado esperado, fórmula y transiciones coherentes en la especificación. |
-| T-03 | Definir modelo de datos, permisos, consultas y versiones | RF-01 a RF-16 | T-01, T-02 | Esquema y operaciones documentados; ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
+| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-16 | T-01, T-02 | Diagramas conceptual y relacional, diccionario, normalización, migraciones SQL y RLS documentados; ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
 | T-04 | Diseñar recorridos principales en celular y computadora | RNF-01, RNF-02, RF-16 | T-02 | Pantallas y estados de crear, publicar, participar, entregar y revisar; controles accesibles y configuración avanzada. |
-| T-05 | Inicializar aplicación y verificaciones del repositorio | RNF-04 | T-01, T-03 | Dependencias fijadas, construcción reproducible, configuración de ejemplo sin secretos y comprobaciones básicas. |
+| T-05 | Inicializar aplicación, Playwright e integración continua con GitHub Actions | RNF-01, RNF-02, RNF-04 | T-01, T-03 | Dependencias fijadas, construcción reproducible y configuración de ejemplo sin secretos. Flujo de Actions ejecutado con análisis estático, tipos, pruebas disponibles, construcción y recorrido inicial de Playwright; registrar informe y entorno aislado para pruebas de datos. |
 
 ## Recorrido central
 

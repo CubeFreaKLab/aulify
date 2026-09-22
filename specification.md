@@ -2,7 +2,7 @@
 
 **Estado: borrador 0.8.**
 
-Este documento describe el comportamiento del producto y las reglas pendientes. El propósito y alcance general se encuentran en [CONTEXT.md](CONTEXT.md); los principios de desarrollo, en [constitution.md](constitution.md).
+Este documento describe el comportamiento del producto y las reglas pendientes. El propósito y alcance general se encuentran en [Producto y vocabulario](docs/producto.md); los principios de desarrollo, en [Principios](docs/principios.md).
 
 ## Estado de las reglas
 
@@ -53,7 +53,7 @@ Consulta sus calificaciones cuando el docente las publica. La clasificación del
 | RNF-01 | Buena experiencia responsive para ambos roles | Preparar, participar y revisar se pueden completar en celular y computadora. Las tablas y controles se adaptan al espacio disponible. | Navegadores y tamaños objetivo, límites de conectividad y rendimiento. |
 | RNF-02 | Usabilidad y accesibilidad prioritarias | Las acciones y estados tienen nombres comprensibles. Se verifican teclado, foco, etiquetas, contraste, lectura, movimiento y tiempo. | Criterios medibles y procedimiento de evaluación de uso. |
 | RNF-03 | Objetivo de carga de 50 estudiantes por actividad y cuatro actividades simultáneas | Ejecutar una prueba con 200 cuentas de prueba distribuidas entre cuatro actividades, además de las sesiones docentes. Registrar errores, tiempos, persistencia de respuestas y consumo de servicios. | Umbrales de aceptación y configuración del entorno. Es un objetivo de prueba, todavía sin capacidad validada. |
-| RNF-04 | Inicio con planes gratuitos de servicios | El despliegue inicial identifica plan, elegibilidad, cuotas y respuesta al agotamiento. No activa un plan con facturación como parte del inicio gratuito. | Proveedor definitivo de archivos y viabilidad de las cuotas bajo carga. Las opciones y precios están en docs/costos-servicios.md. |
+| RNF-04 | Inicio con planes gratuitos de servicios | El despliegue inicial identifica plan, elegibilidad, cuotas y respuesta al agotamiento. No activa un plan con facturación como parte del inicio gratuito. | Viabilidad de Supabase Free bajo carga, proveedor de correo, transporte de sincronización y alojamiento. La selección técnica y los costos están en plan.md y docs/costos-servicios.md. |
 
 ## Organización y publicación de recursos
 

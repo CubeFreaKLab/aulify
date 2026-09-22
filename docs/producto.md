@@ -1,10 +1,8 @@
-# Contexto de Aulify
+# Producto y vocabulario de Aulify
 
 ## Identidad y propósito
 
 **Aulify** es una plataforma web para la creación de recursos de clase interactivos en educación secundaria.
-
-Título del proyecto: **Desarrollo de la plataforma web Aulify para la creación de recursos de clase interactivos en educación secundaria**.
 
 El recorrido central es preparar un recurso con explicaciones y preguntas, compartirlo con una materia, participar y revisar respuestas y resultados. La facilidad de uso, la comprensión y la accesibilidad son prioridades para ambos roles, en celular y computadora.
 
@@ -29,7 +27,7 @@ El recorrido central es preparar un recurso con explicaciones y preguntas, compa
 - Gráficos de evolución, distribución de notas y estado de entregas, acompañados de tablas y filtros.
 - Reportes de posibles irregularidades para evaluación del docente dentro de la plataforma.
 
-Las reglas detalladas y sus pendientes se mantienen en [specification.md](specification.md). Los principios de diseño y desarrollo se encuentran en [constitution.md](constitution.md).
+Las reglas detalladas y sus pendientes se mantienen en [specification.md](../specification.md). Los principios de diseño y desarrollo se encuentran en [principios.md](principios.md).
 
 ## Referencias de diseño
 
@@ -41,9 +39,11 @@ Método: Spec Driven Development (SDD).
 
 Estado: planificación; sin aplicación implementada.
 
-Opciones tecnológicas por evaluar: React, Next.js, TypeScript, Node.js y Firebase. El [plan técnico](plan.md) presenta una propuesta modular y la alternativa de almacenamiento de archivos por comprobar. El alcance no exige microservicios.
+Selección de servicios: Supabase con PostgreSQL para datos, Supabase Auth para identidad y Supabase Storage para archivos privados, con inicio en Free. La [decisión de arquitectura](decisiones/0001-supabase.md) registra los motivos y las comprobaciones pendientes. Se mantienen React, Next.js, TypeScript y Node.js como propuesta para la aplicación modular. El alcance no exige microservicios.
 
-El inicio utilizará planes gratuitos. Los [costos de referencia](docs/costos-servicios.md) distinguen licencias, planes, cuotas y alternativas de pago. La carga objetivo es de 50 estudiantes por actividad y cuatro actividades simultáneas; se trata de una meta de prueba y no de una capacidad ya validada.
+Se adopta Playwright para las pruebas de recorridos y GitHub Actions para integración continua. Sus configuraciones se implementarán al inicializar la aplicación; las pruebas todavía no se han ejecutado.
+
+El inicio utilizará planes gratuitos. Los [costos de referencia](costos-servicios.md) distinguen licencias, planes, cuotas y alternativas de pago. La carga objetivo es de 50 estudiantes por actividad y cuatro actividades simultáneas; se trata de una meta de prueba y no de una capacidad ya validada.
 
 ## Vocabulario
 

@@ -1,6 +1,6 @@
 # Plan técnico de Aulify
 
-**Estado: propuesta inicial, pendiente de comprobación técnica.**
+**Estado: Supabase, Playwright y GitHub Actions seleccionados; implementación y comprobación técnica pendientes.**
 
 Este documento desarrolla cómo abordar los requisitos de [specification.md](specification.md). No describe una aplicación ya implementada. Las reglas funcionales se mantienen en la especificación y los costos en [docs/costos-servicios.md](docs/costos-servicios.md).
 
@@ -8,23 +8,27 @@ Este documento desarrolla cómo abordar los requisitos de [specification.md](spe
 
 Una aplicación web modular con interfaz y operaciones de servidor dentro del mismo proyecto. Los módulos separan responsabilidades, pero el inicio no requiere despliegues independientes ni microservicios.
 
-| Componente | Opción por evaluar | Responsabilidad |
+| Componente | Selección o propuesta | Responsabilidad |
 |---|---|---|
 | Interfaz y aplicación web | Next.js, React y TypeScript | Pantallas, editor, participación, tareas y resultados. |
 | Operaciones de servidor | Entorno Node.js de la aplicación | Validación de permisos, reglas académicas, publicación de notas y operaciones sensibles. |
-| Identidad | Firebase Authentication, Spark | Acceso con correo y contraseña y recuperación por correo. |
-| Datos y cambios de sesión | Cloud Firestore, Spark | Materias, recursos versionados, actividades, intentos, respuestas y estados. |
-| Archivos privados | Supabase Storage Free, candidato | Imágenes y entregas, con acceso ligado a la autorización en Aulify. |
+| Identidad | Supabase Auth, Free | Acceso con correo y contraseña; configurar y comprobar un proveedor SMTP para recuperación por correo. |
+| Datos | PostgreSQL de Supabase, Free | Modelo relacional de materias, integrantes, recursos versionados, actividades, intentos, respuestas y calificaciones. |
+| Sincronización | Transporte por comprobar | Evaluar Realtime y alternativas compatibles con las cuotas y con la carga objetivo; la elección de base de datos no determina por sí sola este transporte. |
+| Archivos privados | Supabase Storage, Free | Imágenes y entregas con políticas de acceso vinculadas a la pertenencia y los permisos. |
 | Despliegue | Vercel Hobby si el uso es elegible | Aplicación publicada por HTTPS. Render se evalúa como alternativa, considerando sus límites. |
-| Versionado y verificaciones | GitHub Free y Actions | Cambios revisables y comprobaciones del proyecto dentro de cuotas. |
+| Versionado e integración continua | GitHub Free y GitHub Actions | Ejecutar comprobaciones y conservar informes vinculados a cada cambio, dentro de las cuotas. |
+| Pruebas de recorridos | Playwright | Comprobar los flujos entre roles en navegador y su presentación en distintos tamaños de pantalla. |
 
-Las versiones de dependencias se fijarán al inicializar la aplicación y quedarán registradas en el archivo de bloqueo. No se seleccionará una biblioteca de editor o gráficos solo por su apariencia: primero se comprobarán licencia, accesibilidad, soporte móvil y encaje con los requisitos.
+La [decisión de Supabase](docs/decisiones/0001-supabase.md) sustituye la combinación anterior de proveedores. Las versiones de dependencias se fijarán al inicializar la aplicación y quedarán registradas en el archivo de bloqueo. No se seleccionará una biblioteca de editor o gráficos solo por su apariencia: primero se comprobarán licencia, accesibilidad, soporte móvil y encaje con los requisitos.
 
 ## 2. Prueba técnica previa al desarrollo de funciones
 
-Comprobar con datos ficticios el recorrido mínimo: iniciar sesión, crear una materia, aprobar una solicitud, guardar y leer datos con permisos y subir un archivo privado. Esto permite verificar la combinación de proveedores antes de construir el editor completo.
+Comprobar con datos ficticios el recorrido mínimo: iniciar sesión, recuperar el acceso por correo, crear una materia, aprobar una solicitud, guardar y leer datos con permisos y subir un archivo privado. Esto permite verificar Supabase y sus servicios auxiliares antes de construir el editor completo.
 
-La integración de Firebase Authentication con Supabase se apoyará en su [documentación oficial](https://supabase.com/docs/guides/auth/third-party/firebase-auth). Los permisos de archivos deben impedir que cambiar una dirección o identificador permita consultar entregas ajenas. Las credenciales administrativas permanecen en el servidor. No se presupone el uso de Cloud Functions ni la activación de Blaze.
+Supabase Auth identificará al usuario y PostgreSQL conservará los perfiles y relaciones del producto. Definir políticas de seguridad por fila (RLS) para las tablas expuestas y políticas de acceso para Storage. Los permisos deben impedir que cambiar una dirección o identificador permita consultar notas o entregas ajenas. Las credenciales administrativas permanecen en el servidor; una operación privilegiada debe verificar explícitamente los permisos del solicitante. Fuentes: [RLS](https://supabase.com/docs/guides/database/postgres/row-level-security) y [tablas y relaciones](https://supabase.com/docs/guides/database/tables).
+
+El correo predeterminado de Supabase se limita a destinatarios autorizados del equipo y no cubre el registro o la recuperación para todos los usuarios. Seleccionar un servicio SMTP compatible, verificar su remitente, cuotas y costo, y ejecutar una recuperación real con una cuenta de prueba antes de considerar completa la autenticación. [Documentación de SMTP](https://supabase.com/docs/guides/auth/auth-smtp).
 
 Las cargas de archivos deben evitar trasladar todo su contenido a través de operaciones de servidor con límites menores. Se comprobará una carga autorizada directa al almacenamiento, además de la validación de tipo, tamaño y pertenencia a la materia. El máximo admitido por un proveedor no define automáticamente el máximo del producto.
 
@@ -60,7 +64,11 @@ La capa de interfaz no decide permisos ni resultados académicos. El servidor va
 | Calificación | Resultado calculado o manual, máximo, peso y estado de publicación. |
 | Incidencia | Señal registrada, contexto mínimo y revisión del docente. |
 
-Definir los documentos, consultas e índices a partir de estos recorridos. Separar las consignas visibles de las soluciones y criterios que deben permanecer reservados. No enviar respuestas correctas ocultas dentro de los datos descargados por el estudiante.
+Definir el modelo conceptual, el modelo relacional y el esquema físico de PostgreSQL. Documentar entidades, cardinalidades, claves primarias y foráneas, dependencias funcionales, normalización hasta tercera forma normal cuando corresponda, restricciones, índices y políticas de acceso. Justificar las excepciones y evitar duplicaciones que puedan producir notas o pertenencias inconsistentes.
+
+Conservar las migraciones SQL versionadas para reproducir el esquema. La estructura de los bloques del editor puede evaluarse como contenido JSONB versionado, con validación explícita; esta posibilidad no reemplaza las relaciones académicas ni autoriza guardar soluciones ocultas junto con datos que el estudiante puede consultar. El diagrama y el diccionario de datos deben corresponder con las migraciones vigentes.
+
+Separar las consignas visibles de las soluciones y criterios que deben permanecer reservados. No enviar respuestas correctas ocultas dentro de los datos descargados por el estudiante.
 
 ## 5. Consistencia del quiz y las notas
 
@@ -77,6 +85,8 @@ La interfaz mantendrá la transición continua del quiz y presentará errores cu
 ## 6. Comunicación y costo de las sesiones
 
 Propuesta: escuchar únicamente el estado de sesión necesario, las respuestas propias del estudiante y los datos autorizados para el docente. Evitar que cada estudiante descargue todas las respuestas del grupo.
+
+Supabase Free admite 200 conexiones simultáneas de Realtime. Si cada uno de los 200 estudiantes y cuatro docentes mantiene una conexión, se requieren 204, por encima de esa cuota. Antes de adoptar Realtime para todos los participantes, evaluar un transporte compatible con el inicio gratuito, incluyendo consultas periódicas o una combinación de mecanismos, y medir su latencia y consumo. Esta evaluación no reduce la carga objetivo ni acredita su cumplimiento. [Límites de Realtime](https://supabase.com/docs/guides/realtime/limits).
 
 El objetivo es probar cuatro actividades simultáneas con 50 estudiantes cada una, además de sus docentes. Medir consumo, respuestas persistidas, errores y tiempos bajo esa carga. Los umbrales de aceptación se fijarán antes de ejecutar la prueba; el objetivo no implica una capacidad ya demostrada.
 
@@ -112,6 +122,18 @@ Cada registro de prueba incluirá versión, entorno, datos ficticios utilizados,
 
 ## 10. Decisiones antes de implementar
 
-Completar las reglas pendientes de la especificación que afecten a cada entrega: puntuación y redondeo, publicación de notas, preguntas dependientes, desempates, plazos de reentrega y datos visibles. Las decisiones técnicas inmediatas son almacenamiento de archivos, despliegue elegible, versiones, consultas, límites y eliminación periódica.
+Completar las reglas pendientes de la especificación que afecten a cada entrega: puntuación y redondeo, publicación de notas, preguntas dependientes, desempates, plazos de reentrega y datos visibles. Las decisiones técnicas inmediatas son proveedor SMTP, transporte de sincronización, modelo relacional y RLS, despliegue elegible, versiones, consultas, límites, respaldo y eliminación periódica.
 
 El orden de ejecución y la evidencia de finalización se mantienen en [tasks.md](tasks.md).
+
+## 11. Integración continua con GitHub Actions
+
+GitHub Actions ejecutará las comprobaciones al proponer cambios mediante pull requests y al integrar cambios en la rama principal. La configuración se añadirá al inicializar la aplicación y usar comandos reales del proyecto; por ahora no existe un flujo ejecutado.
+
+El flujo previsto comprende instalación reproducible de dependencias, análisis estático, comprobación de tipos, pruebas de reglas de negocio, construcción de la aplicación, pruebas de migraciones y permisos en un entorno aislado y recorridos de Playwright. Vitest y axe se mantienen como herramientas propuestas para cálculos y comprobaciones automáticas de accesibilidad. La evaluación manual de accesibilidad sigue siendo necesaria.
+
+Las pruebas de base de datos usarán datos ficticios y una instancia de prueba aislada, preferentemente Supabase local en el ejecutor si el experimento confirma su viabilidad. Comprobar restricciones, consultas y RLS con usuarios y permisos reales de prueba. No ejecutar restablecimientos ni migraciones de prueba contra la base de datos de uso.
+
+Los informes identificarán el cambio de código, entorno y resultado. Conservar reportes de Playwright y capturas o trazas de fallos con retención acotada; las evidencias seleccionadas para una entrega se preservarán por separado con su versión. Cancelar ejecuciones obsoletas de una misma rama para limitar consumo y evitar disparar pruebas costosas por cambios que no las afectan. Configurar tiempos máximos y permisos mínimos para los flujos.
+
+La aprobación de comprobaciones obligatorias se configurará como condición de integración si el plan y la visibilidad del repositorio lo permiten; verificarlo antes de declarar una protección automática. El despliegue automático y la creación de recursos externos requieren una configuración independiente y todavía no están implementados. Fuentes: [integración continua](https://docs.github.com/en/actions/get-started/continuous-integration) y [cuotas de Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
