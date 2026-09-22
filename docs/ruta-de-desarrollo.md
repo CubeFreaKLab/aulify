@@ -8,6 +8,8 @@ El primer resultado funcional será un recorrido completo: un docente crea una m
 
 ## Punto de partida comprobado
 
+El repositorio contiene contexto, principios, una especificación en borrador 0.8 con 16 requisitos funcionales y 4 no funcionales, un plan técnico propuesto y 21 tareas pendientes. Todavía no contiene aplicación, esquema físico de datos, prototipo de interfaces aprobado ni resultados de pruebas.
+
 El [plan](../plan.md) mantiene Next.js, React y TypeScript como propuesta para la aplicación. La selección vigente utiliza Supabase con PostgreSQL, Auth y Storage, además de Playwright y GitHub Actions para recorridos e integración continua. La [decisión de arquitectura](decisiones/0001-supabase.md) sustituye la combinación anterior de datos e identidad. Su selección no acredita una configuración implementada ni capacidad validada.
 
 Los documentos existentes se conservan como punto de partida. El desarrollo puede empezar cuando estén resueltas las dependencias de una entrega; las funciones posteriores pueden mantener pendientes expresamente identificados.
@@ -28,7 +30,7 @@ La segunda entrega es una porción comprobable del producto, no una reducción d
 
 ## Objetivos de ejecución y revisión
 
-Las entregas se organizan por dependencias y resultados comprobables.
+Las entregas se organizan por dependencias y resultados comprobables. Las previsiones se ajustan con la evidencia de ejecución e integración.
 
 | Orden | Hito previsto | Condición para avanzar |
 |---|---|---|
@@ -38,6 +40,8 @@ Las entregas se organizan por dependencias y resultados comprobables.
 | 4 | Integrar equipos, potenciadores, gráficos, incidencias y conservación. | Compatibilidad de reglas y revisión de los recorridos completos en ambos roles. |
 | 5 | Preparar la versión integrada. | Construcción reproducible, servicios configurados, comprobaciones pertinentes y lista explícita de limitaciones o defectos pendientes. |
 | 6 | Estabilizar, completar evidencias y verificar la demostración. | Corregir fallos prioritarios; alinear diagramas, manuales, capturas y versión publicada; comprobar recuperación y datos de demostración. |
+
+Cada entrega registra evidencia, pendientes y el siguiente hito. Si una dependencia cambia la previsión, actualizarla con su causa antes de modificar el alcance; conservar visibles las funciones pendientes. Aprovechar el margen disponible para estabilización y revisión de la versión existente. La documentación y las pruebas se producen con cada función.
 
 ## Decisiones que deben cerrarse primero
 
@@ -133,6 +137,7 @@ Comprobar teclado, foco, etiquetas, lectura, contraste, adaptación de pantalla,
 Mantener docs/producto.md como entrada breve; docs/principios.md como principios; specification.md como alcance general y reglas transversales; plan.md como arquitectura vigente; tasks.md como mapa de dependencias.
 
 Al preparar cada entrega, crear una carpeta de especificación solo si su detalle lo requiere, con spec.md, plan.md y tasks.md. Enlazar las reglas generales y no mantener copias divergentes. Agregar modelo de datos, contratos de operaciones, decisiones y pruebas cuando exista contenido concreto. El nombre del archivo no garantiza la calidad de una especificación.
+
 
 ## Condición de entrega
 

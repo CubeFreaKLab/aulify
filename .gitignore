@@ -15,3 +15,35 @@ coverage/
 .DS_Store
 Thumbs.db
 ~$*
+
+# Configuración e instrucciones locales
+AGENTS.md
+AGENTS.override.md
+CONTEXT.md
+CLAUDE.md
+GEMINI.md
+.codex/
+.agents/
+.claude/
+.cursor/
+.windsurf/
+.aider*
+.cursorrules
+.windsurfrules
+.clinerules/
+.mcp.json
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+.github/agents/
+.specify/
+/skills/
+/prompts/
+/.local-private/
+
+# Informes locales y estado de pruebas
+playwright-report/
+test-results/
+blob-report/
+playwright/.auth/
+supabase/.temp/

@@ -7,6 +7,7 @@ Actualizado: 22 de septiembre de 2026.
 - Repositorio en planificación: contexto, principios, especificación 0.8, plan y tareas disponibles.
 - Supabase con PostgreSQL, Auth y Storage seleccionado; decisión en [ADR 0001](decisiones/0001-supabase.md).
 - Playwright y GitHub Actions seleccionados para comprobación de recorridos e integración continua. Configuración pendiente.
+- Flujo de entrega y commits definido en [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ## Pendiente de implementación
 

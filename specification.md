@@ -2,7 +2,7 @@
 
 **Estado: borrador 0.8.**
 
-Este documento describe el comportamiento del producto y las reglas pendientes. El propósito y alcance general se encuentran en [Producto y vocabulario](docs/producto.md); los principios de desarrollo, en [Principios](docs/principios.md).
+Este documento describe el comportamiento del producto y las reglas pendientes. El propósito y alcance general se encuentran en [producto y vocabulario](docs/producto.md); los principios de desarrollo, en [principios](docs/principios.md).
 
 ## Estado de las reglas
 
