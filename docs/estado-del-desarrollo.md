@@ -4,10 +4,12 @@ Actualizado: 22 de septiembre de 2026.
 
 ## Comprobado
 
-- Repositorio en planificación: contexto, principios, especificación 0.8, plan y tareas disponibles.
+- Repositorio en planificación: producto, principios, especificación general 0.9, plan y tareas disponibles.
 - Supabase con PostgreSQL, Auth y Storage seleccionado; decisión en [ADR 0001](decisiones/0001-supabase.md).
 - Playwright y GitHub Actions seleccionados para comprobación de recorridos e integración continua. Configuración pendiente.
 - Flujo de entrega y commits definido en [CONTRIBUTING.md](../CONTRIBUTING.md).
+- [Entrega 001](../specs/001-recurso-interactivo/spec.md) documentada con recorrido completo, alcance incremental, permisos, estados y siete propuestas nuevas para revisión.
+- [30 casos de aceptación](../specs/001-recurso-interactivo/aceptacion.md), [plan](../specs/001-recurso-interactivo/plan.md) y [tareas de 001](../specs/001-recurso-interactivo/tasks.md) preparados. Ningún caso ha sido ejecutado.
 
 ## Pendiente de implementación
 
@@ -15,7 +17,7 @@ No hay aplicación, migraciones, proyecto Supabase configurado, biblioteca visua
 
 ## Siguiente entrega
 
-Cerrar los criterios del recorrido inicial: cuenta → materia → incorporación aprobada → recurso con explicación y pregunta → participación → revisión y publicación del resultado. Precisar las decisiones que bloqueen ese recorrido; elaborar el modelo de datos y el prototipo antes de implementar sus dependencias.
+Revisar las propuestas P-01 a P-07 de 001 y elaborar el modelo conceptual y relacional, sus permisos y restricciones. Preparar después conceptos visuales, fundamentos de la marca y prototipos de editor, participación y revisión. Las decisiones independientes pueden avanzar mientras se revisan los detalles de producto.
 
 ## Evidencia para actualizar este estado
 

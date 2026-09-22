@@ -4,6 +4,8 @@
 
 Este documento desarrolla cómo abordar los requisitos de [specification.md](specification.md). No describe una aplicación ya implementada. Las reglas funcionales se mantienen en la especificación y los costos en [docs/costos-servicios.md](docs/costos-servicios.md).
 
+El [plan de la entrega 001](specs/001-recurso-interactivo/plan.md) concreta las entidades, operaciones y comprobaciones del primer recorrido. Sus propuestas de comportamiento se revisan en el [spec de 001](specs/001-recurso-interactivo/spec.md) antes de implementar la parte afectada.
+
 ## 1. Arquitectura propuesta
 
 Una aplicación web modular con interfaz y operaciones de servidor dentro del mismo proyecto. Los módulos separan responsabilidades, pero el inicio no requiere despliegues independientes ni microservicios.

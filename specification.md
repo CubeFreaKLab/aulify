@@ -1,6 +1,6 @@
 # Especificación de Aulify
 
-**Estado: borrador 0.8.**
+**Estado: borrador 0.9.**
 
 Este documento describe el comportamiento del producto y las reglas pendientes. El propósito y alcance general se encuentran en [producto y vocabulario](docs/producto.md); los principios de desarrollo, en [principios](docs/principios.md).
 
@@ -11,6 +11,12 @@ Este documento describe el comportamiento del producto y las reglas pendientes. 
 - **Pendiente:** decisión necesaria para completar un requisito.
 
 Los criterios de comprobación son propuestas para verificar el producto; no representan pruebas ejecutadas.
+
+## Especificaciones por entrega
+
+La [entrega 001: recurso interactivo](specs/001-recurso-interactivo/spec.md) desarrolla el primer recorrido completo entre docente y estudiante, con permisos, estados, reglas de evaluación, propuestas de valores iniciales y [30 casos de aceptación](specs/001-recurso-interactivo/aceptacion.md). Sus detalles nuevos P-01 a P-07 están pendientes de revisión de producto. La división en entregas no elimina requisitos del alcance general.
+
+El [plan de 001](specs/001-recurso-interactivo/plan.md) y sus [tareas](specs/001-recurso-interactivo/tasks.md) concretan las dependencias para diseñar e implementar esa primera parte. Las reglas generales siguen vigentes; una propuesta de la entrega no las sustituye de forma implícita.
 
 ## Recorridos principales
 

@@ -4,6 +4,8 @@
 
 Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md). La existencia de estos documentos no acredita funciones implementadas. Resolver las decisiones que afecten una tarea antes de iniciar su construcción.
 
+La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recorrido central. Su [desglose de tareas](specs/001-recurso-interactivo/tasks.md) desarrolla la secuencia de modelado, diseño, acceso, materias, recursos, participación y evaluación. T-02 tiene una propuesta parcial en ese spec, pendiente de revisión; ninguna tarea general queda completada por ese avance documental.
+
 ## Preparación técnica
 
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |

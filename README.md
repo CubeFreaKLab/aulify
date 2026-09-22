@@ -25,6 +25,8 @@ Supabase con PostgreSQL, Auth y Storage, Playwright y GitHub Actions están sele
 | [Producto y vocabulario](docs/producto.md) | Usuarios, alcance y conceptos. |
 | [Principios](docs/principios.md) | Usabilidad, accesibilidad, control de las actividades y consistencia. |
 | [Especificación general](specification.md) | Requisitos funcionales y reglas transversales. |
+| [Primera entrega: recurso interactivo](specs/001-recurso-interactivo/spec.md) | Recorrido, permisos, estados y propuestas para revisar. |
+| [Aceptación de la primera entrega](specs/001-recurso-interactivo/aceptacion.md) | 30 casos con resultados esperados, pendientes de ejecución. |
 | [Plan técnico](plan.md) | Arquitectura propuesta, datos, permisos y pruebas. |
 | [Tareas](tasks.md) | Dependencias y criterios de finalización. |
 | [Ruta de desarrollo](docs/ruta-de-desarrollo.md) | Entregas y criterios de revisión. |
