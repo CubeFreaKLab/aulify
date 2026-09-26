@@ -1,14 +1,14 @@
 # Ruta de desarrollo de Aulify
 
-Fecha de revisión: 22 de septiembre de 2026.
+Fecha de revisión: 26 de septiembre de 2026.
 
-Estado: ruta propuesta con Supabase, Playwright y GitHub Actions seleccionados. Las demás tecnologías candidatas y los criterios numéricos pendientes requieren definición y comprobación. Esta ruta no acredita una implementación ni pruebas realizadas.
+Estado: ruta propuesta con Supabase, Playwright y GitHub Actions seleccionados. Las demás tecnologías candidatas requieren selección y comprobación; los criterios numéricos están definidos en el plan de calidad. Esta ruta no acredita una implementación ni pruebas realizadas.
 
 El primer resultado funcional será un recorrido completo: un docente crea una materia, aprueba a un estudiante, prepara y publica un recurso con explicaciones y preguntas, el estudiante participa y el docente revisa y publica el resultado. Las entregas posteriores amplían ese recorrido hasta cubrir el alcance de la [especificación](../specification.md).
 
 ## Punto de partida comprobado
 
-El repositorio contiene producto, principios, una especificación general en borrador 0.9 con 16 requisitos funcionales y 4 no funcionales, un plan técnico propuesto y 21 tareas generales de implementación pendientes. La [entrega 001](../specs/001-recurso-interactivo/spec.md) concreta el primer recorrido con 30 casos de aceptación pendientes de ejecución. Todavía no contiene aplicación, esquema físico de datos, prototipo de interfaces aprobado ni resultados de pruebas.
+El repositorio contiene producto, principios, especificación general 1.0 con 17 requisitos funcionales y 6 no funcionales, plan técnico y tareas. T-02 documental está completada; construcción pendiente. La [entrega 001](../specs/001-recurso-interactivo/spec.md) tiene 38 casos y las ampliaciones otros 38; todos pendientes de ejecución. No hay aplicación, esquema físico, prototipo aprobado ni resultados de pruebas.
 
 El [plan](../plan.md) mantiene Next.js, React y TypeScript como propuesta para la aplicación. La selección vigente utiliza Supabase con PostgreSQL, Auth y Storage, además de Playwright y GitHub Actions para recorridos e integración continua. La [decisión de arquitectura](decisiones/0001-supabase.md) sustituye la combinación anterior de datos e identidad. Su selección no acredita una configuración implementada ni capacidad validada.
 
@@ -18,9 +18,9 @@ Los documentos existentes se conservan como punto de partida. El desarrollo pued
 
 | Entrega | Trabajo y relación con las tareas | Evidencia necesaria para cerrarla |
 |---|---|---|
-| 0. Especificación inicial ejecutable | Precisar cuentas, permisos, estados, versiones, puntuación y publicación que afecten al primer recorrido. Desarrolla T-02 y prepara T-03. | Ejemplos con resultados esperados, decisiones registradas y ausencia de ambigüedades que bloqueen la primera entrega. |
+| 0. Base funcional documentada | Versión 1.0 definida: cuentas, permisos, estados, versiones, puntuación, publicación y ayuda. T-02 documental completada; prepara T-03. | Decisiones, ejemplos y 76 escenarios esperados disponibles; ejecución pendiente. |
 | 1. Fundamentos de diseño y viabilidad técnica | Redefinir estilo manteniendo el logotipo. Comprobar Supabase y las alternativas de correo y sincronización con un experimento reducido. T-01, T-03 y T-04. | Prototipos de editor, participación y revisión en móvil y escritorio; modelo conceptual; resultados reales de permisos, datos, archivos, recuperación por correo y sincronización. |
-| 2. Primer recorrido funcional | Inicializar aplicación, acceso, materia, aprobación, recurso con explicación y preguntas de selección, participación y revisión. Partes de T-05 a T-12 y T-14. | Recorrido reproducible entre dos cuentas; persistencia; acceso ajeno rechazado; versión publicada conservada; puntuación y publicación comprobadas; capturas de la versión ejecutada. |
+| 2. Primer recorrido funcional | Inicializar aplicación, acceso, materia, aprobación, recurso con explicación y preguntas de selección/abiertas, participación, revisión y ayuda. Partes de T-05 a T-12, T-14 y T-22. | Recorrido reproducible entre dos cuentas; persistencia; acceso ajeno rechazado; versión publicada conservada; puntuación, publicación y ayuda comprobadas; capturas de la versión ejecutada. |
 | 3. Recursos y actividades completas | Completar biblioteca, copias, tipos de preguntas, corrección manual, modos de avance, disponibilidad, mezcla, tiempo y reconexión. Completar T-08 a T-12. | Casos representativos por tipo de pregunta y estado; reconexión sin duplicaciones; tiempo controlado por servidor; soluciones ocultas protegidas. |
 | 4. Evaluación y seguimiento | Tareas con archivos, reentregas, actividades manuales, promedio, gráficos y filtros. T-13, T-14 y T-16. | Casos de cálculo con resultados esperados; separación entre notas corregidas y publicadas; archivos privados; tablas y gráficos con los mismos valores. |
 | 5. Juego y ciclo de vida | Equipos, clasificación, rachas, sonidos y potenciadores; incidencias; archivo, restauración y eliminación. T-15, T-17 y T-18. | Reglas coherentes cuando se ocultan aciertos; consumo único de potenciadores; incidencias sin sanción automática; restauración y eliminación verificadas. |
@@ -43,16 +43,11 @@ Las entregas se organizan por dependencias y resultados comprobables. Las previs
 
 Cada entrega registra evidencia, pendientes y el siguiente hito. Si una dependencia cambia la previsión, actualizarla con su causa antes de modificar el alcance; conservar visibles las funciones pendientes. Aprovechar el margen disponible para estabilización y revisión de la versión existente. La documentación y las pruebas se producen con cada función.
 
-## Decisiones que deben cerrarse primero
+## Siguiente trabajo
 
-1. **Cuentas y pertenencia:** verificación del correo, cambios de perfil, expiración y renovación de códigos, retiro de integrantes y tratamiento de sesiones activas.
-2. **Estados del recurso y de la actividad:** borrador, publicación, apertura, cierre, corrección y publicación de notas; reglas al editar contenido que ya tiene respuestas.
-3. **Resultados:** fórmulas de puntos y nota, precisión y redondeo, distribución por elementos, resultado sin actividades evaluadas y efecto de bonificaciones.
-4. **Información visible:** combinación de ocultar aciertos con puntos, rachas, clasificación y explicaciones. No revelar indirectamente una solución que debe permanecer oculta.
-5. **Persistencia y continuidad:** autoridad del reloj, reconexión, envío repetido y conflictos de guardado. Una respuesta duplicada no cambia la puntuación ni consume otra bonificación.
-6. **Calidad medible:** tamaños y navegadores objetivo, límites de archivos, tareas de uso y procedimiento de evaluación, umbrales de latencia, errores y persistencia bajo carga.
+La base funcional está definida. Elaborar modelos, contratos y diseño visual a partir de sus reglas. Comprobar SMTP, alojamiento, sincronización, cuotas y bibliotecas antes de construir dependencias sensibles. Los detalles técnicos se documentan en decisiones de arquitectura; cambios funcionales actualizan la especificación y sus casos.
 
-Las decisiones de equipos o informes que no afecten al primer recorrido se cierran antes de sus respectivas entregas. Cada decisión debe indicar alternativas, motivo, consecuencias y estado: propuesta, aceptada o sustituida.
+La [matriz](calidad/trazabilidad.md) relaciona requisitos con tareas y comprobaciones. El [plan de calidad](calidad/plan-de-calidad.md) define el procedimiento y los umbrales, sin atribuir resultados aún.
 
 ## Evaluación tecnológica
 
@@ -126,7 +121,7 @@ Las capturas son evidencia de una ejecución identificada, no sustituyen una pru
 
 ## Comprobación de usabilidad y accesibilidad
 
-Definir antes de evaluar las tareas, los criterios y la forma de registrar resultados. Los recorridos centrales son crear y publicar un recurso, incorporarse a una materia, participar, entregar y revisar resultados. Medir finalización, errores, necesidad de ayuda y tiempos en condiciones identificadas.
+Aplicar el plan de calidad para tareas, criterios y registro de resultados antes de evaluar. Los recorridos centrales son crear y publicar un recurso, incorporarse a una materia, participar, entregar y revisar resultados. Medir finalización, errores, necesidad de ayuda y tiempos en condiciones identificadas.
 
 Los recorridos técnicos y la inspección de accesibilidad son evidencia del comportamiento del sistema. Para afirmar que docentes y estudiantes lo encuentran fácil de usar se necesita una evaluación con participantes reales y un procedimiento adecuado. Si esa evaluación no se realiza, documentar el alcance técnico de los resultados y la validación con usuarios pendiente.
 

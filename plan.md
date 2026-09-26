@@ -4,7 +4,7 @@
 
 Este documento desarrolla cómo abordar los requisitos de [specification.md](specification.md). No describe una aplicación ya implementada. Las reglas funcionales se mantienen en la especificación y los costos en [docs/costos-servicios.md](docs/costos-servicios.md).
 
-El [plan de la entrega 001](specs/001-recurso-interactivo/plan.md) concreta las entidades, operaciones y comprobaciones del primer recorrido. Sus propuestas de comportamiento se revisan en el [spec de 001](specs/001-recurso-interactivo/spec.md) antes de implementar la parte afectada.
+El [plan de la entrega 001](specs/001-recurso-interactivo/plan.md) concreta las entidades, operaciones y comprobaciones del primer recorrido. Sus decisiones operativas están definidas en el [spec de 001](specs/001-recurso-interactivo/spec.md), versión 1.0.
 
 ## 1. Arquitectura propuesta
 
@@ -58,15 +58,16 @@ La capa de interfaz no decide permisos ni resultados académicos. El servidor va
 | Usuario | Identidad y perfil; los permisos se comprueban por operación. |
 | Materia | Docente propietario, nombre, curso, año y estado de archivo. |
 | Membresía | Materia, estudiante y estado de solicitud o aprobación. |
-| Recurso y versión | Propietario, bloques, borrador y versión publicada inmutable cuando está asociada a respuestas. |
+| Recurso y versión | Propietario, bloques, borrador mutable y versiones publicadas inmutables. |
 | Actividad y sesión | Materia, versión utilizada, reglas configuradas, disponibilidad y estado de avance. |
 | Intento y respuesta | Estudiante, actividad, tiempos, orden asignado, respuestas y estado de corrección. |
 | Uso de potenciador | Actividad, estudiante, tipo y consumo; independiente de los intentos. |
 | Entrega y versión | Actividad, estudiante, archivos y evaluación asociada a cada entrega. |
 | Calificación | Resultado calculado o manual, máximo, peso y estado de publicación. |
 | Incidencia | Señal registrada, contexto mínimo y revisión del docente. |
+| Preferencia de ayuda | Cuenta, rol, versión de guía y estado ofrecido, omitido o completado. |
 
-Definir el modelo conceptual, el modelo relacional y el esquema físico de PostgreSQL. Documentar entidades, cardinalidades, claves primarias y foráneas, dependencias funcionales, normalización hasta tercera forma normal cuando corresponda, restricciones, índices y políticas de acceso. Justificar las excepciones y evitar duplicaciones que puedan producir notas o pertenencias inconsistentes.
+Elaborar el modelo conceptual, el modelo relacional y el esquema físico de PostgreSQL. Documentar entidades, cardinalidades, claves primarias y foráneas, dependencias funcionales, normalización hasta tercera forma normal cuando corresponda, restricciones, índices y políticas de acceso. Justificar las excepciones y evitar duplicaciones que puedan producir notas o pertenencias inconsistentes.
 
 Conservar las migraciones SQL versionadas para reproducir el esquema. La estructura de los bloques del editor puede evaluarse como contenido JSONB versionado, con validación explícita; esta posibilidad no reemplaza las relaciones académicas ni autoriza guardar soluciones ocultas junto con datos que el estudiante puede consultar. El diagrama y el diccionario de datos deben corresponder con las migraciones vigentes.
 
@@ -90,9 +91,9 @@ Propuesta: escuchar únicamente el estado de sesión necesario, las respuestas p
 
 Supabase Free admite 200 conexiones simultáneas de Realtime. Si cada uno de los 200 estudiantes y cuatro docentes mantiene una conexión, se requieren 204, por encima de esa cuota. Antes de adoptar Realtime para todos los participantes, evaluar un transporte compatible con el inicio gratuito, incluyendo consultas periódicas o una combinación de mecanismos, y medir su latencia y consumo. Esta evaluación no reduce la carga objetivo ni acredita su cumplimiento. [Límites de Realtime](https://supabase.com/docs/guides/realtime/limits).
 
-El objetivo es probar cuatro actividades simultáneas con 50 estudiantes cada una, además de sus docentes. Medir consumo, respuestas persistidas, errores y tiempos bajo esa carga. Los umbrales de aceptación se fijarán antes de ejecutar la prueba; el objetivo no implica una capacidad ya demostrada.
+El objetivo es probar cuatro actividades simultáneas con 50 estudiantes cada una, además de sus docentes. Medir consumo, respuestas persistidas, errores y tiempos bajo esa carga. Los umbrales están definidos en el [plan de calidad](docs/calidad/plan-de-calidad.md); el objetivo no implica una capacidad ya demostrada.
 
-Los mecanismos de clasificación y progreso deben respetar la configuración que oculta aciertos. Se resolverá esa combinación antes de publicar señales de puntuación o rachas que permitan deducir una corrección oculta.
+Los mecanismos de clasificación y progreso deben respetar la configuración que oculta aciertos. Las reglas JU-01 a JU-08 de la especificación determinan esa combinación y deben comprobarse antes de publicar señales de puntuación o rachas.
 
 ## 7. Experiencia y accesibilidad
 
@@ -124,7 +125,7 @@ Cada registro de prueba incluirá versión, entorno, datos ficticios utilizados,
 
 ## 10. Decisiones antes de implementar
 
-Completar las reglas pendientes de la especificación que afecten a cada entrega: puntuación y redondeo, publicación de notas, preguntas dependientes, desempates, plazos de reentrega y datos visibles. Las decisiones técnicas inmediatas son proveedor SMTP, transporte de sincronización, modelo relacional y RLS, despliegue elegible, versiones, consultas, límites, respaldo y eliminación periódica.
+La especificación 1.0 define puntuación, redondeo, publicación, mezcla, desempates, reentregas, visibilidad y ayuda. Queda concretar la implementación: SMTP, transporte guiado, modelo relacional/RLS, contratos, despliegue, versiones, respaldo y eliminación periódica. Las decisiones funcionales nuevas se versionan antes de implementarse. Los [criterios de calidad](docs/calidad/plan-de-calidad.md) y la [trazabilidad](docs/calidad/trazabilidad.md) orientan las comprobaciones.
 
 El orden de ejecución y la evidencia de finalización se mantienen en [tasks.md](tasks.md).
 

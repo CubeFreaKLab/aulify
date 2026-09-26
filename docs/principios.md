@@ -1,6 +1,6 @@
 # Principios de desarrollo de Aulify
 
-**Estado: borrador.**
+**Estado: base de desarrollo 1.0.**
 
 Este documento define los principios de diseño y desarrollo. El contexto general está en [producto y vocabulario](producto.md) y los requisitos en [specification.md](../specification.md).
 
@@ -50,7 +50,7 @@ La creación, participación y revisión deben tener una buena experiencia en ce
 
 El quiz mantiene una interacción continua. Cuando no se muestra la corrección, el avance individual pasa a la siguiente pregunta sin una pantalla de confirmación de guardado. En modo guiado, quien ya respondió pasa mediante una transición breve a una vista del progreso grupal hasta que el docente abra la siguiente pregunta. Los aciertos permanecen ocultos cuando así se configure.
 
-Los criterios concretos de accesibilidad y sus comprobaciones se documentarán en la especificación y el plan. La conformidad se declarará únicamente con evidencia de verificación.
+Los criterios concretos y sus comprobaciones están en la especificación y el plan de calidad; su ejecución está pendiente. La conformidad se declarará únicamente con evidencia de verificación.
 
 ## 8. Desarrollo verificable
 
@@ -59,3 +59,7 @@ La documentación contiene requisitos, decisiones técnicas, pendientes y result
 La selección de tecnologías y arquitectura se justifica frente a esos requisitos. No se establece una obligación de utilizar microservicios.
 
 Las funcionalidades, verificaciones y limitaciones se describen según su estado real.
+
+## 9. Ayuda inicial
+
+Ofrecer ayuda breve por rol, opcional y reabrible. Omitirla no limita funciones. No consumir intentos, publicar datos o alterar plazos desde una guía. Mantener instrucciones y estados vacíos comprensibles.

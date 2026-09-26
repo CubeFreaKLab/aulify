@@ -1,18 +1,18 @@
 # Tareas de desarrollo de Aulify
 
-**Estado: planificación. Todas las tareas de implementación están pendientes.**
+**Estado: base funcional 1.0 definida. T-02 documental completada; todas las tareas de implementación están pendientes.**
 
 Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md). La existencia de estos documentos no acredita funciones implementadas. Resolver las decisiones que afecten una tarea antes de iniciar su construcción.
 
-La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recorrido central. Su [desglose de tareas](specs/001-recurso-interactivo/tasks.md) desarrolla la secuencia de modelado, diseño, acceso, materias, recursos, participación y evaluación. T-02 tiene una propuesta parcial en ese spec, pendiente de revisión; ninguna tarea general queda completada por ese avance documental.
+La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recorrido central. Su [desglose de tareas](specs/001-recurso-interactivo/tasks.md) desarrolla la secuencia de modelado, diseño, acceso, materias, recursos, participación y evaluación. T-02 se cierra como definición documental mediante la especificación general 1.0 y las decisiones D-01 a D-07. No acredita implementación ni pruebas ejecutadas.
 
 ## Preparación técnica
 
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |
 |---|---|---|---|---|
 | T-01 | Comprobar Supabase Free, despliegue, correo y acceso privado a datos y archivos | RF-01, RF-02, RF-10, RNF-03, RNF-04 | — | Prueba con cuentas ficticias, RLS y Storage comprobados, recuperación por SMTP y transporte de sincronización evaluados frente a cuotas y carga objetivo. |
-| T-02 | Precisar reglas de evaluación, estados y visibilidad pendientes | RF-05 a RF-08, RF-13 a RF-16 | — | Ejemplos de resultado esperado, fórmula y transiciones coherentes en la especificación. |
-| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-16 | T-01, T-02 | Diagramas conceptual y relacional, diccionario, normalización, migraciones SQL y RLS documentados; ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
+| T-02 | Definir reglas de evaluación, estados y visibilidad (documentación completada) | RF-05 a RF-08, RF-13 a RF-16 | — | Base 1.0, D-01 a D-07, casos AC-01 a AC-38 y AP-01 a AP-38 con resultados esperados. |
+| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-17 | T-02 para el modelo; T-01 para validar persistencia | Diagramas conceptual y relacional, diccionario, normalización, migraciones SQL y RLS documentados; ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
 | T-04 | Diseñar recorridos principales en celular y computadora | RNF-01, RNF-02, RF-16 | T-02 | Pantallas y estados de crear, publicar, participar, entregar y revisar; controles accesibles y configuración avanzada. |
 | T-05 | Inicializar aplicación, Playwright e integración continua con GitHub Actions | RNF-01, RNF-02, RNF-04 | T-01, T-03 | Dependencias fijadas, construcción reproducible y configuración de ejemplo sin secretos. Flujo de Actions ejecutado con análisis estático, tipos, pruebas disponibles, construcción y recorrido inicial de Playwright; registrar informe y entorno aislado para pruebas de datos. |
 
@@ -38,13 +38,16 @@ La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recor
 | T-16 | Construir gráficos, tablas y filtros | RF-12 | T-14 | Mismos valores en gráficos y tablas al filtrar materia, curso y año. |
 | T-17 | Implementar controles de integridad e incidencias | RF-09, RF-14 | T-03, T-11 | Intentos y permisos comprobados; señales documentadas y sin sanción automática. |
 | T-18 | Implementar archivo, restauración y eliminación | RF-02 | T-03, T-09, T-13 | Restauración dentro del plazo y eliminación completa de datos de prueba vencidos, conservando biblioteca y otras materias. |
+| T-22 | Implementar ayuda inicial por rol y ayuda contextual | RF-17, RNF-01, RNF-02 | T-04, T-06, T-12 | AC-31 a AC-34 y AP-34; omitir/repetir, teclado, preferencia por cuenta y sin efectos sobre intentos o notas. |
 
 ## Comprobación integrada
 
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |
 |---|---|---|---|---|
-| T-19 | Revisar recorridos y accesibilidad en ambos dispositivos | RNF-01, RNF-02 | T-12 a T-18 | Registro de barreras y correcciones; teclado, foco, contraste, tiempo y alternativas de interacción comprobados. |
+| T-19 | Revisar recorridos y accesibilidad en ambos dispositivos | RNF-01, RNF-02 | T-12 a T-18, T-22 | Registro de barreras y correcciones; teclado, foco, contraste, tiempo y alternativas de interacción comprobados. |
 | T-20 | Ejecutar pruebas de carga y consumo de servicios | RNF-03, RNF-04 | T-11, T-15, T-16 | Umbrales fijados antes de la ejecución; resultados de cuatro actividades de 50 estudiantes con consumo, errores y latencia. |
-| T-21 | Verificar despliegue y documentar operación | RF-01 a RF-16, RNF-01 a RNF-04 | T-19, T-20 | Versión publicada, recorridos esenciales comprobados y límites, recuperación y mantenimiento documentados. |
+| T-21 | Verificar despliegue y documentar operación | RF-01 a RF-17, RNF-01 a RNF-06 | T-19, T-20 | Versión publicada, recorridos esenciales comprobados y límites, recuperación y mantenimiento documentados. |
 
 No marcar una tarea como completada solo porque exista código. Enlazar su evidencia y actualizar la especificación cuando una decisión cambie el comportamiento previsto.
+
+La [matriz de trazabilidad](docs/calidad/trazabilidad.md) y el [plan de calidad](docs/calidad/plan-de-calidad.md) completan los criterios y su evidencia.

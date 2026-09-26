@@ -26,6 +26,7 @@ El recorrido central es preparar un recurso con explicaciones y preguntas, compa
 - Publicación de notas individuales y promedios ponderados sobre 100.
 - Gráficos de evolución, distribución de notas y estado de entregas, acompañados de tablas y filtros.
 - Reportes de posibles irregularidades para evaluación del docente dentro de la plataforma.
+- Ayuda inicial y contextual por rol, opcional, accesible y reabrible.
 
 Las reglas detalladas y sus pendientes se mantienen en [specification.md](../specification.md). Los principios de diseño y desarrollo se encuentran en [principios.md](principios.md).
 
@@ -37,7 +38,7 @@ La identidad visual de Aulify orienta la presentación. Wayground es una referen
 
 Método: Spec Driven Development (SDD).
 
-Estado: planificación; sin aplicación implementada.
+Estado: base funcional 1.0 definida; modelado, diseño e implementación pendientes.
 
 Selección de servicios: Supabase con PostgreSQL para datos, Supabase Auth para identidad y Supabase Storage para archivos privados, con inicio en Free. La [decisión de arquitectura](decisiones/0001-supabase.md) registra los motivos y las comprobaciones pendientes. Se mantienen React, Next.js, TypeScript y Node.js como propuesta para la aplicación modular. El alcance no exige microservicios.
 
