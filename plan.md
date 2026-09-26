@@ -53,6 +53,8 @@ La capa de interfaz no decide permisos ni resultados académicos. El servidor va
 
 ## 4. Modelo de información propuesto
 
+El [modelo conceptual y relacional 1.0](docs/modelado/README.md) desarrolla las entidades resumidas aquí. Incluye fuente JSON, DBML, diccionario, cardinalidades, normalización, permisos e invariantes. El [ADR 0003](docs/decisiones/0003-modelo-relacional.md) explica las decisiones. Esquema físico y comprobación contra PostgreSQL pendientes.
+
 | Entidad | Información o relación principal |
 |---|---|
 | Usuario | Identidad y perfil; los permisos se comprueban por operación. |
@@ -67,7 +69,7 @@ La capa de interfaz no decide permisos ni resultados académicos. El servidor va
 | Incidencia | Señal registrada, contexto mínimo y revisión del docente. |
 | Preferencia de ayuda | Cuenta, rol, versión de guía y estado ofrecido, omitido o completado. |
 
-Elaborar el modelo conceptual, el modelo relacional y el esquema físico de PostgreSQL. Documentar entidades, cardinalidades, claves primarias y foráneas, dependencias funcionales, normalización hasta tercera forma normal cuando corresponda, restricciones, índices y políticas de acceso. Justificar las excepciones y evitar duplicaciones que puedan producir notas o pertenencias inconsistentes.
+El modelo conceptual y relacional ya documenta entidades, cardinalidades, claves, dependencias, normalización y excepciones. Derivar de él el esquema físico de PostgreSQL, las restricciones e índices ejecutables y las políticas de acceso. Comprobar las invariantes entre relaciones; una FK válida no demuestra por sí sola pertenencia a la misma materia o coherencia de una publicación.
 
 Conservar las migraciones SQL versionadas para reproducir el esquema. La estructura de los bloques del editor puede evaluarse como contenido JSONB versionado, con validación explícita; esta posibilidad no reemplaza las relaciones académicas ni autoriza guardar soluciones ocultas junto con datos que el estudiante puede consultar. El diagrama y el diccionario de datos deben corresponder con las migraciones vigentes.
 

@@ -1,0 +1,53 @@
+digraph Estados {
+  graph [rankdir=LR, bgcolor=white, pad=0.4, nodesep=0.5, ranksep=0.75, fontname="Arial", fontsize=22, label="Aulify · estados independientes\nCerrar un intento no equivale a publicar una nota", labelloc=t];
+  node [shape=box, style="rounded,filled", fillcolor="#F1F8F4", color="#9EBCAE", fontname="Arial", fontsize=12, margin="0.16,0.14"];
+  edge [fontname="Arial", fontsize=10, color="#617A6D"];
+  subgraph cluster_recurso {
+    label="RECURSO"; color="#CADDD2";
+    borrador [label="Borrador mutable\nRevisión de concurrencia"];
+    version1 [label="Versión publicada 1\nInmutable"];
+    version2 [label="Versión publicada 2\nInmutable"];
+    borrador -> borrador [label="guardar"];
+    borrador -> version1 [label="publicar"];
+    borrador -> version2 [label="editar y volver a publicar"];
+  }
+  subgraph cluster_actividad {
+    label="ACTIVIDAD · estado derivado de publicación y fechas"; color="#CADDD2";
+    ab [label="Borrador"];
+    ap [label="Programada"];
+    aa [label="Abierta"];
+    ac [label="Cerrada"];
+    ab -> ap [label="publicar para después"];
+    ab -> aa [label="publicar ahora"];
+    ap -> aa [label="apertura servidor"];
+    aa -> ac [label="plazo o finalización"];
+  }
+  subgraph cluster_intento {
+    label="INTENTO"; color="#CADDD2";
+    curso [label="En curso"];
+    cerrado [label="Cerrado\nEnvío / guiado / plazo"];
+    admin [label="Cerrado administrativo\nRetiro / archivo / cierre anticipado"];
+    resolver [label="Resolución con motivo\nEvaluar o excluir"];
+    curso -> cerrado;
+    curso -> admin;
+    admin -> resolver;
+  }
+  subgraph cluster_correccion {
+    label="CORRECCIÓN DE PREGUNTA"; color="#CADDD2";
+    pendiente [label="Pendiente\nSin revisión de puntos"];
+    corregida [label="Revisión de puntos 1\nCompleta"];
+    revisada [label="Revisión de puntos 2\nAnterior conservada"];
+    pendiente -> corregida [label="corregir"];
+    corregida -> revisada [label="corregir con motivo"];
+  }
+  subgraph cluster_publicacion {
+    label="EVALUACIÓN DEL ESTUDIANTE"; color="#CADDD2";
+    privada [label="Revisión privada 1"];
+    publicada [label="Revisión publicada 1\nVisible según política"];
+    nueva [label="Revisión privada 2\nPublicada 1 sigue vigente"];
+    publicada2 [label="Revisión publicada 2\nHistorial conservado"];
+    privada -> publicada [label="publicar"];
+    publicada -> nueva [label="preparar corrección"];
+    nueva -> publicada2 [label="republicar"];
+  }
+}

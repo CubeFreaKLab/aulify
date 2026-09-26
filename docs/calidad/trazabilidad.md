@@ -44,7 +44,17 @@ La relación es de cobertura prevista, no de prueba aprobada. Un caso puede comp
 | Evidencia | Informe, captura, traza o consulta que respalde el resultado; sin datos privados. |
 | Seguimiento | Defecto, corrección y nueva ejecución vinculados; conservar el fallo original. |
 
-El diseño, el modelo de datos y las migraciones agregarán sus enlaces a las filas correspondientes al existir. No crear vínculos a diagramas, pantallas, informes de Actions o ciclos de Jira/QMetry inexistentes. Las fuentes editables y el commit permiten reproducir la evidencia seleccionada para documentación.
+El [modelo de datos 1.0](../modelado/README.md) ya está disponible. Los vínculos siguientes son evidencia de diseño documental; las migraciones y comprobaciones de aplicación aún no existen. Las fuentes editables y el commit permiten reproducir las figuras.
+
+| Requisitos | Modelo disponible |
+|---|---|
+| RF-01, RF-02, RF-17 | [Identidad y pertenencia](../modelado/diagramas/01-identidad.svg): perfiles, códigos, solicitudes, membresías, eventos y ayuda. |
+| RF-03, RF-04, RF-13, RF-14 | [Autoría](../modelado/diagramas/02-autoria.svg): borrador, versiones, bloques, grupos, preguntas, elementos y secretos. |
+| RF-05, RF-16 | [Actividades](../modelado/diagramas/03-actividades.svg): subtipos, participantes, plazos y sesión guiada. |
+| RF-05, RF-06, RF-14, RF-15 | [Participación](../modelado/diagramas/04-participacion.svg): intentos, orden, respuestas, equipos y consumos. |
+| RF-07, RF-08, RF-10, RF-11, RF-12 | [Evaluación](../modelado/diagramas/05-evaluacion.svg): revisiones, entregas y publicaciones; gráficos y promedios se derivan. |
+| RF-02, RF-09, RNF-05, RNF-06 | [Operación](../modelado/diagramas/06-operacion.svg) y [permisos](../modelado/permisos.md): incidencias, conservación e invariantes. |
+| RNF-01, RNF-02, RNF-03, RNF-04 | [Casos y estados](../modelado/casos-y-operaciones.md) para diseñar la experiencia; rendimiento, usabilidad, accesibilidad y consumo siguen pendientes de medición. |
 
 ## Cambios y finalización
 

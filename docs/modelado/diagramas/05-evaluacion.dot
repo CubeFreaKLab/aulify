@@ -1,0 +1,32 @@
+digraph modelo {
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Entregas y evaluación · modelo lógico 1.0"];
+node [shape=plain, fontname="Arial"];
+edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
+"attempt_questions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>attempt_questions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"attempts" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>attempts</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"evaluation_question_grades" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>evaluation_question_grades</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: evaluation_id, question_grade_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">2 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"evaluation_revisions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>evaluation_revisions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK participant_id</TD></TR><TR><TD ALIGN="LEFT">FK attempt_id ?</TD></TR><TR><TD ALIGN="LEFT">FK submission_version_id ?</TD></TR><TR><TD ALIGN="LEFT">FK actor_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">12 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"file_objects" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>file_objects</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"participants" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>participants</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"question_grades" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>question_grades</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK attempt_question_id</TD></TR><TR><TD ALIGN="LEFT">FK actor_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">11 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"resubmission_windows" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>resubmission_windows</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK participant_id</TD></TR><TR><TD ALIGN="LEFT">FK actor_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">7 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"submission_files" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>submission_files</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: submission_version_id, file_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">3 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"submission_versions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>submission_versions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK submission_id</TD></TR><TR><TD ALIGN="LEFT">FK resubmission_window_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">8 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"submissions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>submissions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK participant_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">3 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"attempt_questions" -> "question_grades" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"profiles" -> "question_grades" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"participants" -> "submissions" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"submissions" -> "submission_versions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"resubmission_windows" -> "submission_versions" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"submission_versions" -> "submission_files" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"file_objects" -> "submission_files" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"participants" -> "resubmission_windows" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"profiles" -> "resubmission_windows" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"participants" -> "evaluation_revisions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"attempts" -> "evaluation_revisions" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"submission_versions" -> "evaluation_revisions" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"profiles" -> "evaluation_revisions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"evaluation_revisions" -> "evaluation_question_grades" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"question_grades" -> "evaluation_question_grades" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+}

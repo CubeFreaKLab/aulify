@@ -8,7 +8,7 @@ El primer resultado funcional será un recorrido completo: un docente crea una m
 
 ## Punto de partida comprobado
 
-El repositorio contiene producto, principios, especificación general 1.0 con 17 requisitos funcionales y 6 no funcionales, plan técnico y tareas. T-02 documental está completada; construcción pendiente. La [entrega 001](../specs/001-recurso-interactivo/spec.md) tiene 38 casos y las ampliaciones otros 38; todos pendientes de ejecución. No hay aplicación, esquema físico, prototipo aprobado ni resultados de pruebas.
+El repositorio contiene producto, principios, especificación general 1.0 con 17 requisitos funcionales y 6 no funcionales, plan técnico y tareas. T-02 documental está completada; construcción pendiente. La [entrega 001](../specs/001-recurso-interactivo/spec.md) tiene 38 casos y las ampliaciones otros 38; todos pendientes de ejecución. El [modelo conceptual/relacional](modelado/README.md) completa E1-T02 documental con diagramas, diccionario, normalización y permisos; T-03 sigue parcial hasta implementar y comprobar persistencia. No hay aplicación, esquema físico aplicado, prototipo aprobado ni resultados de pruebas de funcionamiento.
 
 El [plan](../plan.md) mantiene Next.js, React y TypeScript como propuesta para la aplicación. La selección vigente utiliza Supabase con PostgreSQL, Auth y Storage, además de Playwright y GitHub Actions para recorridos e integración continua. La [decisión de arquitectura](decisiones/0001-supabase.md) sustituye la combinación anterior de datos e identidad. Su selección no acredita una configuración implementada ni capacidad validada.
 

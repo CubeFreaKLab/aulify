@@ -1,0 +1,39 @@
+digraph Aulify {
+  graph [rankdir=TB, bgcolor="white", pad=0.45, nodesep=0.45, ranksep=0.8, splines=polyline, fontname="Arial", fontsize=24, labelloc=t, label="Aulify · modelo conceptual\nContenido, participación y resultados"];
+  node [shape=box, style="rounded,filled", fillcolor="#F1F8F4", color="#9EBCAE", fontname="Arial", fontsize=15, margin="0.2,0.16"];
+  edge [fontname="Arial", fontsize=11, color="#647C70", arrowsize=0.6];
+  docente [label="DOCENTE\nPropietario de materia y biblioteca", fillcolor="#087F5B", fontcolor=white];
+  estudiante [label="ESTUDIANTE\nCuenta y aprobación", fillcolor="#087F5B", fontcolor=white];
+  materia [label="MATERIA\nCurso · año · conservación"];
+  recurso [label="RECURSO\nBorrador de biblioteca"];
+  version [label="VERSIÓN PUBLICADA\nBloques · preguntas\nSoluciones reservadas"];
+  pertenencia [label="PERTENENCIA\nSolicitud → aprobación\nIdentidad estable al reingresar"];
+  actividad [label="ACTIVIDAD\nLectura · quiz · tarea · manual\nDisponibilidad y reglas"];
+  participante [label="PARTICIPANTE\nActividad + pertenencia\nAlias · equipo · potenciadores"];
+  intento [label="INTENTO\nPreguntas y orden asignados"];
+  respuesta [label="RESPUESTA\nEnvío definitivo"];
+  entrega [label="ENTREGA\nVersiones de archivos"];
+  correccion [label="CORRECCIÓN\nPuntos exactos y revisiones"];
+  evaluacion [label="EVALUACIÓN\nFuente y revisión\nPublicación explícita", fillcolor="#E0F3E9", penwidth=2];
+  consulta [label="CONSULTA AUTORIZADA\nNotas propias · promedio\nGráficos y clasificación permitida", fillcolor="#F6F7F6"];
+  docente -> materia [label="posee 0..N"];
+  docente -> recurso [label="crea 0..N"];
+  recurso -> version [label="publica 0..N"];
+  estudiante -> pertenencia [label="pertenece a 0..N"];
+  materia -> pertenencia [label="aprueba 0..N"];
+  materia -> actividad [label="organiza 0..N"];
+  version -> actividad [label="asignada en 0..N\nobligatoria en lectura/quiz"];
+  actividad -> participante [label="reúne 0..N"];
+  pertenencia -> participante [label="participa en 0..N"];
+  participante -> intento [label="realiza 0..N\nsolo quiz"];
+  intento -> respuesta [label="recibe 0..N\nuna por pregunta asignada"];
+  intento -> correccion [label="por pregunta asignada\nincluye omisiones"];
+  participante -> entrega [label="0..1 contenedor\nsolo tarea"];
+  correccion -> evaluacion [label="sustenta quiz"];
+  entrega -> evaluacion [label="sustenta tarea"];
+  participante -> evaluacion [label="tiene revisiones\ntambién manuales"];
+  evaluacion -> consulta [label="última publicación\nsegún permisos"];
+  {rank=same; docente; estudiante;}
+  {rank=same; recurso; materia; pertenencia;}
+  {rank=same; respuesta; correccion; entrega;}
+}

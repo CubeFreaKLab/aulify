@@ -1,0 +1,5 @@
+# Mantener reproducibles fuentes, exportaciones y huellas del modelo en Windows/Linux.
+/.gitattributes text eol=lf
+/docs/modelado/** text eol=lf
+/docs/modelado/diagramas/*.png binary
+/tools/modelado/*.py text eol=lf

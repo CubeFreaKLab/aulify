@@ -1,0 +1,29 @@
+digraph modelo {
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Actividades y disponibilidad · modelo lógico 1.0"];
+node [shape=plain, fontname="Arial"];
+edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
+"activities" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>activities</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK subject_id</TD></TR><TR><TD ALIGN="LEFT">FK version_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">16 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"deadline_extensions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>deadline_extensions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK activity_id</TD></TR><TR><TD ALIGN="LEFT">FK participant_id ?</TD></TR><TR><TD ALIGN="LEFT">FK actor_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">7 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"guided_sessions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>guided_sessions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: activity_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"memberships" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>memberships</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"participants" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>participants</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK activity_id</TD></TR><TR><TD ALIGN="LEFT">FK membership_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"questions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>questions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, question_key</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"quiz_settings" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>quiz_settings</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: activity_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">17 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"resource_versions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>resource_versions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"session_questions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>session_questions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: activity_id, position</TD></TR><TR><TD ALIGN="LEFT">FK version_id</TD></TR><TR><TD ALIGN="LEFT">FK question_key</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"subjects" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>subjects</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"task_settings" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>task_settings</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: activity_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">2 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"subjects" -> "activities" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"resource_versions" -> "activities" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"activities" -> "quiz_settings" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"activities" -> "task_settings" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"activities" -> "participants" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"memberships" -> "participants" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"activities" -> "deadline_extensions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"participants" -> "deadline_extensions" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"profiles" -> "deadline_extensions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"quiz_settings" -> "guided_sessions" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"guided_sessions" -> "session_questions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"questions" -> "session_questions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+}

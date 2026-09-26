@@ -38,7 +38,7 @@ La identidad visual de Aulify orienta la presentación. Wayground es una referen
 
 Método: Spec Driven Development (SDD).
 
-Estado: base funcional 1.0 definida; modelado, diseño e implementación pendientes.
+Estado: base funcional y [modelo conceptual/relacional 1.0](modelado/README.md) definidos; diseño visual, esquema físico comprobado e implementación pendientes.
 
 Selección de servicios: Supabase con PostgreSQL para datos, Supabase Auth para identidad y Supabase Storage para archivos privados, con inicio en Free. La [decisión de arquitectura](decisiones/0001-supabase.md) registra los motivos y las comprobaciones pendientes. Se mantienen React, Next.js, TypeScript y Node.js como propuesta para la aplicación modular. El alcance no exige microservicios.
 

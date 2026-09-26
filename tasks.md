@@ -1,6 +1,6 @@
 # Tareas de desarrollo de Aulify
 
-**Estado: base funcional 1.0 definida. T-02 documental completada; todas las tareas de implementación están pendientes.**
+**Estado: base funcional 1.0 definida. T-02 documental completada; T-03 con modelado conceptual/relacional disponible y persistencia pendiente. Las tareas de implementación siguen abiertas.**
 
 Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md). La existencia de estos documentos no acredita funciones implementadas. Resolver las decisiones que afecten una tarea antes de iniciar su construcción.
 
@@ -12,7 +12,7 @@ La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recor
 |---|---|---|---|---|
 | T-01 | Comprobar Supabase Free, despliegue, correo y acceso privado a datos y archivos | RF-01, RF-02, RF-10, RNF-03, RNF-04 | — | Prueba con cuentas ficticias, RLS y Storage comprobados, recuperación por SMTP y transporte de sincronización evaluados frente a cuotas y carga objetivo. |
 | T-02 | Definir reglas de evaluación, estados y visibilidad (documentación completada) | RF-05 a RF-08, RF-13 a RF-16 | — | Base 1.0, D-01 a D-07, casos AC-01 a AC-38 y AP-01 a AP-38 con resultados esperados. |
-| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-17 | T-02 para el modelo; T-01 para validar persistencia | Diagramas conceptual y relacional, diccionario, normalización, migraciones SQL y RLS documentados; ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
+| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-17 | T-02 para el modelo; T-01 para validar persistencia | Modelo y documentación disponibles en [modelado](docs/modelado/README.md). Pendientes migraciones SQL, restricciones/índices y RLS ejecutados; comprobar que ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
 | T-04 | Diseñar recorridos principales en celular y computadora | RNF-01, RNF-02, RF-16 | T-02 | Pantallas y estados de crear, publicar, participar, entregar y revisar; controles accesibles y configuración avanzada. |
 | T-05 | Inicializar aplicación, Playwright e integración continua con GitHub Actions | RNF-01, RNF-02, RNF-04 | T-01, T-03 | Dependencias fijadas, construcción reproducible y configuración de ejemplo sin secretos. Flujo de Actions ejecutado con análisis estático, tipos, pruebas disponibles, construcción y recorrido inicial de Playwright; registrar informe y entorno aislado para pruebas de datos. |
 

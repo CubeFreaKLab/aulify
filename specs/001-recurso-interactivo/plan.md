@@ -6,7 +6,7 @@ Estado: propuesta técnica para el [spec](spec.md). No hay aplicación, migracio
 
 Se mantienen Supabase PostgreSQL/Auth/Storage, Playwright y GitHub Actions como selecciones. Next.js, React y TypeScript son candidatos; fijar versiones y bibliotecas al comprobar su compatibilidad. El correo SMTP requiere una prueba real antes de cerrar acceso y recuperación. El avance individual no necesita que el docente esté conectado; la selección para sesiones guiadas posteriores sigue abierta.
 
-Las decisiones D-01 a D-07 están definidas en la base funcional 1.0. El siguiente paso es modelarlas y comprobar su implementación. La documentación no acredita resultados de pruebas.
+Las decisiones D-01 a D-07 están definidas en la base funcional 1.0 y desarrolladas en el [modelo lógico](../../docs/modelado/README.md). El siguiente trabajo técnico es comprobarlas al implementar persistencia. La documentación no acredita resultados de pruebas de la aplicación.
 
 ## Datos que deben modelarse
 
@@ -25,7 +25,7 @@ Las decisiones D-01 a D-07 están definidas en la base funcional 1.0. El siguien
 | Preferencia de ayuda | Cuenta, rol, versión y estado de invitación/recorrido; no contiene respuestas ni afecta intentos. |
 | Evento de cambio | Actor, momento, motivo y cambio mínimo de ampliación de plazo o republicación de nota. |
 
-El siguiente trabajo de datos debe producir modelo conceptual, relacional, claves, cardinalidades, dependencias funcionales y normalización justificada. Después, diccionario, migraciones SQL y políticas RLS. Evaluar JSONB para bloques versionados, sin trasladar pertenencias o soluciones reservadas a documentos accesibles al estudiante.
+El modelo conceptual/relacional, sus claves, cardinalidades, diccionario y normalización están disponibles. JSONB se limita a agregados tipados de autoría, formato y envío; las soluciones y pertenencias se separan. El siguiente trabajo de datos produce migraciones SQL, funciones transaccionales y políticas RLS con pruebas reales del [catálogo de invariantes](../../docs/modelado/restricciones.md).
 
 No guardar una única tabla genérica de estados que confunda intento, corrección y publicación. Si una cifra se materializa por rendimiento, documentar cómo se calcula y mantiene consistente.
 
@@ -39,7 +39,7 @@ No guardar una única tabla genérica de estados que confunda intento, correcci�
 - Separar contratos de lectura docentes y estudiantiles. No enviar soluciones para luego esconderlas en la interfaz.
 - Las operaciones privilegiadas comprueban autorización propia. Una clave administrativa no sustituye esa comprobación.
 
-Los nombres de tablas, operaciones, códigos de error y contratos concretos se fijarán con el modelo. No crear rutas o archivos de aplicación que aparenten una arquitectura implementada antes de seleccionarla.
+Los nombres y relaciones están definidos en el modelo lógico; los contratos de API, códigos de error y funciones físicas se concretarán en la comprobación técnica. No crear rutas o archivos que aparenten una aplicación implementada antes de construirla.
 
 ## Diseño antes de la interfaz
 

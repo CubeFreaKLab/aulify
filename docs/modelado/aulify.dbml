@@ -1,0 +1,701 @@
+// Generado desde modelo.json. Modelo lógico; no es una migración segura.
+// CHECK, índices parciales, transacciones y permisos: restricciones.md y permisos.md.
+Project aulify {
+  database_type: 'PostgreSQL'
+  Note: 'Modelo lógico 1.0; app es un espacio previsto no expuesto. Auth es externo.'
+}
+
+Table auth.users {
+  Note: "Identidad administrada por Supabase Auth; no crear esta tabla en migraciones propias."
+  id uuid [not null, note: "Identificador externo de autenticación."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.profiles {
+  Note: "Perfil de producto, sin duplicar contraseñas ni correo de Auth."
+  id uuid [not null, note: "Mismo identificador que auth.users."]
+  display_name varchar(120) [not null, note: "Nombre visible; no acredita identidad institucional."]
+  role varchar(16) [not null, note: "teacher o student; fijo después del registro."]
+  created_at timestamptz [not null, note: "Alta del perfil."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.subjects {
+  Note: "Materia de un docente con curso y año como atributos."
+  id uuid [not null, note: "Identificador de materia."]
+  owner_id uuid [not null, note: "Docente propietario."]
+  name varchar(120) [not null, note: "Nombre; no es único."]
+  course_label varchar(80) [not null, note: "Curso o grupo usado para filtros."]
+  school_year smallint [not null, note: "Año de la materia."]
+  created_at timestamptz [not null, note: "Creación."]
+  archived_at timestamptz [null, note: "Archivo; nulo significa activa."]
+  purge_started_at timestamptz [null, note: "Inicio de eliminación; impide restaurar."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.invitation_codes {
+  Note: "Códigos actuales y revocados, de lectura exclusiva del propietario."
+  id uuid [not null, note: "Identificador."]
+  subject_id uuid [not null, note: "Materia de destino."]
+  code varchar(8) [not null, note: "Código aleatorio; identifica solicitud, no autentica."]
+  created_at timestamptz [not null, note: "Generación."]
+  revoked_at timestamptz [null, note: "Desactivación o renovación."]
+  indexes {
+    id [pk]
+    code [unique]
+  }
+}
+
+Table app.join_requests {
+  Note: "Historial de solicitudes; aceptar no reemplaza la membresía estable."
+  id uuid [not null, note: "Identificador."]
+  invitation_id uuid [not null, note: "Código utilizado; conservar tras renovación."]
+  student_id uuid [not null, note: "Solicitante estudiante."]
+  status varchar(16) [not null, note: "pending, approved o rejected."]
+  requested_at timestamptz [not null, note: "Solicitud."]
+  decided_at timestamptz [null, note: "Decisión; nulo mientras pendiente."]
+  decided_by uuid [null, note: "Docente que decidió."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.memberships {
+  Note: "Una pertenencia estable por materia y estudiante; reingreso reutiliza su identidad."
+  id uuid [not null, note: "Identificador estable de pertenencia."]
+  subject_id uuid [not null, note: "Materia."]
+  student_id uuid [not null, note: "Estudiante."]
+  status varchar(16) [not null, note: "approved o withdrawn."]
+  created_at timestamptz [not null, note: "Primera aprobación."]
+  updated_at timestamptz [not null, note: "Último cambio."]
+  indexes {
+    id [pk]
+    (subject_id, student_id) [unique]
+  }
+}
+
+Table app.membership_events {
+  Note: "Eventos de aprobación, retiro y reingreso sin perder decisiones anteriores."
+  id uuid [not null, note: "Identificador."]
+  membership_id uuid [not null, note: "Pertenencia afectada."]
+  request_id uuid [null, note: "Solicitud que causó aprobación; nulo al retirar."]
+  actor_id uuid [not null, note: "Docente responsable."]
+  event_type varchar(16) [not null, note: "approved, withdrawn o rejoined."]
+  reason text [null, note: "Motivo de retiro, si corresponde."]
+  occurred_at timestamptz [not null, note: "Momento de operación."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.help_progress {
+  Note: "Preferencia de guía por cuenta, rol y versión."
+  profile_id uuid [not null, note: "Cuenta."]
+  guide_key varchar(40) [not null, note: "Recorrido de ayuda."]
+  guide_version integer [not null, note: "Versión positiva."]
+  state varchar(16) [not null, note: "offered, skipped o completed; sin fila significa no ofrecida."]
+  updated_at timestamptz [not null, note: "Último estado."]
+  indexes {
+    (profile_id, guide_key, guide_version) [pk]
+  }
+}
+
+Table app.file_objects {
+  Note: "Metadatos propios de archivos privados; bytes administrados por Storage."
+  id uuid [not null, note: "Identificador usado por referencias."]
+  owner_id uuid [not null, note: "Cuenta que carga."]
+  bucket varchar(63) [not null, note: "Bucket privado."]
+  object_path text [not null, note: "Ruta opaca; no contiene nombres ni correo."]
+  original_name varchar(255) [not null, note: "Nombre de presentación, nunca ruta de escritura."]
+  mime_type varchar(120) [not null, note: "Tipo validado por contenido."]
+  byte_size bigint [not null, note: "Tamaño validado positivo."]
+  sha256 varchar(64) [null, note: "Huella del contenido si se calcula."]
+  state varchar(20) [not null, note: "pending, ready o delete_pending."]
+  created_at timestamptz [not null, note: "Inicio de carga."]
+  validated_at timestamptz [null, note: "Validación completa antes de asociar."]
+  indexes {
+    id [pk]
+    (bucket, object_path) [unique]
+  }
+}
+
+Table app.resources {
+  Note: "Identidad de biblioteca independiente de materias y de cada publicación."
+  id uuid [not null, note: "Identificador de recurso."]
+  owner_id uuid [not null, note: "Docente propietario."]
+  kind varchar(16) [not null, note: "resource o standalone_quiz."]
+  title varchar(120) [not null, note: "Título de trabajo para búsqueda; no cambia versiones previas."]
+  created_at timestamptz [not null, note: "Creación."]
+  updated_at timestamptz [not null, note: "Última edición."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.resource_drafts {
+  Note: "Documento mutable de autoría; puede contener soluciones y nunca se entrega al estudiante."
+  resource_id uuid [not null, note: "Recurso, con un borrador actual."]
+  revision bigint [not null, note: "Contador positivo de concurrencia optimista."]
+  schema_version integer [not null, note: "Versión del esquema del documento."]
+  document jsonb [not null, note: "Agregado de edición validado; sin pertenencias ni calificaciones."]
+  updated_at timestamptz [not null, note: "Último guardado confirmado."]
+  indexes {
+    resource_id [pk]
+  }
+}
+
+Table app.draft_files {
+  Note: "Referencias de archivos del borrador, extraídas y verificadas al guardar."
+  resource_id uuid [not null, note: "Borrador."]
+  file_id uuid [not null, note: "Archivo ready del mismo propietario."]
+  indexes {
+    (resource_id, file_id) [pk]
+  }
+}
+
+Table app.resource_versions {
+  Note: "Publicación inmutable; la actividad fija esta versión."
+  id uuid [not null, note: "Identificador de versión."]
+  resource_id uuid [not null, note: "Recurso de origen."]
+  version_no integer [not null, note: "Secuencia positiva por recurso."]
+  title varchar(120) [not null, note: "Título publicado conservado."]
+  published_at timestamptz [not null, note: "Momento de publicación."]
+  content_schema_version integer [not null, note: "Esquema de contenido usado al publicar."]
+  indexes {
+    id [pk]
+    (resource_id, version_no) [unique]
+  }
+}
+
+Table app.question_groups {
+  Note: "Grupos que mantienen juntas explicaciones y preguntas dependientes."
+  version_id uuid [not null, note: "Versión publicada."]
+  group_key uuid [not null, note: "Identidad local estable entre versiones."]
+  position integer [not null, note: "Orden inicial positivo de grupo."]
+  indexes {
+    (version_id, group_key) [pk]
+    (version_id, position) [unique]
+  }
+}
+
+Table app.content_blocks {
+  Note: "Bloques públicos de una versión; las soluciones nunca están aquí."
+  version_id uuid [not null, note: "Versión publicada."]
+  block_key uuid [not null, note: "Identidad de bloque dentro de la versión."]
+  group_key uuid [null, note: "Grupo de explicación asociada; nulo para contenido general."]
+  position integer [not null, note: "Orden positivo, único en la versión."]
+  kind varchar(16) [not null, note: "heading, text, list, image, video_link o quiz."]
+  body jsonb [not null, note: "Formato de presentación tipado y saneado."]
+  file_id uuid [null, note: "Archivo de imagen; FK real, no URL incrustada."]
+  alt_text text [null, note: "Texto alternativo requerido en imagen."]
+  external_url text [null, note: "HTTPS para video enlazado."]
+  indexes {
+    (version_id, block_key) [pk]
+    (version_id, position) [unique]
+  }
+}
+
+Table app.questions {
+  Note: "Consigna y metadatos públicos de cada pregunta publicada."
+  version_id uuid [not null, note: "Versión."]
+  question_key uuid [not null, note: "Identidad local estable de pregunta."]
+  group_key uuid [not null, note: "Grupo; una independiente usa su propio grupo."]
+  position integer [not null, note: "Posición dentro del grupo."]
+  kind varchar(24) [not null, note: "single, multiple, boolean, match, order, gap_choice, gap_text u open."]
+  prompt jsonb [not null, note: "Consigna con formato saneado; no solución."]
+  max_points numeric(10,2) [not null, note: "Valor positivo de la pregunta."]
+  correction_mode varchar(16) [not null, note: "automatic o manual; escritura exige manual."]
+  indexes {
+    (version_id, question_key) [pk]
+    (version_id, group_key, position) [unique]
+  }
+}
+
+Table app.question_items {
+  Note: "Opciones, extremos de pares, elementos de secuencia o espacios; no incluye posición correcta."
+  version_id uuid [not null, note: "Versión."]
+  question_key uuid [not null, note: "Pregunta."]
+  item_key uuid [not null, note: "Identificador local de opción/elemento."]
+  parent_item_key uuid [null, note: "Espacio al que pertenece una opción de completar."]
+  kind varchar(16) [not null, note: "choice, left, right, sequence o gap."]
+  position integer [not null, note: "Orden de autoría para representación, no solución de secuencia."]
+  label text [not null, note: "Texto mostrado."]
+  indexes {
+    (version_id, question_key, item_key) [pk]
+    (version_id, question_key, position) [unique]
+  }
+}
+
+Table app.question_secrets {
+  Note: "Guía manual, explicación de respuesta y pista; superficie privada separada."
+  version_id uuid [not null, note: "Versión."]
+  question_key uuid [not null, note: "Pregunta."]
+  manual_guide text [null, note: "Guía privada obligatoria para escritura."]
+  feedback text [null, note: "Explicación reservada según visibilidad."]
+  hint text [null, note: "Pista liberable con consumo autorizado."]
+  indexes {
+    (version_id, question_key) [pk]
+  }
+}
+
+Table app.item_solutions {
+  Note: "Solución relacional por elemento: acierto, pareja/opción de espacio o posición esperada."
+  version_id uuid [not null, note: "Versión."]
+  question_key uuid [not null, note: "Pregunta."]
+  item_key uuid [not null, note: "Elemento evaluado."]
+  is_correct boolean [null, note: "Selección o verdadero/falso."]
+  target_item_key uuid [null, note: "Pareja derecha u opción correcta del espacio."]
+  expected_position integer [null, note: "Posición correcta en secuencia."]
+  indexes {
+    (version_id, question_key, item_key) [pk]
+  }
+}
+
+Table app.activities {
+  Note: "Asignación a materia; lectura, quiz, tarea o actividad manual."
+  id uuid [not null, note: "Identificador de actividad."]
+  subject_id uuid [not null, note: "Materia propietaria."]
+  kind varchar(16) [not null, note: "reading, quiz, task o manual."]
+  version_id uuid [null, note: "Versión obligatoria para reading/quiz; ausente para task/manual."]
+  title varchar(120) [not null, note: "Nombre de la actividad."]
+  instructions text [null, note: "Consigna de tarea/actividad manual."]
+  opens_at timestamptz [null, note: "Disponibilidad; nulo en actividad manual."]
+  closes_at timestamptz [null, note: "Obligatorio para quiz/tarea publicados."]
+  occurs_on date [null, note: "Fecha de realización manual para informes."]
+  timezone varchar(64) [not null, note: "Zona IANA elegida para mostrar fechas."]
+  max_grade numeric(10,2) [null, note: "Máximo positivo; nulo en reading."]
+  weight numeric(10,2) [null, note: "Peso positivo en evaluadas; nulo en reading."]
+  counts_for_average boolean [not null, note: "Siempre falso en reading."]
+  published_at timestamptz [null, note: "Nulo mientras borrador."]
+  locked_at timestamptz [null, note: "Primer intento/entrega/evaluación; congela reglas."]
+  created_at timestamptz [not null, note: "Creación."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.quiz_settings {
+  Note: "Subtipo de actividad quiz, en relación uno a uno."
+  activity_id uuid [not null, note: "Actividad tipo quiz."]
+  purpose varchar(16) [not null, note: "practice o exam."]
+  pacing varchar(16) [not null, note: "self_paced o guided."]
+  attempt_limit integer [not null, note: "Positivo; guiado exige uno."]
+  duration_seconds integer [null, note: "Positivo o nulo para desactivar."]
+  manual_closed_questions boolean [not null, note: "Revisión manual de preguntas cerradas."]
+  feedback_policy varchar(16) [not null, note: "immediate, after_close o hidden."]
+  shuffle_groups boolean [not null, note: "Solo individual."]
+  shuffle_options boolean [not null, note: "Solo tipos compatibles."]
+  teams_enabled boolean [not null, note: "Equipos configurados antes del inicio."]
+  ranking_enabled boolean [not null, note: "No permitido con feedback hidden."]
+  streaks_enabled boolean [not null, note: "No permitido con feedback hidden."]
+  sound_allowed boolean [not null, note: "El participante conserva activación voluntaria."]
+  hint_enabled boolean [not null, note: "Un uso por participante/actividad."]
+  double_enabled boolean [not null, note: "Un uso por participante/actividad."]
+  bonus_affects_grade boolean [not null, note: "Nota limitada al máximo."]
+  visibility_tracking boolean [not null, note: "Señal opcional avisada antes del intento."]
+  indexes {
+    activity_id [pk]
+  }
+}
+
+Table app.task_settings {
+  Note: "Subtipo de actividad que recibe archivos."
+  activity_id uuid [not null, note: "Actividad tipo task."]
+  allow_late boolean [not null, note: "Admisión después de cierre con marca de tardía."]
+  indexes {
+    activity_id [pk]
+  }
+}
+
+Table app.participants {
+  Note: "Relación estable actividad-membresía; existir aquí no consume intento."
+  id uuid [not null, note: "Identificador de participación."]
+  activity_id uuid [not null, note: "Actividad."]
+  membership_id uuid [not null, note: "Membresía de la misma materia."]
+  alias_no integer [not null, note: "Número opaco único por actividad."]
+  room_joined_at timestamptz [null, note: "Inscripción a sala guiada antes de iniciar."]
+  created_at timestamptz [not null, note: "Primera asociación a actividad."]
+  indexes {
+    id [pk]
+    (activity_id, membership_id) [unique]
+    (activity_id, alias_no) [unique]
+  }
+}
+
+Table app.deadline_extensions {
+  Note: "Registro inmutable de ampliación global o individual."
+  id uuid [not null, note: "Identificador."]
+  activity_id uuid [not null, note: "Actividad."]
+  participant_id uuid [null, note: "Destino individual de la misma actividad; nulo para cierre global."]
+  new_deadline timestamptz [not null, note: "Nueva fecha que amplía, nunca acorta."]
+  actor_id uuid [not null, note: "Docente propietario."]
+  reason text [not null, note: "Motivo."]
+  created_at timestamptz [not null, note: "Momento de autorización."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.guided_sessions {
+  Note: "Una sesión por actividad guiada; control persistente sin depender del docente conectado."
+  activity_id uuid [not null, note: "Actividad guiada."]
+  started_at timestamptz [null, note: "Nulo en sala de espera."]
+  closed_at timestamptz [null, note: "Fin de sesión."]
+  close_reason varchar(20) [null, note: "completed, deadline o teacher_early."]
+  revision bigint [not null, note: "Versión de control para reconexión y concurrencia."]
+  indexes {
+    activity_id [pk]
+  }
+}
+
+Table app.session_questions {
+  Note: "Orden común de preguntas y sus ventanas en modo guiado."
+  activity_id uuid [not null, note: "Sesión."]
+  position integer [not null, note: "Posición positiva en sesión."]
+  version_id uuid [not null, note: "Versión de la actividad."]
+  question_key uuid [not null, note: "Pregunta."]
+  opened_at timestamptz [null, note: "Apertura por docente."]
+  closed_at timestamptz [null, note: "Cierre; ausente mientras abierta."]
+  indexes {
+    (activity_id, position) [pk]
+    (activity_id, version_id, question_key) [unique]
+  }
+}
+
+Table app.attempts {
+  Note: "Una oportunidad de un participante; el estado no equivale a corrección o publicación."
+  id uuid [not null, note: "Identificador."]
+  participant_id uuid [not null, note: "Participante estable."]
+  attempt_no integer [not null, note: "Secuencia positiva que no se reinicia al reingresar."]
+  started_at timestamptz [not null, note: "Inicio según servidor."]
+  closed_at timestamptz [null, note: "Nulo mientras abierto."]
+  close_reason varchar(24) [null, note: "submitted, guided_completed, deadline, withdrawal, archive o teacher_early."]
+  request_key uuid [not null, note: "Clave de inicio; autenticación previa a cualquier repetición."]
+  indexes {
+    id [pk]
+    (participant_id, attempt_no) [unique]
+    request_key [unique]
+  }
+}
+
+Table app.attempt_questions {
+  Note: "Conjunto y orden congelado por intento, incluso para preguntas omitidas."
+  id uuid [not null, note: "Identificador de pregunta asignada."]
+  attempt_id uuid [not null, note: "Intento."]
+  version_id uuid [not null, note: "Misma versión que actividad, validada al iniciar."]
+  question_key uuid [not null, note: "Pregunta publicada."]
+  position integer [not null, note: "Orden asignado positivo."]
+  item_order jsonb [not null, note: "Listas tipadas de IDs de opciones para presentación; no soluciones."]
+  indexes {
+    id [pk]
+    (attempt_id, position) [unique]
+    (attempt_id, version_id, question_key) [unique]
+  }
+}
+
+Table app.responses {
+  Note: "Envío definitivo e inmutable; ausencia de fila significa sin respuesta confirmada."
+  attempt_question_id uuid [not null, note: "Pregunta asignada; una respuesta como máximo."]
+  request_key uuid [not null, note: "Clave global de idempotencia de envío."]
+  payload_hash varchar(64) [not null, note: "Huella de payload normalizado para rechazar reuso distinto."]
+  payload jsonb [not null, note: "Respuesta tipada: IDs, pares, orden, espacios o texto; nunca puntuación del cliente."]
+  received_at timestamptz [not null, note: "Confirmación según servidor."]
+  indexes {
+    attempt_question_id [pk]
+    request_key [unique]
+  }
+}
+
+Table app.question_grades {
+  Note: "Correcciones append-only; puede calificar omisión sin inventar respuesta."
+  id uuid [not null, note: "Identificador de revisión."]
+  attempt_question_id uuid [not null, note: "Pregunta asignada."]
+  revision_no integer [not null, note: "Secuencia por pregunta asignada."]
+  points_num numeric [not null, note: "Numerador entero no negativo de puntos base exactos."]
+  points_den numeric [not null, note: "Denominador entero positivo; evitar división prematura."]
+  method varchar(16) [not null, note: "automatic, manual u omission."]
+  actor_id uuid [null, note: "Docente en manual; nulo en cálculo automático."]
+  comment text [null, note: "Comentario de evaluación, con visibilidad controlada."]
+  reason text [null, note: "Obligatorio al corregir una evaluación previa."]
+  engine_version varchar(32) [not null, note: "Versión del cálculo/contrato de revisión."]
+  created_at timestamptz [not null, note: "Momento de corrección."]
+  indexes {
+    id [pk]
+    (attempt_question_id, revision_no) [unique]
+  }
+}
+
+Table app.attempt_resolutions {
+  Note: "Resolución expresa de cierre administrativo."
+  attempt_id uuid [not null, note: "Intento cerrado por retiro, archivo o cierre anticipado."]
+  decision varchar(16) [not null, note: "evaluate o exclude."]
+  actor_id uuid [not null, note: "Docente que decide."]
+  reason text [not null, note: "Motivo obligatorio."]
+  decided_at timestamptz [not null, note: "Resolución."]
+  indexes {
+    attempt_id [pk]
+  }
+}
+
+Table app.teams {
+  Note: "Equipos de una actividad antes de congelar composición."
+  id uuid [not null, note: "Identificador."]
+  activity_id uuid [not null, note: "Actividad con equipos habilitados."]
+  name varchar(80) [not null, note: "Nombre visible de equipo."]
+  indexes {
+    id [pk]
+    (activity_id, name) [unique]
+  }
+}
+
+Table app.team_members {
+  Note: "Cada participante ocupa un equipo de su misma actividad."
+  participant_id uuid [not null, note: "Participante de lista congelada."]
+  team_id uuid [not null, note: "Equipo de la misma actividad."]
+  indexes {
+    participant_id [pk]
+  }
+}
+
+Table app.powerup_uses {
+  Note: "Un consumo por participante/tipo para toda la actividad, no por intento."
+  participant_id uuid [not null, note: "Participante."]
+  kind varchar(16) [not null, note: "hint o double."]
+  attempt_question_id uuid [not null, note: "Pregunta donde se consumió, del mismo participante."]
+  request_key uuid [not null, note: "Clave de idempotencia de consumo."]
+  consumed_at timestamptz [not null, note: "Instante de consumo autorizado."]
+  indexes {
+    (participant_id, kind) [pk]
+    request_key [unique]
+  }
+}
+
+Table app.submissions {
+  Note: "Contenedor estable de entrega de tarea por participante."
+  id uuid [not null, note: "Identificador."]
+  participant_id uuid [not null, note: "Participante de actividad tipo task."]
+  created_at timestamptz [not null, note: "Primera recepción válida."]
+  indexes {
+    id [pk]
+    participant_id [unique]
+  }
+}
+
+Table app.submission_versions {
+  Note: "Versión recibida completa e inmutable; cargas parciales permanecen fuera."
+  id uuid [not null, note: "Identificador."]
+  submission_id uuid [not null, note: "Entrega."]
+  version_no integer [not null, note: "Secuencia positiva."]
+  received_at timestamptz [not null, note: "Recepción válida."]
+  deadline_used timestamptz [not null, note: "Plazo efectivo aplicado al recibir; hecho histórico."]
+  resubmission_window_id uuid [null, note: "Autorización utilizada, si era reentrega de tarea calificada."]
+  late boolean [not null, note: "Respecto al cierre general; ampliación se explica separadamente."]
+  request_key uuid [not null, note: "Idempotencia de recepción."]
+  indexes {
+    id [pk]
+    (submission_id, version_no) [unique]
+    request_key [unique]
+  }
+}
+
+Table app.submission_files {
+  Note: "Archivos de una versión recibida."
+  submission_version_id uuid [not null, note: "Versión de entrega."]
+  file_id uuid [not null, note: "Objeto validado y autorizado."]
+  position smallint [not null, note: "Posición de uno a cinco."]
+  indexes {
+    (submission_version_id, file_id) [pk]
+    (submission_version_id, position) [unique]
+  }
+}
+
+Table app.resubmission_windows {
+  Note: "Permiso individual explícito para otra versión de tarea calificada."
+  id uuid [not null, note: "Identificador."]
+  participant_id uuid [not null, note: "Participante."]
+  opens_at timestamptz [not null, note: "Inicio de autorización."]
+  closes_at timestamptz [not null, note: "Límite individual."]
+  actor_id uuid [not null, note: "Docente autorizante."]
+  reason text [null, note: "Comentario opcional."]
+  revoked_at timestamptz [null, note: "Revocación antes de usar; no borra entrega recibida."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.evaluation_revisions {
+  Note: "Resultado propuesto y publicación histórica por participante; no sobrescribir nota publicada."
+  id uuid [not null, note: "Identificador de evaluación."]
+  participant_id uuid [not null, note: "Estudiante en actividad."]
+  revision_no integer [not null, note: "Secuencia de revisión."]
+  source_kind varchar(24) [not null, note: "quiz, submission, manual o nonparticipation."]
+  attempt_id uuid [null, note: "Intento elegido, obligatorio en quiz."]
+  submission_version_id uuid [null, note: "Versión elegida, obligatoria en submission."]
+  grade numeric(10,2) [not null, note: "Nota final redondeada y dentro del máximo."]
+  feedback text [null, note: "Comentario general publicable."]
+  reason text [null, note: "Motivo de corrección o cero por no participación."]
+  actor_id uuid [not null, note: "Docente que prepara la evaluación."]
+  created_at timestamptz [not null, note: "Creación de revisión."]
+  published_at timestamptz [null, note: "Única transición de publicación; nulo significa privada."]
+  indexes {
+    id [pk]
+    (participant_id, revision_no) [unique]
+  }
+}
+
+Table app.evaluation_question_grades {
+  Note: "Correcciones exactas utilizadas por una evaluación de quiz publicada o preparada."
+  evaluation_id uuid [not null, note: "Evaluación de quiz."]
+  question_grade_id uuid [not null, note: "Revisión concreta de puntuación por pregunta."]
+  indexes {
+    (evaluation_id, question_grade_id) [pk]
+  }
+}
+
+Table app.integrity_events {
+  Note: "Señales opcionales y limitadas de visibilidad; no prueban fraude."
+  id uuid [not null, note: "Identificador."]
+  attempt_id uuid [not null, note: "Intento."]
+  client_event_key uuid [not null, note: "Deduplicación de señal del navegador."]
+  hidden_at timestamptz [not null, note: "Inicio indicado por navegador; no autoritativo."]
+  visible_at timestamptz [null, note: "Fin indicado por navegador."]
+  received_at timestamptz [not null, note: "Recepción en servidor."]
+  indexes {
+    id [pk]
+    (attempt_id, client_event_key) [unique]
+  }
+}
+
+Table app.incident_reviews {
+  Note: "Resolución mínima por intento, separada de detalle de señales que caduca."
+  attempt_id uuid [not null, note: "Intento revisado."]
+  status varchar(24) [not null, note: "pending, reviewed_no_action o reviewed_observation."]
+  actor_id uuid [null, note: "Docente que revisó."]
+  comment text [null, note: "Observación; no modifica nota automáticamente."]
+  reviewed_at timestamptz [null, note: "Momento de revisión."]
+  indexes {
+    attempt_id [pk]
+  }
+}
+
+Table app.activity_events {
+  Note: "Auditoría mínima de control y cambios autorizados; no sustituye tablas del dominio."
+  id uuid [not null, note: "Identificador."]
+  activity_id uuid [not null, note: "Actividad."]
+  actor_id uuid [null, note: "Cuenta autorizada o nulo en proceso del sistema."]
+  event_type varchar(40) [not null, note: "Tipo permitido: publicación, bloqueo, sesión o revisión de incidencia."]
+  details jsonb [not null, note: "Esquema acotado según evento; sin respuestas, correos, soluciones ni credenciales."]
+  occurred_at timestamptz [not null, note: "Hora de servidor."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.subject_events {
+  Note: "Auditoría de archivo y restauración con fecha real."
+  id uuid [not null, note: "Identificador."]
+  subject_id uuid [not null, note: "Materia."]
+  actor_id uuid [not null, note: "Propietario."]
+  event_type varchar(16) [not null, note: "archived o restored."]
+  occurred_at timestamptz [not null, note: "Hora de servidor."]
+  indexes {
+    id [pk]
+  }
+}
+
+Table app.purge_jobs {
+  Note: "Trabajo de eliminación reanudable; completa registros y objetos, no solo una cascada SQL."
+  id uuid [not null, note: "Identificador de trabajo."]
+  subject_id uuid [null, note: "Materia mientras existe; nulo después del borrado final."]
+  due_at timestamptz [not null, note: "Archivo más 30 días; se recalcula al archivar nuevamente."]
+  status varchar(16) [not null, note: "scheduled, running, failed, done o cancelled."]
+  phase varchar(24) [not null, note: "Referencias, objetos o registros; fases controladas."]
+  retry_count integer [not null, note: "Reintentos no negativos."]
+  last_error_code varchar(64) [null, note: "Código técnico sin payload sensible."]
+  next_retry_at timestamptz [null, note: "Próximo intento."]
+  completed_at timestamptz [null, note: "Finalización real."]
+  indexes {
+    id [pk]
+  }
+}
+
+Ref: app.profiles.id > auth.users.id [delete: restrict]
+Ref: app.subjects.owner_id > app.profiles.id [delete: restrict]
+Ref: app.invitation_codes.subject_id > app.subjects.id [delete: cascade]
+Ref: app.join_requests.invitation_id > app.invitation_codes.id [delete: cascade]
+Ref: app.join_requests.student_id > app.profiles.id [delete: restrict]
+Ref: app.join_requests.decided_by > app.profiles.id [delete: restrict]
+Ref: app.memberships.subject_id > app.subjects.id [delete: cascade]
+Ref: app.memberships.student_id > app.profiles.id [delete: restrict]
+Ref: app.membership_events.membership_id > app.memberships.id [delete: cascade]
+Ref: app.membership_events.request_id > app.join_requests.id [delete: cascade]
+Ref: app.membership_events.actor_id > app.profiles.id [delete: restrict]
+Ref: app.help_progress.profile_id > app.profiles.id [delete: cascade]
+Ref: app.file_objects.owner_id > app.profiles.id [delete: restrict]
+Ref: app.resources.owner_id > app.profiles.id [delete: restrict]
+Ref: app.resource_drafts.resource_id > app.resources.id [delete: cascade]
+Ref: app.draft_files.resource_id > app.resource_drafts.resource_id [delete: cascade]
+Ref: app.draft_files.file_id > app.file_objects.id [delete: restrict]
+Ref: app.resource_versions.resource_id > app.resources.id [delete: restrict]
+Ref: app.question_groups.version_id > app.resource_versions.id [delete: cascade]
+Ref: app.content_blocks.version_id > app.resource_versions.id [delete: cascade]
+Ref: app.content_blocks.(version_id, group_key) > app.question_groups.(version_id, group_key) [delete: restrict]
+Ref: app.content_blocks.file_id > app.file_objects.id [delete: restrict]
+Ref: app.questions.(version_id, group_key) > app.question_groups.(version_id, group_key) [delete: cascade]
+Ref: app.question_items.(version_id, question_key) > app.questions.(version_id, question_key) [delete: cascade]
+Ref: app.question_items.(version_id, question_key, parent_item_key) > app.question_items.(version_id, question_key, item_key) [delete: restrict]
+Ref: app.question_secrets.(version_id, question_key) > app.questions.(version_id, question_key) [delete: cascade]
+Ref: app.item_solutions.(version_id, question_key, item_key) > app.question_items.(version_id, question_key, item_key) [delete: cascade]
+Ref: app.item_solutions.(version_id, question_key, target_item_key) > app.question_items.(version_id, question_key, item_key) [delete: restrict]
+Ref: app.activities.subject_id > app.subjects.id [delete: cascade]
+Ref: app.activities.version_id > app.resource_versions.id [delete: restrict]
+Ref: app.quiz_settings.activity_id > app.activities.id [delete: cascade]
+Ref: app.task_settings.activity_id > app.activities.id [delete: cascade]
+Ref: app.participants.activity_id > app.activities.id [delete: cascade]
+Ref: app.participants.membership_id > app.memberships.id [delete: cascade]
+Ref: app.deadline_extensions.activity_id > app.activities.id [delete: cascade]
+Ref: app.deadline_extensions.participant_id > app.participants.id [delete: cascade]
+Ref: app.deadline_extensions.actor_id > app.profiles.id [delete: restrict]
+Ref: app.guided_sessions.activity_id > app.quiz_settings.activity_id [delete: cascade]
+Ref: app.session_questions.activity_id > app.guided_sessions.activity_id [delete: cascade]
+Ref: app.session_questions.(version_id, question_key) > app.questions.(version_id, question_key) [delete: restrict]
+Ref: app.attempts.participant_id > app.participants.id [delete: cascade]
+Ref: app.attempt_questions.attempt_id > app.attempts.id [delete: cascade]
+Ref: app.attempt_questions.(version_id, question_key) > app.questions.(version_id, question_key) [delete: restrict]
+Ref: app.responses.attempt_question_id > app.attempt_questions.id [delete: cascade]
+Ref: app.question_grades.attempt_question_id > app.attempt_questions.id [delete: cascade]
+Ref: app.question_grades.actor_id > app.profiles.id [delete: restrict]
+Ref: app.attempt_resolutions.attempt_id > app.attempts.id [delete: cascade]
+Ref: app.attempt_resolutions.actor_id > app.profiles.id [delete: restrict]
+Ref: app.teams.activity_id > app.activities.id [delete: cascade]
+Ref: app.team_members.participant_id > app.participants.id [delete: cascade]
+Ref: app.team_members.team_id > app.teams.id [delete: cascade]
+Ref: app.powerup_uses.participant_id > app.participants.id [delete: cascade]
+Ref: app.powerup_uses.attempt_question_id > app.attempt_questions.id [delete: cascade]
+Ref: app.submissions.participant_id > app.participants.id [delete: cascade]
+Ref: app.submission_versions.submission_id > app.submissions.id [delete: cascade]
+Ref: app.submission_versions.resubmission_window_id > app.resubmission_windows.id [delete: cascade]
+Ref: app.submission_files.submission_version_id > app.submission_versions.id [delete: cascade]
+Ref: app.submission_files.file_id > app.file_objects.id [delete: restrict]
+Ref: app.resubmission_windows.participant_id > app.participants.id [delete: cascade]
+Ref: app.resubmission_windows.actor_id > app.profiles.id [delete: restrict]
+Ref: app.evaluation_revisions.participant_id > app.participants.id [delete: cascade]
+Ref: app.evaluation_revisions.attempt_id > app.attempts.id [delete: cascade]
+Ref: app.evaluation_revisions.submission_version_id > app.submission_versions.id [delete: cascade]
+Ref: app.evaluation_revisions.actor_id > app.profiles.id [delete: restrict]
+Ref: app.evaluation_question_grades.evaluation_id > app.evaluation_revisions.id [delete: cascade]
+Ref: app.evaluation_question_grades.question_grade_id > app.question_grades.id [delete: cascade]
+Ref: app.integrity_events.attempt_id > app.attempts.id [delete: cascade]
+Ref: app.incident_reviews.attempt_id > app.attempts.id [delete: cascade]
+Ref: app.incident_reviews.actor_id > app.profiles.id [delete: restrict]
+Ref: app.activity_events.activity_id > app.activities.id [delete: cascade]
+Ref: app.activity_events.actor_id > app.profiles.id [delete: restrict]
+Ref: app.subject_events.subject_id > app.subjects.id [delete: cascade]
+Ref: app.subject_events.actor_id > app.profiles.id [delete: restrict]
+Ref: app.purge_jobs.subject_id > app.subjects.id [delete: set null]

@@ -1,0 +1,3426 @@
+{
+  "version": "1.0",
+  "specification": "1.0",
+  "status": "modelo lógico; no migración aplicada",
+  "groups": {
+    "externo": "Identidad externa",
+    "01-identidad": "Identidad y pertenencia",
+    "02-autoria": "Autoría y contenido publicado",
+    "03-actividades": "Actividades y disponibilidad",
+    "04-participacion": "Participación y juego",
+    "05-evaluacion": "Entregas y evaluación",
+    "06-operacion": "Integridad y conservación"
+  },
+  "tables": [
+    {
+      "name": "auth.users",
+      "group": "externo",
+      "purpose": "Identidad administrada por Supabase Auth; no crear esta tabla en migraciones propias.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador externo de autenticación."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [],
+      "access": "proveedor",
+      "foreign_keys": []
+    },
+    {
+      "name": "profiles",
+      "group": "01-identidad",
+      "purpose": "Perfil de producto, sin duplicar contraseñas ni correo de Auth.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Mismo identificador que auth.users."
+        },
+        {
+          "name": "display_name",
+          "type": "varchar(120)",
+          "nullable": false,
+          "description": "Nombre visible; no acredita identidad institucional."
+        },
+        {
+          "name": "role",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "teacher o student; fijo después del registro."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Alta del perfil."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "CU-01"
+      ],
+      "access": "propio y docente con relación vigente",
+      "foreign_keys": [
+        {
+          "columns": [
+            "id"
+          ],
+          "target": "auth.users",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "subjects",
+      "group": "01-identidad",
+      "purpose": "Materia de un docente con curso y año como atributos.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de materia."
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente propietario."
+        },
+        {
+          "name": "name",
+          "type": "varchar(120)",
+          "nullable": false,
+          "description": "Nombre; no es único."
+        },
+        {
+          "name": "course_label",
+          "type": "varchar(80)",
+          "nullable": false,
+          "description": "Curso o grupo usado para filtros."
+        },
+        {
+          "name": "school_year",
+          "type": "smallint",
+          "nullable": false,
+          "description": "Año de la materia."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Creación."
+        },
+        {
+          "name": "archived_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Archivo; nulo significa activa."
+        },
+        {
+          "name": "purge_started_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Inicio de eliminación; impide restaurar."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "CU-02",
+        "IN-04",
+        "IN-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "owner_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "invitation_codes",
+      "group": "01-identidad",
+      "purpose": "Códigos actuales y revocados, de lectura exclusiva del propietario.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "subject_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Materia de destino."
+        },
+        {
+          "name": "code",
+          "type": "varchar(8)",
+          "nullable": false,
+          "description": "Código aleatorio; identifica solicitud, no autentica."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Generación."
+        },
+        {
+          "name": "revoked_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Desactivación o renovación."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "code"
+        ]
+      ],
+      "rules": [
+        "CU-03",
+        "CU-06"
+      ],
+      "access": "solo propietario mediante operación autorizada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "subject_id"
+          ],
+          "target": "subjects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "join_requests",
+      "group": "01-identidad",
+      "purpose": "Historial de solicitudes; aceptar no reemplaza la membresía estable.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "invitation_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Código utilizado; conservar tras renovación."
+        },
+        {
+          "name": "student_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Solicitante estudiante."
+        },
+        {
+          "name": "status",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "pending, approved o rejected."
+        },
+        {
+          "name": "requested_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Solicitud."
+        },
+        {
+          "name": "decided_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Decisión; nulo mientras pendiente."
+        },
+        {
+          "name": "decided_by",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Docente que decidió."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "CU-04",
+        "CU-06"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "invitation_id"
+          ],
+          "target": "invitation_codes",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "student_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        },
+        {
+          "columns": [
+            "decided_by"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "memberships",
+      "group": "01-identidad",
+      "purpose": "Una pertenencia estable por materia y estudiante; reingreso reutiliza su identidad.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador estable de pertenencia."
+        },
+        {
+          "name": "subject_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Materia."
+        },
+        {
+          "name": "student_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Estudiante."
+        },
+        {
+          "name": "status",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "approved o withdrawn."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Primera aprobación."
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Último cambio."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "subject_id",
+          "student_id"
+        ]
+      ],
+      "rules": [
+        "CU-04",
+        "CU-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "subject_id"
+          ],
+          "target": "subjects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "student_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "membership_events",
+      "group": "01-identidad",
+      "purpose": "Eventos de aprobación, retiro y reingreso sin perder decisiones anteriores.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "membership_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pertenencia afectada."
+        },
+        {
+          "name": "request_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Solicitud que causó aprobación; nulo al retirar."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente responsable."
+        },
+        {
+          "name": "event_type",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "approved, withdrawn o rejoined."
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": true,
+          "description": "Motivo de retiro, si corresponde."
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Momento de operación."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "CU-04",
+        "CU-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "membership_id"
+          ],
+          "target": "memberships",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "request_id"
+          ],
+          "target": "join_requests",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "help_progress",
+      "group": "01-identidad",
+      "purpose": "Preferencia de guía por cuenta, rol y versión.",
+      "columns": [
+        {
+          "name": "profile_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Cuenta."
+        },
+        {
+          "name": "guide_key",
+          "type": "varchar(40)",
+          "nullable": false,
+          "description": "Recorrido de ayuda."
+        },
+        {
+          "name": "guide_version",
+          "type": "integer",
+          "nullable": false,
+          "description": "Versión positiva."
+        },
+        {
+          "name": "state",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "offered, skipped o completed; sin fila significa no ofrecida."
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Último estado."
+        }
+      ],
+      "pk": [
+        "profile_id",
+        "guide_key",
+        "guide_version"
+      ],
+      "unique": [],
+      "rules": [
+        "AY-01",
+        "AY-02",
+        "AY-03",
+        "AY-04"
+      ],
+      "access": "propio; rol derivado de profiles y catálogo de guías",
+      "foreign_keys": [
+        {
+          "columns": [
+            "profile_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "file_objects",
+      "group": "02-autoria",
+      "purpose": "Metadatos propios de archivos privados; bytes administrados por Storage.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador usado por referencias."
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Cuenta que carga."
+        },
+        {
+          "name": "bucket",
+          "type": "varchar(63)",
+          "nullable": false,
+          "description": "Bucket privado."
+        },
+        {
+          "name": "object_path",
+          "type": "text",
+          "nullable": false,
+          "description": "Ruta opaca; no contiene nombres ni correo."
+        },
+        {
+          "name": "original_name",
+          "type": "varchar(255)",
+          "nullable": false,
+          "description": "Nombre de presentación, nunca ruta de escritura."
+        },
+        {
+          "name": "mime_type",
+          "type": "varchar(120)",
+          "nullable": false,
+          "description": "Tipo validado por contenido."
+        },
+        {
+          "name": "byte_size",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Tamaño validado positivo."
+        },
+        {
+          "name": "sha256",
+          "type": "varchar(64)",
+          "nullable": true,
+          "description": "Huella del contenido si se calcula."
+        },
+        {
+          "name": "state",
+          "type": "varchar(20)",
+          "nullable": false,
+          "description": "pending, ready o delete_pending."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Inicio de carga."
+        },
+        {
+          "name": "validated_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Validación completa antes de asociar."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "bucket",
+          "object_path"
+        ]
+      ],
+      "rules": [
+        "RE-06",
+        "TA-01",
+        "IN-05"
+      ],
+      "access": "autorización según referencias, no bucket público",
+      "foreign_keys": [
+        {
+          "columns": [
+            "owner_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "resources",
+      "group": "02-autoria",
+      "purpose": "Identidad de biblioteca independiente de materias y de cada publicación.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de recurso."
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente propietario."
+        },
+        {
+          "name": "kind",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "resource o standalone_quiz."
+        },
+        {
+          "name": "title",
+          "type": "varchar(120)",
+          "nullable": false,
+          "description": "Título de trabajo para búsqueda; no cambia versiones previas."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Creación."
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Última edición."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "RE-01",
+        "RE-02"
+      ],
+      "access": "propietario",
+      "foreign_keys": [
+        {
+          "columns": [
+            "owner_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "resource_drafts",
+      "group": "02-autoria",
+      "purpose": "Documento mutable de autoría; puede contener soluciones y nunca se entrega al estudiante.",
+      "columns": [
+        {
+          "name": "resource_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Recurso, con un borrador actual."
+        },
+        {
+          "name": "revision",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Contador positivo de concurrencia optimista."
+        },
+        {
+          "name": "schema_version",
+          "type": "integer",
+          "nullable": false,
+          "description": "Versión del esquema del documento."
+        },
+        {
+          "name": "document",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Agregado de edición validado; sin pertenencias ni calificaciones."
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Último guardado confirmado."
+        }
+      ],
+      "pk": [
+        "resource_id"
+      ],
+      "unique": [],
+      "rules": [
+        "RE-03"
+      ],
+      "access": "propietario exclusivamente",
+      "foreign_keys": [
+        {
+          "columns": [
+            "resource_id"
+          ],
+          "target": "resources",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "draft_files",
+      "group": "02-autoria",
+      "purpose": "Referencias de archivos del borrador, extraídas y verificadas al guardar.",
+      "columns": [
+        {
+          "name": "resource_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Borrador."
+        },
+        {
+          "name": "file_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Archivo ready del mismo propietario."
+        }
+      ],
+      "pk": [
+        "resource_id",
+        "file_id"
+      ],
+      "unique": [],
+      "rules": [
+        "RE-03",
+        "IN-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "resource_id"
+          ],
+          "target": "resource_drafts",
+          "target_columns": [
+            "resource_id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "file_id"
+          ],
+          "target": "file_objects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "resource_versions",
+      "group": "02-autoria",
+      "purpose": "Publicación inmutable; la actividad fija esta versión.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de versión."
+        },
+        {
+          "name": "resource_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Recurso de origen."
+        },
+        {
+          "name": "version_no",
+          "type": "integer",
+          "nullable": false,
+          "description": "Secuencia positiva por recurso."
+        },
+        {
+          "name": "title",
+          "type": "varchar(120)",
+          "nullable": false,
+          "description": "Título publicado conservado."
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Momento de publicación."
+        },
+        {
+          "name": "content_schema_version",
+          "type": "integer",
+          "nullable": false,
+          "description": "Esquema de contenido usado al publicar."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "resource_id",
+          "version_no"
+        ]
+      ],
+      "rules": [
+        "RE-04",
+        "RE-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "resource_id"
+          ],
+          "target": "resources",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "question_groups",
+      "group": "02-autoria",
+      "purpose": "Grupos que mantienen juntas explicaciones y preguntas dependientes.",
+      "columns": [
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión publicada."
+        },
+        {
+          "name": "group_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identidad local estable entre versiones."
+        },
+        {
+          "name": "position",
+          "type": "integer",
+          "nullable": false,
+          "description": "Orden inicial positivo de grupo."
+        }
+      ],
+      "pk": [
+        "version_id",
+        "group_key"
+      ],
+      "unique": [
+        [
+          "version_id",
+          "position"
+        ]
+      ],
+      "rules": [
+        "PR-03",
+        "PR-04"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "version_id"
+          ],
+          "target": "resource_versions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "content_blocks",
+      "group": "02-autoria",
+      "purpose": "Bloques públicos de una versión; las soluciones nunca están aquí.",
+      "columns": [
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión publicada."
+        },
+        {
+          "name": "block_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identidad de bloque dentro de la versión."
+        },
+        {
+          "name": "group_key",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Grupo de explicación asociada; nulo para contenido general."
+        },
+        {
+          "name": "position",
+          "type": "integer",
+          "nullable": false,
+          "description": "Orden positivo, único en la versión."
+        },
+        {
+          "name": "kind",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "heading, text, list, image, video_link o quiz."
+        },
+        {
+          "name": "body",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Formato de presentación tipado y saneado."
+        },
+        {
+          "name": "file_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Archivo de imagen; FK real, no URL incrustada."
+        },
+        {
+          "name": "alt_text",
+          "type": "text",
+          "nullable": true,
+          "description": "Texto alternativo requerido en imagen."
+        },
+        {
+          "name": "external_url",
+          "type": "text",
+          "nullable": true,
+          "description": "HTTPS para video enlazado."
+        }
+      ],
+      "pk": [
+        "version_id",
+        "block_key"
+      ],
+      "unique": [
+        [
+          "version_id",
+          "position"
+        ]
+      ],
+      "rules": [
+        "RE-02",
+        "RE-06",
+        "PR-03"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "version_id"
+          ],
+          "target": "resource_versions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "version_id",
+            "group_key"
+          ],
+          "target": "question_groups",
+          "target_columns": [
+            "version_id",
+            "group_key"
+          ],
+          "on_delete": "restrict"
+        },
+        {
+          "columns": [
+            "file_id"
+          ],
+          "target": "file_objects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "questions",
+      "group": "02-autoria",
+      "purpose": "Consigna y metadatos públicos de cada pregunta publicada.",
+      "columns": [
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión."
+        },
+        {
+          "name": "question_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identidad local estable de pregunta."
+        },
+        {
+          "name": "group_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Grupo; una independiente usa su propio grupo."
+        },
+        {
+          "name": "position",
+          "type": "integer",
+          "nullable": false,
+          "description": "Posición dentro del grupo."
+        },
+        {
+          "name": "kind",
+          "type": "varchar(24)",
+          "nullable": false,
+          "description": "single, multiple, boolean, match, order, gap_choice, gap_text u open."
+        },
+        {
+          "name": "prompt",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Consigna con formato saneado; no solución."
+        },
+        {
+          "name": "max_points",
+          "type": "numeric(10,2)",
+          "nullable": false,
+          "description": "Valor positivo de la pregunta."
+        },
+        {
+          "name": "correction_mode",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "automatic o manual; escritura exige manual."
+        }
+      ],
+      "pk": [
+        "version_id",
+        "question_key"
+      ],
+      "unique": [
+        [
+          "version_id",
+          "group_key",
+          "position"
+        ]
+      ],
+      "rules": [
+        "PR-01",
+        "PR-02"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "version_id",
+            "group_key"
+          ],
+          "target": "question_groups",
+          "target_columns": [
+            "version_id",
+            "group_key"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "question_items",
+      "group": "02-autoria",
+      "purpose": "Opciones, extremos de pares, elementos de secuencia o espacios; no incluye posición correcta.",
+      "columns": [
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión."
+        },
+        {
+          "name": "question_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta."
+        },
+        {
+          "name": "item_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador local de opción/elemento."
+        },
+        {
+          "name": "parent_item_key",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Espacio al que pertenece una opción de completar."
+        },
+        {
+          "name": "kind",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "choice, left, right, sequence o gap."
+        },
+        {
+          "name": "position",
+          "type": "integer",
+          "nullable": false,
+          "description": "Orden de autoría para representación, no solución de secuencia."
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "nullable": false,
+          "description": "Texto mostrado."
+        }
+      ],
+      "pk": [
+        "version_id",
+        "question_key",
+        "item_key"
+      ],
+      "unique": [
+        [
+          "version_id",
+          "question_key",
+          "position"
+        ]
+      ],
+      "rules": [
+        "PR-01",
+        "PR-04"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "version_id",
+            "question_key"
+          ],
+          "target": "questions",
+          "target_columns": [
+            "version_id",
+            "question_key"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "version_id",
+            "question_key",
+            "parent_item_key"
+          ],
+          "target": "question_items",
+          "target_columns": [
+            "version_id",
+            "question_key",
+            "item_key"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "question_secrets",
+      "group": "02-autoria",
+      "purpose": "Guía manual, explicación de respuesta y pista; superficie privada separada.",
+      "columns": [
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión."
+        },
+        {
+          "name": "question_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta."
+        },
+        {
+          "name": "manual_guide",
+          "type": "text",
+          "nullable": true,
+          "description": "Guía privada obligatoria para escritura."
+        },
+        {
+          "name": "feedback",
+          "type": "text",
+          "nullable": true,
+          "description": "Explicación reservada según visibilidad."
+        },
+        {
+          "name": "hint",
+          "type": "text",
+          "nullable": true,
+          "description": "Pista liberable con consumo autorizado."
+        }
+      ],
+      "pk": [
+        "version_id",
+        "question_key"
+      ],
+      "unique": [],
+      "rules": [
+        "PR-01",
+        "JU-01",
+        "JU-02",
+        "JU-04"
+      ],
+      "access": "docente; estudiante solo proyección autorizada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "version_id",
+            "question_key"
+          ],
+          "target": "questions",
+          "target_columns": [
+            "version_id",
+            "question_key"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "item_solutions",
+      "group": "02-autoria",
+      "purpose": "Solución relacional por elemento: acierto, pareja/opción de espacio o posición esperada.",
+      "columns": [
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión."
+        },
+        {
+          "name": "question_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta."
+        },
+        {
+          "name": "item_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Elemento evaluado."
+        },
+        {
+          "name": "is_correct",
+          "type": "boolean",
+          "nullable": true,
+          "description": "Selección o verdadero/falso."
+        },
+        {
+          "name": "target_item_key",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Pareja derecha u opción correcta del espacio."
+        },
+        {
+          "name": "expected_position",
+          "type": "integer",
+          "nullable": true,
+          "description": "Posición correcta en secuencia."
+        }
+      ],
+      "pk": [
+        "version_id",
+        "question_key",
+        "item_key"
+      ],
+      "unique": [],
+      "rules": [
+        "PR-01",
+        "PR-02",
+        "IN-01"
+      ],
+      "access": "docente; estudiante solo revisión autorizada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "version_id",
+            "question_key",
+            "item_key"
+          ],
+          "target": "question_items",
+          "target_columns": [
+            "version_id",
+            "question_key",
+            "item_key"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "version_id",
+            "question_key",
+            "target_item_key"
+          ],
+          "target": "question_items",
+          "target_columns": [
+            "version_id",
+            "question_key",
+            "item_key"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "activities",
+      "group": "03-actividades",
+      "purpose": "Asignación a materia; lectura, quiz, tarea o actividad manual.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de actividad."
+        },
+        {
+          "name": "subject_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Materia propietaria."
+        },
+        {
+          "name": "kind",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "reading, quiz, task o manual."
+        },
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Versión obligatoria para reading/quiz; ausente para task/manual."
+        },
+        {
+          "name": "title",
+          "type": "varchar(120)",
+          "nullable": false,
+          "description": "Nombre de la actividad."
+        },
+        {
+          "name": "instructions",
+          "type": "text",
+          "nullable": true,
+          "description": "Consigna de tarea/actividad manual."
+        },
+        {
+          "name": "opens_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Disponibilidad; nulo en actividad manual."
+        },
+        {
+          "name": "closes_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Obligatorio para quiz/tarea publicados."
+        },
+        {
+          "name": "occurs_on",
+          "type": "date",
+          "nullable": true,
+          "description": "Fecha de realización manual para informes."
+        },
+        {
+          "name": "timezone",
+          "type": "varchar(64)",
+          "nullable": false,
+          "description": "Zona IANA elegida para mostrar fechas."
+        },
+        {
+          "name": "max_grade",
+          "type": "numeric(10,2)",
+          "nullable": true,
+          "description": "Máximo positivo; nulo en reading."
+        },
+        {
+          "name": "weight",
+          "type": "numeric(10,2)",
+          "nullable": true,
+          "description": "Peso positivo en evaluadas; nulo en reading."
+        },
+        {
+          "name": "counts_for_average",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Siempre falso en reading."
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Nulo mientras borrador."
+        },
+        {
+          "name": "locked_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Primer intento/entrega/evaluación; congela reglas."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Creación."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "RE-04",
+        "RE-05",
+        "AC-01",
+        "AC-02",
+        "TA-01",
+        "TA-04"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "subject_id"
+          ],
+          "target": "subjects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "version_id"
+          ],
+          "target": "resource_versions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "quiz_settings",
+      "group": "03-actividades",
+      "purpose": "Subtipo de actividad quiz, en relación uno a uno.",
+      "columns": [
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad tipo quiz."
+        },
+        {
+          "name": "purpose",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "practice o exam."
+        },
+        {
+          "name": "pacing",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "self_paced o guided."
+        },
+        {
+          "name": "attempt_limit",
+          "type": "integer",
+          "nullable": false,
+          "description": "Positivo; guiado exige uno."
+        },
+        {
+          "name": "duration_seconds",
+          "type": "integer",
+          "nullable": true,
+          "description": "Positivo o nulo para desactivar."
+        },
+        {
+          "name": "manual_closed_questions",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Revisión manual de preguntas cerradas."
+        },
+        {
+          "name": "feedback_policy",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "immediate, after_close o hidden."
+        },
+        {
+          "name": "shuffle_groups",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Solo individual."
+        },
+        {
+          "name": "shuffle_options",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Solo tipos compatibles."
+        },
+        {
+          "name": "teams_enabled",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Equipos configurados antes del inicio."
+        },
+        {
+          "name": "ranking_enabled",
+          "type": "boolean",
+          "nullable": false,
+          "description": "No permitido con feedback hidden."
+        },
+        {
+          "name": "streaks_enabled",
+          "type": "boolean",
+          "nullable": false,
+          "description": "No permitido con feedback hidden."
+        },
+        {
+          "name": "sound_allowed",
+          "type": "boolean",
+          "nullable": false,
+          "description": "El participante conserva activación voluntaria."
+        },
+        {
+          "name": "hint_enabled",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Un uso por participante/actividad."
+        },
+        {
+          "name": "double_enabled",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Un uso por participante/actividad."
+        },
+        {
+          "name": "bonus_affects_grade",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Nota limitada al máximo."
+        },
+        {
+          "name": "visibility_tracking",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Señal opcional avisada antes del intento."
+        }
+      ],
+      "pk": [
+        "activity_id"
+      ],
+      "unique": [],
+      "rules": [
+        "AC-01",
+        "AC-08",
+        "JU-01",
+        "JU-02",
+        "JU-04",
+        "JU-05",
+        "IN-02"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "task_settings",
+      "group": "03-actividades",
+      "purpose": "Subtipo de actividad que recibe archivos.",
+      "columns": [
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad tipo task."
+        },
+        {
+          "name": "allow_late",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Admisión después de cierre con marca de tardía."
+        }
+      ],
+      "pk": [
+        "activity_id"
+      ],
+      "unique": [],
+      "rules": [
+        "TA-01",
+        "TA-02"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "participants",
+      "group": "03-actividades",
+      "purpose": "Relación estable actividad-membresía; existir aquí no consume intento.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de participación."
+        },
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad."
+        },
+        {
+          "name": "membership_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Membresía de la misma materia."
+        },
+        {
+          "name": "alias_no",
+          "type": "integer",
+          "nullable": false,
+          "description": "Número opaco único por actividad."
+        },
+        {
+          "name": "room_joined_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Inscripción a sala guiada antes de iniciar."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Primera asociación a actividad."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "activity_id",
+          "membership_id"
+        ],
+        [
+          "activity_id",
+          "alias_no"
+        ]
+      ],
+      "rules": [
+        "AC-03",
+        "AC-08",
+        "JU-07",
+        "JU-08"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "membership_id"
+          ],
+          "target": "memberships",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "deadline_extensions",
+      "group": "03-actividades",
+      "purpose": "Registro inmutable de ampliación global o individual.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad."
+        },
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Destino individual de la misma actividad; nulo para cierre global."
+        },
+        {
+          "name": "new_deadline",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Nueva fecha que amplía, nunca acorta."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente propietario."
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": false,
+          "description": "Motivo."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Momento de autorización."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "AC-06",
+        "AC-07"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "guided_sessions",
+      "group": "03-actividades",
+      "purpose": "Una sesión por actividad guiada; control persistente sin depender del docente conectado.",
+      "columns": [
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad guiada."
+        },
+        {
+          "name": "started_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Nulo en sala de espera."
+        },
+        {
+          "name": "closed_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Fin de sesión."
+        },
+        {
+          "name": "close_reason",
+          "type": "varchar(20)",
+          "nullable": true,
+          "description": "completed, deadline o teacher_early."
+        },
+        {
+          "name": "revision",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Versión de control para reconexión y concurrencia."
+        }
+      ],
+      "pk": [
+        "activity_id"
+      ],
+      "unique": [],
+      "rules": [
+        "AC-08",
+        "AC-09"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "quiz_settings",
+          "target_columns": [
+            "activity_id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "session_questions",
+      "group": "03-actividades",
+      "purpose": "Orden común de preguntas y sus ventanas en modo guiado.",
+      "columns": [
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Sesión."
+        },
+        {
+          "name": "position",
+          "type": "integer",
+          "nullable": false,
+          "description": "Posición positiva en sesión."
+        },
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión de la actividad."
+        },
+        {
+          "name": "question_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta."
+        },
+        {
+          "name": "opened_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Apertura por docente."
+        },
+        {
+          "name": "closed_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Cierre; ausente mientras abierta."
+        }
+      ],
+      "pk": [
+        "activity_id",
+        "position"
+      ],
+      "unique": [
+        [
+          "activity_id",
+          "version_id",
+          "question_key"
+        ]
+      ],
+      "rules": [
+        "AC-08",
+        "AC-09",
+        "PR-04"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "guided_sessions",
+          "target_columns": [
+            "activity_id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "version_id",
+            "question_key"
+          ],
+          "target": "questions",
+          "target_columns": [
+            "version_id",
+            "question_key"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "attempts",
+      "group": "04-participacion",
+      "purpose": "Una oportunidad de un participante; el estado no equivale a corrección o publicación.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Participante estable."
+        },
+        {
+          "name": "attempt_no",
+          "type": "integer",
+          "nullable": false,
+          "description": "Secuencia positiva que no se reinicia al reingresar."
+        },
+        {
+          "name": "started_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Inicio según servidor."
+        },
+        {
+          "name": "closed_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Nulo mientras abierto."
+        },
+        {
+          "name": "close_reason",
+          "type": "varchar(24)",
+          "nullable": true,
+          "description": "submitted, guided_completed, deadline, withdrawal, archive o teacher_early."
+        },
+        {
+          "name": "request_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Clave de inicio; autenticación previa a cualquier repetición."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "participant_id",
+          "attempt_no"
+        ],
+        [
+          "request_key"
+        ]
+      ],
+      "rules": [
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "IN-07"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "attempt_questions",
+      "group": "04-participacion",
+      "purpose": "Conjunto y orden congelado por intento, incluso para preguntas omitidas.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de pregunta asignada."
+        },
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Intento."
+        },
+        {
+          "name": "version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Misma versión que actividad, validada al iniciar."
+        },
+        {
+          "name": "question_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta publicada."
+        },
+        {
+          "name": "position",
+          "type": "integer",
+          "nullable": false,
+          "description": "Orden asignado positivo."
+        },
+        {
+          "name": "item_order",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Listas tipadas de IDs de opciones para presentación; no soluciones."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "attempt_id",
+          "position"
+        ],
+        [
+          "attempt_id",
+          "version_id",
+          "question_key"
+        ]
+      ],
+      "rules": [
+        "PR-03",
+        "PR-04",
+        "AC-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "attempt_id"
+          ],
+          "target": "attempts",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "version_id",
+            "question_key"
+          ],
+          "target": "questions",
+          "target_columns": [
+            "version_id",
+            "question_key"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "responses",
+      "group": "04-participacion",
+      "purpose": "Envío definitivo e inmutable; ausencia de fila significa sin respuesta confirmada.",
+      "columns": [
+        {
+          "name": "attempt_question_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta asignada; una respuesta como máximo."
+        },
+        {
+          "name": "request_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Clave global de idempotencia de envío."
+        },
+        {
+          "name": "payload_hash",
+          "type": "varchar(64)",
+          "nullable": false,
+          "description": "Huella de payload normalizado para rechazar reuso distinto."
+        },
+        {
+          "name": "payload",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Respuesta tipada: IDs, pares, orden, espacios o texto; nunca puntuación del cliente."
+        },
+        {
+          "name": "received_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Confirmación según servidor."
+        }
+      ],
+      "pk": [
+        "attempt_question_id"
+      ],
+      "unique": [
+        [
+          "request_key"
+        ]
+      ],
+      "rules": [
+        "AC-04",
+        "AC-05",
+        "PR-01",
+        "IN-01"
+      ],
+      "access": "propia y propietario; sin solución/nota incrustada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "attempt_question_id"
+          ],
+          "target": "attempt_questions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "question_grades",
+      "group": "05-evaluacion",
+      "purpose": "Correcciones append-only; puede calificar omisión sin inventar respuesta.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de revisión."
+        },
+        {
+          "name": "attempt_question_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta asignada."
+        },
+        {
+          "name": "revision_no",
+          "type": "integer",
+          "nullable": false,
+          "description": "Secuencia por pregunta asignada."
+        },
+        {
+          "name": "points_num",
+          "type": "numeric",
+          "nullable": false,
+          "description": "Numerador entero no negativo de puntos base exactos."
+        },
+        {
+          "name": "points_den",
+          "type": "numeric",
+          "nullable": false,
+          "description": "Denominador entero positivo; evitar división prematura."
+        },
+        {
+          "name": "method",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "automatic, manual u omission."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Docente en manual; nulo en cálculo automático."
+        },
+        {
+          "name": "comment",
+          "type": "text",
+          "nullable": true,
+          "description": "Comentario de evaluación, con visibilidad controlada."
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": true,
+          "description": "Obligatorio al corregir una evaluación previa."
+        },
+        {
+          "name": "engine_version",
+          "type": "varchar(32)",
+          "nullable": false,
+          "description": "Versión del cálculo/contrato de revisión."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Momento de corrección."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "attempt_question_id",
+          "revision_no"
+        ]
+      ],
+      "rules": [
+        "PR-02",
+        "EV-01",
+        "EV-02",
+        "EV-05"
+      ],
+      "access": "docente; estudiante solo mediante evaluación publicada/revisión liberada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "attempt_question_id"
+          ],
+          "target": "attempt_questions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "attempt_resolutions",
+      "group": "04-participacion",
+      "purpose": "Resolución expresa de cierre administrativo.",
+      "columns": [
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Intento cerrado por retiro, archivo o cierre anticipado."
+        },
+        {
+          "name": "decision",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "evaluate o exclude."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente que decide."
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": false,
+          "description": "Motivo obligatorio."
+        },
+        {
+          "name": "decided_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Resolución."
+        }
+      ],
+      "pk": [
+        "attempt_id"
+      ],
+      "unique": [],
+      "rules": [
+        "IN-07"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "attempt_id"
+          ],
+          "target": "attempts",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "teams",
+      "group": "04-participacion",
+      "purpose": "Equipos de una actividad antes de congelar composición.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad con equipos habilitados."
+        },
+        {
+          "name": "name",
+          "type": "varchar(80)",
+          "nullable": false,
+          "description": "Nombre visible de equipo."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "activity_id",
+          "name"
+        ]
+      ],
+      "rules": [
+        "JU-07"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "team_members",
+      "group": "04-participacion",
+      "purpose": "Cada participante ocupa un equipo de su misma actividad.",
+      "columns": [
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Participante de lista congelada."
+        },
+        {
+          "name": "team_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Equipo de la misma actividad."
+        }
+      ],
+      "pk": [
+        "participant_id"
+      ],
+      "unique": [],
+      "rules": [
+        "JU-07",
+        "JU-08"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "team_id"
+          ],
+          "target": "teams",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "powerup_uses",
+      "group": "04-participacion",
+      "purpose": "Un consumo por participante/tipo para toda la actividad, no por intento.",
+      "columns": [
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Participante."
+        },
+        {
+          "name": "kind",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "hint o double."
+        },
+        {
+          "name": "attempt_question_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Pregunta donde se consumió, del mismo participante."
+        },
+        {
+          "name": "request_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Clave de idempotencia de consumo."
+        },
+        {
+          "name": "consumed_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Instante de consumo autorizado."
+        }
+      ],
+      "pk": [
+        "participant_id",
+        "kind"
+      ],
+      "unique": [
+        [
+          "request_key"
+        ]
+      ],
+      "rules": [
+        "JU-04",
+        "JU-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "attempt_question_id"
+          ],
+          "target": "attempt_questions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "submissions",
+      "group": "05-evaluacion",
+      "purpose": "Contenedor estable de entrega de tarea por participante.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Participante de actividad tipo task."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Primera recepción válida."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "participant_id"
+        ]
+      ],
+      "rules": [
+        "TA-01",
+        "TA-02"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "submission_versions",
+      "group": "05-evaluacion",
+      "purpose": "Versión recibida completa e inmutable; cargas parciales permanecen fuera.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "submission_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Entrega."
+        },
+        {
+          "name": "version_no",
+          "type": "integer",
+          "nullable": false,
+          "description": "Secuencia positiva."
+        },
+        {
+          "name": "received_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Recepción válida."
+        },
+        {
+          "name": "deadline_used",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Plazo efectivo aplicado al recibir; hecho histórico."
+        },
+        {
+          "name": "resubmission_window_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Autorización utilizada, si era reentrega de tarea calificada."
+        },
+        {
+          "name": "late",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Respecto al cierre general; ampliación se explica separadamente."
+        },
+        {
+          "name": "request_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Idempotencia de recepción."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "submission_id",
+          "version_no"
+        ],
+        [
+          "request_key"
+        ]
+      ],
+      "rules": [
+        "TA-02",
+        "TA-03"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "submission_id"
+          ],
+          "target": "submissions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "resubmission_window_id"
+          ],
+          "target": "resubmission_windows",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "submission_files",
+      "group": "05-evaluacion",
+      "purpose": "Archivos de una versión recibida.",
+      "columns": [
+        {
+          "name": "submission_version_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Versión de entrega."
+        },
+        {
+          "name": "file_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Objeto validado y autorizado."
+        },
+        {
+          "name": "position",
+          "type": "smallint",
+          "nullable": false,
+          "description": "Posición de uno a cinco."
+        }
+      ],
+      "pk": [
+        "submission_version_id",
+        "file_id"
+      ],
+      "unique": [
+        [
+          "submission_version_id",
+          "position"
+        ]
+      ],
+      "rules": [
+        "TA-01",
+        "TA-02"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "submission_version_id"
+          ],
+          "target": "submission_versions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "file_id"
+          ],
+          "target": "file_objects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "resubmission_windows",
+      "group": "05-evaluacion",
+      "purpose": "Permiso individual explícito para otra versión de tarea calificada.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Participante."
+        },
+        {
+          "name": "opens_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Inicio de autorización."
+        },
+        {
+          "name": "closes_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Límite individual."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente autorizante."
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": true,
+          "description": "Comentario opcional."
+        },
+        {
+          "name": "revoked_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Revocación antes de usar; no borra entrega recibida."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "TA-03"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "evaluation_revisions",
+      "group": "05-evaluacion",
+      "purpose": "Resultado propuesto y publicación histórica por participante; no sobrescribir nota publicada.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de evaluación."
+        },
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Estudiante en actividad."
+        },
+        {
+          "name": "revision_no",
+          "type": "integer",
+          "nullable": false,
+          "description": "Secuencia de revisión."
+        },
+        {
+          "name": "source_kind",
+          "type": "varchar(24)",
+          "nullable": false,
+          "description": "quiz, submission, manual o nonparticipation."
+        },
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Intento elegido, obligatorio en quiz."
+        },
+        {
+          "name": "submission_version_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Versión elegida, obligatoria en submission."
+        },
+        {
+          "name": "grade",
+          "type": "numeric(10,2)",
+          "nullable": false,
+          "description": "Nota final redondeada y dentro del máximo."
+        },
+        {
+          "name": "feedback",
+          "type": "text",
+          "nullable": true,
+          "description": "Comentario general publicable."
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": true,
+          "description": "Motivo de corrección o cero por no participación."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Docente que prepara la evaluación."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Creación de revisión."
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Única transición de publicación; nulo significa privada."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "participant_id",
+          "revision_no"
+        ]
+      ],
+      "rules": [
+        "EV-01",
+        "EV-04",
+        "EV-05",
+        "EV-06",
+        "EV-07"
+      ],
+      "access": "docente; titular solo última publicada autorizada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "attempt_id"
+          ],
+          "target": "attempts",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "submission_version_id"
+          ],
+          "target": "submission_versions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "evaluation_question_grades",
+      "group": "05-evaluacion",
+      "purpose": "Correcciones exactas utilizadas por una evaluación de quiz publicada o preparada.",
+      "columns": [
+        {
+          "name": "evaluation_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Evaluación de quiz."
+        },
+        {
+          "name": "question_grade_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Revisión concreta de puntuación por pregunta."
+        }
+      ],
+      "pk": [
+        "evaluation_id",
+        "question_grade_id"
+      ],
+      "unique": [],
+      "rules": [
+        "EV-04",
+        "EV-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "evaluation_id"
+          ],
+          "target": "evaluation_revisions",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "question_grade_id"
+          ],
+          "target": "question_grades",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "integrity_events",
+      "group": "06-operacion",
+      "purpose": "Señales opcionales y limitadas de visibilidad; no prueban fraude.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Intento."
+        },
+        {
+          "name": "client_event_key",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Deduplicación de señal del navegador."
+        },
+        {
+          "name": "hidden_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Inicio indicado por navegador; no autoritativo."
+        },
+        {
+          "name": "visible_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Fin indicado por navegador."
+        },
+        {
+          "name": "received_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Recepción en servidor."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "attempt_id",
+          "client_event_key"
+        ]
+      ],
+      "rules": [
+        "IN-02",
+        "IN-06"
+      ],
+      "access": "docente; titular solo explicación de su incidencia",
+      "foreign_keys": [
+        {
+          "columns": [
+            "attempt_id"
+          ],
+          "target": "attempts",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "incident_reviews",
+      "group": "06-operacion",
+      "purpose": "Resolución mínima por intento, separada de detalle de señales que caduca.",
+      "columns": [
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Intento revisado."
+        },
+        {
+          "name": "status",
+          "type": "varchar(24)",
+          "nullable": false,
+          "description": "pending, reviewed_no_action o reviewed_observation."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Docente que revisó."
+        },
+        {
+          "name": "comment",
+          "type": "text",
+          "nullable": true,
+          "description": "Observación; no modifica nota automáticamente."
+        },
+        {
+          "name": "reviewed_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Momento de revisión."
+        }
+      ],
+      "pk": [
+        "attempt_id"
+      ],
+      "unique": [],
+      "rules": [
+        "IN-03",
+        "IN-06"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "attempt_id"
+          ],
+          "target": "attempts",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "activity_events",
+      "group": "06-operacion",
+      "purpose": "Auditoría mínima de control y cambios autorizados; no sustituye tablas del dominio.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Actividad."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Cuenta autorizada o nulo en proceso del sistema."
+        },
+        {
+          "name": "event_type",
+          "type": "varchar(40)",
+          "nullable": false,
+          "description": "Tipo permitido: publicación, bloqueo, sesión o revisión de incidencia."
+        },
+        {
+          "name": "details",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Esquema acotado según evento; sin respuestas, correos, soluciones ni credenciales."
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Hora de servidor."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "RE-05",
+        "AC-09",
+        "IN-03"
+      ],
+      "access": "docente y operación autorizada",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "subject_events",
+      "group": "06-operacion",
+      "purpose": "Auditoría de archivo y restauración con fecha real.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador."
+        },
+        {
+          "name": "subject_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Materia."
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Propietario."
+        },
+        {
+          "name": "event_type",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "archived o restored."
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Hora de servidor."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "IN-04",
+        "IN-05"
+      ],
+      "access": "restringido",
+      "foreign_keys": [
+        {
+          "columns": [
+            "subject_id"
+          ],
+          "target": "subjects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "actor_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict"
+        }
+      ]
+    },
+    {
+      "name": "purge_jobs",
+      "group": "06-operacion",
+      "purpose": "Trabajo de eliminación reanudable; completa registros y objetos, no solo una cascada SQL.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de trabajo."
+        },
+        {
+          "name": "subject_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Materia mientras existe; nulo después del borrado final."
+        },
+        {
+          "name": "due_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Archivo más 30 días; se recalcula al archivar nuevamente."
+        },
+        {
+          "name": "status",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "scheduled, running, failed, done o cancelled."
+        },
+        {
+          "name": "phase",
+          "type": "varchar(24)",
+          "nullable": false,
+          "description": "Referencias, objetos o registros; fases controladas."
+        },
+        {
+          "name": "retry_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Reintentos no negativos."
+        },
+        {
+          "name": "last_error_code",
+          "type": "varchar(64)",
+          "nullable": true,
+          "description": "Código técnico sin payload sensible."
+        },
+        {
+          "name": "next_retry_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Próximo intento."
+        },
+        {
+          "name": "completed_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Finalización real."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "IN-05",
+        "IN-06"
+      ],
+      "access": "solo proceso de operación",
+      "foreign_keys": [
+        {
+          "columns": [
+            "subject_id"
+          ],
+          "target": "subjects",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "set null"
+        }
+      ]
+    }
+  ]
+}

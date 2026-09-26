@@ -1,0 +1,33 @@
+digraph modelo {
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Autoría y contenido publicado · modelo lógico 1.0"];
+node [shape=plain, fontname="Arial"];
+edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
+"content_blocks" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>content_blocks</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, block_key</TD></TR><TR><TD ALIGN="LEFT">FK group_key ?</TD></TR><TR><TD ALIGN="LEFT">FK file_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">9 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"draft_files" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>draft_files</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: resource_id, file_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">2 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"file_objects" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>file_objects</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK owner_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">11 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"item_solutions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>item_solutions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, question_key, item_key</TD></TR><TR><TD ALIGN="LEFT">FK target_item_key ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"question_groups" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>question_groups</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, group_key</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">3 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"question_items" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>question_items</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, question_key, item_key</TD></TR><TR><TD ALIGN="LEFT">FK parent_item_key ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">7 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"question_secrets" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>question_secrets</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, question_key</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"questions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>questions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, question_key</TD></TR><TR><TD ALIGN="LEFT">FK group_key</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">8 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"resource_drafts" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>resource_drafts</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: resource_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"resource_versions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>resource_versions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK resource_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"resources" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>resources</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK owner_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"profiles" -> "file_objects" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"profiles" -> "resources" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"resources" -> "resource_drafts" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"resource_drafts" -> "draft_files" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"file_objects" -> "draft_files" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"resources" -> "resource_versions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"resource_versions" -> "question_groups" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"resource_versions" -> "content_blocks" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"question_groups" -> "content_blocks" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"file_objects" -> "content_blocks" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"question_groups" -> "questions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"questions" -> "question_items" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"question_items" -> "question_items" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"questions" -> "question_secrets" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"question_items" -> "item_solutions" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"question_items" -> "item_solutions" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+}

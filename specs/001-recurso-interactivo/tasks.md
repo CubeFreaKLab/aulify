@@ -1,11 +1,11 @@
 # Tareas de 001
 
-Estado: especificación 1.0 definida; construcción pendiente. Esta lista desglosa parte de [las tareas generales](../../tasks.md) sin cerrar las funciones posteriores.
+Estado: especificación y modelo lógico 1.0 definidos; construcción pendiente. Esta lista desglosa parte de [las tareas generales](../../tasks.md) sin cerrar las funciones posteriores.
 
 | ID | Entrega | Dependencias | Criterio de cierre | Estado |
 |---|---|---|---|---|
 | E1-T01 | Definir D-01 a D-07 y ajustar casos | — | Decisiones, cálculos y permisos documentados; ayuda por rol incorporada. | Completada en documentación; no implementada. |
-| E1-T02 | Modelo conceptual, relacional, normalización y permisos | E1-T01 en decisiones de datos | Diagrama editable, claves, cardinalidades, diccionario inicial y matriz de acceso que cubran los estados del spec. | Pendiente. |
+| E1-T02 | Modelo conceptual, relacional, normalización y permisos | E1-T01 en decisiones de datos | [Modelo](../../docs/modelado/README.md), claves, cardinalidades, diccionario, normalización y matriz de acceso; [verificación estructural](../../docs/modelado/verificacion.md). | Completada como modelado documental; políticas ejecutables y pruebas en E1-T04/E1-T05. |
 | E1-T03 | Conceptos, fundamentos visuales y recorridos | Spec; E1-T01 en decisiones de interacción | Diseño revisado de editor, participación y resultados, con móvil, escritorio y estados de error. | Pendiente. |
 | E1-T04 | Comprobar correo, alojamiento y base técnica | Selecciones del plan | Registro/recuperación y acceso restringido probados con datos ficticios; versiones y resultados registrados. | Pendiente. |
 | E1-T05 | Base de aplicación, migraciones iniciales y CI | E1-T02, E1-T04 | Construcción reproducible, entorno aislado, primer informe real de Actions y esquema comprobado. | Pendiente. |

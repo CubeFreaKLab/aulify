@@ -1,0 +1,30 @@
+digraph Respuesta {
+  graph [rankdir=TB, bgcolor=white, pad=0.45, nodesep=0.4, ranksep=0.45, fontname="Arial", fontsize=22, label="Confirmar respuesta · flujo transaccional previsto", labelloc=t];
+  node [shape=box, style="rounded,filled", fillcolor="#F1F8F4", color="#9EBCAE", fontname="Arial", fontsize=13, margin="0.2,0.12"];
+  edge [fontname="Arial", fontsize=11, color="#617A6D", arrowsize=0.6];
+  inicio [label="Estudiante confirma\nClave de petición + respuesta", fillcolor="#087F5B", fontcolor=white];
+  auth [label="Verificar sesión y pertenencia\nPregunta de intento propio"];
+  replay [shape=diamond, label="¿Petición ya\nconfirmada?"];
+  mismo [shape=diamond, label="¿Mismo payload\ny operación?"];
+  limites [label="Para envío nuevo: comprobar\nintento abierto, orden y plazo\ncon hora del servidor"];
+  rechazo [label="Rechazar con mensaje útil\nSin avanzar ni consumir uso", fillcolor="#FFF3E8", color="#D5B28D"];
+  trans [label="Transacción\nRegistrar respuesta definitiva\n+ consumir doble si corresponde"];
+  puntos [label="Corrección automática cerrada\no revisión manual pendiente\nCerrar intento si corresponde"];
+  commit [label="Confirmar persistencia"];
+  recuperar [label="Recuperar resultado original\nSin otra respuesta ni consumo"];
+  salida [label="Devolver solo información permitida\nAvanzar o mostrar retroalimentación\nSin pantalla intermedia de guardado", fillcolor="#E0F3E9", penwidth=2];
+  red [label="Si se pierde la confirmación de red:\nreintentar con la misma clave", shape=note, fillcolor="#F7F8F7"];
+  inicio -> auth;
+  auth -> replay [label="autorizado"];
+  auth -> rechazo [label="denegado"];
+  replay -> mismo [label="sí"];
+  replay -> limites [label="no"];
+  mismo -> recuperar [label="sí"];
+  mismo -> rechazo [label="no"];
+  limites -> trans [label="válido"];
+  limites -> rechazo [label="inválido"];
+  trans -> puntos -> commit -> salida;
+  recuperar -> salida;
+  commit -> red [style=dashed];
+  red -> inicio [style=dashed, constraint=false];
+}

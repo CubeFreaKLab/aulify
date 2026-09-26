@@ -1,0 +1,27 @@
+digraph modelo {
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Participación y juego · modelo lógico 1.0"];
+node [shape=plain, fontname="Arial"];
+edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
+"activities" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>activities</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"attempt_questions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>attempt_questions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK attempt_id</TD></TR><TR><TD ALIGN="LEFT">FK version_id</TD></TR><TR><TD ALIGN="LEFT">FK question_key</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"attempt_resolutions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>attempt_resolutions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: attempt_id</TD></TR><TR><TD ALIGN="LEFT">FK actor_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"attempts" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>attempts</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK participant_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">7 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"participants" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>participants</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"powerup_uses" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>powerup_uses</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: participant_id, kind</TD></TR><TR><TD ALIGN="LEFT">FK attempt_question_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"questions" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>questions</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: version_id, question_key</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"responses" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>responses</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: attempt_question_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"team_members" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>team_members</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: participant_id</TD></TR><TR><TD ALIGN="LEFT">FK team_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">2 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"teams" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>teams</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK activity_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">3 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"participants" -> "attempts" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"attempts" -> "attempt_questions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"questions" -> "attempt_questions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"attempt_questions" -> "responses" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"attempts" -> "attempt_resolutions" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"profiles" -> "attempt_resolutions" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"activities" -> "teams" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"participants" -> "team_members" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
+"teams" -> "team_members" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"participants" -> "powerup_uses" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+"attempt_questions" -> "powerup_uses" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+}

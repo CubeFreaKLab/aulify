@@ -9,6 +9,8 @@ Actualizado: 26 de septiembre de 2026.
 - [Entrega 001](../specs/001-recurso-interactivo/spec.md) con recorrido, alcance incremental, permisos, estados, plan y tareas.
 - [38 casos de 001](../specs/001-recurso-interactivo/aceptacion.md) y [38 casos del alcance completo](../specs/aceptacion-producto.md): 76 escenarios definidos; todos no ejecutados.
 - [Plan de calidad](calidad/plan-de-calidad.md) y [matriz de trazabilidad](calidad/trazabilidad.md) con criterios fijados antes de medir y evidencias previstas por requisito.
+- [Modelo conceptual y relacional 1.0](modelado/README.md): 44 relaciones propias y una identidad externa, diccionario, normalización, 21 invariantes y matriz de permisos. Diez diagramas con fuentes editables y exportaciones SVG/PNG.
+- [Verificación del modelo](modelado/verificacion.md): estructura y derivados comprobados; DBML parseado y figuras revisadas. E1-T02 completada como modelado documental; T-03 permanece parcial hasta ejecutar migraciones, restricciones y RLS.
 - Supabase con PostgreSQL, Auth y Storage seleccionado; decisión en [ADR 0001](decisiones/0001-supabase.md). Playwright y GitHub Actions seleccionados para recorridos e integración continua.
 - Procedimiento de cambios y commits en [CONTRIBUTING.md](../CONTRIBUTING.md); implementación organizada en [tareas](../tasks.md).
 
@@ -20,9 +22,9 @@ Next.js, React, TypeScript y bibliotecas de interfaz siguen sujetos al plan y a 
 
 ## Siguiente entrega
 
-Elaborar el modelo conceptual y relacional: entidades, cardinalidades, claves, restricciones, normalización, diccionario y matriz de permisos. Conservar diagramas editables y relacionarlos con requisitos. Después, concretar el esquema físico y sus migraciones junto con la comprobación técnica de Supabase.
+Trabajar fundamentos de marca conservando el logotipo y diseñar editor, participación y revisión en celular y computadora, incluidos estados vacíos, errores, ayuda y accesibilidad. El modelo ya define las identidades, relaciones y estados que estas pantallas deben representar.
 
-Con esa base, trabajar fundamentos de marca conservando el logotipo y diseñar editor, participación y revisión en celular y computadora, incluidos estados vacíos, errores, ayuda y accesibilidad. Modelo y diseño deben acordar los mismos estados antes de construir el primer recorrido.
+Completar además la comprobación técnica de Supabase, correo y alojamiento. Derivar del modelo las migraciones, CHECK, índices parciales, funciones transaccionales y permisos. La exportación DBML no se considera una migración segura ni una prueba de RLS. Diseño y persistencia deben coincidir antes de construir el primer recorrido.
 
 ## Cómo actualizar este estado
 

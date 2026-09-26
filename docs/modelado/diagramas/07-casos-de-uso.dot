@@ -1,0 +1,26 @@
+digraph Casos {
+  graph [rankdir=LR, bgcolor=white, pad=0.4, nodesep=0.26, ranksep=1.5, fontname="Arial", fontsize=22, label="Aulify · actores y casos de uso", labelloc=t];
+  node [fontname="Arial", fontsize=13, shape=ellipse, style=filled, fillcolor="#F1F8F4", color="#9EBCAE", margin="0.15,0.1"];
+  edge [dir=none, color="#759586"];
+  docente [shape=box, label="Docente", fillcolor="#087F5B", fontcolor=white];
+  estudiante [shape=box, label="Estudiante", fillcolor="#087F5B", fontcolor=white];
+  subgraph cluster_sistema {
+    label="Límite funcional de Aulify"; color="#CEDBD4"; style=rounded;
+    uc01 [label="UC-01\nAcceder y recuperar cuenta"];
+    uc02 [label="UC-02\nOrganizar materia e integrantes"];
+    uc03 [label="UC-03\nSolicitar ingreso"];
+    uc04 [label="UC-04\nPreparar y publicar recurso"];
+    uc05 [label="UC-05\nConfigurar y dirigir actividad"];
+    uc06 [label="UC-06\nParticipar en quiz"];
+    uc07 [label="UC-07\nEntregar tarea"];
+    uc08 [label="UC-08\nCorregir y publicar notas"];
+    uc09 [label="UC-09\nConsultar seguimiento autorizado"];
+    uc10 [label="UC-10\nRevisar incidencias"];
+    uc11 [label="UC-11\nArchivar o restaurar materia"];
+    uc12 [label="UC-12\nConsultar ayuda"];
+  }
+  docente -> {uc01 uc02 uc04 uc05 uc08 uc09 uc10 uc11 uc12};
+  estudiante -> {uc01 uc03 uc06 uc07 uc09 uc12};
+  nota [shape=note, fillcolor="#F7F8F7", label="Auth, Storage y limpieza son\ncolaboradores técnicos.\nNo añaden roles institucionales."];
+  uc12 -> nota [style=invis];
+}
