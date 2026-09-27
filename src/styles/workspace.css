@@ -1058,3 +1058,15 @@ tr:last-child td {
 .block-order-row > .row {
   flex-shrink: 0;
 }
+.editor-title {
+  field-sizing: content;
+  resize: none;
+  overflow: hidden;
+  min-height: 1.6em;
+}
+@media (max-width: 1150px) {
+  .editor-aside .surface > .divider,
+  .editor-aside .surface > .divider ~ * {
+    display: none;
+  }
+}

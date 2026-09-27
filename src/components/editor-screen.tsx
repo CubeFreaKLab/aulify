@@ -220,12 +220,16 @@ function EditorForm({
             <label className="sr-only" htmlFor="resource-title">
               Título del recurso
             </label>
-            <input
+            <textarea
               className="editor-title"
               id="resource-title"
+              rows={1}
               maxLength={120}
               value={draft.title}
-              onChange={(e) => update({ ...draft, title: e.target.value })}
+              onChange={(e) => update({ ...draft, title: e.target.value.replace(/[\r\n]+/g, ' ') })}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') e.preventDefault();
+              }}
             />
             <div className="editor-meta">
               <BookOpen size={14} />
