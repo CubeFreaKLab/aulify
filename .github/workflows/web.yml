@@ -1,0 +1,82 @@
+name: Calidad del prototipo web
+
+on:
+  push:
+    branches: [main]
+    paths:
+      [
+        'src/**',
+        'public/**',
+        'tests/**',
+        'package.json',
+        'package-lock.json',
+        '*config*',
+        'tsconfig.json',
+        '.github/workflows/web.yml',
+      ]
+  pull_request:
+    branches: [main]
+    paths:
+      [
+        'src/**',
+        'public/**',
+        'tests/**',
+        'package.json',
+        'package-lock.json',
+        '*config*',
+        'tsconfig.json',
+        '.github/workflows/web.yml',
+      ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Tipos, reglas y recorridos de demostración
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: true
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - name: Obtener la revisión
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js 24
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Instalar dependencias fijadas
+        run: npm ci
+      - name: Comprobar formato
+        run: npm run format:check
+      - name: Analizar código
+        run: npm run lint
+      - name: Comprobar tipos
+        run: npm run typecheck
+      - name: Verificar reglas del dominio
+        run: npm test
+      - name: Construir aplicación
+        run: npm run build
+      - name: Preparar Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Comprobar recorridos y accesibilidad automática
+        run: npm run test:e2e
+      - name: Conservar informe y evidencia de fallos
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: verificacion-web-${{ github.sha }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
