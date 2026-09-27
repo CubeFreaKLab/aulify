@@ -1,0 +1,322 @@
+.results-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.review-detail {
+  min-width: 0;
+}
+.review-detail > .row h2 {
+  margin-bottom: 7px;
+}
+.review-person strong {
+  font-size: 13px;
+  display: block;
+}
+.review-person small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.review-person > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.results-score-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 15px 18px;
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.results-score-strip strong {
+  color: var(--ink);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+.review-answer > .row {
+  align-items: flex-start;
+  margin-bottom: 9px;
+}
+.review-answer h3 {
+  max-width: 58ch;
+  flex: 1;
+  min-width: 180px;
+}
+.review-guide {
+  font-size: 12px;
+  margin: 12px 0;
+}
+.review-guide summary {
+  font-weight: 650;
+  cursor: pointer;
+  min-height: 34px;
+  display: list-item;
+  align-content: center;
+}
+.review-guide p {
+  padding: 10px 14px;
+  background: var(--mint-soft);
+  border-radius: 8px;
+}
+.results-review-form {
+  margin-top: 15px;
+  gap: 14px;
+}
+.results-review-form .grade-input {
+  max-width: 130px;
+}
+.results-publish-form {
+  margin-top: 26px;
+  gap: 16px;
+}
+.results-publish-form > h3 {
+  font-size: 20px;
+}
+.results-publish-form > .button {
+  align-self: flex-start;
+}
+.results-filters {
+  align-items: flex-end;
+}
+.results-filters > .field {
+  min-width: 160px;
+  flex: 1;
+  max-width: 330px;
+}
+.results-filters > .button {
+  margin-bottom: 3px;
+}
+.results-overview {
+  margin-bottom: 26px;
+}
+.results-scale {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.results-average-chart {
+  display: grid;
+  gap: 15px;
+  margin: 24px 0 28px;
+}
+.results-average-bar {
+  display: grid;
+  grid-template-columns: minmax(80px, 150px) minmax(90px, 1fr) 48px;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+}
+.results-average-bar > span {
+  overflow-wrap: anywhere;
+}
+.results-average-bar > div {
+  height: 14px;
+  border-radius: 4px;
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+.results-average-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--green);
+  transition: width var(--motion-long) var(--ease-standard);
+}
+.results-average-bar strong {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.results-overview th[scope='row'] {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  background: white;
+  color: var(--ink);
+}
+.results-table-secondary {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+.results-feedback {
+  min-width: 135px;
+  max-width: 330px;
+  font-size: 12px;
+}
+.results-feedback summary {
+  cursor: pointer;
+  min-height: 32px;
+  align-content: center;
+  font-weight: 650;
+}
+.results-feedback p {
+  margin: 10px 0;
+  min-width: 160px;
+  line-height: 1.7;
+}
+.results-new-task {
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+.task-detail h2 {
+  margin-bottom: 10px;
+}
+.task-instructions {
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+.task-deadlines {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 18px 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.task-student-content {
+  max-width: 760px;
+  margin-top: 22px;
+}
+.task-student-content input[type='file'] {
+  padding: 10px;
+  font-size: 12px;
+}
+.task-student-content input[type='file']::file-selector-button {
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.task-student-content form > .button {
+  align-self: flex-start;
+}
+.task-submission-state {
+  margin-bottom: 22px;
+}
+.task-submission-state p {
+  font-size: 12px;
+  margin-top: 6px;
+}
+.task-submission-state ul {
+  font-size: 12px;
+  margin-block: 10px;
+  overflow-wrap: anywhere;
+}
+.task-review-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-top: 16px;
+  background: var(--paper);
+}
+.task-review-card h3 {
+  font-size: 17px;
+}
+.task-review-card > .results-note {
+  margin-top: 9px;
+}
+.task-review-card .answer-quote {
+  margin-top: 15px;
+  background: white;
+}
+.task-review-card > ul {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.results-history {
+  margin-top: 18px;
+  font-size: 12px;
+}
+.results-history summary {
+  min-height: 40px;
+  align-content: center;
+  cursor: pointer;
+  font-weight: 650;
+}
+.results-history li {
+  padding-block: 5px;
+}
+.task-detail .section-head h3 {
+  font-size: 17px;
+}
+.review-answer .answer-quote {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .results-average-bar {
+    grid-template-columns: 86px minmax(60px, 1fr) 36px;
+    gap: 9px;
+    font-size: 11px;
+  }
+  .results-score-strip {
+    gap: 12px;
+    padding: 13px;
+  }
+  .results-filters > .field {
+    max-width: none;
+    min-width: 120px;
+  }
+  .results-review-form .row {
+    align-items: stretch;
+  }
+  .results-review-form .row > .button {
+    flex: 1;
+  }
+  .task-review-card {
+    padding: 16px;
+  }
+  .task-deadlines {
+    gap: 8px;
+    flex-direction: column;
+  }
+  .task-detail > .row {
+    align-items: flex-start;
+  }
+  .results-publish-form > .button {
+    width: 100%;
+  }
+  .results-overview {
+    padding-inline: 16px;
+  }
+  .results-overview th,
+  .results-overview td {
+    padding: 12px 10px;
+  }
+  .results-overview table {
+    font-size: 12px;
+  }
+  .results-overview .grade-number {
+    font-size: 17px;
+  }
+  .task-student-content form > .button {
+    width: 100%;
+  }
+  .task-student-content input[type='file'] {
+    max-width: 100%;
+  }
+  .results-new-task .grid-two {
+    gap: 15px;
+  }
+  .review-list {
+    padding-bottom: 8px;
+  }
+  .results-publish-form .muted {
+    font-size: 13px;
+  }
+}
