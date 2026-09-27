@@ -235,7 +235,7 @@ export function Workspace() {
         <WorkspaceTransition path={path}>
           {notices}
           {page === 'inicio' ? (
-            <Dashboard state={state} user={user} subjects={subjects} />
+            <Dashboard key={user.id} state={state} user={user} subjects={subjects} />
           ) : page === 'materias' ? (
             <SubjectsScreen state={state} user={user} subjects={subjects} />
           ) : page === 'materia' && id ? (
