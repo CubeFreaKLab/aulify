@@ -1,0 +1,12 @@
+:root{
+  --font:'Inter Variable','Inter',system-ui,sans-serif;
+  --green:#049a4e;--mint:#b8fac6;--paper:#fafaf8;--ink:#0f0f0f;--white:#fff;
+  --surface-muted:#ecece7;--muted:#60615a;--line:#e0e1d9;--line-strong:#b7bab0;
+  --green-text:#086d3c;--mint-soft:#eaf8ed;--danger:#a42b20;--danger-soft:#fff0ed;
+  --amber:#785112;--amber-soft:#fff5da;--focus:#08753c;
+  --radius-button:10px;--radius-card:16px;
+  --shadow-card:0 6px 24px #0f0f0f06;--shadow-float:0 16px 70px #0f0f0f18;
+  --motion-fast:150ms;--motion-medium:250ms;--motion-long:350ms;
+  --ease-standard:cubic-bezier(.2,0,0,1);--ease-enter:cubic-bezier(0,0,0,1);--ease-exit:cubic-bezier(.3,0,1,1);
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--space-12:48px;--space-16:64px;
+}
