@@ -12,11 +12,33 @@ Aulify es una plataforma web para docentes y estudiantes de secundaria. Su recor
 - Tareas, corrección manual, publicación de calificaciones y seguimiento con gráficos y tablas.
 - Controles de accesibilidad, ayuda inicial por rol, recuperación ante desconexiones y separación de permisos entre cuentas.
 
-## Estado
+## Prototipo web
 
-Base funcional y modelo conceptual/relacional 1.0 definidos; siguiente etapa: diseño visual y comprobación técnica de persistencia. Todavía no hay una aplicación ejecutable ni pruebas de funcionamiento realizadas. Las funciones anteriores describen el alcance previsto.
+La aplicación ejecutable incluye una portada ilustrada, un editor por bloques y un recorrido de demostración: preparar un recurso, publicarlo, responder como estudiante, revisar respuestas escritas y publicar notas. Incluye materias, solicitudes, tareas y resultados con datos ficticios. La [matriz de pantallas](docs/diseno/pantallas-y-estados.md) distingue las interacciones disponibles y los servicios pendientes.
 
-Supabase con PostgreSQL, Auth y Storage, Playwright y GitHub Actions están seleccionados. La aplicación con Next.js, React y TypeScript sigue como propuesta técnica; el proveedor de correo y el transporte de sesiones requieren comprobación.
+La muestra conserva cambios en el almacenamiento de este navegador y permite cambiar entre perfiles ficticios. No ofrece autenticación real ni almacenamiento privado de archivos. Supabase Auth, PostgreSQL, Storage y correo se integrarán con pruebas de permisos y persistencia; el transporte de sesiones y sus cuotas siguen pendientes. Consulta el [estado verificable](docs/estado-del-desarrollo.md).
+
+## Ejecutar
+
+Requiere Node.js 24 y npm. No necesita credenciales externas para explorar el prototipo.
+
+```sh
+npm ci
+npm run dev
+```
+
+Abre [Aulify local](http://127.0.0.1:3000). Entra con **Explorar una clase** o visita `/acceso` y elige el perfil de demostración. Puedes reiniciar los datos desde Preferencias. El [manual del prototipo](docs/prototipo/uso-y-limites.md) explica los recorridos y sus límites.
+
+```sh
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+La construcción usa Next.js, React y TypeScript, React Aria para controles, BlockNote para edición e Inter para la interfaz. Versiones fijadas en `package-lock.json`. GitHub Actions ejecuta análisis, tipos, pruebas, construcción y recorridos; el resultado remoto de cada revisión se consulta en [Actions](https://github.com/CubeFreaKLab/aulify/actions). Producción y CD permanecen pendientes.
 
 ## Documentación del producto
 
@@ -40,5 +62,10 @@ Supabase con PostgreSQL, Auth y Storage, Playwright y GitHub Actions están sele
 | [Decisión sobre Supabase](docs/decisiones/0001-supabase.md) | Motivos y consecuencias de la selección. |
 | [Decisión funcional 1.0](docs/decisiones/0002-reglas-funcionales.md) | Valores iniciales, versiones, evaluación y consecuencias para el modelado. |
 | [Decisión del modelo relacional](docs/decisiones/0003-modelo-relacional.md) | Versiones, publicaciones y excepciones de normalización. |
+| [Base web y editor](docs/decisiones/0004-base-web.md) | Bibliotecas, licencias, renderizado y criterios de integración. |
+| [Dirección visual](docs/diseno/direccion-visual.md) | Marca, composición, tipografía y movimiento. |
+| [Componentes y recursos](docs/diseno/recursos-y-componentes.md) | Assets, fuentes y preparación del diseño editable. |
+| [Capturas del prototipo](docs/diseno/capturas/README.md) | Portada, editor, revisión, quiz, móvil y movimiento reducido. |
+| [Verificación del prototipo](docs/verificacion/pruebas-prototipo.md) | Casos ejecutados, entorno y límites de la evidencia. |
 
 El desarrollo sigue especificaciones verificables: comportamiento esperado, solución técnica, tareas, implementación y comprobación. Las pautas para cambios y commits están en [CONTRIBUTING.md](CONTRIBUTING.md).

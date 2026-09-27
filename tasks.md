@@ -1,12 +1,14 @@
 # Tareas de desarrollo de Aulify
 
-**Estado: base funcional 1.0 definida. T-02 documental completada; T-03 con modelado conceptual/relacional disponible y persistencia pendiente. Las tareas de implementación siguen abiertas.**
+**Estado: base funcional 1.0 y prototipo web 0.1.0 disponibles. T-02 documental completada; T-03 con modelo disponible y persistencia pendiente. La implementación integrada con Supabase sigue abierta.**
 
 Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md). La existencia de estos documentos no acredita funciones implementadas. Resolver las decisiones que afecten una tarea antes de iniciar su construcción.
 
 La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recorrido central. Su [desglose de tareas](specs/001-recurso-interactivo/tasks.md) desarrolla la secuencia de modelado, diseño, acceso, materias, recursos, participación y evaluación. T-02 se cierra como definición documental mediante la especificación general 1.0 y las decisiones D-01 a D-07. No acredita implementación ni pruebas ejecutadas.
 
 ## Preparación técnica
+
+El [prototipo](docs/prototipo/uso-y-limites.md) incorpora recorridos de T-04, T-07 a T-16 y T-22 con un adaptador local. Sus [pruebas](docs/verificacion/pruebas-prototipo.md) y [matriz de pantallas](docs/diseno/pantallas-y-estados.md) describen el alcance comprobado. T-04 cuenta con pantallas funcionales en móvil/escritorio y revisión técnica; la aprobación visual queda abierta. T-05 dispone de aplicación, pruebas y flujo de CI; todavía faltan migraciones y comprobaciones en un entorno de datos real. Las tareas siguientes conservan sus criterios de cierre completos.
 
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |
 |---|---|---|---|---|

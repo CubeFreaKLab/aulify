@@ -1,31 +1,43 @@
 # Estado del desarrollo
 
-Actualizado: 26 de septiembre de 2026.
+Actualizado: 27 de septiembre de 2026 · prototipo web 0.1.0.
 
-## Documentación disponible
+## Disponible para explorar
 
-- [Especificación funcional 1.0](../specification.md): 17 requisitos funcionales, 6 no funcionales y reglas de cuentas, recursos, participación, evaluación, juego, tareas, conservación y ayuda.
-- [Decisión funcional](decisiones/0002-reglas-funcionales.md) y decisiones D-01 a D-07 definidas para construir. T-02 y E1-T01 completadas únicamente como trabajo documental.
-- [Entrega 001](../specs/001-recurso-interactivo/spec.md) con recorrido, alcance incremental, permisos, estados, plan y tareas.
-- [38 casos de 001](../specs/001-recurso-interactivo/aceptacion.md) y [38 casos del alcance completo](../specs/aceptacion-producto.md): 76 escenarios definidos; todos no ejecutados.
-- [Plan de calidad](calidad/plan-de-calidad.md) y [matriz de trazabilidad](calidad/trazabilidad.md) con criterios fijados antes de medir y evidencias previstas por requisito.
-- [Modelo conceptual y relacional 1.0](modelado/README.md): 44 relaciones propias y una identidad externa, diccionario, normalización, 21 invariantes y matriz de permisos. Diez diagramas con fuentes editables y exportaciones SVG/PNG.
-- [Verificación del modelo](modelado/verificacion.md): estructura y derivados comprobados; DBML parseado y figuras revisadas. E1-T02 completada como modelado documental; T-03 permanece parcial hasta ejecutar migraciones, restricciones y RLS.
-- Supabase con PostgreSQL, Auth y Storage seleccionado; decisión en [ADR 0001](decisiones/0001-supabase.md). Playwright y GitHub Actions seleccionados para recorridos e integración continua.
-- Procedimiento de cambios y commits en [CONTRIBUTING.md](../CONTRIBUTING.md); implementación organizada en [tareas](../tasks.md).
+Aulify dispone de una aplicación ejecutable con Next.js, React y TypeScript. La portada, el espacio docente y la participación estudiantil comparten marca e Inter, con composiciones distintas. El [manual de la demostración](prototipo/uso-y-limites.md) explica cómo ejecutarla y recorrerla.
 
-## Pendiente de construcción y validación
+- Portada ilustrada, demostración pública de preguntas y formularios de acceso con validación local.
+- Materias, solicitud por código y aprobación; biblioteca con búsqueda, copias y vista previa.
+- Editor por bloques con guardado automático, formato enriquecido, reordenamiento sin arrastre y versiones de publicación.
+- Ocho tipos de pregunta; avance individual y sesión guiada entre pestañas del mismo navegador; pista y doble con límite de uso.
+- Revisión manual, publicación de notas y resultados propios. Promedios separados por materia y estudiante, filtros y gráficos con tabla equivalente.
+- Tareas con metadatos de archivo de muestra, revisión y publicación de nota. Ayuda inicial por rol que puede omitirse y reabrirse.
 
-No hay aplicación, migraciones, proyecto Supabase configurado, biblioteca visual aprobada ni resultados de pruebas de Aulify en este repositorio. Las decisiones funcionales son la base de construcción; no acreditan validación con usuarios.
+Los datos son ficticios, persisten en el navegador y pueden reiniciarse. La selección de perfil facilita revisar ambos recorridos; todavía no hay autenticación ni autorización de servidor. La [matriz de pantallas](diseno/pantallas-y-estados.md) distingue cada interacción operativa de sus dependencias pendientes.
 
-Next.js, React, TypeScript y bibliotecas de interfaz siguen sujetos al plan y a comprobación técnica. SMTP, transporte guiado, cuotas, respaldo, alojamiento y eliminación programada requieren pruebas y decisiones de implementación. No están configurados Jira, QMetry ni un flujo de Actions ejecutado.
+## Evidencia y decisiones
 
-## Siguiente entrega
+Las [pruebas del prototipo](verificacion/pruebas-prototipo.md) registran las ejecuciones de Vitest y Playwright, axe, los fallos encontrados y su corrección. La comprobación local de tipos, análisis estático y construcción se completó sin errores. La configuración de [GitHub Actions](../.github/workflows/web.yml) ejecuta estas comprobaciones y los recorridos sobre la aplicación compilada; su resultado remoto se registra por ejecución en el informe.
 
-Trabajar fundamentos de marca conservando el logotipo y diseñar editor, participación y revisión en celular y computadora, incluidos estados vacíos, errores, ayuda y accesibilidad. El modelo ya define las identidades, relaciones y estados que estas pantallas deben representar.
+La [dirección visual](diseno/direccion-visual.md), los [componentes y assets](diseno/recursos-y-componentes.md) y el [ADR 0004](decisiones/0004-base-web.md) documentan lo incorporado. Los conceptos generados son referencias visuales; las capturas del navegador muestran componentes y controles reales. La revisión técnica de estas pantallas no equivale a aprobación visual del producto ni a una evaluación de usabilidad con personas.
 
-Completar además la comprobación técnica de Supabase, correo y alojamiento. Derivar del modelo las migraciones, CHECK, índices parciales, funciones transaccionales y permisos. La exportación DBML no se considera una migración segura ni una prueba de RLS. Diseño y persistencia deben coincidir antes de construir el primer recorrido.
+## Base funcional y modelado
 
-## Cómo actualizar este estado
+- [Especificación 1.0](../specification.md): 17 requisitos funcionales y 6 no funcionales. [Reglas y decisiones](decisiones/0002-reglas-funcionales.md) D-01 a D-07.
+- [Entrega 001](../specs/001-recurso-interactivo/spec.md), [38 casos AC](../specs/001-recurso-interactivo/aceptacion.md) y [38 casos AP](../specs/aceptacion-producto.md). Los 76 casos integrados del producto siguen pendientes; las pruebas de demostración no los cierran.
+- [Modelo conceptual y relacional 1.0](modelado/README.md): 44 relaciones propias y una identidad externa, normalización, diccionario, invariantes, permisos y diez diagramas con fuentes editables. [Verificación documental](modelado/verificacion.md) disponible.
+- [Plan de calidad](calidad/plan-de-calidad.md), [trazabilidad](calidad/trazabilidad.md) y [tareas](../tasks.md) conservan los criterios del producto completo.
 
-Registrar archivos o cambios verificables, comandos/procedimientos, resultados y limitaciones. Vincular diagramas a sus fuentes editables y capturas a una versión ejecutada. Comprobar enlaces, conteos y ejemplos del spec solo acredita coherencia documental; no marcar casos funcionales como aprobados por esa revisión. Mantener abiertas las tareas hasta contar con la evidencia de sus criterios.
+## Siguiente integración
+
+T-01 continúa pendiente. La [inspección de servicios](verificacion/viabilidad-servicios.md) encontró el motor Docker local inaccesible y ninguna conexión de prueba de Aulify configurada. No se ejecutaron migraciones, RLS, almacenamiento privado ni recuperación por correo.
+
+El siguiente recorrido es una integración vertical con Supabase: identidad, materia, solicitud y aprobación; lectura y escritura autorizadas; archivo privado. Debe usar migraciones versionadas, cuentas ficticias de distintos roles y casos permitidos/denegados. Después se sustituirá el adaptador local conservando los contratos y se repetirán los recorridos con servicios reales.
+
+Quedan además pendientes sincronización entre dispositivos, límites de red y servicio, conservación y eliminación programadas, juego por equipos y clasificación, pruebas de carga y operación. La entrega actual no despliega producción ni demuestra esos comportamientos.
+
+Figma editable queda pendiente de conexión al archivo y cuenta correctos. Los SVG, tokens y pantallas existentes son materiales de partida. No hay capturas ni un archivo de Figma creado como parte de esta implementación. Jira y QMetry tampoco se han configurado.
+
+## Criterio de actualización
+
+Registrar versión, entorno, procedimiento, resultado y límites de cada comprobación. Mantener separadas la documentación del modelo, las pruebas locales del prototipo y las pruebas integradas del producto. Una captura, un commit o una biblioteca por sí solos no acreditan una función completa.

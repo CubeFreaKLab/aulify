@@ -1,0 +1,436 @@
+{
+  "kind": "local-production-prototype",
+  "applicationCommit": "a5ef296f97b7d1ade7b766850146243127dc8493",
+  "testsCommit": "fe35aa8",
+  "environment": "Windows; Node.js 24.14.1; Next.js compilado; Chromium 153.0.8010.12; datos ficticios",
+  "command": "PLAYWRIGHT_BASE_URL=http://127.0.0.1:3001 npm run test:e2e",
+  "reportSha256": "ab56dfd76e329dce06f7b4e123a9700eaf53be67067175fdf9dccdaef3c78028",
+  "stats": {
+    "startTime": "2026-09-27T19:08:51.335Z",
+    "duration": 51269.992,
+    "expected": 38,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "name": "ocho tipos de pregunta, pista y doble únicos, escritura pendiente",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 4826
+        }
+      ]
+    },
+    {
+      "name": "sesión guiada creada en interfaz coordina dos pestañas del mismo navegador",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 4488
+        }
+      ]
+    },
+    {
+      "name": "ocho tipos de pregunta, pista y doble únicos, escritura pendiente",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 4674
+        }
+      ]
+    },
+    {
+      "name": "sesión guiada creada en interfaz coordina dos pestañas del mismo navegador",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 3906
+        }
+      ]
+    },
+    {
+      "name": "ayuda opcional, navegación por rol y acceso no concedido a herramientas docentes",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 3159
+        }
+      ]
+    },
+    {
+      "name": "diálogo por teclado devuelve foco y no altera los datos al cerrar",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1314
+        }
+      ]
+    },
+    {
+      "name": "vista previa conserva foco y contenido con movimiento no-preference",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2110
+        }
+      ]
+    },
+    {
+      "name": "vista previa conserva foco y contenido con movimiento reduce",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1033
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática y reflujo del inicio docente",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1669
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática y reflujo del inicio estudiante",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1665
+        }
+      ]
+    },
+    {
+      "name": "almacenamiento corrupto ofrece recuperación explícita sin sobrescribir al leer",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1179
+        }
+      ]
+    },
+    {
+      "name": "recurso existente conserva negrita, bloque quiz y orden después de recargar",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 6648
+        }
+      ]
+    },
+    {
+      "name": "recurso → publicación → quiz oculto → revisión → nota publicada",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 10830
+        }
+      ]
+    },
+    {
+      "name": "ayuda opcional, navegación por rol y acceso no concedido a herramientas docentes",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2653
+        }
+      ]
+    },
+    {
+      "name": "diálogo por teclado devuelve foco y no altera los datos al cerrar",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1155
+        }
+      ]
+    },
+    {
+      "name": "vista previa conserva foco y contenido con movimiento no-preference",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1810
+        }
+      ]
+    },
+    {
+      "name": "vista previa conserva foco y contenido con movimiento reduce",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 840
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática y reflujo del inicio docente",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1416
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática y reflujo del inicio estudiante",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1497
+        }
+      ]
+    },
+    {
+      "name": "almacenamiento corrupto ofrece recuperación explícita sin sobrescribir al leer",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1088
+        }
+      ]
+    },
+    {
+      "name": "recurso existente conserva negrita, bloque quiz y orden después de recargar",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 6579
+        }
+      ]
+    },
+    {
+      "name": "recurso → publicación → quiz oculto → revisión → nota publicada",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 12254
+        }
+      ]
+    },
+    {
+      "name": "landing: marca, ilustraciones, vínculos y pregunta pública operativos",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2348
+        }
+      ]
+    },
+    {
+      "name": "landing: movimiento reducido mantiene la escena estable al desplazarse",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 777
+        }
+      ]
+    },
+    {
+      "name": "landing y acceso conservan reflujo a 320 píxeles CSS",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 688
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1190
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /acceso",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 980
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /registro",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 963
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /recuperar",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 919
+        }
+      ]
+    },
+    {
+      "name": "formularios de acceso y recuperación no autentican ni almacenan credenciales",
+      "project": "chromium-escritorio",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1563
+        }
+      ]
+    },
+    {
+      "name": "landing: marca, ilustraciones, vínculos y pregunta pública operativos",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 3100
+        }
+      ]
+    },
+    {
+      "name": "landing: movimiento reducido mantiene la escena estable al desplazarse",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 771
+        }
+      ]
+    },
+    {
+      "name": "landing y acceso conservan reflujo a 320 píxeles CSS",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 743
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1377
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /acceso",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 986
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /registro",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 952
+        }
+      ]
+    },
+    {
+      "name": "accesibilidad automática de /recuperar",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 903
+        }
+      ]
+    },
+    {
+      "name": "formularios de acceso y recuperación no autentican ni almacenan credenciales",
+      "project": "chromium-movil",
+      "outcome": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1647
+        }
+      ]
+    }
+  ]
+}

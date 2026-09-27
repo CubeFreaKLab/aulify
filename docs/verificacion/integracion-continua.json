@@ -1,0 +1,96 @@
+{
+  "verifiedAt": "2026-09-27T19:17:05.8744404Z",
+  "runId": 36343447881,
+  "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36343447881",
+  "headCommit": "56486c88ce39f1d59047983294e019ab93467645",
+  "status": "completed",
+  "conclusion": "success",
+  "createdAt": "2026-09-27T19:11:35Z",
+  "updatedAt": "2026-09-27T19:14:12Z",
+  "jobs": [
+    {
+      "name": "Tipos, reglas y recorridos de demostración",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-27T19:11:39Z",
+      "completed_at": "2026-09-27T19:14:12Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Obtener la revisión",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preparar Node.js 24",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Instalar dependencias fijadas",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar formato",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analizar código",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar tipos",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar reglas del dominio",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Construir aplicación",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preparar Chromium",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar recorridos y accesibilidad automática",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Conservar informe y evidencia de fallos",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Preparar Node.js 24",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Obtener la revisión",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

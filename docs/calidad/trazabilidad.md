@@ -1,6 +1,6 @@
 # Trazabilidad de requisitos, tareas y comprobaciones
 
-Base funcional 1.0 · 26 de septiembre de 2026. Todos los casos están pendientes de ejecución.
+Base funcional 1.0 · actualización del 27 de septiembre de 2026. Los casos integrados AC/AP siguen pendientes; existe evidencia separada del prototipo.
 
 Esta matriz enlaza el [catálogo de requisitos y sus reglas](../../specification.md), las [tareas](../../tasks.md), los [casos AC de la entrega 001](../../specs/001-recurso-interactivo/aceptacion.md) y los [casos AP del alcance completo](../../specs/aceptacion-producto.md). Los criterios Q pertenecen al [plan de calidad](plan-de-calidad.md). Aquí «AC» identifica casos de aceptación; en la columna de reglas se escribe «regla AC» para distinguir las reglas de participación del documento general.
 
@@ -44,7 +44,7 @@ La relación es de cobertura prevista, no de prueba aprobada. Un caso puede comp
 | Evidencia | Informe, captura, traza o consulta que respalde el resultado; sin datos privados. |
 | Seguimiento | Defecto, corrección y nueva ejecución vinculados; conservar el fallo original. |
 
-El [modelo de datos 1.0](../modelado/README.md) ya está disponible. Los vínculos siguientes son evidencia de diseño documental; las migraciones y comprobaciones de aplicación aún no existen. Las fuentes editables y el commit permiten reproducir las figuras.
+El [modelo de datos 1.0](../modelado/README.md) ya está disponible. Los vínculos siguientes son evidencia de diseño documental; las migraciones todavía no existen. Las fuentes editables y el commit permiten reproducir las figuras.
 
 | Requisitos | Modelo disponible |
 |---|---|
@@ -57,5 +57,17 @@ El [modelo de datos 1.0](../modelado/README.md) ya está disponible. Los víncul
 | RNF-01, RNF-02, RNF-03, RNF-04 | [Casos y estados](../modelado/casos-y-operaciones.md) para diseñar la experiencia; rendimiento, usabilidad, accesibilidad y consumo siguen pendientes de medición. |
 
 ## Cambios y finalización
+
+### Evidencia del prototipo 0.1.0
+
+| Requisitos relacionados | Comprobación disponible | Límite |
+|---|---|---|
+| RF-03, RF-04, RF-13 | Guardado de bloques enriquecidos, recarga, ordenación por teclado, copias y versiones; ocho tipos de pregunta. | Adaptador local, sin persistencia ni autorización de servidor. |
+| RF-05, RF-06, RF-07, RF-08, RF-14, RF-15, RF-16 | Recorrido de publicación, participación, revisión manual y nota; ayudas de un uso, corrección oculta y sesión guiada. | La sala comparte almacenamiento entre pestañas; no acredita sincronización remota ni equipos. |
+| RF-10, RF-12, RF-17 | Metadatos de entregas, revisión, filtros y tabla/gráfico; ayuda por rol sin consumir intentos. | No almacena bytes de archivos; falta almacenamiento privado y evaluación con usuarios. |
+| RNF-01, RNF-02 | Playwright en escritorio y móvil emulado; teclado, foco, movimiento reducido, reflujo y análisis axe en estados identificados. | No certifica WCAG completo ni reemplaza pruebas con lectores de pantalla o teléfonos físicos. |
+| RNF-06 | Dependencias fijadas, construcción y flujo de GitHub Actions con informe por versión. | CI no despliega ni comprueba migraciones o recuperación de datos. |
+
+Procedimientos, versiones y resultados en [pruebas del prototipo](../verificacion/pruebas-prototipo.md). Estos casos de demostración no se contabilizan como aprobaciones de los 76 escenarios integrados.
 
 Si cambia una regla, actualizar su caso y esta matriz antes de implementar. Al terminar una tarea, registrar qué casos se ejecutaron, cuáles faltan y dónde están sus resultados. La comprobación de enlaces o de este documento acredita coherencia documental, no funcionamiento del producto. El estado consolidado se conserva en [estado del desarrollo](../estado-del-desarrollo.md).

@@ -1,6 +1,6 @@
 # Dirección visual de Aulify
 
-Estado: propuesta de implementación, 27 de septiembre de 2026. Las comprobaciones y la aprobación visual se registran por separado.
+Estado: propuesta implementada en el prototipo 0.1.0, 27 de septiembre de 2026. Las comprobaciones técnicas y la aprobación visual se registran por separado.
 
 ## Dos experiencias, una identidad
 
@@ -12,7 +12,7 @@ Paleta de origen: verde #049A4E, menta #B8FAC6, papel #FAFAF8, gris claro #ECECE
 
 ## Composición elegida
 
-Se comparan dos bocetos de apertura, que se contrastarán con conceptos visuales:
+Se compararon dos bocetos de apertura y sus conceptos visuales:
 
 ```
 A · Escritorio que cobra vida
@@ -30,7 +30,7 @@ en movimiento.           | hojas y preguntas en planos
 explicación y acciones   | cuaderno en primer plano
 ```
 
-Se elige A por ofrecer una escena central reconocible y una transición natural hacia una clase de ejemplo. B conserva una lectura clara pero se aproxima más a una composición habitual de texto e imagen. La elección puede ajustarse tras inspeccionar los conceptos sin alterar la identidad.
+Se eligió A por ofrecer una escena central reconocible y una transición natural hacia una clase de ejemplo. B conserva una lectura clara pero se aproxima más a una composición habitual de texto e imagen. Los conceptos se inspeccionaron antes de integrar el cuaderno ilustrado y las capas independientes de la portada. La aprobación visual del producto sigue abierta.
 
 El recorrido de la portada contiene escenas distintas: promesa comprensible; materiales que se ordenan; explicación y pregunta que se pueden explorar; vista del trabajo docente; cierre con entrada a la demostración. El momento principal es la transformación del cuaderno en un recurso interactivo. Las ilustraciones se mueven en planos independientes y dejan libre el texto. La página conserva desplazamiento normal y accesos directos.
 
@@ -52,4 +52,4 @@ Las animaciones admiten interrupción, mantienen el foco comprensible y respetan
 
 ## Assets y evidencia
 
-Los SVG originales de marca se conservan. Se preparan conceptos y recursos ilustrados específicos; las pantallas del producto se construyen con componentes reales. Los conceptos raster no se presentan como capturas de una aplicación ejecutada. La evidencia visual del prototipo se vinculará a su versión y entorno.
+Los SVG originales de marca se conservan. Se generaron dos conceptos de composición y un cuaderno ilustrado con transparencia; las pantallas del producto se construyeron con componentes reales. Los conceptos raster no se presentan como capturas de una aplicación ejecutada. La [evidencia visual del prototipo](capturas/README.md) identifica versión y entorno.
