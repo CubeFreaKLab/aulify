@@ -10,10 +10,12 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "format:check": "prettier --check src tests *.ts *.mjs *.json .github/workflows/*.yml",
+    "format": "prettier --write src tests *.ts *.mjs *.json .github/workflows/*.yml"
   },
   "dependencies": {
     "@blocknote/ariakit": "0.55.0",
@@ -34,7 +36,9 @@
     "@types/react-dom": "19.3.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.6",
+    "prettier": "3.9.9",
     "typescript": "6.0.3",
     "vitest": "5.0.2"
-  }
+  },
+  "type": "module"
 }
