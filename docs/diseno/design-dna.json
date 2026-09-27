@@ -1,0 +1,15 @@
+{
+  "version": "1.0-prototipo",
+  "design_system": {
+    "color": {"green":"#049A4E","mint":"#B8FAC6","paper":"#FAFAF8","lightGray":"#ECECE7","muted":"#60615A","ink":"#0F0F0F","white":"#FFFFFF","source":"Tokens originales de marca; decisiones semánticas en src/styles/tokens.css"},
+    "typography": {"family":"Inter Variable","weights":{"display":[800,900],"heading":[700,750],"control":650,"body":[400,500]},"displayScale":"clamp adaptable por composición","bodyPx":15,"readingLineHeight":1.85},
+    "spacing": {"scale":[4,8,12,16,24,32,48,64],"density":"Amplia en portada; funcional en plataforma"},
+    "layout": {"marketing":"Hero central ilustrado y secciones de demostración","workspace":"Navegación lateral y área central","mobile":"Composición vertical; navegación desplegable","maxReadingWidthPx":800},
+    "shape": {"buttonRadiusPx":10,"cardRadiusPx":16,"illustration":"Contorno negro y curvas orgánicas"},
+    "elevation": {"cards":"Borde tenue, sombra contenida","overlay":"Fondo atenuado y panel flotante"},
+    "motion": {"durationMs":{"fast":150,"medium":250,"long":350},"easing":{"standard":"cubic-bezier(.2,0,0,1)","enter":"cubic-bezier(0,0,0,1)","exit":"cubic-bezier(.3,0,1,1)"},"reference":"https://m3.material.io/styles/motion/transitions/transition-patterns","reducedMotion":"Composición estática y transiciones inmediatas"},
+    "components": {"controls":"React Aria con estilos Aulify","editor":"BlockNote con Ariakit y bloque de actividad","questions":"Una consigna y alternativas amplias","feedback":"Según política de visibilidad de actividad"}
+  },
+  "design_style": {"mood":["cercano","curioso","claro"],"audience":"Docentes y estudiantes de secundaria","composition":"Materiales escolares organizados hasta formar una clase; superficies de trabajo tranquilas","imagery":"Ilustración lineal negra con verde, sin infantilización","voice":"Español directo, acciones comprensibles","ornamentation":"Concentrada en la portada; orientada a la tarea dentro del aula"},
+  "visual_effects": {"overview":{"effect_intensity":"moderada en portada, baja en plataforma","performance_tier":"CSS y DOM"},"scroll":{"enabled":true,"effect":"Planos ilustrados con desplazamientos diferenciados y scroll normal"},"webgl":{"enabled":false},"particles":{"enabled":false},"cursorEffects":{"enabled":false},"transitions":{"enabled":true,"patterns":["container transform","forward/backward","lateral","top level","enter/exit","skeleton"]},"composite_notes":"El logo conserva el SVG original; las escenas raster se combinan con elementos HTML/SVG. No se carga el editor en la portada."}
+}
