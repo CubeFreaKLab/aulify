@@ -1,0 +1,141 @@
+{
+  "date": "2026-09-27T19:11:50.459Z",
+  "commit": "56486c88ce39f1d59047983294e019ab93467645",
+  "environment": "Windows · Next.js compilado · Chromium · datos ficticios",
+  "browser": "153.0.8010.12",
+  "captures": [
+    {
+      "name": "01-portada-escritorio.png",
+      "description": "Apertura de la portada, movimiento normal.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/",
+      "scrollY": 0,
+      "sha256": "386e7f78489f1fa6c511dbe8d1c685f33dc0859d7d3449a9075915bd34936533"
+    },
+    {
+      "name": "02-portada-completa.png",
+      "description": "Recorrido completo de presentación.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/",
+      "scrollY": 0,
+      "sha256": "386e7f78489f1fa6c511dbe8d1c685f33dc0859d7d3449a9075915bd34936533"
+    },
+    {
+      "name": "03-escena-intermedia.png",
+      "description": "Planos ilustrados durante el desplazamiento.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/",
+      "scrollY": 0,
+      "sha256": "386e7f78489f1fa6c511dbe8d1c685f33dc0859d7d3449a9075915bd34936533"
+    },
+    {
+      "name": "04-salida-escena.png",
+      "description": "Salida de la escena y comienzo del contenido.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/",
+      "scrollY": 0,
+      "sha256": "386e7f78489f1fa6c511dbe8d1c685f33dc0859d7d3449a9075915bd34936533"
+    },
+    {
+      "name": "05-movimiento-reducido.png",
+      "description": "Escena estática con preferencia de movimiento reducido.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/",
+      "scrollY": 0,
+      "sha256": "fa32d119cdeafb4209aeced70fbcbfec8ceb75f6785a39157c96722659948a34"
+    },
+    {
+      "name": "06-portada-movil.png",
+      "description": "Composición específica de portada a 390 px.",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "url": "/",
+      "scrollY": 0,
+      "sha256": "44fa3ee245deef0574f3219d8fb300c4501839f799dfc42a35b7ffaaee850cbb"
+    },
+    {
+      "name": "07-editor-escritorio.png",
+      "description": "Editor con explicación, bloque interactivo y preguntas.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/demo/editor/resource-ecosystems",
+      "scrollY": 0,
+      "sha256": "b42c8acdbf39e4a68545401fab5a479d441ac7d6a4550b42a868f309d9027dcc"
+    },
+    {
+      "name": "08-editor-movil.png",
+      "description": "Acciones, herramientas y contenido adaptados a móvil.",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "url": "/demo/editor/resource-ecosystems",
+      "scrollY": 0,
+      "sha256": "4d20c00eebbf7ed126db34f86108cb183f868a8187ccf6f16b8df6d0123788b4"
+    },
+    {
+      "name": "09-preguntas-320.png",
+      "description": "Controles de ordenación y borrado visibles a 320 px.",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "url": "/demo/editor/resource-ecosystems",
+      "scrollY": 2438,
+      "sha256": "b5fb581dd0154ca1ade0e4e3d1634544a956ac0174e91dc65a6b17976e1df49c"
+    },
+    {
+      "name": "10-revision-escritorio.png",
+      "description": "Respuestas y revisión de un intento ficticio.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/demo/revision",
+      "scrollY": 0,
+      "sha256": "ef017633dbdb491118f5d999886d50ab0fe4fa1a349413cccf8cc1ece2c9cd97"
+    },
+    {
+      "name": "11-quiz-escritorio.png",
+      "description": "Primera pregunta y potenciadores habilitados.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "url": "/demo/actividad/activity-ecosystems",
+      "scrollY": 0,
+      "sha256": "c40c493862179d42a3cde76e9dd82e5fab384b74e52858805d506068ba60bdc2"
+    },
+    {
+      "name": "12-quiz-movil.png",
+      "description": "Alternativas táctiles, progreso y respuesta en móvil.",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "url": "/demo/actividad/activity-ecosystems",
+      "scrollY": 0,
+      "sha256": "d8c90f7bd96b46bd8cf512f7740e27f1deb2db8071a2b866f1a9abf1910e6a6f"
+    }
+  ],
+  "pageErrors": []
+}
