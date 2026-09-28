@@ -1,8 +1,10 @@
 'use client';
 
-import Link from 'next/link';
+import Link from './workspace-link';
 import { BarChart3, Check, ClipboardCheck, FileText, Plus, Upload } from 'lucide-react';
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
+import { usePathname } from 'next/navigation';
+import { uploadFile } from '@/lib/upload';
 import {
   calculateAverage,
   numeric,
@@ -14,14 +16,16 @@ import {
   type Evaluation,
   type Question,
   type StudentResult,
+  type SubmissionFile,
   type Subject,
   type Task,
   type TaskSubmission,
   type User,
 } from '@/domain';
-import { getDemoRepository, runDemo } from '@/demo/store';
+import { getDemoRepository, runDemo, getWorkspaceExtras } from '@/demo/store';
 import { Badge, Button, EmptyState, Field, PageHeading } from './ui';
 import '../styles/results.css';
+import { ManualActivities, TaskResubmission } from './classroom-management';
 
 interface ScreenProps {
   state: DemoState;
@@ -108,10 +112,10 @@ function AnswerReviewForm({
   const latest = answer.reviews.at(-1);
   const [editing, setEditing] = useState(!latest);
   const prefix = `review-${attempt.id}-${question.id}`;
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const saved = runDemo(
+    const saved = await runDemo(
       (repo) =>
         repo.reviewAnswer(
           attempt.id,
@@ -456,6 +460,7 @@ function latestEvaluations(evaluations: Evaluation[]) {
 }
 
 export function ResultsScreen({ state, user }: ScreenProps) {
+  const live = usePathname().startsWith('/aula');
   const [subjectId, setSubjectId] = useState('all');
   const [course, setCourse] = useState('all');
   const [year, setYear] = useState('all');
@@ -616,6 +621,14 @@ export function ResultsScreen({ state, user }: ScreenProps) {
             : 'Tus calificaciones aparecen cuando el docente las publica.'
         }
       />
+      {teacher && (
+        <ManualActivities
+          state={state}
+          user={user}
+          live={live}
+          draftEvaluations={getWorkspaceExtras().draftEvaluations}
+        />
+      )}
       <div className="filters results-filters">
         <Field label="Materia" id="result-subject">
           <select
@@ -862,10 +875,10 @@ function NewTaskForm({
       closes: localDateTime(new Date(now + 7 * 86400000)),
     };
   });
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const result = runDemo(
+    const result = await runDemo(
       (repo) =>
         repo.createTask(
           {
@@ -971,31 +984,53 @@ function NewTaskForm({
 
 function StudentTask({ state, user, task }: ScreenProps & { task: Task }) {
   const [files, setFiles] = useState<File[]>([]);
+  const live = usePathname().startsWith('/aula');
+  const [uploading, setUploading] = useState(false);
+  const uploaded = useRef(new WeakMap<File, SubmissionFile>());
   const submissions = state.submissions.filter(
     (item) => item.taskId === task.id && item.studentId === user.id,
   );
-  const submission = submissions.at(-1);
+  const submission = submissions.toSorted((a, b) => a.version - b.version).at(-1);
   const evaluation = latestEvaluation(state, task.id, user.id);
-  const canSubmit = !submission?.gradedAt;
-  function submit(event: FormEvent<HTMLFormElement>) {
+  const reentry = getWorkspaceExtras().resubmissionWindows?.find(
+    (window) => window.taskId === task.id && window.studentId === user.id,
+  );
+  const canSubmit = !submission?.gradedAt || Boolean(reentry);
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (uploading) return;
     const form = event.currentTarget;
     const data = new FormData(form);
-    const result = runDemo(
-      (repo) =>
-        repo.submitTask(
-          task.id,
-          files.map((file) => ({
-            id: crypto.randomUUID(),
-            name: file.name,
-            size: file.size,
-            mimeType: file.type,
-          })),
-          String(data.get('note') ?? ''),
-          user.id,
-        ),
-      'Entrega de muestra registrada. Se guardaron los datos de los archivos, no su contenido.',
+    setUploading(true);
+    const result = await runDemo(
+      async (repo) => {
+        if (
+          files.length < 1 ||
+          files.length > 5 ||
+          files.reduce((sum, file) => sum + file.size, 0) > 20 * 1024 * 1024
+        )
+          throw new Error('Adjunta de 1 a 5 archivos, con un total de hasta 20 MiB.');
+        const attachments: SubmissionFile[] = [];
+        for (const file of files) {
+          if (live) {
+            const saved = uploaded.current.get(file) || (await uploadFile(file, 'submission'));
+            uploaded.current.set(file, saved);
+            attachments.push(saved);
+          } else
+            attachments.push({
+              id: crypto.randomUUID(),
+              name: file.name,
+              size: file.size,
+              mimeType: file.type,
+            });
+        }
+        return repo.submitTask(task.id, attachments, String(data.get('note') ?? ''), user.id);
+      },
+      live
+        ? 'Tu trabajo fue entregado.'
+        : 'Entrega de muestra registrada. Se guardaron los datos de los archivos, no su contenido.',
     );
+    setUploading(false);
     if (result) {
       setFiles([]);
       form.reset();
@@ -1019,7 +1054,8 @@ function StudentTask({ state, user, task }: ScreenProps & { task: Task }) {
           <ul>
             {submission.files.map((file) => (
               <li key={file.id}>
-                {file.name} <span className="results-note">({number(file.size / 1024)} KiB)</span>
+                <FileName file={file} />{' '}
+                <span className="results-note">({number(file.size / 1024)} KiB)</span>
               </li>
             ))}
           </ul>
@@ -1033,8 +1069,14 @@ function StudentTask({ state, user, task }: ScreenProps & { task: Task }) {
           )}
         </div>
       )}
+      {reentry && (
+        <p className="notice">
+          El docente habilitó una nueva entrega hasta {date(reentry.closesAt)}. Tu evaluación
+          anterior se conserva hasta que publique una nueva.
+        </p>
+      )}
       {canSubmit ? (
-        <form className="stack" onSubmit={submit}>
+        <form className="stack" onSubmit={submit} aria-busy={uploading}>
           <Field
             label={submission ? 'Archivos para reemplazar la entrega' : 'Adjunta tu trabajo'}
             id={`task-files-${task.id}`}
@@ -1061,18 +1103,23 @@ function StudentTask({ state, user, task }: ScreenProps & { task: Task }) {
             <textarea id={`task-note-${task.id}`} name="note" maxLength={3000} rows={2} />
           </Field>
           <p className="results-note">
-            En esta demostración se guardan el nombre, el tamaño y el tipo de archivo en este
-            navegador. El contenido no se sube ni estará disponible para descargar.
+            {live
+              ? 'Tus archivos solo estarán disponibles para ti y el docente de esta materia.'
+              : 'En esta demostración se guardan el nombre, el tamaño y el tipo de archivo. El contenido no se sube ni estará disponible para descargar.'}
           </p>
-          <Button type="submit">
+          <Button type="submit" isDisabled={uploading}>
             <Upload size={17} aria-hidden="true" />
-            {submission ? 'Reemplazar entrega de muestra' : 'Registrar entrega de muestra'}
+            {uploading
+              ? 'Subiendo tu trabajo…'
+              : submission
+                ? 'Reemplazar entrega'
+                : 'Entregar trabajo'}
           </Button>
         </form>
       ) : (
         <p className="results-note">
-          Esta entrega ya fue corregida. Una nueva oportunidad requiere autorización del docente;
-          esa función se incorporará con los servicios de la plataforma.
+          Esta entrega ya fue corregida. Pide a tu docente que habilite una nueva entrega si
+          necesitas hacer cambios.
         </p>
       )}
       {submissions.length > 1 && (
@@ -1103,7 +1150,7 @@ function TaskReview({
     evaluation?.submissionId === submission.id &&
     evaluation.grade === submission.grade &&
     evaluation.comment === (submission.comment ?? '');
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     runDemo(
@@ -1133,14 +1180,11 @@ function TaskReview({
       <ul>
         {submission.files.map((file) => (
           <li key={file.id}>
-            {file.name} <span className="results-note">· {number(file.size / 1024)} KiB</span>
+            <FileName file={file} />{' '}
+            <span className="results-note">· {number(file.size / 1024)} KiB</span>
           </li>
         ))}
       </ul>
-      <p className="results-note">
-        Archivos de muestra: solo hay metadatos. La revisión aquí permite probar la nota y los
-        comentarios.
-      </p>
       <form className="stack results-review-form" onSubmit={submit}>
         <Field label={`Nota, de 0 a ${task.maxGrade}`} id={`task-grade-${submission.id}`}>
           <input
@@ -1186,7 +1230,19 @@ function TaskReview({
   );
 }
 
+function FileName({ file }: { file: SubmissionFile }) {
+  const live = usePathname().startsWith('/aula');
+  return live ? (
+    <a href={`/api/files/${file.id}?download=1`} target="_blank" rel="noreferrer">
+      {file.name}
+    </a>
+  ) : (
+    <>{file.name}</>
+  );
+}
+
 export function TasksScreen({ state, user }: ScreenProps) {
+  const live = usePathname().startsWith('/aula');
   const [creating, setCreating] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState('all');
   const teacher = user.role === 'teacher';
@@ -1299,6 +1355,7 @@ export function TasksScreen({ state, user }: ScreenProps) {
                 ) : (
                   <StudentTask state={state} user={user} task={task} />
                 )}
+                {teacher && <TaskResubmission state={state} task={task} live={live} />}
               </article>
             );
           })}

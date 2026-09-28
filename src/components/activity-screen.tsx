@@ -1,6 +1,8 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link';
+import Link from './workspace-link';
+import { usePathname } from 'next/navigation';
+import { ActivityManagement, ActivityRanking } from './classroom-management';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   ArrowLeft,
@@ -17,19 +19,25 @@ import {
 import {
   questionsOf,
   numeric,
-  studentActivity,
-  safeImageUrl,
   type DemoState,
   type User,
   type AnswerValue,
   type StudentQuestion,
-  type Block,
   type Activity,
+  type Block,
   type Attempt,
 } from '@/domain';
-import { runDemo, refreshDemo } from '@/demo/store';
+import {
+  runDemo,
+  refreshDemo,
+  getDemoRepository,
+  getImmediateFeedback,
+  getWorkspaceExtras,
+  remoteCommand,
+} from '@/demo/store';
 import { Button, Badge, EmptyState, PageHeading } from './ui';
 import { QuestionInput } from './question-input';
+import { ResourceReader } from './resource-reader';
 import '../styles/quiz.css';
 
 export function ActivityScreen({
@@ -105,7 +113,7 @@ export function ActivityScreen({
     return <TeacherRoom state={state} activity={activity} user={user} notices={notices} />;
   let view;
   try {
-    view = studentActivity(state, activity.id, user.id);
+    view = getDemoRepository().studentActivity(activity.id, user.id);
   } catch {
     return (
       <main id="contenido" className="error-page">
@@ -167,16 +175,23 @@ export function ActivityScreen({
             Disponible hasta {new Date(activity.settings.closesAt).toLocaleString('es-BO')}. Las
             respuestas escritas se revisan manualmente.
           </p>
+          {activity.settings.reportVisibility && (
+            <p className="notice">
+              Esta actividad registra cuándo esta pestaña deja de estar visible. El docente puede
+              revisar esas señales; no muestran qué aplicación usas ni prueban una trampa. No se
+              aplican sanciones automáticas.
+            </p>
+          )}
           {activity.settings.pace === 'guided' ? (
             <>
               <p className="notice" style={{ margin: '15px 0' }}>
-                El docente abrirá cada pregunta. Esta sala usa datos locales de demostración.
+                El docente abrirá cada pregunta. Puedes esperar aquí hasta que comience.
               </p>
               <Button
-                onPress={() => {
-                  const joined = runDemo(
+                onPress={async () => {
+                  const joined = await runDemo(
                     (r) => r.joinGuidedRoom(activity.id, user.id),
-                    'Te uniste a la sala de ejemplo.',
+                    'Te uniste a la sala.',
                   );
                   if (joined && current) setPlaying(true);
                 }}
@@ -196,8 +211,8 @@ export function ActivityScreen({
             <Button
               style={{ marginTop: 18 }}
               isDisabled={!current && view.attemptsRemaining === 0}
-              onPress={() => {
-                const attempt = runDemo((r) => r.startAttempt(activity.id, user.id));
+              onPress={async () => {
+                const attempt = await runDemo((r) => r.startAttempt(activity.id, user.id));
                 if (attempt) setPlaying(true);
               }}
             >
@@ -215,12 +230,13 @@ function PreviewQuestion({ question }: { question: StudentQuestion }) {
   return <QuestionInput question={question} value={value} onChange={setValue} />;
 }
 function QuizHeader() {
+  const live = usePathname().startsWith('/aula');
   return (
     <header className="quiz-topbar">
       <Link href="/" className="quiz-logo">
         <img src="/brand/aulify-logo.svg" alt="Aulify" />
       </Link>
-      <Badge>Clase de ejemplo</Badge>
+      <Badge>{live ? 'Tu aula' : 'Clase de ejemplo'}</Badge>
       <Link href="/demo" className="button ghost small">
         <ArrowLeft size={16} />
         Mi inicio
@@ -228,138 +244,6 @@ function QuizHeader() {
     </header>
   );
 }
-function ResourceReader({
-  title,
-  blocks,
-  document,
-}: {
-  title: string;
-  blocks: Block[];
-  document?: unknown[];
-}) {
-  return (
-    <article className="reader-paper">
-      <div className="eyebrow">Recurso de clase</div>
-      <h1>{title}</h1>
-      {document?.length
-        ? document.map((block, i) => <NativeReadBlock key={i} block={block} />)
-        : blocks
-            .filter((b) => b.type !== 'quiz')
-            .map((b) => (
-              <div className="reader-block" key={b.id}>
-                {b.type === 'heading' ? (
-                  <h2>{b.text}</h2>
-                ) : b.type === 'text' ? (
-                  <p>{b.text}</p>
-                ) : b.type === 'list' ? (
-                  b.ordered ? (
-                    <ol>
-                      {b.items.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ol>
-                  ) : (
-                    <ul>
-                      {b.items.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  )
-                ) : b.type === 'image' && safeImageUrl(b.url) ? (
-                  <figure>
-                    <img src={b.url} alt={b.alt} />
-                    {b.caption && <figcaption>{b.caption}</figcaption>}
-                  </figure>
-                ) : b.type === 'video' && b.url.startsWith('https://') ? (
-                  <a href={b.url} target="_blank" rel="noreferrer">
-                    {b.title} ↗
-                  </a>
-                ) : null}
-              </div>
-            ))}
-    </article>
-  );
-}
-function NativeReadBlock({ block }: { block: unknown }) {
-  if (!block || typeof block !== 'object') return null;
-  const b = block as {
-    type?: string;
-    content?: unknown;
-    props?: Record<string, unknown>;
-    children?: unknown[];
-  };
-  if (b.type === 'quiz') return null;
-  const content = <InlineContent content={b.content} />;
-  return (
-    <div className="reader-block">
-      {b.type === 'heading' ? (
-        <h2>{content}</h2>
-      ) : b.type === 'bulletListItem' ? (
-        <ul>
-          <li>{content}</li>
-        </ul>
-      ) : b.type === 'numberedListItem' ? (
-        <ol>
-          <li>{content}</li>
-        </ol>
-      ) : b.type === 'image' && typeof b.props?.url === 'string' && safeImageUrl(b.props.url) ? (
-        <img src={b.props.url} alt={String(b.props.caption || 'Imagen del recurso')} />
-      ) : b.type === 'video' &&
-        typeof b.props?.url === 'string' &&
-        b.props.url.startsWith('https://') ? (
-        <a href={b.props.url} rel="noreferrer" target="_blank">
-          {String(b.props.caption || 'Ver video')} ↗
-        </a>
-      ) : (
-        <p>{content}</p>
-      )}
-      {b.children?.map((child, i) => (
-        <NativeReadBlock block={child} key={i} />
-      ))}
-    </div>
-  );
-}
-function InlineContent({ content }: { content: unknown }) {
-  if (!Array.isArray(content)) return null;
-  return (
-    <>
-      {content.map((raw, i) => {
-        const item = raw as {
-          type?: string;
-          text?: string;
-          styles?: { bold?: boolean; italic?: boolean; underline?: boolean; strike?: boolean };
-          content?: unknown;
-          href?: string;
-        };
-        if (item.type === 'link')
-          return typeof item.href === 'string' && /^https?:\/\//.test(item.href) ? (
-            <a key={i} href={item.href} target="_blank" rel="noreferrer">
-              <InlineContent content={item.content} />
-            </a>
-          ) : (
-            <InlineContent key={i} content={item.content} />
-          );
-        return (
-          <span
-            key={i}
-            style={{
-              fontWeight: item.styles?.bold ? 700 : undefined,
-              fontStyle: item.styles?.italic ? 'italic' : undefined,
-              textDecoration: item.styles?.underline
-                ? 'underline'
-                : item.styles?.strike
-                  ? 'line-through'
-                  : undefined,
-            }}
-          >
-            {item.text}
-          </span>
-        );
-      })}
-    </>
-  );
-}
-
 function QuizPlayer({
   state,
   activity,
@@ -375,9 +259,14 @@ function QuizPlayer({
   questions: StudentQuestion[];
   notices: ReactNode;
 }) {
+  const live = usePathname().startsWith('/aula');
   const [value, setValue] = useState<AnswerValue>();
   const [double, setDouble] = useState(false);
   const [hint, setHint] = useState('');
+  const [soundOn, setSoundOn] = useState(activity.settings.sound);
+  const [streak, setStreak] = useState(0);
+  const audio = useRef<AudioContext | null>(null);
+  const [signalError, setSignalError] = useState(false);
   const [feedback, setFeedback] = useState<{
     id: string;
     points: number;
@@ -409,10 +298,46 @@ function QuizPlayer({
     }, 1000);
     return () => clearInterval(timer);
   }, [attempt.deadline]);
-  function submit() {
+  useEffect(() => {
+    if (!live || !activity.settings.reportVisibility || attempt.status !== 'in-progress') return;
+    let hiddenAt: string | null = null;
+    const changed = () => {
+      if (document.visibilityState === 'hidden') hiddenAt = new Date().toISOString();
+      else if (hiddenAt) {
+        const start = hiddenAt;
+        hiddenAt = null;
+        void remoteCommand('reportVisibility', [
+          attempt.id,
+          crypto.randomUUID(),
+          start,
+          new Date().toISOString(),
+        ])
+          .then(() => setSignalError(false))
+          .catch(() => setSignalError(true));
+      }
+    };
+    document.addEventListener('visibilitychange', changed);
+    return () => document.removeEventListener('visibilitychange', changed);
+  }, [live, activity.settings.reportVisibility, attempt.id, attempt.status]);
+  useEffect(
+    () => () => {
+      void audio.current?.close();
+      audio.current = null;
+    },
+    [],
+  );
+  async function submit() {
     if (!question || !value || submitting.current) return;
     submitting.current = true;
-    const result = runDemo((r) =>
+    if (soundOn) {
+      try {
+        audio.current ||= new AudioContext();
+        void audio.current.resume();
+      } catch {
+        /* El quiz sigue operativo si el dispositivo no admite audio. */
+      }
+    }
+    const result = await runDemo((r) =>
       r.submitAnswer(
         attempt.id,
         question.id,
@@ -424,17 +349,37 @@ function QuizPlayer({
     );
     submitting.current = false;
     if (!result) return;
+    if (soundOn && audio.current?.state === 'running') {
+      const oscillator = audio.current.createOscillator(),
+        gain = audio.current.createGain();
+      oscillator.frequency.value = 440;
+      gain.gain.setValueAtTime(0.035, audio.current.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audio.current.currentTime + 0.09);
+      oscillator.connect(gain);
+      gain.connect(audio.current.destination);
+      oscillator.start();
+      oscillator.stop(audio.current.currentTime + 0.1);
+    }
     const answer = result.answers.find((a) => a.questionId === question.id);
     const review = answer?.reviews.at(-1);
-    const raw = questionsOf(state.versions.find((v) => v.id === attempt.versionId)!).find(
-      (q) => q.id === question.id,
-    );
-    if (activity.settings.feedback === 'immediate' && review) {
+    const raw = questionsOf(
+      getDemoRepository()
+        .load()
+        .versions.find((v) => v.id === attempt.versionId) || { blocks: [] },
+    ).find((q) => q.id === question.id);
+    const serverFeedback = getImmediateFeedback(attempt.id, question.id);
+    if (activity.settings.streaks && activity.settings.feedback === 'immediate')
+      setStreak((previous) =>
+        serverFeedback?.correct || (review && numeric(review.points) === question.points)
+          ? previous + 1
+          : 0,
+      );
+    if (activity.settings.feedback === 'immediate' && (review || serverFeedback)) {
       setFeedback({
         id: question.id,
-        points: numeric(review.points),
+        points: numeric(serverFeedback?.points || review!.points),
         max: question.points,
-        explanation: raw?.explanation || '',
+        explanation: serverFeedback?.explanation || raw?.explanation || '',
       });
     } else setValue(undefined);
     setDouble(false);
@@ -461,6 +406,7 @@ function QuizPlayer({
             Las calificaciones aparecerán cuando las publique.
           </p>
           {notices}
+          <ActivityRanking activityId={activity.id} live={live} state={state} />
           <div className="row">
             <Link href="/demo/resultados" className="button">
               Ver mis resultados
@@ -497,12 +443,28 @@ function QuizPlayer({
             <div style={{ width: `${(attempt.answers.length / questions.length) * 100}%` }} />
           </div>
         </div>
+        {activity.settings.sound && (
+          <Button variant="ghost small" aria-pressed={soundOn} onPress={() => setSoundOn(!soundOn)}>
+            {soundOn ? 'Silenciar sonidos' : 'Activar sonidos'}
+          </Button>
+        )}
         <Link className="button ghost small" href="/demo">
           Salir
         </Link>
       </header>
       <main id="contenido" className="quiz-canvas">
         {notices}
+        {signalError && (
+          <p className="notice">
+            No se pudo enviar una señal de visibilidad. Esto no modifica tu respuesta ni tu
+            calificación.
+          </p>
+        )}
+        {activity.settings.streaks && streak > 1 && (
+          <p role="status" className="notice">
+            {streak} aciertos seguidos. ¡Sigue pensando!
+          </p>
+        )}
         {waiting ? (
           <section className="quiz-finish">
             <div className="finish-icon">
@@ -587,8 +549,10 @@ function QuizPlayer({
                       type="button"
                       className="powerup"
                       disabled={consumedHint}
-                      onClick={() => {
-                        const text = runDemo((r) => r.useHint(attempt.id, question.id, user.id));
+                      onClick={async () => {
+                        const text = await runDemo((r) =>
+                          r.useHint(attempt.id, question.id, user.id),
+                        );
                         if (text) setHint(text);
                       }}
                     >
@@ -636,6 +600,7 @@ function TeacherRoom({
   user: User;
   notices: ReactNode;
 }) {
+  const live = usePathname().startsWith('/aula');
   const version = state.versions.find((v) => v.id === activity.versionId)!;
   const guided = activity.settings.pace === 'guided';
   const questions = questionsOf(version);
@@ -649,7 +614,7 @@ function TeacherRoom({
       <main id="contenido" className="app-content" style={{ maxWidth: 1050 }}>
         {notices}
         <PageHeading
-          eyebrow={guided ? 'Sala guiada · demostración local' : 'Vista docente'}
+          eyebrow={guided ? 'Sala guiada' : 'Vista docente'}
           title={activity.title}
           description={
             guided
@@ -661,6 +626,13 @@ function TeacherRoom({
             Revisar respuestas
           </Link>
         </PageHeading>
+        <ActivityManagement
+          state={state}
+          user={user}
+          activity={activity}
+          live={live}
+          extras={getWorkspaceExtras()}
+        />
         {guided ? (
           <section className="surface">
             <div className="row between">
@@ -733,8 +705,8 @@ function TeacherRoom({
               )}
             </div>
             <p className="notice" style={{ marginTop: 25 }}>
-              Para explorar ambos roles, vuelve al inicio y cambia de perfil. Esta muestra no
-              conecta dispositivos distintos.
+              Los estudiantes entran desde su materia. Abre la siguiente pregunta cuando tu clase
+              esté lista.
             </p>
           </section>
         ) : (

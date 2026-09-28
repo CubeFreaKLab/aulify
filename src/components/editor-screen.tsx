@@ -1,7 +1,8 @@
 'use client';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { useWorkspaceRouter as useRouter } from './workspace-link';
 import {
   Eye,
   ArrowUpRight,
@@ -21,7 +22,7 @@ import {
   type Resource,
   type User,
 } from '@/domain';
-import { runDemo, getDemoRepository } from '@/demo/store';
+import { runDemo, getDemoRepository, remoteCommand } from '@/demo/store';
 import { Button, Badge, PageHeading, DialogPanel, Field, EmptyState } from './ui';
 import { QuestionAuthor } from './question-author';
 const RichEditor = dynamic(() => import('./rich-editor'), {
@@ -63,6 +64,9 @@ function EditorForm({
   user: User;
 }) {
   const router = useRouter();
+  const live = usePathname().startsWith('/aula');
+  const [publishPending, setPublishPending] = useState(false);
+  const publishLock = useRef(false);
   const [draft, setDraft] = useState<Resource>(() => structuredClone(resource));
   const [saving, setSaving] = useState<'saved' | 'pending' | 'error'>('saved');
   const [publishing, setPublishing] = useState(false);
@@ -77,20 +81,28 @@ function EditorForm({
   const [subjectId, setSubjectId] = useState(
     state.subjects.find((s) => s.ownerId === user.id)?.id || '',
   );
+  const inFlight = useRef<Promise<Resource | undefined> | null>(null);
   function update(value: Resource) {
     dirty.current = true;
     latest.current = value;
     setDraft(value);
     setSaving('pending');
   }
-  function save() {
+  async function save(): Promise<Resource | undefined> {
+    if (inFlight.current) await inFlight.current;
     if (!dirty.current) return latest.current;
-    const result = runDemo((repo) => repo.saveDraft(latest.current, revision.current, user.id));
+    const submitted = latest.current;
+    const pending = runDemo((repo) => repo.saveDraft(submitted, revision.current, user.id));
+    inFlight.current = pending;
+    const result = await pending;
+    inFlight.current = null;
     if (result) {
       revision.current = result.revision;
-      latest.current = result;
-      dirty.current = false;
-      setSaving('saved');
+      if (latest.current === submitted) {
+        latest.current = result;
+        dirty.current = false;
+      }
+      setSaving(dirty.current ? 'pending' : 'saved');
       setConflict(false);
       return result;
     }
@@ -107,22 +119,44 @@ function EditorForm({
     const timer = setTimeout(() => saveRef.current(), 1000);
     return () => clearTimeout(timer);
   }, [draft]);
+  useEffect(() => {
+    const warn = (event: BeforeUnloadEvent) => {
+      if (dirty.current) event.preventDefault();
+    };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, []);
   useEffect(
     () => () => {
       if (dirty.current) saveRef.current();
     },
     [],
   );
-  const publish = () => {
-    const saved = save();
-    if (!saved) return;
-    const activity = runDemo((repo) => {
-      const version = repo.publishResource(saved.id, user.id);
-      return repo.createActivity(version.id, subjectId, settings, saved.title, user.id);
-    }, 'Recurso publicado en tu materia.');
-    if (activity) {
-      setPublishing(false);
-      router.push(`/demo/materia/${subjectId}`);
+  const publish = async () => {
+    if (publishLock.current) return;
+    publishLock.current = true;
+    setPublishPending(true);
+    try {
+      const saved = await save();
+      if (!saved) return;
+      const activity = await runDemo(async (repo) => {
+        const version = await repo.publishResource(saved.id, user.id);
+        if (!questionsOf(saved).length) {
+          if (!live)
+            throw new Error(
+              'Publica un recurso de lectura desde tu cuenta, o añade preguntas para explorar el quiz de demostración.',
+            );
+          return remoteCommand('publishReading', [version.id, subjectId]);
+        }
+        return repo.createActivity(version.id, subjectId, settings, saved.title, user.id);
+      }, 'Recurso publicado en tu materia.');
+      if (activity) {
+        setPublishing(false);
+        router.push(`/demo/materia/${subjectId}`);
+      }
+    } finally {
+      publishLock.current = false;
+      setPublishPending(false);
     }
   };
   const questions = questionsOf(draft);
@@ -142,16 +176,16 @@ function EditorForm({
         </Badge>
         <Button
           variant="secondary"
-          onPress={() => {
-            if (save()) router.push(`/demo/previa/${draft.id}`);
+          onPress={async () => {
+            if (await save()) router.push(`/demo/previa/${draft.id}`);
           }}
         >
           <Eye size={16} />
           Vista previa
         </Button>
         <Button
-          onPress={() => {
-            if (save()) setPublishing(true);
+          onPress={async () => {
+            if (await save()) setPublishing(true);
           }}
         >
           Publicar
@@ -171,8 +205,8 @@ function EditorForm({
             </Button>
             <Button
               variant="secondary small"
-              onPress={() => {
-                const copy = runDemo((repo) =>
+              onPress={async () => {
+                const copy = await runDemo((repo) =>
                   repo.saveDraft(
                     {
                       ...latest.current,
@@ -301,7 +335,9 @@ function EditorForm({
             </p>
           </div>
           <p className="muted" style={{ marginTop: 15, fontSize: 11 }}>
-            Edición local con datos de demostración.
+            {live
+              ? 'Borrador privado. La clase accede solo al contenido publicado.'
+              : 'Edición local con datos de demostración.'}
           </p>
         </aside>
       </div>
@@ -325,7 +361,7 @@ function EditorForm({
               onChange={(e) => setSubjectId(e.target.value)}
             >
               {state.subjects
-                .filter((s) => s.ownerId === user.id)
+                .filter((s) => s.ownerId === user.id && !s.archivedAt)
                 .map((s) => (
                   <option value={s.id} key={s.id}>
                     {s.name} · {s.course}
@@ -333,163 +369,200 @@ function EditorForm({
                 ))}
             </select>
           </Field>
-          <div className="grid-two">
-            <Field id="purpose" label="¿Para qué usarás la actividad?">
-              <select
-                id="purpose"
-                value={settings.purpose}
-                onChange={(e) =>
-                  setSettings({
-                    ...defaultActivitySettings(
-                      new Date().toISOString(),
-                      e.target.value as 'practice' | 'exam',
-                    ),
-                    closesAt: settings.closesAt,
-                  })
-                }
-              >
-                <option value="practice">Práctica</option>
-                <option value="exam">Examen</option>
-              </select>
-            </Field>
-            <Field id="max-grade" label="Nota máxima">
-              <input
-                id="max-grade"
-                type="number"
-                min="1"
-                max="1000"
-                required
-                value={settings.maxGrade}
-                onChange={(e) => setSettings({ ...settings, maxGrade: Number(e.target.value) })}
-              />
-            </Field>
-          </div>
-          <Field id="close-date" label="Disponible hasta">
-            <input
-              id="close-date"
-              type="datetime-local"
-              required
-              value={localInput(settings.closesAt)}
-              onChange={(e) => {
-                if (e.target.value)
-                  setSettings({ ...settings, closesAt: new Date(e.target.value).toISOString() });
-              }}
-            />
-            <small>
-              Zona de la actividad: {settings.timeZone}. El campo usa la hora de este dispositivo.
-            </small>
-          </Field>
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={settings.countsTowardAverage}
-              onChange={(e) => setSettings({ ...settings, countsTowardAverage: e.target.checked })}
-            />
-            Incluir en el promedio de la materia
-          </label>
-          <details className="advanced">
-            <summary>Configuración avanzada</summary>
-            <div className="advanced-content stack">
+          {questions.length > 0 && (
+            <>
               <div className="grid-two">
-                <Field id="attempts" label="Intentos por estudiante">
-                  <input
-                    id="attempts"
-                    type="number"
-                    disabled={settings.pace === 'guided'}
-                    min="1"
-                    max="20"
-                    value={settings.maxAttempts}
+                <Field id="purpose" label="¿Para qué usarás la actividad?">
+                  <select
+                    id="purpose"
+                    value={settings.purpose}
                     onChange={(e) =>
-                      setSettings({ ...settings, maxAttempts: Number(e.target.value) })
+                      setSettings({
+                        ...defaultActivitySettings(
+                          new Date().toISOString(),
+                          e.target.value as 'practice' | 'exam',
+                        ),
+                        closesAt: settings.closesAt,
+                      })
                     }
-                  />
+                  >
+                    <option value="practice">Práctica</option>
+                    <option value="exam">Examen</option>
+                  </select>
                 </Field>
-                <Field id="time-limit" label="Tiempo en minutos (0 = sin límite)">
+                <Field id="max-grade" label="Nota máxima">
                   <input
-                    id="time-limit"
+                    id="max-grade"
                     type="number"
-                    min="0"
-                    value={settings.timeLimitMinutes || 0}
-                    onChange={(e) =>
-                      setSettings({ ...settings, timeLimitMinutes: Number(e.target.value) || null })
-                    }
+                    min="1"
+                    max="1000"
+                    required
+                    value={settings.maxGrade}
+                    onChange={(e) => setSettings({ ...settings, maxGrade: Number(e.target.value) })}
                   />
                 </Field>
               </div>
-              <Field id="feedback" label="Cuándo mostrar las respuestas">
-                <select
-                  id="feedback"
-                  value={settings.feedback}
-                  onChange={(e) =>
-                    setSettings({
-                      ...settings,
-                      feedback: e.target.value as ActivitySettings['feedback'],
-                      ...(e.target.value !== 'immediate' ? { streaks: false, ranking: false } : {}),
-                    })
-                  }
-                >
-                  <option value="immediate">Después de responder</option>
-                  <option value="after-close">Después del cierre y publicación</option>
-                  <option value="hidden">Mantener ocultas</option>
-                </select>
-              </Field>
-              <Field id="pace" label="Ritmo de participación">
-                <select
-                  id="pace"
-                  value={settings.pace}
-                  onChange={(e) =>
-                    setSettings({
-                      ...settings,
-                      pace: e.target.value as ActivitySettings['pace'],
-                      ...(e.target.value === 'guided'
-                        ? { maxAttempts: 1, shuffleQuestions: false }
-                        : {}),
-                    })
-                  }
-                >
-                  <option value="individual">Cada estudiante a su ritmo</option>
-                  <option value="guided">Guiado por el docente</option>
-                </select>
-              </Field>
-              <Field id="weight" label="Peso en el promedio">
+              <Field id="close-date" label="Disponible hasta">
                 <input
-                  id="weight"
-                  type="number"
-                  min="0.1"
-                  step="0.1"
-                  value={settings.weight}
-                  onChange={(e) => setSettings({ ...settings, weight: Number(e.target.value) })}
+                  id="close-date"
+                  type="datetime-local"
+                  required
+                  value={localInput(settings.closesAt)}
+                  onChange={(e) => {
+                    if (e.target.value)
+                      setSettings({
+                        ...settings,
+                        closesAt: new Date(e.target.value).toISOString(),
+                      });
+                  }}
                 />
+                <small>
+                  Zona de la actividad: {settings.timeZone}. El campo usa la hora de este
+                  dispositivo.
+                </small>
               </Field>
-              {(
-                [
-                  ['shuffleQuestions', 'Mezclar preguntas'],
-                  ['shuffleOptions', 'Mezclar opciones'],
-                  ['manualCorrection', 'Revisar también las respuestas cerradas'],
-                  ['allowHint', 'Permitir una pista durante la actividad'],
-                  ['allowDouble', 'Permitir un doble durante la actividad'],
-                  ['bonusAffectsGrade', 'Incluir bonificación en la nota, sin superar el máximo'],
-                ] as const
-              ).map(([key, label]) => (
-                <label className="checkbox-label" key={key}>
-                  <input
-                    type="checkbox"
-                    disabled={key === 'shuffleQuestions' && settings.pace === 'guided'}
-                    checked={settings[key]}
-                    onChange={(e) => setSettings({ ...settings, [key]: e.target.checked })}
-                  />
-                  {label}
-                </label>
-              ))}
-            </div>
-          </details>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={settings.countsTowardAverage}
+                  onChange={(e) =>
+                    setSettings({ ...settings, countsTowardAverage: e.target.checked })
+                  }
+                />
+                Incluir en el promedio de la materia
+              </label>
+              <details className="advanced">
+                <summary>Configuración avanzada</summary>
+                <div className="advanced-content stack">
+                  <div className="grid-two">
+                    <Field id="attempts" label="Intentos por estudiante">
+                      <input
+                        id="attempts"
+                        type="number"
+                        disabled={settings.pace === 'guided'}
+                        min="1"
+                        max="20"
+                        value={settings.maxAttempts}
+                        onChange={(e) =>
+                          setSettings({ ...settings, maxAttempts: Number(e.target.value) })
+                        }
+                      />
+                    </Field>
+                    <Field id="time-limit" label="Tiempo en minutos (0 = sin límite)">
+                      <input
+                        id="time-limit"
+                        type="number"
+                        min="0"
+                        value={settings.timeLimitMinutes || 0}
+                        onChange={(e) =>
+                          setSettings({
+                            ...settings,
+                            timeLimitMinutes: Number(e.target.value) || null,
+                          })
+                        }
+                      />
+                    </Field>
+                  </div>
+                  <Field id="feedback" label="Cuándo mostrar las respuestas">
+                    <select
+                      id="feedback"
+                      value={settings.feedback}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          feedback: e.target.value as ActivitySettings['feedback'],
+                          ...(e.target.value === 'hidden'
+                            ? { streaks: false, ranking: false }
+                            : {}),
+                        })
+                      }
+                    >
+                      <option value="immediate">Después de responder</option>
+                      <option value="after-close">Después del cierre y publicación</option>
+                      <option value="hidden">Mantener ocultas</option>
+                    </select>
+                  </Field>
+                  <Field id="pace" label="Ritmo de participación">
+                    <select
+                      id="pace"
+                      value={settings.pace}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          pace: e.target.value as ActivitySettings['pace'],
+                          ...(e.target.value === 'guided'
+                            ? { maxAttempts: 1, shuffleQuestions: false }
+                            : {}),
+                        })
+                      }
+                    >
+                      <option value="individual">Cada estudiante a su ritmo</option>
+                      <option value="guided">Guiado por el docente</option>
+                    </select>
+                  </Field>
+                  <Field id="weight" label="Peso en el promedio">
+                    <input
+                      id="weight"
+                      type="number"
+                      min="0.1"
+                      step="0.1"
+                      value={settings.weight}
+                      onChange={(e) => setSettings({ ...settings, weight: Number(e.target.value) })}
+                    />
+                  </Field>
+                  {(
+                    [
+                      ['shuffleQuestions', 'Mezclar preguntas'],
+                      ['shuffleOptions', 'Mezclar opciones'],
+                      ['manualCorrection', 'Revisar también las respuestas cerradas'],
+                      ['allowHint', 'Permitir una pista durante la actividad'],
+                      ['allowDouble', 'Permitir un doble durante la actividad'],
+                      ['streaks', 'Mostrar rachas de aciertos cuando la corrección sea visible'],
+                      ['sound', 'Permitir sonidos que cada estudiante puede desactivar'],
+                      ['teams', 'Participar por equipos (se configuran antes de empezar)'],
+                      ['ranking', 'Compartir clasificación con alias'],
+                      [
+                        'reportVisibility',
+                        'Informar cambios de visibilidad de la pestaña, sin sanción automática',
+                      ],
+                      [
+                        'bonusAffectsGrade',
+                        'Incluir bonificación en la nota, sin superar el máximo',
+                      ],
+                    ] as const
+                  ).map(([key, label]) => (
+                    <label className="checkbox-label" key={key}>
+                      <input
+                        type="checkbox"
+                        disabled={
+                          (key === 'shuffleQuestions' && settings.pace === 'guided') ||
+                          ((key === 'ranking' || key === 'streaks') &&
+                            settings.feedback === 'hidden')
+                        }
+                        checked={settings[key]}
+                        onChange={(e) => setSettings({ ...settings, [key]: e.target.checked })}
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </details>
+            </>
+          )}
+          {!questions.length && (
+            <p className="notice">
+              Se compartirá como lectura. No genera intentos ni calificación.
+            </p>
+          )}
           <div className="notice">
             <strong>{draft.title}</strong>
-            <p>
-              {questions.length} preguntas · {settings.maxAttempts}{' '}
-              {settings.maxAttempts === 1 ? 'intento' : 'intentos'} · {settings.maxGrade} puntos de
-              nota máxima.
-            </p>
+            {questions.length > 0 && (
+              <p>
+                {questions.length} preguntas · {settings.maxAttempts}{' '}
+                {settings.maxAttempts === 1 ? 'intento' : 'intentos'} · {settings.maxGrade} puntos
+                de nota máxima.
+              </p>
+            )}
             <p>
               Las respuestas escritas quedan para tu revisión. Publicar crea una versión
               independiente del borrador.
@@ -499,7 +572,10 @@ function EditorForm({
             <Button variant="secondary" onPress={() => setPublishing(false)}>
               Seguir editando
             </Button>
-            <Button type="submit" isDisabled={!subjectId}>
+            <Button
+              type="submit"
+              isDisabled={!subjectId || publishPending || (!questions.length && !live)}
+            >
               Publicar en la materia
             </Button>
           </div>

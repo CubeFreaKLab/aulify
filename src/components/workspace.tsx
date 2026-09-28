@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import Link, { useWorkspaceRouter as useRouter, workspacePath } from './workspace-link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import {
   Home,
@@ -25,14 +25,27 @@ import {
   ChevronDown,
   RotateCcw,
 } from 'lucide-react';
-import { useDemo, runDemo, switchProfile, clearNotice, resetDemo } from '@/demo/store';
-import { DEMO_IDS, questionsOf, type DemoState, type User, type Subject } from '@/domain';
+import {
+  useDemo,
+  runDemo,
+  switchProfile,
+  clearNotice,
+  resetDemo,
+  refreshDemo,
+  clearWorkspaceSession,
+  getWorkspaceExtras,
+  getDemoRepository,
+} from '@/demo/store';
+import { questionsOf, type DemoState, type User, type Subject } from '@/domain';
 import { Button, Badge, PageHeading, DialogPanel, Field, EmptyState } from './ui';
 import { EditorScreen } from './editor-screen';
 import { ActivityScreen } from './activity-screen';
 import { ReviewScreen, ResultsScreen, TasksScreen } from './results-screen';
 import { ResourcePreview } from './resource-preview';
 import { WorkspaceTransition } from './workspace-transition';
+import { ThemeSwitcher } from './theme';
+import { ResourceReader } from './resource-reader';
+import { SubjectManagement, ManualActivities } from './classroom-management';
 
 const navigation = [
   { href: '/demo', label: 'Mi inicio', icon: Home },
@@ -54,7 +67,7 @@ export function Workspace() {
         id="contenido"
         className="loading-shell"
         aria-busy="true"
-        aria-label="Preparando la clase de ejemplo"
+        aria-label="Preparando tu aula"
       >
         <div className="skeleton" style={{ width: '40%', height: 40 }} />
         <div className="skeleton block" />
@@ -63,14 +76,24 @@ export function Workspace() {
   if (!data.state)
     return (
       <main id="contenido" className="error-page">
-        <h1>No pudimos abrir la muestra.</h1>
+        <h1>{data.live ? 'No pudimos abrir tu aula.' : 'No pudimos abrir la muestra.'}</h1>
         <p role="alert">{data.error}</p>
-        <Button onPress={resetDemo}>Reiniciar datos de demostración</Button>
+        <Button onPress={data.live ? refreshDemo : resetDemo}>
+          {data.live ? 'Reintentar' : 'Reiniciar datos de demostración'}
+        </Button>
+        {data.live && <Link href="/acceso">Volver a iniciar sesión</Link>}
         <Link href="/">Volver a Aulify</Link>
       </main>
     );
   const { state, userId } = data;
-  const user = state.users.find((u) => u.id === userId) || state.users[0];
+  const user = state.users.find((u) => u.id === userId);
+  if (!user)
+    return (
+      <main id="contenido" className="error-page">
+        <h1>No se encontró tu perfil.</h1>
+        <Link href="/acceso">Volver a iniciar sesión</Link>
+      </main>
+    );
   const teacher = user.role === 'teacher';
   const subjects = state.subjects.filter((s) =>
     teacher
@@ -120,12 +143,13 @@ export function Workspace() {
         </Link>
         <nav className="app-nav">
           {navigation
+            .map((item) => ({ ...item, href: workspacePath(item.href, path) }))
             .filter((n) => teacher || !['Biblioteca', 'Por revisar'].includes(n.label))
             .map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
-                className={`nav-link ${path === n.href || (n.href !== '/demo' && path.startsWith(n.href)) ? 'active' : ''}`}
+                className={`nav-link ${path === n.href || (!['/demo', '/aula'].includes(n.href) && path.startsWith(n.href)) ? 'active' : ''}`}
                 aria-current={path === n.href ? 'page' : undefined}
                 onClick={() => setMobile(false)}
               >
@@ -164,6 +188,7 @@ export function Workspace() {
           </Link>
         ))}
         <div className="sidebar-bottom">
+          <ThemeSwitcher compact />
           <Link href="/demo/ayuda" className="nav-link" onClick={() => setMobile(false)}>
             <HelpCircle size={19} />
             Ayuda
@@ -220,16 +245,38 @@ export function Workspace() {
             </span>
           </div>
           <div className="row">
-            <span className="demo-tag">Demostración</span>
-            <Button
-              variant="ghost small"
-              aria-label="Cambiar perfil"
-              onPress={() => setProfiles(true)}
-            >
-              <span className="role-label">Cambiar perfil</span>
-              <Users size={17} />
-              <ChevronDown size={13} />
-            </Button>
+            {data.live ? (
+              <Button
+                variant="ghost small"
+                onPress={async () => {
+                  const result = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'signout' }),
+                  });
+                  if (result.ok) {
+                    clearWorkspaceSession();
+                    router.replace('/acceso');
+                    router.refresh();
+                  }
+                }}
+              >
+                Cerrar sesión
+              </Button>
+            ) : (
+              <>
+                <span className="demo-tag">Demostración</span>
+                <Button
+                  variant="ghost small"
+                  aria-label="Cambiar perfil"
+                  onPress={() => setProfiles(true)}
+                >
+                  <span className="role-label">Cambiar perfil</span>
+                  <Users size={17} />
+                  <ChevronDown size={13} />
+                </Button>
+              </>
+            )}
           </div>
         </header>
         <WorkspaceTransition path={path}>
@@ -305,10 +352,10 @@ function Dashboard({
     !state.helpPreferences.some((p) => p.userId === user.id && p.status !== 'offered'),
   );
   const activities = state.activities.filter((a) => subjects.some((s) => s.id === a.subjectId));
+  const firstResource = state.resources.find((resource) => resource.ownerId === user.id);
   return (
     <>
       <PageHeading
-        eyebrow={teacher ? 'Tu aula, a tu manera' : 'Un día para descubrir'}
         title={`Hola, ${user.name.split(' ')[0]}.`}
         description={
           teacher
@@ -325,16 +372,21 @@ function Dashboard({
       </PageHeading>
       <section className="welcome-panel">
         <div className="welcome-copy">
-          <div className="eyebrow">{teacher ? 'De una idea a una clase' : 'Biología · 3° A'}</div>
           <h2>{teacher ? 'Una explicación puede ser el comienzo.' : 'Todo está conectado.'}</h2>
           <p>
             {teacher
               ? 'Añade una pregunta y deja que tus estudiantes sean parte de la historia.'
-              : 'Explora los ecosistemas, conecta ideas y pon a prueba lo que sabes.'}
+              : 'Explora los recursos de tus materias y participa a tu ritmo.'}
           </p>
           <Link
             href={
-              teacher ? `/demo/editor/${DEMO_IDS.resource}` : `/demo/actividad/${DEMO_IDS.activity}`
+              teacher
+                ? firstResource
+                  ? `/demo/editor/${firstResource.id}`
+                  : '/demo/biblioteca'
+                : activities[0]
+                  ? `/demo/actividad/${activities[0].id}`
+                  : '/demo/materias'
             }
             className="button"
           >
@@ -344,7 +396,7 @@ function Dashboard({
         </div>
         <div className="welcome-art">
           <img
-            src="/illustrations/cuaderno.png"
+            src="/illustrations/cuaderno.svg"
             alt="Cuaderno abierto de ciencias con hojas y un lápiz verde"
           />
         </div>
@@ -484,9 +536,9 @@ function SubjectCard({ subject: s, state }: { subject: Subject; state: DemoState
     </Link>
   );
 }
-function createResource(user: User, navigate: (path: string) => void) {
+async function createResource(user: User, navigate: (path: string) => void) {
   const id = crypto.randomUUID();
-  const resource = runDemo((r) =>
+  const resource = await runDemo((r) =>
     r.saveDraft(
       {
         id,
@@ -553,14 +605,14 @@ function SubjectsScreen({
       >
         <form
           className="stack"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             const result = teacher
-              ? runDemo(
+              ? await runDemo(
                   (r) => r.createSubject({ name, course, year, description: '' }, user.id),
                   'Materia creada.',
                 )
-              : runDemo(
+              : await runDemo(
                   (r) => r.requestMembership(code, user.id),
                   'Solicitud enviada. El docente debe aprobarla.',
                 );
@@ -632,7 +684,11 @@ function SubjectScreen({
   user: User;
   subjectId: string;
 }) {
+  const live = usePathname().startsWith('/aula');
   const [tab, setTab] = useState('recursos');
+  const [readingId, setReadingId] = useState<string | null>(null);
+  const readings = getWorkspaceExtras().readings.filter((r) => r.subjectId === subjectId);
+  const reading = readings.find((r) => r.id === readingId);
   const s = state.subjects.find((v) => v.id === subjectId);
   if (!s)
     return (
@@ -659,13 +715,19 @@ function SubjectScreen({
         title={s.name}
         description={s.description || 'Cada recurso es una nueva forma de aprender.'}
       >
-        {teacher && (
+        {teacher && s.status === 'active' && (
           <Link href="/demo/biblioteca" className="button">
             <Plus size={17} />
             Compartir recurso
           </Link>
         )}
       </PageHeading>
+      {s.status === 'archived' && (
+        <p className="notice warning">
+          Esta materia está archivada y es de solo lectura. Puedes restaurarla durante 30 días desde
+          el archivo, desde Configuración.
+        </p>
+      )}
       <div className="tab-bar" role="tablist" aria-label="Contenido de la materia">
         {(teacher ? ['recursos', 'integrantes', 'configuración'] : ['recursos']).map((t) => (
           <button
@@ -705,6 +767,17 @@ function SubjectScreen({
       >
         {tab === 'recursos' ? (
           <div className="list-panel">
+            {readings.map((r) => (
+              <div className="list-item" key={r.id}>
+                <div>
+                  <h3>{r.title}</h3>
+                  <p>Recurso de lectura · sin calificación</p>
+                </div>
+                <Button variant="secondary small" onPress={() => setReadingId(r.id)}>
+                  Leer recurso
+                </Button>
+              </div>
+            ))}
             {state.activities
               .filter((a) => a.subjectId === s.id)
               .map((a) => (
@@ -717,29 +790,27 @@ function SubjectScreen({
                       <h3>{a.title}</h3>
                       <p>
                         {a.settings.purpose === 'practice' ? 'Práctica' : 'Examen'} ·{' '}
-                        {questionsOf(state.versions.find((v) => v.id === a.versionId)!).length}{' '}
+                        {teacher
+                          ? questionsOf(
+                              state.versions.find((v) => v.id === a.versionId) || { blocks: [] },
+                            ).length
+                          : getDemoRepository().studentActivity(a.id, user.id).questions
+                              .length}{' '}
                         preguntas
                       </p>
                     </div>
                   </div>
-                  <Link
-                    className="button secondary small"
-                    href={
-                      teacher && a.settings.pace !== 'guided'
-                        ? `/demo/previa/${state.versions.find((v) => v.id === a.versionId)?.resourceId}`
-                        : `/demo/actividad/${a.id}`
-                    }
-                  >
+                  <Link className="button secondary small" href={`/demo/actividad/${a.id}`}>
                     {teacher
                       ? a.settings.pace === 'guided'
                         ? 'Abrir sala'
-                        : 'Vista previa'
+                        : 'Ver actividad'
                       : 'Participar'}
                     <ArrowRight size={16} />
                   </Link>
                 </div>
               ))}
-            {!state.activities.some((a) => a.subjectId === s.id) && (
+            {!readings.length && !state.activities.some((a) => a.subjectId === s.id) && (
               <EmptyState icon={FileText} title="Aquí empieza tu próxima clase">
                 Comparte un recurso desde tu biblioteca.
               </EmptyState>
@@ -778,7 +849,9 @@ function SubjectScreen({
                               ? 'Aprobado'
                               : m.status === 'pending'
                                 ? 'Solicitud pendiente'
-                                : 'Rechazado'}
+                                : m.status === 'removed'
+                                  ? 'Retirado'
+                                  : 'Rechazado'}
                           </Badge>
                         </td>
                         <td>
@@ -816,18 +889,31 @@ function SubjectScreen({
             </div>
           </>
         ) : (
-          <div className="surface">
-            <h2>Detalles de la materia</h2>
-            <p>
-              {s.name} · {s.course} · {s.year}
-            </p>
-            <p className="muted" style={{ marginTop: 15 }}>
-              El archivo, la restauración y la eliminación programada se incorporarán al conectar
-              los servicios de la plataforma.
-            </p>
-          </div>
+          <SubjectManagement state={state} user={user} subject={s} live={live} />
         )}
       </section>
+      {tab === 'recursos' && teacher && (
+        <ManualActivities
+          state={state}
+          user={user}
+          live={live}
+          subjectId={s.id}
+          draftEvaluations={getWorkspaceExtras().draftEvaluations}
+        />
+      )}
+      <DialogPanel
+        open={Boolean(reading)}
+        onClose={() => setReadingId(null)}
+        title="Recurso de lectura"
+      >
+        {reading && (
+          <ResourceReader
+            title={reading.title}
+            blocks={reading.content.blocks}
+            document={reading.content.editorDocument}
+          />
+        )}
+      </DialogPanel>
     </>
   );
 }
@@ -898,9 +984,9 @@ function LibraryScreen({ state, user }: { state: DemoState; user: User }) {
                 <ResourcePreview resource={r} />
                 <Button
                   variant="ghost small"
-                  onPress={() => {
+                  onPress={async () => {
                     const id = crypto.randomUUID();
-                    const copy = runDemo(
+                    const copy = await runDemo(
                       (repo) =>
                         repo.saveDraft(
                           { ...structuredClone(r), id, title: `${r.title} (copia)`, revision: 0 },
@@ -975,47 +1061,60 @@ function HelpScreen({
   preferences: boolean;
 }) {
   const [confirm, setConfirm] = useState(false);
+  const live = usePathname().startsWith('/aula');
   return (
     <>
       <PageHeading
         title={preferences ? 'Aulify, a tu manera.' : 'Una mano para empezar.'}
         description={
           preferences
-            ? 'Preferencias y datos de tu demostración.'
+            ? 'Tu perfil, apariencia y opciones de accesibilidad.'
             : 'Ayuda breve para encontrar tu próximo paso.'
         }
       />
       <div className="surface" style={{ maxWidth: 820 }}>
         {preferences ? (
           <>
-            <h2>Tu perfil de muestra</h2>
+            <h2>{live ? 'Tu perfil' : 'Tu perfil de muestra'}</h2>
             <p>
               {user.name} · {user.role === 'teacher' ? 'Docente' : 'Estudiante'}
             </p>
+            <div className="divider" />
+            <h2>Apariencia</h2>
+            <ThemeSwitcher />
             <div className="divider" />
             <h2>Movimiento y accesibilidad</h2>
             <p className="muted">
               Aulify respeta la preferencia de movimiento reducido de tu dispositivo. Puedes navegar
               con teclado, ampliar el texto y usar alternativas a arrastrar.
             </p>
-            <div className="divider" />
-            <h2>Reiniciar la demostración</h2>
-            <p className="muted">
-              Se eliminarán los cambios locales de esta muestra y volverá la clase de ejemplo. No
-              afecta cuentas ni servicios externos.
-            </p>
-            <Button variant="secondary" style={{ marginTop: 18 }} onPress={() => setConfirm(true)}>
-              <RotateCcw size={17} />
-              Reiniciar datos
-            </Button>
+            {!live && (
+              <>
+                <div className="divider" />
+                <h2>Reiniciar la demostración</h2>
+                <p className="muted">
+                  Se eliminarán los cambios locales de esta muestra y volverá la clase de ejemplo.
+                  No afecta cuentas ni servicios externos.
+                </p>
+                <Button
+                  variant="secondary"
+                  style={{ marginTop: 18 }}
+                  onPress={() => setConfirm(true)}
+                >
+                  <RotateCcw size={17} />
+                  Reiniciar datos
+                </Button>
+              </>
+            )}
           </>
         ) : (
           <>
             <HelpSteps teacher={user.role === 'teacher'} />
             <div className="divider" />
             <p className="notice">
-              Estás explorando una clase con datos ficticios. El correo y el almacenamiento remoto
-              se conectarán en una entrega posterior.
+              {live
+                ? 'Tus cambios se guardan en tu cuenta. Si pierdes la conexión, conserva abierta la página y espera antes de reintentar.'
+                : 'Estás explorando una clase con datos ficticios guardados en este navegador.'}
             </p>
             <Button
               variant="secondary"

@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import Link from 'next/link';
+import Link from './workspace-link';
 import { Leaf, ArrowRight } from 'lucide-react';
 import { DialogPanel, Button, Badge } from './ui';
 import { questionsOf, type Resource } from '@/domain';
