@@ -58,7 +58,9 @@ Instalar las dependencias con `npm ci`, preparar Chromium con `npx playwright in
 
 Servir el compilado con `node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3002`. En otra terminal, con la conexión y las cuentas ficticias preparadas mediante el [procedimiento remoto](datos-remotos.md), definir `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3002` y `AULIFY_REMOTE_E2E=1`, y ejecutar `npx playwright test --workers=2`.
 
-Sin `AULIFY_REMOTE_E2E=1`, los dieciocho casos que requieren cuentas privadas se omiten deliberadamente. El CI público no recibe estas cuentas ni el secreto de servicio para ejecutar pruebas de navegador. Las trazas y los vídeos de los recorridos autenticados están desactivados para evitar conservar valores de los formularios de acceso.
+Sin `AULIFY_REMOTE_E2E=1`, los casos que requieren cuentas privadas se omiten deliberadamente. Tras incorporar la regresión y distribución de resultados, el conjunto autenticado contiene veintidós ejecuciones: doce de integración, seis de gestión y cuatro de resultados. Los informes previos conservan sus conteos originales. El CI público no recibe estas cuentas ni el secreto de servicio para ejecutar pruebas de navegador. Las trazas y los vídeos de los recorridos autenticados están desactivados para evitar conservar valores de los formularios de acceso.
+
+La [distribución de resultados](resultados-distribucion.md) incorpora tres pruebas unitarias de intervalos, normalización y fechas; el conjunto local pasó a 39 casos en cinco archivos. Sus cuatro ejecuciones de navegador aprobaron filtros inclusivos, valores 0/20/80/100, pendientes separados y correspondencia entre gráfico y tabla. Los dos análisis axe de esa vista no encontraron infracciones; no sustituyen la revisión manual completa de accesibilidad.
 
 ## Integración continua y mantenimiento
 

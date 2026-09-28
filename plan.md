@@ -35,7 +35,7 @@ Las claves privadas quedan en variables de servidor. La clave publicable puede u
 
 ## 3. Modelo y migraciones
 
-El [modelo 1.1](docs/modelado/README.md) reúne 44 relaciones del dominio y una relación técnica de límites de frecuencia, con Auth externo. Incluye diccionario, DBML, diagramas, normalización, invariantes y permisos. Las diez migraciones versionadas materializan el modelo, comandos, proyecciones, conservación, reservas de archivo, reentregas y sincronización; las últimas optimizan permisos por consulta y serializan respuesta y cierre guiado.
+El [modelo 1.2](docs/modelado/README.md) reúne 44 relaciones del dominio y tres técnicas para límites de frecuencia y revisiones de sincronización, con Auth externo. Incluye diccionario, DBML, diagramas, normalización, invariantes y permisos. Las doce migraciones versionadas materializan el modelo, comandos, proyecciones, conservación, reservas de archivo, reentregas y sincronización. También optimizan permisos por consulta, serializan respuesta y cierre guiado y limitan la proyección a la actividad abierta.
 
 PGlite reproduce las migraciones en una base nueva y comprueba restricciones y accesos. Los ensayos remotos utilizan Auth, JWT, PostgreSQL y Storage reales; cada evidencia conserva sus límites. El JSONB de los bloques se valida y versiona, sin sustituir las relaciones de materias, integrantes, intentos, respuestas y evaluaciones.
 
@@ -53,7 +53,7 @@ Las versiones publicadas son independientes del borrador. Un guardado concurrent
 
 ## 5. Sincronización y carga
 
-En una actividad activa, el navegador consulta cada segundo una huella opaca del estado autorizado mediante `/api/sync`. Solo descarga la proyección completa al detectar cambios. Ante fallos temporales, espacia reintentos a uno, dos, cuatro y ocho segundos; al recuperar conexión vuelve a consultar el estado. Las otras pantallas consultan su estado cada cuatro segundos; la consulta se suspende cuando la página está oculta. Una respuesta confirmada por el servidor se incorpora inmediatamente y descarta lecturas anteriores que podrían hacer retroceder el intento.
+En una actividad activa, el navegador consulta cada segundo una huella opaca del estado autorizado mediante `/api/sync`. Esta huella combina revisiones técnicas y plazos; solo descarga la proyección de esa actividad al detectar cambios. Al volver a otras pantallas recupera el aula completa e invalida las consultas anteriores. Ante fallos temporales, espacia reintentos a uno, dos, cuatro y ocho segundos; al recuperar conexión vuelve a consultar el estado. Las otras pantallas consultan su estado cada cuatro segundos; la consulta se suspende cuando la página está oculta. Una respuesta confirmada por el servidor se incorpora inmediatamente y descarta lecturas anteriores que podrían hacer retroceder el intento.
 
 La huella no incluye respuestas ajenas ni cambia al corregir datos que el estudiante todavía debe tener ocultos. La consulta periódica evita depender de 204 conexiones Realtime, por encima de la cuota Free de 200 publicada. La decisión no demuestra por sí sola capacidad: la prueba mide los endpoints HTTP reales, sus latencias, errores y consumo. [Límites de Realtime](https://supabase.com/docs/guides/realtime/limits).
 
