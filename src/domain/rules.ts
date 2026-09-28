@@ -416,12 +416,9 @@ export function validateAnswer(question: Question, answer: AnswerValue): void {
             Object.keys(answer.pairs),
             question.left.map((item) => item.id),
           ) &&
-          sameSet(
-            Object.values(answer.pairs),
-            question.right.map((item) => item.id),
-          ),
+          Object.values(answer.pairs).every((id) => question.right.some((item) => item.id === id)),
         'INVALID_ANSWER',
-        'Relaciona todos los elementos una sola vez.',
+        'Elige una relación válida para cada elemento.',
       );
       break;
     case 'ordering':

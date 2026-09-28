@@ -1,0 +1,113 @@
+{
+  "startedAt": "2026-09-28T13:07:09.596Z",
+  "revision": "0c110a7006e62721e4f9bc4da8f834de77a8477c",
+  "environment": "Supabase remoto, RPC con JWT de dos cuentas ficticias",
+  "checks": [
+    {
+      "scenario": "AP-03",
+      "detail": "conjunto exacto → 4",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-03",
+      "detail": "correcta omitida → 0",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-03",
+      "detail": "incorrecta añadida → 0",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-04",
+      "detail": "tres pares de cuatro, valor 8 → 6",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-05",
+      "detail": "dos posiciones de cuatro, valor 5 → 2,5",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-06",
+      "detail": "dos espacios correctos de tres, valor 6 → 4",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-06",
+      "detail": "mismas palabras escritas → pendiente manual",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-06",
+      "detail": "pendiente manual impide publicar nota completa",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "cerrada con corrección manual permanece pendiente",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "valor 6 fuera de [0,5] rechazado",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "rechazo conserva el estado pendiente",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "valor negativo rechazado después de revisión",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "rechazo conserva revisión previa de 3",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "adicional de doble correcto → 2",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "adicional de doble erróneo → 0",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "manual pendiente no asigna adicional anticipado",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "manual corregida con 3 → adicional 3",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-14",
+      "detail": "B=6 Q=10 D=2 M=20 → juego 8 y nota 12",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-14",
+      "detail": "B=6 Q=10 D=2 M=20 → juego 8 y nota 16",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-14",
+      "detail": "B+D mayor que Q no supera nota máxima 20",
+      "result": "passed"
+    }
+  ],
+  "completedAt": "2026-09-28T13:07:36.889Z",
+  "status": "passed",
+  "limitations": [
+    "No prueba interfaz, SMTP ni concurrencia.",
+    "No constituye cobertura del resto de escenarios AC/AP."
+  ]
+}

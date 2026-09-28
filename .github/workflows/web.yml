@@ -10,6 +10,7 @@ on:
         'tests/**',
         'supabase/migrations/**',
         'tools/datos/check.mjs',
+        'tools/datos/scoring-acceptance.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -26,6 +27,7 @@ on:
         'tests/**',
         'supabase/migrations/**',
         'tools/datos/check.mjs',
+        'tools/datos/scoring-acceptance.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -72,6 +74,8 @@ jobs:
         run: npm test
       - name: Verificar migraciones y permisos en PostgreSQL aislado
         run: node tools/datos/check.mjs
+      - name: Verificar casos numéricos de puntuación
+        run: node tools/datos/scoring-acceptance.mjs
       - name: Construir aplicación
         run: npm run build
       - name: Preparar Chromium

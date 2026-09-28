@@ -112,7 +112,7 @@ Los umbrales, métodos y criterios de liberación están en el [plan de calidad]
 | Selección simple | Una opción correcta; valor completo o cero. |
 | Selección múltiple | Uno o más aciertos definidos; solo el conjunto exacto obtiene valor completo. Incompleto o con opciones adicionales obtiene cero. |
 | Verdadero/falso | Dos alternativas y una correcta; valor completo o cero. |
-| Relacionar | Correspondencias uno a uno; valor repartido por igual entre pares; puntos proporcionales a pares correctos. |
+| Relacionar | Solución con correspondencias uno a uno; el estudiante elige una opción válida por cada elemento. Puede repetir una opción equivocada: se puntúa cada par por separado. Valor repartido por igual entre pares, proporcional a los correctos. |
 | Ordenar | Posición esperada por elemento; valor repartido por igual entre posiciones; puntos proporcionales a posiciones correctas. |
 | Completar con opciones | Igual parte del valor por espacio; cada uno evalúa su opción correcta. |
 | Completar escribiendo | Revisión manual por espacio y partes iguales del valor. No corregir por coincidencia de texto. |

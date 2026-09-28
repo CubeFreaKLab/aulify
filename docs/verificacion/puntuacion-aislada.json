@@ -1,0 +1,128 @@
+{
+  "startedAt": "2026-09-28T12:50:28.586Z",
+  "revision": "fb3f8f5e1c357ccba25a1039e818d747c48a2a02",
+  "environment": "PGlite aislado con Auth y Storage mínimos",
+  "checks": [
+    {
+      "scenario": "AP-03",
+      "detail": "conjunto exacto → 4",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-03",
+      "detail": "correcta omitida → 0",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-03",
+      "detail": "incorrecta añadida → 0",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-04",
+      "detail": "tres pares de cuatro, valor 8 → 6",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-05",
+      "detail": "dos posiciones de cuatro, valor 5 → 2,5",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-06",
+      "detail": "dos espacios correctos de tres, valor 6 → 4",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-06",
+      "detail": "mismas palabras escritas → pendiente manual",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-06",
+      "detail": "pendiente manual impide publicar nota completa",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "cerrada con corrección manual permanece pendiente",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "valor 6 fuera de [0,5] rechazado",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "rechazo conserva el estado pendiente",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "valor negativo rechazado después de revisión",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-07",
+      "detail": "rechazo conserva revisión previa de 3",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "adicional de doble correcto → 2",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "adicional de doble erróneo → 0",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "manual pendiente no asigna adicional anticipado",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-13",
+      "detail": "manual corregida con 3 → adicional 3",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-14",
+      "detail": "B=6 Q=10 D=2 M=20 → juego 8 y nota 12",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-14",
+      "detail": "B=6 Q=10 D=2 M=20 → juego 8 y nota 16",
+      "result": "passed"
+    },
+    {
+      "scenario": "AP-14",
+      "detail": "B+D mayor que Q no supera nota máxima 20",
+      "result": "passed"
+    }
+  ],
+  "migrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql"
+  ],
+  "completedAt": "2026-09-28T12:50:30.799Z",
+  "status": "passed",
+  "limitations": [
+    "Auth y Storage simulados; no sustituye ensayo remoto.",
+    "No constituye cobertura del resto de escenarios AC/AP."
+  ]
+}

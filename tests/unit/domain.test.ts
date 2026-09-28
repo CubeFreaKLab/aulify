@@ -227,6 +227,26 @@ describe('corrección por identificadores y precisión', () => {
       denominator: 2,
     });
   });
+  it('califica tres relaciones correctas de cuatro sin convertir un error en respuesta inválida', () => {
+    const q: Question = {
+      id: 'match-four',
+      type: 'matching',
+      prompt: 'Relaciona',
+      points: 8,
+      left: ['a', 'b', 'c', 'd'].map((id) => ({ id, text: id })),
+      right: ['w', 'x', 'y', 'z'].map((id) => ({ id, text: id })),
+      pairs: { a: 'w', b: 'x', c: 'y', d: 'z' },
+    };
+    expect(
+      scoreQuestion(q, { type: 'matching', pairs: { a: 'w', b: 'x', c: 'y', d: 'w' } }),
+    ).toEqual({ numerator: 6, denominator: 1 });
+    expect(() =>
+      scoreQuestion(q, { type: 'matching', pairs: { a: 'w', b: 'x', c: 'y' } }),
+    ).toThrow();
+    expect(() =>
+      scoreQuestion(q, { type: 'matching', pairs: { a: 'w', b: 'x', c: 'y', d: 'foreign' } }),
+    ).toThrow();
+  });
 });
 
 describe('borradores, publicación y versiones', () => {
