@@ -1,6 +1,6 @@
 # Verificación del agregado de intentos docentes
 
-Fecha: 28 de septiembre de 2026. Migración preparada: `20260928130653_aulify_teacher_attempt_projection.sql`. La aplicación remota está pendiente de revisión.
+Fecha: 28 de septiembre de 2026. Migración: `20260928130653_aulify_teacher_attempt_projection.sql`. Aplicada en el proyecto autorizado, con historial verificado en el SQL Editor. El [sondeo posterior](datos-protocolo-60s-migracion14.md) conserva sus resultados y límites; la aplicación no equivale a aprobar capacidad.
 
 La migración reúne los intentos de una actividad mediante agregados sobre preguntas, respuestas, revisiones y ampliaciones de plazo. Solo utiliza esa consulta en la rama del docente propietario. Conserva la autorización actual, los campos devueltos, los datos permitidos al estudiante y los serializadores de las confirmaciones. No modifica tablas, contadores de revisión, puntuación, bloqueos ni claves idempotentes.
 

@@ -1,5 +1,7 @@
 # Diagnóstico de un minuto del protocolo de actividad
 
+Se conserva aquí el primer diagnóstico. La [repetición posterior a la migración 14](datos-protocolo-60s-migracion14.md) registró cero errores técnicos, pero siguió sin cumplir el p95 de confirmación. Los registros de ambas ejecuciones permanecen separados.
+
 Este diagnóstico no sustituye Q-06: se ejecutó un minuto, con una pregunta y sin calentamiento ni fase guiada. El p95 de confirmación observado superó el objetivo de 1,5 segundos, por lo que no justifica declarar capacidad aprobada.
 
 ## Entorno y procedimiento
