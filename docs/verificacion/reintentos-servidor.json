@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-09-28T13:48:33.917Z",
+  "baseRevision": "c030d6d",
+  "workingChanges": [
+    "src/demo/store.ts",
+    "src/lib/retry-after.ts",
+    "tests/e2e/integrado.spec.ts",
+    "tests/unit/retry-after.test.ts"
+  ],
+  "buildId": "76aWxJ8Ymu77wqTlNGlZJ",
+  "environment": "Aplicación compilada local y Supabase remoto; indisponibilidad de sync simulada en navegador",
+  "cases": [
+    {
+      "title": "una caída de sincronización reduce reintentos y se recupera sin recargar",
+      "project": "chromium-escritorio",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 49151
+        }
+      ]
+    },
+    {
+      "title": "una caída de sincronización reduce reintentos y se recupera sin recargar",
+      "project": "chromium-movil",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 37739
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "startTime": "2026-09-28T13:48:33.917Z",
+    "duration": 88355.746,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "limitation": "Dos tamaños Chromium emulados. No es medición de capacidad ni prueba de correo."
+}

@@ -287,6 +287,25 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
       timeout: 20000,
     });
     expect(snapshots).toBeGreaterThan(0);
+    // El servidor puede pedir una pausa mayor que el retroceso exponencial local.
+    let limitedRequests = 0;
+    await page.route('**/api/sync?*', async (route) => {
+      limitedRequests++;
+      await route.fulfill({
+        status: 503,
+        headers: { 'Retry-After': '5' },
+        contentType: 'application/json',
+        body: JSON.stringify({ error: message }),
+      });
+    });
+    await expect(page.getByRole('alert').filter({ hasText: message })).toBeVisible();
+    await page.waitForTimeout(3000);
+    expect(limitedRequests).toBe(1);
+    await expect.poll(() => limitedRequests, { timeout: 6000 }).toBeGreaterThanOrEqual(2);
+    await page.unroute('**/api/sync?*');
+    await expect(page.getByRole('alert').filter({ hasText: message })).toHaveCount(0, {
+      timeout: 10000,
+    });
     page.off('request', countSnapshot);
   });
   test('rechaza cookies con identidad alterada y conserva la sesión original', async ({

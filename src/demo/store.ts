@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useSyncExternalStore } from 'react';
 import { usePathname } from 'next/navigation';
+import { retryAfterDeadline } from '@/lib/retry-after';
 import {
   createDemoRepository,
   DEMO_IDS,
@@ -62,6 +63,7 @@ let activeMode: boolean | null = null;
 let activeActivityScope: string | null = null;
 let generation = 0;
 let projectionEpoch = 0;
+let automaticRetryAt = 0;
 type ImmediateFeedback = {
   points: Rational;
   explanation: string | null;
@@ -80,6 +82,7 @@ export function clearWorkspaceSession() {
   activeMode = null;
   activeActivityScope = null;
   refreshPending = null;
+  automaticRetryAt = 0;
   feedbackByAnswer.clear();
   emit();
 }
@@ -104,6 +107,7 @@ class WorkspaceHttpError extends Error {
   }
 }
 async function requestJson<T>(url: string, options?: RequestInit): Promise<T> {
+  const requestGeneration = generation;
   let response: Response;
   try {
     response = await fetch(url, {
@@ -113,6 +117,12 @@ async function requestJson<T>(url: string, options?: RequestInit): Promise<T> {
     });
   } catch {
     throw new Error('Se perdió la conexión. Conserva esta página abierta y vuelve a intentarlo.');
+  }
+  if (requestGeneration === generation && [429, 503].includes(response.status)) {
+    automaticRetryAt = Math.max(
+      automaticRetryAt,
+      retryAfterDeadline(response.headers.get('Retry-After')),
+    );
   }
   const data = await response.json();
   if (!response.ok)
@@ -386,6 +396,7 @@ export function useDemo() {
       retryAt = 0,
       authorizationLost = false;
     const refresh = () => {
+      if (Date.now() < automaticRetryAt) return;
       failures = 0;
       retryAt = 0;
       authorizationLost = false;
@@ -401,7 +412,7 @@ export function useDemo() {
         document.visibilityState !== 'visible' ||
         syncing ||
         authorizationLost ||
-        Date.now() < retryAt
+        Date.now() < Math.max(retryAt, automaticRetryAt)
       )
         return;
       if (!activityId) {

@@ -17,3 +17,7 @@ Los tres aprobaron. El conjunto local consta de 42 pruebas unitarias en seis arc
 La preparación del ensayo respeta las cuotas y separa renovaciones para evitar otra ráfaga artificial. No se aumentaron límites ni se alteraron direcciones IP. Referencia: [límites oficiales de Supabase Auth](https://supabase.com/docs/guides/auth/rate-limits), consultada el 28 de septiembre de 2026.
 
 Reproducción: `npx vitest run tests/unit/auth-renewal.test.ts tests/unit/http.test.ts`.
+
+## Espera del cliente
+
+El navegador respeta `Retry-After` en respuestas 429/503 antes de reanudar sus consultas automáticas. La pausa admite segundos o fecha HTTP y se limpia al cambiar de sesión; una respuesta de una sesión anterior no modifica esa espera. El reintento manual de una acción sigue disponible. Dos ejecuciones en Chromium, escritorio y móvil, comprobaron el retroceso sin cabecera, la espera de cinco segundos indicada por el servidor y la recuperación sin recargar. [Registro](reintentos-servidor.json). El compilado `76aWxJ8Ymu77wqTlNGlZJ` incorpora este ajuste y la corrección de relaciones; el conjunto local pasó 45 pruebas unitarias, tipos, análisis y construcción.
