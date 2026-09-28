@@ -1,0 +1,33 @@
+name: Conservación y limpieza de Aulify
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mantenimiento-aulify
+  cancel-in-progress: false
+
+jobs:
+  limpiar:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtener la versión publicada
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js 24
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+      - name: Aplicar plazos y eliminar archivos sin referencias autorizadas
+        env:
+          SUPABASE_URL: ${{ secrets.AULIFY_SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.AULIFY_SUPABASE_SECRET_KEY }}
+        run: node tools/datos/maintenance.mjs

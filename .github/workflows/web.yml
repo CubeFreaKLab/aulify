@@ -1,4 +1,4 @@
-name: Calidad del prototipo web
+name: Calidad de Aulify
 
 on:
   push:
@@ -8,6 +8,8 @@ on:
         'src/**',
         'public/**',
         'tests/**',
+        'supabase/migrations/**',
+        'tools/datos/check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -21,6 +23,8 @@ on:
         'src/**',
         'public/**',
         'tests/**',
+        'supabase/migrations/**',
+        'tools/datos/check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -64,6 +68,8 @@ jobs:
         run: npm run typecheck
       - name: Verificar reglas del dominio
         run: npm test
+      - name: Verificar migraciones y permisos en PostgreSQL aislado
+        run: node tools/datos/check.mjs
       - name: Construir aplicación
         run: npm run build
       - name: Preparar Chromium
