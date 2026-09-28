@@ -4,10 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff, GraduationCap } from 'lucide-react';
 import { useRef, useState, type FormEvent } from 'react';
-import { Badge, Button, Field } from './ui';
+import { useRouter } from 'next/navigation';
+import { Button, Field } from './ui';
 import '../styles/auth.css';
 
-type AuthMode = 'access' | 'register' | 'recover';
+type AuthMode = 'access' | 'register' | 'recover' | 'update-password';
 type Errors = Partial<Record<'name' | 'email' | 'password' | 'profile', string>>;
 
 const content: Record<AuthMode, { title: string; description: string; action: string }> = {
@@ -19,16 +20,23 @@ const content: Record<AuthMode, { title: string; description: string; action: st
   register: {
     title: 'Tu lugar en el aula.',
     description: 'Elige cómo vas a participar en Aulify.',
-    action: 'Revisar registro',
+    action: 'Crear cuenta',
   },
   recover: {
     title: 'Recupera tu acceso.',
-    description: 'Empieza con el correo que usarías para entrar.',
-    action: 'Continuar con este correo',
+    description: 'Te enviaremos un enlace para volver a tu aula.',
+    action: 'Enviar enlace de recuperación',
+  },
+  'update-password': {
+    title: 'Elige tu nueva contraseña.',
+    description: 'Usa una contraseña que solo tú conozcas.',
+    action: 'Guardar contraseña',
   },
 };
 
 export function AuthScreen({ mode }: { mode: AuthMode }) {
+  const router = useRouter();
+  const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState('');
@@ -37,6 +45,7 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
   const copy = content[mode];
   const registering = mode === 'register';
   const recovering = mode === 'recover';
+  const updating = mode === 'update-password';
 
   function describe(field: keyof Errors, hasHint = false) {
     return (
@@ -51,8 +60,9 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
     setStatus('');
   }
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (pending) return;
     const form = event.currentTarget;
     const data = new FormData(form);
     const nextErrors: Errors = {};
@@ -61,12 +71,12 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
     if (registering && String(data.get('name') ?? '').trim().length < 2) {
       nextErrors.name = 'Escribe tu nombre, con al menos dos caracteres.';
     }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!updating && (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
       nextErrors.email = 'Escribe un correo completo, como nombre@ejemplo.com.';
     }
     if (!recovering && !password) {
-      nextErrors.password = 'Escribe una contraseña de ejemplo.';
-    } else if (registering && password.length < 8) {
+      nextErrors.password = 'Escribe tu contraseña.';
+    } else if ((registering || updating) && password.length < 8) {
       nextErrors.password = 'Usa al menos ocho caracteres.';
     }
     if (registering && !data.get('profile')) nextErrors.profile = 'Elige docente o estudiante.';
@@ -77,18 +87,39 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
       form.querySelector<HTMLInputElement>(`[name="${first}"]`)?.focus();
       return;
     }
-    // Validation only: the prototype never submits or persists credentials.
-    const passwordInput = form.elements.namedItem('password');
-    if (passwordInput instanceof HTMLInputElement) passwordInput.value = '';
-    setShowPassword(false);
-    setStatus(
-      recovering
-        ? 'El correo tiene un formato válido. El envío de enlaces todavía no está habilitado en esta demostración. No se ha enviado ningún correo.'
-        : registering
-          ? 'El formulario está completo. Esta demostración no crea cuentas ni guarda contraseñas. Puedes explorar el aula con el perfil que elegiste.'
-          : 'El formulario está completo. El inicio de sesión todavía no está habilitado en esta demostración. Puedes explorar el aula como docente o estudiante.',
-    );
-    requestAnimationFrame(() => statusRef.current?.focus());
+    setPending(true);
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: mode,
+          email,
+          password,
+          name: data.get('name'),
+          role:
+            selectedProfile === 'docente'
+              ? 'teacher'
+              : selectedProfile === 'estudiante'
+                ? 'student'
+                : undefined,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'No pudimos completar la solicitud.');
+      const passwordInput = form.elements.namedItem('password');
+      if (passwordInput instanceof HTMLInputElement) passwordInput.value = '';
+      setShowPassword(false);
+      if (result.redirect) {
+        router.replace(result.redirect);
+        router.refresh();
+      } else setStatus(result.message);
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : 'No hay conexión. Inténtalo de nuevo.');
+    } finally {
+      setPending(false);
+      requestAnimationFrame(() => statusRef.current?.focus());
+    }
   }
 
   return (
@@ -122,23 +153,12 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
 
         <section className="auth-panel" aria-labelledby="auth-title">
           <div className="auth-form-container">
-            <Badge tone="green">Vista de demostración</Badge>
             <div className="auth-heading">
               <h1 id="auth-title">{copy.title}</h1>
               <p>{copy.description}</p>
             </div>
 
-            <p className="auth-demo-explanation" id="auth-demo-explanation">
-              Puedes probar estos formularios. Las cuentas aún no están habilitadas; usa datos y una
-              contraseña de ejemplo.
-            </p>
-
-            <form
-              className="auth-form"
-              noValidate
-              onSubmit={submit}
-              aria-describedby="auth-demo-explanation"
-            >
+            <form className="auth-form" noValidate onSubmit={submit} aria-busy={pending}>
               {registering && (
                 <Field label="Tu nombre" id="auth-name" error={errors.name}>
                   <input
@@ -155,28 +175,30 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
                   />
                 </Field>
               )}
-              <Field label="Correo electrónico" id="auth-email" error={errors.email}>
-                <input
-                  id="auth-email"
-                  name="email"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="nombre@ejemplo.com"
-                  required
-                  maxLength={254}
-                  aria-invalid={!!errors.email}
-                  aria-describedby={describe('email')}
-                  onChange={() => clearError('email')}
-                />
-              </Field>
+              {!updating && (
+                <Field label="Correo electrónico" id="auth-email" error={errors.email}>
+                  <input
+                    id="auth-email"
+                    name="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    placeholder="nombre@ejemplo.com"
+                    required
+                    maxLength={254}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={describe('email')}
+                    onChange={() => clearError('email')}
+                  />
+                </Field>
+              )}
 
               {!recovering && (
                 <Field
                   label="Contraseña"
                   id="auth-password"
                   hint={
-                    registering
+                    registering || updating
                       ? 'Al menos ocho caracteres. Puedes pegar tu contraseña.'
                       : undefined
                   }
@@ -187,15 +209,15 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
                       id="auth-password"
                       name="password"
                       type={showPassword ? 'text' : 'password'}
-                      autoComplete={registering ? 'new-password' : 'current-password'}
+                      autoComplete={registering || updating ? 'new-password' : 'current-password'}
                       placeholder={
-                        registering ? 'Crea una contraseña de ejemplo' : 'Tu contraseña de ejemplo'
+                        registering || updating ? 'Crea una contraseña' : 'Tu contraseña'
                       }
                       required
-                      minLength={registering ? 8 : undefined}
+                      minLength={registering || updating ? 8 : undefined}
                       maxLength={128}
                       aria-invalid={!!errors.password}
-                      aria-describedby={describe('password', registering)}
+                      aria-describedby={describe('password', registering || updating)}
                       onChange={() => clearError('password')}
                     />
                     <button
@@ -272,8 +294,8 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
                 </fieldset>
               )}
 
-              <Button type="submit" className="auth-submit">
-                {copy.action}
+              <Button type="submit" className="auth-submit" isDisabled={pending}>
+                {pending ? 'Un momento…' : copy.action}
                 <ArrowRight size={18} aria-hidden="true" />
               </Button>
               {status && (

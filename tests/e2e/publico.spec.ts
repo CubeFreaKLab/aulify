@@ -73,9 +73,21 @@ for (const route of ['/', '/acceso', '/registro', '/recuperar']) {
   });
 }
 
-test('formularios de acceso y recuperación no autentican ni almacenan credenciales', async ({
+test('formularios validan y muestran respuestas del servidor sin guardar credenciales en Web Storage', async ({
   page,
 }) => {
+  await page.route('**/api/auth', async (route) => {
+    const request = route.request().postDataJSON();
+    await route.fulfill({
+      status: request.action === 'access' ? 401 : 200,
+      contentType: 'application/json',
+      body: JSON.stringify(
+        request.action === 'access'
+          ? { error: 'No pudimos iniciar sesión. Revisa tu correo y contraseña.' }
+          : { message: 'Si existe una cuenta con ese correo, recibirás un enlace.' },
+      ),
+    });
+  });
   await page.goto('/acceso');
   const password = 'Ejemplo-solo-prueba-726!';
   const email = 'verificacion@example.test';
@@ -90,8 +102,7 @@ test('formularios de acceso y recuperación no autentican ni almacenan credencia
   await page.getByRole('button', { name: 'Mostrar contraseña', exact: true }).click();
   await expect(page.getByLabel('Contraseña', { exact: true })).toHaveAttribute('type', 'text');
   await page.getByRole('button', { name: 'Continuar', exact: true }).click();
-  await expect(page.getByRole('status')).toContainText('no está habilitado');
-  await expect(page.getByLabel('Contraseña', { exact: true })).toHaveValue('');
+  await expect(page.getByRole('status')).toContainText('No pudimos iniciar sesión');
   await expect(page).toHaveURL(/\/acceso$/);
   const stored = await page.evaluate(() =>
     JSON.stringify({ local: { ...localStorage }, session: { ...sessionStorage } }),
@@ -103,7 +114,7 @@ test('formularios de acceso y recuperación no autentican ni almacenan credencia
     page.getByRole('heading', { name: 'Recupera tu acceso.', exact: true }),
   ).toBeVisible();
   await page.getByLabel('Correo electrónico', { exact: true }).fill(email);
-  await page.getByRole('button', { name: 'Continuar con este correo' }).click();
-  await expect(page.getByRole('status')).toContainText('No se ha enviado ningún correo');
+  await page.getByRole('button', { name: 'Enviar enlace de recuperación' }).click();
+  await expect(page.getByRole('status')).toContainText('Si existe una cuenta');
   await expectNoHorizontalOverflow(page);
 });
