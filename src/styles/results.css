@@ -138,7 +138,7 @@
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
-  background: white;
+  background: var(--white);
   color: var(--ink);
 }
 .results-table-secondary {
@@ -233,7 +233,7 @@
 }
 .task-review-card .answer-quote {
   margin-top: 15px;
-  background: white;
+  background: var(--white);
 }
 .task-review-card > ul {
   font-size: 13px;

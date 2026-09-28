@@ -1,5 +1,7 @@
 # Capturas del prototipo 0.1.0
 
+**Corrección de evidencia:** las imágenes 01, 02, 03 y 04 guardaron el estado de carga y no acreditan el diseño de la portada. Se mantienen como registro de esa primera captura; para revisar la portada utilice las [capturas comprobadas del refinamiento](refinamiento/README.md).
+
 Capturadas el 27 de septiembre de 2026 desde la aplicación compilada, con Chromium sobre Windows y datos ficticios. La revisión fuente, versión del navegador, tamaños CSS, rutas y SHA-256 están en [manifest.json](manifest.json). Son capturas de la web; no son conceptos generados ni lienzos de Figma.
 
 | Captura | Qué permite revisar |

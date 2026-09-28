@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { ThemeSwitcher } from './theme';
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -12,13 +12,10 @@ import {
   CheckCheck,
   ChevronRight,
   CircleHelp,
-  GripVertical,
   Layers2,
-  List,
   Play,
   Plus,
   RotateCcw,
-  Type,
   Users,
   X,
 } from 'lucide-react';
@@ -57,48 +54,16 @@ function PencilDrawing() {
 }
 
 function HeroScene() {
-  const scene = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = scene.current;
-    if (!element) return;
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const bounds = element.getBoundingClientRect();
-      const travel = Math.max(280, window.innerHeight * 0.65);
-      const progress = preference.matches
-        ? 1
-        : Math.max(0, Math.min(1, (window.innerHeight * 0.65 - bounds.top) / travel));
-      element.style.setProperty('--scene-p', progress.toFixed(3));
-    };
-    const schedule = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    preference.addEventListener('change', schedule);
-    return () => {
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      preference.removeEventListener('change', schedule);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
-
   return (
     <div
       className="l-scene"
-      ref={scene}
       role="group"
       aria-label="Un cuaderno, explicaciones y preguntas se reúnen para formar una clase"
     >
       <div className="l-scene-line" aria-hidden="true" />
       <div className="l-scene-book" aria-hidden="true">
         <Image
-          src="/illustrations/cuaderno.png"
+          src="/illustrations/cuaderno.svg"
           alt=""
           width={1706}
           height={922}
@@ -126,23 +91,8 @@ function HeroScene() {
         </div>
       </div>
       <div className="l-paper l-paper-plant" aria-hidden="true">
-        <span className="l-paper-label">Una idea para empezar</span>
+        <span className="l-paper-label">La fotosíntesis</span>
         <PlantDrawing />
-        <span className="l-paper-note">Todo empieza con una pregunta.</span>
-      </div>
-      <div className="l-sticky-note" aria-hidden="true">
-        <span>
-          Para la clase
-          <br />
-          de hoy
-        </span>
-        <span>
-          Observar.
-          <br />
-          Preguntar.
-          <br />
-          Participar.
-        </span>
       </div>
       <div className="l-scene-pencil" aria-hidden="true">
         <PencilDrawing />
@@ -152,10 +102,6 @@ function HeroScene() {
           <path d="m81 34 11 19m-35 7 20 5m-26 21 22-3M888 11l-10 20m34-5-19 15M925 357l24-3m-24 16 16 10M245 401c-25 4-45-7-54-22M798 454c24 0 41-12 49-33" />
         </g>
       </svg>
-      <a className="l-scene-caption" href="#probar">
-        <span>Del cuaderno a la participación</span>
-        <ArrowDown size={20} />
-      </a>
     </div>
   );
 }
@@ -347,51 +293,66 @@ function PracticeExample() {
 }
 
 function EditorPreview() {
+  const [title, setTitle] = useState('La vida en una hoja');
+  const [explanation, setExplanation] = useState(
+    'Las plantas transforman la luz, el agua y el dióxido de carbono en alimento. ¿Qué ocurre si les falta luz?',
+  );
+  const [question, setQuestion] = useState(false);
   return (
-    <figure className="l-editor-preview">
+    <div className="l-editor-preview" aria-label="Prueba de creación de un recurso">
       <div className="l-editor-bar">
         <span>
-          <BookOpen size={16} /> Recursos / Biología
-        </span>
-        <span className="l-editor-draft">
-          <span /> Borrador
+          <BookOpen size={17} /> Tu recurso de prueba
         </span>
       </div>
-      <div className="l-editor-body">
-        <div className="l-editor-tools" aria-hidden="true">
-          <Type size={20} />
-          <List size={20} />
-          <CircleHelp size={20} />
-          <Plus size={20} />
-        </div>
-        <div className="l-editor-page">
-          <span className="l-editor-kicker">Biología · 3.º de secundaria</span>
-          <h3>La vida en una hoja.</h3>
+      <div className="l-editor-page">
+        <label className="l-editor-title">
+          Título del recurso
+          <input value={title} onChange={(event) => setTitle(event.target.value)} maxLength={120} />
+        </label>
+        <label className="l-editor-explanation">
+          Explicación
+          <textarea
+            value={explanation}
+            onChange={(event) => setExplanation(event.target.value)}
+            rows={4}
+            maxLength={800}
+          />
+        </label>
+        <div className="l-editor-image">
+          <PlantDrawing />
           <p>
-            Hoy vamos a mirar una planta de otra manera. ¿De dónde obtiene la energía para crecer?
+            Luz + agua + CO₂
+            <br />
+            <strong>Alimento para crecer.</strong>
           </p>
-          <div className="l-editor-image">
-            <PlantDrawing />
-            <span>
-              Luz + agua + CO₂
-              <br />
-              <strong>Una pequeña fábrica de alimento.</strong>
-            </span>
-          </div>
-          <div className="l-editor-quiz-block">
-            <GripVertical size={19} aria-hidden="true" />
-            <span className="l-editor-quiz-icon">
-              <CircleHelp size={21} />
-            </span>
-            <span>
-              <strong>Ahora te toca a ti</strong>
-              <small>3 preguntas · Distintas formas de responder</small>
-            </span>
-          </div>
         </div>
+        {question && (
+          <div className="l-editor-quiz-block" role="status">
+            <CircleHelp size={22} />
+            <div>
+              <strong>¿Qué necesita una planta para crecer?</strong>
+              <p>Selección simple · Luz, agua y CO₂</p>
+            </div>
+            <button
+              className="icon-button"
+              onClick={() => setQuestion(false)}
+              aria-label="Quitar pregunta de ejemplo"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        )}
+        {!question && (
+          <button className="l-block-add" onClick={() => setQuestion(true)}>
+            <Plus size={18} /> Añadir una pregunta de ejemplo
+          </button>
+        )}
       </div>
-      <figcaption>Un recurso de ejemplo con explicación y quiz.</figcaption>
-    </figure>
+      <p className="l-editor-caption">
+        Puedes escribir aquí. Este ejemplo no se guarda ni se publica.
+      </p>
+    </div>
   );
 }
 
@@ -409,6 +370,7 @@ export function Landing() {
           <a href="#probar" className="l-nav-section">
             Pruébalo
           </a>
+          <ThemeSwitcher compact />
           <Link href="/acceso">
             Entrar <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
@@ -421,19 +383,14 @@ export function Landing() {
       <main id="contenido">
         <section className="l-hero" aria-labelledby="l-hero-title">
           <div className="l-hero-copy">
-            <p className="l-eyebrow">
-              <span /> Para quienes enseñan. Para quienes preguntan.
-            </p>
             <h1 id="l-hero-title">
-              UNA CLASE.
+              Que tu clase
               <br />
-              MUCHAS FORMAS
-              <br />
-              <span>DE PARTICIPAR.</span>
+              <span>tome parte.</span>
             </h1>
             <p className="l-hero-description">
-              Explica, pregunta y descubre lo que aprende tu clase.
-              <br className="l-desktop-break" /> El espacio donde tus ideas se vuelven interactivas.
+              Crea recursos con explicaciones y preguntas. Comparte una clase en la que todos puedan
+              participar.
             </p>
             <div className="l-hero-actions">
               <Link className="button" href="/demo?perfil=docente">
@@ -445,30 +402,14 @@ export function Landing() {
             </div>
           </div>
           <HeroScene />
-          <div className="l-hero-footnote">
-            <span>Hecho para educación secundaria</span>
-            <span>En tu computadora. En tu celular.</span>
-          </div>
         </section>
 
         <section className="l-intro l-shell" id="la-idea" aria-labelledby="l-intro-title">
-          <div className="l-intro-margin">
-            <span className="l-small-label">El aula, a tu manera</span>
-            <svg viewBox="0 0 100 80" fill="none" aria-hidden="true">
-              <path
-                d="M8 12c63-19 85 37 40 33-29-3-28-35-5-31 19 3 22 36 8 58m-8-15 8 16 17-9"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
           <div className="l-intro-copy">
             <h2 id="l-intro-title">
-              Las buenas clases
+              Una explicación puede
               <br />
-              empiezan con <span>curiosidad.</span>
+              abrir muchas preguntas.
             </h2>
             <p>
               Un texto puede abrir una idea. Una imagen, hacerla más clara. Y una pregunta, darle
@@ -479,17 +420,8 @@ export function Landing() {
 
         <section className="l-playground" id="probar" aria-labelledby="l-playground-title">
           <div className="l-shell l-playground-heading">
-            <span className="l-small-label">Menos mirar. Más participar.</span>
-            <h2 id="l-playground-title">
-              Hay que probarlo
-              <br />
-              <span>para entenderlo.</span>
-            </h2>
-            <p>
-              Empieza con esta pequeña clase de biología.
-              <br />
-              No necesitas registrarte.
-            </p>
+            <h2 id="l-playground-title">Entra en la clase.</h2>
+            <p>Lee, piensa y responde. Prueba esta actividad de biología sin registrarte.</p>
           </div>
           <div className="l-shell l-example-grid">
             <div className="l-lesson-note">
@@ -521,7 +453,7 @@ export function Landing() {
             <PracticeExample />
           </div>
           <div className="l-shell l-playground-bottom">
-            <span>Una explicación y una pregunta. Así empieza una conversación.</span>
+            <span>El docente decide cuándo mostrar respuestas y calificaciones.</span>
             <Link href="/demo?perfil=estudiante">
               Conocer la experiencia del estudiante <ArrowUpRight size={18} />
             </Link>
@@ -530,13 +462,9 @@ export function Landing() {
 
         <section className="l-create l-shell" id="crear" aria-labelledby="l-create-title">
           <div className="l-create-copy">
-            <span className="l-small-label">Del lado de quien enseña</span>
             <h2 id="l-create-title">
-              Tus ideas.
-              <br />
-              Tus bloques.
-              <br />
-              <span>Tu clase.</span>
+              Prepara la clase
+              <br />a tu manera.
             </h2>
             <p>
               Escribe una explicación, añade una imagen y suma preguntas justo donde hacen falta.
@@ -562,11 +490,10 @@ export function Landing() {
 
         <section className="l-journey l-shell" aria-labelledby="l-journey-title">
           <div className="l-journey-heading">
-            <span className="l-small-label">De una idea a una clase compartida</span>
             <h2 id="l-journey-title">
-              Un recorrido claro.
+              Y después,
               <br />
-              De principio a fin.
+              acompaña el aprendizaje.
             </h2>
           </div>
           <ol className="l-journey-list">
@@ -609,11 +536,10 @@ export function Landing() {
         <section className="l-invitation" aria-labelledby="l-invitation-title">
           <div className="l-shell l-invitation-inner">
             <div>
-              <span className="l-small-label">La próxima idea puede ser tuya</span>
               <h2 id="l-invitation-title">
-                Hagamos que
+                Hay lugar para
                 <br />
-                la clase <span>participe.</span>
+                <span>tus ideas.</span>
               </h2>
             </div>
             <div className="l-invitation-actions">
@@ -624,7 +550,7 @@ export function Landing() {
               <Link className="l-invitation-student" href="/demo?perfil=estudiante">
                 Soy estudiante <ArrowRight size={19} />
               </Link>
-              <span>Demostración con una clase de ejemplo.</span>
+              <span>Explora una demostración con datos ficticios.</span>
             </div>
           </div>
         </section>

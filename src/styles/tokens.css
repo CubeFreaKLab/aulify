@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --font: 'Inter Variable', 'Inter', system-ui, sans-serif;
   --green: #049a4e;
   --mint: #b8fac6;
@@ -16,6 +17,11 @@
   --amber: #785112;
   --amber-soft: #fff5da;
   --focus: #08753c;
+  --on-ink: #fafaf8;
+  --on-mint: #0f0f0f;
+  --on-green: #fff;
+  --action-green: #086d3c;
+  --danger-action: #a42b20;
   --radius-button: 10px;
   --radius-card: 16px;
   --shadow-card: 0 6px 24px #0f0f0f06;
@@ -34,4 +40,27 @@
   --space-8: 32px;
   --space-12: 48px;
   --space-16: 64px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #131813;
+  --ink: #f2f5ef;
+  --white: #1c231d;
+  --surface-muted: #29322a;
+  --muted: #b7c2b7;
+  --line: #364037;
+  --line-strong: #748375;
+  --green-text: #91e5ab;
+  --mint-soft: #213d2b;
+  --danger: #ffb0a3;
+  --danger-soft: #40251f;
+  --amber: #f1d28f;
+  --amber-soft: #3d331d;
+  --focus: #b8fac6;
+  --on-ink: #131813;
+  --action-green: #b8fac6;
+  --on-green: #102717;
+  --shadow-card: 0 6px 24px #00000018;
+  --shadow-float: 0 16px 70px #00000038;
 }

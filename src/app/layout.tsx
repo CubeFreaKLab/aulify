@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import '@fontsource-variable/inter';
+import { ThemeProvider } from '@/components/theme';
+import { themeInit } from '@/lib/theme-init';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -11,12 +13,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body>
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

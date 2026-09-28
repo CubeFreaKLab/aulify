@@ -39,8 +39,8 @@
   transition: width var(--motion-long) var(--ease-standard);
 }
 .quiz-canvas {
-  max-width: 960px;
-  margin: 45px auto 0;
+  max-width: 1040px;
+  margin: 40px auto 0;
   padding: 0 32px 60px;
 }
 .quiz-heading {
@@ -50,12 +50,12 @@
   margin-bottom: 25px;
 }
 .quiz-question {
-  font-size: clamp(27px, 3vw, 42px);
-  font-weight: 780;
+  font-size: clamp(28px, 3.4vw, 46px);
+  font-weight: 820;
   letter-spacing: -0.04em;
   line-height: 1.18;
   max-width: 780px;
-  margin: 18px 0 32px;
+  margin: 18px 0 38px;
 }
 .question-stage {
   animation: content-in var(--motion-medium) var(--ease-standard);
@@ -74,24 +74,33 @@
   align-items: center;
   gap: 16px;
   padding: 23px;
-  border: 1.5px solid var(--line-strong);
+  border: 2px solid var(--line-strong);
   border-radius: 14px;
-  min-height: 96px;
+  min-height: 110px;
   cursor: pointer;
-  background: white;
+  background: var(--white);
   font-size: 17px;
-  font-weight: 550;
+  font-weight: 600;
+  box-shadow: 0 4px 0 var(--line);
   transition:
     background var(--motion-fast),
-    border-color var(--motion-fast);
+    border-color var(--motion-fast),
+    transform var(--motion-fast),
+    box-shadow var(--motion-fast);
 }
 .answer-option:hover {
-  background: #f4faf5;
+  background: var(--mint-soft);
   border-color: var(--green-text);
 }
 .answer-option.selected {
   border-color: var(--green-text);
   background: var(--mint-soft);
+  box-shadow: 0 2px 0 var(--green-text);
+  transform: translateY(2px);
+}
+.answer-option:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--line);
 }
 .answer-option:has(input:focus-visible) {
   outline: 3px solid var(--focus);
@@ -119,8 +128,8 @@
   background: var(--paper);
 }
 .selected .option-letter {
-  background: var(--green-text);
-  color: white;
+  background: var(--action-green);
+  color: var(--on-green);
   border-color: var(--green-text);
 }
 .quiz-bottom {
@@ -139,7 +148,7 @@
   border: 1px solid var(--line-strong);
   border-radius: 30px;
   padding: 10px 15px;
-  background: white;
+  background: var(--white);
   font-size: 12px;
   font-weight: 650;
   min-height: 44px;
@@ -217,7 +226,7 @@
   grid-template-columns: 1fr 24px 1fr;
   gap: 15px;
   align-items: center;
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 16px;
@@ -229,7 +238,7 @@
   padding: 14px 18px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: white;
+  background: var(--white);
 }
 .ordering-row > .row {
   margin-left: auto;

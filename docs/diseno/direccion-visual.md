@@ -1,6 +1,6 @@
 # Dirección visual de Aulify
 
-Estado: propuesta implementada en el prototipo 0.1.0, 27 de septiembre de 2026. Las comprobaciones técnicas y la aprobación visual se registran por separado.
+Estado: refinamiento 1.1, 28 de septiembre de 2026. Las comprobaciones técnicas y la evaluación visual se registran por separado.
 
 ## Dos experiencias, una identidad
 
@@ -12,31 +12,23 @@ Paleta de origen: verde #049A4E, menta #B8FAC6, papel #FAFAF8, gris claro #ECECE
 
 ## Composición elegida
 
-Se compararon dos bocetos de apertura y sus conceptos visuales:
+La apertura enfrenta una frase breve y dos acciones con una escena de materiales escolares. El cuaderno conserva el dibujo de partida; las hojas y el lápiz forman planos independientes. Los márgenes, tamaños y desplazamientos se recomponen en móvil, manteniendo el título y las acciones antes de la ilustración.
 
 ```
-A · Escritorio que cobra vida
-marca                         producto / explorar / entrar
-            UNA CLASE. MUCHAS FORMAS
-                 DE PARTICIPAR.
-            explicación breve / explorar clase
-       hoja ↘     cuaderno abierto     ↙ lápiz
-                  recurso de clase
-
-B · Cuaderno abierto
-marca                         producto / explorar / entrar
-Tu próxima clase,        | escena ilustrada
-en movimiento.           | hojas y preguntas en planos
-explicación y acciones   | cuaderno en primer plano
+marca                   idea / probar / apariencia / acceso
+Que tu clase       |   hoja de pregunta      hoja de ciencias
+tome parte.        |         cuaderno abierto
+explicación        |                  lápiz en primer plano
+explorar / probar  |
 ```
 
-Se eligió A por ofrecer una escena central reconocible y una transición natural hacia una clase de ejemplo. B conserva una lectura clara pero se aproxima más a una composición habitual de texto e imagen. Los conceptos se inspeccionaron antes de integrar el cuaderno ilustrado y las capas independientes de la portada. La aprobación visual del producto sigue abierta.
+La primera composición central de tres líneas se sustituyó por esta apertura lateral. Se retiraron etiquetas promocionales repetidas, indicaciones decorativas de desplazamiento y textos que no ayudaban a reconocer una acción. Se conserva la información útil: materia, consigna, cantidad de preguntas y condición de demostración.
 
-El recorrido de la portada contiene escenas distintas: promesa comprensible; materiales que se ordenan; explicación y pregunta que se pueden explorar; vista del trabajo docente; cierre con entrada a la demostración. El momento principal es la transformación del cuaderno en un recurso interactivo. Las ilustraciones se mueven en planos independientes y dejan libre el texto. La página conserva desplazamiento normal y accesos directos.
+El recorrido pasa de reconocer materiales de una clase a leer una explicación, responder una pregunta, probar la creación y explorar el espacio de cada rol. El momento principal es participar realmente en el ejemplo: elegir una respuesta produce una devolución y permite continuar. La prueba del editor admite cambiar el título, escribir una explicación y añadir o quitar una pregunta; explica que los cambios no se guardan ni publican.
 
-La emoción cambia de curiosidad a comprensión, participación y confianza. El punto de mayor expresión es el armado de la clase; el editor y los resultados que siguen reducen la intensidad para mostrar claridad. La escena estática debe seguir contando esa transformación. En móvil el título, las acciones y la escena se recomponen verticalmente.
+La emoción buscada cambia de curiosidad a comprensión, participación y confianza. La apertura aporta la expresión visual; el interior mantiene controles orientados a preparar, responder y revisar. El desplazamiento es natural, sin inmovilizar el documento ni pedir esperas para acceder al contenido.
 
-Referencias de presentación: [Leonardo](https://leonardo.ai/) y [Mind Robotics](https://www.mindrobotics.com/). Se toman como referencias de jerarquía y presencia visual, conservando recursos y composiciones propios.
+Referencias de presentación: [Leonardo](https://leonardo.ai/) y [Mind Robotics](https://www.mindrobotics.com/). Aportan referencias de jerarquía y presencia visual; la composición y los recursos pertenecen a Aulify.
 
 ## Plataforma
 
@@ -53,3 +45,9 @@ Las animaciones admiten interrupción, mantienen el foco comprensible y respetan
 ## Assets y evidencia
 
 Los SVG originales de marca se conservan. Se generaron dos conceptos de composición y un cuaderno ilustrado con transparencia; las pantallas del producto se construyeron con componentes reales. Los conceptos raster no se presentan como capturas de una aplicación ejecutada. La [evidencia visual del prototipo](capturas/README.md) identifica versión y entorno.
+
+## Apariencia y verificación del refinamiento
+
+Claro, oscuro y sistema comparten la misma jerarquía. La preferencia se conserva por navegador y se sincroniza entre pestañas; un script temprano aplica el fondo antes de presentar el contenido. El cambio utiliza una transición breve, con alternativa inmediata al pedir movimiento reducido. Los colores de acción y sus textos se separan de los colores de marca para mantener contraste.
+
+La [verificación visual 1.1](verificacion-visual-1.1.md) registra los recorridos y límites de esta revisión. Las [capturas del refinamiento](capturas/refinamiento/README.md) sustituyen la evidencia inválida de la primera portada.

@@ -1,0 +1,1 @@
+export const themeInit = `(function(){var t='system';try{var s=localStorage.getItem('aulify.theme');if(s==='light'||s==='dark')t=s;}catch(e){}var d=t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';document.documentElement.dataset.themePreference=t;})();`;

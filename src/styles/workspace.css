@@ -46,7 +46,7 @@
 }
 .nav-link .count {
   margin-left: auto;
-  background: white;
+  background: var(--white);
   border-radius: 6px;
   font-size: 11px;
   padding: 1px 6px;
@@ -90,7 +90,7 @@
 }
 .avatar.dark {
   background: var(--ink);
-  color: white;
+  color: var(--on-ink);
 }
 .user-name {
   font-size: 13px;
@@ -219,7 +219,7 @@
 .metric {
   border: 1px solid var(--line);
   border-radius: 13px;
-  background: white;
+  background: var(--white);
   padding: 20px;
   display: flex;
   gap: 15px;
@@ -254,7 +254,7 @@
   text-decoration: none;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: white;
+  background: var(--white);
   overflow: hidden;
   transition:
     transform var(--motion-medium),
@@ -300,7 +300,7 @@
 .list-panel {
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: white;
+  background: var(--white);
   overflow: hidden;
 }
 .list-item {
@@ -361,7 +361,7 @@
   color: var(--ink);
 }
 .surface {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 26px;
@@ -399,7 +399,7 @@
 .resource-card {
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: white;
+  background: var(--white);
   overflow: hidden;
 }
 .resource-cover {
@@ -417,7 +417,7 @@
   position: absolute;
   left: 14px;
   top: 14px;
-  background: white;
+  background: var(--white);
 }
 .resource-card-body {
   padding: 20px;
@@ -443,7 +443,7 @@
   align-items: start;
 }
 .editor-sheet {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
@@ -498,7 +498,7 @@
   align-items: flex-start;
   gap: 8px;
   padding: 13px 10px;
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 9px;
   font-size: 11px;
@@ -521,7 +521,7 @@
 }
 .question-author {
   margin-top: 16px;
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   padding: 18px;
   border-radius: 12px;
@@ -567,7 +567,7 @@
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: white;
+  background: var(--white);
   font-size: 13px;
 }
 .question-type-grid button:hover {
@@ -578,7 +578,7 @@
   margin: auto;
 }
 .reader-paper {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 48px;
@@ -629,7 +629,7 @@
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: white;
+  background: var(--white);
 }
 table {
   border-collapse: collapse;
@@ -668,7 +668,7 @@ tr:last-child td {
   align-items: center;
   gap: 10px;
   width: 100%;
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   padding: 14px;
   border-radius: 10px;
@@ -773,11 +773,11 @@ tr:last-child td {
 .bn-container {
   font-family: var(--font) !important;
   --bn-font-family: var(--font);
-  --bn-colors-editor-background: #fff;
-  --bn-colors-editor-text: #0f0f0f;
-  --bn-colors-menu-background: #fff;
-  --bn-colors-menu-text: #0f0f0f;
-  --bn-colors-hovered-background: #eaf8ed;
+  --bn-colors-editor-background: var(--white);
+  --bn-colors-editor-text: var(--ink);
+  --bn-colors-menu-background: var(--white);
+  --bn-colors-menu-text: var(--ink);
+  --bn-colors-hovered-background: var(--mint-soft);
   --bn-colors-selected-background: #b8fac6;
   --bn-colors-selected-text: #0f0f0f;
 }
@@ -992,7 +992,7 @@ tr:last-child td {
 .preview-container {
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: white;
+  background: var(--white);
   overflow: hidden;
 }
 ::view-transition-group(resource-preview) {

@@ -1,0 +1,200 @@
+{
+  "capturedAt": "2026-09-28T06:39:18.245Z",
+  "url": "http://127.0.0.1:3002",
+  "environment": "development",
+  "browser": "153.0.8010.12",
+  "captures": [
+    {
+      "filename": "escritorio-apertura.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 0,
+      "fullPage": false,
+      "sha256": "ec08fb8080d700d00420b78712a0967d7fd1d1bcb71bf66fe6abb367ff3604ea"
+    },
+    {
+      "filename": "escritorio-completa.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 0,
+      "fullPage": true,
+      "sha256": "bcf8e6f957a1e4cfb1d84c8addbfe7fdaaa07efeaccc6f6794fcbbb5b3dd4e0f"
+    },
+    {
+      "filename": "escritorio-intermedia.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 390,
+      "fullPage": false,
+      "sha256": "925e3348245b29dd0882823d927bdc90930c486cc9a678de45b7337f708f4cc7"
+    },
+    {
+      "filename": "escritorio-salida.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 660,
+      "fullPage": false,
+      "sha256": "4801693a759db046b8493978e397e0bc261e48cf53222487f881c3fe4cbad204"
+    },
+    {
+      "filename": "movil-apertura.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 0,
+      "fullPage": false,
+      "sha256": "0a1a76d1498788af44828aaeb7104e974d0b2b3cab13fe1fed65afe7df5b00e2"
+    },
+    {
+      "filename": "movil-completa.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 0,
+      "fullPage": true,
+      "sha256": "2f3ce597ccf2aa3dbd71302e6baab9010d2e02957529398e2d564616961bfe52"
+    },
+    {
+      "filename": "movil-intermedia.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 390,
+      "fullPage": false,
+      "sha256": "cc42dadeea717348afd5e83a1c2ad9af5c483013a9224a3761a7d0e2c7c27812"
+    },
+    {
+      "filename": "movil-salida.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "scrollY": 660,
+      "fullPage": false,
+      "sha256": "ec1996395270f5cfe4fd9b5a0549bda4a94656d69f711b0ec5c33712081f717c"
+    },
+    {
+      "filename": "compacto-reducido-apertura.png",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "scrollY": 0,
+      "fullPage": false,
+      "sha256": "8c99b719c0fc929492e96e500c075dbb1063f3d0b92d658023ba8efbf6d143c6"
+    },
+    {
+      "filename": "compacto-reducido-completa.png",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "scrollY": 0,
+      "fullPage": true,
+      "sha256": "825a92586b86ccec85363739871a1867035dee45a2898dd6b5aa7b260ae15011"
+    },
+    {
+      "filename": "compacto-reducido-intermedia.png",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "scrollY": 390,
+      "fullPage": false,
+      "sha256": "bd4653b082a2562439f4978f5db9224fcb23cccb6dc00e44f928f71b00ed249d"
+    },
+    {
+      "filename": "compacto-reducido-salida.png",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "scrollY": 660,
+      "fullPage": false,
+      "sha256": "2b3413f3a8b6e2f3d13ddd0c7efb435446bab0413124988636cfd8a9e76e1dc7"
+    },
+    {
+      "filename": "oscuro-apertura.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "scrollY": 0,
+      "fullPage": false,
+      "sha256": "cb2aa33403e700a7eed4620a01baa50f02a587975158273310a5a3bd34b6908e"
+    },
+    {
+      "filename": "oscuro-completa.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "scrollY": 0,
+      "fullPage": true,
+      "sha256": "046d31bcfc451f509a9009b0c41985723ec9b8ac356fe2524acb57711a1f2dfb"
+    },
+    {
+      "filename": "oscuro-intermedia.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "scrollY": 390,
+      "fullPage": false,
+      "sha256": "5c599ca7476fcd591c1b1f4e1471a4c2d634a1b7aa97474e42ba1a2795f56a97"
+    },
+    {
+      "filename": "oscuro-salida.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "scrollY": 660,
+      "fullPage": false,
+      "sha256": "3ac763f7d4f5fc033baf70861e739928a9510caf359476142d7a342f88ed2ca9"
+    }
+  ]
+}

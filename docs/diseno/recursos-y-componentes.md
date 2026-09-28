@@ -94,10 +94,11 @@ Se comprobaron las [curvas y duraciones oficiales](https://m3.material.io/styles
 | Archivo | Procedencia documentada | Uso |
 |---|---|---|
 | [aulify-logo.svg](../../public/brand/aulify-logo.svg) | Archivo de marca Aulify aportado al proyecto. | Cabeceras y navegación; se conservan sus trazos. |
-| [aulify-logo-white.svg](../../public/brand/aulify-logo-white.svg) | Variante aportada con los originales. | Disponible para superficies oscuras; no implica que exista un modo oscuro de toda la aplicación. |
+| [aulify-logo-white.svg](../../public/brand/aulify-logo-white.svg) | Variante aportada con los originales. | Variante utilizada por el tema oscuro. |
 | [aulify-symbol.svg](../../public/brand/aulify-symbol.svg) | Símbolo original aportado. | Icono del sitio y usos compactos. |
 | [student-login.svg](../../public/brand/student-login.svg) | Ilustración aportada con los recursos existentes de Aulify. | Pantallas de acceso. |
-| [cuaderno.png](../../public/illustrations/cuaderno.png) | Ilustración raster generada para el prototipo: cuaderno de ciencias, hojas y lápiz. | Capa principal de la portada y recurso ilustrativo del inicio. Conserva transparencia real. |
+| [cuaderno.png](../../public/illustrations/cuaderno.png) | Ilustración raster generada para el prototipo: cuaderno de ciencias, hojas y lápiz. | Original conservado para reproducir el trazado. La portada utiliza ahora la versión SVG. |
+| [cuaderno.svg](../../public/illustrations/cuaderno.svg) | Trazado del PNG con VTracer 0.6.12. | 427 trazados, sin imágenes raster incrustadas. Ver `tools/diseno/vectorizar-cuaderno.py`. |
 | Dibujos de planta, lápiz y papeles en `landing.tsx` | Trazos definidos en el componente para esta composición. | Capas independientes y elementos ilustrativos del relato de la portada. |
 
 Los conceptos de apertura y los recursos de producción son entregables distintos. Una imagen de concepto con texto dibujado no se utiliza como interfaz ni como sustituto del logotipo SVG. El cuaderno final no contiene texto de interfaz; los títulos, preguntas y botones se renderizan como contenido accesible de la web.
@@ -106,7 +107,7 @@ La procedencia anterior no atribuye una licencia de redistribución que no const
 
 ## Preparación para Figma
 
-La aplicación proporciona una base reproducible: tokens CSS, SVG de marca, ilustración raster, componentes y pantallas en distintos tamaños. Estos recursos permiten preparar variables de color, tipografía, espacio y movimiento; componentes de controles; y lienzos por recorrido y estado.
+La aplicación proporciona una base reproducible: tokens CSS, SVG de marca, cuaderno vectorizado, componentes y pantallas en distintos tamaños. Estos recursos permiten preparar variables de color, tipografía, espacio y movimiento; componentes de controles; y lienzos por recorrido y estado.
 
 La réplica editable en Figma sigue pendiente. No existe una equivalencia automática entre una captura y un lienzo con texto, componentes, restricciones y variantes editables. Al preparar esa réplica se deben conservar los SVG, reconstruir textos con Inter y comprobar los estados responsivos. La documentación debe reflejar el orden real del proceso y enlazar el archivo editable cuando exista.
 
@@ -118,3 +119,5 @@ La réplica editable en Figma sigue pendiente. No existe una equivalencia autom�
 - [Dependencias fijadas](../../package.json) y [lockfile](../../package-lock.json).
 
 Las comprobaciones de componentes, rutas y accesibilidad se registran con sus resultados reales. Este catálogo describe la implementación; no sustituye los informes de pruebas.
+
+El selector `ThemeSwitcher`, el proveedor y los hooks de `theme.tsx` aplican claro, oscuro o sistema. `useResolvedTheme()` comunica el tema efectivo a componentes como BlockNote. El comportamiento y las comprobaciones están en [verificación visual 1.1](verificacion-visual-1.1.md).

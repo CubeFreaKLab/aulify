@@ -1,5 +1,6 @@
 @import '../styles/tokens.css';
 @import '../styles/workspace.css';
+@import '../styles/theme.css';
 
 * {
   box-sizing: border-box;
@@ -95,7 +96,7 @@ select:focus-visible {
   top: -100px;
   z-index: 2000;
   background: var(--ink);
-  color: white;
+  color: var(--on-ink);
   padding: 0.75rem 1rem;
   border-radius: 8px;
 }
@@ -128,10 +129,10 @@ select:focus-visible {
     color var(--motion-fast),
     transform var(--motion-fast);
   background: var(--ink);
-  color: white;
+  color: var(--on-ink);
 }
 .button:hover {
-  background: #30332e;
+  background: color-mix(in srgb, var(--ink), var(--paper) 14%);
 }
 .button:active {
   transform: translateY(1px);
@@ -141,7 +142,7 @@ select:focus-visible {
   opacity: 0.45;
 }
 .button.secondary {
-  background: white;
+  background: var(--white);
   border-color: var(--line);
   color: var(--ink);
 }
@@ -150,7 +151,7 @@ select:focus-visible {
 }
 .button.mint {
   background: var(--mint);
-  color: var(--ink);
+  color: var(--on-mint);
 }
 .button.mint:hover {
   background: #a0f3b3;
@@ -164,8 +165,8 @@ select:focus-visible {
   background: var(--surface-muted);
 }
 .button.danger {
-  background: var(--danger);
-  color: white;
+  background: var(--danger-action);
+  color: #fff;
 }
 .button.small {
   padding: 7px 11px;
@@ -229,7 +230,7 @@ select:focus-visible {
   padding: 11px 13px;
   border: 1px solid var(--line-strong);
   border-radius: 9px;
-  background: white;
+  background: var(--white);
   color: var(--ink);
   min-height: 44px;
 }
@@ -355,7 +356,7 @@ select:focus-visible {
   text-align: center;
   border: 1px dashed var(--line-strong);
   border-radius: 16px;
-  background: white;
+  background: var(--white);
 }
 .empty-state svg {
   margin: 0 auto 18px;
@@ -405,7 +406,7 @@ select:focus-visible {
   max-width: calc(100vw - 32px);
   z-index: 150;
   background: var(--ink);
-  color: white;
+  color: var(--on-ink);
   padding: 12px 20px;
   border-radius: 12px;
   box-shadow: var(--shadow-float);

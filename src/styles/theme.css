@@ -1,0 +1,90 @@
+.theme-switcher {
+  display: inline-flex;
+  width: fit-content;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+.theme-switcher button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  min-width: 40px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 12px;
+}
+.theme-switcher button:hover {
+  color: var(--ink);
+  background: var(--surface-muted);
+}
+.theme-switcher button[aria-pressed='true'] {
+  color: var(--ink);
+  background: var(--surface-muted);
+}
+.theme-switcher.compact button {
+  padding: 7px;
+}
+.theme-switcher button:focus-visible {
+  outline-offset: 1px;
+}
+::view-transition-group(root) {
+  animation-duration: 230ms;
+  animation-timing-function: var(--ease-standard);
+}
+.sidebar-bottom .theme-switcher {
+  margin: 8px 0 12px;
+}
+:root[data-theme='dark'] img[src='/brand/aulify-logo.svg'] {
+  content: url('/brand/aulify-logo-white.svg');
+}
+:root[data-theme='dark'] .subject-card-head {
+  background: #284632;
+}
+:root[data-theme='dark'] .subject-card:nth-child(2) .subject-card-head {
+  background: #443d27;
+}
+:root[data-theme='dark'] .subject-card:nth-child(3) .subject-card-head {
+  background: #30394a;
+}
+:root[data-theme='dark'] .auth-story {
+  background: var(--mint-soft);
+}
+:root[data-theme='dark'] .auth-illustration img {
+  mix-blend-mode: normal;
+}
+:root[data-theme='dark'] .finish-icon,
+:root[data-theme='dark'] .powerup[aria-pressed='true'],
+:root[data-theme='dark'] .help-step-number {
+  color: var(--on-mint);
+}
+:root[data-theme='dark'] .nav-link.active,
+:root[data-theme='dark'] .avatar:not(.dark),
+:root[data-theme='dark'] .step-number,
+:root[data-theme='dark'] .quiz-invitation {
+  color: var(--on-mint);
+}
+:root[data-theme='dark'] .nav-link.active .count {
+  color: var(--ink);
+}
+:root[data-theme='dark'] th {
+  background: var(--surface-muted);
+}
+:root[data-theme='dark'] .quiz-invitation .button {
+  background: #0f0f0f;
+  color: #fafaf8;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
