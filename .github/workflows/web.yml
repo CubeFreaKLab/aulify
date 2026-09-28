@@ -11,6 +11,7 @@ on:
         'supabase/migrations/**',
         'tools/datos/check.mjs',
         'tools/datos/scoring-acceptance.mjs',
+        'tools/datos/teacher-projection-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -28,6 +29,7 @@ on:
         'supabase/migrations/**',
         'tools/datos/check.mjs',
         'tools/datos/scoring-acceptance.mjs',
+        'tools/datos/teacher-projection-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -76,6 +78,8 @@ jobs:
         run: node tools/datos/check.mjs
       - name: Verificar casos numéricos de puntuación
         run: node tools/datos/scoring-acceptance.mjs
+      - name: Verificar equivalencia y permisos de la proyección docente
+        run: node tools/datos/teacher-projection-check.mjs
       - name: Construir aplicación
         run: npm run build
       - name: Preparar Chromium
@@ -90,5 +94,6 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            docs/verificacion/datos-proyeccion-docente-aislada.json
           if-no-files-found: ignore
           retention-days: 14
