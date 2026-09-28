@@ -1,6 +1,6 @@
 # Verificación de datos en PostgreSQL aislado
 
-El 28 de septiembre de 2026 se ejecutaron las ocho migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 68 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
+El 28 de septiembre de 2026 se ejecutaron las diez migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 70 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
 
 ## Qué se comprobó
 
@@ -9,6 +9,7 @@ El 28 de septiembre de 2026 se ejecutaron las ocho migraciones de `supabase/migr
 - Intento recuperable, orden obligatorio, respuesta definitiva, reintento idempotente y rechazo de la misma clave con contenido distinto. Un doble por actividad y nota limitada al máximo.
 - Escritura pendiente impide publicar; corrección docente y publicación separadas. Una nota agregada publicada no revela una revisión configurada como oculta.
 - Sesión guiada: inscripción, inicio docente, confirmación de preguntas pendientes, omisiones, cierre final, equipos y clasificación.
+- Una respuesta guiada ya confirmada conserva su reintento idempotente al cerrar la pregunta; una respuesta nueva posterior al cierre se rechaza. La carrera simultánea requiere además la comprobación remota documentada por separado.
 - Tarea con archivo previamente registrado, rechazo de metadatos ficticios, revisión/publicación y reentrega autorizada conservando versiones.
 - Ventana de reentrega visible para propietario y estudiante autorizado, ausente para docente ajeno y estudiante retirado, y retirada del snapshot al consumirse.
 - Lectura privada del archivo, retiro, cierre administrativo y exclusión del intento. Archivo de materia, restauración válida y rechazo al alcanzar treinta días.

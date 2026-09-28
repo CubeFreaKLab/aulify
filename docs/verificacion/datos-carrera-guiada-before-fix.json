@@ -1,0 +1,944 @@
+{
+  "startedAt": "2026-09-28T08:04:05.445Z",
+  "mode": "before-fix",
+  "scope": "Carrera entre respuestas de cuatro estudiantes y cierre docente de pregunta guiada",
+  "rounds": [
+    {
+      "activity": 1,
+      "question": 1,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 2,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 3,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 4,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 5,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 6,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 7,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 8,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 9,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 10,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 1,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 2,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 3,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 4,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 5,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 6,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 7,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 8,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 9,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 10,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 1,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 2,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 3,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 4,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 5,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 6,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 7,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "answer",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 8,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 9,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 10,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "23505",
+          "reason": "duplicate key value violates unique constraint \"question_grades_attempt_question_id_revision_no_key\""
+        }
+      ]
+    }
+  ],
+  "activities": [
+    "c63d0e90-e00d-4b37-9fd9-151cfe3870c2",
+    "dc821538-3df2-4e8e-a8ac-756a31e49758",
+    "4fa32c73-e52f-4170-9c52-e3cda10be907"
+  ],
+  "unexpectedErrors": 34,
+  "completedAt": "2026-09-28T08:04:26.530Z"
+}

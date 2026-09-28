@@ -1,0 +1,955 @@
+{
+  "startedAt": "2026-09-28T08:06:41.851Z",
+  "mode": "after-fix",
+  "scope": "Carrera entre respuestas de cuatro estudiantes y cierre docente de pregunta guiada",
+  "rounds": [
+    {
+      "activity": 1,
+      "question": 1,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 2,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 3,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 4,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 5,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 6,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 7,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 8,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 9,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 1,
+      "question": 10,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 1,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 2,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 3,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 4,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 5,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 6,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 7,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 8,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 9,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 2,
+      "question": 10,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 1,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 2,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 3,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 4,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 5,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 6,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 7,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 8,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "QUESTION_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 9,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "activity": 3,
+      "question": 10,
+      "outcomes": [
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "OK",
+          "reason": null
+        },
+        {
+          "kind": "answer",
+          "code": "P0001",
+          "reason": "ATTEMPT_CLOSED"
+        },
+        {
+          "kind": "close",
+          "code": "OK",
+          "reason": null
+        }
+      ]
+    }
+  ],
+  "activities": [
+    "e4e0afe5-db71-4808-87d5-3858de8cac73",
+    "958d5320-99cd-4b38-9db1-529c6282f92e",
+    "193e0251-42fc-4849-9067-8ba7dc9010e3"
+  ],
+  "unexpectedErrors": 0,
+  "completedAt": "2026-09-28T08:06:58.298Z",
+  "persistenceAudit": {
+    "recordedAt": "2026-09-28T08:08:51.946Z",
+    "source": "Consulta de solo lectura por Supabase MCP",
+    "attempts": 12,
+    "closedAttempts": 12,
+    "attemptQuestions": 120,
+    "persistedResponses": 69,
+    "gradeRows": 120,
+    "automaticGrades": 69,
+    "omissionGrades": 51
+  }
+}

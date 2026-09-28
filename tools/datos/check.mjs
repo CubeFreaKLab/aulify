@@ -106,10 +106,12 @@ await command('autoTeams',guided.id,1);
 await as('student'); await command('joinGuidedRoom',guided.id); await reject(()=>command('startAttempt',guided.id),'guiada espera inicio docente');
 await as('teacher');await command('startGuidedSession',guided.id);
 await as('student');const gat=await command('startAttempt',guided.id);
-const immediate=await command('submitAnswer',gat.id,questions[0].id,answers[0],id(),false);assert(immediate.feedback.correct===true,'retroalimentación inmediata');
+const guidedKey=id();const immediate=await command('submitAnswer',gat.id,questions[0].id,answers[0],guidedKey,false);assert(immediate.feedback.correct===true,'retroalimentación inmediata');
 await as('teacher');await command('closeGuidedQuestion',guided.id,false);await command('openNextGuidedQuestion',guided.id);
+await as('student');const replayGuided=await command('submitAnswer',gat.id,questions[0].id,answers[0],guidedKey,false);assert(replayGuided.attempt.answers.length===1,'ACK guiado recuperable tras cerrar la pregunta');await as('teacher');
 await reject(()=>command('closeGuidedQuestion',guided.id,false),'confirmar omisiones guiadas');
 await command('closeGuidedQuestion',guided.id,true);
+await as('student');await reject(()=>command('submitAnswer',gat.id,questions[1].id,answers[1],id(),false),'cierre guiado gana antes de nueva respuesta');await as('teacher');
 for(let i=2;i<questions.length;i++){await command('openNextGuidedQuestion',guided.id);await command('closeGuidedQuestion',guided.id,true);}
 let gatFinal=await command('readAttempt',gat.id);assert(gatFinal.status==='closed'&&gatFinal.closeReason==='guided-complete','última pregunta finaliza guiada');
 const ranking=await command('ranking',guided.id);assert(ranking.individual.length===1&&ranking.teams.length===1,'clasificación individual y por equipos');
