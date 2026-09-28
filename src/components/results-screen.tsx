@@ -523,7 +523,12 @@ export function ResultsScreen({ state, user }: ScreenProps) {
         }
       }
     } else {
-      for (const item of getDemoRepository().studentResults(subject.id, user.id))
+      for (const item of getDemoRepository().studentResults(subject.id, user.id)) {
+        const kind = state.tasks.some((task) => task.id === item.activityId)
+          ? 'task'
+          : state.manualActivities.some((activity) => activity.id === item.activityId)
+            ? 'manual'
+            : 'quiz';
         rows.push({
           id: `${item.activityId}/${user.id}`,
           studentId: user.id,
@@ -532,12 +537,15 @@ export function ResultsScreen({ state, user }: ScreenProps) {
           status: item.status,
           grade: item.status === 'published' ? item.grade : null,
           maxGrade: item.maxGrade,
-          kind: 'quiz',
+          kind,
           comment: evaluations.find((evaluation) => evaluation.activityId === item.activityId)
             ?.comment,
           answers: item.status === 'published' && item.reviewVisible ? item.answers : undefined,
         });
+      }
     }
+    // La proyección remota del estudiante ya incluye tareas y actividades manuales.
+    if (live && !teacher) continue;
     for (const task of state.tasks.filter((item) => item.subjectId === subject.id)) {
       const studentIds = teacher
         ? [

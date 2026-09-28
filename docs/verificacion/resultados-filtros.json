@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-28",
+  "environment": "Next.js compilado local, Supabase Free remoto, cuentas y materias ficticias",
+  "before": {
+    "startedAt": "2026-09-28T08:26:53.032Z",
+    "durationMs": 23389.954,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "project": "Chromium escritorio 1440x900",
+    "expectedRows": 4,
+    "observedRows": 27
+  },
+  "after": {
+    "startedAt": "2026-09-28T08:30:02.817Z",
+    "durationMs": 21402.413,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "buildId": "7Q51XhoTLuizcaUW7mZnR",
+    "projects": ["Chromium escritorio 1440x900", "Chromium móvil emulado 390x844"]
+  },
+  "assertions": [
+    "Una fila por quiz, tarea, manual publicada y manual pendiente",
+    "Cuatro filas de la materia seleccionada al alternar A/B/A/B",
+    "Tipo de actividad y materia correctos",
+    "Actividad manual pendiente sin nota inventada",
+    "Al volver a todas las materias cada actividad permanece una sola vez",
+    "Sin advertencias de claves React duplicadas",
+    "Página sin desbordamiento horizontal; tabla móvil desplazable"
+  ],
+  "limits": [
+    "No verifica todo AP-26 ni todos los filtros o valores frontera",
+    "No es un despliegue público ni una prueba de capacidad",
+    "Móvil emulado; sin lector de pantalla ni dispositivo físico"
+  ],
+  "source": "tests/e2e/resultados-integrados.spec.ts"
+}
