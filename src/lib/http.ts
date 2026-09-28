@@ -10,10 +10,22 @@ export function jsonResponse(body: unknown, status = 200) {
 export function isSameOrigin(request: NextRequest) {
   const origin = request.headers.get('origin');
   const fetchSite = request.headers.get('sec-fetch-site');
-  return (
-    origin === request.nextUrl.origin &&
-    (!fetchSite || fetchSite === 'same-origin' || fetchSite === 'none')
-  );
+  if (!origin || (fetchSite && fetchSite !== 'same-origin' && fetchSite !== 'none')) return false;
+  if (origin === request.nextUrl.origin) return true;
+  // Next normaliza 127.0.0.1 a localhost; conserva puerto y protocolo al comparar.
+  try {
+    const source = new URL(origin),
+      target = request.nextUrl;
+    const loopback = new Set(['localhost', '127.0.0.1', '[::1]']);
+    return (
+      loopback.has(source.hostname) &&
+      loopback.has(target.hostname) &&
+      source.port === target.port &&
+      source.protocol === target.protocol
+    );
+  } catch {
+    return false;
+  }
 }
 
 export async function readJson(

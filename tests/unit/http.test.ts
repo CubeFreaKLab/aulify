@@ -31,6 +31,16 @@ describe('frontera HTTP del aula', () => {
       expect(safePath(path)).toBe('/aula');
     expect(safePath('/restablecer')).toBe('/restablecer');
   });
+  it('tolera la normalización local de Next sin permitir otro puerto ni otro sitio', () => {
+    const request = (origin: string) =>
+      new NextRequest('http://localhost:3002/api/auth', {
+        headers: { origin, 'sec-fetch-site': 'same-origin' },
+      });
+    expect(isSameOrigin(request('http://127.0.0.1:3002'))).toBe(true);
+    expect(isSameOrigin(request('http://127.0.0.1:3001'))).toBe(false);
+    expect(isSameOrigin(request('http://localhost.evil.example:3002'))).toBe(false);
+    expect(isSameOrigin(request('https://127.0.0.1:3002'))).toBe(false);
+  });
   it('rechaza cuerpos grandes, arrays y contenido no JSON', async () => {
     const request = (body: string, type = 'application/json') =>
       new NextRequest('https://aulify.example/api/commands', {

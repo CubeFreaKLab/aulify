@@ -8,7 +8,7 @@ test('landing: marca, ilustraciones, vínculos y pregunta pública operativos', 
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('MUCHAS FORMAS');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Que tu clase');
   await expect(page.getByRole('link', { name: 'Explorar una clase', exact: true })).toHaveAttribute(
     'href',
     '/demo?perfil=docente',

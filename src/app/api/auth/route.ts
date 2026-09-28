@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       (!password || password.length > 128 || (action !== 'access' && password.length < 8))
     )
       return jsonResponse({ error: 'La contraseña debe tener entre 8 y 128 caracteres.' }, 400);
-    const origin = request.nextUrl.origin;
+    const origin = request.headers.get('origin')!;
     if (action === 'access') {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error)

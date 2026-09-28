@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff, GraduationCap } from 'luc
 import { useRef, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Field } from './ui';
+import { clearWorkspaceSession } from '@/demo/store';
 import '../styles/auth.css';
 
 type AuthMode = 'access' | 'register' | 'recover' | 'update-password';
@@ -34,12 +35,18 @@ const content: Record<AuthMode, { title: string; description: string; action: st
   },
 };
 
-export function AuthScreen({ mode }: { mode: AuthMode }) {
+export function AuthScreen({
+  mode,
+  initialStatus = '',
+}: {
+  mode: AuthMode;
+  initialStatus?: string;
+}) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [showPassword, setShowPassword] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(initialStatus);
   const [selectedProfile, setSelectedProfile] = useState<'docente' | 'estudiante' | null>(null);
   const statusRef = useRef<HTMLDivElement>(null);
   const copy = content[mode];
@@ -111,6 +118,7 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
       if (passwordInput instanceof HTMLInputElement) passwordInput.value = '';
       setShowPassword(false);
       if (result.redirect) {
+        clearWorkspaceSession();
         router.replace(result.redirect);
         router.refresh();
       } else setStatus(result.message);
