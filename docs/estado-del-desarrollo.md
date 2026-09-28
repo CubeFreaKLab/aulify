@@ -32,7 +32,7 @@ Los conteos describen ejecuciones distintas. No equivalen a cerrar automáticame
 ## Trabajo pendiente de cierre
 
 - Terminar la prueba de carga de cuatro grupos de cincuenta estudiantes y cuatro docentes, en modos individual y guiado, con sus umbrales y cuotas originales. No hay capacidad de producción demostrada todavía.
-- El CI remoto `36392124813` aprobó todos sus pasos sobre `20e5afc`: 35 pruebas unitarias, SQL aislado y 52 casos públicos de navegador. El mantenimiento `36392156874` terminó correctamente mediante disparo manual, con cero archivos pendientes. Falta observar la activación programada y comprobar recuperación operativa; [registro](verificacion/ci-integracion.json).
+- El CI remoto `36396177901` aprobó todos sus pasos sobre `1dc862b`: 36 pruebas unitarias, 70 comprobaciones SQL aisladas y 52 casos públicos de navegador. Los dieciocho recorridos autenticados se omiten en CI y conservan su evidencia privada de ejecución. El mantenimiento `36392156874` terminó correctamente mediante disparo manual, con cero archivos pendientes. Falta observar la activación programada y comprobar recuperación operativa; [registro](verificacion/ci-integracion.json).
 - Completar despliegue, comprobaciones por HTTPS y entrega/recuperación por correo. El dominio propio está fuera de esta entrega.
 - La protección de Auth contra contraseñas filtradas figura deshabilitada en el asesor y requiere plan Pro. Se conserva Free; [aviso y referencia oficial](verificacion/asesores-supabase.json). No representa una comprobación completa de seguridad.
 - Consolidar correspondencia de AC/AP, recuperación operativa y revisión manual de accesibilidad. No se configuraron Jira ni QMetry; se conservan casos, incidencias y resultados reproducibles en el repositorio.

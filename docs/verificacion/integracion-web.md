@@ -56,6 +56,8 @@ Sin `AULIFY_REMOTE_E2E=1`, los dieciocho casos que requieren cuentas privadas se
 
 La [ejecución 36392124813](https://github.com/CubeFreaKLab/aulify/actions/runs/36392124813), sobre `20e5afc`, terminó correctamente en Ubuntu: 35 pruebas unitarias, SQL aislado y 52 casos de navegador aprobados. Los doce casos autenticados se omitieron según la configuración del CI público. También aprobó formato, análisis, tipos y construcción. El [registro seleccionado](ci-integracion.json) conserva revisión, pasos y líneas de resultado; los logs completos se preservaron aparte.
 
+La [ejecución 36396177901](https://github.com/CubeFreaKLab/aulify/actions/runs/36396177901), sobre `1dc862b`, volvió a aprobar los controles: 36 pruebas unitarias, 70 comprobaciones aisladas de datos y 52 casos públicos de navegador. Los dieciocho casos autenticados se omitieron deliberadamente. Esta ejecución comprueba la revisión indicada; los cambios posteriores requieren su propia verificación.
+
 La [ejecución manual 36392156874](https://github.com/CubeFreaKLab/aulify/actions/runs/36392156874) comprobó el flujo de conservación contra Supabase. Terminó correctamente y no encontró archivos para eliminar (`deletedFileRecords: 0`). El cron está configurado cada seis horas; todavía no se observó una activación por horario. Esta ejecución no demuestra por sí sola recuperación desde un respaldo ni un plazo garantizado de purga.
 
 ## Alcance de la evidencia restante
