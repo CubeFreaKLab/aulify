@@ -6,7 +6,7 @@ Modelo de autorización del producto. Las migraciones implementan RLS y contrato
 
 Toda operación obtiene la identidad de una sesión verificada, no de un `user_id`, rol o nota enviado por el cliente. La pertenencia vigente y el propietario se comprueban en servidor. Una materia archivada o en eliminación revoca acceso estudiantil. Retirar no borra historial y reaprobar no crea otra membresía.
 
-El espacio `app` del DBML es una organización prevista para relaciones internas; no es una instrucción para exponer todas ellas en Data API. Preferir contratos explícitos que devuelvan solo datos autorizados. La migración definirá esquemas expuestos, GRANT, RLS y funciones de entrada; las credenciales administrativas no deben sustituir comprobaciones de usuario.
+El esquema `app` organiza las relaciones internas y no está expuesto en Data API. Los contratos explícitos devuelven solo datos autorizados. Las migraciones definen GRANT, RLS y funciones de entrada; las credenciales administrativas no sustituyen comprobaciones de usuario. Las tablas técnicas de revisión tampoco tienen acceso directo desde clientes.
 
 ## Matriz de permisos
 

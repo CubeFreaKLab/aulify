@@ -45,7 +45,7 @@ El docente organiza una materia para un grupo y año. El estudiante solicita ing
 
 **Puntos, nota y revisión.** Una respuesta conserva lo enviado. Las correcciones guardan puntos base exactos y versiones; la nota de quiz deriva de esas correcciones. Cada evaluación enlaza las revisiones de puntos utilizadas. Así, publicar 12 y preparar una corrección a 14 mantiene 12 visible hasta una nueva publicación, con el detalle anterior coherente.
 
-**Datos calculados.** Promedio, clasificación, rachas y gráficos son consultas o proyecciones del dominio. No se crean tablas independientes de «promedio» o «ranking» como fuentes paralelas que puedan contradecir notas y respuestas. Si más adelante se necesita caché, deberá tener versión, invalidación y reconstrucción verificables.
+**Datos calculados.** Promedio, clasificación, rachas y gráficos son consultas o proyecciones del dominio. No se crean tablas independientes de «promedio» o «ranking» como fuentes paralelas que puedan contradecir notas y respuestas. La sincronización utiliza dos relaciones técnicas derivadas de revisión, por actividad y participante; no almacenan promedios, respuestas ni permisos. Su actualización es transaccional y está documentada en [normalización](normalizacion.md).
 
 **Estados distintos.** Intento cerrado, corrección completa y nota publicada son hechos diferentes. Una sesión terminada puede tener preguntas escritas pendientes. El [diagrama de estados](diagramas/08-estados.svg) muestra esas dimensiones por separado.
 
