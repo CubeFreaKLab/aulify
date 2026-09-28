@@ -1,0 +1,246 @@
+{
+  "source": {
+    "httpPath": "docs/verificacion/datos-observacion-rafaga-20260928142340.json",
+    "sqlPath": "docs/verificacion/datos-observacion-sql-20260928-142829.json",
+    "clocksPath": "docs/verificacion/datos-relojes-20260928142311.json"
+  },
+  "scope": "Diagnóstico puntual; las muestras de sesiones no son conteos de solicitudes únicas. active_without_wait no mide CPU.",
+  "calibration": {
+    "offsetLowerBoundMs": -166,
+    "offsetUpperBoundMs": 95,
+    "caveat": "Calibración posterior, supone desfase estable durante estas ventanas cercanas."
+  },
+  "httpWindow": {
+    "start": "2026-09-28T14:28:29.713Z",
+    "end": "2026-09-28T14:28:42.048Z"
+  },
+  "sqlWindow": {
+    "start": "2026-09-28T14:28:31.475832+00:00",
+    "end": "2026-09-28T14:28:47.976713+00:00"
+  },
+  "overlap": {
+    "definiteSamples": 100,
+    "possibleSamples": 102,
+    "totalSamples": 160
+  },
+  "validity": {
+    "activity": true,
+    "counterLocks": false,
+    "limitation": "Observador v1 reutiliza pg_locks: sus bloqueos de relación no sirven para inferencias. Actividad sí varía."
+  },
+  "burst": {
+    "target": 200,
+    "dispatched": 200,
+    "windowMs": 1879.5523000000394,
+    "confirmed": 200,
+    "confirmationP95Ms": 4714.505999999994
+  },
+  "integrity": {
+    "confirmed": 200,
+    "missingOrChangedConfirmed": 0
+  },
+  "stages": {
+    "sync": {
+      "requests": 1298,
+      "failures": 0,
+      "p95Ms": 3977.6657000000123
+    },
+    "snapshot": {
+      "requests": 211,
+      "failures": 0,
+      "p95Ms": 3253.746999999974
+    },
+    "answer": {
+      "requests": 200,
+      "failures": 0,
+      "p95Ms": 4714.474300000002
+    }
+  },
+  "peakCounterCommands": {
+    "active": null,
+    "blocked": null,
+    "transactionid_wait": null,
+    "tuple_wait": null,
+    "active_without_wait": null
+  },
+  "counterWriters": {},
+  "relationLocks": {},
+  "groups": {
+    "other/idle in transaction/Client/ClientRead": {
+      "observedSamples": 68,
+      "sessionSamples": 116,
+      "maxSimultaneousSessions": 5,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "sync/idle in transaction/Client/ClientRead": {
+      "observedSamples": 32,
+      "sessionSamples": 57,
+      "maxSimultaneousSessions": 6,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "other/idle/Client/ClientRead": {
+      "observedSamples": 100,
+      "sessionSamples": 573,
+      "maxSimultaneousSessions": 13,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "other/idle/none/none": {
+      "observedSamples": 8,
+      "sessionSamples": 8,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "command/active/none/none": {
+      "observedSamples": 31,
+      "sessionSamples": 87,
+      "maxSimultaneousSessions": 9,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 241.26
+    },
+    "other/active/none/none": {
+      "observedSamples": 13,
+      "sessionSamples": 16,
+      "maxSimultaneousSessions": 3,
+      "blockedSessionSamples": 1,
+      "maxBlocked": 1,
+      "longestActiveMs": 84.84
+    },
+    "sync/active/none/none": {
+      "observedSamples": 8,
+      "sessionSamples": 8,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 18.37
+    },
+    "other/active/Lock/transactionid": {
+      "observedSamples": 5,
+      "sessionSamples": 7,
+      "maxSimultaneousSessions": 2,
+      "blockedSessionSamples": 6,
+      "maxBlocked": 2,
+      "longestActiveMs": 32.06
+    },
+    "other/active/LWLock/WALWrite": {
+      "observedSamples": 4,
+      "sessionSamples": 4,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 22.27
+    },
+    "command/idle in transaction/none/none": {
+      "observedSamples": 5,
+      "sessionSamples": 7,
+      "maxSimultaneousSessions": 2,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "other/idle in transaction/none/none": {
+      "observedSamples": 4,
+      "sessionSamples": 4,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "command/active/LWLock/BufferContent": {
+      "observedSamples": 1,
+      "sessionSamples": 1,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 49.67
+    },
+    "command/active/LWLock/LockManager": {
+      "observedSamples": 1,
+      "sessionSamples": 4,
+      "maxSimultaneousSessions": 4,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 16.04
+    },
+    "other/active/LWLock/LockManager": {
+      "observedSamples": 2,
+      "sessionSamples": 2,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 26.26
+    },
+    "other/active/IO/WalSync": {
+      "observedSamples": 10,
+      "sessionSamples": 10,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 20.43
+    },
+    "activity_snapshot/active/none/none": {
+      "observedSamples": 59,
+      "sessionSamples": 311,
+      "maxSimultaneousSessions": 9,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 627.9
+    },
+    "command/idle in transaction/Client/ClientRead": {
+      "observedSamples": 14,
+      "sessionSamples": 34,
+      "maxSimultaneousSessions": 7,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "activity_snapshot/idle in transaction/Client/ClientRead": {
+      "observedSamples": 17,
+      "sessionSamples": 43,
+      "maxSimultaneousSessions": 8,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "sync/idle in transaction/none/none": {
+      "observedSamples": 5,
+      "sessionSamples": 5,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": null
+    },
+    "activity_snapshot/active/LWLock/LockManager": {
+      "observedSamples": 1,
+      "sessionSamples": 1,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 138.9
+    },
+    "sync/active/Client/ClientRead": {
+      "observedSamples": 1,
+      "sessionSamples": 1,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 1.17
+    },
+    "other/active/Client/ClientRead": {
+      "observedSamples": 1,
+      "sessionSamples": 1,
+      "maxSimultaneousSessions": 1,
+      "blockedSessionSamples": 0,
+      "maxBlocked": 0,
+      "longestActiveMs": 0.39
+    }
+  }
+}

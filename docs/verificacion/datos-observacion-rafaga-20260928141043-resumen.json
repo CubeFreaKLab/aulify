@@ -1,0 +1,69 @@
+{
+  "source": {
+    "httpPath": "docs/verificacion/datos-observacion-rafaga-20260928141043.json",
+    "sqlPath": "docs/verificacion/datos-observacion-sql-sin-solapamiento.json",
+    "clocksPath": "docs/verificacion/datos-relojes-20260928142311.json"
+  },
+  "scope": "Diagnóstico puntual; las muestras de sesiones no son conteos de solicitudes únicas. active_without_wait no mide CPU.",
+  "calibration": {
+    "offsetLowerBoundMs": -166,
+    "offsetUpperBoundMs": 95,
+    "caveat": "Calibración posterior, supone desfase estable durante estas ventanas cercanas."
+  },
+  "httpWindow": {
+    "start": "2026-09-28T14:13:15.263Z",
+    "end": "2026-09-28T14:13:27.408Z"
+  },
+  "sqlWindow": {
+    "start": "2026-09-28T14:12:36.413808+00:00",
+    "end": "2026-09-28T14:12:52.580985+00:00"
+  },
+  "overlap": {
+    "definiteSamples": 0,
+    "possibleSamples": 0,
+    "totalSamples": 160
+  },
+  "validity": {
+    "activity": true,
+    "counterLocks": false,
+    "limitation": "Observador v1 reutiliza pg_locks: sus bloqueos de relación no sirven para inferencias. Actividad sí varía."
+  },
+  "burst": {
+    "target": 200,
+    "dispatched": 200,
+    "windowMs": 1889.8527000000176,
+    "confirmed": 200,
+    "confirmationP95Ms": 6175.9361999999965
+  },
+  "integrity": {
+    "confirmed": 200,
+    "missingOrChangedConfirmed": 0
+  },
+  "stages": {
+    "sync": {
+      "requests": 1097,
+      "failures": 0,
+      "p95Ms": 4753.866100000014
+    },
+    "snapshot": {
+      "requests": 210,
+      "failures": 0,
+      "p95Ms": 3173.4260000000068
+    },
+    "answer": {
+      "requests": 200,
+      "failures": 0,
+      "p95Ms": 6175.901000000013
+    }
+  },
+  "peakCounterCommands": {
+    "active": null,
+    "blocked": null,
+    "transactionid_wait": null,
+    "tuple_wait": null,
+    "active_without_wait": null
+  },
+  "counterWriters": {},
+  "relationLocks": {},
+  "groups": {}
+}

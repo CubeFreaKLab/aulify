@@ -1,0 +1,32 @@
+{
+  "measuredAt": "2026-09-28T14:37:43.532Z",
+  "environment": "PGlite aislado; advisory locks ficticios en una sola sesión; sin tráfico remoto.",
+  "results": [
+    {
+      "name": "functionScan",
+      "counts": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pass": true
+    },
+    {
+      "name": "projectSet",
+      "counts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "pass": true
+    },
+    {
+      "name": "Consulta completa v2: cinco muestras, separación y salida agregada",
+      "pass": true
+    }
+  ]
+}

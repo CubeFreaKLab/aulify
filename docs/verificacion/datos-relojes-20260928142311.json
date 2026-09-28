@@ -1,0 +1,33 @@
+{
+  "measuredAt": "2026-09-28T14:23:11.716Z",
+  "meaning": "Desfase estimado servidor menos Windows; límites incluyen el viaje HTTP, sin asumir simetría de red.",
+  "samples": [
+    {
+      "localSentAt": "2026-09-28T14:23:11.717Z",
+      "localReceivedAt": "2026-09-28T14:23:14.399Z",
+      "serverTime": "2026-09-28T14:23:14.168166+00:00",
+      "roundTripMs": 2682,
+      "estimatedOffsetMs": 1110,
+      "offsetLowerBoundMs": -231,
+      "offsetUpperBoundMs": 2451
+    },
+    {
+      "localSentAt": "2026-09-28T14:23:14.603Z",
+      "localReceivedAt": "2026-09-28T14:23:14.997Z",
+      "serverTime": "2026-09-28T14:23:14.808082+00:00",
+      "roundTripMs": 394,
+      "estimatedOffsetMs": 8,
+      "offsetLowerBoundMs": -189,
+      "offsetUpperBoundMs": 205
+    },
+    {
+      "localSentAt": "2026-09-28T14:23:15.197Z",
+      "localReceivedAt": "2026-09-28T14:23:15.458Z",
+      "serverTime": "2026-09-28T14:23:15.292933+00:00",
+      "roundTripMs": 261,
+      "estimatedOffsetMs": -35.5,
+      "offsetLowerBoundMs": -166,
+      "offsetUpperBoundMs": 95
+    }
+  ]
+}
