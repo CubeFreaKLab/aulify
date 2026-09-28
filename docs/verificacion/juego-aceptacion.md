@@ -44,3 +44,23 @@ Las cuentas son ficticias y se insertan exclusivamente en el esquema mínimo de 
 ## Límites
 
 Esta evidencia aislada no acredita reconexión de red remota para AP-08, ni recorridos de navegador para AP-09/AP-11. En AP-15 demuestra rechazo y reserva de datos, pero no la explicación visual de incompatibilidades. No verifica JWT reales, correo, animación, sonido, accesibilidad ni capacidad. AP-10, AP-12, AP-17 y AP-21 quedan fuera de este ejecutor: ausencia de docente, carrera de pistas, efectos y archivos requieren sus comprobaciones específicas. PGlite con una conexión no demuestra concurrencia real. La cobertura integrada debe conservar esos límites al combinar este informe con otras evidencias.
+
+## Ensayo remoto preparado
+
+[game-privacy-remote.mjs](../../tools/datos/game-privacy-remote.mjs) prepara una comprobación acotada de AP-16 con cuatro cuentas ficticias existentes: dos docentes y dos estudiantes. No crea cuentas ni cambia perfiles. Al ejecutar, contrasta el perfil persistido y la identidad del JWT antes de crear una materia y actividad de prueba; utiliza únicamente las operaciones públicas de Aulify. Archiva esa materia al finalizar, conservando el recurso ficticio de biblioteca.
+
+Sin argumentos comprueba exclusivamente los archivos locales y devuelve `prepared-only`, sin crear clientes ni iniciar sesiones. Requiere `--run` para enviar tráfico. La preparación local se verificó con `fetch` bloqueado, análisis estático y comprobación de sintaxis; no acredita ejecución remota:
+
+```text
+node tools/datos/game-privacy-remote.mjs
+```
+
+Después de comprobar que la migración 15 está aplicada y disponer de una ventana sin pruebas de carga u observaciones simultáneas:
+
+```text
+node tools/datos/game-privacy-remote.mjs --run
+```
+
+El ensayo verifica 10/10 publicado, corrección privada a 10/8 sin cambio de clasificación, contenido o huella estudiantil, y republicación explícita a 10/8 con promedio de equipo 9. Contrasta identidades docentes y alias estudiantiles y rechaza consultas del docente ajeno y de un cliente anónimo. Su informe se genera en `docs/verificacion/juego-privacidad-remota.json` solo al ejecutar; no incorpora credenciales, tokens ni identificadores de las cuentas.
+
+El flujo público [web.yml](../../.github/workflows/web.yml) incorpora únicamente el ejecutor aislado, su filtro de rutas y su informe como artefacto. El ensayo remoto requiere cuentas privadas y no se ejecuta en CI. Incorporar el paso al archivo no equivale a observar una ejecución aprobada de GitHub Actions.
