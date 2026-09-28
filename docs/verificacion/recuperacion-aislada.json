@@ -1,0 +1,67 @@
+{
+  "startedAt": "2026-09-28T08:10:03.125Z",
+  "completedAt": "2026-09-28T08:10:05.754Z",
+  "commit": "91c5fe494f3f7e651876db702f16289059b85ff0",
+  "environment": "PGlite 0.5.8 local; Auth y Storage mínimos aislados; datos ficticios",
+  "migrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql"
+  ],
+  "backup": {
+    "bytes": 5162538,
+    "sha256": "2173d35770aec7e22c35fdfc67932ae316717f2333a540a9e950ebf0e28bd0cc",
+    "format": "PGlite datadir gzip"
+  },
+  "recoveryAndVerificationMs": 542,
+  "checks": [
+    {
+      "case": "nota publicada presente antes del respaldo",
+      "result": "passed"
+    },
+    {
+      "case": "respaldo materializado como archivo independiente",
+      "result": "passed"
+    },
+    {
+      "case": "tablas y RLS coinciden después de restaurar",
+      "result": "passed"
+    },
+    {
+      "case": "resultados y versiones publicados conservados",
+      "result": "passed"
+    },
+    {
+      "case": "pertenencia y materia conservadas",
+      "result": "passed"
+    },
+    {
+      "case": "docente ajeno continúa sin acceso",
+      "result": "passed"
+    },
+    {
+      "case": "operación ajena rechazada después de restaurar",
+      "result": "passed"
+    },
+    {
+      "case": "se puede continuar operando sobre el entorno recuperado",
+      "result": "passed"
+    },
+    {
+      "case": "RLS continúa activo en las 45 tablas",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "No es un respaldo importable en PostgreSQL alojado ni una recuperación de Supabase.",
+    "No incluye sesiones Auth reales, contraseñas, bytes de Storage ni prueba posterior a despliegue.",
+    "La recuperación operativa del servicio remoto continúa pendiente; este ensayo cubre estructura y datos ficticios del motor aislado."
+  ]
+}
