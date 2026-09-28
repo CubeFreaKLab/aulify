@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Check, ListOrdered, Link2 } from 'lucide-react';
 import type { AnswerValue, StudentQuestion } from '@/domain/types';
+import '@/styles/fill-question.css';
 
 export function QuestionInput({
   question,
@@ -173,6 +174,7 @@ export function QuestionInput({
           <button
             className="button secondary small"
             type="button"
+            disabled={disabled}
             onClick={() => onChange({ type: 'ordering', itemIds: order })}
           >
             Mantener este orden
@@ -180,66 +182,91 @@ export function QuestionInput({
         )}
       </div>
     );
-  if (question.type === 'fill-options')
+  if (question.type === 'fill-options' || question.type === 'fill-text') {
+    const parts = question.template.split(/(\{[^{}]+\})/g);
     return (
-      <div className="stack">
-        <p className="fill-template">{question.template}</p>
-        {question.blanks.map((blank, i) => (
-          <div className="field" key={blank.id}>
-            <label htmlFor={`${question.id}-${blank.id}`}>Espacio {i + 1}</label>
-            <select
-              id={`${question.id}-${blank.id}`}
-              disabled={disabled}
-              value={value?.type === 'fill-options' ? value.choices[blank.id] || '' : ''}
-              onChange={(e) =>
-                onChange({
-                  type: 'fill-options',
-                  choices: {
-                    ...(value?.type === 'fill-options' ? value.choices : {}),
-                    [blank.id]: e.target.value,
-                  },
-                })
-              }
-            >
-              <option value="">Elige una palabra</option>
-              {blank.options.map((o) => (
-                <option value={o.id} key={o.id}>
-                  {o.text}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
+      <div className="fill-question">
+        <p className="fill-template fill-inline">
+          {parts.map((part, index) => {
+            if (!/^\{[^{}]+\}$/.test(part)) return <span key={index}>{part}</span>;
+            const blankId = part.slice(1, -1);
+            const number = question.blanks.findIndex((blank) => blank.id === blankId);
+            if (number < 0)
+              return (
+                <span key={index} aria-label="Espacio sin configurar">
+                  ______
+                </span>
+              );
+            const id = `${question.id}-${blankId}-${index}`;
+            if (question.type === 'fill-options') {
+              const blank = question.blanks[number];
+              return (
+                <span className="fill-slot" key={index}>
+                  <span className="fill-slot-number" aria-hidden="true">
+                    {number + 1}
+                  </span>
+                  <label className="sr-only" htmlFor={id}>
+                    Espacio {number + 1}
+                  </label>
+                  <select
+                    id={id}
+                    disabled={disabled}
+                    value={value?.type === 'fill-options' ? value.choices[blank.id] || '' : ''}
+                    onChange={(event) =>
+                      onChange({
+                        type: 'fill-options',
+                        choices: {
+                          ...(value?.type === 'fill-options' ? value.choices : {}),
+                          [blank.id]: event.target.value,
+                        },
+                      })
+                    }
+                  >
+                    <option value="">Elegir palabra</option>
+                    {blank.options.map((option) => (
+                      <option value={option.id} key={option.id}>
+                        {option.text}
+                      </option>
+                    ))}
+                  </select>
+                </span>
+              );
+            }
+            const blank = question.blanks[number];
+            return (
+              <span className="fill-slot" key={index}>
+                <span className="fill-slot-number" aria-hidden="true">
+                  {number + 1}
+                </span>
+                <label className="sr-only" htmlFor={id}>
+                  {blank.label || `Espacio ${number + 1}`}
+                </label>
+                <input
+                  id={id}
+                  maxLength={5000}
+                  disabled={disabled}
+                  autoComplete="off"
+                  placeholder={`Espacio ${number + 1}`}
+                  value={value?.type === 'fill-text' ? value.texts[blank.id] || '' : ''}
+                  onChange={(event) =>
+                    onChange({
+                      type: 'fill-text',
+                      texts: {
+                        ...(value?.type === 'fill-text' ? value.texts : {}),
+                        [blank.id]: event.target.value,
+                      },
+                    })
+                  }
+                />
+              </span>
+            );
+          })}
+        </p>
+        {question.type === 'fill-text' && (
+          <p className="muted">Las palabras escritas requieren revisión de tu docente.</p>
+        )}
       </div>
     );
-  if (question.type === 'fill-text')
-    return (
-      <div className="stack">
-        <p className="fill-template">{question.template}</p>
-        {question.blanks.map((blank, i) => (
-          <div className="field" key={blank.id}>
-            <label htmlFor={`${question.id}-${blank.id}`}>
-              {blank.label || `Espacio ${i + 1}`}
-            </label>
-            <input
-              id={`${question.id}-${blank.id}`}
-              maxLength={5000}
-              disabled={disabled}
-              value={value?.type === 'fill-text' ? value.texts[blank.id] || '' : ''}
-              onChange={(e) =>
-                onChange({
-                  type: 'fill-text',
-                  texts: {
-                    ...(value?.type === 'fill-text' ? value.texts : {}),
-                    [blank.id]: e.target.value,
-                  },
-                })
-              }
-            />
-          </div>
-        ))}
-        <p className="muted">Las palabras escritas requieren revisión de tu docente.</p>
-      </div>
-    );
+  }
   return null;
 }

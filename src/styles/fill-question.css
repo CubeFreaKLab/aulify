@@ -1,0 +1,55 @@
+.fill-inline {
+  line-height: 2.5;
+  overflow-wrap: anywhere;
+}
+.fill-slot {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 6px;
+  margin: 5px 3px;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+.fill-slot-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  height: 24px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+}
+.fill-slot input,
+.fill-slot select {
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-bottom: 3px solid var(--ink);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  width: clamp(130px, 16vw, 210px);
+  max-width: calc(100% - 30px);
+  min-height: 44px;
+  padding: 8px 10px;
+}
+.fill-slot input:disabled,
+.fill-slot select:disabled {
+  opacity: 0.75;
+}
+@media (max-width: 600px) {
+  .fill-inline {
+    line-height: 2;
+  }
+  .fill-slot {
+    margin: 5px 1px;
+  }
+  .fill-slot input,
+  .fill-slot select {
+    width: 150px;
+  }
+}
