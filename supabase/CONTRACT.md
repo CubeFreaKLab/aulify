@@ -34,6 +34,8 @@ En `guided.studentIds`, el docente recibe los participantes de su sala; el estud
 
 El snapshot añade `teams`, `incidents`, `readings` y `draftEvaluations` fuera de `state`. `readings` incluye `{id,subjectId,title,content}`; el contenido es una versión sin secretos. `teams` docentes incluye `{id,activityId,name,studentIds}`. `incidents` contiene resoluciones y cantidad de señales; son indicios, sin sanción automática.
 
+La proyección acotada reúne los intentos del docente mediante `app.activity_attempts_json`, un helper privado sin ejecución concedida a clientes. Conserva el mismo contrato y la autorización de `activity_snapshot`; la rama estudiantil y el ACK de `submitAnswer` mantienen sus serializadores. La colección de intentos no establece un orden contractual; `questionOrder`, `optionOrders`, respuestas y revisiones sí conservan su orden.
+
 `resubmissionWindows` contiene `{taskId,studentId,closesAt}` únicamente para autorizaciones vigentes y no consumidas. El docente propietario ve las de su materia; el estudiante ve solo las propias mientras conserve acceso. La interfaz de tarea habilita la nueva entrega si hay una ventana vigente incluso cuando la versión anterior ya tiene calificación. No inferir la autorización a partir de la falta de nota.
 
 `participants` contiene, solo para el docente propietario, `{id,activityId,studentId,alias}`. Su `id` permite ampliar un plazo individual sin confundir cuenta y participación. `autoTeams(activityId,teamCount)` distribuye aleatoriamente la lista aprobada con diferencia máxima de tamaño de uno y permite después `configureTeams`.

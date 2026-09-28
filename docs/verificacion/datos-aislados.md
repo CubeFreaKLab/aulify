@@ -2,6 +2,8 @@
 
 El 28 de septiembre de 2026 se ejecutaron las doce migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 84 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
 
+La repetición posterior con catorce migraciones conserva **84 comprobaciones aprobadas** en [su propio registro](datos-aislados-migracion14.json). La optimización de la lectura docente añade [26 comprobaciones diferenciales](datos-proyeccion-docente.md), sin sustituir ni alterar la evidencia anterior. Ambas ejecuciones son aisladas; no equivalen a una aplicación remota de la migración preparada.
+
 ## Qué se comprobó
 
 - Creación de materia, solicitud por código, aprobación y rechazo de operaciones de estudiante o docente ajeno.

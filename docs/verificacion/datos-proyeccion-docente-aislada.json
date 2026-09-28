@@ -1,0 +1,132 @@
+{
+  "startedAt": "2026-09-28T13:11:35.451Z",
+  "environment": "PGlite 0.5.8 aislado; comparación con snapshot anterior",
+  "checks": [
+    {
+      "scenario": "01 docente sin intentos y con equipo configurado",
+      "passed": true
+    },
+    {
+      "scenario": "02 estudiante sin intento no recibe soluciones",
+      "passed": true
+    },
+    {
+      "scenario": "03 docente conserva órdenes de un intento sin respuestas",
+      "passed": true
+    },
+    {
+      "scenario": "04 estudiante recibe únicamente su intento",
+      "passed": true
+    },
+    {
+      "scenario": "05 respuesta automática con doble y pista preservados",
+      "passed": true
+    },
+    {
+      "scenario": "06 reintento idempotente no duplica respuesta ni cambia revisión",
+      "passed": true
+    },
+    {
+      "scenario": "07 cierre conserva respuestas de varios tipos y pendientes manuales",
+      "passed": true
+    },
+    {
+      "scenario": "08 revisión manual e incidencia conservadas",
+      "passed": true
+    },
+    {
+      "scenario": "09 historial manual mantiene orden, actor y motivo",
+      "passed": true
+    },
+    {
+      "scenario": "10 nota publicada conserva evaluación y sus referencias",
+      "passed": true
+    },
+    {
+      "scenario": "11 publicación oculta mantiene revisiones privadas fuera del alumno",
+      "passed": true
+    },
+    {
+      "scenario": "12 varios intentos del mismo participante conservan sus órdenes",
+      "passed": true
+    },
+    {
+      "scenario": "13 intentos y respuestas ajenos no aparecen en la vista propia",
+      "passed": true
+    },
+    {
+      "scenario": "14 ampliación global conserva límite y plazo individual",
+      "passed": true
+    },
+    {
+      "scenario": "15 ampliación personal afecta solo a su participante",
+      "passed": true
+    },
+    {
+      "scenario": "16 vencimiento conserva omisiones y respuestas ya confirmadas",
+      "passed": true
+    },
+    {
+      "scenario": "17 retiro conserva intentos y cierre administrativo para docente",
+      "passed": true
+    },
+    {
+      "scenario": "18 resolución administrativa conservada",
+      "passed": true
+    },
+    {
+      "scenario": "19 estudiante retirado no obtiene la proyección",
+      "passed": true
+    },
+    {
+      "scenario": "20 archivo conserva vista docente y cierre administrativo",
+      "passed": true
+    },
+    {
+      "scenario": "21 archivo revoca lectura del estudiante",
+      "passed": true
+    },
+    {
+      "scenario": "22 docente ajeno no obtiene proyección",
+      "passed": true
+    },
+    {
+      "scenario": "23 anónimo no obtiene proyección",
+      "passed": true
+    },
+    {
+      "scenario": "24 cliente autenticado no llama helper con privilegios docentes",
+      "passed": true
+    },
+    {
+      "scenario": "25 anónimo no llama helper",
+      "passed": true
+    },
+    {
+      "scenario": "26 helper privado y wrapper público mantienen sus permisos",
+      "passed": true
+    }
+  ],
+  "migrationFiles": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql"
+  ],
+  "finishedAt": "2026-09-28T13:11:37.530Z",
+  "limitations": [
+    "Base aislada sin red; no representa concurrencia ni capacidad remota.",
+    "La comparación ignora únicamente revision de transporte y orden no contractual de intentos.",
+    "Auth/Storage mínimos de prueba; no hay envío de correo ni API remota."
+  ]
+}
