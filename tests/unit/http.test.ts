@@ -4,13 +4,14 @@ import { authFailureResponse, isSameOrigin, readJson, safePath } from '../../src
 
 describe('frontera HTTP del aula', () => {
   it('distingue indisponibilidad de Auth de una sesión inválida', async () => {
-    for (const error of [{ status: 503 }, { name: 'AuthRetryableFetchError' }]) {
+    for (const error of [{ status: 429 }, { status: 503 }, { name: 'AuthRetryableFetchError' }]) {
       const response = authFailureResponse(error);
       expect(response.status).toBe(503);
       expect(await response.json()).toEqual({
         error: 'No pudimos verificar tu sesión en este momento. Intenta de nuevo.',
       });
       expect(response.headers.get('Cache-Control')).toBe('private, no-store');
+      expect(response.headers.get('Retry-After')).toBe('30');
     }
     expect(authFailureResponse({ status: 401 }).status).toBe(401);
     expect(authFailureResponse({ name: 'AuthInvalidJwtError' }).status).toBe(401);

@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { isAuthUnavailable, type AuthFailure } from './supabase/auth-availability';
 
 export function jsonResponse(body: unknown, status = 200) {
   return NextResponse.json(body, {
@@ -7,11 +8,9 @@ export function jsonResponse(body: unknown, status = 200) {
   });
 }
 
-export function authFailureResponse(error?: { status?: number; name?: string } | null) {
-  const unavailable =
-    (error?.status !== undefined && error.status >= 500) ||
-    error?.name === 'AuthRetryableFetchError';
-  return jsonResponse(
+export function authFailureResponse(error?: AuthFailure | null) {
+  const unavailable = isAuthUnavailable(error);
+  const response = jsonResponse(
     {
       error: unavailable
         ? 'No pudimos verificar tu sesión en este momento. Intenta de nuevo.'
@@ -19,6 +18,8 @@ export function authFailureResponse(error?: { status?: number; name?: string } |
     },
     unavailable ? 503 : 401,
   );
+  if (unavailable) response.headers.set('Retry-After', '30');
+  return response;
 }
 
 export function isSameOrigin(request: NextRequest) {

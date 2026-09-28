@@ -2,11 +2,14 @@ import 'server-only';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { supabaseConfig } from './config';
+import { authAvailability } from './auth-availability';
 
 export async function createSupabaseServer() {
   const cookieStore = await cookies();
   const { url, key } = supabaseConfig();
+  const availability = authAvailability(url);
   return createServerClient(url, key, {
+    global: { fetch: availability.fetch },
     cookieOptions: {
       sameSite: 'lax',
       httpOnly: true,
@@ -17,6 +20,7 @@ export async function createSupabaseServer() {
     cookies: {
       getAll: () => cookieStore.getAll(),
       setAll: (entries) => {
+        if (availability.failure) return;
         try {
           entries.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
         } catch {
