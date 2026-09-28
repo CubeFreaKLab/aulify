@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-09-28T08:07:09Z",
+  "environment": "Proyecto Aulify, Supabase Free, tras diez migraciones",
+  "categories": {
+    "security": [
+      {
+        "name": "rls_enabled_no_policy",
+        "level": "INFO",
+        "count": 39,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "level": "WARN",
+        "count": 1,
+        "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+      }
+    ],
+    "performance": [
+      {
+        "name": "unused_index",
+        "level": "INFO",
+        "count": 25,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+      }
+    ]
+  },
+  "interpretation": [
+    "Las tablas privadas de app se utilizan a través de funciones con controles explícitos; RLS sin políticas de acceso directo es intencional en estas tablas.",
+    "Los índices sin uso observado pertenecen a una base nueva con carga parcial; no se eliminaron por ese aviso.",
+    "Existe un WARN: la protección contra contraseñas filtradas no está habilitada. Supabase la ofrece desde el plan Pro; se conserva el plan Free y el pendiente se registra expresamente.",
+    "No hay avisos ERROR. El asesor no sustituye pruebas de autorización ni una auditoría completa."
+  ]
+}

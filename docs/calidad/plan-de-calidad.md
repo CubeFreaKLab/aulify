@@ -1,6 +1,6 @@
 # Plan de calidad y evidencia
 
-Versión 1.0 · 26 de septiembre de 2026. Criterios definidos; implementación y ejecución pendientes.
+Versión 1.0 · criterios del 26 de septiembre de 2026; estado actualizado el 28 de septiembre. Existen pruebas aisladas, remotas y de navegador ejecutadas. Carga, correo, operación y cobertura completa se cierran con sus resultados específicos; los umbrales siguientes se mantienen.
 
 ## Propósito
 
@@ -40,7 +40,7 @@ Q-03 toma 44 × 44 píxeles CSS como objetivo de diseño para controles táctile
 | Uso con personas | Comprender instrucciones, publicar, participar y consultar notas. | Observación de tareas sin encuesta obligatoria. Si no se realiza, queda pendiente explícitamente. |
 | Liberación | Migraciones, pruebas breves tras despliegue y restauración. | Procedimientos reproducibles y datos ficticios. |
 
-La selección de Vitest/axe se verifica al inicializar las dependencias. Playwright y GitHub Actions están seleccionados, pero todavía no configurados. Versiones exactas y comandos se registran al existir la aplicación. No generar resultados, capturas de ejecución o porcentajes de cobertura ficticios.
+Vitest, axe, Playwright, PGlite y GitHub Actions están configurados. Sus versiones están fijadas en el repositorio; los resultados vigentes constan en [integración web](../verificacion/integracion-web.md), [SQL aislado](../verificacion/datos-aislados.md) y [Supabase real](../verificacion/datos-remotos.md). La existencia de herramientas no cierra los criterios Q ni autoriza porcentajes de cobertura sin medición.
 
 ## Escenario de carga
 

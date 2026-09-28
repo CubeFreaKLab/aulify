@@ -4,7 +4,7 @@ El aula digital, más simple e interactiva.
 
 Aulify es una plataforma web para docentes y estudiantes de secundaria. Su recorrido principal une recursos de clase por bloques, preguntas interactivas y revisión de resultados, con una experiencia adaptable a celular y computadora.
 
-## Funciones previstas
+## Funciones
 
 - Recursos con explicaciones, imágenes, enlaces y preguntas; borradores, vista previa y versiones publicadas.
 - Quizzes de práctica y examen con modos de avance y reglas configurables.
@@ -12,11 +12,11 @@ Aulify es una plataforma web para docentes y estudiantes de secundaria. Su recor
 - Tareas, corrección manual, publicación de calificaciones y seguimiento con gráficos y tablas.
 - Controles de accesibilidad, ayuda inicial por rol, recuperación ante desconexiones y separación de permisos entre cuentas.
 
-## Prototipo web
+## Aplicación y demostración
 
-La aplicación ejecutable incluye una portada ilustrada, un editor por bloques y un recorrido de demostración: preparar un recurso, publicarlo, responder como estudiante, revisar respuestas escritas y publicar notas. Incluye materias, solicitudes, tareas y resultados con datos ficticios. La [matriz de pantallas](docs/diseno/pantallas-y-estados.md) distingue las interacciones disponibles y los servicios pendientes.
+La aplicación incluye portada ilustrada, temas claro y oscuro, editor por bloques, quizzes, tareas, revisión y resultados. El aula autenticada conecta Supabase Auth, PostgreSQL y Storage; la demostración pública permite explorar una clase ficticia. Consulta el [estado comprobado](docs/estado-del-desarrollo.md) y las [pruebas de integración web](docs/verificacion/integracion-web.md).
 
-La muestra conserva cambios en el almacenamiento de este navegador y permite cambiar entre perfiles ficticios. No ofrece autenticación real ni almacenamiento privado de archivos. Supabase Auth, PostgreSQL, Storage y correo se integrarán con pruebas de permisos y persistencia; el transporte de sesiones y sus cuotas siguen pendientes. Consulta el [estado verificable](docs/estado-del-desarrollo.md).
+La entrada `/demo` conserva cambios en este navegador y permite cambiar entre perfiles ficticios. `/aula` requiere una cuenta y aplica permisos de servidor. El correo general, la capacidad bajo carga y el despliegue siguen en verificación; no se declaran resueltos por disponer de formularios o de una compilación correcta.
 
 ## Ejecutar
 
@@ -38,7 +38,9 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-La construcción usa Next.js, React y TypeScript, React Aria para controles, BlockNote para edición e Inter para la interfaz. Versiones fijadas en `package-lock.json`. GitHub Actions ejecuta análisis, tipos, pruebas, construcción y recorridos; el resultado remoto de cada revisión se consulta en [Actions](https://github.com/CubeFreaKLab/aulify/actions). Producción y CD permanecen pendientes.
+Para conectar un entorno propio, copiar `.env.example` a `.env.local`, configurar las variables de Supabase y aplicar las migraciones de `supabase/migrations` en orden. La clave privada de servicio solo se utiliza en el servidor para archivos y mantenimiento; nunca debe llevar el prefijo `NEXT_PUBLIC_`. El [contrato de datos](supabase/CONTRACT.md) y la [verificación remota](docs/verificacion/datos-remotos.md) explican las operaciones y las cuentas ficticias de prueba.
+
+La construcción usa Next.js, React y TypeScript, React Aria para controles, BlockNote para edición e Inter para la interfaz. Las versiones están fijadas en `package-lock.json`. GitHub Actions ejecuta formato, análisis, tipos, unidad, SQL aislado, construcción y recorridos públicos. Los doce casos de servicios reales se habilitan expresamente en un entorno privado. Consulta los resultados en [Actions](https://github.com/CubeFreaKLab/aulify/actions).
 
 ## Documentación del producto
 
@@ -48,7 +50,7 @@ La construcción usa Next.js, React y TypeScript, React Aria para controles, Blo
 | [Principios](docs/principios.md) | Usabilidad, accesibilidad, control de las actividades y consistencia. |
 | [Especificación general](specification.md) | Requisitos funcionales y reglas transversales. |
 | [Primera entrega: recurso interactivo](specs/001-recurso-interactivo/spec.md) | Recorrido, permisos, estados y decisiones operativas. |
-| [Aceptación de la primera entrega](specs/001-recurso-interactivo/aceptacion.md) | 38 casos con resultados esperados, pendientes de ejecución. |
+| [Aceptación de la primera entrega](specs/001-recurso-interactivo/aceptacion.md) | 38 escenarios con resultados esperados y cobertura por consolidar. |
 | [Aceptación del producto](specs/aceptacion-producto.md) | 38 casos complementarios para las ampliaciones. |
 | [Plan de calidad](docs/calidad/plan-de-calidad.md) | Métodos, umbrales, defectos y evidencia. |
 | [Trazabilidad](docs/calidad/trazabilidad.md) | Requisitos, reglas, tareas y casos relacionados. |

@@ -1,0 +1,144 @@
+[
+  {
+    "id": 36392124813,
+    "name": "Calidad de Aulify",
+    "sha": "20e5afc6b34dc0a713d92702848ae6bc80846d6d",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36392124813",
+    "createdAt": "2026-09-28T07:31:40Z",
+    "updatedAt": "2026-09-28T07:34:26Z",
+    "jobs": [
+      {
+        "id": 108830096827,
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "success"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "selectedLogLines": [
+      "2026-09-28T07:32:14.0364186Z  Test Files  4 passed (4)",
+      "2026-09-28T07:32:14.0380043Z       Tests  35 passed (35)",
+      "2026-09-28T07:34:20.4000178Z   12 skipped",
+      "2026-09-28T07:34:20.4000694Z   52 passed (1.5m)",
+      "2026-09-28T07:32:14.0364174Z  Test Files  4 passed (4)",
+      "2026-09-28T07:32:14.0380017Z       Tests  35 passed (35)",
+      "2026-09-28T07:34:20.4000171Z   12 skipped",
+      "2026-09-28T07:34:20.4000692Z   52 passed (1.5m)"
+    ]
+  },
+  {
+    "id": 36392156874,
+    "name": "Conservación y limpieza de Aulify",
+    "sha": "20e5afc6b34dc0a713d92702848ae6bc80846d6d",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36392156874",
+    "createdAt": "2026-09-28T07:32:01Z",
+    "updatedAt": "2026-09-28T07:32:13Z",
+    "jobs": [
+      {
+        "id": 108830201875,
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la versión publicada",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Aplicar plazos y eliminar archivos sin referencias autorizadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la versión publicada",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "selectedLogLines": [
+      "2026-09-28T07:32:10.7616087Z {\"completedAt\":\"2026-09-28T07:32:10.759Z\",\"deletedFileRecords\":0}",
+      "2026-09-28T07:32:10.7616021Z {\"completedAt\":\"2026-09-28T07:32:10.759Z\",\"deletedFileRecords\":0}"
+    ]
+  }
+]

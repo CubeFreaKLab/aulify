@@ -1,6 +1,6 @@
 # Trazabilidad de requisitos, tareas y comprobaciones
 
-Base funcional 1.0 · actualización del 27 de septiembre de 2026. Los casos integrados AC/AP siguen pendientes; existe evidencia separada del prototipo.
+Base funcional 1.0 · actualización del 28 de septiembre de 2026. Existen verificaciones aisladas, remotas y de navegador de la integración; la correspondencia individual de los 76 escenarios AC/AP se está consolidando. Consulta [estado](../estado-del-desarrollo.md) e [integración web](../verificacion/integracion-web.md). No convertir un conteo de pruebas en aprobación automática de estos casos.
 
 Esta matriz enlaza el [catálogo de requisitos y sus reglas](../../specification.md), las [tareas](../../tasks.md), los [casos AC de la entrega 001](../../specs/001-recurso-interactivo/aceptacion.md) y los [casos AP del alcance completo](../../specs/aceptacion-producto.md). Los criterios Q pertenecen al [plan de calidad](plan-de-calidad.md). Aquí «AC» identifica casos de aceptación; en la columna de reglas se escribe «regla AC» para distinguir las reglas de participación del documento general.
 

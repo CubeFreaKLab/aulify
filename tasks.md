@@ -1,6 +1,6 @@
 # Tareas de desarrollo de Aulify
 
-**Estado: base funcional 1.0 y prototipo web 0.1.0 disponibles. T-02 documental completada; T-03 con modelo disponible y persistencia pendiente. La implementación integrada con Supabase sigue abierta.**
+**Estado: base funcional 1.0, modelo 1.1 e implementación integrada con Supabase disponibles. T-02 documental completada; la verificación de entrega y operación sigue abierta.**
 
 Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md). La existencia de estos documentos no acredita funciones implementadas. Resolver las decisiones que afecten una tarea antes de iniciar su construcción.
 
@@ -8,13 +8,13 @@ La [entrega 001](specs/001-recurso-interactivo/spec.md) concreta parte del recor
 
 ## Preparación técnica
 
-El [prototipo](docs/prototipo/uso-y-limites.md) incorpora recorridos de T-04, T-07 a T-16 y T-22 con un adaptador local. Sus [pruebas](docs/verificacion/pruebas-prototipo.md) y [matriz de pantallas](docs/diseno/pantallas-y-estados.md) describen el alcance comprobado. T-04 cuenta con pantallas funcionales en móvil/escritorio y revisión técnica; la aprobación visual queda abierta. T-05 dispone de aplicación, pruebas y flujo de CI; todavía faltan migraciones y comprobaciones en un entorno de datos real. Las tareas siguientes conservan sus criterios de cierre completos.
+La integración del 28 de septiembre conecta las pantallas a Supabase con diez migraciones, permisos y archivos reales. Existen [70 verificaciones de SQL aislado](docs/verificacion/datos-aislados.md), [45 remotas](docs/verificacion/datos-remotos.md), [concurrencia guiada](docs/verificacion/datos-carrera-guiada.md) y [recorridos de navegador](docs/verificacion/integracion-web.md). T-03 y T-05 tienen implementación ejecutada; su evidencia se conserva por capa. T-01/T-06 siguen parcialmente abiertas por SMTP, T-20 por carga y T-21 por despliegue y operación. Las tareas mantienen sus criterios completos y no se cierran mediante el conteo de pruebas.
 
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |
 |---|---|---|---|---|
 | T-01 | Comprobar Supabase Free, despliegue, correo y acceso privado a datos y archivos | RF-01, RF-02, RF-10, RNF-03, RNF-04 | — | Prueba con cuentas ficticias, RLS y Storage comprobados, recuperación por SMTP y transporte de sincronización evaluados frente a cuotas y carga objetivo. |
 | T-02 | Definir reglas de evaluación, estados y visibilidad (documentación completada) | RF-05 a RF-08, RF-13 a RF-16 | — | Base 1.0, D-01 a D-07, casos AC-01 a AC-38 y AP-01 a AP-38 con resultados esperados. |
-| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-17 | T-02 para el modelo; T-01 para validar persistencia | Modelo y documentación disponibles en [modelado](docs/modelado/README.md). Pendientes migraciones SQL, restricciones/índices y RLS ejecutados; comprobar que ninguna lectura estudiantil expone soluciones ocultas o notas ajenas. |
+| T-03 | Definir modelo relacional de PostgreSQL, normalización, permisos, consultas y versiones | RF-01 a RF-17 | T-02 para el modelo; T-01 para validar persistencia | Modelo 1.1 y documentación en [modelado](docs/modelado/README.md), diez migraciones aplicadas, restricciones e índices. Verificaciones aisladas y remotas de permisos y ausencia de soluciones ocultas/ notas ajenas; consolidar cobertura de todos los escenarios. |
 | T-04 | Diseñar recorridos principales en celular y computadora | RNF-01, RNF-02, RF-16 | T-02 | Pantallas y estados de crear, publicar, participar, entregar y revisar; controles accesibles y configuración avanzada. |
 | T-05 | Inicializar aplicación, Playwright e integración continua con GitHub Actions | RNF-01, RNF-02, RNF-04 | T-01, T-03 | Dependencias fijadas, construcción reproducible y configuración de ejemplo sin secretos. Flujo de Actions ejecutado con análisis estático, tipos, pruebas disponibles, construcción y recorrido inicial de Playwright; registrar informe y entorno aislado para pruebas de datos. |
 

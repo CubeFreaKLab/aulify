@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-28T08:05:11.913Z",
+  "durationMs": 144300.199,
+  "passed": 12,
+  "failed": 0,
+  "skipped": 0,
+  "flaky": 0,
+  "applicationCommit": "4894cce",
+  "buildId": "5QririPmjJI9Ub74OkXjB",
+  "environment": "Next.js compilado local, Supabase Free remoto, datos ficticios",
+  "projects": ["Chromium escritorio 1440x900", "Chromium móvil emulado 390x844"],
+  "scenarios": [
+    "Responder tres preguntas, perder una confirmación, reintentar con la misma clave sin duplicar, consumir doble una vez, descartar una lectura antigua, avanzar y retomar tras recarga; soluciones y revisión manual ocultas",
+    "Fallo temporal de sincronización: reintentos espaciados sin consultas completas adicionales y recuperación sin recargar",
+    "JWT de cookie con identidad alterada rechazado; sesión original válida",
+    "Recorrido docente, salida y cambio de cuenta sin conservar acceso a recursos ajenos",
+    "Publicación de lectura y consulta de la versión por estudiante aprobado",
+    "Entrega y descarga de archivo real; acceso denegado al docente ajeno"
+  ],
+  "limits": [
+    "No es una ejecución de todos los archivos de Playwright ni de carga.",
+    "La preparación del nuevo escenario rechazó inicialmente una configuración incompatible (racha activada con retroalimentación oculta); se corrigió el escenario y se conservó su registro por separado.",
+    "No verifica entrega de correo SMTP, dispositivos físicos ni despliegue público."
+  ]
+}
