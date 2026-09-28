@@ -27,7 +27,7 @@ Las versiones y dependencias están fijadas en `package.json` y `package-lock.js
 
 `/aula` requiere una sesión validada de Supabase. El servidor vuelve a comprobar identidad en las operaciones; no confía en el identificador de actor que envíe el navegador. El perfil persistente se establece al crear la cuenta y no cambia al modificar los metadatos editables de Auth.
 
-Las 45 tablas propias tienen RLS y no conceden escritura directa a los roles cliente. Siete funciones públicas invocadoras constituyen la frontera de datos; las funciones internas del esquema privado comprueban identidad, propiedad y pertenencia antes de operar. Las funciones privilegiadas internas usan un contexto de búsqueda restringido. El [contrato](supabase/CONTRACT.md) identifica acciones y proyecciones.
+Las 47 tablas propias tienen RLS y no conceden escritura directa a los roles cliente. Ocho funciones públicas invocadoras constituyen la frontera de datos; las funciones internas del esquema privado comprueban identidad, propiedad y pertenencia antes de operar. Las funciones privilegiadas internas usan un contexto de búsqueda restringido. El [contrato](supabase/CONTRACT.md) identifica acciones y proyecciones.
 
 Las respuestas correctas, guías privadas, borradores y notas sin publicar no se incorporan a la proyección estudiantil. Al cerrar sesión se limpian datos, revisiones y respuestas pendientes en memoria. Las operaciones de una sesión antigua no pueden repoblar el estado de otra cuenta.
 

@@ -228,5 +228,94 @@
       "2026-09-28T08:17:31.0091254Z   18 skipped",
       "2026-09-28T08:17:31.0091662Z   52 passed (1.8m)"
     ]
+  },
+  {
+    "id": 36399407870,
+    "name": "Calidad de Aulify",
+    "sha": "c892923c52416f0085d3d3fbd28e7a68bff7a569",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36399407870",
+    "createdAt": "2026-09-28T08:46:48Z",
+    "updatedAt": "2026-09-28T08:50:02Z",
+    "jobs": [
+      {
+        "id": 108853436956,
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "success"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "selectedLogLines": [
+      "2026-09-28T08:47:28.3104902Z  Test Files  5 passed (5)",
+      "2026-09-28T08:47:28.3106259Z       Tests  39 passed (39)",
+      "2026-09-28T08:47:31.3322251Z FINISHED 84 checks",
+      "2026-09-28T08:49:58.0676082Z   22 skipped",
+      "2026-09-28T08:49:58.0676506Z   52 passed (1.8m)"
+    ]
   }
 ]

@@ -20,7 +20,7 @@ Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en
 |---|---|---|
 | Modelo y PostgreSQL aislado | Modelo 1.2, doce migraciones y 84 comprobaciones aprobadas en PGlite | [Informe aislado](verificacion/datos-aislados.md) |
 | Supabase real | 45 comprobaciones de Auth, permisos, operaciones, concurrencia y Storage con cuatro cuentas ficticias | [Informe remoto](verificacion/datos-remotos.md) |
-| Aplicación compilada | 39 pruebas unitarias; tipos, análisis estático y construcción satisfactorios | [Integración web](verificacion/integracion-web.md) |
+| Aplicación compilada | 42 pruebas unitarias; tipos, análisis estático y construcción satisfactorios | [Integración web](verificacion/integracion-web.md) |
 | Navegador autenticado | Último lote: doce aprobados en escritorio y móvil, incluidos reintento de respuesta, reconexión y JWT alterado | [Confirmación y conexión](verificacion/integracion-resiliencia.json) |
 | Gestión integrada | Seis de los casos de navegador ejercitan materias, equipos, evaluación y reentrega con cuentas reales de prueba | [Gestión web](verificacion/datos-gestion-web.md) |
 | Cierre guiado concurrente | Treinta rondas y 150 operaciones remotas repetidas sin errores técnicos después de corregir el bloqueo | [Concurrencia](verificacion/datos-carrera-guiada.md) |
@@ -36,9 +36,11 @@ La verificación posterior de [consultas acotadas](verificacion/integracion-acot
 ## Trabajo pendiente de cierre
 
 - Terminar la prueba de carga de cuatro grupos de cincuenta estudiantes y cuatro docentes, en modos individual y guiado, con sus umbrales y cuotas originales. No hay capacidad de producción demostrada todavía.
-- El CI remoto `36396177901` aprobó todos sus pasos sobre `1dc862b`: 36 pruebas unitarias, 70 comprobaciones SQL aisladas y 52 casos públicos de navegador. Los dieciocho recorridos autenticados se omiten en CI y conservan su evidencia privada de ejecución. El mantenimiento `36392156874` terminó correctamente mediante disparo manual, con cero archivos pendientes. Falta observar la activación programada y comprobar recuperación operativa; [registro](verificacion/ci-integracion.json).
+- El CI remoto `36399407870` aprobó todos sus pasos sobre `c892923`: 39 pruebas unitarias, 84 comprobaciones SQL aisladas y 52 casos públicos de navegador. Los veintidós recorridos autenticados se omiten en CI y conservan su evidencia privada de ejecución. El mantenimiento `36392156874` terminó correctamente mediante disparo manual, con cero archivos pendientes. Falta observar la activación programada y comprobar recuperación operativa; [registro](verificacion/ci-integracion.json).
 - Completar despliegue, comprobaciones por HTTPS y entrega/recuperación por correo. El dominio propio está fuera de esta entrega.
 - La protección de Auth contra contraseñas filtradas figura deshabilitada en el asesor y requiere plan Pro. Se conserva Free; [aviso y referencia oficial](verificacion/asesores-supabase.json). No representa una comprobación completa de seguridad.
 - Consolidar correspondencia de AC/AP, recuperación operativa y revisión manual de accesibilidad. No se configuraron Jira ni QMetry; se conservan casos, incidencias y resultados reproducibles en el repositorio.
 
 El [plan técnico](../plan.md), las [tareas](../tasks.md) y la [trazabilidad](calidad/trazabilidad.md) describen el cierre de cada requisito. Los informes del prototipo se conservan como antecedentes y no sustituyen las comprobaciones de esta integración.
+
+La [renovación de sesiones](verificacion/renovacion-auth.md) conserva cookies ante límites temporales de Auth y detiene la solicitud con 503; tres casos con cliente SSR real y transporte simulado verifican límite, rechazo definitivo y renovación válida.
