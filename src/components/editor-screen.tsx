@@ -382,6 +382,7 @@ function EditorForm({
                           new Date().toISOString(),
                           e.target.value as 'practice' | 'exam',
                         ),
+                        opensAt: settings.opensAt,
                         closesAt: settings.closesAt,
                       })
                     }
@@ -402,11 +403,24 @@ function EditorForm({
                   />
                 </Field>
               </div>
+              <Field id="open-date" label="Disponible desde">
+                <input
+                  id="open-date"
+                  type="datetime-local"
+                  required
+                  value={localInput(settings.opensAt)}
+                  onChange={(e) => {
+                    if (e.target.value)
+                      setSettings({ ...settings, opensAt: new Date(e.target.value).toISOString() });
+                  }}
+                />
+              </Field>
               <Field id="close-date" label="Disponible hasta">
                 <input
                   id="close-date"
                   type="datetime-local"
                   required
+                  min={localInput(settings.opensAt)}
                   value={localInput(settings.closesAt)}
                   onChange={(e) => {
                     if (e.target.value)
