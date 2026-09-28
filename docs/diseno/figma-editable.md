@@ -14,7 +14,7 @@ El [archivo de Aulify](https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulif
 | Editor de recursos | 892 px | `57:582` | [Ver](capturas/figma/editor.png) |
 | Participación | 892 px | `47:1546` | [Ver](capturas/figma/quiz.png) |
 | Revisión de respuestas | 892 px | `47:1628` | [Ver](capturas/figma/revision.png) |
-| Resultados | 892 px | `47:1958` | [Ver](capturas/figma/resultados.png) |
+| Resultados | 892 px | `47:1958` | [Versión anterior verificada](capturas/figma/resultados.png); actualización pendiente de validación visual |
 | Inicio docente móvil | 390 px | `48:2` | [Ver](capturas/figma/inicio-movil.png) |
 | Participación móvil | 390 px | `48:128` | [Ver](capturas/figma/quiz-movil.png) |
 
@@ -35,3 +35,9 @@ Se compararon las exportaciones de Figma con las composiciones web, comprobando 
 Para modificar una pantalla, abre su página de Figma y selecciona el frame indicado. Las instancias de botón y de respuesta exponen propiedades de texto y estado. Los modos de la colección de colores permiten trabajar las variantes clara y oscura. Los frames conservan las dimensiones verificadas; para otros anchos se deben revisar los ajustes de auto layout y emplear las variantes móviles.
 
 Las pantallas de plataforma muestran datos ficticios de la demostración. El archivo representa maquetas editables y componentes, no un prototipo navegable completo. Las animaciones, el guardado, la autenticación y los demás comportamientos se comprueban en la aplicación y en sus pruebas, no mediante estas imágenes estáticas.
+
+## Actualización de Resultados
+
+La web incorpora filtros por fecha, una distribución de notas publicadas por actividad y su tabla equivalente, verificados en [Resultados: distribución y filtros](../verificacion/resultados-distribucion.md). La sincronización del frame `47:1958` incorpora esas secciones, pero su comprobación visual detectó textos con anchura heredada y márgenes pendientes de ajuste. Por tanto, `resultados.png` conserva la versión anterior aprobada y no se presenta como captura de la nueva distribución. La exportación nueva queda pendiente de terminar y verificar la réplica.
+
+El [detalle del editor por bloques](capturas/figma/editor-bloques-detalle.png), exportado del nodo `57:770`, permite leer sus controles y el bloque interactivo en un documento impreso sin reducir la pantalla completa.

@@ -137,7 +137,27 @@
         "Inter"
       ],
       "capture": "resultados.png",
-      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-1958"
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-1958",
+      "captureStatus": "previous-verified-version",
+      "pendingUpdate": {
+        "features": [
+          "Filtros inclusivos por fecha",
+          "Distribución por actividad",
+          "Tabla equivalente",
+          "Fecha de actividad en resultados"
+        ],
+        "frameHeight": 2702,
+        "detailId": "66:605",
+        "status": "visual-repair-and-export-pending",
+        "findings": [
+          "Anchura de texto heredada en campos",
+          "Ajuste de márgenes y tipografía de tabla"
+        ],
+        "newComponents": [
+          "65:19",
+          "65:24"
+        ]
+      }
     },
     {
       "id": "48:2",
@@ -240,5 +260,15 @@
       "Las capturas de /demo usan datos ficticios y no demuestran conexión con datos reales.",
       "Las transiciones del producto se verifican en la web; estas exportaciones PNG son estáticas."
     ]
-  }
+  },
+  "details": [
+    {
+      "id": "57:770",
+      "name": "Editor de recursos · detalle de bloques",
+      "width": 624,
+      "height": 602,
+      "capture": "editor-bloques-detalle.png",
+      "status": "verified-native-export"
+    }
+  ]
 }

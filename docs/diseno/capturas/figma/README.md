@@ -5,3 +5,5 @@ Exportaciones PNG de capas nativas del archivo editable de Aulify, verificadas e
 Los archivos `landing-clara.png` y `landing-oscura.png` muestran la portada completa. `hero-claro.png`, `quiz-claro.png` y `editor-claro.png` son detalles de esa portada. `fundamentos.png`, `botones.png`, `campos.png`, `opciones-quiz.png` y `respuestas-quiz.png` muestran el sistema de interfaz. Las otras imágenes corresponden a las vistas de acceso y plataforma.
 
 Los nombres, respuestas y calificaciones visibles proceden de datos de demostración. Estas imágenes documentan el diseño editable resultante de la implementación web; no establecen una cronología anterior de diseño ni prueban operaciones con usuarios reales.
+
+`editor-bloques-detalle.png` es una exportación legible del nodo nativo `57:770` (624 × 602 px), sin modificar el diseño. `resultados.png` corresponde a la versión anterior verificada: la sincronización de filtros por fecha y distribución ya comenzó en el archivo editable, pero requiere corregir anchuras de texto y comprobar la exportación antes de sustituir esta imagen.
