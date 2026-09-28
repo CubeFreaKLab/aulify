@@ -1,7 +1,7 @@
 const messages: Record<string, string> = {
   FORBIDDEN: 'No tienes permiso para realizar esta acción.',
   AUTH_REQUIRED: 'Tu sesión terminó. Vuelve a iniciar sesión.',
-  CONFIRM_PENDING: 'Confirma tu correo antes de continuar.',
+  CONFIRM_PENDING: 'Quedan respuestas pendientes. Confirma su cierre para continuar.',
   PROFILE_REQUIRED: 'No pudimos cargar tu perfil. Vuelve a iniciar sesión.',
   TEACHER_REQUIRED: 'Esta acción corresponde al docente.',
   STUDENT_REQUIRED: 'Esta acción corresponde al estudiante.',
@@ -51,7 +51,7 @@ const messages: Record<string, string> = {
 
 export function commandError(code: string) {
   return (
-    messages[code] ||
+    messages[code.split(':', 1)[0]] ||
     (code.startsWith('INVALID_')
       ? 'Revisa los datos: falta información o hay un valor no válido.'
       : 'No pudimos completar el cambio. Actualiza la página y revisa los datos.')

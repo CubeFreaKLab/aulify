@@ -1,5 +1,6 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type APIRequestContext, type Page } from '@playwright/test';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import { dismissGuide, expectNoHorizontalOverflow } from './helpers';
 
 const enabled = process.env.AULIFY_REMOTE_E2E === '1';
@@ -11,6 +12,16 @@ function accounts() {
 }
 function fixtures() {
   return JSON.parse(fs.readFileSync('.local-private/remote-test-fixtures.json', 'utf8'));
+}
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3002';
+const headers = { Origin: new URL(baseURL).origin, 'Sec-Fetch-Site': 'same-origin' };
+async function command(request: APIRequestContext, action: string, ...args: unknown[]) {
+  const response = await request.post(`${baseURL}/api/commands`, {
+    headers,
+    data: { action, args },
+  });
+  if (!response.ok()) throw new Error(`Preparación ${action}: HTTP ${response.status()}.`);
+  return (await response.json()).result;
 }
 async function login(page: Page, account: Account) {
   await page.goto('/acceso');
@@ -24,6 +35,283 @@ async function login(page: Page, account: Account) {
 
 test.describe('Integración con cuentas ficticias y servicios reales', () => {
   test.skip(!enabled, 'Requiere conexión privada al proyecto de pruebas y cuentas preparadas.');
+  test('responde, reintenta sin duplicar, avanza sin otra consulta y retoma el intento', async ({
+    page,
+    playwright,
+  }) => {
+    const account = accounts(),
+      fixture = fixtures();
+    const teacher = await playwright.request.newContext();
+    let releaseSnapshot: (() => void) | undefined;
+    try {
+      const auth = await teacher.post(`${baseURL}/api/auth`, {
+        headers,
+        data: { action: 'access', ...account.teacher },
+      });
+      if (!auth.ok()) throw new Error(`Acceso ficticio: HTTP ${auth.status()}.`);
+      const id = () => crypto.randomUUID();
+      const correct = id();
+      const questions = [
+        {
+          id: id(),
+          type: 'single',
+          prompt: '¿Qué aporta energía a las plantas?',
+          points: 2,
+          options: [
+            { id: correct, text: 'Luz solar' },
+            { id: id(), text: 'Plástico' },
+          ],
+          correctOptionId: correct,
+          explanation: 'La fotosíntesis aprovecha la luz.',
+        },
+        {
+          id: id(),
+          type: 'open',
+          prompt: 'Explica una observación de tu planta.',
+          points: 2,
+          manual: true,
+          manualGuide: 'Guía privada: relación entre luz y crecimiento.',
+        },
+        {
+          id: id(),
+          type: 'true-false',
+          prompt: 'Las plantas utilizan luz.',
+          points: 2,
+          correct: true,
+        },
+      ];
+      const resource = {
+        id: id(),
+        title: 'Participación verificada',
+        kind: 'quiz',
+        revision: 1,
+        blocks: [{ id: id(), type: 'quiz', questions }],
+      };
+      await command(teacher, 'saveDraft', resource, 0);
+      const version = await command(teacher, 'publishResource', resource.id);
+      const settings = {
+        purpose: 'practice',
+        pace: 'individual',
+        maxGrade: 100,
+        weight: 1,
+        countsTowardAverage: true,
+        maxAttempts: 1,
+        opensAt: new Date(Date.now() - 60000).toISOString(),
+        closesAt: new Date(Date.now() + 3600000).toISOString(),
+        timeLimitMinutes: null,
+        timeZone: 'America/La_Paz',
+        feedback: 'hidden',
+        manualCorrection: false,
+        shuffleQuestions: false,
+        shuffleOptions: false,
+        streaks: false,
+        sound: false,
+        ranking: false,
+        teams: false,
+        allowHint: false,
+        allowDouble: true,
+        bonusAffectsGrade: false,
+        reportVisibility: false,
+      };
+      const activity = await command(
+        teacher,
+        'createActivity',
+        version.id,
+        fixture.subjectId,
+        settings,
+      );
+      await login(page, account.student);
+      await page.goto(`/aula/actividad/${activity.id}`);
+      await page.getByRole('button', { name: 'Empezar actividad', exact: true }).click();
+      await expect(
+        page.getByRole('heading', { name: questions[0].prompt, exact: true }),
+      ).toBeVisible();
+      await page.waitForTimeout(1800);
+      const stalled = new Promise<void>((resolve) => {
+        releaseSnapshot = resolve;
+      });
+      let capturedOldSnapshot!: () => void;
+      const oldSnapshotReady = new Promise<void>((resolve) => {
+        capturedOldSnapshot = resolve;
+      });
+      await page.route(
+        '**/api/workspace',
+        async (route) => {
+          const old = await route.fetch();
+          capturedOldSnapshot();
+          await stalled;
+          await route.fulfill({ response: old });
+        },
+        { times: 1 },
+      );
+      await page.evaluate(() => window.dispatchEvent(new Event('online')));
+      await oldSnapshotReady;
+      const keys: string[] = [];
+      let loseFirstAcknowledgement = true;
+      await page.route('**/api/commands', async (route) => {
+        const body = route.request().postDataJSON();
+        if (body.action !== 'submitAnswer') return route.continue();
+        keys.push(body.args[3]);
+        const response = await route.fetch();
+        if (loseFirstAcknowledgement && response.ok()) {
+          loseFirstAcknowledgement = false;
+          return route.fulfill({
+            status: 503,
+            contentType: 'application/json',
+            body: JSON.stringify({ error: 'Confirmación interrumpida. Reintenta tu respuesta.' }),
+          });
+        }
+        return route.fulfill({ response });
+      });
+      await page.getByRole('radio', { name: /Luz solar/ }).check();
+      await page.getByRole('button', { name: 'Puntos ×2', exact: true }).click();
+      await page.getByRole('button', { name: 'Responder', exact: true }).click();
+      await expect(
+        page.getByRole('alert').filter({ hasText: 'Confirmación interrumpida' }),
+      ).toBeVisible();
+      const acknowledged = page.waitForResponse(
+        (response) =>
+          response.url().endsWith('/api/commands') &&
+          response.request().postDataJSON()?.action === 'submitAnswer' &&
+          response.ok(),
+      );
+      await page.getByRole('button', { name: 'Responder', exact: true }).click();
+      await acknowledged;
+      await expect(
+        page.getByRole('heading', { name: questions[1].prompt, exact: true }),
+      ).toBeVisible({ timeout: 1500 });
+      expect(keys).toHaveLength(2);
+      expect(keys[0]).toMatch(/^[0-9a-f-]{36}$/);
+      expect(keys[1]).toBe(keys[0]);
+      await expect(page.getByRole('button', { name: 'Doble utilizado' })).toBeDisabled();
+      releaseSnapshot?.();
+      await page.waitForTimeout(500);
+      await expect(
+        page.getByRole('heading', { name: questions[1].prompt, exact: true }),
+      ).toBeVisible();
+      await expect(page.locator('.quiz-feedback')).toHaveCount(0);
+      await page.reload();
+      await page.getByRole('button', { name: 'Retomar mi participación' }).click();
+      await expect(
+        page.getByRole('heading', { name: questions[1].prompt, exact: true }),
+      ).toBeVisible();
+      await page
+        .getByLabel('Tu respuesta', { exact: true })
+        .fill('La planta cercana a la ventana creció más.');
+      await page.getByRole('button', { name: 'Responder', exact: true }).click();
+      await expect(
+        page.getByRole('heading', { name: questions[2].prompt, exact: true }),
+      ).toBeVisible();
+      await page.getByRole('radio', { name: /Verdadero/ }).check();
+      await page.getByRole('button', { name: 'Responder', exact: true }).click();
+      await expect(page.getByRole('heading', { name: '¡Participación completada!' })).toBeVisible();
+      const own = await (await page.request.get('/api/workspace')).json();
+      const attempt = own.state.attempts.find(
+        (item: { activityId: string }) => item.activityId === activity.id,
+      );
+      expect(attempt.answers).toHaveLength(3);
+      expect(attempt.status).toBe('closed');
+      expect(attempt.answers[0].idempotencyKey).toBe(keys[0]);
+      expect(
+        attempt.answers.every((answer: { reviews: unknown[] }) => answer.reviews.length === 0),
+      ).toBe(true);
+      const serialized = JSON.stringify(own.studentActivities[activity.id]);
+      expect(serialized).not.toContain('correctOptionId');
+      expect(serialized).not.toContain('Guía privada');
+      const review = await (await teacher.get(`${baseURL}/api/workspace`)).json();
+      const teacherAttempt = review.state.attempts.find(
+        (item: { id: string }) => item.id === attempt.id,
+      );
+      expect(teacherAttempt.answers[0].reviews).toHaveLength(1);
+      expect(teacherAttempt.answers[1].reviews).toHaveLength(0);
+      await expectNoHorizontalOverflow(page);
+    } finally {
+      releaseSnapshot?.();
+      await teacher.dispose();
+    }
+  });
+  test('una caída de sincronización reduce reintentos y se recupera sin recargar', async ({
+    page,
+  }) => {
+    await login(page, accounts().teacher);
+    const fixture = fixtures();
+    const synced = page.waitForResponse(
+      (response) => response.url().includes('/api/sync?') && response.status() === 200,
+    );
+    await page.goto(`/aula/actividad/${fixture.activityId}`);
+    await synced;
+    // Separa la carga inicial del intervalo de indisponibilidad observado.
+    await page.waitForTimeout(1800);
+    let syncRequests = 0,
+      snapshots = 0;
+    const message = 'El servicio de prueba está ocupado. Se reintentará.';
+    await page.route('**/api/sync?*', async (route) => {
+      syncRequests++;
+      await route.fulfill({
+        status: 503,
+        contentType: 'application/json',
+        body: JSON.stringify({ error: message }),
+      });
+    });
+    const countSnapshot = (request: { url(): string }) => {
+      if (request.url().endsWith('/api/workspace')) snapshots++;
+    };
+    page.on('request', countSnapshot);
+    await expect(page.getByRole('alert').filter({ hasText: message })).toBeVisible();
+    await page.waitForTimeout(10000);
+    expect(syncRequests).toBeGreaterThanOrEqual(3);
+    expect(syncRequests).toBeLessThanOrEqual(5);
+    expect(snapshots).toBe(0);
+    await page.unroute('**/api/sync?*');
+    await expect(page.getByRole('alert').filter({ hasText: message })).toHaveCount(0, {
+      timeout: 20000,
+    });
+    expect(snapshots).toBeGreaterThan(0);
+    page.off('request', countSnapshot);
+  });
+  test('rechaza cookies con identidad alterada y conserva la sesión original', async ({
+    page,
+    playwright,
+  }) => {
+    const account = accounts();
+    await login(page, account.teacher);
+    const state = await page.request.storageState();
+    const authCookies = state.cookies
+      .filter((cookie) => /sb-.+-auth-token(?:\.\d+)?$/.test(cookie.name))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    expect(authCookies.length).toBeGreaterThan(0);
+    const encoded = authCookies.map((cookie) => cookie.value).join('');
+    expect(encoded.startsWith('base64-')).toBe(true);
+    const session = JSON.parse(Buffer.from(encoded.slice(7), 'base64url').toString('utf8'));
+    const parts = session.access_token.split('.');
+    const claims = JSON.parse(Buffer.from(parts[1], 'base64url').toString('utf8'));
+    claims.sub = 'ffffffff-ffff-4fff-8fff-ffffffffffff';
+    parts[1] = Buffer.from(JSON.stringify(claims)).toString('base64url');
+    session.access_token = parts.join('.');
+    const changed = `base64-${Buffer.from(JSON.stringify(session)).toString('base64url')}`;
+    let offset = 0;
+    for (let index = 0; index < authCookies.length; index++) {
+      const cookie = authCookies[index];
+      const size = cookie.value.length;
+      cookie.value =
+        index === authCookies.length - 1
+          ? changed.slice(offset)
+          : changed.slice(offset, offset + size);
+      offset += size;
+    }
+    const forged = await playwright.request.newContext({
+      baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3002',
+      storageState: state,
+    });
+    try {
+      const response = await forged.get('/api/workspace');
+      expect(response.status()).toBe(401);
+      expect(await response.json()).not.toHaveProperty('state');
+      expect((await page.request.get('/api/workspace')).status()).toBe(200);
+    } finally {
+      await forged.dispose();
+    }
+  });
   test('el docente recorre su aula y cerrar sesión protege el cambio de cuenta', async ({
     page,
   }) => {

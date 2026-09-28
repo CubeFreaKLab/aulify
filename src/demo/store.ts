@@ -60,6 +60,7 @@ let remote: ServerSnapshot | null = null;
 let refreshPending: Promise<void> | null = null;
 let activeMode: boolean | null = null;
 let generation = 0;
+let projectionEpoch = 0;
 type ImmediateFeedback = {
   points: Rational;
   explanation: string | null;
@@ -92,15 +93,28 @@ function readProfile() {
       ? DEMO_IDS.teacher
       : window.sessionStorage.getItem('aulify.demo.profile') || DEMO_IDS.teacher;
 }
+class WorkspaceHttpError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+  }
+}
 async function requestJson<T>(url: string, options?: RequestInit): Promise<T> {
   let response: Response;
   try {
-    response = await fetch(url, { ...options, cache: 'no-store' });
+    response = await fetch(url, {
+      ...options,
+      cache: 'no-store',
+      signal: options?.signal || AbortSignal.timeout(15000),
+    });
   } catch {
     throw new Error('Se perdió la conexión. Conserva esta página abierta y vuelve a intentarlo.');
   }
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'No pudimos completar la acción.');
+  if (!response.ok)
+    throw new WorkspaceHttpError(data.error || 'No pudimos completar la acción.', response.status);
   return data as T;
 }
 export async function remoteCommand<T>(action: string, args: unknown[]): Promise<T> {
@@ -135,18 +149,66 @@ function remoteRepository(): WorkspaceRepository {
     openNextGuidedQuestion: command('openNextGuidedQuestion', 1),
     startAttempt: command('startAttempt', 1),
     submitAnswer: async (...args: unknown[]) => {
+      const currentGeneration = generation;
       const result = await remoteCommand<{ attempt: Attempt; feedback: ImmediateFeedback | null }>(
         'submitAnswer',
         args.slice(0, 5),
       );
-      if (result.feedback) feedbackByAnswer.set(`${args[0]}:${args[1]}`, result.feedback);
-      return {
+      const attempt: Attempt = {
         ...result.attempt,
         answers: result.attempt.answers.map((answer) => ({
           ...answer,
           reviews: answer.reviews || [],
         })),
       };
+      if (currentGeneration !== generation) return attempt;
+      if (result.feedback) feedbackByAnswer.set(`${args[0]}:${args[1]}`, result.feedback);
+      if (remote && snapshot && attempt.studentId === remote.userId) {
+        // El servidor ya confirmó la escritura. Una lectura iniciada antes no puede revertirla.
+        projectionEpoch++;
+        const doubleAnswer = attempt.answers.find((answer) => answer.usedDouble);
+        const consumed = remote.state.powerups.some(
+          (use) =>
+            use.activityId === attempt.activityId &&
+            use.studentId === attempt.studentId &&
+            use.kind === 'double',
+        );
+        const state: DemoState = {
+          ...remote.state,
+          attempts: [...remote.state.attempts.filter((item) => item.id !== attempt.id), attempt],
+          powerups:
+            doubleAnswer && !consumed
+              ? [
+                  ...remote.state.powerups,
+                  {
+                    activityId: attempt.activityId,
+                    studentId: attempt.studentId,
+                    kind: 'double',
+                    questionId: doubleAnswer.questionId,
+                    attemptId: attempt.id,
+                    at: doubleAnswer.submittedAt,
+                  },
+                ]
+              : remote.state.powerups,
+        };
+        const activity = remote.studentActivities[attempt.activityId];
+        remote = {
+          ...remote,
+          state,
+          studentActivities: activity
+            ? {
+                ...remote.studentActivities,
+                [attempt.activityId]: {
+                  ...activity,
+                  attempt,
+                  doubleUsed: activity.doubleUsed || Boolean(doubleAnswer),
+                },
+              }
+            : remote.studentActivities,
+        };
+        snapshot = { ...snapshot, state, error: null, message: null };
+      }
+      return attempt;
     },
     useHint: command('useHint', 2),
     reviewAnswer: command('reviewAnswer', 5),
@@ -207,10 +269,11 @@ export async function refreshDemo() {
   }
   if (refreshPending) return refreshPending;
   const currentGeneration = generation;
+  const currentProjection = projectionEpoch;
   refreshPending = (async () => {
     try {
       const data = await requestJson<ServerSnapshot>('/api/workspace');
-      if (currentGeneration !== generation) return;
+      if (currentGeneration !== generation || currentProjection !== projectionEpoch) return;
       remote = data;
       snapshot = {
         state: data.state,
@@ -241,6 +304,7 @@ function showError(error: unknown) {
 export async function runDemo<T>(
   operation: (repository: WorkspaceRepository) => T | Promise<T>,
   message?: string,
+  options?: { refresh: 'deferred' },
 ): Promise<T | undefined> {
   if (!repository) {
     showError(new Error('El aula todavía se está preparando.'));
@@ -250,7 +314,7 @@ export async function runDemo<T>(
   try {
     const result = await operation(repository);
     if (currentGeneration !== generation) return undefined;
-    await refreshDemo();
+    if (!activeMode || options?.refresh !== 'deferred') await refreshDemo();
     if (currentGeneration !== generation) return undefined;
     if (snapshot) snapshot = { ...snapshot, message: snapshot.error ? null : message || null };
     emit();
@@ -310,7 +374,13 @@ export function useDemo() {
   const data = useSyncExternalStore(subscribe, getSnapshot, serverSnapshot);
   useEffect(() => {
     void hydrate(live);
+    let failures = 0,
+      retryAt = 0,
+      authorizationLost = false;
     const refresh = () => {
+      failures = 0;
+      retryAt = 0;
+      authorizationLost = false;
       void refreshDemo();
     };
     window.addEventListener('storage', refresh);
@@ -320,7 +390,13 @@ export function useDemo() {
       syncing = false,
       cancelled = false;
     const synchronize = async () => {
-      if (document.visibilityState !== 'visible' || syncing) return;
+      if (
+        document.visibilityState !== 'visible' ||
+        syncing ||
+        authorizationLost ||
+        Date.now() < retryAt
+      )
+        return;
       if (!activityId) {
         refresh();
         return;
@@ -331,12 +407,29 @@ export function useDemo() {
           `/api/sync?activity=${encodeURIComponent(activityId)}`,
         );
         if (cancelled) return;
-        if (revision !== value.revision) {
+        const recovering = failures > 0;
+        failures = 0;
+        retryAt = 0;
+        if (revision !== value.revision || recovering) {
           revision = value.revision;
           await refreshDemo();
         }
-      } catch {
-        if (!cancelled) await refreshDemo();
+      } catch (error) {
+        if (cancelled) return;
+        if (error instanceof WorkspaceHttpError && [401, 403].includes(error.status)) {
+          authorizationLost = true;
+          generation++;
+          remote = null;
+          refreshPending = null;
+          feedbackByAnswer.clear();
+          snapshot = { state: null, userId: '', live: true, error: error.message, message: null };
+          emit();
+          if (error.status === 403) await refreshDemo();
+        } else {
+          failures++;
+          retryAt = Date.now() + Math.min(8000, 1000 * 2 ** (failures - 1));
+          if (failures === 1) showError(error);
+        }
       } finally {
         syncing = false;
       }

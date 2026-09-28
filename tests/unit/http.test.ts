@@ -1,8 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import { NextRequest } from 'next/server';
-import { isSameOrigin, readJson, safePath } from '../../src/lib/http';
+import { authFailureResponse, isSameOrigin, readJson, safePath } from '../../src/lib/http';
 
 describe('frontera HTTP del aula', () => {
+  it('distingue indisponibilidad de Auth de una sesión inválida', async () => {
+    for (const error of [{ status: 503 }, { name: 'AuthRetryableFetchError' }]) {
+      const response = authFailureResponse(error);
+      expect(response.status).toBe(503);
+      expect(await response.json()).toEqual({
+        error: 'No pudimos verificar tu sesión en este momento. Intenta de nuevo.',
+      });
+      expect(response.headers.get('Cache-Control')).toBe('private, no-store');
+    }
+    expect(authFailureResponse({ status: 401 }).status).toBe(401);
+    expect(authFailureResponse({ name: 'AuthInvalidJwtError' }).status).toBe(401);
+    expect(authFailureResponse(null).status).toBe(401);
+  });
   it('rechaza solicitudes cruzadas y sin origen aunque tengan cookies', () => {
     for (const origin of ['https://otro.example', '', 'null']) {
       const request = new NextRequest('https://aulify.example/api/commands', {

@@ -276,6 +276,7 @@ function QuizPlayer({
   const [clock, setClock] = useState(() => Date.now());
   const heading = useRef<HTMLHeadingElement>(null);
   const submitting = useRef(false);
+  const submissionKeys = useRef(new Map<string, string>());
   const guided = activity.settings.pace === 'guided';
   const index = guided ? activity.guided?.questionIndex || 0 : attempt.answers.length;
   const questionId = feedback?.id || attempt.questionOrder[index];
@@ -292,12 +293,20 @@ function QuizPlayer({
     heading.current?.focus();
   }, [questionId, waiting]);
   useEffect(() => {
+    let checkedDeadline = false;
     const timer = setInterval(() => {
       setClock(Date.now());
-      if (Date.now() >= Date.parse(attempt.deadline)) refreshDemo();
+      if (
+        !checkedDeadline &&
+        attempt.status === 'in-progress' &&
+        Date.now() >= Date.parse(attempt.deadline)
+      ) {
+        checkedDeadline = true;
+        void refreshDemo();
+      }
     }, 1000);
     return () => clearInterval(timer);
-  }, [attempt.deadline]);
+  }, [attempt.deadline, attempt.status]);
   useEffect(() => {
     if (!live || !activity.settings.reportVisibility || attempt.status !== 'in-progress') return;
     let hiddenAt: string | null = null;
@@ -329,6 +338,9 @@ function QuizPlayer({
   async function submit() {
     if (!question || !value || submitting.current) return;
     submitting.current = true;
+    const answerKey = `${attempt.id}:${question.id}`;
+    if (!submissionKeys.current.has(answerKey))
+      submissionKeys.current.set(answerKey, crypto.randomUUID());
     if (soundOn) {
       try {
         audio.current ||= new AudioContext();
@@ -337,15 +349,18 @@ function QuizPlayer({
         /* El quiz sigue operativo si el dispositivo no admite audio. */
       }
     }
-    const result = await runDemo((r) =>
-      r.submitAnswer(
-        attempt.id,
-        question.id,
-        value,
-        `${attempt.id}:${question.id}`,
-        double,
-        user.id,
-      ),
+    const result = await runDemo(
+      (r) =>
+        r.submitAnswer(
+          attempt.id,
+          question.id,
+          value,
+          submissionKeys.current.get(answerKey)!,
+          double,
+          user.id,
+        ),
+      undefined,
+      { refresh: 'deferred' },
     );
     submitting.current = false;
     if (!result) return;

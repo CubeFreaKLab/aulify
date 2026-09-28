@@ -7,6 +7,20 @@ export function jsonResponse(body: unknown, status = 200) {
   });
 }
 
+export function authFailureResponse(error?: { status?: number; name?: string } | null) {
+  const unavailable =
+    (error?.status !== undefined && error.status >= 500) ||
+    error?.name === 'AuthRetryableFetchError';
+  return jsonResponse(
+    {
+      error: unavailable
+        ? 'No pudimos verificar tu sesión en este momento. Intenta de nuevo.'
+        : 'Tu sesión terminó. Vuelve a iniciar sesión.',
+    },
+    unavailable ? 503 : 401,
+  );
+}
+
 export function isSameOrigin(request: NextRequest) {
   const origin = request.headers.get('origin');
   const fetchSite = request.headers.get('sec-fetch-site');
