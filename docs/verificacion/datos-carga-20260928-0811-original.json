@@ -1,0 +1,128 @@
+{
+  "runId": "98242fd9-4f02-4296-a78a-b862253452cc",
+  "startedAt": "2026-09-28T08:10:45.672Z",
+  "status": "stopped-at-safety-limit",
+  "commit": "91c5fe494f3f7e651876db702f16289059b85ff0",
+  "buildId": "5QririPmjJI9Ub74OkXjB",
+  "environment": {
+    "application": "Next.js production local HTTP",
+    "base": "http://127.0.0.1:3002",
+    "database": "Supabase Free, PostgreSQL 17, sa-east-1",
+    "generator": {
+      "node": "v24.14.1",
+      "os": "win32 10.0.26220",
+      "cpu": "Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 34257453056
+    },
+    "activeSessions": 204,
+    "teachers": 4,
+    "students": 200,
+    "studentsPerClass": 50,
+    "questionsPerActivity": 10,
+    "pollingMs": 1000,
+    "polling": "GET /api/sync; GET /api/workspace solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional",
+    "warmupSeconds": 300,
+    "measurementSeconds": 900,
+    "logicalBodyBudgetBytes": 1000000000,
+    "confirmation": "ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.",
+    "fixtureHistory": "Las cuentas conservan el calentamiento fallido previo; el primer grupo conserva además seis actividades cerradas de la prueba de concurrencia guiada. No se borró ese historial para reducir el costo de lectura."
+  },
+  "phases": [
+    {
+      "name": "individual-warmup",
+      "mode": "individual",
+      "stage": "warmup",
+      "targetSeconds": 300,
+      "startedAt": "2026-09-28T08:11:41.317Z",
+      "requestCount": 22663,
+      "failedRequests": 810,
+      "bodyBytes": 109743684,
+      "operations": {
+        "sync": {
+          "count": 19193,
+          "failed": 414,
+          "p50Ms": 860.38,
+          "p95Ms": 6628.3,
+          "maxMs": 15016,
+          "statuses": {
+            "0": 414,
+            "200": 18779
+          }
+        },
+        "snapshot": {
+          "count": 1681,
+          "failed": 8,
+          "p50Ms": 1894.36,
+          "p95Ms": 8260.37,
+          "maxMs": 15014,
+          "statuses": {
+            "0": 8,
+            "200": 1673
+          }
+        },
+        "submitAnswer": {
+          "count": 1789,
+          "failed": 388,
+          "p50Ms": 2134.45,
+          "p95Ms": 15011.55,
+          "maxMs": 15016,
+          "statuses": {
+            "0": 388,
+            "200": 1401
+          }
+        }
+      },
+      "skippedPollTicks": 33418,
+      "confirmed": {},
+      "unsentAnswers": 0,
+      "unconfirmedAnswers": 0,
+      "unobservedConfirmations": 0,
+      "burst": null,
+      "interrupted": true,
+      "completedAt": "2026-09-28T08:16:00.738Z",
+      "elapsedSeconds": 259.421,
+      "integrityAuditStatus": "No completada: TimeoutError",
+      "successfulAcknowledgementSamples": 1401,
+      "observedConfirmationSamples": 1401,
+      "observedPropagationSamples": 0,
+      "confirmationP95Ms": 7437.84,
+      "responseAckP95Ms": 7437.83,
+      "propagationP95Ms": null,
+      "failureRate": 0.03574107576225566,
+      "criteria": {
+        "durationCompleted": false,
+        "confirmationP95": false,
+        "propagationP95": true,
+        "validRequestFailureRate": false,
+        "integrity": false,
+        "burst": true
+      }
+    }
+  ],
+  "authentication": {
+    "rateLimitWaits": 0,
+    "preparedSessions": 204
+  },
+  "limitations": [
+    "El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.",
+    "La aplicación está en una computadora local, no en el alojamiento público.",
+    "Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.",
+    "La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos."
+  ],
+  "sourceDiffSha256": "550ec8b5d219bad89885fa5bc0e3302911db23efed61504c9eef1d322c11a091",
+  "previousReport": "datos-carga-20260928-0740.md",
+  "failure": {
+    "type": "Error",
+    "reason": "Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto."
+  },
+  "completedAt": "2026-09-28T08:16:15.779Z",
+  "generatorEventLoop": {
+    "p95Ms": 32.05,
+    "maxMs": 35.91
+  },
+  "observedApplicationBodyBytes": 116779634,
+  "totalRequests": 23072,
+  "conservativeEstimatedBytes": 257184996,
+  "interruptedReason": "Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto."
+}

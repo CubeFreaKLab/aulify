@@ -1,0 +1,136 @@
+{
+  "runId": "6f4b431d-ce37-4c8b-b249-5b277ac0c981",
+  "startedAt": "2026-09-28T07:30:27.513Z",
+  "status": "stopped-at-safety-limit",
+  "commit": "5391321013e87c4b2ffa8c1835075ef51cf92e60",
+  "environment": {
+    "application": "Next.js production local HTTP",
+    "base": "http://127.0.0.1:3002",
+    "database": "Supabase Free, PostgreSQL 17, sa-east-1",
+    "generator": {
+      "node": "v24.14.1",
+      "os": "win32 10.0.26220",
+      "cpu": "Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 34257453056
+    },
+    "activeSessions": 204,
+    "teachers": 4,
+    "students": 200,
+    "studentsPerClass": 50,
+    "questionsPerActivity": 10,
+    "pollingMs": 1000,
+    "polling": "GET /api/sync; GET /api/workspace solo cuando cambia la huella",
+    "warmupSeconds": 300,
+    "measurementSeconds": 900,
+    "logicalBodyBudgetBytes": 1000000000
+  },
+  "phases": [
+    {
+      "name": "individual-warmup",
+      "mode": "individual",
+      "stage": "warmup",
+      "targetSeconds": 300,
+      "startedAt": "2026-09-28T07:40:08.466Z",
+      "requestCount": 2211,
+      "failedRequests": 1797,
+      "bodyBytes": 1650149,
+      "operations": {
+        "sync": {
+          "count": 705,
+          "failed": 462,
+          "statuses": {
+            "0": 461,
+            "200": 243,
+            "403": 1
+          },
+          "p95Ms": 15014.3223,
+          "maxMs": 15066.69570000004
+        },
+        "snapshot": {
+          "count": 705,
+          "failed": 617,
+          "statuses": {
+            "0": 580,
+            "200": 88,
+            "401": 37
+          },
+          "p95Ms": 15013.847499999916,
+          "maxMs": 15015.859499999904
+        },
+        "submitAnswer": {
+          "count": 776,
+          "failed": 697,
+          "statuses": {
+            "0": 544,
+            "200": 79,
+            "401": 153
+          },
+          "p95Ms": 15014.613099999959,
+          "maxMs": 15016.527699999977
+        },
+        "confirmationSnapshot": {
+          "count": 25,
+          "failed": 21,
+          "statuses": {
+            "0": 21,
+            "200": 4
+          },
+          "p95Ms": 15013.2108,
+          "maxMs": 15013.935999999987
+        }
+      },
+      "skippedPollTicks": 17898,
+      "unsentAnswers": 0,
+      "unconfirmedAnswers": 187,
+      "unobservedConfirmations": 0,
+      "burst": null,
+      "interrupted": true,
+      "completedAt": "2026-09-28T07:41:42.587Z",
+      "elapsedSeconds": 94.121,
+      "successfulAcknowledgementSamples": 79,
+      "observedConfirmationSamples": 13,
+      "responseAckP95Ms": 27609.990100000054,
+      "confirmationP95Ms": 21130.157999999938,
+      "propagationP95Ms": null,
+      "failureRate": 0.8127544097693351,
+      "integrityAuditStatus": "La auditoría HTTP posterior al corte también agotó 15 segundos; no se pudo contrastar el conjunto de claves confirmadas."
+    }
+  ],
+  "authentication": {
+    "rateLimitWaits": 0,
+    "preparedSessions": 204
+  },
+  "limitations": [
+    "El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.",
+    "La aplicación está en una computadora local, no en el alojamiento público.",
+    "Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.",
+    "La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos."
+  ],
+  "failure": {
+    "type": "TimeoutError",
+    "reason": "Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto."
+  },
+  "completedAt": "2026-09-28T07:41:57.601Z",
+  "generatorEventLoop": {
+    "p95Ms": 32.03,
+    "maxMs": 103.15
+  },
+  "observedApplicationBodyBytes": 2051756,
+  "totalRequests": 2620,
+  "conservativeEstimatedBytes": 6786392,
+  "interruptedReason": "Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto.",
+  "compiledCommit": "20e5afc",
+  "commitMeaning": "HEAD del repositorio al iniciar el generador; compiledCommit identifica el código compilado realmente servido.",
+  "archivedRawSource": "datos-carga-20260928-0740.json",
+  "summaryDerivedAt": "2026-09-28T07:47:53.934Z",
+  "postStopRecoveryAudit": {
+    "observedAt": "2026-09-28T07:47:53.935Z",
+    "source": "Consulta de solo lectura vía Supabase MCP después de cesar la carga",
+    "activities": 4,
+    "attempts": 200,
+    "persistedAnswers": 200,
+    "duplicateQuestionRows": 0,
+    "confirmedKeyCorrespondence": "No verificada: la auditoría HTTP agotó el tiempo y el conjunto en memoria no se serializó."
+  }
+}

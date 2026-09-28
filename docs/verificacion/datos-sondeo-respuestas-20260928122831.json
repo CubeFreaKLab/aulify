@@ -1,0 +1,461 @@
+{
+  "startedAt": "2026-09-28T12:28:31.878Z",
+  "scope": "Sondeo HTTP de una ráfaga, sin calentamiento ni medición sostenida. No equivale a Q-06.",
+  "buildId": "7sRhvomkfVIG0kD7-y2WS",
+  "commit": "c8432b82ff03326b4fe47b1452dc762ab0cbb5e0",
+  "students": 20,
+  "records": [
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 4070.8333,
+      "bytes": 615453
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 707.5150999999996,
+      "bytes": 182594
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 604.8922000000002,
+      "bytes": 180992
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 764.0681000000004,
+      "bytes": 184192
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 617.8167000000012,
+      "bytes": 179920
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 666.3383000000013,
+      "bytes": 112435
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 947.3581999999988,
+      "bytes": 429689
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 733.1873999999989,
+      "bytes": 31674
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 421.1967000000004,
+      "bytes": 31674
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 404.0239999999976,
+      "bytes": 31672
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 743.3610000000008,
+      "bytes": 31678
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 497.8679000000011,
+      "bytes": 31672
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 941.9863000000005,
+      "bytes": 429619
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 408.3715000000011,
+      "bytes": 31670
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 446.55280000000494,
+      "bytes": 31670
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 403.8575999999957,
+      "bytes": 31670
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 866.8767999999982,
+      "bytes": 31674
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 440.5804999999964,
+      "bytes": 31672
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 952.8269,
+      "bytes": 428945
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 727.841800000002,
+      "bytes": 31670
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 404.112000000001,
+      "bytes": 31674
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 1220.9830000000002,
+      "bytes": 31676
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 438.6532999999981,
+      "bytes": 31676
+    },
+    {
+      "stage": "authenticationPreparation",
+      "status": 200,
+      "ms": 422.53310000000056,
+      "bytes": 31676
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 1357.135199999997,
+      "bytes": 770
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 285.7546000000002,
+      "bytes": 770
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 288.0633000000016,
+      "bytes": 770
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 264.04500000000553,
+      "bytes": 770
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 198.8173999999999,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 208.70729999999458,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 431.57310000000143,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 519.0452000000005,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 195.39890000000014,
+      "bytes": 1961
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 795.9926999999952,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 420.5996000000014,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 940.7534000000014,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 347.7105999999985,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 954.5700999999972,
+      "bytes": 1961
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 556.5787000000055,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 231.26550000000134,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 1087.8695000000007,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 1094.7620000000024,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 302.3067999999985,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 180.05289999999513,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 226.15000000000146,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 171.59739999999874,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 177.00470000000496,
+      "bytes": 1962
+    },
+    {
+      "stage": "prepare",
+      "status": 200,
+      "ms": 339.8623000000007,
+      "bytes": 1962
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 187.42919999999867,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 225.21420000000217,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 182.09389999999985,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 333.4219000000012,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 263.4999000000025,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 176.717899999996,
+      "bytes": 2255
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 313.21259999999893,
+      "bytes": 2254
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 665.5417999999991,
+      "bytes": 2255
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 219.4123000000036,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 599.6068999999989,
+      "bytes": 2255
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 796.3312000000005,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 174.26609999999346,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 176.57949999999983,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 189.61740000000282,
+      "bytes": 2255
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 194.42689999999857,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 432.965200000006,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 216.03549999999814,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 165.76580000000104,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 198.4400999999998,
+      "bytes": 2256
+    },
+    {
+      "stage": "answer",
+      "status": 200,
+      "ms": 600.3138000000035,
+      "bytes": 2256
+    },
+    {
+      "stage": "audit",
+      "status": 200,
+      "ms": 198.84709999999905,
+      "bytes": 37829
+    },
+    {
+      "stage": "audit",
+      "status": 200,
+      "ms": 318.5506000000023,
+      "bytes": 37825
+    },
+    {
+      "stage": "audit",
+      "status": 200,
+      "ms": 208.58469999999215,
+      "bytes": 37837
+    },
+    {
+      "stage": "audit",
+      "status": 200,
+      "ms": 196.77939999999944,
+      "bytes": 37827
+    }
+  ],
+  "activities": [
+    "f6b4eb69-6d9c-4434-888b-c931e2934187",
+    "996f93dc-e67b-44e1-9b0d-5261c0ab499b",
+    "37ba4adc-53d3-4a88-b528-06f9310c7f5d",
+    "ba37d9cb-8672-4ddd-bf00-73a3d7cd59db"
+  ],
+  "authentication": {
+    "prepared": 24,
+    "waits": 0,
+    "spacingMs": 2500
+  },
+  "dispatchWindowMs": 1795.5946999999942,
+  "confirmed": 20,
+  "confirmationP95Ms": 665.5779000000039,
+  "persisted": 20,
+  "missingOrChangedConfirmed": 0,
+  "status": "completed",
+  "completedAt": "2026-09-28T12:29:38.265Z",
+  "observedBodyBytes": 3457687,
+  "conservativeEstimatedBytes": 6989102
+}

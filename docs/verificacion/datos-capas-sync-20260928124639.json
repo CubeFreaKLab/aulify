@@ -1,0 +1,6473 @@
+{
+  "startedAt": "2026-09-28T12:46:39.616Z",
+  "scope": "Comparación breve de la misma RPC autorizada, directa frente a ruta HTTP local; no sustituye Q-06.",
+  "buildId": "7sRhvomkfVIG0kD7-y2WS",
+  "commit": "c8432b82ff03326b4fe47b1452dc762ab0cbb5e0",
+  "sessionCount": 100,
+  "measurements": [
+    {
+      "layer": "http",
+      "concurrency": 20,
+      "requests": 200,
+      "failed": 0,
+      "elapsedMs": 3323.3723999999993,
+      "p50Ms": 172.77089999999998,
+      "p95Ms": 771.4676999999999
+    },
+    {
+      "layer": "rpc",
+      "concurrency": 20,
+      "requests": 200,
+      "failed": 0,
+      "elapsedMs": 3112.7066000000004,
+      "p50Ms": 169.40390000000025,
+      "p95Ms": 782.7089000000005
+    },
+    {
+      "layer": "rpc",
+      "concurrency": 100,
+      "requests": 200,
+      "failed": 0,
+      "elapsedMs": 5210.5074,
+      "p50Ms": 224.57990000000063,
+      "p95Ms": 1187.4128
+    },
+    {
+      "layer": "http",
+      "concurrency": 100,
+      "requests": 200,
+      "failed": 0,
+      "elapsedMs": 3501.1917999999987,
+      "p50Ms": 661.3643999999986,
+      "p95Ms": 1345.1073000000015
+    }
+  ],
+  "records": [
+    {
+      "layer": "http",
+      "stage": "warmup",
+      "role": "teacher",
+      "status": 200,
+      "ms": 1310.041,
+      "bytes": 142
+    },
+    {
+      "layer": "rpc",
+      "stage": "warmup",
+      "role": "teacher",
+      "status": 200,
+      "ms": 414.3616000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 227.0625,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 256.72309999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 609.3640000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 620.5217,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 623.1599000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 623.5935000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 642.3118999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 646.7935,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 683.5218,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 687.5860999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 690.5938999999998,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 771.4676999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.24980000000005,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 792.8409999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 170.03290000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 182.23160000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 176.8366000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 807.8890000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 194.13459999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 189.4761999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.98489999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.9322000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 155.49220000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 935.2011,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.55409999999983,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 165.5581000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 289.7541000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.18880000000036,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 212.9631999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 190.8512999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 197.16280000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 174.5618000000004,
+      "bytes": 140
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 192.91679999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 211.37339999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1089.0600000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 163.93009999999958,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.8412999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.27610000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 158.60310000000027,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 275.26160000000027,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.10630000000037,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 657.5556999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.11719999999968,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 175.58579999999984,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 167.46230000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 185.57299999999987,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 160.45410000000038,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1207.8367,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1212.3620999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1223.0075,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1226.6401,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1235.3797000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 211.0048999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 203.32390000000032,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.92570000000023,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 163.26739999999972,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 163.5227,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.1203999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 165.50170000000026,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 177.29539999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 195.66660000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 222.51080000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 172.51490000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.18190000000004,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.60030000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 155.6314000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.00480000000016,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.97029999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 188.49559999999974,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 160.23770000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 214.60640000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 190.14179999999988,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 197.41510000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 164.42619999999988,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.36439999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.3992000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 236.46810000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.5324999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 210.65359999999964,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.5639000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.32459999999992,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 173.44090000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.27310000000034,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.75430000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.07200000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 196.2202000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 174.41709999999966,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.5299,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 172.77089999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.72569999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.61279999999988,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 158.51260000000002,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 155.67070000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 181.26400000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 192.8729000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 188.6157000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 158.92749999999978,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 164.4139,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 185.33410000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 161.71849999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.3760000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.05009999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 195.17599999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 201.29809999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 158.0989999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 197.97919999999976,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 191.75559999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.86509999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 172.30229999999983,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 161.01009999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 163.90200000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.23240000000033,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 171.82630000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.70090000000027,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 186.65269999999964,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 301.2413999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 158.3379,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.11249999999973,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 169.3804,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 163.05480000000034,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 177.82250000000022,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 149.72490000000016,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 169.75689999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 216.47350000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 149.99040000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.51880000000028,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.95040000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.0056999999997,
+      "bytes": 140
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.2458999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 216.44750000000022,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 160.41139999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 318.83799999999974,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 164.11169999999993,
+      "bytes": 140
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 164.87350000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 244.82760000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.0974000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 187.23239999999987,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.36940000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 455.61270000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.37390000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 174.79320000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 180.6023,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.63250000000016,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.78330000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 156.18730000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 267.42509999999993,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.4979000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.52840000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 187.95939999999973,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.61299999999983,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.35970000000043,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 268.9038999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 177.99029999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.9987000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 160.51870000000008,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 189.73170000000027,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 198.9450999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 182.7183,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 164.47260000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 180.10190000000011,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 160.07440000000042,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 158.51449999999977,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 641.7743,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 661.027,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.24049999999988,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.29999999999973,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 161.45399999999972,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 188.20759999999973,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 195.3807999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.54960000000028,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.77679999999964,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 586.2613999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.1588999999999,
+      "bytes": 140
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.43970000000036,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 161.53060000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 171.05610000000024,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 174.48540000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 165.24829999999974,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.50030000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 171.5256999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 185.98529999999982,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 236.97919999999976,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 183.20079999999962,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 161.48050000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 198.19619999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 157.85109999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.10800000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.07900000000063,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 161.46180000000004,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.78160000000025,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 210.04590000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 279.25419999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.97069999999985,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 279.77050000000054,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 325.8876999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 451.21910000000025,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 560.8361,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 403.6394,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 644.9206000000004,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-20",
+      "role": "student",
+      "status": 200,
+      "ms": 885.7212,
+      "bytes": 142
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 160.7560000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 343.27650000000085,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 349.7934000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 357.8213999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 359.66210000000046,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 452.8289999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.48829999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.1349999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 578.7007000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 600.9893999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 150.70119999999952,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 615.094,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 459.8222000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 632.5021999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.72429999999986,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.07400000000052,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.0002000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 156.88380000000052,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.85609999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.30159999999978,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 782.7089000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 145.91970000000038,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.04949999999917,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 274.5634999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 462.41550000000007,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 481.3886000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 878.5190999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 162.2492000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.7533000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.26989999999932,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 145.96300000000065,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 916.7446999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 930.4807000000001,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.4265000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 935.3184999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 937.2469000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 942.4316000000008,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.9514999999992,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 173.32670000000053,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.02700000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1007.4260000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.72559999999976,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 249.39289999999983,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.48179999999957,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 150.80339999999978,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.15669999999955,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.70039999999972,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 181.79890000000069,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 210.80279999999948,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 178.8716000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 256.03969999999936,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 194.1844000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1141.8071,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 184.83339999999953,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 1164.3289999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 194.03669999999966,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 174.0590999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.80559999999969,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.95319999999992,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.72850000000017,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.3738000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 170.27829999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.29009999999926,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 176.23109999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.09340000000066,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 192.36300000000028,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 178.07669999999962,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 159.22249999999985,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.46949999999924,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.92370000000028,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 147.92969999999968,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.1921999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.79809999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 188.54899999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 149.3715000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 453.0698999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 470.1866,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 643.5815999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 492.48269999999957,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 145.01400000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 147.91719999999987,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 170.07380000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.20409999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 456.0092999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.23799999999937,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 182.67460000000028,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.03960000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 182.29899999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.67109999999957,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.30199999999968,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.0583999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.47270000000026,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 453.28999999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.90059999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 165.41670000000067,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 149.85719999999947,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 164.64360000000033,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.7484999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 147.9376000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.58790000000045,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 145.57369999999992,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.6347999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 200.9472999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.5640000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 177.9277000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 147.11499999999978,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 169.35159999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 169.40390000000025,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.54110000000037,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.22170000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.14590000000044,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 169.8685999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 184.3149000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 166.40689999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.14120000000003,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.72910000000047,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.47910000000047,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.00980000000072,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 172.03179999999975,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 152.84989999999925,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.9993999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.9400999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.34590000000026,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 144.3723,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 220.3732,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 257.33559999999943,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 190.03650000000016,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 208.21169999999984,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.9993000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 277.45950000000084,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.11879999999928,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 164.64019999999982,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 395.0195999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.39630000000034,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.19800000000032,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 459.58309999999983,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.8770000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.26710000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 256.45589999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 483.28309999999965,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 252.94779999999992,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 522.6039000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.82499999999982,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.40129999999954,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 453.01780000000053,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 473.0643,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 432.7542000000003,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 173.58100000000013,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 508.7979999999998,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.3047999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 546.2716,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 776.7777999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 545.8498,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.03390000000036,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 178.39390000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 756.3904999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 450.5514999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 691.9348,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 578.0805999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 466.5029999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 155.57899999999972,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 796.8086000000003,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.5645999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 168.65179999999964,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.2568999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 150.5587999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 180.34279999999944,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 182.04860000000008,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.3078000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "teacher",
+      "status": 200,
+      "ms": 151.71910000000025,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 151.66620000000057,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 461.0036,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 179.2532000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 148.55140000000029,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.66409999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 488.0126,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 154.53609999999935,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 283.8572000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 170.10910000000058,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 214.66820000000007,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 147.63900000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 153.8068999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 178.34050000000025,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 176.60260000000017,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 171.1897000000008,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 258.0654000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 145.59420000000046,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 145.22469999999976,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 146.6876000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 152.41720000000078,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 394.77930000000015,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 177.89490000000023,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 147.78990000000067,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 167.60960000000068,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 173.20049999999992,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 175.1778000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 482.03639999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 257.8681999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 483.79439999999886,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-20",
+      "role": "student",
+      "status": 200,
+      "ms": 567.6596,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 183.19650000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 183.83479999999872,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 184.98320000000058,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 185.90819999999985,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 187.6941999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 189.46510000000126,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 194.4361000000008,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 199.8802999999989,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 201.33139999999912,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 201.75990000000093,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 204.1141000000007,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 224.57990000000063,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 224.69250000000102,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 256.1748000000007,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 256.3191000000006,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 256.15630000000056,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 298.0725000000002,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 298.9233000000004,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 300.6933999999983,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 147.84049999999843,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 154.78720000000067,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.1729000000014,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.3793000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 152.5012000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 153.16630000000077,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 158.14109999999891,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 152.77289999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 152.30099999999948,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.03809999999976,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 360.15290000000095,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 367.09050000000025,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 375.29719999999907,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 380.1317999999992,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 383.15859999999884,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 386.3837999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 389.6375000000007,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 392.78510000000097,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 399.6851999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 401.479800000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 402.33100000000013,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 180.48959999999897,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 406.8562000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 408.9803000000011,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 410.0437000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 414.1990000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 416.4422000000013,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 199.5622999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 421.97700000000077,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 425.3056000000015,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 427.5066999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 176.8778000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 434.553100000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 433.90749999999935,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 434.7981,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 437.9935000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 444.4795000000013,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 192.31720000000132,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 449.8132000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 448.9889999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 450.4418000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 453.2631999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 460.6803,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 461.4001999999982,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 466.0847999999987,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 468.8007000000016,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 175.04290000000037,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 467.5563999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 471.2960000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 468.20700000000033,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 174.5122999999985,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 219.97810000000027,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 476.60119999999915,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 473.32800000000134,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 157.98459999999977,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 160.17150000000038,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 156.66899999999987,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 158.51220000000103,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 494.5170999999991,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 163.5,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 155.9365999999991,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 509.91429999999855,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 512.338099999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 161.65949999999975,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 164.53570000000036,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 518.6496000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 514.1290000000008,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 164.945099999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 515.0547000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 156.84940000000097,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 519.5564999999988,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 164.34439999999995,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 525.6715999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 179.90979999999945,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.40810000000056,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 531.6568000000007,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 537.6553999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 530.5734999999986,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 533.4427999999989,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 152.64750000000095,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 152.6839,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 541.1147000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 538.8613999999998,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 156.14140000000043,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 155.05279999999948,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 146.0537000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 555.9750000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 157.8719999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 160.8903999999984,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 157.21780000000035,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 576.1877999999997,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 150.46560000000136,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 575.090900000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 180.67759999999907,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 145.0048999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 185.16389999999956,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 167.88869999999952,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 188.25950000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 179.3848999999991,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 159.01649999999972,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 173.89700000000084,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 176.08590000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 170.1133000000009,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 158.26950000000033,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 184.9459999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 175.97929999999906,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 151.54979999999887,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 148.35770000000048,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 625.1978999999992,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 180.4305000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 628.1295000000009,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 179.77479999999923,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 177.3130000000001,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 153.4400000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 178.23099999999977,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 179.10720000000038,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 180.82560000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 162.1999999999989,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 479.1949000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 167.5720999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 190.99139999999898,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 169.11329999999907,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 155.57420000000093,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 160.09460000000036,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 167.07310000000143,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 148.5492000000013,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 196.6845000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 153.83250000000044,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 672.4398000000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 156.56850000000122,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.7472999999991,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 156.46270000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.13650000000052,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 154.40469999999914,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 157.27839999999924,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 170.83990000000085,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 220.69270000000142,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 161.66799999999967,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 157.2422000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 162.38609999999971,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 158.78849999999875,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 155.96910000000025,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 156.70819999999912,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 699.1568000000007,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 694.5691999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 178.57190000000082,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 176.8814999999995,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 185.16979999999967,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 472.0769,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 787.8702000000012,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 277.90810000000056,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 341.72879999999896,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 483.1815999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 487.7353999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 895.3432999999986,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 909.5302000000011,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 459.3736000000008,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 468.02210000000014,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 490.6396000000004,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 957.7249000000011,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 979.705899999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 988.3384999999998,
+      "bytes": 146
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 532.5457000000006,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1011.4372000000003,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1017.4840000000004,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1026.191499999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1036.6872999999996,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 641.6738000000005,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1133.0203999999994,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 772.2146999999986,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1187.4128,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1551.135400000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1572.8207000000002,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1628.6652999999988,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1646.256300000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1924.2350999999999,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 2020.058500000001,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 2041.1500000000015,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 2347.2379,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 2824.1929999999993,
+      "bytes": 147
+    },
+    {
+      "layer": "rpc",
+      "stage": "rpc-100",
+      "role": "student",
+      "status": 200,
+      "ms": 5205.945299999999,
+      "bytes": 147
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 638.4918000000016,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 638.7426000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 663.8919999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 672.4789999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 718.1160999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 770.9175000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 776.2340999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 782.3002000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 780.5018,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 161.3145999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 162.6851000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 171.34600000000137,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 896.0421000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 909.1044000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 914.6201999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 919.1977999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 920.7358999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 921.4453999999987,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 160.1185999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 153.6146000000008,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 161.13999999999942,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 949.0269000000008,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 949.5571,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 155.7469999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 155.5610000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 957.6301000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 967.9207999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 964.5668000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 966.9836000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 302.2011999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 199.9333999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 1012.4380999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1020.6201999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1025.0218000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1036.7623000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 161.89140000000043,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1075.5290000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1069.7093999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 161.16769999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1083.9251999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 191.92479999999887,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1082.9316,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 169.7020999999986,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1095.8973999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 208.94040000000132,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1133.1852,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 211.92749999999978,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 209.91309999999976,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 212.44770000000062,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 209.91380000000026,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1147.8868000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1144.0528000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1147.4265999999989,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 203.17679999999928,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1154.9740999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 201.5599999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 202.33609999999862,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1157.2740000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 194.46720000000096,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1157.7754999999997,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1167.9971999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1168.4184999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1163.892600000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1168.1844999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 215.1368999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1187.6463999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 217.58439999999973,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 231.9323999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1187.5707000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1203.997300000001,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 225.40400000000045,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1219.0321000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1215.8328000000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1216.6807000000008,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 240.3088000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1218.5972000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1228.1814000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 262.3639999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1236.7261999999992,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1234.8647,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1232.2927,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1233.7297000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 200.72409999999945,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1234.1368000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1235.068299999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1255.4912000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 199.95780000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1258.9378000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1258.9211000000014,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1257.1085000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1259.8166999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1274.4247999999989,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1275.6671999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 1279.0205999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 263.3616000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1278.2144000000008,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1277.9606000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 264.7566999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1294.5789000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1295.1314000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 221.2556999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1294.0882999999994,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1293.4001000000007,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1295.5280000000002,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 231.3703000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1304.8536000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1302.5661999999993,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1304.9997000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1305.6417999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1304.0649000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1304.0272999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1324.4125000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 368.90990000000056,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 240.98949999999968,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1330.2829000000002,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 242.73389999999927,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1334.7050000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1332.1587,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1333.6640000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 198.66400000000067,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 232.8089,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1330.1675999999989,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1331.3671000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1333.2735000000011,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1334.0205999999998,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1330.8460999999988,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1337.3883000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1333.6072999999997,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 254.86189999999988,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 255.1884000000009,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1338.6093,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 190.79370000000017,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 192.40420000000086,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 194.3739000000005,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 206.84490000000005,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1345.1073000000015,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 188.806700000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 193.59469999999965,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 205.78800000000047,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 217.34609999999884,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 220.59929999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1367.6358,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1368.5774999999994,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 220.58950000000004,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 229.20929999999862,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 198.5547999999999,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 229.9943999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 231.89220000000023,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 201.54910000000018,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 221.8163000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1395.2181,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 237.15630000000056,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 200.77340000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 222.77160000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 219.19859999999971,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 192.05669999999918,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 194.85219999999936,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 196.10189999999966,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 196.0534000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 211.0706999999984,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 198.80409999999938,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 287.83549999999923,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 288.08050000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 767.6412,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 247.79230000000098,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 198.01280000000042,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 200.67009999999937,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 203.72279999999955,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 190.66059999999925,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 220.90349999999853,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 225.3117999999995,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 223.42330000000038,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 192.08129999999983,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 192.53279999999904,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 197.1208000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 217.83100000000013,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 183.1887000000006,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 322.3149000000012,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 209.4372999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 218.04719999999907,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 204.50910000000113,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 214.3716000000004,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 325.20679999999993,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 331.21739999999954,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 307.47999999999956,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 323.51290000000154,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 350.7482,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 321.937100000001,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 439.7330000000002,
+      "bytes": 141
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 626.6890999999996,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1690.9345999999987,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 1732.2972999999984,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 478.0063000000009,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 661.3643999999986,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 721.0568000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "teacher",
+      "status": 200,
+      "ms": 2166.1908000000003,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 2217.6622000000007,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 2742.5561,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 3067.8506000000016,
+      "bytes": 142
+    },
+    {
+      "layer": "http",
+      "stage": "http-100",
+      "role": "student",
+      "status": 200,
+      "ms": 3498.7252000000008,
+      "bytes": 142
+    }
+  ],
+  "limitations": [
+    "RPC directa incluye red/PostgREST/PostgreSQL; no aísla tiempo SQL.",
+    "HTTP incluye proxy, validación JWT y ruta Next.js además de RPC.",
+    "Orden alternado para reducir sesgo de calentamiento; no elimina variabilidad de red.",
+    "Tokens existentes y válidos; no se renueva ni simula autenticación durante la medición."
+  ],
+  "status": "completed",
+  "completedAt": "2026-09-28T12:46:56.524Z",
+  "observedBodyBytes": 115811,
+  "conservativeEstimatedBytes": 1052870
+}

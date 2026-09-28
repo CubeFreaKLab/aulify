@@ -1,0 +1,5103 @@
+{
+  "startedAt": "2026-09-28T08:44:05.950Z",
+  "scope": "Sondeo HTTP acotado de solo lectura; no sustituye Q-06",
+  "base": "http://127.0.0.1:3002",
+  "gitHead": "a4540316467e34492f454e117e06d89eb3bb781e",
+  "buildId": "pxh1ODWREQKmVs3aCb8qm",
+  "sessionCount": 20,
+  "authentication": "Cookies ya preparadas; no se realizan nuevos accesos",
+  "measurements": [
+    {
+      "stage": "/api/sync concurrency=1",
+      "concurrency": 1,
+      "requests": 100,
+      "failed": 0,
+      "elapsedMs": 15552.1508,
+      "p50Ms": 149.70959999999832,
+      "p95Ms": 176.26130000000194,
+      "byRole": {
+        "teacher": {
+          "count": 20,
+          "failed": 0,
+          "p95Ms": 172.03880000000026
+        },
+        "student": {
+          "count": 80,
+          "failed": 0,
+          "p95Ms": 176.26130000000194
+        }
+      }
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "concurrency": 8,
+      "requests": 100,
+      "failed": 0,
+      "elapsedMs": 2109.5390000000007,
+      "p50Ms": 154.6222000000016,
+      "p95Ms": 221.1818999999996,
+      "byRole": {
+        "teacher": {
+          "count": 20,
+          "failed": 0,
+          "p95Ms": 220.65460000000166
+        },
+        "student": {
+          "count": 80,
+          "failed": 0,
+          "p95Ms": 221.1818999999996
+        }
+      }
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "concurrency": 20,
+      "requests": 100,
+      "failed": 0,
+      "elapsedMs": 961.4631999999983,
+      "p50Ms": 166.22359999999753,
+      "p95Ms": 246.7033999999985,
+      "byRole": {
+        "teacher": {
+          "count": 20,
+          "failed": 0,
+          "p95Ms": 252.95310000000245
+        },
+        "student": {
+          "count": 80,
+          "failed": 0,
+          "p95Ms": 245.9455999999991
+        }
+      }
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "concurrency": 1,
+      "requests": 100,
+      "failed": 0,
+      "elapsedMs": 22788.2587,
+      "p50Ms": 164.03279999999359,
+      "p95Ms": 485.8683999999994,
+      "byRole": {
+        "teacher": {
+          "count": 20,
+          "failed": 0,
+          "p95Ms": 503.09040000000095
+        },
+        "student": {
+          "count": 80,
+          "failed": 0,
+          "p95Ms": 192.66100000000006
+        }
+      }
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "concurrency": 8,
+      "requests": 100,
+      "failed": 0,
+      "elapsedMs": 4147.9686,
+      "p50Ms": 221.1296000000002,
+      "p95Ms": 618.053899999999,
+      "byRole": {
+        "teacher": {
+          "count": 20,
+          "failed": 0,
+          "p95Ms": 789.6437000000005
+        },
+        "student": {
+          "count": 80,
+          "failed": 0,
+          "p95Ms": 410.1003999999957
+        }
+      }
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "concurrency": 20,
+      "requests": 100,
+      "failed": 0,
+      "elapsedMs": 3494.034400000004,
+      "p50Ms": 497.81029999999737,
+      "p95Ms": 1516.257700000002,
+      "byRole": {
+        "teacher": {
+          "count": 20,
+          "failed": 0,
+          "p95Ms": 1810.5467999999964
+        },
+        "student": {
+          "count": 80,
+          "failed": 0,
+          "p95Ms": 665.0835999999981
+        }
+      }
+    }
+  ],
+  "completedAt": "2026-09-28T08:45:06.456Z",
+  "records": [
+    {
+      "stage": "preparation",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1296.5829999999999,
+      "bytes": 608953
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 675.4067,
+      "bytes": 182334
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 510.16330000000016,
+      "bytes": 180732
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 612.9393,
+      "bytes": 183932
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 471.2649000000001,
+      "bytes": 179660
+    },
+    {
+      "stage": "preparation",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1235.2976000000003,
+      "bytes": 423189
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 489.7970000000005,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 402.46419999999944,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 517.1174000000001,
+      "bytes": 31412
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 463.08989999999994,
+      "bytes": 31418
+    },
+    {
+      "stage": "preparation",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 741.9686000000002,
+      "bytes": 423219
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 393.21219999999994,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 353.2047999999995,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 367.22519999999895,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 394.6969000000008,
+      "bytes": 31418
+    },
+    {
+      "stage": "preparation",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 750.9490000000005,
+      "bytes": 422445
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 504.7636000000002,
+      "bytes": 31410
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 479.96230000000105,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 354.3639000000003,
+      "bytes": 31416
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 378.0511999999999,
+      "bytes": 31416
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 191.2474999999995,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 146.90589999999975,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 159.89359999999942,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.96500000000015,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.27519999999822,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.34770000000026,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.96909999999843,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 143.0622000000003,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.0670999999984,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 150.5033000000003,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 156.8760999999995,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.38500000000022,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 165.5050999999985,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 133.04619999999886,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.1826000000001,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 170.34799999999996,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 170.4505999999983,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 148.64469999999892,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.39170000000013,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 145.15970000000016,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 161.9411,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.34820000000036,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.1214,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 145.3672999999999,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 174.3024000000005,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 133.65639999999985,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.78330000000096,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 146.26029999999992,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.76900000000023,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 135.10130000000026,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 172.03880000000026,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.03550000000178,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 165.90999999999985,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.61409999999887,
+      "bytes": 139
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.8675000000003,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 145.16939999999886,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 161.8315999999977,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 139.16979999999967,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 168.31910000000062,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.03199999999924,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.310300000001,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 139.52369999999792,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.1887999999999,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.22469999999885,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.17319999999745,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.00789999999688,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.29869999999937,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 135.22450000000026,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 171.94610000000102,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 139.10180000000037,
+      "bytes": 139
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 168.0741999999991,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.43640000000232,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.7023999999983,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 139.73549999999886,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.60439999999653,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 132.9825000000019,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.08420000000115,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 168.02560000000085,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 178.18830000000162,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 146.57459999999992,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.41500000000087,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 140.02630000000136,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.85289999999804,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 143.37579999999798,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.09100000000035,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 142.96750000000247,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.7996000000021,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.70959999999832,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.1127000000015,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 140.36859999999797,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.5652999999984,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.39280000000144,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.40709999999672,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 133.55880000000252,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 128.04360000000088,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.67249999999694,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 140.48050000000148,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.84100000000035,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 142.3643000000011,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.6821000000018,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 135.03649999999834,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 130.0766999999978,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.4337000000014,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 131.1319999999978,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 176.26130000000194,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 143.26770000000033,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.7616999999991,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.75440000000162,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.60610000000088,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 143.07589999999982,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 169.51080000000002,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 203.1895000000004,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 254.35059999999794,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 247.41519999999946,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.91489999999976,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 170.77739999999903,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.70550000000003,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.33020000000033,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.57080000000133,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=1",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.08580000000075,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 148.60219999999754,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 204.8097000000016,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 204.96510000000126,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 213.18249999999898,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 220.2432000000008,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 221.1818999999996,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 220.65460000000166,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 246.4523999999983,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.53080000000045,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.73809999999867,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.16990000000078,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.5047999999988,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 291.3690000000024,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 265.79959999999846,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 292.40330000000176,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 207.9833000000035,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 309.15690000000177,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 152.58350000000064,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.58810000000085,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 170.97370000000228,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.6846000000005,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 152.50400000000081,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 174.24619999999777,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 202.29969999999958,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 204.58079999999973,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 203.68279999999868,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 205.88750000000073,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 205.14649999999892,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.53340000000026,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 153.78689999999915,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.84749999999985,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 152.60090000000127,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.30720000000292,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.2412000000004,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.20579999999973,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.68700000000172,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 145.44089999999778,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.83269999999902,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 155.6800000000003,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.10499999999956,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.42919999999867,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.89519999999902,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.2634999999973,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.41829999999754,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 159.1508999999969,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 161.52369999999792,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 136.97710000000006,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.7329000000027,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.8834999999999,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.54379999999946,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 153.3256999999976,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.23210000000108,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 133.53130000000237,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 137.95929999999862,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.46930000000066,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 170.20160000000033,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.28800000000047,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 153.46069999999963,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.91470000000118,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.6877999999997,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 173.38500000000204,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 169.78849999999875,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 146.23199999999997,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.25900000000183,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 153.30419999999867,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.6222000000016,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 156.40090000000055,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 172.38200000000143,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.8748999999989,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.78319999999803,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.74820000000182,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.8543000000027,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.77880000000005,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.70400000000154,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 152.59879999999976,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 139.41719999999987,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.74469999999928,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 159.85449999999764,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 140.3810999999987,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 150.6972999999998,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.89809999999852,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 155.37480000000141,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.55010000000038,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 134.29869999999937,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 142.53099999999904,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 146.97539999999935,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 133.03830000000016,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 152.41570000000138,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 156.337099999997,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.3934999999983,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.80169999999998,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 171.03219999999783,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.90610000000015,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.17509999999675,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.28090000000157,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 134.59309999999823,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 135.8272999999972,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 138.27400000000125,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 141.38110000000233,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=8",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 129.9943999999996,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 172.92799999999988,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 173.571899999999,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 181.44700000000012,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 184.81400000000212,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 185.82280000000173,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 185.79000000000087,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 186.22839999999997,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 191.55779999999868,
+      "bytes": 140
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 210.40710000000036,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 243.99920000000202,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 245.9455999999991,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 245.24730000000272,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 244.87049999999726,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 246.7033999999985,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 245.6889999999985,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 247.91530000000057,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 246.82589999999982,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 252.95310000000245,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 279.20120000000315,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 285.8399000000027,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 137.18940000000293,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 175.59990000000107,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.34110000000146,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.5614999999998,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.168700000002,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.21389999999883,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.71319999999832,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.08959999999934,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 165.78729999999996,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.73769999999786,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.54390000000058,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 162.92529999999897,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.26339999999982,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 169.3101999999999,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 171.03159999999843,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 201.8744000000006,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 203.1410999999971,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 196.52939999999944,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 171.0597999999991,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.22359999999753,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 161.8729999999996,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 146.8148000000001,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.28830000000016,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 132.41820000000007,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.81419999999707,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.64619999999923,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.32500000000073,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 165.60429999999906,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 175.25020000000222,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.98400000000038,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.46689999999944,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 175.35930000000008,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 169.48660000000018,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 175.10809999999765,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 184.59200000000055,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 149.80300000000352,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 134.68829999999798,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 155.0583000000006,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.5087999999996,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 163.15100000000166,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.72509999999966,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.40560000000187,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.0116999999991,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 173.46900000000096,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 172.32960000000094,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 180.63210000000254,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 183.29119999999966,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 179.96479999999792,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.59869999999864,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 178.64779999999882,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 151.7716999999975,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 172.16760000000068,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 172.17699999999968,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 164.5444000000025,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 167.46510000000126,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 155.59500000000116,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 161.67529999999897,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 155.8159999999989,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.75049999999828,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 171.93670000000202,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 169.6330999999991,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 144.20349999999962,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 147.9290000000001,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 131.3179999999993,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 176.23149999999805,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 176.87539999999717,
+      "bytes": 141
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 161.23719999999958,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 169.21389999999883,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 165.96619999999893,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 154.59309999999823,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.16080000000147,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 136.56890000000203,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 150.0508000000009,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 152.80140000000029,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 157.66709999999875,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "teacher",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 158.24039999999877,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 138.91860000000088,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 160.9914000000026,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 166.13869999999952,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/sync concurrency=20",
+      "role": "student",
+      "route": "/api/sync",
+      "status": 200,
+      "ms": 173.6291999999994,
+      "bytes": 142
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 451.1417999999976,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 174.2117999999973,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 192.66100000000006,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.1844999999994,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 177.0547000000006,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 485.8683999999994,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 195.6369999999988,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 152.85829999999987,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 161.3703999999998,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.48479999999836,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 493.75459999999657,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 152.9725000000035,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.04230000000098,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 160.23479999999836,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 187.19280000000435,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 466.18679999999586,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.28940000000148,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 187.11299999999756,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.91249999999854,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 153.7511999999988,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 472.72269999999844,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 179.41309999999794,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.90020000000368,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 156.88880000000063,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 160.29309999999532,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 506.3122999999978,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 158.4056000000055,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.03279999999359,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 183.67730000000302,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 171.94150000000081,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 493.0807000000059,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 153.75009999999747,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 154.58640000000014,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 160.1252999999997,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 158.58920000000217,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 495.59879999999976,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.0711999999985,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 162.71889999999985,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 160.73809999999503,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 184.1206999999995,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 475.3113999999987,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 187.25009999999747,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 158.15559999999823,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 155.72679999999673,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 150.45769999999902,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 480.05019999999786,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 184.59509999999864,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 157.67929999999615,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 150.8286999999982,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 161.26499999999942,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 471.43159999999625,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 187.8495999999941,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 154.69200000000274,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 158.5315999999948,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 153.6690000000017,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 469.153999999995,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 172.16849999999977,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.8830999999991,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.87810000000172,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 161.37739999999758,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 503.09040000000095,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 160.44280000000435,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 161.94030000000203,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 183.27279999999882,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 160.00419999999576,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 469.54959999999846,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 187.6298999999999,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 154.91820000000007,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 161.32200000000012,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 195.99199999999837,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 471.0717999999979,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.9928,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 187.03729999999632,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.9809000000023,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 146.99639999999636,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 413.6674999999959,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 164.125,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 184.5807999999961,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 163.12709999999788,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 156.99029999999766,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 466.4155000000028,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 189.37540000000445,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 162.22249999999622,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 162.2303000000029,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 152.38379999999597,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 448.72729999999865,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 156.3101999999999,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 158.29000000000087,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.16969999999856,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 185.96760000000359,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 471.08780000000115,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 193.46839999999793,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 159.7083999999959,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 157.8538999999946,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 210.58179999999993,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 399.56669999999576,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 163.30019999999786,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 178.870600000002,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 163.13709999999992,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=1",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 156.18669999999838,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 287.37059999999474,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 295.30719999999565,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 299.79039999999804,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 303.3433999999979,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 465.5372999999963,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 255.62290000000212,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 272.9149000000034,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 589.3113999999987,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 594.6507999999958,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 304.071299999996,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 207.55579999999463,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 219.1545999999944,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 220.27769999999873,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 267.0196999999971,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 272.0688000000009,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 209.55140000000392,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 189.84389999999985,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 204.25309999999445,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 192.28080000000045,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 209.67410000000382,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 789.6437000000005,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1098.3329000000012,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 166.76520000000164,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 606.196600000003,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 212.32459999999992,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 526.2505999999994,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 241.16600000000471,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 229.2780999999959,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 242.45520000000397,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 185.07380000000558,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 191.91189999999915,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 462.315499999997,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 221.1296000000002,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 276.863400000002,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 202.8900999999969,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 252.0100999999995,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 218.0515000000014,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 172.10409999999683,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 208.41070000000036,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 663.6327999999994,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 217.64489999999932,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 255.48389999999927,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 190.72619999999733,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 589.4285000000018,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 199.96949999999924,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 191.73680000000604,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 199.44490000000224,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 176.57420000000275,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 177.5838999999978,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 565.3942999999999,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 202.36349999999948,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 220.64830000000075,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 225.22269999999844,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 515.5081999999966,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 196.14820000000327,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 238.6800000000003,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 162.27620000000024,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 484.76870000000054,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 163.38739999999962,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 295.1707999999999,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 518.1169000000009,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 242.7786000000051,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 167.36420000000362,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 190.89680000000226,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 377.92460000000574,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 506.3497000000061,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 208.5353999999934,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 169.76980000000185,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 206.70829999999842,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 195.2885000000024,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 706.6111999999994,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 191.2433000000019,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 585.261599999998,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 302.09709999999905,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 168.7071999999971,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 192.26640000000043,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 523.4231999999975,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 268.22290000000066,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 171.73690000000352,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 286.338800000005,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 163.37079999999696,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 202.0835999999981,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 518.7434999999969,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 167.55349999999453,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 194.78919999999925,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 168.2818000000043,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 512.5515999999989,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 240.7551999999996,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 173.46250000000146,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 181.21010000000388,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 171.66879999999946,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 410.1003999999957,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 513.0409999999974,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 557.437300000005,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 171.10229999999865,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 188.67689999999857,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 290.8996000000043,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 161.5879999999961,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 644.3100999999951,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=8",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 618.053899999999,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 244.6281999999992,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 248.74369999999908,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 256.15269999999873,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 302.3145000000004,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 327.61409999999887,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 341.1342000000004,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 508.79209999999875,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 543.1068000000014,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 564.5210999999981,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 568.7241999999969,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 569.3522000000012,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 571.2106000000058,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 581.402399999999,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 628.677300000003,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 306.67659999999887,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 383.30189999999857,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 395.16049999999814,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 660.5697,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 220.23359999999957,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 765.2226999999984,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 226.88259999999718,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 515.1376999999993,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 837.8234999999986,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 292.2502999999997,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 345.0517000000036,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 352.45900000000256,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 389.00359999999637,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 492.49489999999787,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 512.6266000000032,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 587.402399999999,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 391.78139999999985,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 511.1660999999949,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 462.91820000000007,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 412.5916999999972,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 665.0835999999981,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1089.6219999999958,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 307.4415999999983,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1429.3542000000016,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 406.60689999999886,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 664.9613000000027,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1464.1578999999983,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 291.18940000000293,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 374.46390000000247,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 617.7007000000012,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 438.16560000000027,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 346.84850000000006,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 334.9637999999977,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 353.56640000000334,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 364.5284000000029,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 508.9640999999974,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 664.795299999998,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 621.1232999999993,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 522.4324000000051,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1429.5592000000033,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 278.4879000000001,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 513.7767000000022,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1298.4012000000002,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 292.3228999999992,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 497.81029999999737,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1808.464399999997,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 616.946600000003,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1516.257700000002,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 364.880799999999,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 404.7555999999968,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 413.88840000000346,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 411.155399999996,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 297.6510999999955,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 362.5178999999989,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 411.1357999999964,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 384.61159999999654,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 314.31029999999737,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1555.3441999999995,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1140.623099999997,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 2483.103299999995,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 332.7765999999974,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 317.35579999999754,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 591.8007999999973,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 291.1732999999949,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1435.1641000000018,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 351.9412000000011,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 405.21220000000176,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 309.35280000000057,
+      "bytes": 17925
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 349.0627999999997,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 429.8090000000011,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 371.6131000000023,
+      "bytes": 17923
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 550.7626000000018,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 405.44840000000113,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 627.3974000000017,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 510.6791000000012,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1244.876400000001,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 728.1544999999969,
+      "bytes": 17927
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 555.1426999999967,
+      "bytes": 17929
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 732.6887999999963,
+      "bytes": 17931
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1810.5467999999964,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1700.1111999999994,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 919.4092999999993,
+      "bytes": 291813
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1379.992600000005,
+      "bytes": 291024
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1082.063399999999,
+      "bytes": 291783
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1296.2828000000009,
+      "bytes": 291814
+    },
+    {
+      "stage": "/api/workspace concurrency=20",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 913.3977000000014,
+      "bytes": 291024
+    }
+  ],
+  "observedBodyBytes": 24823325,
+  "conservativeEstimatedBytes": 50281530,
+  "workspaceScope": "activity"
+}

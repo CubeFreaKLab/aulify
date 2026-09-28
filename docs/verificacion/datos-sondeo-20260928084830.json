@@ -1,0 +1,767 @@
+{
+  "startedAt": "2026-09-28T08:48:30.813Z",
+  "scope": "Sondeo HTTP acotado de solo lectura; no sustituye Q-06",
+  "base": "http://127.0.0.1:3002",
+  "gitHead": "c892923c52416f0085d3d3fbd28e7a68bff7a569",
+  "buildId": "pxh1ODWREQKmVs3aCb8qm",
+  "sessionCount": 204,
+  "authentication": "Cookies ya preparadas; no se realizan nuevos accesos",
+  "measurements": [],
+  "preparationFailure": {
+    "sessionIndex": 92,
+    "lastStatus": 401,
+    "activityCount": null
+  },
+  "failure": "No se obtuvo una sesión válida o su actividad de prueba. No se inicia el sondeo.",
+  "status": "failed-preparation-or-probe",
+  "completedAt": "2026-09-28T08:49:09.747Z",
+  "records": [
+    {
+      "stage": "preparation",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 1255.5147000000002,
+      "bytes": 608953
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 707.3733000000002,
+      "bytes": 182334
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 569.2172,
+      "bytes": 180732
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 620.9315999999999,
+      "bytes": 183932
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 529.7396999999996,
+      "bytes": 179660
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 485.1180000000004,
+      "bytes": 112175
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 512.1868000000004,
+      "bytes": 112167
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 514.7125999999998,
+      "bytes": 112161
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 444.15380000000005,
+      "bytes": 112173
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 516.9952000000003,
+      "bytes": 112171
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 467.3023000000003,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 365.1947,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 415.01960000000054,
+      "bytes": 112172
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 373.7650000000003,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 387.16110000000026,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 405.1093000000001,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 406.64609999999993,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 410.4364999999998,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 407.48629999999866,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 407.8184999999994,
+      "bytes": 112172
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 377.5617999999995,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 408.1412999999993,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 443.46930000000066,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 351.1352999999999,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 531.0264999999999,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 396.64429999999993,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 370.64639999999963,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 394.7551999999996,
+      "bytes": 112164
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 372.73209999999926,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 369.4349000000002,
+      "bytes": 112172
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 383.9915999999994,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 374.45760000000155,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 395.34369999999944,
+      "bytes": 112172
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 366.47919999999976,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 397.85349999999926,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 408.4323000000022,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 353.3826000000008,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 364.66849999999977,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 406.811099999999,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 370.2479999999996,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 376.3089,
+      "bytes": 112168
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 379.3682000000008,
+      "bytes": 112170
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 373.77850000000035,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 407.69650000000183,
+      "bytes": 112172
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 395.2140999999974,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 370.6994999999988,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 398.4183000000012,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 340.2914000000019,
+      "bytes": 112176
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 337.3944999999985,
+      "bytes": 112174
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 445.09289999999964,
+      "bytes": 112170
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 2252.198199999999,
+      "bytes": 112172
+    },
+    {
+      "stage": "preparation",
+      "role": "teacher",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 564.7805999999982,
+      "bytes": 423189
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 188.9510999999984,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 207.27319999999963,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 207.01750000000175,
+      "bytes": 31412
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 197.75269999999728,
+      "bytes": 31418
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 473.9618999999984,
+      "bytes": 31412
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 373.5092000000004,
+      "bytes": 31418
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 405.71020000000135,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 355.85699999999997,
+      "bytes": 31414
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 362.53359999999884,
+      "bytes": 31418
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 392.875,
+      "bytes": 31419
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 360.7554000000018,
+      "bytes": 31413
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 356.909300000003,
+      "bytes": 31419
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 360.46210000000065,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 348.3210999999974,
+      "bytes": 31419
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 380.76810000000114,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 409.4149000000034,
+      "bytes": 31411
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 396.90629999999874,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 355.4951000000001,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 360.67489999999816,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 348.4405999999981,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 368.3220000000001,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 335.70800000000236,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 400.11209999999846,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 349.48029999999926,
+      "bytes": 31413
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 353.47260000000097,
+      "bytes": 31411
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 350.66739999999845,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 359.52700000000186,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 352.53459999999905,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 368.55680000000575,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 342.45700000000215,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 372.7876000000033,
+      "bytes": 31413
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 360.1244000000006,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 357.04379999999946,
+      "bytes": 31419
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 351.7089000000051,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 365.4340999999986,
+      "bytes": 31413
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 355.3542000000016,
+      "bytes": 31419
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 360.5540000000037,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 350.59560000000056,
+      "bytes": 31415
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 362.82999999999447,
+      "bytes": 31419
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 200,
+      "ms": 347.54729999999836,
+      "bytes": 31417
+    },
+    {
+      "stage": "preparation",
+      "role": "student",
+      "route": "/api/workspace",
+      "status": 401,
+      "ms": 165.79089999999997,
+      "bytes": 58
+    }
+  ],
+  "observedBodyBytes": 8175466,
+  "conservativeEstimatedBytes": 16446164,
+  "workspaceScope": "activity"
+}

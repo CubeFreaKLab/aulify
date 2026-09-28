@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-09-28T08:50:00Z",
+  "source": "Supabase unified logs, aggregate query; no payloads or credentials retained",
+  "window": {
+    "start": "2026-09-28T08:43:00Z",
+    "end": "2026-09-28T08:50:00Z"
+  },
+  "query": "select log_attributes['error'] error,log_attributes['status'] status,count(*) total from logs where source='auth_logs' group by error,status",
+  "rows": [
+    {
+      "error": "",
+      "status": "200",
+      "total": 143
+    },
+    {
+      "error": "429: Request rate limit reached",
+      "status": "429",
+      "total": 3
+    },
+    {
+      "error": "",
+      "status": "",
+      "total": 141
+    }
+  ],
+  "interpretation": "La renovación de sesiones preparadas excedió el límite Auth antes de medir lecturas con 204 sesiones. Los informes de preparación registran HTTP401; no acreditan una fase de carga.",
+  "sourceFiles": [
+    "datos-sondeo-20260928084703.json",
+    "datos-sondeo-20260928084830.json"
+  ]
+}

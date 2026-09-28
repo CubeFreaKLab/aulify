@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-09-28 07:48:50 UTC",
+  "scope": "Estadísticas acumuladas de todo el proyecto; no son percentiles ni mediciones exclusivas de la carga.",
+  "operations": [
+    {
+      "operation": "snapshot",
+      "calls": 894,
+      "mean_ms": "765.70",
+      "max_ms": "5837.97",
+      "total_ms": "684539.34"
+    },
+    {
+      "operation": "command",
+      "calls": 1366,
+      "mean_ms": "71.94",
+      "max_ms": "4585.29",
+      "total_ms": "98268.29"
+    },
+    {
+      "operation": "sync",
+      "calls": 725,
+      "mean_ms": "120.64",
+      "max_ms": "3865.60",
+      "total_ms": "87465.65"
+    }
+  ],
+  "jwtAlgorithm": "ES256",
+  "findings": [
+    "Snapshot calculaba owns_subject/can_subject por filas; sustitución por conjuntos autorizados en la migración 9.",
+    "Workspace y comandos llamaban getUser por petición; la capa HTTP cambia a getClaims con validación de firma ES256.",
+    "Consulta EXPLAIN remoto de funciones bloqueada por permisos del conector; EXPLAIN ANALYZE aislado se conserva por separado."
+  ]
+}
