@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { retryAfterMs } from './load-waits.mjs';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
@@ -15,6 +16,7 @@ const runId = crypto.randomUUID();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: (await fs.readFile('.next/BUILD_ID','utf8')).trim(), environment: { application: 'Next.js production local HTTP', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', 'La aplicación está en una computadora local, no en el alojamiento público.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
 report.environment.confirmation = 'ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.';
+report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
 report.previousReport = 'datos-carga-20260928-0811.md';
 report.environment.fixtureHistory = 'Las cuentas conservan el calentamiento fallido previo; el primer grupo conserva además las actividades cerradas de las pruebas de concurrencia guiada. No se borró ese historial para reducir el costo de lectura.';
@@ -47,7 +49,7 @@ async function request(s, route, { method = 'GET', body, tag = route, metric = t
     const response = await fetch(base + route, { method, headers: { Cookie: [...s.jar].map(([k, v]) => `${k}=${v}`).join('; '), Origin: base, 'Sec-Fetch-Site': 'same-origin', ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(15_000) });
     setCookies(s, response); const text = await response.text();
     record(target, tag, response.status, performance.now() - start, Buffer.byteLength(text));
-    if (!response.ok) { const error = new Error(`HTTP_${response.status}`); error.recorded = true; error.status = response.status; throw error; }
+    if (!response.ok) { const error = new Error(`HTTP_${response.status}`); error.recorded = true; error.status = response.status; error.retryAfterMs = retryAfterMs(response.headers.get('Retry-After')); throw error; }
     return { value: JSON.parse(text), elapsed: performance.now() - start };
   } catch (error) { if (!error.recorded) record(target, tag, 0, performance.now() - start, 0); throw error; }
 }
@@ -58,11 +60,11 @@ async function prepareSessions() {
   let previousRenewal=0;
   for (const [index, s] of sessions.entries()) {
     let ready = false;
-    if (s.jar.size) { if(needsTokenRefresh(s)){await delay(Math.max(0,2500-(Date.now()-previousRenewal)));previousRenewal=Date.now();} try { await request(s, '/api/workspace', { metric: false }); ready = true; } catch(error) {if(error.status===503||error.status===429){console.log('Auth temporalmente no disponible durante preparación; espera de 60 segundos.');report.authentication.rateLimitWaits++;await delay(60000);await request(s, '/api/workspace', {metric:false});ready=true;}else s.jar.clear();} }
+    if (s.jar.size) { if(needsTokenRefresh(s)){await delay(Math.max(0,2500-(Date.now()-previousRenewal)));previousRenewal=Date.now();} try { await request(s, '/api/workspace', { metric: false }); ready = true; } catch(error) {if(error.status===503||error.status===429){console.log('Auth temporalmente no disponible durante preparación; espera de 60 segundos.');report.authentication.rateLimitWaits++;await delay(Math.max(60000,error.retryAfterMs||0));await request(s, '/api/workspace', {metric:false});ready=true;}else s.jar.clear();} }
     if (!ready) {
       for (let retry = 0; retry < 10; retry++) {
         try { await request(s, '/api/auth', { method: 'POST', metric: false, body: { action: 'access', email: s.email, password: s.password } }); ready = true; break; }
-        catch (error) { if (error.status !== 429) throw new Error(`No se pudo preparar sesión ficticia ${index + 1}.`); report.authentication.rateLimitWaits++; console.log('Auth solicita esperar: pausa de 60 segundos.'); await delay(60_000); }
+        catch (error) { if (error.status !== 429) throw new Error(`No se pudo preparar sesión ficticia ${index + 1}.`); report.authentication.rateLimitWaits++; console.log('Auth solicita esperar: pausa de 60 segundos.'); await delay(Math.max(60_000,error.retryAfterMs||0)); }
       }
       await delay(2500);
     }
@@ -101,7 +103,7 @@ function startPolling() {
           s.latest=null;s.lastRevision=null;s.authorizationLost=true;
           if(error.status===403&&!aborted)try{await refresh(s);}catch{/* La única comprobación adicional también queda medida. */}
         }
-        s.retryAt=Date.now()+s.retryMs;s.retryMs=Math.min(8000,s.retryMs*2);
+        s.retryAt=Date.now()+Math.max(s.retryMs,error.retryAfterMs||0);s.retryMs=Math.min(8000,s.retryMs*2);
       }
     })().finally(() => { s.running = null; });
   };

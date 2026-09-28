@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import os from 'node:os';
 import {performance,monitorEventLoopDelay} from 'node:perf_hooks';
 import {execFileSync} from 'node:child_process';
+import {retryAfterMs} from './load-waits.mjs';
 const base='http://127.0.0.1:3002';
 const accounts=JSON.parse(await fs.readFile('.local-private/load-accounts.json','utf8'));
 const fixtures=JSON.parse(await fs.readFile('.local-private/load-fixtures.json','utf8'));
@@ -11,6 +12,7 @@ if(accounts.projectRef!=='bnqyyumfmyexsqszglab'||accounts.users.length!==204)thr
 const sessions=accounts.users.map(a=>({...a,jar:new Map(Object.entries(cookies[a.id]?.cookies||{})),lastRevision:null,running:null,retryMs:1000,retryAt:0,authorizationLost:false}));
 const teachers=sessions.filter(a=>a.role==='teacher'),students=sessions.filter(a=>a.role==='student');
 const report={startedAt:new Date().toISOString(),scope:'Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.',buildId:(await fs.readFile('.next/BUILD_ID','utf8')).trim(),commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sessions:204,teachers:4,students:200,pollMs:1000,seconds:60,records:[],activities:[],authentication:{prepared:0,temporaryWaits:0,spacingMs:2500},limitations:['Aplicación compilada local y base remota Free; no mide render de 204 navegadores.','Una pregunta single-choice por estudiante y sin sesión guiada.','Preparación y auditoría fuera de medición.','Consumo estimado, no contador facturable.']};
+report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
 const parallel=async(items,n,fn)=>{let i=0;await Promise.all(Array.from({length:Math.min(n,items.length)},async()=>{while(i<items.length){const j=i++;await fn(items[j]);}}));};
@@ -19,7 +21,7 @@ const request=async(s,path,body,stage)=>{if(abortReason&&measuring)return{error:
  for(const h of response.headers.getSetCookie()){const pair=h.split(';',1)[0],i=pair.indexOf('=');if(pair.slice(i+1))s.jar.set(pair.slice(0,i),pair.slice(i+1));else s.jar.delete(pair.slice(0,i));}
  const text=await response.text();bytes+=Buffer.byteLength(text);report.records.push({stage,measurement,status:response.status,ms:performance.now()-start,bytes:Buffer.byteLength(text)});
  if(2*bytes+1024*report.records.length>1e9)abortReason='Transferencia adicional estimada superior a 1 GB';
- if(!response.ok)return{error:response.status,retryAfter:response.headers.get('Retry-After')};return{data:JSON.parse(text)};
+ if(!response.ok)return{error:response.status,retryAfterMs:retryAfterMs(response.headers.get('Retry-After'))};return{data:JSON.parse(text)};
  }catch(e){report.records.push({stage,measurement,status:0,ms:performance.now()-start,error:e.name});return{error:e.name};}};
 const cmd=async(s,action,args,stage='prepare')=>{const r=await request(s,'/api/commands',{action,args},stage);if(r.error)throw new Error(`${action}: ${r.error}`);return r.data.result;};
 function needsRefresh(s){try{let v=[...s.jar].filter(([k])=>k.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,v])=>v).join('');v=decodeURIComponent(v);if(v.startsWith('base64-'))v=Buffer.from(v.slice(7),'base64url').toString();return(JSON.parse(v).expires_at??0)*1000<Date.now()+90000;}catch{return true;}}
@@ -34,7 +36,7 @@ try{
    const r=await request(s,activityByGroup.has(s.group)?`/api/workspace?activity=${activityByGroup.get(s.group)}`:'/api/workspace',undefined,'authenticationPreparation');
    if(!r.error){ready=true;if(s.role==='teacher'){const a=r.data.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];if(a)activityByGroup.set(s.group,a.id);}break;}
    if(![429,503].includes(r.error))throw new Error(`Preparación ficticia: HTTP ${r.error}`);
-   report.authentication.temporaryWaits++;await delay(Math.min(60000,Math.max(30000,Number(r.retryAfter||30)*1000)));
+   report.authentication.temporaryWaits++;await delay(Math.max(30000,r.retryAfterMs||0));
   }
   if(!ready)throw new Error('Auth permanece temporalmente indisponible; sin medición');
   report.authentication.prepared++;await saveCookies();
@@ -46,9 +48,9 @@ try{
  report.measurementStartedAt=new Date().toISOString();const began=performance.now();measuring=true;loop.enable();
  const poll=s=>{if(s.running||performance.now()>=began+60000||abortReason||s.authorizationLost||Date.now()<s.retryAt){skipped++;return;}s.running=(async()=>{
   const sync=await request(s,`/api/sync?activity=${s.activityId}`,undefined,'sync');
-  let error=sync.error;
-  if(!error&&s.lastRevision!==sync.data.revision){const snap=await request(s,`/api/workspace?activity=${s.activityId}`,undefined,'snapshot');error=snap.error;if(!error)s.lastRevision=sync.data.revision;}
-  if(error){if(error===401||error===403)s.authorizationLost=true;s.retryAt=Date.now()+s.retryMs;s.retryMs=Math.min(8000,s.retryMs*2);}else{s.retryAt=0;s.retryMs=1000;}
+  let error=sync.error,serverWait=sync.retryAfterMs||0;
+  if(!error&&s.lastRevision!==sync.data.revision){const snap=await request(s,`/api/workspace?activity=${s.activityId}`,undefined,'snapshot');error=snap.error;serverWait=snap.retryAfterMs||0;if(!error)s.lastRevision=sync.data.revision;}
+  if(error){if(error===401||error===403)s.authorizationLost=true;s.retryAt=Date.now()+Math.max(s.retryMs,serverWait);s.retryMs=Math.min(8000,s.retryMs*2);}else{s.retryAt=0;s.retryMs=1000;}
  })().finally(()=>s.running=null);};
  sessions.forEach((s,i)=>timers.push(setTimeout(()=>{poll(s);timers.push(setInterval(()=>poll(s),1000));},i*1000/204)));
  monitor=setInterval(()=>{const rs=report.records.filter(x=>x.measurement);console.log(`Diagnóstico: ${Math.round((performance.now()-began)/1000)}s, ${rs.length} solicitudes, ${rs.filter(x=>x.status!==200).length} fallos.`);},15000);
