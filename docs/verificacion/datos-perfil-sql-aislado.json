@@ -1,0 +1,473 @@
+{
+  "startedAt": "2026-09-28T13:02:49.135Z",
+  "environment": "PGlite 0.5.8 en memoria; un solo proceso, sin red y sin concurrencia",
+  "migrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql"
+  ],
+  "fixture": {
+    "teachers": 1,
+    "foreignTeachers": 1,
+    "students": 50,
+    "questions": 10,
+    "attempts": 50,
+    "answersPerAttempt": 8,
+    "storedAnswers": 400,
+    "feedback": "hidden",
+    "duration": null
+  },
+  "components": {
+    "teacherAttempts50": {
+      "samples": 30,
+      "p50Ms": 38.398099999999886,
+      "p95Ms": 46.166699999999764,
+      "minimumMs": 29.384399999999914,
+      "maximumMs": 46.76440000000002,
+      "jsonBytes": 255305
+    },
+    "expiryScan50": {
+      "samples": 30,
+      "p50Ms": 1.8005000000002838,
+      "p95Ms": 1.894800000000032,
+      "minimumMs": 1.7505000000001019,
+      "maximumMs": 1.9407000000001062,
+      "jsonBytes": 4
+    },
+    "teacherVersion": {
+      "samples": 30,
+      "p50Ms": 1.313999999999396,
+      "p95Ms": 1.6453000000001339,
+      "minimumMs": 1.2867999999998574,
+      "maximumMs": 2.022399999999834,
+      "jsonBytes": 4105
+    },
+    "studentVersion": {
+      "samples": 30,
+      "p50Ms": 1.0883999999996377,
+      "p95Ms": 1.1994999999997162,
+      "minimumMs": 1.0748999999996158,
+      "maximumMs": 1.2305999999998676,
+      "jsonBytes": 3195
+    },
+    "studentAttempt": {
+      "samples": 30,
+      "p50Ms": 0.6862999999993917,
+      "p95Ms": 0.6997999999994136,
+      "minimumMs": 0.6769999999996799,
+      "maximumMs": 0.7141999999994368,
+      "jsonBytes": 4058
+    },
+    "scoreSingleAnswer": {
+      "samples": 30,
+      "p50Ms": 0.5762000000004264,
+      "p95Ms": 0.6469999999999345,
+      "minimumMs": 0.5636999999996988,
+      "maximumMs": 0.7292999999999665,
+      "jsonBytes": 35
+    },
+    "studentProjection": {
+      "samples": 30,
+      "p50Ms": 3.3635999999996784,
+      "p95Ms": 4.065400000000409,
+      "minimumMs": 3.2874000000001615,
+      "maximumMs": 4.750199999999495,
+      "jsonBytes": 10726
+    },
+    "presentQuestions10": {
+      "samples": 30,
+      "p50Ms": 1.673000000000684,
+      "p95Ms": 1.755099999999402,
+      "minimumMs": 1.6387999999997191,
+      "maximumMs": 2.0380000000004657,
+      "jsonBytes": 2852
+    },
+    "setBasedTeacherAttempts50": {
+      "samples": 30,
+      "p50Ms": 15.685099999998783,
+      "p95Ms": 15.991799999999785,
+      "minimumMs": 15.442600000000311,
+      "maximumMs": 16.316400000001522,
+      "jsonBytes": 255305
+    }
+  },
+  "stages": {
+    "baseline": {
+      "student_sync": {
+        "samples": 30,
+        "p50Ms": 0.4540999999999258,
+        "p95Ms": 0.8684000000002925,
+        "minimumMs": 0.4400999999998021,
+        "maximumMs": 0.8756000000003041,
+        "jsonBytes": 139
+      },
+      "student_snapshot": {
+        "samples": 30,
+        "p50Ms": 4.762899999999718,
+        "p95Ms": 7.272299999999632,
+        "minimumMs": 4.605500000000575,
+        "maximumMs": 7.301199999999881,
+        "jsonBytes": 16653
+      },
+      "teacher_sync": {
+        "samples": 30,
+        "p50Ms": 0.44650000000001455,
+        "p95Ms": 0.48660000000018044,
+        "minimumMs": 0.43760000000020227,
+        "maximumMs": 0.4975000000004002,
+        "jsonBytes": 138
+      },
+      "teacher_snapshot": {
+        "samples": 30,
+        "p50Ms": 35.53279999999995,
+        "p95Ms": 36.75450000000001,
+        "minimumMs": 34.78369999999995,
+        "maximumMs": 37.70139999999992,
+        "jsonBytes": 287666
+      }
+    },
+    "authOnlyPrototype": {
+      "student_sync": {
+        "samples": 30,
+        "p50Ms": 0.4418000000005122,
+        "p95Ms": 0.505500000000211,
+        "minimumMs": 0.43550000000050204,
+        "maximumMs": 0.5486000000000786,
+        "jsonBytes": 138
+      },
+      "student_snapshot": {
+        "samples": 30,
+        "p50Ms": 4.628099999999904,
+        "p95Ms": 6.59900000000016,
+        "minimumMs": 4.494300000000294,
+        "maximumMs": 6.895300000000134,
+        "jsonBytes": 16653
+      },
+      "teacher_sync": {
+        "samples": 30,
+        "p50Ms": 0.4492000000000189,
+        "p95Ms": 0.5138999999999214,
+        "minimumMs": 0.4364999999997963,
+        "maximumMs": 1.3009000000001834,
+        "jsonBytes": 139
+      },
+      "teacher_snapshot": {
+        "samples": 30,
+        "p50Ms": 35.30580000000009,
+        "p95Ms": 36.58759999999984,
+        "minimumMs": 35.07800000000043,
+        "maximumMs": 38.0671999999995,
+        "jsonBytes": 287666
+      }
+    },
+    "combinedContextPrototype": {
+      "student_sync": {
+        "samples": 30,
+        "p50Ms": 0.4598999999998341,
+        "p95Ms": 1.2538999999997031,
+        "minimumMs": 0.45640000000003056,
+        "maximumMs": 1.2829000000001543,
+        "jsonBytes": 139
+      },
+      "student_snapshot": {
+        "samples": 30,
+        "p50Ms": 4.549200000000383,
+        "p95Ms": 4.843999999999141,
+        "minimumMs": 4.418900000000576,
+        "maximumMs": 4.95010000000002,
+        "jsonBytes": 16653
+      },
+      "teacher_sync": {
+        "samples": 30,
+        "p50Ms": 0.49289999999928114,
+        "p95Ms": 0.6643000000003667,
+        "minimumMs": 0.4613000000008469,
+        "maximumMs": 0.6857999999992899,
+        "jsonBytes": 139
+      },
+      "teacher_snapshot": {
+        "samples": 30,
+        "p50Ms": 35.45300000000134,
+        "p95Ms": 36.51610000000073,
+        "minimumMs": 34.81239999999889,
+        "maximumMs": 36.78949999999895,
+        "jsonBytes": 287666
+      }
+    },
+    "setBasedAttemptsPrototype": {
+      "student_sync": {
+        "samples": 30,
+        "p50Ms": 0.5570999999999913,
+        "p95Ms": 0.6156000000009954,
+        "minimumMs": 0.5230000000010477,
+        "maximumMs": 0.6918000000005122,
+        "jsonBytes": 139
+      },
+      "student_snapshot": {
+        "samples": 30,
+        "p50Ms": 5.883499999999913,
+        "p95Ms": 7.890000000001237,
+        "minimumMs": 5.672999999998865,
+        "maximumMs": 9.305399999999281,
+        "jsonBytes": 16653
+      },
+      "teacher_sync": {
+        "samples": 30,
+        "p50Ms": 0.46889999999984866,
+        "p95Ms": 0.5135000000009313,
+        "minimumMs": 0.4555000000000291,
+        "maximumMs": 0.5687999999991007,
+        "jsonBytes": 139
+      },
+      "teacher_snapshot": {
+        "samples": 30,
+        "p50Ms": 21.912200000000666,
+        "p95Ms": 23.405000000000655,
+        "minimumMs": 21.462499999999636,
+        "maximumMs": 25.714500000000044,
+        "jsonBytes": 287666
+      }
+    },
+    "teacherOnlySetBasedPrototype": {
+      "student_sync": {
+        "samples": 30,
+        "p50Ms": 0.4624000000003434,
+        "p95Ms": 0.5004000000008091,
+        "minimumMs": 0.4574000000011438,
+        "maximumMs": 0.5154999999995198,
+        "jsonBytes": 139
+      },
+      "student_snapshot": {
+        "samples": 30,
+        "p50Ms": 4.5173999999988155,
+        "p95Ms": 6.66610000000037,
+        "minimumMs": 4.3700000000008,
+        "maximumMs": 6.910200000000259,
+        "jsonBytes": 16653
+      },
+      "teacher_sync": {
+        "samples": 30,
+        "p50Ms": 0.4646999999986292,
+        "p95Ms": 0.5321999999996478,
+        "minimumMs": 0.4555000000000291,
+        "maximumMs": 0.5481999999992695,
+        "jsonBytes": 139
+      },
+      "teacher_snapshot": {
+        "samples": 30,
+        "p50Ms": 21.818599999998696,
+        "p95Ms": 22.717999999998938,
+        "minimumMs": 21.494699999999284,
+        "maximumMs": 24.485500000000684,
+        "jsonBytes": 287666
+      }
+    },
+    "recommendedPrototype": {
+      "student_sync": {
+        "samples": 30,
+        "p50Ms": 0.4657000000006519,
+        "p95Ms": 1.5826999999990221,
+        "minimumMs": 0.44900000000052387,
+        "maximumMs": 3.682300000000396,
+        "jsonBytes": 139
+      },
+      "student_snapshot": {
+        "samples": 30,
+        "p50Ms": 4.607299999999668,
+        "p95Ms": 6.632999999999811,
+        "minimumMs": 4.531200000001263,
+        "maximumMs": 6.967800000000352,
+        "jsonBytes": 16653
+      },
+      "teacher_sync": {
+        "samples": 30,
+        "p50Ms": 0.4434000000001106,
+        "p95Ms": 0.4992999999994936,
+        "minimumMs": 0.43659999999908905,
+        "maximumMs": 0.5056000000004133,
+        "jsonBytes": 139
+      },
+      "teacher_snapshot": {
+        "samples": 30,
+        "p50Ms": 21.90689999999995,
+        "p95Ms": 23.258499999999913,
+        "minimumMs": 21.530300000000352,
+        "maximumMs": 23.90009999999893,
+        "jsonBytes": 287666
+      }
+    }
+  },
+  "writes": {
+    "ordinaryAnswer": {
+      "totalIncludingDeferred": {
+        "samples": 30,
+        "p50Ms": 2.1217999999998938,
+        "p95Ms": 2.3616000000001804,
+        "minimumMs": 2.058100000000195,
+        "maximumMs": 2.41820000000007
+      },
+      "commandBeforeDeferred": {
+        "samples": 30,
+        "p50Ms": 1.5950000000002547,
+        "p95Ms": 1.8232000000007247,
+        "minimumMs": 1.526199999999335,
+        "maximumMs": 1.8392999999996391
+      },
+      "deferredFlush": {
+        "samples": 30,
+        "p50Ms": 0.5249000000003434,
+        "p95Ms": 0.5775999999996202,
+        "minimumMs": 0.5090000000000146,
+        "maximumMs": 0.5949999999993452
+      },
+      "sharedTeacherRevisionIncrements": 2
+    },
+    "lastAnswer": {
+      "totalIncludingDeferred": {
+        "samples": 30,
+        "p50Ms": 2.3833000000004176,
+        "p95Ms": 2.6088999999992666,
+        "minimumMs": 2.2818999999999505,
+        "maximumMs": 2.798899999999776
+      },
+      "commandBeforeDeferred": {
+        "samples": 30,
+        "p50Ms": 1.6712999999999738,
+        "p95Ms": 1.9069999999992433,
+        "minimumMs": 1.594199999999546,
+        "maximumMs": 2.0778000000000247
+      },
+      "deferredFlush": {
+        "samples": 30,
+        "p50Ms": 0.7049999999999272,
+        "p95Ms": 0.7636000000002241,
+        "minimumMs": 0.6866999999992913,
+        "maximumMs": 0.8515999999999622
+      },
+      "sharedTeacherRevisionIncrements": 3
+    }
+  },
+  "checks": [
+    {
+      "case": "Reintento ordinario no incrementa revisión",
+      "passed": true
+    },
+    {
+      "case": "Reintento final no incrementa revisión",
+      "passed": true
+    },
+    {
+      "case": "Prototipo A conserva student sync, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo A conserva student snapshot, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo A conserva teacher sync, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo A conserva teacher snapshot, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo B conserva student sync, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo B conserva student snapshot, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo B conserva teacher sync, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "Prototipo B conserva teacher snapshot, omitiendo solo reloj de transporte",
+      "passed": true
+    },
+    {
+      "case": "aulify_sync deniega docente ajeno en prototipo",
+      "passed": true
+    },
+    {
+      "case": "aulify_activity_snapshot deniega docente ajeno en prototipo",
+      "passed": true
+    },
+    {
+      "case": "aulify_sync deniega perfil inexistente en prototipo",
+      "passed": true
+    },
+    {
+      "case": "aulify_activity_snapshot deniega perfil inexistente en prototipo",
+      "passed": true
+    },
+    {
+      "case": "Prototipo C conserva student sync, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo C conserva student snapshot, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo C conserva teacher sync, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo C conserva teacher snapshot, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo D conserva student sync, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo D conserva student snapshot, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo D conserva teacher sync, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Prototipo D conserva teacher snapshot, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Propuesta mínima conserva student sync, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Propuesta mínima conserva student snapshot, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Propuesta mínima conserva teacher sync, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    },
+    {
+      "case": "Propuesta mínima conserva teacher snapshot, omitiendo reloj y orden no contractual de intentos",
+      "passed": true
+    }
+  ],
+  "finishedAt": "2026-09-28T13:03:02.335Z",
+  "limitations": [
+    "No mide contención, conexiones, PostgREST, Auth, red ni Next.js.",
+    "Las propuestas solo se aplican al proceso PGlite; no son migraciones desplegables ni sustituyen los ensayos de seguridad completos.",
+    "El conjunto ficticio tiene respuestas automáticas, un intento por alumno y ocho respuestas de diez; otros volúmenes y revisiones pueden cambiar los costos.",
+    "La descarga JSON incluye la serialización y comunicación local de PGlite; no es tiempo exclusivo del motor PostgreSQL.",
+    "Las fases se ejecutan secuencialmente; sus diferencias pequeñas no prueban una mejora causal en producción."
+  ]
+}
