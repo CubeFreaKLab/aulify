@@ -6,5 +6,7 @@ import { supabaseConfig } from './config';
 export function createSupabaseAdmin() {
   const key = process.env.SUPABASE_SECRET_KEY;
   if (!key) throw new Error('El almacenamiento del aula todavía no está configurado.');
-  return createClient(supabaseConfig().url, key, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
+  return createClient(supabaseConfig().url, key, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
 }

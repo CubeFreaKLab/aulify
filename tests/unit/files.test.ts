@@ -8,13 +8,24 @@ describe('archivos privados del aula', () => {
     expect(() => validateFileMetadata('trabajo.pdf', 10 * 1024 * 1024 + 1, 'submission')).toThrow();
     expect(() => validateFileMetadata('imagen.png', 5 * 1024 * 1024 + 1, 'resource')).toThrow();
     expect(() => validateFileMetadata('trabajo.docx', 100, 'resource')).toThrow();
-    await expect(validateFileBytes('trabajo.pdf', strToU8('MZ ejecutable de prueba'))).rejects.toThrow();
+    await expect(
+      validateFileBytes('trabajo.pdf', strToU8('MZ ejecutable de prueba')),
+    ).rejects.toThrow();
   });
   it('rechaza macros y expansión desproporcionada de DOCX antes de extraer documentos', async () => {
-    const types = strToU8('<Types><Override ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" /></Types>');
-    const macro = zipSync({ '[Content_Types].xml': types, 'word/document.xml': strToU8('<w:document/>'), 'word/vbaProject.bin': new Uint8Array([1]) });
+    const types = strToU8(
+      '<Types><Override ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" /></Types>',
+    );
+    const macro = zipSync({
+      '[Content_Types].xml': types,
+      'word/document.xml': strToU8('<w:document/>'),
+      'word/vbaProject.bin': new Uint8Array([1]),
+    });
     await expect(validateFileBytes('trabajo.docx', macro)).rejects.toThrow(/macros/);
-    const expanded = zipSync({ '[Content_Types].xml': new Uint8Array(300_000), 'word/document.xml': strToU8('<w:document/>') });
+    const expanded = zipSync({
+      '[Content_Types].xml': new Uint8Array(300_000),
+      'word/document.xml': strToU8('<w:document/>'),
+    });
     await expect(validateFileBytes('trabajo.docx', expanded)).rejects.toThrow(/estructura/);
   });
   it('acepta la firma real de PDF y detecta una imagen con extensión engañosa', async () => {
