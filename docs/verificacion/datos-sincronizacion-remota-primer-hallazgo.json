@@ -1,0 +1,50 @@
+{
+  "startedAt": "2026-09-28T08:35:15.123Z",
+  "migration": "20260928083328",
+  "checks": [
+    {
+      "name": "Anónimo no lee actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Docente ajeno no lee actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no inscrito no lee actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Docente solo recibe ámbito solicitado",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante recibe solo identidad y proyección propia",
+      "result": "passed"
+    },
+    {
+      "name": "Proyección acotada sin soluciones privadas",
+      "result": "passed"
+    },
+    {
+      "name": "Ámbito omite módulos externos a la actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Huella estable sin cambios",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Datos ficticios; no mide capacidad ni entrega de correo.",
+    "Los permisos SQL internos se verifican adicionalmente con SET ROLE en PostgreSQL aislado."
+  ],
+  "subjectId": "ddd99317-a14f-4606-bebb-50f10b39b764",
+  "activityId": "485e0f2e-f4a0-43c8-8220-8f33fe015643",
+  "status": "failed",
+  "failure": {
+    "code": "Error",
+    "message": "Respuesta ajena no altera huella estudiantil"
+  },
+  "completedAt": "2026-09-28T08:35:20.228Z"
+}

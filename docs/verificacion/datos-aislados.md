@@ -1,6 +1,6 @@
 # Verificación de datos en PostgreSQL aislado
 
-El 28 de septiembre de 2026 se ejecutaron las diez migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 70 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
+El 28 de septiembre de 2026 se ejecutaron las doce migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 84 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
 
 ## Qué se comprobó
 
@@ -14,8 +14,10 @@ El 28 de septiembre de 2026 se ejecutaron las diez migraciones de `supabase/migr
 - Ventana de reentrega visible para propietario y estudiante autorizado, ausente para docente ajeno y estudiante retirado, y retirada del snapshot al consumirse.
 - Lectura privada del archivo, retiro, cierre administrativo y exclusión del intento. Archivo de materia, restauración válida y rechazo al alcanzar treinta días.
 - Purga de relaciones y archivos exclusivos; conserva la biblioteca, y exige que Storage confirme la ausencia del objeto antes de completar el borrado.
-- Los códigos inválidos consumen el límite de diez comprobaciones por diez minutos. Las siete funciones públicas son `SECURITY INVOKER`, ninguna ejecutable por `anon`; las 45 tablas propias tienen RLS y no conceden DML directo a clientes.
+- Los códigos inválidos consumen el límite de diez comprobaciones por diez minutos. Las ocho funciones públicas son `SECURITY INVOKER`, ninguna ejecutable por `anon`; las 47 tablas propias tienen RLS y no conceden DML directo a clientes.
 - Sincronización de una actividad con huella opaca: estable sin cambios, diferente al iniciar o responder, sin señal de correcciones ocultas, y denegada a visitantes, docentes ajenos y estudiantes retirados.
+
+- Snapshot por actividad: ámbito docente limitado, proyección estudiantil sin secretos, rechazo de docente ajeno, estudiante no inscrito y retirado. Las tablas de revisiones y su modificador interno rechazan consultas directas del cliente; la participación ajena no altera la huella estudiantil.
 
 ## Reproducción
 

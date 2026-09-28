@@ -75,7 +75,7 @@ def dbml(model):
     return '\n'.join(out)+'\n'
 
 def dictionary(model):
-    out=['# Diccionario del modelo lógico', '', 'Generado desde [modelo.json](modelo.json). Tipos PostgreSQL previstos; no existe todavía una migración aplicada. PK = clave primaria; UK = unicidad; FK = clave foránea. Las reglas que necesitan transacciones o índices parciales están en [restricciones](restricciones.md).', '']
+    out=['# Diccionario del modelo lógico', '', 'Generado desde [modelo.json](modelo.json). Tipos PostgreSQL del modelo; el estado de aplicación y pruebas de las migraciones se registra en [verificación](verificacion.md). PK = clave primaria; UK = unicidad; FK = clave foránea. Las reglas que necesitan transacciones o índices parciales están en [restricciones](restricciones.md).', '']
     for group,title in model['groups'].items():
         out += [f'## {title}', '']
         for t in model['tables']:

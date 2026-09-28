@@ -1,17 +1,17 @@
 # Modelo de Aulify
 
-Versión 1.1 · 28 de septiembre de 2026 · Basado en la especificación funcional 1.0.
+Versión 1.2 · 28 de septiembre de 2026 · Basado en la especificación funcional 1.0.
 
-El modelo describe cómo organizar y conservar la información del producto completo. Incluye **44 relaciones de dominio, una relación técnica para limitar intentos de código y la identidad externa de Supabase Auth**. La división responde a versiones, permisos e historial: una tabla única de recursos o resultados mezclaría datos que cambian y se publican en momentos distintos.
+El modelo describe cómo organizar y conservar la información del producto completo. Incluye **44 relaciones de dominio, tres relaciones técnicas para limitar intentos de código y sincronizar actividades y la identidad externa de Supabase Auth**. La división responde a versiones, permisos e historial: una tabla única de recursos o resultados mezclaría datos que cambian y se publican en momentos distintos.
 
-El modelo lógico está acompañado por [seis migraciones SQL](../../supabase/migrations), contratos de servidor y pruebas en PostgreSQL aislado. Las migraciones se aplicaron en el proyecto de Aulify; [45 comprobaciones remotas](../verificacion/datos-remotos.md) verificaron Auth, permisos, Storage y concurrencia. El envío de correo y la aplicación web completa requieren verificaciones adicionales. El [informe de datos](../verificacion/datos-aislados.md) distingue lo ejecutado y las comprobaciones pendientes.
+El modelo lógico está acompañado por [migraciones SQL](../../supabase/migrations), contratos de servidor y pruebas en PostgreSQL aislado. Las doce migraciones se aplicaron en el proyecto de Aulify; la ampliación de sincronización se verifica por separado en el [informe de sincronización](../verificacion/datos-sincronizacion.md). [45 comprobaciones remotas](../verificacion/datos-remotos.md) verificaron Auth, permisos, Storage y concurrencia. El envío de correo y la aplicación web completa requieren verificaciones adicionales. El [informe de datos](../verificacion/datos-aislados.md) distingue lo ejecutado y las comprobaciones pendientes.
 
 ## Cómo recorrerlo
 
 1. [Explicación conceptual](conceptual.md): entidades, cardinalidades y decisiones principales.
 2. [Casos de uso y operaciones](casos-y-operaciones.md): actores, recorridos y límites transaccionales.
 3. [Modelo editable DBML](aulify.dbml): relaciones, campos, claves primarias, unicidad y claves foráneas.
-4. [Diccionario](diccionario.md): propósito y significado de cada campo; tipos y nulabilidad previstos.
+4. [Diccionario](diccionario.md): propósito y significado de cada campo; tipos y nulabilidad.
 5. [Normalización](normalizacion.md): dependencias, descomposición y excepciones justificadas.
 6. [Restricciones](restricciones.md): reglas que las claves simples no garantizan y diseño de índices.
 7. [Permisos y conservación](permisos.md): qué puede hacer cada rol y cómo evitar exposición de datos.
@@ -56,3 +56,5 @@ El segundo comando valida claves, tipos, referencias a reglas y coherencia de ar
 Para 001 se necesitan identidad/pertenencia, recurso y borrador, versiones, selección simple/abierta, actividades individuales, intentos/respuestas, corrección, publicación y ayuda. Equipos, potenciadores, archivos de tareas, modo guiado, incidencias y purga se incorporan en entregas posteriores conforme a [las tareas](../../tasks.md).
 
 La implementación física añade descripción de materia, documento de presentación publicado, nota de entrega y metadatos de reserva/purga de archivos. `join_request_checks` conserva solo cuenta y hora para limitar también códigos inválidos; se depura a los diez minutos. El [contrato](../../supabase/CONTRACT.md) define comandos y proyecciones, y el [ADR inicial](../decisiones/0003-modelo-relacional.md) conserva la justificación de la base relacional.
+
+La revisión 1.2 incorpora `activity_sync_versions` y `participant_sync_versions`: contadores derivados actualizados al confirmar transacciones. No contienen respuestas, calificaciones ni decisiones de acceso. Mantienen las 44 relaciones del dominio y elevan a 47 el total de tablas propias.

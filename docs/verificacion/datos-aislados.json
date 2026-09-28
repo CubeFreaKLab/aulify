@@ -1,5 +1,5 @@
 {
-  "executedAt": "2026-09-28T08:05:41.186Z",
+  "executedAt": "2026-09-28T08:40:40.908Z",
   "engine": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
   "runtime": "PGlite 0.5.8",
   "migrationFiles": [
@@ -12,7 +12,9 @@
     "20260928070919_aulify_resubmission_projection.sql",
     "20260928072137_aulify_activity_sync_digest.sql",
     "20260928074757_aulify_snapshot_authorized_sets.sql",
-    "20260928080503_aulify_guided_answer_close_lock.sql"
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql"
   ],
   "checks": [
     {
@@ -55,7 +57,21 @@
       "result": "passed"
     },
     {
+      "case": "snapshot de actividad limita ámbito docente",
+      "result": "passed"
+    },
+    {
       "case": "docente ajeno no obtiene huella",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "docente ajeno no obtiene snapshot de actividad",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "estudiante no inscrito no obtiene actividad",
       "result": "rejected-as-expected",
       "code": "42501"
     },
@@ -68,11 +84,23 @@
       "result": "passed"
     },
     {
+      "case": "snapshot acotado no filtra soluciones ni perfiles ajenos",
+      "result": "passed"
+    },
+    {
+      "case": "primera participación ajena no cambia huella de estudiante sin intento",
+      "result": "passed"
+    },
+    {
       "case": "inicio idempotente recupera intento",
       "result": "passed"
     },
     {
       "case": "nuevo intento cambia huella",
+      "result": "passed"
+    },
+    {
+      "case": "respuesta y entrada de otro estudiante no cambian huella propia",
       "result": "passed"
     },
     {
@@ -121,11 +149,30 @@
       "result": "passed"
     },
     {
+      "case": "publicación de nota cambia huella estudiantil",
+      "result": "passed"
+    },
+    {
       "case": "nota publicada sin soluciones ocultas",
       "result": "passed"
     },
     {
       "case": "sin SELECT de soluciones",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "sin SELECT directo de contadores docentes",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "sin SELECT directo de contadores individuales",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "cliente no modifica revisiones técnicas",
       "result": "rejected-as-expected",
       "code": "42501"
     },
@@ -143,6 +190,14 @@
       "case": "guiada espera inicio docente",
       "result": "rejected-as-expected",
       "code": "P0001"
+    },
+    {
+      "case": "sala estudiantil no revela UUID de compañeros ni bloqueo docente",
+      "result": "passed"
+    },
+    {
+      "case": "docente conserva participantes y bloqueo",
+      "result": "passed"
     },
     {
       "case": "retroalimentación inmediata",
@@ -211,6 +266,11 @@
     },
     {
       "case": "retiro revoca sincronización",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "retiro revoca snapshot de actividad",
       "result": "rejected-as-expected",
       "code": "42501"
     },
@@ -300,11 +360,11 @@
       "code": "42501"
     },
     {
-      "case": "RLS en las 45 tablas propias",
+      "case": "RLS en las 47 tablas propias",
       "result": "passed"
     },
     {
-      "case": "siete wrappers públicos invoker sin ejecución anónima",
+      "case": "ocho wrappers públicos invoker sin ejecución anónima",
       "result": "passed"
     },
     {
@@ -314,6 +374,11 @@
     },
     {
       "case": "anon no obtiene huella",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "anon no obtiene snapshot de actividad",
       "result": "rejected-as-expected",
       "code": "42501"
     },

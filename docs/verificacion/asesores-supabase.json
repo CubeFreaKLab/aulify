@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-09-28T08:07:09Z",
-  "environment": "Proyecto Aulify, Supabase Free, tras diez migraciones",
+  "checkedAt": "2026-09-28T08:39:16Z",
+  "environment": "Proyecto Aulify, Supabase Free, tras doce migraciones",
   "categories": {
     "security": [
       {
         "name": "rls_enabled_no_policy",
         "level": "INFO",
-        "count": 39,
+        "count": 41,
         "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
       },
       {
@@ -20,7 +20,7 @@
       {
         "name": "unused_index",
         "level": "INFO",
-        "count": 25,
+        "count": 24,
         "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
       }
     ]

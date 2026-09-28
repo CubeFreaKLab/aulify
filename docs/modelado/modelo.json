@@ -1,7 +1,7 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "specification": "1.0",
-  "status": "Modelo coherente con seis migraciones aplicadas; verificaciones aisladas y remotas documentadas por separado.",
+  "status": "Modelo de 44 relaciones de dominio y 3 técnicas. Estado de aplicación de migraciones y pruebas en docs/verificacion; la validación estructural no acredita capacidad.",
   "groups": {
     "externo": "Identidad externa",
     "01-identidad": "Identidad y pertenencia",
@@ -3520,6 +3520,92 @@
         }
       ],
       "introduced_in": "physical-1.0"
+    },
+    {
+      "name": "activity_sync_versions",
+      "group": "06-operacion",
+      "purpose": "Metadatos técnicos derivados para detectar cambios sin reconstruir la actividad; no sustituyen permisos ni datos de dominio.",
+      "columns": [
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de la entidad cuya revisión se conserva."
+        },
+        {
+          "name": "public_revision",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Revisión de cambios visibles de la sesión o actividad. Contador no negativo, valor inicial cero."
+        },
+        {
+          "name": "teacher_revision",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Revisión de cambios observables por el propietario, incluidos los privados. Contador no negativo, valor inicial cero."
+        }
+      ],
+      "pk": [
+        "activity_id"
+      ],
+      "unique": [],
+      "rules": [
+        "AC-07"
+      ],
+      "access": "solo disparadores internos y consultas autorizadas; sin lectura ni escritura directa del cliente",
+      "foreign_keys": [
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ],
+      "introduced_in": "physical-1.2"
+    },
+    {
+      "name": "participant_sync_versions",
+      "group": "06-operacion",
+      "purpose": "Metadatos técnicos derivados para detectar cambios sin reconstruir la actividad; no sustituyen permisos ni datos de dominio.",
+      "columns": [
+        {
+          "name": "participant_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de la entidad cuya revisión se conserva."
+        },
+        {
+          "name": "student_revision",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Revisión de cambios visibles del participante; excluye correcciones todavía privadas. Contador no negativo, valor inicial cero."
+        }
+      ],
+      "pk": [
+        "participant_id"
+      ],
+      "unique": [],
+      "rules": [
+        "AC-07"
+      ],
+      "access": "solo disparadores internos y consultas autorizadas; sin lectura ni escritura directa del cliente",
+      "foreign_keys": [
+        {
+          "columns": [
+            "participant_id"
+          ],
+          "target": "participants",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ],
+      "introduced_in": "physical-1.2"
     }
   ]
 }

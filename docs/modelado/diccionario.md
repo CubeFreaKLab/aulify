@@ -1,6 +1,6 @@
 # Diccionario del modelo lógico
 
-Generado desde [modelo.json](modelo.json). Tipos PostgreSQL previstos; no existe todavía una migración aplicada. PK = clave primaria; UK = unicidad; FK = clave foránea. Las reglas que necesitan transacciones o índices parciales están en [restricciones](restricciones.md).
+Generado desde [modelo.json](modelo.json). Tipos PostgreSQL del modelo; el estado de aplicación y pruebas de las migraciones se registra en [verificación](verificacion.md). PK = clave primaria; UK = unicidad; FK = clave foránea. Las reglas que necesitan transacciones o índices parciales están en [restricciones](restricciones.md).
 
 ## Identidad externa
 
@@ -952,3 +952,34 @@ Reglas: CU-06.
 | `checked_at` | `timestamptz` | No | Hora de servidor; conservación máxima de diez minutos. |
 
 - FK `profile_id` → `profiles(id)`; eliminación prevista: `cascade`.
+
+### activity_sync_versions
+
+Metadatos técnicos derivados para detectar cambios sin reconstruir la actividad; no sustituyen permisos ni datos de dominio.
+
+PK: `activity_id`.
+Acceso: solo disparadores internos y consultas autorizadas; sin lectura ni escritura directa del cliente.
+Reglas: AC-07.
+
+| Campo | Tipo previsto | Admite nulo | Descripción |
+|---|---|---|---|
+| `activity_id` | `uuid` | No | Identificador de la entidad cuya revisión se conserva. |
+| `public_revision` | `bigint` | No | Revisión de cambios visibles de la sesión o actividad. Contador no negativo, valor inicial cero. |
+| `teacher_revision` | `bigint` | No | Revisión de cambios observables por el propietario, incluidos los privados. Contador no negativo, valor inicial cero. |
+
+- FK `activity_id` → `activities(id)`; eliminación prevista: `cascade`.
+
+### participant_sync_versions
+
+Metadatos técnicos derivados para detectar cambios sin reconstruir la actividad; no sustituyen permisos ni datos de dominio.
+
+PK: `participant_id`.
+Acceso: solo disparadores internos y consultas autorizadas; sin lectura ni escritura directa del cliente.
+Reglas: AC-07.
+
+| Campo | Tipo previsto | Admite nulo | Descripción |
+|---|---|---|---|
+| `participant_id` | `uuid` | No | Identificador de la entidad cuya revisión se conserva. |
+| `student_revision` | `bigint` | No | Revisión de cambios visibles del participante; excluye correcciones todavía privadas. Contador no negativo, valor inicial cero. |
+
+- FK `participant_id` → `participants(id)`; eliminación prevista: `cascade`.

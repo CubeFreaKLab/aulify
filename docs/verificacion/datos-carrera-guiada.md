@@ -21,3 +21,7 @@ Después de aplicar la corrección, no hubo errores de restricción ni interbloq
 Se conservan los registros [anterior](datos-carrera-guiada-before-fix.json) y [posterior](datos-carrera-guiada-after-fix.json). El ejecutor es [guided-race.mjs](../../tools/datos/guided-race.mjs); utiliza credenciales y cookies locales excluidas de Git. Las comprobaciones aisladas adicionales verifican el reintento tras cierre y el rechazo de una respuesta nueva posterior al cierre.
 
 Esta prueba comprueba la regla de concurrencia descrita; no sustituye el escenario de carga Q-06 ni garantiza ausencia de cualquier carrera posible.
+
+## Repetición con contadores de sincronización
+
+Tras incorporar las migraciones de lectura acotada y privacidad se repitieron treinta rondas, ciento cincuenta operaciones y tres actividades nuevas. No se observaron errores técnicos ni interbloqueos; los rechazos de respuesta posteriores al cierre siguieron siendo resultados permitidos. El [registro adicional](datos-carrera-guiada-revision-counters.json) conserva cada resultado. Esta repetición valida la compatibilidad del orden de bloqueos con los disparadores diferidos, sin acreditar el umbral de latencia bajo 204 sesiones.

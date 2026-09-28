@@ -64,3 +64,7 @@ No duplicar índices que ya crean PK/UK ni prometer una mejora sin medir. Las FK
 Definir un orden de adquisición de bloqueos: materia, actividad, participante, intento y pregunta asignada. Las lecturas compatibles pueden compartir bloqueo; no serializar innecesariamente todas las respuestas de una materia. Inicio, cambio de reglas, archivo y retiro necesitan coordinación con las operaciones que admiten respuestas. Probar interbloqueos, reintentos y latencia: un esquema consistente pero demasiado serial no acredita la meta de carga.
 
 Storage y PostgreSQL no forman una sola transacción de archivos. Las cargas se validan antes de confirmar la entrega; los objetos huérfanos y eliminaciones fallidas necesitan limpieza reintentable. La purga conserva un trabajo operativo mínimo y no declara «completado» mientras falten objetos exclusivos por eliminar.
+
+## Revisiones técnicas de sincronización
+
+Las tablas de revisión tienen PK/FK por actividad o participante, borrado en cascada y contadores no negativos. Solo disparadores internos los actualizan, de forma diferida dentro de la transacción. Una actualización sin cambio de valores no incrementa la revisión. La autorización siempre se consulta en las relaciones vigentes; la revisión opaca solo indica si corresponde descargar una proyección nueva.

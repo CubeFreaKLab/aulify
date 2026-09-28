@@ -16,8 +16,8 @@ await db.exec(`create role anon; create role authenticated; create role service_
 for(const f of (await fs.readdir('supabase/migrations')).filter(f=>f.endsWith('.sql')).sort()){
  try{await db.exec(await fs.readFile(`supabase/migrations/${f}`,'utf8'));console.log(`APPLIED ${f}`);}catch(e){console.error(`FAILED ${f}: ${e.message}\n${e.where??''}\n${e.query?.slice(Math.max(0,Number(e.position)-180),Number(e.position)+180)??''}`);process.exit(1);}
 }
-const users={teacher:'10000000-0000-4000-8000-000000000001',student:'10000000-0000-4000-8000-000000000002',other:'10000000-0000-4000-8000-000000000003'};
-for(const [name,id] of Object.entries(users))await db.query(`insert into auth.users values($1,$2,now(),$3)`,[id,`${name}@example.test`,{name,role:name==='student'?'student':'teacher'}]);
+const users={teacher:'10000000-0000-4000-8000-000000000001',student:'10000000-0000-4000-8000-000000000002',other:'10000000-0000-4000-8000-000000000003',studentOther:'10000000-0000-4000-8000-000000000004'};
+for(const [name,id] of Object.entries(users))await db.query(`insert into auth.users values($1,$2,now(),$3)`,[id,`${name}@example.test`,{name,role:name.startsWith('student')?'student':'teacher'}]);
 await db.exec('set role authenticated');
 const as=async(name)=>{await db.query(`select set_config('request.jwt.claim.sub',$1,false)`,[users[name]]);};
 const command=async(action,...args)=>(await db.query('select public.aulify_command($1,$2) result',[action,{args}])).rows[0].result;
@@ -58,14 +58,28 @@ const settings={purpose:'practice',pace:'individual',maxGrade:20,weight:2,counts
 const activity=await command('createActivity',version.id,subject.id,settings,'Práctica'); assert(activity.id,'crear actividad');
 const sync=async()=>(await db.query('select public.aulify_sync($1) result',[activity.id])).rows[0].result;
 const teacherSync=await sync();assert(/^[a-f0-9]{32}$/.test(teacherSync.revision)&&Object.keys(teacherSync).length===3,'sync retorna solo huella, hora y plazo');
+const scoped=async()=>(await db.query('select public.aulify_activity_snapshot($1) result',[activity.id])).rows[0].result;
+const teacherScope=await scoped();assert(teacherScope.state.activities.length===1&&teacherScope.state.versions.length===1&&teacherScope.state.subjects.length===1&&teacherScope.state.resources.length===0,'snapshot de actividad limita ámbito docente');
 await as('other');await reject(()=>sync(),'docente ajeno no obtiene huella');
+await reject(()=>scoped(),'docente ajeno no obtiene snapshot de actividad');
+await as('studentOther');await reject(()=>scoped(),'estudiante no inscrito no obtiene actividad');
 await as('student');
 const initialSync=await sync();assert(initialSync.revision===(await sync()).revision,'huella estable sin cambios');
 snapshot=(await db.query('select public.aulify_snapshot() result')).rows[0].result;
 const serialized=JSON.stringify(snapshot);
 assert(!serialized.includes('correctOptionId')&&!serialized.includes('manualGuide')&&!serialized.includes('Explicación privada')&&!serialized.includes('Pista privada'),'snapshot no filtra soluciones/guías/pistas');
+const studentScope=await scoped();assert(studentScope.state.versions.length===0&&studentScope.state.users.length===1&&Object.keys(studentScope.studentActivities).length===1&&!JSON.stringify(studentScope).includes('correctOptionId')&&!JSON.stringify(studentScope).includes('manualGuide'),'snapshot acotado no filtra soluciones ni perfiles ajenos');
+const beforeFirstPeer=(await sync()).revision;
+await as('studentOther');const peerJoin=await command('requestMembership',code);await as('teacher');await command('decideMembership',peerJoin.id,'approved');
+await as('studentOther');await command('startAttempt',activity.id);await as('student');
+assert(beforeFirstPeer===(await sync()).revision,'primera participación ajena no cambia huella de estudiante sin intento');
 const attempt=await command('startAttempt',activity.id); const same=await command('startAttempt',activity.id);assert(attempt.id===same.id,'inicio idempotente recupera intento');
 assert(initialSync.revision!==(await sync()).revision,'nuevo intento cambia huella');
+const beforePeer=(await sync()).revision;
+
+await as('studentOther');const peerAttempt=await command('startAttempt',activity.id);await command('submitAnswer',peerAttempt.id,questions[0].id,answers[0],id(),false);
+await as('student');assert((await sync()).revision===beforePeer,'respuesta y entrada de otro estudiante no cambian huella propia');
+await as('teacher');const peerMembership=(await scoped()).state.memberships.find(m=>m.studentId===users.studentOther&&m.status==='approved');await command('withdrawMembership',peerMembership.id,'Escenario aislado de privacidad');await as('student');
 await reject(()=>command('submitAnswer',attempt.id,questions[1].id,answers[1],id(),false),'orden de pregunta');
 await command('useHint',attempt.id,questions[0].id);await command('useHint',attempt.id,questions[0].id);
 const beforeResponseSync=await sync();
@@ -86,9 +100,13 @@ await command('reviewAnswer',attempt.id,questions[7].id,4,'Falta detalle');
 await as('student');assert(beforeManualSync.revision===(await sync()).revision,'corrección privada no modifica huella estudiantil');await as('teacher');
 const evaluation=await command('publishGrade',activity.id,users.student);assert(evaluation.grade===20,'nota con doble limitada al máximo');
 await as('student');
+assert(beforeManualSync.revision!==(await sync()).revision,'publicación de nota cambia huella estudiantil');
 snapshot=(await db.query('select public.aulify_snapshot() result')).rows[0].result;
 assert(snapshot.studentResults[subject.id][0].reviewVisible===false&&snapshot.studentResults[subject.id][0].grade===20,'nota publicada sin soluciones ocultas');
 await reject(()=>db.query('select * from app.question_secrets'),'sin SELECT de soluciones');
+await reject(()=>db.query('select * from app.activity_sync_versions'),'sin SELECT directo de contadores docentes');
+await reject(()=>db.query('select * from app.participant_sync_versions'),'sin SELECT directo de contadores individuales');
+await reject(()=>db.query('select app.bump_sync_revision($1,null,true,false)',[activity.id]),'cliente no modifica revisiones técnicas');
 await reject(()=>db.query('select app.question_json($1,$2,true)',[version.id,questions[0].id]),'sin llamada de helper privado');
 await as('teacher');
 const manual=await command('createManualActivity',{subjectId:subject.id,title:'Participación',description:'Observación',occursAt:new Date().toISOString(),maxGrade:100,weight:1,countsTowardAverage:true});
@@ -98,12 +116,19 @@ await as('student');await reject(()=>command('readActivity',activity.id),'archiv
 await as('teacher');await command('restoreSubject',subject.id);
 await command('setHelpPreference','completed',1);
 await command('updateSubject',subject.id,{name:'Biología 2026',course:'3.º A',year:2026,description:'Actualizada'});
-await command('renewCode',subject.id,true);
+const renewedCode=await command('renewCode',subject.id,true);
 // Sesión guiada: sin inicio por estudiante; orden y cierre controlados por docente.
 const guided=await command('createActivity',version.id,subject.id,{...settings,pace:'guided',maxAttempts:1,feedback:'immediate',ranking:true,teams:true},'Sesión guiada');
 await command('configureTeams',guided.id,[{name:'Equipo verde',studentIds:[users.student]}]);
 await command('autoTeams',guided.id,1);
 await as('student'); await command('joinGuidedRoom',guided.id); await reject(()=>command('startAttempt',guided.id),'guiada espera inicio docente');
+await as('teacher');const privacyGuided=await command('createActivity',version.id,subject.id,{...settings,pace:'guided',maxAttempts:1},'Sala privada');await as('student');await command('joinGuidedRoom',privacyGuided.id);
+await as('studentOther');const peerRejoin=await command('requestMembership',renewedCode.code);await as('teacher');await command('decideMembership',peerRejoin.id,'approved');await as('studentOther');await command('joinGuidedRoom',privacyGuided.id);
+await as('student');const privateRoom=(await db.query('select public.aulify_activity_snapshot($1) result',[privacyGuided.id])).rows[0].result;
+assert(privateRoom.state.activities[0].guided.studentIds.length===1&&privateRoom.state.activities[0].guided.studentIds[0]===users.student&&!('lockedAt' in privateRoom.state.activities[0]),'sala estudiantil no revela UUID de compañeros ni bloqueo docente');
+await as('teacher');const ownerRoom=(await db.query('select public.aulify_activity_snapshot($1) result',[privacyGuided.id])).rows[0].result;
+assert(ownerRoom.state.activities[0].guided.studentIds.length===2&&('lockedAt' in ownerRoom.state.activities[0]),'docente conserva participantes y bloqueo');
+await command('withdrawMembership',peerMembership.id,'Fin de caso de sala privada');
 await as('teacher');await command('startGuidedSession',guided.id);
 await as('student');const gat=await command('startAttempt',guided.id);
 const guidedKey=id();const immediate=await command('submitAnswer',gat.id,questions[0].id,answers[0],guidedKey,false);assert(immediate.feedback.correct===true,'retroalimentación inmediata');
@@ -141,6 +166,7 @@ snapshot=(await db.query('select public.aulify_snapshot() result')).rows[0].resu
 const membership=snapshot.state.memberships.find(m=>m.studentId===users.student&&m.status==='approved');
 await command('withdrawMembership',membership.id,'Prueba controlada');
 await as('student');await reject(()=>sync(),'retiro revoca sincronización');await as('teacher');
+await as('student');await reject(()=>scoped(),'retiro revoca snapshot de actividad');await as('teacher');
 await command('allowResubmission',task.id,users.student,settings.closesAt,'Verificar revocación de pertenencia');
 await as('student');assert((await db.query('select public.aulify_snapshot() result')).rows[0].result.resubmissionWindows.length===0,'estudiante retirado no ve ventanas vigentes');await as('teacher');
 await command('resolveAttempt',second.id,'exclude','Excluir intento retirado');
@@ -162,12 +188,13 @@ await reject(()=>db.query('select public.aulify_maintenance($1,$2)',['tick',{}])
 await reject(()=>db.query('select public.aulify_reserve_upload($1,$2,$3,$4,$5,$6)',[users.student,id(),'x.pdf','submission',1,'application/pdf']),'cliente no reserva usando privilegios de servicio');
 await db.exec('reset role');
 const catalog=(await db.query(`select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='app' and c.relkind='r'`)).rows;
-assert(catalog.length===45&&catalog.every(x=>x.relrowsecurity),'RLS en las 45 tablas propias');
+assert(catalog.length===47&&catalog.every(x=>x.relrowsecurity),'RLS en las 47 tablas propias');
 const publicFunctions=(await db.query(`select p.proname,p.prosecdef,has_function_privilege('anon',p.oid,'EXECUTE') anon from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'aulify_%'`)).rows;
-assert(publicFunctions.length===7&&publicFunctions.every(x=>!x.prosecdef&&!x.anon),'siete wrappers públicos invoker sin ejecución anónima');
+assert(publicFunctions.length===8&&publicFunctions.every(x=>!x.prosecdef&&!x.anon),'ocho wrappers públicos invoker sin ejecución anónima');
 await db.exec('set role anon');
 await reject(()=>db.query('select public.aulify_snapshot()'),'anon no obtiene snapshot');
 await reject(()=>db.query('select public.aulify_sync($1)',[activity.id]),'anon no obtiene huella');
+await reject(()=>db.query('select public.aulify_activity_snapshot($1)',[activity.id]),'anon no obtiene snapshot de actividad');
 await reject(()=>db.query('select public.aulify_command($1,$2)',['createSubject',{args:[]}]),'anon no ejecuta comandos');
 await db.exec('reset role');
 const engine=(await db.query('select version() value')).rows[0].value;

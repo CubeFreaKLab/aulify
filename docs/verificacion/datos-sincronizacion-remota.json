@@ -1,0 +1,110 @@
+{
+  "startedAt": "2026-09-28T08:39:43.833Z",
+  "migration": "scoped-and-private-lock",
+  "checks": [
+    {
+      "name": "Anónimo no lee actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Docente ajeno no lee actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no inscrito no lee actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Docente solo recibe ámbito solicitado",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante recibe solo identidad y proyección propia",
+      "result": "passed"
+    },
+    {
+      "name": "Proyección acotada sin soluciones privadas",
+      "result": "passed"
+    },
+    {
+      "name": "Ámbito omite módulos externos a la actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Huella estable sin cambios",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta ajena no altera huella estudiantil",
+      "result": "passed"
+    },
+    {
+      "name": "Participación altera huella docente",
+      "result": "passed"
+    },
+    {
+      "name": "ACK no expone acierto oculto",
+      "result": "passed"
+    },
+    {
+      "name": "Reintento idempotente no duplica respuesta",
+      "result": "passed"
+    },
+    {
+      "name": "Corrección privada no altera huella",
+      "result": "passed"
+    },
+    {
+      "name": "Corrección privada no aparece en snapshot acotado",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación de nota altera huella",
+      "result": "passed"
+    },
+    {
+      "name": "Nota publicada visible sin soluciones",
+      "result": "passed"
+    },
+    {
+      "name": "Sala estudiantil sin UUID ajenos ni bloqueo docente",
+      "result": "passed"
+    },
+    {
+      "name": "Docente conserva participantes de sala y bloqueo",
+      "result": "passed"
+    },
+    {
+      "name": "Retiro revoca snapshot inmediatamente",
+      "result": "passed"
+    },
+    {
+      "name": "Retiro revoca huella inmediatamente",
+      "result": "passed"
+    },
+    {
+      "name": "Archivo revoca acceso estudiantil",
+      "result": "passed"
+    },
+    {
+      "name": "Propietario puede inspeccionar materia archivada",
+      "result": "passed"
+    },
+    {
+      "name": "Próxima frontera es la apertura futura",
+      "result": "passed"
+    },
+    {
+      "name": "Apertura cambia huella sin escritura",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Datos ficticios; no mide capacidad ni entrega de correo.",
+    "Los permisos SQL internos se verifican adicionalmente con SET ROLE en PostgreSQL aislado."
+  ],
+  "subjectId": "b71c5fd0-cf00-494e-85fe-9a5befb4524a",
+  "activityId": "6df8bbe8-d1ca-4fbe-b3ab-26e8774d4750",
+  "status": "passed",
+  "completedAt": "2026-09-28T08:39:58.562Z"
+}

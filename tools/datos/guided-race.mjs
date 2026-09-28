@@ -9,6 +9,15 @@ const cookies=JSON.parse(await fs.readFile('.local-private/load-http-sessions.js
 const fixtures=JSON.parse(await fs.readFile('.local-private/load-fixtures.json','utf8'));
 const group=fixtures.groups[0];
 const people=accounts.users.filter(a=>a.group===group.group&&a.position<=4);
+// Renovar por el mismo endpoint autenticado que usa la aplicación y conservar cookies nuevas.
+for(const account of people){
+ const jar=new Map(Object.entries(cookies[account.id]?.cookies||{}));
+ const response=await fetch('http://127.0.0.1:3002/api/workspace',{headers:{Cookie:[...jar].map(([k,v])=>`${k}=${v}`).join('; ')},signal:AbortSignal.timeout(15000)});
+ await response.text();if(!response.ok)throw new Error(`Sesión ficticia requiere acceso: HTTP ${response.status}`);
+ for(const header of response.headers.getSetCookie()){const pair=header.split(';',1)[0],i=pair.indexOf('=');if(pair.slice(i+1))jar.set(pair.slice(0,i),pair.slice(i+1));else jar.delete(pair.slice(0,i));}
+ cookies[account.id]={cookies:Object.fromEntries(jar),savedAt:new Date().toISOString()};
+}
+await fs.writeFile('.local-private/load-http-sessions.json',JSON.stringify(cookies)+'\n');
 const client = account => {
   const parts=Object.entries(cookies[account.id]?.cookies||{}).filter(([name])=>name.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,value])=>value).join('');
   let value=decodeURIComponent(parts);if(value.startsWith('base64-'))value=Buffer.from(value.slice(7),'base64url').toString();

@@ -63,3 +63,7 @@ Respaldos del proveedor y objetos activos tienen ciclos distintos. La versión d
 - Descarga usa un archivo compartido cuya referencia autorizada ya terminó.
 
 Estos casos complementan AC-06, AC-26 y AP-20 a AP-33. Solo las ejecuciones reales contra políticas y operaciones demostrarán autorización correcta.
+
+## Lectura por actividad
+
+`aulify_activity_snapshot` comprueba identidad y pertenencia actual en cada llamada. El docente recibe únicamente el ámbito solicitado; el estudiante, su proyección sin soluciones ni correcciones ocultas. Los contadores internos de sincronización carecen de lectura y escritura directa para clientes. Una retirada revoca la consulta aunque el cliente conserve una revisión antigua.
