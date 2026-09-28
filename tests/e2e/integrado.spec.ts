@@ -121,7 +121,20 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
         settings,
       );
       await login(page, account.student);
-      await page.goto(`/aula/actividad/${activity.id}`);
+      await page.goto(`/aula/materia/${fixture.subjectId}`);
+      const scopedResponse = page.waitForResponse(
+        (response) =>
+          response.url().endsWith(`/api/workspace?activity=${activity.id}`) && response.ok(),
+      );
+      await page.locator(`a[href="/aula/actividad/${activity.id}"]`).click();
+      const scoped = await (await scopedResponse).json();
+      expect(scoped.state.activities.map((item: { id: string }) => item.id)).toEqual([activity.id]);
+      expect(scoped.state.subjects.map((item: { id: string }) => item.id)).toEqual([
+        fixture.subjectId,
+      ]);
+      expect(scoped.state.resources).toEqual([]);
+      expect(scoped.state.tasks).toEqual([]);
+      expect(scoped.studentResults).toEqual({});
       await page.getByRole('button', { name: 'Empezar actividad', exact: true }).click();
       await expect(
         page.getByRole('heading', { name: questions[0].prompt, exact: true }),
@@ -135,7 +148,7 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
         capturedOldSnapshot = resolve;
       });
       await page.route(
-        '**/api/workspace',
+        '**/api/workspace*',
         async (route) => {
           const old = await route.fetch();
           capturedOldSnapshot();
@@ -225,6 +238,13 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
       expect(teacherAttempt.answers[0].reviews).toHaveLength(1);
       expect(teacherAttempt.answers[1].reviews).toHaveLength(0);
       await expectNoHorizontalOverflow(page);
+      const wholeWorkspace = page.waitForResponse(
+        (response) => response.url().endsWith('/api/workspace') && response.ok(),
+      );
+      await page.getByRole('link', { name: 'Ver mis resultados' }).click();
+      await wholeWorkspace;
+      await expect(page).toHaveURL(/\/aula\/resultados$/);
+      await expect(page.getByLabel('Materia', { exact: true })).toBeVisible();
     } finally {
       releaseSnapshot?.();
       await teacher.dispose();
@@ -254,7 +274,7 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
       });
     });
     const countSnapshot = (request: { url(): string }) => {
-      if (request.url().endsWith('/api/workspace')) snapshots++;
+      if (new URL(request.url()).pathname === '/api/workspace') snapshots++;
     };
     page.on('request', countSnapshot);
     await expect(page.getByRole('alert').filter({ hasText: message })).toBeVisible();
@@ -314,6 +334,7 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
   });
   test('el docente recorre su aula y cerrar sesión protege el cambio de cuenta', async ({
     page,
+    playwright,
   }) => {
     const account = accounts(),
       fixture = fixtures();
@@ -336,6 +357,21 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
     await page.getByRole('button', { name: 'Cerrar sesión', exact: true }).click();
     await expect(page).toHaveURL(/\/acceso$/);
     await login(page, account.studentOther);
+    // Ambos estudiantes de la preparación pertenecen a la materia; el docente ajeno no.
+    const outsider = await playwright.request.newContext();
+    try {
+      const auth = await outsider.post(`${baseURL}/api/auth`, {
+        headers,
+        data: { action: 'access', ...account.teacherOther },
+      });
+      if (!auth.ok()) throw new Error(`Acceso ficticio: HTTP ${auth.status()}.`);
+      expect(
+        (await outsider.get(`${baseURL}/api/workspace?activity=${fixture.activityId}`)).status(),
+      ).toBe(403);
+    } finally {
+      await outsider.dispose();
+    }
+    expect((await page.request.get('/api/workspace?activity=invalid')).status()).toBe(400);
     const response = await page.request.get('/api/workspace');
     expect(response.status()).toBe(200);
     const data = await response.json();

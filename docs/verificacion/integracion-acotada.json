@@ -1,0 +1,37 @@
+{
+  "buildId": "7Q51XhoTLuizcaUW7mZnR",
+  "environment": "Next.js compilado local, Supabase Free remoto; once migraciones durante esta ejecución",
+  "projects": [
+    "Chromium escritorio 1440x900",
+    "Chromium móvil emulado 390x844"
+  ],
+  "initialRun": {
+    "startTime": "2026-09-28T08:34:13.849Z",
+    "duration": 84479.85800000001,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "correctedFixtureRun": {
+    "startTime": "2026-09-28T08:36:56.050Z",
+    "duration": 14765.142000000002,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "distinctApprovedExecutions": 12,
+  "explanation": "El lote inicial aprobó diez de doce. Dos expectativas exigían denegar a studentOther, pero ambas cuentas estudiantiles de preparación pertenecían a la materia. Se cambió el actor a un docente ajeno y los dos casos pasaron. No se modificó la autorización de la aplicación para resolver esta preparación. La repetición parcial no constituye un segundo lote completo.",
+  "scenarios": [
+    "La entrada mediante enlace carga solo actividad y materia actuales, sin tareas ni resultados ajenos al recorrido.",
+    "Responder, reintentar sin duplicar, no retroceder ante lecturas antiguas, retomar después de recargar y conservar retroalimentación oculta.",
+    "La salida mediante enlace a Resultados vuelve a consultar el aula completa.",
+    "El endpoint acotado rechaza docente ajeno con 403 y UUID inválido con 400.",
+    "Continúan los controles de reconexión, JWT alterado, publicación de lectura y archivos privados."
+  ],
+  "limits": [
+    "No mide la capacidad para 204 sesiones ni despliegue HTTPS.",
+    "La migración posterior sobre privacidad de participantes tiene verificación de datos separada."
+  ]
+}

@@ -59,6 +59,7 @@ let repository: WorkspaceRepository | null = null;
 let remote: ServerSnapshot | null = null;
 let refreshPending: Promise<void> | null = null;
 let activeMode: boolean | null = null;
+let activeActivityScope: string | null = null;
 let generation = 0;
 let projectionEpoch = 0;
 type ImmediateFeedback = {
@@ -77,6 +78,7 @@ export function clearWorkspaceSession() {
   remote = null;
   repository = null;
   activeMode = null;
+  activeActivityScope = null;
   refreshPending = null;
   feedbackByAnswer.clear();
   emit();
@@ -230,15 +232,17 @@ function remoteRepository(): WorkspaceRepository {
     studentResults: (id: string) => remote?.studentResults[id] || [],
   } as WorkspaceRepository;
 }
-async function hydrate(live: boolean) {
-  if (activeMode === live && snapshot) {
+async function hydrate(live: boolean, activityScope: string | null = null) {
+  const sameScope = activeMode === live && activeActivityScope === activityScope;
+  if (sameScope && snapshot) {
     if (!live && new URLSearchParams(window.location.search).has('perfil'))
       switchProfile(readProfile());
     return;
   }
-  if (activeMode === live && refreshPending) return;
+  if (sameScope && refreshPending) return;
   clearWorkspaceSession();
   activeMode = live;
+  activeActivityScope = activityScope;
   if (live) {
     repository = remoteRepository();
     await refreshDemo();
@@ -272,7 +276,10 @@ export async function refreshDemo() {
   const currentProjection = projectionEpoch;
   refreshPending = (async () => {
     try {
-      const data = await requestJson<ServerSnapshot>('/api/workspace');
+      const url = activeActivityScope
+        ? `/api/workspace?activity=${encodeURIComponent(activeActivityScope)}`
+        : '/api/workspace';
+      const data = await requestJson<ServerSnapshot>(url);
       if (currentGeneration !== generation || currentProjection !== projectionEpoch) return;
       remote = data;
       snapshot = {
@@ -371,9 +378,10 @@ const serverSnapshot = () => null;
 export function useDemo() {
   const path = usePathname();
   const live = path.startsWith('/aula');
+  const activityId = path.startsWith('/aula/actividad/') ? path.split('/')[3] : null;
   const data = useSyncExternalStore(subscribe, getSnapshot, serverSnapshot);
   useEffect(() => {
-    void hydrate(live);
+    void hydrate(live, activityId);
     let failures = 0,
       retryAt = 0,
       authorizationLost = false;
@@ -385,7 +393,6 @@ export function useDemo() {
     };
     window.addEventListener('storage', refresh);
     window.addEventListener('online', refresh);
-    const activityId = path.startsWith('/aula/actividad/') ? path.split('/')[3] : null;
     let revision: string | null = null,
       syncing = false,
       cancelled = false;
@@ -448,6 +455,6 @@ export function useDemo() {
       window.removeEventListener('online', refresh);
       if (timer) window.clearInterval(timer);
     };
-  }, [live, path]);
-  return data?.live === live ? data : null;
+  }, [live, path, activityId]);
+  return data?.live === live && activeActivityScope === activityId ? data : null;
 }

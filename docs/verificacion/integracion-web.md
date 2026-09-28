@@ -46,6 +46,14 @@ El análisis estático, los tipos y la construcción continuaron aprobados; Vite
 
 ## Reproducción
 
+### Consultas limitadas a la actividad
+
+El recorrido de participación utiliza ahora `/api/workspace?activity=…`. El servidor autoriza y obtiene solo la actividad abierta; al salir, la interfaz recupera el aula completa. Cambiar de ámbito invalida lecturas y operaciones anteriores para que no repongan datos de otra pantalla. La respuesta mantiene el contrato de estado que utiliza el navegador.
+
+La [comprobación del compilado `7Q51XhoTLuizcaUW7mZnR`](integracion-acotada.json) cubre entrada y salida mediante enlaces, alcance de los datos y rechazo de accesos ajenos, además de los recorridos anteriores. El primer lote aprobó diez casos; dos fallaron porque se había elegido como supuesto ajeno a un estudiante que sí pertenecía a la materia. Se corrigió la preparación usando un docente ajeno y las dos repeticiones pasaron. Son doce ejecuciones distintas aprobadas mediante esos dos lotes, sin afirmar una segunda ejecución completa. No es una medición de capacidad.
+
+### Ejecutar las comprobaciones
+
 Instalar las dependencias con `npm ci`, preparar Chromium con `npx playwright install chromium` y ejecutar `npm run lint`, `npm run typecheck`, `npm test` y `npm run build`.
 
 Servir el compilado con `node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3002`. En otra terminal, con la conexión y las cuentas ficticias preparadas mediante el [procedimiento remoto](datos-remotos.md), definir `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3002` y `AULIFY_REMOTE_E2E=1`, y ejecutar `npx playwright test --workers=2`.
