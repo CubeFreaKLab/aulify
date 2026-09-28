@@ -1,6 +1,6 @@
 # Verificación de datos en PostgreSQL aislado
 
-El 28 de septiembre de 2026 se ejecutaron las seis migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 55 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
+El 28 de septiembre de 2026 se ejecutaron las ocho migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 68 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
 
 ## Qué se comprobó
 
@@ -10,18 +10,23 @@ El 28 de septiembre de 2026 se ejecutaron las seis migraciones de `supabase/migr
 - Escritura pendiente impide publicar; corrección docente y publicación separadas. Una nota agregada publicada no revela una revisión configurada como oculta.
 - Sesión guiada: inscripción, inicio docente, confirmación de preguntas pendientes, omisiones, cierre final, equipos y clasificación.
 - Tarea con archivo previamente registrado, rechazo de metadatos ficticios, revisión/publicación y reentrega autorizada conservando versiones.
+- Ventana de reentrega visible para propietario y estudiante autorizado, ausente para docente ajeno y estudiante retirado, y retirada del snapshot al consumirse.
 - Lectura privada del archivo, retiro, cierre administrativo y exclusión del intento. Archivo de materia, restauración válida y rechazo al alcanzar treinta días.
 - Purga de relaciones y archivos exclusivos; conserva la biblioteca, y exige que Storage confirme la ausencia del objeto antes de completar el borrado.
-- Los códigos inválidos consumen el límite de diez comprobaciones por diez minutos. Las seis funciones públicas son `SECURITY INVOKER`, ninguna ejecutable por `anon`; las 45 tablas propias tienen RLS y no conceden DML directo a clientes.
+- Los códigos inválidos consumen el límite de diez comprobaciones por diez minutos. Las siete funciones públicas son `SECURITY INVOKER`, ninguna ejecutable por `anon`; las 45 tablas propias tienen RLS y no conceden DML directo a clientes.
+- Sincronización de una actividad con huella opaca: estable sin cambios, diferente al iniciar o responder, sin señal de correcciones ocultas, y denegada a visitantes, docentes ajenos y estudiantes retirados.
 
 ## Reproducción
 
-Instalar `@electric-sql/pglite@0.5.8` en un directorio de herramientas y apuntar `PGLITE_MODULE` a su archivo `dist/index.js`. El script usa por defecto el directorio local ignorado `.local-private/data-test-runtime`. Ejecutar desde el repositorio:
+Las dependencias de desarrollo incluyen `@electric-sql/pglite@0.5.8`. Ejecutar desde el repositorio con Node.js compatible:
 
 ```powershell
+npm ci
 node tools/datos/check.mjs --report docs/verificacion/datos-aislados.json
 python tools/modelado/generar.py --check
 ```
+
+También se admite un motor instalado por separado indicando su archivo `dist/index.js` en `PGLITE_MODULE`.
 
 El ejecutor crea roles y esquemas mínimos de Auth y Storage, ejecuta los mismos SQL de migración y cambia de rol para comprobar permisos. No usa un simulador de consultas ni un blob global de estado. Las reservas y los objetos de archivo de la prueba representan metadatos, no una subida real de bytes.
 

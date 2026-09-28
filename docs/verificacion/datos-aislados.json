@@ -1,14 +1,16 @@
 {
-  "executedAt": "2026-09-28T06:46:12.354Z",
+  "executedAt": "2026-09-28T07:20:36.403Z",
   "engine": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
   "runtime": "PGlite 0.5.8",
   "migrationFiles": [
-    "20260928062213_aulify_relational_core.sql",
-    "20260928062305_aulify_commands.sql",
-    "20260928062755_aulify_projections_storage.sql",
-    "20260928063218_aulify_retention_hardening.sql",
-    "20260928063815_aulify_join_rate_limit.sql",
-    "20260928064022_aulify_upload_reservations.sql"
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928071832_aulify_activity_sync_digest.sql"
   ],
   "checks": [
     {
@@ -47,11 +49,28 @@
       "result": "passed"
     },
     {
+      "case": "sync retorna solo huella, hora y plazo",
+      "result": "passed"
+    },
+    {
+      "case": "docente ajeno no obtiene huella",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "huella estable sin cambios",
+      "result": "passed"
+    },
+    {
       "case": "snapshot no filtra soluciones/guías/pistas",
       "result": "passed"
     },
     {
       "case": "inicio idempotente recupera intento",
+      "result": "passed"
+    },
+    {
+      "case": "nuevo intento cambia huella",
       "result": "passed"
     },
     {
@@ -61,6 +80,10 @@
     },
     {
       "case": "acierto oculto no se filtra",
+      "result": "passed"
+    },
+    {
+      "case": "respuesta confirmada cambia huella",
       "result": "passed"
     },
     {
@@ -86,6 +109,10 @@
       "case": "escritura pendiente impide publicar",
       "result": "rejected-as-expected",
       "code": "P0001"
+    },
+    {
+      "case": "corrección privada no modifica huella estudiantil",
+      "result": "passed"
     },
     {
       "case": "nota con doble limitada al máximo",
@@ -147,13 +174,38 @@
       "code": "P0001"
     },
     {
+      "case": "docente ve ventana de reentrega vigente",
+      "result": "passed"
+    },
+    {
+      "case": "docente ajeno no ve ventanas de reentrega",
+      "result": "passed"
+    },
+    {
+      "case": "estudiante ve su autorización de reentrega",
+      "result": "passed"
+    },
+    {
       "case": "reentrega conserva versión anterior",
+      "result": "passed"
+    },
+    {
+      "case": "ventana consumida desaparece del snapshot",
       "result": "passed"
     },
     {
       "case": "archivo privado entre docentes",
       "result": "rejected-as-expected",
       "code": "42501"
+    },
+    {
+      "case": "retiro revoca sincronización",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "estudiante retirado no ve ventanas vigentes",
+      "result": "passed"
     },
     {
       "case": "retiro revoca descarga de tarea",
@@ -241,11 +293,16 @@
       "result": "passed"
     },
     {
-      "case": "seis wrappers públicos invoker sin ejecución anónima",
+      "case": "siete wrappers públicos invoker sin ejecución anónima",
       "result": "passed"
     },
     {
       "case": "anon no obtiene snapshot",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "anon no obtiene huella",
       "result": "rejected-as-expected",
       "code": "42501"
     },
