@@ -1,0 +1,244 @@
+{
+  "fileKey": "96LeZKgvvAvsYetQEbTrBC",
+  "updated": "2026-09-28",
+  "method": "Réplica editable a partir de la interfaz web implementada",
+  "data": "Demostración con personas y respuestas ficticias",
+  "screens": [
+    {
+      "id": "28:948",
+      "name": "Landing / Claro / 892",
+      "width": 892,
+      "height": 3951,
+      "texts": 77,
+      "vectors": 384,
+      "instances": 7,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "landing-clara.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=28-948"
+    },
+    {
+      "id": "28:258",
+      "name": "Landing / Oscuro / 892",
+      "width": 892,
+      "height": 3951,
+      "texts": 77,
+      "vectors": 384,
+      "instances": 7,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "landing-oscura.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=28-258"
+    },
+    {
+      "id": "46:2",
+      "name": "Acceso / Escritorio · 892",
+      "width": 892,
+      "height": 810,
+      "texts": 19,
+      "vectors": 140,
+      "instances": 2,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "acceso.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=46-2"
+    },
+    {
+      "id": "47:204",
+      "name": "Inicio docente / Escritorio · 892",
+      "width": 892,
+      "height": 1143,
+      "texts": 41,
+      "vectors": 344,
+      "instances": 2,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "inicio.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-204"
+    },
+    {
+      "id": "47:716",
+      "name": "Materia / Escritorio · 892",
+      "width": 892,
+      "height": 810,
+      "texts": 34,
+      "vectors": 62,
+      "instances": 1,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "materia.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-716"
+    },
+    {
+      "id": "57:582",
+      "name": "Editor de recursos / Escritorio · 892",
+      "width": 892,
+      "height": 2331,
+      "texts": 79,
+      "vectors": 240,
+      "instances": 1,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "editor.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=57-582"
+    },
+    {
+      "id": "47:1546",
+      "name": "Participación / Escritorio · 892",
+      "width": 892,
+      "height": 810,
+      "texts": 17,
+      "vectors": 20,
+      "instances": 5,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "quiz.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-1546"
+    },
+    {
+      "id": "47:1628",
+      "name": "Revisión / Escritorio · 892",
+      "width": 892,
+      "height": 3636,
+      "texts": 82,
+      "vectors": 55,
+      "instances": 1,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "revision.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-1628"
+    },
+    {
+      "id": "47:1958",
+      "name": "Resultados / Escritorio · 892",
+      "width": 892,
+      "height": 1709,
+      "texts": 92,
+      "vectors": 59,
+      "instances": 1,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "resultados.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=47-1958"
+    },
+    {
+      "id": "48:2",
+      "name": "Inicio docente / Móvil · 390",
+      "width": 390,
+      "height": 1109,
+      "texts": 26,
+      "vectors": 25,
+      "instances": 0,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "inicio-movil.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=48-2"
+    },
+    {
+      "id": "48:128",
+      "name": "Participación / Móvil · 390",
+      "width": 390,
+      "height": 878,
+      "texts": 17,
+      "vectors": 20,
+      "instances": 5,
+      "rasterFills": 0,
+      "fontFamilies": [
+        "Inter"
+      ],
+      "capture": "quiz-movil.png",
+      "url": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify?node-id=48-128"
+    }
+  ],
+  "fileUrl": "https://www.figma.com/design/96LeZKgvvAvsYetQEbTrBC/Aulify",
+  "collections": {
+    "primitives": {
+      "id": "VariableCollectionId:17:2",
+      "count": 38
+    },
+    "semanticColors": {
+      "id": "VariableCollectionId:17:41",
+      "count": 21,
+      "modes": [
+        "Claro",
+        "Oscuro"
+      ]
+    },
+    "geometryAndMotion": {
+      "id": "VariableCollectionId:17:63",
+      "count": 13
+    }
+  },
+  "components": [
+    {
+      "name": "Aulify/Botón",
+      "nodeId": "20:30",
+      "variants": 12
+    },
+    {
+      "name": "Aulify/Campo de texto",
+      "nodeId": "21:23",
+      "variants": 4
+    },
+    {
+      "name": "Aulify/Opción del ejemplo",
+      "nodeId": "22:27",
+      "variants": 6
+    },
+    {
+      "name": "Aulify/Respuesta de participación",
+      "nodeId": "49:37",
+      "variants": 8
+    },
+    {
+      "name": "Aulify/Marca",
+      "nodeId": "24:3"
+    },
+    {
+      "name": "Aulify/Cuaderno",
+      "nodeId": "24:4"
+    },
+    {
+      "name": "Aulify/Estudiante",
+      "nodeId": "42:2"
+    }
+  ],
+  "verification": {
+    "textOverrideAndRestorePassed": true,
+    "rasterFills": 0,
+    "fontFamilies": [
+      "Inter"
+    ],
+    "responsiveFrameWidths": [
+      892,
+      390
+    ],
+    "codeReference": "src/styles/tokens.css, src/styles/landing.css, src/styles/workspace.css, src/styles/quiz.css",
+    "limitations": [
+      "Maquetas editables; no constituyen un prototipo navegable completo.",
+      "Los frames mantienen el tamaño verificado; para adaptar composiciones conviene usar las variantes y auto layout internos.",
+      "Las capturas de /demo usan datos ficticios y no demuestran conexión con datos reales.",
+      "Las transiciones del producto se verifican en la web; estas exportaciones PNG son estáticas."
+    ]
+  }
+}
