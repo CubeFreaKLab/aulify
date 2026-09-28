@@ -1,0 +1,32 @@
+# Verificación de datos en PostgreSQL aislado
+
+El 28 de septiembre de 2026 se ejecutaron las seis migraciones de `supabase/migrations` sobre una base nueva en memoria con PGlite 0.5.8. La [evidencia JSON](datos-aislados.json) identifica motor, hora real, archivos y 55 comprobaciones explícitas aprobadas. Se utilizaron cuentas y contenido ficticios; no se conectó una base remota.
+
+## Qué se comprobó
+
+- Creación de materia, solicitud por código, aprobación y rechazo de operaciones de estudiante o docente ajeno.
+- Borrador con conflicto de revisión, publicación normalizada de los ocho tipos de pregunta y ausencia de soluciones, guías y pistas privadas en las proyecciones estudiantiles.
+- Intento recuperable, orden obligatorio, respuesta definitiva, reintento idempotente y rechazo de la misma clave con contenido distinto. Un doble por actividad y nota limitada al máximo.
+- Escritura pendiente impide publicar; corrección docente y publicación separadas. Una nota agregada publicada no revela una revisión configurada como oculta.
+- Sesión guiada: inscripción, inicio docente, confirmación de preguntas pendientes, omisiones, cierre final, equipos y clasificación.
+- Tarea con archivo previamente registrado, rechazo de metadatos ficticios, revisión/publicación y reentrega autorizada conservando versiones.
+- Lectura privada del archivo, retiro, cierre administrativo y exclusión del intento. Archivo de materia, restauración válida y rechazo al alcanzar treinta días.
+- Purga de relaciones y archivos exclusivos; conserva la biblioteca, y exige que Storage confirme la ausencia del objeto antes de completar el borrado.
+- Los códigos inválidos consumen el límite de diez comprobaciones por diez minutos. Las seis funciones públicas son `SECURITY INVOKER`, ninguna ejecutable por `anon`; las 45 tablas propias tienen RLS y no conceden DML directo a clientes.
+
+## Reproducción
+
+Instalar `@electric-sql/pglite@0.5.8` en un directorio de herramientas y apuntar `PGLITE_MODULE` a su archivo `dist/index.js`. El script usa por defecto el directorio local ignorado `.local-private/data-test-runtime`. Ejecutar desde el repositorio:
+
+```powershell
+node tools/datos/check.mjs --report docs/verificacion/datos-aislados.json
+python tools/modelado/generar.py --check
+```
+
+El ejecutor crea roles y esquemas mínimos de Auth y Storage, ejecuta los mismos SQL de migración y cambia de rol para comprobar permisos. No usa un simulador de consultas ni un blob global de estado. Las reservas y los objetos de archivo de la prueba representan metadatos, no una subida real de bytes.
+
+## Límites y próxima comprobación
+
+Estos resultados no sustituyen Auth/JWT reales, SMTP, firma y descarga de Storage, validación de contenido de archivos, conexiones simultáneas ni una prueba de carga. Tampoco acreditan accesibilidad, funcionamiento de las pantallas o despliegue. Deben repetirse los recorridos integrados con cuentas independientes y datos ficticios en el proyecto de destino; inspeccionar los asesores de Supabase y comprobar la configuración del trabajo periódico de conservación antes de declarar producción verificada.
+
+Las migraciones no guardan credenciales, correo personal ni identidad de proyectos remotos. El contrato de aplicación está en [supabase/CONTRACT.md](../../supabase/CONTRACT.md). La limpieza se ejecuta con [maintenance.mjs](../../tools/datos/maintenance.mjs), utilizando una credencial privada de servicio; disponer del script no significa que su horario esté configurado.

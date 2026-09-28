@@ -1,5 +1,5 @@
 digraph modelo {
-graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Integridad y conservación · modelo lógico 1.0"];
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Integridad y conservación · modelo lógico 1.1"];
 node [shape=plain, fontname="Arial"];
 edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
 "activities" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>activities</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
@@ -7,6 +7,7 @@ edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
 "attempts" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>attempts</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
 "incident_reviews" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>incident_reviews</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: attempt_id</TD></TR><TR><TD ALIGN="LEFT">FK actor_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
 "integrity_events" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>integrity_events</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK attempt_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"join_request_checks" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>join_request_checks</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK profile_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">3 campos · ver diccionario</FONT></TD></TR></TABLE>>];
 "profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
 "purge_jobs" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>purge_jobs</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK subject_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">9 campos · ver diccionario</FONT></TD></TR></TABLE>>];
 "subject_events" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>subject_events</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK subject_id</TD></TR><TR><TD ALIGN="LEFT">FK actor_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">5 campos · ver diccionario</FONT></TD></TR></TABLE>>];
@@ -19,4 +20,5 @@ edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
 "subjects" -> "subject_events" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
 "profiles" -> "subject_events" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
 "subjects" -> "purge_jobs" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"profiles" -> "join_request_checks" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
 }

@@ -1,7 +1,7 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "specification": "1.0",
-  "status": "modelo lógico; no migración aplicada",
+  "status": "Modelo coherente con seis migraciones aplicadas; verificaciones aisladas y remotas documentadas por separado.",
   "groups": {
     "externo": "Identidad externa",
     "01-identidad": "Identidad y pertenencia",
@@ -135,6 +135,13 @@
           "type": "timestamptz",
           "nullable": true,
           "description": "Inicio de eliminación; impide restaurar."
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": false,
+          "description": "Descripción editable de la materia.",
+          "introduced_in": "physical-1.0"
         }
       ],
       "pk": [
@@ -613,6 +620,27 @@
           "type": "timestamptz",
           "nullable": true,
           "description": "Validación completa antes de asociar."
+        },
+        {
+          "name": "purge_job_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Trabajo de purga responsable del objeto exclusivo.",
+          "introduced_in": "physical-1.0"
+        },
+        {
+          "name": "upload_purpose",
+          "type": "varchar(16)",
+          "nullable": false,
+          "description": "resource o submission; determina límites de reserva.",
+          "introduced_in": "physical-1.0"
+        },
+        {
+          "name": "upload_expires_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Caducidad de reserva de carga a las 24 horas.",
+          "introduced_in": "physical-1.0"
         }
       ],
       "pk": [
@@ -640,6 +668,17 @@
             "id"
           ],
           "on_delete": "restrict"
+        },
+        {
+          "columns": [
+            "purge_job_id"
+          ],
+          "target": "purge_jobs",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "restrict",
+          "introduced_in": "physical-1.0"
         }
       ]
     },
@@ -855,6 +894,13 @@
           "type": "integer",
           "nullable": false,
           "description": "Esquema de contenido usado al publicar."
+        },
+        {
+          "name": "editor_document",
+          "type": "jsonb",
+          "nullable": true,
+          "description": "Documento de presentación validado, sin soluciones; instantánea inmutable.",
+          "introduced_in": "physical-1.0"
         }
       ],
       "pk": [
@@ -2688,6 +2734,13 @@
           "type": "uuid",
           "nullable": false,
           "description": "Idempotencia de recepción."
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "nullable": false,
+          "description": "Mensaje que acompaña esta versión de entrega.",
+          "introduced_in": "physical-1.0"
         }
       ],
       "pk": [
@@ -3421,6 +3474,52 @@
           "on_delete": "set null"
         }
       ]
+    },
+    {
+      "name": "join_request_checks",
+      "group": "06-operacion",
+      "purpose": "Control técnico de diez intentos de código en diez minutos; no conserva códigos ingresados.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de comprobación."
+        },
+        {
+          "name": "profile_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Cuenta autenticada que solicita ingreso."
+        },
+        {
+          "name": "checked_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Hora de servidor; conservación máxima de diez minutos."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [],
+      "rules": [
+        "CU-06"
+      ],
+      "access": "proceso interno; no lectura cliente",
+      "foreign_keys": [
+        {
+          "columns": [
+            "profile_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ],
+      "introduced_in": "physical-1.0"
     }
   ]
 }

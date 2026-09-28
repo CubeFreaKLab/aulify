@@ -9,7 +9,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 627.92)">
 <title>modelo</title>
 <polygon fill="#ffffff" stroke="none" points="-28.8,28.8 -28.8,-627.92 1551.8,-627.92 1551.8,28.8 -28.8,28.8"/>
-<text text-anchor="middle" x="761.5" y="-576.12" font-family="Arial" font-size="20.00">Identidad y pertenencia · modelo lógico 1.0</text>
+<text text-anchor="middle" x="761.5" y="-576.12" font-family="Arial" font-size="20.00">Identidad y pertenencia · modelo lógico 1.1</text>
 <!-- auth.users -->
 <g id="node1" class="node">
 <title>auth.users</title>
@@ -179,7 +179,7 @@
 <polygon fill="none" stroke="#cddad4" points="540.12,-248.5 540.12,-282.25 716.38,-282.25 716.38,-248.5 540.12,-248.5"/>
 <text text-anchor="start" x="549.12" y="-259.95" font-family="Arial" font-size="14.00">FK owner_id</text>
 <polygon fill="none" stroke="#cddad4" points="540.12,-214.75 540.12,-248.5 716.38,-248.5 716.38,-214.75 540.12,-214.75"/>
-<text text-anchor="start" x="549.12" y="-226.2" font-family="Arial" font-size="14.00" fill="#63716b">8 campos · ver diccionario</text>
+<text text-anchor="start" x="549.12" y="-226.2" font-family="Arial" font-size="14.00" fill="#63716b">9 campos · ver diccionario</text>
 </g>
 <!-- profiles&#45;&gt;subjects -->
 <g id="edge2" class="edge">

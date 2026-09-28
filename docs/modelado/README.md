@@ -1,10 +1,10 @@
 # Modelo de Aulify
 
-Versión 1.0 · 26 de septiembre de 2026 · Basado en la especificación funcional 1.0.
+Versión 1.1 · 28 de septiembre de 2026 · Basado en la especificación funcional 1.0.
 
-El modelo describe cómo organizar y conservar la información del producto completo. Incluye **44 relaciones propias y la identidad externa de Supabase Auth**. La división responde a versiones, permisos e historial: una tabla única de recursos o resultados mezclaría datos que cambian y se publican en momentos distintos. Las relaciones se construirán por entregas; no es necesario implementar todas para demostrar el primer recorrido.
+El modelo describe cómo organizar y conservar la información del producto completo. Incluye **44 relaciones de dominio, una relación técnica para limitar intentos de código y la identidad externa de Supabase Auth**. La división responde a versiones, permisos e historial: una tabla única de recursos o resultados mezclaría datos que cambian y se publican en momentos distintos.
 
-Este es un modelo conceptual y lógico con tipos PostgreSQL previstos. Todavía no es una base de datos desplegada: faltan migraciones, restricciones transaccionales y políticas comprobadas en el motor. Exportar DBML a SQL por sí solo no completa esos controles.
+El modelo lógico está acompañado por [seis migraciones SQL](../../supabase/migrations), contratos de servidor y pruebas en PostgreSQL aislado. Las migraciones se aplicaron en el proyecto de Aulify; [45 comprobaciones remotas](../verificacion/datos-remotos.md) verificaron Auth, permisos, Storage y concurrencia. El envío de correo y la aplicación web completa requieren verificaciones adicionales. El [informe de datos](../verificacion/datos-aislados.md) distingue lo ejecutado y las comprobaciones pendientes.
 
 ## Cómo recorrerlo
 
@@ -55,4 +55,4 @@ El segundo comando valida claves, tipos, referencias a reglas y coherencia de ar
 
 Para 001 se necesitan identidad/pertenencia, recurso y borrador, versiones, selección simple/abierta, actividades individuales, intentos/respuestas, corrección, publicación y ayuda. Equipos, potenciadores, archivos de tareas, modo guiado, incidencias y purga se incorporan en entregas posteriores conforme a [las tareas](../../tasks.md).
 
-El siguiente trabajo de persistencia producirá migraciones reproducibles, índices y restricciones ejecutables, funciones transaccionales, políticas de acceso y pruebas negativas. La interfaz puede diseñarse con estos estados mientras se comprueba la viabilidad técnica. [ADR del modelo](../decisiones/0003-modelo-relacional.md).
+La implementación física añade descripción de materia, documento de presentación publicado, nota de entrega y metadatos de reserva/purga de archivos. `join_request_checks` conserva solo cuenta y hora para limitar también códigos inválidos; se depura a los diez minutos. El [contrato](../../supabase/CONTRACT.md) define comandos y proyecciones, y el [ADR inicial](../decisiones/0003-modelo-relacional.md) conserva la justificación de la base relacional.

@@ -1,0 +1,214 @@
+{
+  "startedAt": "2026-09-28T06:52:14.182Z",
+  "environment": "Supabase remoto, PostgreSQL 17, Auth y Storage",
+  "sdk": "@supabase/supabase-js 2.117.2",
+  "checks": [
+    {
+      "name": "Cuatro cuentas ficticias y sesiones JWT independientes, sin envío de correo",
+      "result": "passed"
+    },
+    {
+      "name": "Anónimo no obtiene snapshot",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Anónimo no ejecuta comandos",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Estudiante no ejecuta mantenimiento",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Cambiar user_metadata no cambia el rol de producto",
+      "result": "passed"
+    },
+    {
+      "name": "Metadata manipulada no concede permisos docentes",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Solicitar código deja pendiente sin aprobación automática",
+      "result": "passed"
+    },
+    {
+      "name": "Docente ajeno no aprueba solicitudes",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Dos estudiantes aprobados, membresías separadas",
+      "result": "passed"
+    },
+    {
+      "name": "Carrera de dos borradores acepta uno y detecta conflicto",
+      "result": "passed"
+    },
+    {
+      "name": "Ocho tipos publicados mediante RPC en tablas separadas",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot estudiantil excluye soluciones, guía, explicación y pista reservadas",
+      "result": "passed"
+    },
+    {
+      "name": "Carrera de tres inicios produce un solo intento",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no lee intento de compañero",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Servidor rechaza pregunta fuera de orden",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Pista idempotente sin doble consumo",
+      "result": "passed"
+    },
+    {
+      "name": "Carrera de tres respuestas idénticas no duplica respuesta ni revela acierto",
+      "result": "passed"
+    },
+    {
+      "name": "Misma clave con contenido distinto rechazada",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Doble no puede usarse en otra pregunta",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "La última respuesta cierra intento individual",
+      "result": "passed"
+    },
+    {
+      "name": "Escritura pendiente impide publicar",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Reglas congeladas tras iniciar",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Corrección y doble calculados en servidor, nota limitada al máximo",
+      "result": "passed"
+    },
+    {
+      "name": "Nota publicada con desglose oculto",
+      "result": "passed"
+    },
+    {
+      "name": "Notas de otro estudiante ausentes del snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Sala guiada espera inicio docente",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Retroalimentación inmediata autorizada",
+      "result": "passed"
+    },
+    {
+      "name": "Cierre guiado exige confirmar respuestas pendientes",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Sesión finaliza normalmente y conserva omisiones",
+      "result": "passed"
+    },
+    {
+      "name": "Clasificación muestra alias y equipos sin identidades ni correos",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no llama reserva privilegiada directamente",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Carga directa con URL firmada a bucket privado",
+      "result": "passed"
+    },
+    {
+      "name": "Bytes descargados para validación coinciden con la carga",
+      "result": "passed"
+    },
+    {
+      "name": "Storage RLS niega descarga a compañero",
+      "result": "passed",
+      "detail": "NoSuchKey"
+    },
+    {
+      "name": "Storage niega descarga anónima",
+      "result": "passed",
+      "detail": "NoSuchKey"
+    },
+    {
+      "name": "RPC de archivo niega docente ajeno",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Docente autorizado puede descargar mediante URL temporal",
+      "result": "passed"
+    },
+    {
+      "name": "Tarea corregida requiere autorización de reentrega",
+      "result": "passed",
+      "detail": "P0001"
+    },
+    {
+      "name": "Reentrega conserva la primera versión y su nota",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad manual con publicación individual",
+      "result": "passed"
+    },
+    {
+      "name": "Archivo revoca el acceso a actividades",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Restauración devuelve acceso sin reabrir intentos",
+      "result": "passed"
+    },
+    {
+      "name": "Retiro revoca consulta del archivo de tarea",
+      "result": "passed",
+      "detail": "42501"
+    },
+    {
+      "name": "Reingreso mantiene oportunidades consumidas",
+      "result": "passed"
+    },
+    {
+      "name": "Fixture queda activo, dos docentes y dos estudiantes conservados para E2E",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Cuentas ficticias confirmadas con API de administración; no se verifican entrega de correo, confirmación por SMTP ni recuperación por correo.",
+    "Las carreras cubren tres solicitudes simultáneas; no sustituyen la meta de carga de 204 usuarios.",
+    "La validación de bytes del endpoint web se verifica aparte: aquí se prueban reserva, Storage y RPC."
+  ],
+  "status": "passed",
+  "completedAt": "2026-09-28T06:52:36.396Z"
+}

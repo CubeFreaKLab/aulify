@@ -53,6 +53,7 @@ Reglas: CU-02, IN-04, IN-05.
 | `created_at` | `timestamptz` | No | Creación. |
 | `archived_at` | `timestamptz` | Sí | Archivo; nulo significa activa. |
 | `purge_started_at` | `timestamptz` | Sí | Inicio de eliminación; impide restaurar. |
+| `description` | `text` | No | Descripción editable de la materia. |
 
 - FK `owner_id` → `profiles(id)`; eliminación prevista: `restrict`.
 
@@ -182,8 +183,12 @@ Reglas: RE-06, TA-01, IN-05.
 | `state` | `varchar(20)` | No | pending, ready o delete_pending. |
 | `created_at` | `timestamptz` | No | Inicio de carga. |
 | `validated_at` | `timestamptz` | Sí | Validación completa antes de asociar. |
+| `purge_job_id` | `uuid` | Sí | Trabajo de purga responsable del objeto exclusivo. |
+| `upload_purpose` | `varchar(16)` | No | resource o submission; determina límites de reserva. |
+| `upload_expires_at` | `timestamptz` | No | Caducidad de reserva de carga a las 24 horas. |
 
 - FK `owner_id` → `profiles(id)`; eliminación prevista: `restrict`.
+- FK `purge_job_id` → `purge_jobs(id)`; eliminación prevista: `restrict`.
 
 ### resources
 
@@ -255,6 +260,7 @@ Reglas: RE-04, RE-05.
 | `title` | `varchar(120)` | No | Título publicado conservado. |
 | `published_at` | `timestamptz` | No | Momento de publicación. |
 | `content_schema_version` | `integer` | No | Esquema de contenido usado al publicar. |
+| `editor_document` | `jsonb` | Sí | Documento de presentación validado, sin soluciones; instantánea inmutable. |
 
 - FK `resource_id` → `resources(id)`; eliminación prevista: `restrict`.
 
@@ -740,6 +746,7 @@ Reglas: TA-02, TA-03.
 | `resubmission_window_id` | `uuid` | Sí | Autorización utilizada, si era reentrega de tarea calificada. |
 | `late` | `boolean` | No | Respecto al cierre general; ampliación se explica separadamente. |
 | `request_key` | `uuid` | No | Idempotencia de recepción. |
+| `note` | `text` | No | Mensaje que acompaña esta versión de entrega. |
 
 - FK `submission_id` → `submissions(id)`; eliminación prevista: `cascade`.
 - FK `resubmission_window_id` → `resubmission_windows(id)`; eliminación prevista: `cascade`.
@@ -929,3 +936,19 @@ Reglas: IN-05, IN-06.
 | `completed_at` | `timestamptz` | Sí | Finalización real. |
 
 - FK `subject_id` → `subjects(id)`; eliminación prevista: `set null`.
+
+### join_request_checks
+
+Control técnico de diez intentos de código en diez minutos; no conserva códigos ingresados.
+
+PK: `id`.
+Acceso: proceso interno; no lectura cliente.
+Reglas: CU-06.
+
+| Campo | Tipo previsto | Admite nulo | Descripción |
+|---|---|---|---|
+| `id` | `uuid` | No | Identificador de comprobación. |
+| `profile_id` | `uuid` | No | Cuenta autenticada que solicita ingreso. |
+| `checked_at` | `timestamptz` | No | Hora de servidor; conservación máxima de diez minutos. |
+
+- FK `profile_id` → `profiles(id)`; eliminación prevista: `cascade`.

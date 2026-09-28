@@ -9,7 +9,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 695.42)">
 <title>modelo</title>
 <polygon fill="#ffffff" stroke="none" points="-28.8,28.8 -28.8,-695.42 1358.8,-695.42 1358.8,28.8 -28.8,28.8"/>
-<text text-anchor="middle" x="665" y="-643.62" font-family="Arial" font-size="20.00">Entregas y evaluación · modelo lógico 1.0</text>
+<text text-anchor="middle" x="665" y="-643.62" font-family="Arial" font-size="20.00">Entregas y evaluación · modelo lógico 1.1</text>
 <!-- attempt_questions -->
 <g id="node1" class="node">
 <title>attempt_questions</title>
@@ -239,7 +239,7 @@
 <polygon fill="none" stroke="#cddad4" points="506,-321.75 506,-355.5 707,-355.5 707,-321.75 506,-321.75"/>
 <text text-anchor="start" x="515" y="-333.2" font-family="Arial" font-size="14.00">FK resubmission_window_id ?</text>
 <polygon fill="none" stroke="#cddad4" points="506,-288 506,-321.75 707,-321.75 707,-288 506,-288"/>
-<text text-anchor="start" x="515" y="-299.45" font-family="Arial" font-size="14.00" fill="#63716b">8 campos · ver diccionario</text>
+<text text-anchor="start" x="515" y="-299.45" font-family="Arial" font-size="14.00" fill="#63716b">9 campos · ver diccionario</text>
 </g>
 <!-- resubmission_windows&#45;&gt;submission_versions -->
 <g id="edge5" class="edge">

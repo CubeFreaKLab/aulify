@@ -2,7 +2,7 @@
 // CHECK, índices parciales, transacciones y permisos: restricciones.md y permisos.md.
 Project aulify {
   database_type: 'PostgreSQL'
-  Note: 'Modelo lógico 1.0; app es un espacio previsto no expuesto. Auth es externo.'
+  Note: 'Modelo lógico 1.1; app es un esquema no expuesto. Auth es externo.'
 }
 
 Table auth.users {
@@ -34,6 +34,7 @@ Table app.subjects {
   created_at timestamptz [not null, note: "Creación."]
   archived_at timestamptz [null, note: "Archivo; nulo significa activa."]
   purge_started_at timestamptz [null, note: "Inicio de eliminación; impide restaurar."]
+  description text [not null, note: "Descripción editable de la materia."]
   indexes {
     id [pk]
   }
@@ -119,6 +120,9 @@ Table app.file_objects {
   state varchar(20) [not null, note: "pending, ready o delete_pending."]
   created_at timestamptz [not null, note: "Inicio de carga."]
   validated_at timestamptz [null, note: "Validación completa antes de asociar."]
+  purge_job_id uuid [null, note: "Trabajo de purga responsable del objeto exclusivo."]
+  upload_purpose varchar(16) [not null, note: "resource o submission; determina límites de reserva."]
+  upload_expires_at timestamptz [not null, note: "Caducidad de reserva de carga a las 24 horas."]
   indexes {
     id [pk]
     (bucket, object_path) [unique]
@@ -167,6 +171,7 @@ Table app.resource_versions {
   title varchar(120) [not null, note: "Título publicado conservado."]
   published_at timestamptz [not null, note: "Momento de publicación."]
   content_schema_version integer [not null, note: "Esquema de contenido usado al publicar."]
+  editor_document jsonb [null, note: "Documento de presentación validado, sin soluciones; instantánea inmutable."]
   indexes {
     id [pk]
     (resource_id, version_no) [unique]
@@ -497,6 +502,7 @@ Table app.submission_versions {
   resubmission_window_id uuid [null, note: "Autorización utilizada, si era reentrega de tarea calificada."]
   late boolean [not null, note: "Respecto al cierre general; ampliación se explica separadamente."]
   request_key uuid [not null, note: "Idempotencia de recepción."]
+  note text [not null, note: "Mensaje que acompaña esta versión de entrega."]
   indexes {
     id [pk]
     (submission_id, version_no) [unique]
@@ -625,6 +631,16 @@ Table app.purge_jobs {
   }
 }
 
+Table app.join_request_checks {
+  Note: "Control técnico de diez intentos de código en diez minutos; no conserva códigos ingresados."
+  id uuid [not null, note: "Identificador de comprobación."]
+  profile_id uuid [not null, note: "Cuenta autenticada que solicita ingreso."]
+  checked_at timestamptz [not null, note: "Hora de servidor; conservación máxima de diez minutos."]
+  indexes {
+    id [pk]
+  }
+}
+
 Ref: app.profiles.id > auth.users.id [delete: restrict]
 Ref: app.subjects.owner_id > app.profiles.id [delete: restrict]
 Ref: app.invitation_codes.subject_id > app.subjects.id [delete: cascade]
@@ -638,6 +654,7 @@ Ref: app.membership_events.request_id > app.join_requests.id [delete: cascade]
 Ref: app.membership_events.actor_id > app.profiles.id [delete: restrict]
 Ref: app.help_progress.profile_id > app.profiles.id [delete: cascade]
 Ref: app.file_objects.owner_id > app.profiles.id [delete: restrict]
+Ref: app.file_objects.purge_job_id > app.purge_jobs.id [delete: restrict]
 Ref: app.resources.owner_id > app.profiles.id [delete: restrict]
 Ref: app.resource_drafts.resource_id > app.resources.id [delete: cascade]
 Ref: app.draft_files.resource_id > app.resource_drafts.resource_id [delete: cascade]
@@ -699,3 +716,4 @@ Ref: app.activity_events.actor_id > app.profiles.id [delete: restrict]
 Ref: app.subject_events.subject_id > app.subjects.id [delete: cascade]
 Ref: app.subject_events.actor_id > app.profiles.id [delete: restrict]
 Ref: app.purge_jobs.subject_id > app.subjects.id [delete: set null]
+Ref: app.join_request_checks.profile_id > app.profiles.id [delete: cascade]

@@ -30,6 +30,7 @@ Una hoja única con docente, materia, estudiante, preguntas, respuestas y notas 
 | `question_grades` | `id → pregunta asignada, revisión, puntos, método, autor y fecha`; `(attempt_question_id, revision_no) → id`. | Cada revisión es un hecho nuevo. Una corrección no altera el envío original. |
 | `powerup_uses` | `(participant_id, kind) → pregunta asignada, clave, fecha`. | Un uso por actividad a través del participante estable, nunca uno por intento. |
 | `submission_files` | `(submission_version_id, file_id) → position`. | Resolver muchos a muchos sin guardar rutas separadas por comas; el archivo conserva metadatos en `file_objects`. |
+| `join_request_checks` | `id → profile_id, checked_at`. | Cada comprobación de código es un evento independiente. No repite el código ni el correo, y su conservación breve es técnica. |
 
 Las demás relaciones de eventos, subtipos y asociaciones siguen el mismo criterio: atributos de un evento dependen de su identidad; las asociaciones puras se determinan por la pareja de claves. El [diccionario](diccionario.md) contiene sus claves concretas.
 

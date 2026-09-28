@@ -1,5 +1,5 @@
 digraph modelo {
-graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Participación y juego · modelo lógico 1.0"];
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Participación y juego · modelo lógico 1.1"];
 node [shape=plain, fontname="Arial"];
 edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
 "activities" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>activities</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];

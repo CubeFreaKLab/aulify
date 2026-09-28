@@ -58,7 +58,7 @@ def validate(model):
 def dbml(model):
     out = ['// Generado desde modelo.json. Modelo lógico; no es una migración segura.',
            '// CHECK, índices parciales, transacciones y permisos: restricciones.md y permisos.md.',
-           'Project aulify {', "  database_type: 'PostgreSQL'", "  Note: 'Modelo lógico 1.0; app es un espacio previsto no expuesto. Auth es externo.'", '}', '']
+           'Project aulify {', "  database_type: 'PostgreSQL'", f"  Note: 'Modelo lógico {model['version']}; app es un esquema no expuesto. Auth es externo.'", '}', '']
     for t in model['tables']:
         out += [f'Table {dbname(t["name"])} {{', '  Note: ' + q(t['purpose'])]
         for c in t['columns']:
@@ -96,7 +96,7 @@ def diagram(model, group):
     local = {n:t for n,t in all_tables.items() if t['group']==group}
     external = {f['target'] for t in local.values() for f in t['foreign_keys'] if f['target'] not in local}
     title = model['groups'][group]
-    out=['digraph modelo {', 'graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label='+q(title+' · modelo lógico 1.0')+'];', 'node [shape=plain, fontname="Arial"];', 'edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];']
+    out=['digraph modelo {', 'graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label='+q(title+' · modelo lógico '+model['version'])+'];', 'node [shape=plain, fontname="Arial"];', 'edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];']
     for name in sorted(set(local)|external):
         t=all_tables[name]; is_local=name in local
         color='#087F5B' if is_local else '#63716B'

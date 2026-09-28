@@ -2,6 +2,8 @@
 
 Fecha: 26 de septiembre de 2026. Revisión documental y estructural; no se ejecutó una base PostgreSQL/Supabase ni pruebas de la aplicación.
 
+**Actualización del 28 de septiembre:** la fuente y los diagramas derivados corresponden ahora al modelo 1.1: 45 relaciones propias (44 de dominio y una técnica), 1 externa, 289 campos y 76 FK. Se ejecutaron las migraciones y 55 comprobaciones en PostgreSQL aislado, con el alcance del [informe de datos](../verificacion/datos-aislados.md). La tabla siguiente conserva el alcance de la revisión documental inicial; no atribuye a esa fecha las pruebas posteriores.
+
 El [informe estructural](verificacion-estructural.json) conserva conteos y huella de la fuente validada. El [manifiesto de figuras](diagramas/manifest.json) permite detectar cambios en fuentes o exportaciones que requieran regenerar.
 
 ## Comprobaciones realizadas

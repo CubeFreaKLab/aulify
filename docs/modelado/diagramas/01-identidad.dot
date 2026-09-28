@@ -1,5 +1,5 @@
 digraph modelo {
-graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Identidad y pertenencia · modelo lógico 1.0"];
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Identidad y pertenencia · modelo lógico 1.1"];
 node [shape=plain, fontname="Arial"];
 edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
 "auth.users" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>auth.users</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
@@ -9,7 +9,7 @@ edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
 "membership_events" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>membership_events</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK membership_id</TD></TR><TR><TD ALIGN="LEFT">FK request_id ?</TD></TR><TR><TD ALIGN="LEFT">FK actor_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">7 campos · ver diccionario</FONT></TD></TR></TABLE>>];
 "memberships" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>memberships</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK subject_id</TD></TR><TR><TD ALIGN="LEFT">FK student_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">6 campos · ver diccionario</FONT></TD></TR></TABLE>>];
 "profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">4 campos · ver diccionario</FONT></TD></TR></TABLE>>];
-"subjects" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>subjects</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK owner_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">8 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"subjects" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>subjects</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK owner_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">9 campos · ver diccionario</FONT></TD></TR></TABLE>>];
 "auth.users" -> "profiles" [dir=none, taillabel="1", headlabel="0..1", labeldistance=1.6];
 "profiles" -> "subjects" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
 "subjects" -> "invitation_codes" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];

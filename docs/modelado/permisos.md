@@ -1,6 +1,6 @@
 # Permisos, publicación y conservación
 
-Modelo de autorización previsto. No hay políticas RLS aplicadas ni pruebas de permisos ejecutadas todavía.
+Modelo de autorización del producto. Las migraciones implementan RLS y contratos comprobados en PostgreSQL aislado; las pruebas contra Auth/Storage reales y el despliegue remoto se registran por separado. Consultar [pruebas de datos](../verificacion/datos-aislados.md).
 
 ## Principio de acceso
 

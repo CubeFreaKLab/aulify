@@ -1,0 +1,263 @@
+{
+  "executedAt": "2026-09-28T06:46:12.354Z",
+  "engine": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "runtime": "PGlite 0.5.8",
+  "migrationFiles": [
+    "20260928062213_aulify_relational_core.sql",
+    "20260928062305_aulify_commands.sql",
+    "20260928062755_aulify_projections_storage.sql",
+    "20260928063218_aulify_retention_hardening.sql",
+    "20260928063815_aulify_join_rate_limit.sql",
+    "20260928064022_aulify_upload_reservations.sql"
+  ],
+  "checks": [
+    {
+      "case": "crear materia",
+      "result": "passed"
+    },
+    {
+      "case": "snapshot docente",
+      "result": "passed"
+    },
+    {
+      "case": "solicitar sin acceso",
+      "result": "passed"
+    },
+    {
+      "case": "estudiante no archiva",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "docente ajeno no aprueba",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "conflicto de borrador",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "ocho tipos publicados en filas",
+      "result": "passed"
+    },
+    {
+      "case": "crear actividad",
+      "result": "passed"
+    },
+    {
+      "case": "snapshot no filtra soluciones/guías/pistas",
+      "result": "passed"
+    },
+    {
+      "case": "inicio idempotente recupera intento",
+      "result": "passed"
+    },
+    {
+      "case": "orden de pregunta",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "acierto oculto no se filtra",
+      "result": "passed"
+    },
+    {
+      "case": "idempotencia con contenido distinto",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "doble consumo único",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "cierre última pregunta",
+      "result": "passed"
+    },
+    {
+      "case": "reglas congeladas",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "escritura pendiente impide publicar",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "nota con doble limitada al máximo",
+      "result": "passed"
+    },
+    {
+      "case": "nota publicada sin soluciones ocultas",
+      "result": "passed"
+    },
+    {
+      "case": "sin SELECT de soluciones",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "sin llamada de helper privado",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "archivo revoca acceso",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "guiada espera inicio docente",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "retroalimentación inmediata",
+      "result": "passed"
+    },
+    {
+      "case": "confirmar omisiones guiadas",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "última pregunta finaliza guiada",
+      "result": "passed"
+    },
+    {
+      "case": "clasificación individual y por equipos",
+      "result": "passed"
+    },
+    {
+      "case": "archivo no validado",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "entrega atómica con archivo validado",
+      "result": "passed"
+    },
+    {
+      "case": "reentrega requiere permiso",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "reentrega conserva versión anterior",
+      "result": "passed"
+    },
+    {
+      "case": "archivo privado entre docentes",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "retiro revoca descarga de tarea",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "30 días exactos impiden restaurar",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "purga descubre archivo exclusivo",
+      "result": "passed"
+    },
+    {
+      "case": "purga no afirma borrado mientras existen bytes",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "case": "purga conserva biblioteca independiente",
+      "result": "passed"
+    },
+    {
+      "case": "trabajo de purga completado",
+      "result": "passed"
+    },
+    {
+      "case": "purga elimina materia",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 1",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 2",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 3",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 4",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 5",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 6",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 7",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 8",
+      "result": "passed"
+    },
+    {
+      "case": "código inválido contabilizado 9",
+      "result": "passed"
+    },
+    {
+      "case": "décimo intento adicional limitado",
+      "result": "passed"
+    },
+    {
+      "case": "mantenimiento no disponible al estudiante",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "cliente no reserva usando privilegios de servicio",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "RLS en las 45 tablas propias",
+      "result": "passed"
+    },
+    {
+      "case": "seis wrappers públicos invoker sin ejecución anónima",
+      "result": "passed"
+    },
+    {
+      "case": "anon no obtiene snapshot",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "anon no ejecuta comandos",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    }
+  ],
+  "limitations": [
+    "Instancia PostgreSQL aislada en memoria.",
+    "Auth y Storage se representan mediante esquemas mínimos de prueba; no sustituye pruebas de JWT, correo, API Storage o concurrencia de producción.",
+    "No se aplicaron migraciones remotas en esta ejecución."
+  ]
+}
