@@ -1,6 +1,6 @@
 # Recuperación de una base aislada
 
-Se generó una copia comprimida de una base PGlite con las diez migraciones y datos ficticios. Tras cerrar esa instancia, se abrió otra desde el archivo guardado y se comprobaron estructura, pertenencia, versiones de resultados, autorización y continuidad de escritura. Las nueve comprobaciones aprobaron; el [registro JSON](recuperacion-aislada.json) conserva tiempo real, tamaño y huella del archivo.
+Se generó una copia comprimida de una base PGlite con las doce migraciones y datos ficticios. Tras cerrar esa instancia, se abrió otra desde el archivo guardado y se comprobaron estructura, pertenencia, versiones de resultados, autorización y continuidad de escritura. Las nueve comprobaciones aprobaron; el [registro JSON](recuperacion-aislada.json) conserva tiempo real, tamaño y huella del archivo.
 
 El ejecutor es [recovery-check.mjs](../../tools/datos/recovery-check.mjs). Se reproduce con `node tools/datos/recovery-check.mjs` después de instalar las dependencias. La copia queda en una carpeta local excluida de Git, no en el repositorio público.
 

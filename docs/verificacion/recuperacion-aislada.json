@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-28T08:10:03.125Z",
-  "completedAt": "2026-09-28T08:10:05.754Z",
-  "commit": "91c5fe494f3f7e651876db702f16289059b85ff0",
+  "startedAt": "2026-09-28T08:55:35.670Z",
+  "completedAt": "2026-09-28T08:55:38.514Z",
+  "commit": "c892923c52416f0085d3d3fbd28e7a68bff7a569",
   "environment": "PGlite 0.5.8 local; Auth y Storage mínimos aislados; datos ficticios",
   "migrations": [
     "20260928064804_aulify_relational_core.sql",
@@ -13,14 +13,16 @@
     "20260928070919_aulify_resubmission_projection.sql",
     "20260928072137_aulify_activity_sync_digest.sql",
     "20260928074757_aulify_snapshot_authorized_sets.sql",
-    "20260928080625_aulify_guided_answer_close_lock.sql"
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql"
   ],
   "backup": {
-    "bytes": 5162538,
-    "sha256": "2173d35770aec7e22c35fdfc67932ae316717f2333a540a9e950ebf0e28bd0cc",
+    "bytes": 5190473,
+    "sha256": "46e4e23231fcf465fa6ebc435f463dd67dc290673eab97829b953868db3254e5",
     "format": "PGlite datadir gzip"
   },
-  "recoveryAndVerificationMs": 542,
+  "recoveryAndVerificationMs": 554,
   "checks": [
     {
       "case": "nota publicada presente antes del respaldo",
@@ -55,7 +57,7 @@
       "result": "passed"
     },
     {
-      "case": "RLS continúa activo en las 45 tablas",
+      "case": "RLS continúa activo en las 47 tablas del modelo",
       "result": "passed"
     }
   ],

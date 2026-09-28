@@ -47,6 +47,8 @@ check(before.studentResults[subject.id]?.some(x => x.activityId === manual.id &&
 await db.exec('reset role');
 const catalogSql = `select tablename, rowsecurity from pg_tables where schemaname='app' order by tablename`;
 const tablesBefore = (await db.query(catalogSql)).rows;
+const model = JSON.parse(await fs.readFile('docs/modelado/modelo.json', 'utf8'));
+const expectedTables = model.tables.filter(table => table.group !== 'externo').length;
 const backup = await db.dumpDataDir('gzip');
 const bytes = Buffer.from(await backup.arrayBuffer());
 await fs.mkdir('.local-private/recovery', { recursive: true });
@@ -70,7 +72,7 @@ await as(teacher);
 await command('updateSubject', subject.id, { name: 'Biología recuperada', course: '3.º A', year: 2026, description: 'Continuidad comprobada' });
 check((await snapshot()).state.subjects.some(x => x.name === 'Biología recuperada'), 'se puede continuar operando sobre el entorno recuperado');
 await db.exec('reset role');
-check((await db.query("select count(*)::int n from pg_tables where schemaname='app' and rowsecurity")).rows[0].n === 45, 'RLS continúa activo en las 45 tablas');
+check((await db.query("select count(*)::int n from pg_tables where schemaname='app' and rowsecurity")).rows[0].n === expectedTables, `RLS continúa activo en las ${expectedTables} tablas del modelo`);
 await db.close();
 const report = {
   startedAt: started, completedAt: new Date().toISOString(), commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
