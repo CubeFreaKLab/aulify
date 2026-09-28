@@ -5,6 +5,8 @@ import { BarChart3, Check, ClipboardCheck, FileText, Plus, Upload } from 'lucide
 import { useRef, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { uploadFile } from '@/lib/upload';
+import { activityDays, withinDateRange } from '@/lib/result-analytics';
+import { ResultDistribution } from './result-distribution';
 import {
   calculateAverage,
   numeric,
@@ -426,6 +428,7 @@ export function ReviewScreen({ state, user }: ScreenProps) {
 type Status = StudentResult['status'];
 interface ResultRow {
   id: string;
+  activityId: string;
   studentId: string;
   title: string;
   subject: Subject;
@@ -464,6 +467,11 @@ export function ResultsScreen({ state, user }: ScreenProps) {
   const [subjectId, setSubjectId] = useState('all');
   const [course, setCourse] = useState('all');
   const [year, setYear] = useState('all');
+  const [fromDate, setFromDate] = useState('');
+  const [throughDate, setThroughDate] = useState('');
+  const days = activityDays(state);
+  const includedDate = (activityId: string) =>
+    withinDateRange(days.get(activityId), fromDate, throughDate);
   const teacher = user.role === 'teacher';
   const subjects = visibleSubjects(state, user);
   const filteredSubjects = subjects.filter(
@@ -476,6 +484,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
     state.evaluations.filter(
       (item) =>
         filteredSubjects.some((subject) => subject.id === item.subjectId) &&
+        includedDate(item.activityId) &&
         (teacher || item.studentId === user.id) &&
         Boolean(item.publishedAt),
     ),
@@ -483,7 +492,9 @@ export function ResultsScreen({ state, user }: ScreenProps) {
   const rows: ResultRow[] = [];
   for (const subject of filteredSubjects) {
     if (teacher) {
-      for (const activity of state.activities.filter((item) => item.subjectId === subject.id)) {
+      for (const activity of state.activities.filter(
+        (item) => item.subjectId === subject.id && includedDate(item.id),
+      )) {
         const studentIds = [
           ...new Set([
             ...state.memberships
@@ -511,6 +522,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
                   : 'unpublished';
           rows.push({
             id: `${activity.id}/${id}`,
+            activityId: activity.id,
             studentId: id,
             title: activity.title,
             subject,
@@ -524,6 +536,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
       }
     } else {
       for (const item of getDemoRepository().studentResults(subject.id, user.id)) {
+        if (!includedDate(item.activityId)) continue;
         const kind = state.tasks.some((task) => task.id === item.activityId)
           ? 'task'
           : state.manualActivities.some((activity) => activity.id === item.activityId)
@@ -531,10 +544,12 @@ export function ResultsScreen({ state, user }: ScreenProps) {
             : 'quiz';
         rows.push({
           id: `${item.activityId}/${user.id}`,
+          activityId: item.activityId,
           studentId: user.id,
           title: item.title,
           subject,
-          status: item.status,
+          status:
+            kind === 'manual' && item.status === 'not-started' ? 'pending-review' : item.status,
           grade: item.status === 'published' ? item.grade : null,
           maxGrade: item.maxGrade,
           kind,
@@ -546,7 +561,9 @@ export function ResultsScreen({ state, user }: ScreenProps) {
     }
     // La proyección remota del estudiante ya incluye tareas y actividades manuales.
     if (live && !teacher) continue;
-    for (const task of state.tasks.filter((item) => item.subjectId === subject.id)) {
+    for (const task of state.tasks.filter(
+      (item) => item.subjectId === subject.id && includedDate(item.id),
+    )) {
       const studentIds = teacher
         ? [
             ...new Set([
@@ -566,6 +583,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
         const evaluation = latestEvaluation(state, task.id, id);
         rows.push({
           id: `${task.id}/${id}`,
+          activityId: task.id,
           studentId: id,
           title: task.title,
           subject,
@@ -583,22 +601,44 @@ export function ResultsScreen({ state, user }: ScreenProps) {
         });
       }
     }
-    for (const evaluation of evaluations.filter(
-      (item) => item.subjectId === subject.id && item.source === 'manual',
-    ))
-      rows.push({
-        id: `${evaluation.activityId}/${evaluation.studentId}`,
-        studentId: evaluation.studentId,
-        title:
-          state.manualActivities.find((item) => item.id === evaluation.activityId)?.title ??
-          'Actividad manual',
-        subject,
-        status: 'published',
-        grade: evaluation.grade,
-        maxGrade: evaluation.maxGrade,
-        kind: 'manual',
-        comment: evaluation.comment,
-      });
+    for (const activity of state.manualActivities.filter(
+      (item) => item.subjectId === subject.id && includedDate(item.id),
+    )) {
+      const studentIds = teacher
+        ? [
+            ...new Set([
+              ...state.memberships
+                .filter((item) => item.subjectId === subject.id && item.status === 'approved')
+                .map((item) => item.studentId),
+              ...evaluations
+                .filter((item) => item.activityId === activity.id)
+                .map((item) => item.studentId),
+            ]),
+          ]
+        : [user.id];
+      for (const studentId of studentIds) {
+        const evaluation = evaluations.find(
+          (item) => item.activityId === activity.id && item.studentId === studentId,
+        );
+        const unpublished =
+          teacher &&
+          getWorkspaceExtras().draftEvaluations.some(
+            (item) => item.activityId === activity.id && item.studentId === studentId,
+          );
+        rows.push({
+          id: `${activity.id}/${studentId}`,
+          activityId: activity.id,
+          studentId,
+          title: activity.title,
+          subject,
+          status: evaluation ? 'published' : unpublished ? 'unpublished' : 'pending-review',
+          grade: evaluation?.grade ?? null,
+          maxGrade: activity.maxGrade,
+          kind: 'manual',
+          comment: evaluation?.comment,
+        });
+      }
+    }
   }
   const averageGroups = new Map(
     rows.map((row) => [
@@ -676,17 +716,46 @@ export function ResultsScreen({ state, user }: ScreenProps) {
               ))}
           </select>
         </Field>
+        <Field label="Desde la fecha" id="result-from">
+          <input
+            id="result-from"
+            type="date"
+            value={fromDate}
+            max={throughDate || undefined}
+            aria-describedby="result-date-help"
+            onChange={(event) => setFromDate(event.target.value)}
+          />
+        </Field>
+        <Field label="Hasta la fecha" id="result-through">
+          <input
+            id="result-through"
+            type="date"
+            value={throughDate}
+            min={fromDate || undefined}
+            aria-describedby="result-date-help"
+            onChange={(event) => setThroughDate(event.target.value)}
+          />
+        </Field>
         <Button
           variant="ghost small"
           onPress={() => {
             setSubjectId('all');
             setCourse('all');
             setYear('all');
+            setFromDate('');
+            setThroughDate('');
           }}
         >
           Restablecer filtros
         </Button>
       </div>
+      <p id="result-date-help" className="results-note results-date-help">
+        Las fechas incluyen ambos extremos y corresponden al cierre del quiz o tarea, o a la
+        realización de la actividad manual. El día respeta la zona horaria de la actividad.
+      </p>
+      {fromDate && throughDate && fromDate > throughDate && (
+        <p role="alert">La fecha inicial debe ser anterior o igual a la fecha final.</p>
+      )}
       {!rows.length ? (
         <EmptyState icon={BarChart3} title="Todavía no hay resultados en este grupo">
           Prueba otros filtros o espera la primera actividad de la materia.
@@ -697,6 +766,9 @@ export function ResultsScreen({ state, user }: ScreenProps) {
             <h2 id="average-heading">
               {teacher ? 'Promedios por materia y estudiante' : 'Tus promedios por materia'}{' '}
               <span className="results-scale">sobre 100</span>
+              {(fromDate || throughDate) && (
+                <span className="results-scale"> · Promedio del intervalo</span>
+              )}
             </h2>
             <p className="results-note">
               Cada materia conserva su propio promedio. Solo incluye notas publicadas que cuentan,
@@ -758,6 +830,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
               </table>
             </div>
           </section>
+          {teacher && <ResultDistribution rows={rows} />}
           <div className="section-head">
             <h2>Calificaciones por actividad</h2>
             <Badge>{rows.filter((row) => row.status === 'published').length} publicadas</Badge>
@@ -777,6 +850,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
                   <th scope="col">Materia y grupo</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Nota</th>
+                  <th scope="col">Fecha de actividad</th>
                   <th scope="col">Detalle</th>
                 </tr>
               </thead>
@@ -812,6 +886,11 @@ export function ResultsScreen({ state, user }: ScreenProps) {
                           <span className="results-note"> / {number(row.maxGrade)}</span>
                         </>
                       )}
+                    </td>
+                    <td>
+                      <time dateTime={days.get(row.activityId)}>
+                        {days.get(row.activityId)?.split('-').reverse().join('/') ?? 'Sin fecha'}
+                      </time>
                     </td>
                     <td>
                       {teacher ? (

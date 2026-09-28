@@ -1,0 +1,39 @@
+{
+  "case": "AP-26",
+  "startedAt": "2026-09-28T08:42:29.027Z",
+  "durationMs": 39266.938,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "buildId": "pxh1ODWREQKmVs3aCb8qm",
+  "environment": "Next.js compilado local, Supabase Free remoto, cinco estudiantes y dos materias ficticias",
+  "projects": ["Chromium escritorio 1440x900", "Chromium móvil emulado 390x844"],
+  "batches": ["AP-26 en dos tamaños", "Regresión previa de filas duplicadas en dos tamaños"],
+  "unitTests": {
+    "passed": 3,
+    "file": "tests/unit/result-analytics.test.ts"
+  },
+  "axe": {
+    "scans": 2,
+    "violations": 0,
+    "scope": "Vista de resultados con intervalo de fechas y distribución",
+    "tags": ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]
+  },
+  "expectedAndObserved": {
+    "grades": [0, 20, 80, 100],
+    "pending": 1,
+    "bins": [1, 1, 0, 0, 2],
+    "published": 4,
+    "firstDateAverages": [0, 20, 80, 100, null],
+    "twoDateAverages": [20, 30, 60, 70, 40],
+    "secondDateBins": [0, 0, 5, 0, 0],
+    "separateSubjectAverage": 10,
+    "studentAveragesBySubject": [0, 10]
+  },
+  "limits": [
+    "No despliegue público",
+    "Móvil emulado, no teléfono físico",
+    "Sin lector de pantalla ni evaluación con participantes",
+    "No demuestra toda RF-12 o todos los escenarios de aceptación"
+  ]
+}

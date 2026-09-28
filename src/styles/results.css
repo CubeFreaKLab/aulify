@@ -95,6 +95,38 @@
 .results-overview {
   margin-bottom: 26px;
 }
+.results-date-help {
+  margin: -8px 0 24px;
+  max-width: 90ch;
+}
+.results-distribution > .row > div:first-child {
+  flex: 1;
+  min-width: 220px;
+}
+.results-distribution .field {
+  width: min(100%, 360px);
+}
+.results-distribution-chart {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+}
+.results-distribution-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  margin: 22px 0 0;
+}
+.results-distribution-statuses dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.results-distribution-statuses dd {
+  margin: 6px 0 0;
+  font-size: 22px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
 .results-scale {
   font-size: 13px;
   font-weight: 500;
