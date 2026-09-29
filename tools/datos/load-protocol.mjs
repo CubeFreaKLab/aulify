@@ -4,6 +4,7 @@ import os from 'node:os';
 import {performance,monitorEventLoopDelay} from 'node:perf_hooks';
 import {execFileSync} from 'node:child_process';
 import {retryAfterMs} from './load-waits.mjs';
+import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 const base=process.env.AULIFY_LOAD_BASE_URL;
 const expectedBuild=process.env.AULIFY_EXPECTED_BUILD_ID;
 if(base!=='http://127.0.0.1:3001'||!expectedBuild)throw new Error('Definir explícitamente servidor compilado3001 y AULIFY_EXPECTED_BUILD_ID.');
@@ -25,6 +26,7 @@ const report={startedAt:new Date().toISOString(),scope:'Diagnóstico de 60 segun
 report.buildChecks=[initialBuildCheck];
 report.expectedMigration={path:'supabase/migrations/20260929224538_aulify_participant_teacher_revision.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260929224538_aulify_participant_teacher_revision.sql')).digest('hex')};
 report.scriptSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-protocol.mjs')).digest('hex');
+report.instrumentation={version:'rpc-failure-v1',header:'X-Aulify-Rpc-Failure',sources:Object.fromEntries(await Promise.all(['src/lib/rpc-failure.ts','src/app/api/sync/route.ts','src/app/api/workspace/route.ts','src/app/api/commands/route.ts','tools/datos/load-failure-category.mjs'].map(async path=>[path,crypto.createHash('sha256').update(await fs.readFile(path)).digest('hex')]))),limitations:['Cabecera disponible en fallosRPC de sync/workspace; comandos y Auth pueden quedar unclassified.','Hashes de fuente local; la correspondencia de fuente y compilado debe verificarse antes de autorizar una medición.']};
 report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
@@ -32,10 +34,10 @@ const parallel=async(items,n,fn)=>{let i=0;await Promise.all(Array.from({length:
 const request=async(s,path,body,stage)=>{if(abortReason&&measuring)return{error:'CUTOFF'};const start=performance.now(),measurement=measuring;try{
  const response=await fetch(base+path,{method:body?'POST':'GET',headers:{Cookie:[...s.jar].map(([k,v])=>`${k}=${v}`).join('; '),Origin:base,'Sec-Fetch-Site':'same-origin',...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000)});
  for(const h of response.headers.getSetCookie()){const pair=h.split(';',1)[0],i=pair.indexOf('=');if(pair.slice(i+1))s.jar.set(pair.slice(0,i),pair.slice(i+1));else s.jar.delete(pair.slice(0,i));}
- const text=await response.text();bytes+=Buffer.byteLength(text);report.records.push({stage,measurement,status:response.status,ms:performance.now()-start,bytes:Buffer.byteLength(text)});
+ const text=await response.text();bytes+=Buffer.byteLength(text);report.records.push({stage,measurement,status:response.status,ms:performance.now()-start,bytes:Buffer.byteLength(text),...(response.ok?{}:{failureCategory:rpcFailureCategory(response.headers)})});
  if(2*bytes+1024*report.records.length>1e9)abortReason='Transferencia adicional estimada superior a 1 GB';
  if(!response.ok)return{error:response.status,retryAfterMs:retryAfterMs(response.headers.get('Retry-After'))};return{data:JSON.parse(text)};
- }catch(e){report.records.push({stage,measurement,status:0,ms:performance.now()-start,error:e.name});return{error:e.name};}};
+ }catch(e){const failureCategory=transportFailureCategory(e);report.records.push({stage,measurement,status:0,ms:performance.now()-start,failureCategory});return{error:failureCategory};}};
 const cmd=async(s,action,args,stage='prepare')=>{const r=await request(s,'/api/commands',{action,args},stage);if(r.error)throw new Error(`${action}: ${r.error}`);return r.data.result;};
 function needsRefresh(s){try{let v=[...s.jar].filter(([k])=>k.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,v])=>v).join('');v=decodeURIComponent(v);if(v.startsWith('base64-'))v=Buffer.from(v.slice(7),'base64url').toString();return(JSON.parse(v).expires_at??0)*1000<Date.now()+90000;}catch{return true;}}
 const saveCookies=async()=>{for(const s of sessions)cookies[s.id]={cookies:Object.fromEntries(s.jar),savedAt:new Date().toISOString()};await fs.writeFile('.local-private/load-http-sessions.json',JSON.stringify(cookies)+'\n');};
@@ -76,8 +78,9 @@ try{
  const measured=report.records.filter(x=>x.measurement);if(measured.filter(x=>x.status!==200).length/measured.length>.1)abortReason ||= 'Más del 10 % de fallos técnicos en la ventana de un minuto';
  const persisted=new Map();for(const t of teachers){const r=await request(t,`/api/workspace?activity=${t.activityId}`,undefined,'audit');if(r.error)throw new Error('Auditoría no completada');for(const at of r.data.state.attempts)for(const a of at.answers)persisted.set(`${at.id}:${a.questionId}`,a.idempotencyKey);}
  report.integrity={persisted:persisted.size,confirmed:acks.length,missingOrChangedConfirmed:acks.filter(a=>persisted.get(`${a.attemptId}:${a.questionId}`)!==a.key).length};report.status=abortReason?'stopped-at-safety-limit':'completed';
-}catch(e){report.status='failed';report.failure=e.message;process.exitCode=1;}finally{
+}catch{report.status='failed';report.failure='El diagnóstico no terminó. Revisar etapas, estados HTTP y categorías registradas.';process.exitCode=1;}finally{
  timers.forEach(clearTimeout);clearInterval(monitor);loop.disable();await saveCookies();report.completedAt=new Date().toISOString();report.abortReason=abortReason||undefined;report.observedBodyBytes=bytes;report.conservativeEstimatedBytes=2*bytes+1024*report.records.length;report.generator={node:process.version,os:os.platform(),eventLoopP95Ms:loop.percentile(95)/1e6};
  const measured=report.records.filter(x=>x.measurement);report.measurements=Object.fromEntries(['sync','snapshot','answer'].map(stage=>{const rows=measured.filter(x=>x.stage===stage);return[stage,{count:rows.length,failed:rows.filter(x=>x.status!==200).length,p95Ms:p95(rows.map(x=>x.ms))}];}));
+ report.failuresByCategory=Object.fromEntries(['sync','snapshot','answer'].map(stage=>{const failures=measured.filter(x=>x.stage===stage&&x.status!==200);return[stage,Object.fromEntries([...new Set(failures.map(x=>x.failureCategory))].map(category=>{const rows=failures.filter(x=>x.failureCategory===category);return[category,{count:rows.length,p95Ms:p95(rows.map(x=>x.ms))}];}))];}));
  const path=`docs/verificacion/datos-protocolo-60s-${report.startedAt.replace(/[^0-9]/g,'').slice(0,14)}.json`;await fs.writeFile(path,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({path,status:report.status,burst:report.burst,integrity:report.integrity,measurements:report.measurements,failure:report.failure,abortReason}));
 }

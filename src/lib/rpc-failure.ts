@@ -1,3 +1,5 @@
+import { jsonResponse } from './http';
+
 export type RpcFailureCategory =
   | 'validation'
   | 'forbidden'
@@ -63,10 +65,37 @@ export function classifyRpcFailure(error: unknown, upstreamStatus?: number): Rpc
 }
 
 /** Solo categorías cerradas y duración: nunca serializa el error ni el contenido del comando. */
-export function logRpcFailure(failure: RpcFailure, durationMs: number) {
+export function logRpcFailure(
+  failure: RpcFailure,
+  durationMs: number,
+  scope: 'command' | 'sync' | 'workspace' = 'command',
+) {
   if (failure.status < 500) return;
-  console.warn('aulify.command.rpc_failure', {
+  console.warn(`aulify.${scope}.rpc_failure`, {
     category: failure.category,
     durationMs: Number.isFinite(durationMs) ? Math.max(0, Math.round(durationMs)) : 0,
   });
+}
+
+/** Cabecera de diagnóstico cerrada; la respuesta no incluye el error recibido del servicio. */
+export function readRpcFailureResponse(
+  scope: 'sync' | 'workspace',
+  error: unknown,
+  durationMs: number,
+  upstreamStatus?: number,
+) {
+  const failure = classifyRpcFailure(error, upstreamStatus);
+  logRpcFailure(failure, durationMs, scope);
+  const message =
+    failure.status === 403
+      ? 'Esta actividad ya no está disponible para tu cuenta.'
+      : failure.status === 401
+        ? 'Tu sesión terminó. Vuelve a iniciar sesión.'
+        : scope === 'sync'
+          ? 'No pudimos actualizar la actividad en este momento. Se reintentará.'
+          : 'No pudimos abrir tu aula. Intenta de nuevo.';
+  const response = jsonResponse({ error: message }, failure.status);
+  response.headers.set('X-Aulify-Rpc-Failure', failure.category);
+  if (failure.status === 503) response.headers.set('Retry-After', '30');
+  return response;
 }

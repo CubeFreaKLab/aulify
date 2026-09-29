@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { createSupabaseServer } from '@/lib/supabase/server';
 import { authFailureResponse, jsonResponse } from '@/lib/http';
+import { readRpcFailureResponse } from '@/lib/rpc-failure';
 
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get('activity');
@@ -9,17 +10,16 @@ export async function GET(request: NextRequest) {
   const client = await createSupabaseServer();
   const { data, error: identityError } = await client.auth.getClaims();
   if (identityError || !data?.claims.sub) return authFailureResponse(identityError);
-  const { data: revision, error } = await client.rpc('aulify_sync', { p_activity_id: id });
-  if (error) {
-    const forbidden = error.code === '42501';
-    return jsonResponse(
-      {
-        error: forbidden
-          ? 'Esta actividad ya no está disponible para tu cuenta.'
-          : 'No pudimos actualizar la actividad en este momento. Se reintentará.',
-      },
-      forbidden ? 403 : 503,
-    );
+  const startedAt = performance.now();
+  try {
+    const {
+      data: revision,
+      error,
+      status,
+    } = await client.rpc('aulify_sync', { p_activity_id: id });
+    if (error) return readRpcFailureResponse('sync', error, performance.now() - startedAt, status);
+    return jsonResponse(revision);
+  } catch (error) {
+    return readRpcFailureResponse('sync', error, performance.now() - startedAt);
   }
-  return jsonResponse(revision);
 }
