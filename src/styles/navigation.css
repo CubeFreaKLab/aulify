@@ -1,0 +1,108 @@
+.app-sidebar {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.nav-link > svg {
+  flex-shrink: 0;
+}
+.nav-subject-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.sidebar-label {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+.navigation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: #00000066;
+  display: flex;
+}
+.navigation-modal {
+  height: 100dvh;
+  width: min(310px, calc(100vw - 40px));
+  background: var(--paper);
+  border-right: 1px solid var(--line);
+  box-shadow: var(--shadow-float);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.navigation-drawer {
+  position: relative;
+  min-height: 100%;
+  padding: 28px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+.navigation-close {
+  position: absolute;
+  top: 20px;
+  right: 12px;
+}
+.navigation-drawer .app-logo {
+  margin-bottom: 28px;
+}
+.navigation-drawer .sidebar-label {
+  margin-top: 22px;
+}
+.navigation-drawer .sidebar-bottom {
+  padding-top: 22px;
+}
+.navigation-overlay[data-entering] {
+  animation: navigation-scrim-in var(--motion-fast) var(--ease-enter);
+}
+.navigation-overlay[data-entering] .navigation-modal {
+  animation: navigation-drawer-in var(--motion-medium) var(--ease-enter);
+}
+@keyframes navigation-scrim-in {
+  from {
+    background: #00000000;
+  }
+  to {
+    background: #00000066;
+  }
+}
+@keyframes navigation-drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (max-width: 500px) {
+  .app-topbar {
+    height: 64px;
+    gap: 8px;
+  }
+  .app-topbar > .row {
+    gap: 8px;
+    min-width: 0;
+  }
+  .crumb {
+    min-width: 0;
+  }
+  .crumb-context {
+    display: none;
+  }
+  .crumb strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .app-topbar .demo-tag {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navigation-overlay[data-entering],
+  .navigation-overlay[data-entering] .navigation-modal {
+    animation: none;
+  }
+}

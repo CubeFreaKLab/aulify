@@ -1,16 +1,11 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
-import Link, { useWorkspaceRouter as useRouter, workspacePath } from './workspace-link';
+import Link, { useWorkspaceRouter as useRouter } from './workspace-link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import {
-  Home,
   BookOpen,
-  FolderOpen,
   ClipboardCheck,
-  BarChart3,
-  HelpCircle,
-  Settings,
   Menu,
   X,
   ArrowUpRight,
@@ -20,7 +15,6 @@ import {
   ArrowRight,
   FileText,
   Check,
-  Search,
   GraduationCap,
   ChevronDown,
   RotateCcw,
@@ -41,19 +35,12 @@ import { Button, Badge, PageHeading, DialogPanel, Field, EmptyState } from './ui
 import { EditorScreen } from './editor-screen';
 import { ActivityScreen } from './activity-screen';
 import { ReviewScreen, ResultsScreen, TasksScreen } from './results-screen';
-import { ResourcePreview } from './resource-preview';
+import { LibraryScreen } from './library-screen';
 import { WorkspaceTransition } from './workspace-transition';
 import { ThemeSwitcher } from './theme';
+import { WorkspaceNavigation } from './workspace-navigation';
 import { ResourceReader } from './resource-reader';
 import { SubjectManagement, ManualActivities } from './classroom-management';
-
-const navigation = [
-  { href: '/demo', label: 'Mi inicio', icon: Home },
-  { href: '/demo/materias', label: 'Mis materias', icon: BookOpen },
-  { href: '/demo/biblioteca', label: 'Biblioteca', icon: FolderOpen },
-  { href: '/demo/revision', label: 'Por revisar', icon: ClipboardCheck },
-  { href: '/demo/resultados', label: 'Resultados', icon: BarChart3 },
-];
 
 export function Workspace() {
   const data = useDemo();
@@ -134,84 +121,14 @@ export function Workspace() {
     return <ActivityScreen activityId={id} user={user} state={state} notices={notices} />;
   return (
     <div className="app-shell">
-      <aside
-        className={`app-sidebar ${mobile ? 'mobile-open' : ''}`}
-        aria-label="Navegación de la plataforma"
-      >
-        <Link href="/" className="app-logo" aria-label="Aulify, portada">
-          <img src="/brand/aulify-logo.svg" alt="Aulify" />
-        </Link>
-        <nav className="app-nav">
-          {navigation
-            .map((item) => ({ ...item, href: workspacePath(item.href, path) }))
-            .filter((n) => teacher || !['Biblioteca', 'Por revisar'].includes(n.label))
-            .map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className={`nav-link ${path === n.href || (!['/demo', '/aula'].includes(n.href) && path.startsWith(n.href)) ? 'active' : ''}`}
-                aria-current={path === n.href ? 'page' : undefined}
-                onClick={() => setMobile(false)}
-              >
-                <n.icon size={19} />
-                {n.label}
-                {n.label === 'Por revisar' && (
-                  <span className="count">
-                    {
-                      state.attempts.filter(
-                        (a) => a.status === 'closed' && a.answers.some((r) => !r.reviews.length),
-                      ).length
-                    }
-                  </span>
-                )}
-              </Link>
-            ))}
-          <Link
-            href="/demo/tareas"
-            className={`nav-link ${page === 'tareas' ? 'active' : ''}`}
-            onClick={() => setMobile(false)}
-          >
-            <FileText size={19} />
-            Tareas
-          </Link>
-        </nav>
-        <div className="sidebar-label">TUS MATERIAS</div>
-        {subjects.slice(0, 4).map((s) => (
-          <Link
-            key={s.id}
-            href={`/demo/materia/${s.id}`}
-            className="nav-link"
-            onClick={() => setMobile(false)}
-          >
-            <span className="subject-dot" />
-            {s.name}
-          </Link>
-        ))}
-        <div className="sidebar-bottom">
-          <ThemeSwitcher compact />
-          <Link href="/demo/ayuda" className="nav-link" onClick={() => setMobile(false)}>
-            <HelpCircle size={19} />
-            Ayuda
-          </Link>
-          <Link href="/demo/preferencias" className="nav-link" onClick={() => setMobile(false)}>
-            <Settings size={19} />
-            Preferencias
-          </Link>
-          <div className="user-line">
-            <span className="avatar">
-              {user.name
-                .split(' ')
-                .map((n) => n[0])
-                .slice(0, 2)
-                .join('')}
-            </span>
-            <div>
-              <div className="user-name">{user.name}</div>
-              <div className="user-role">{teacher ? 'Docente' : 'Estudiante'}</div>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <WorkspaceNavigation
+        state={state}
+        user={user}
+        subjects={subjects}
+        open={mobile}
+        onOpenChange={setMobile}
+      />
+
       <div style={{ minWidth: 0 }}>
         <header className="app-topbar">
           <div className="row">
@@ -220,11 +137,13 @@ export function Workspace() {
               onClick={() => setMobile(!mobile)}
               aria-label={mobile ? 'Cerrar navegación' : 'Abrir navegación'}
               aria-expanded={mobile}
+              aria-controls={mobile ? 'mobile-navigation' : undefined}
+              aria-haspopup="dialog"
             >
               {mobile ? <X size={21} /> : <Menu size={21} />}
             </button>
             <span className="crumb">
-              Tu espacio <span>/</span>{' '}
+              <span className="crumb-context">Tu espacio /</span>{' '}
               <strong>
                 {(
                   {
@@ -288,7 +207,11 @@ export function Workspace() {
           ) : page === 'materia' && id ? (
             <SubjectScreen state={state} user={user} subjectId={id} />
           ) : page === 'biblioteca' && teacher ? (
-            <LibraryScreen state={state} user={user} />
+            <LibraryScreen
+              state={state}
+              user={user}
+              onCreate={() => createResource(user, router.push)}
+            />
           ) : page === 'editor' && id && teacher ? (
             <EditorScreen resourceId={id} state={state} user={user} />
           ) : page === 'previa' && id && teacher ? (
@@ -914,101 +837,6 @@ function SubjectScreen({
           />
         )}
       </DialogPanel>
-    </>
-  );
-}
-
-function LibraryScreen({ state, user }: { state: DemoState; user: User }) {
-  const router = useRouter();
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('all');
-  const resources = state.resources.filter(
-    (r) =>
-      r.ownerId === user.id &&
-      r.title.toLowerCase().includes(search.toLowerCase()) &&
-      (filter === 'all' || r.kind === filter),
-  );
-  return (
-    <>
-      <PageHeading
-        title="Tu biblioteca de ideas."
-        description="Prepara una vez. Dale vida en cada clase."
-      >
-        <Button onPress={() => createResource(user, router.push)}>
-          <Plus size={17} />
-          Crear recurso
-        </Button>
-      </PageHeading>
-      <div className="filters">
-        <div className="search-field">
-          <Search size={18} />
-          <input
-            className="input"
-            aria-label="Buscar recursos"
-            placeholder="Buscar en tu biblioteca…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <select
-          className="input"
-          aria-label="Tipo de recurso"
-          style={{ width: 'auto' }}
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="all">Todos los tipos</option>
-          <option value="resource">Recursos de clase</option>
-          <option value="quiz">Quizzes</option>
-        </select>
-      </div>
-      <div className="resource-grid">
-        {resources.map((r) => (
-          <article className="resource-card" key={r.id}>
-            <div className="resource-cover">
-              <Badge>{r.kind === 'quiz' ? 'Quiz' : 'Recurso de clase'}</Badge>
-              <Leaf size={65} strokeWidth={1.2} />
-            </div>
-            <div className="resource-card-body">
-              <h2>{r.title}</h2>
-              <p>
-                {questionsOf(r).length} preguntas ·{' '}
-                {state.versions.some((v) => v.resourceId === r.id)
-                  ? 'Con versión publicada'
-                  : 'Borrador'}
-              </p>
-              <div className="resource-card-actions">
-                <Link className="button small" href={`/demo/editor/${r.id}`}>
-                  Editar recurso
-                </Link>
-                <ResourcePreview resource={r} />
-                <Button
-                  variant="ghost small"
-                  onPress={async () => {
-                    const id = crypto.randomUUID();
-                    const copy = await runDemo(
-                      (repo) =>
-                        repo.saveDraft(
-                          { ...structuredClone(r), id, title: `${r.title} (copia)`, revision: 0 },
-                          0,
-                        ),
-                      'Copia creada de forma independiente.',
-                    );
-                    if (copy) router.push(`/demo/editor/${id}`);
-                  }}
-                >
-                  Duplicar
-                </Button>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-      {!resources.length && (
-        <EmptyState icon={FolderOpen} title="Una idea está por llegar">
-          Cambia la búsqueda o crea tu primer recurso.
-        </EmptyState>
-      )}
     </>
   );
 }
