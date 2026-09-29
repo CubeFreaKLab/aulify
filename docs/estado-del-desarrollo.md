@@ -45,7 +45,7 @@ El historial vigente contiene diecisiete migraciones locales y remotas; la últi
 
 La verificación posterior de [consultas acotadas](verificacion/integracion-acotada.json) cubre los doce recorridos de integración mediante un lote de diez aprobados y la repetición de dos tras corregir su preparación. Los recorridos de resultados se registran aparte. El CI conserva siempre su revisión exacta; no se atribuye a código posterior.
 
-El CI posterior [36644805645](https://github.com/CubeFreaKLab/aulify/actions/runs/36644805645), sobre `26477d9`, aprobó formato, análisis, tipos, pruebas locales, comprobaciones PostgreSQL y construcción, pero falló en navegador. Su registro descargado indica 75 recorridos aprobados, 22 omitidos, uno aprobado tras reintento y dos fallidos del lector enriquecido. Se está corrigiendo su preparación; este resultado no se presenta como integración aprobada.
+El CI posterior [36644805645](https://github.com/CubeFreaKLab/aulify/actions/runs/36644805645), sobre `26477d9`, aprobó formato, análisis, tipos, pruebas locales, comprobaciones PostgreSQL y construcción, pero falló en navegador. Su registro descargado indica 75 recorridos aprobados, 22 omitidos, uno aprobado tras reintento y dos fallidos del lector enriquecido. La [corrección de sus datos de prueba y sincronización de foco](verificacion/ci-lector-restauracion.md) aprobó seis recorridos focalizados y cuatro pruebas del lector legado. El CI posterior [36646107369](https://github.com/CubeFreaKLab/aulify/actions/runs/36646107369), sobre `b770d96`, terminó con todos sus pasos aprobados, según la API de GitHub. Incluye las diecisiete migraciones y la instrumentación de errores de lectura; no incluye cambios posteriores ni convierte pruebas autenticadas omitidas en aprobadas.
 
 ## Trabajo pendiente de cierre
 
@@ -58,3 +58,5 @@ El CI posterior [36644805645](https://github.com/CubeFreaKLab/aulify/actions/run
 El [plan técnico](../plan.md), las [tareas](../tasks.md) y la [trazabilidad](calidad/trazabilidad.md) describen el cierre de cada requisito. Los informes del prototipo se conservan como antecedentes y no sustituyen las comprobaciones de esta integración.
 
 La [renovación de sesiones](verificacion/renovacion-auth.md) conserva cookies ante límites temporales de Auth y detiene la solicitud con 503; tres casos con cliente SSR real y transporte simulado verifican límite, rechazo definitivo y renovación válida.
+
+La [consulta de cuotas del 29 de septiembre](verificacion/cuotas-supabase-20260929.md) observó 0,159 de 5 GB de transferencia en Free, con el retraso de actualización indicado por el proveedor. Permite preparar un diagnóstico limitado; no aprueba todavía el escenario sostenido Q-06/Q-09.
