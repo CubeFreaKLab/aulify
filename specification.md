@@ -72,6 +72,10 @@ Los umbrales, métodos y criterios de liberación están en el [plan de calidad]
 
 **RE-06.** Límites iniciales: título de 120 caracteres, 200 bloques por recurso, 100 preguntas por quiz y respuesta escrita de 5.000 caracteres. Imágenes JPEG, PNG o WebP, hasta 5 MiB cada una. Validar contenido y tamaño en servidor. Video mediante enlace HTTPS, sin subir video; si no puede insertarse de forma segura y accesible, mostrar un enlace descriptivo. No ejecutar HTML o scripts proporcionados como contenido.
 
+**RE-07.** La imagen conserva su proporción. El docente puede ajustar su ancho entre 25 % y 100 % del documento y alinearla a izquierda, centro o derecha mediante controles utilizables con teclado, además del arrastre lateral. El borrador, su vista previa y la lectura conservan esos valores, el texto alternativo y el pie. El formato de texto y los colores de la paleta se mantienen entre edición y lectura, adaptados al tema claro u oscuro.
+
+**RE-08.** El video externo se carga únicamente al solicitarlo, sin reproducción automática. Los enlaces reconocidos de YouTube utilizan su reproductor de privacidad mejorada; los archivos HTTPS compatibles utilizan controles nativos. Otros proveedores permanecen como enlaces descriptivos. Siempre se puede abrir la dirección original; insertar un enlace no garantiza que el proveedor permita reproducirlo ni que el material siga disponible.
+
 ## 5. Configuración, disponibilidad y participación
 
 **AC-01.** Formulario principal: nombre, materia, práctica/examen, nota máxima, inclusión en promedio, modo de avance y disponibilidad. Opciones avanzadas: intentos, tiempo, corrección, peso, mezcla, retroalimentación, equipos, clasificación, potenciadores e incidencias. Mostrar opciones compatibles y resumen antes de publicar e iniciar.

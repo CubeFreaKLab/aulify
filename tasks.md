@@ -53,3 +53,5 @@ La integración del 28 de septiembre conecta las pantallas a Supabase con doce m
 No marcar una tarea como completada solo porque exista código. Enlazar su evidencia y actualizar la especificación cuando una decisión cambie el comportamiento previsto.
 
 La [matriz de trazabilidad](docs/calidad/trazabilidad.md) y el [plan de calidad](docs/calidad/plan-de-calidad.md) completan los criterios y su evidencia.
+
+La [revisión de biblioteca, editor y lector del 29 de septiembre](docs/diseno/revision-biblioteca-editor-2026-09-29.md) aporta evidencia adicional a T-04, T-08, T-09 y T-19: navegación por teclado, imágenes sin deformación, formato compartido, persistencia local y adaptación de las vistas comprobadas. La integración autenticada y los criterios completos de liberación mantienen sus comprobaciones separadas.

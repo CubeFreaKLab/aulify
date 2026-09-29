@@ -4,7 +4,9 @@ Actualizado: 29 de septiembre de 2026. Integración con servicios reales y revis
 
 ## Revisión visual más reciente
 
-Se simplificó el editor para priorizar el documento, se corrigieron superficies y menús del tema oscuro y se ajustó la composición de las ilustraciones en móvil. La [revisión del editor y apariencia](diseno/revision-editor-apariencia-2026-09-29.md) registra capturas reales y 14 ejecuciones locales aprobadas en navegador. Son comprobaciones del alcance descrito; no acreditan la aceptación del diseño completo, pruebas con usuarios ni un nuevo despliegue. La navegación móvil, biblioteca, lector y el resto de pantallas continúan en revisión. Figma y los manuales aún requieren sincronizar estas modificaciones.
+Se simplificó el editor para priorizar el documento, se corrigieron superficies y menús del tema oscuro y se ajustó la composición de las ilustraciones en móvil. La [primera revisión](diseno/revision-editor-apariencia-2026-09-29.md) conserva su evidencia. La [revisión de biblioteca y editor](diseno/revision-biblioteca-editor-2026-09-29.md) incorpora navegación móvil con gestión de foco, muestras reales del contenido, imágenes ajustables sin deformación, video con carga explícita y lectura que conserva formato y paleta.
+
+La revisión local reúne 48 pruebas unitarias aprobadas, construcción/análisis/formato correctos y 68 recorridos públicos de navegador aprobados al combinar el lote inicial con la repetición de dos casos cuyo selector se corrigió. Los 22 recorridos autenticados se omitieron en ese lote. Las 18 capturas de escritorio y móvil en ambos temas identifican su compilación. Estas comprobaciones no acreditan aceptación estética, pruebas con personas ni un nuevo despliegue. La sincronización de Figma y manuales sigue en curso.
 
 Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en el navegador y `/aula` requiere una sesión de Supabase. La demostración permite explorar la interfaz; el aula utiliza operaciones autorizadas en PostgreSQL y archivos privados en Storage.
 

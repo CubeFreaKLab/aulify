@@ -1,0 +1,187 @@
+{
+  "buildId": "uZBQUp2oMTlvRbKzF6icy",
+  "capturedAt": "2026-09-29T22:09:03.525Z",
+  "environment": "Aplicación compilada local con datos ficticios de demostración. El video externo no se carga para la captura.",
+  "captures": [
+    {
+      "file": "biblioteca-escritorio-light.png",
+      "route": "/demo/biblioteca",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "editor-escritorio-light.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "imagen-controles-escritorio-light.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "lectura-escritorio-light.png",
+      "route": "/demo/previa/resource-cuaderno-captura",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "biblioteca-escritorio-dark.png",
+      "route": "/demo/biblioteca",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "editor-escritorio-dark.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "imagen-controles-escritorio-dark.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "lectura-escritorio-dark.png",
+      "route": "/demo/previa/resource-cuaderno-captura",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "biblioteca-movil-light.png",
+      "route": "/demo/biblioteca",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "navegacion-movil-light.png",
+      "route": "/demo/biblioteca",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "editor-movil-light.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "imagen-controles-movil-light.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "lectura-movil-light.png",
+      "route": "/demo/previa/resource-cuaderno-captura",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "overflow": 0
+    },
+    {
+      "file": "biblioteca-movil-dark.png",
+      "route": "/demo/biblioteca",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "navegacion-movil-dark.png",
+      "route": "/demo/biblioteca",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "editor-movil-dark.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "imagen-controles-movil-dark.png",
+      "route": "/demo/editor/resource-cuaderno-captura",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "overflow": 0
+    },
+    {
+      "file": "lectura-movil-dark.png",
+      "route": "/demo/previa/resource-cuaderno-captura",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "overflow": 0
+    }
+  ]
+}

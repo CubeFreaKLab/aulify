@@ -71,6 +71,8 @@ El flujo `mantenimiento.yml` está programado cada seis horas. Ejecuta cierres y
 
 Las pantallas principales funcionan en escritorio y móvil emulado. El editor ofrece menú de bloques, formato, alternativas de reordenamiento por teclado, vista previa y publicación explícita. La configuración agrupa detalles en opciones avanzadas. La ayuda inicial es opcional y puede reabrirse.
 
+La revisión del 29 de septiembre añade navegación móvil modal con gestión de foco, una biblioteca con muestras del contenido y ordenación, y controles de ancho/alineación de imágenes compartidos con el lector. Estos valores se conservan en el documento JSON existente; no requieren nuevas tablas. Una paleta común adapta los colores de texto y fondo del editor a la lectura y a ambos temas. El video utiliza carga explícita y un enlace alternativo; las pruebas del reproductor emplean una respuesta externa simulada y no acreditan la disponibilidad del proveedor. Véase la [evidencia de biblioteca y editor](docs/diseno/revision-biblioteca-editor-2026-09-29.md).
+
 Los temas claro, oscuro y del sistema conservan la identidad de Aulify. El movimiento respeta la preferencia de reducción; sonidos y rachas no deben revelar aciertos configurados como ocultos. Se mantienen tablas equivalentes a los gráficos y controles sin depender únicamente del color.
 
 Playwright y axe comprueban vistas concretas. Las pruebas con lector de pantalla, teléfonos físicos y participantes deben registrarse aparte; no se declara conformidad completa a [WCAG 2.2](https://www.w3.org/TR/WCAG22/) a partir de una batería automática. Diseño y construcción son iterativos; las réplicas de Figma se documentan según su ejecución real.
