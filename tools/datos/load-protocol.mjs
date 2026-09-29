@@ -4,14 +4,27 @@ import os from 'node:os';
 import {performance,monitorEventLoopDelay} from 'node:perf_hooks';
 import {execFileSync} from 'node:child_process';
 import {retryAfterMs} from './load-waits.mjs';
-const base='http://127.0.0.1:3002';
+const base=process.env.AULIFY_LOAD_BASE_URL;
+const expectedBuild=process.env.AULIFY_EXPECTED_BUILD_ID;
+if(base!=='http://127.0.0.1:3001'||!expectedBuild)throw new Error('Definir explícitamente servidor compilado3001 y AULIFY_EXPECTED_BUILD_ID.');
 const accounts=JSON.parse(await fs.readFile('.local-private/load-accounts.json','utf8'));
 const fixtures=JSON.parse(await fs.readFile('.local-private/load-fixtures.json','utf8'));
 const cookies=JSON.parse(await fs.readFile('.local-private/load-http-sessions.json','utf8'));
-if(accounts.projectRef!=='bnqyyumfmyexsqszglab'||accounts.users.length!==204)throw new Error('Proyecto o escenario no autorizado');
+const environment=Object.fromEntries((await fs.readFile('.env.local','utf8')).split(/\r?\n/).filter(line=>line.trim()&&!line.startsWith('#')).map(line=>{const i=line.indexOf('=');return[line.slice(0,i),line.slice(i+1).replace(/^['"]|['"]$/g,'')];}));
+if(accounts.projectRef!=='bnqyyumfmyexsqszglab'||fixtures.projectRef!==accounts.projectRef||environment.NEXT_PUBLIC_SUPABASE_URL!==`https://${accounts.projectRef}.supabase.co`||accounts.users.length!==204)throw new Error('Proyecto o escenario no autorizado');
+const verifyBuild=async()=>{
+ if((await fs.readFile('.next/BUILD_ID','utf8')).trim()!==expectedBuild)throw new Error('Compilado local diferente del esperado.');
+ const response=await fetch(base+'/',{signal:AbortSignal.timeout(15000)});
+ if(!response.ok||!(await response.text()).includes(expectedBuild))throw new Error('El servidor HTTP no entrega el compilado esperado.');
+ return{base,expectedBuild,verifiedAt:new Date().toISOString(),diskMatches:true,servedHtmlMatches:true};
+};
+const initialBuildCheck=await verifyBuild();
 const sessions=accounts.users.map(a=>({...a,jar:new Map(Object.entries(cookies[a.id]?.cookies||{})),lastRevision:null,running:null,retryMs:1000,retryAt:0,authorizationLost:false}));
 const teachers=sessions.filter(a=>a.role==='teacher'),students=sessions.filter(a=>a.role==='student');
 const report={startedAt:new Date().toISOString(),scope:'Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.',buildId:(await fs.readFile('.next/BUILD_ID','utf8')).trim(),commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sessions:204,teachers:4,students:200,pollMs:1000,seconds:60,records:[],activities:[],authentication:{prepared:0,temporaryWaits:0,spacingMs:2500},limitations:['Aplicación compilada local y base remota Free; no mide render de 204 navegadores.','Una pregunta single-choice por estudiante y sin sesión guiada.','Preparación y auditoría fuera de medición.','Consumo estimado, no contador facturable.']};
+report.buildChecks=[initialBuildCheck];
+report.expectedMigration={path:'supabase/migrations/20260929224538_aulify_participant_teacher_revision.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260929224538_aulify_participant_teacher_revision.sql')).digest('hex')};
+report.scriptSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-protocol.mjs')).digest('hex');
 report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
@@ -45,6 +58,7 @@ try{
  const settings={purpose:'practice',pace:'individual',maxGrade:100,weight:1,countsTowardAverage:false,maxAttempts:1,opensAt:new Date(Date.now()-60000).toISOString(),closesAt:new Date(Date.now()+3600000).toISOString(),timeLimitMinutes:null,timeZone:'America/La_Paz',feedback:'hidden',manualCorrection:false,shuffleQuestions:false,shuffleOptions:false,streaks:false,sound:false,ranking:false,teams:false,allowHint:false,allowDouble:false,bonusAffectsGrade:false,reportVisibility:false};
  for(const t of teachers){const g=fixtures.groups.find(g=>g.group===t.group);const a=await cmd(t,'createActivity',[g.versionId,g.subjectId,settings,'Diagnóstico escalonado · 60 segundos']);report.activities.push(a.id);for(const s of sessions.filter(s=>s.group===t.group))s.activityId=a.id;}
  await parallel(students,6,async s=>{s.attemptId=(await cmd(s,'startAttempt',[s.activityId])).id;});
+ report.buildChecks.push(await verifyBuild());
  report.measurementStartedAt=new Date().toISOString();const began=performance.now();measuring=true;loop.enable();
  const poll=s=>{if(s.running||performance.now()>=began+60000||abortReason||s.authorizationLost||Date.now()<s.retryAt){skipped++;return;}s.running=(async()=>{
   const sync=await request(s,`/api/sync?activity=${s.activityId}`,undefined,'sync');

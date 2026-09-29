@@ -47,7 +47,7 @@ La verificación posterior de [consultas acotadas](verificacion/integracion-acot
 
 ## Trabajo pendiente de cierre
 
-- Terminar la prueba de carga de cuatro grupos de cincuenta estudiantes y cuatro docentes, en modos individual y guiado, con sus umbrales y cuotas originales. No hay capacidad de producción demostrada todavía.
+- Resolver y verificar la capacidad de cuatro grupos de cincuenta estudiantes y cuatro docentes, en modos individual y guiado, con sus umbrales y cuotas originales. El [sondeo tras la migración 16](verificacion/datos-protocolo-60s-migracion16.md) no aprobó: 193/200 confirmaciones persistidas, p95 7.929,24 ms y 1,334 % de fallos. No se inició el protocolo sostenido ni se redujeron los umbrales. El informe conserva la comparación y el siguiente diagnóstico necesario.
 - Los veintidós recorridos autenticados se omiten en CI y conservan su evidencia de ejecución separada. La limpieza programada ya se observó: `36571189662` y `36638509107` tienen evento `schedule` y todos sus pasos aprobados. Esto confirma activación automática, sin garantizar un plazo futuro ni sustituir una recuperación operativa; [registro](verificacion/ci-integracion.json).
 - Completar despliegue, comprobaciones por HTTPS y entrega/recuperación por correo. El dominio propio está fuera de esta entrega.
 - La protección de Auth contra contraseñas filtradas figura deshabilitada en el asesor y requiere plan Pro. Se conserva Free; [aviso y referencia oficial](verificacion/asesores-supabase.json). No representa una comprobación completa de seguridad.
