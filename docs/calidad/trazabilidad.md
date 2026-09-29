@@ -1,73 +1,183 @@
-# Trazabilidad de requisitos, tareas y comprobaciones
+# Trazabilidad de requisitos, implementación y comprobaciones
 
-Base funcional 1.0 · actualización del 28 de septiembre de 2026. Existen verificaciones aisladas, remotas y de navegador de la integración; la correspondencia individual de los 76 escenarios AC/AP se está consolidando. Consulta [estado](../estado-del-desarrollo.md) e [integración web](../verificacion/integracion-web.md). No convertir un conteo de pruebas en aprobación automática de estos casos.
+Actualización: 29 de septiembre de 2026. Esta matriz relaciona los [requisitos y reglas](../../specification.md), las [tareas](../../tasks.md), los 38 [casos AC de la entrega 001](../../specs/001-recurso-interactivo/aceptacion.md), los 38 [casos AP del producto](../../specs/aceptacion-producto.md) y los criterios Q del [plan de calidad](plan-de-calidad.md). «Regla AC» designa las reglas de participación de la especificación, no un caso de aceptación.
 
-Esta matriz enlaza el [catálogo de requisitos y sus reglas](../../specification.md), las [tareas](../../tasks.md), los [casos AC de la entrega 001](../../specs/001-recurso-interactivo/aceptacion.md) y los [casos AP del alcance completo](../../specs/aceptacion-producto.md). Los criterios Q pertenecen al [plan de calidad](plan-de-calidad.md). Aquí «AC» identifica casos de aceptación; en la columna de reglas se escribe «regla AC» para distinguir las reglas de participación del documento general.
+La aplicación ya tiene integración con Auth, PostgreSQL y Storage privados, migraciones versionadas y verificaciones remotas. La evidencia del [prototipo local](../verificacion/pruebas-prototipo.md) se conserva como antecedente; no describe por sí sola el estado actual. Los resultados se atribuyen a la revisión y al entorno de cada informe, no automáticamente al último commit.
 
-La relación es de cobertura prevista, no de prueba aprobada. Un caso puede comprobar varios requisitos; no contar esa repetición como varias ejecuciones independientes. Los 38 casos AC y 38 casos AP constituyen 76 escenarios definidos. Cada uno se desglosará en pasos y datos reproducibles cuando existan contratos e interfaz.
+## Lectura de la matriz
 
-| Requisito | Reglas principales | Tareas responsables | Casos previstos | Evidencia que se conservará |
-|---|---|---|---|---|
-| RF-01 · Cuentas | CU-01, CU-06 | T-01, T-06 | AC-01 a AC-03, AC-06 | Acceso y recuperación con cuentas ficticias; rechazo de operaciones ajenas. |
-| RF-02 · Materias y pertenencia | CU-02 a CU-06; IN-04 a IN-07 | T-07, T-18 | AC-04 a AC-06; AP-29 a AP-32, AP-37 | Solicitudes, permisos, retiro, restauración, purga y referencias conservadas. |
-| RF-03 · Editor por bloques | RE-02, RE-03, RE-06 | T-08 | AC-07 a AC-09, AC-28, AC-35; AP-33 | Borrador recuperado, conflicto controlado, publicación válida y operación por teclado. |
-| RF-04 · Biblioteca y versiones | RE-01, RE-02, RE-04, RE-05 | T-09 | AC-10, AC-11, AC-35, AC-36; AP-01, AP-02 | Copias independientes, versión inmutable y prueba de operaciones concurrentes. |
-| RF-05 · Participación y tiempo | Reglas AC-01 a AC-09 | T-11, T-12 | AC-12 a AC-20, AC-36; AP-09, AP-10 | Recorridos individual/guiado, plazos, intentos, reconexión y cierre. |
-| RF-06 · Juego y equipos | JU-03 a JU-08; EV-01 | T-15 | AP-11 a AP-20 | Consumo único, cálculos, empate, equipos y visibilidad permitida. |
-| RF-07 · Corrección y puntuación | PR-01, PR-02; EV-01 a EV-04 | T-10, T-14, T-15 | AC-15, AC-19, AC-21, AC-22, AC-37; AP-03 a AP-07, AP-13, AP-14 | Ejemplos calculados, límites, escritura manual, bonificación y redondeo. |
-| RF-08 · Notas y promedio | EV-04 a EV-08; JU-01 | T-14 | AC-22 a AC-26, AC-38; AP-15, AP-16, AP-24, AP-25 | Publicación por estudiante, historial y promedio con pendientes y ceros explícitos. |
-| RF-09 · Integridad e incidencias | IN-01 a IN-03, IN-06, IN-07 | T-17 | AC-06, AC-16 a AC-20; AP-27 a AP-29 | Operaciones rechazadas, señales limitadas y resolución sin sanción automática. |
-| RF-10 · Tareas con archivos | TA-01 a TA-03 | T-13 | AP-21 a AP-24 | Archivos privados, límites, plazos y versiones de entrega/evaluación. |
-| RF-11 · Evaluación manual | TA-04; EV-05 a EV-08 | T-14 | AP-25, AP-26 | Notas individuales publicadas e historial sin entregas ficticias. |
-| RF-12 · Seguimiento | SE-01 a SE-03; EV-08 | T-16 | AP-26, AP-38 | Gráficos y tablas equivalentes; filtros, pendientes y límites de intervalos. |
-| RF-13 · Tipos de preguntas | PR-01, PR-02 | T-10 | AC-09, AC-14, AC-15; AP-03 a AP-07 | Creación, presentación y corrección por tipo con valores esperados. |
-| RF-14 · Mezcla | PR-03, PR-04; IN-01 | T-11, T-17 | AC-17; AP-08, AP-09 | Orden persistido, grupos dependientes y restricciones del modo guiado. |
-| RF-15 · Retroalimentación | Reglas AC-04, AC-05; JU-01 a JU-03 | T-11, T-15 | AC-13 a AC-16, AC-26; AP-15 a AP-18 | Transiciones, manejo de errores y ausencia de soluciones/puntos reservados. |
-| RF-16 · Configuración | Regla AC-01; RE-05 | T-12 | AC-12, AC-20, AC-36; AP-15, AP-20 | Resumen comprensible, opciones compatibles y bloqueo de reglas iniciadas. |
-| RF-17 · Ayuda | AY-01 a AY-04 | T-22 | AC-31 a AC-34; AP-34 | Guía por rol, omisión/repetición, preferencia persistente y accesibilidad. |
-| RNF-01 · Adaptación | Q-02 | T-04, T-19, T-22 | AC-27, AC-28, AC-33; AP-38 | Capturas con tamaño/navegador y comprobación de acciones y reflujo. |
-| RNF-02 · Usabilidad y accesibilidad | Q-02, Q-03, Q-07 | T-04, T-19, T-22 | AC-27 a AC-34; AP-17, AP-33, AP-38 | Revisión automática/manual y tareas con participantes reales; resultados separados. |
-| RNF-03 · Capacidad | Q-04, Q-06 | T-01, T-20 | AP-35 | Carga reproducible de 204 sesiones, latencia, errores y persistencia. |
-| RNF-04 · Servicios gratuitos | Q-09 | T-01, T-20, T-21 | AP-35, AP-36 | Planes elegibles, cuotas y consumo medido sin activar facturación. |
-| RNF-05 · Privacidad y autorización | IN-01 a IN-07; Q-04, Q-05 | T-03, T-06, T-13, T-17, T-18 | AC-03, AC-06, AC-10, AC-11, AC-16, AC-26; AP-15, AP-20 a AP-24, AP-27 a AP-33, AP-37 | Matriz de acceso, RLS/archivos, concurrencia, ocultamiento y eliminación. |
-| RNF-06 · Reproducibilidad | Q-01, Q-08 | T-03, T-05, T-21 | AP-31, AP-36; ejecuciones de los casos de la entrega | Migraciones, informe real de CI, respaldo/recuperación y documentación de operación. |
+- **L — probado local:** reglas, SQL aislado o navegador sobre una aplicación local. Se especifica cuando utiliza el adaptador de demostración. PGlite simula los esquemas mínimos de Auth y Storage; no acredita JWT, bytes remotos ni concurrencia entre conexiones.
+- **R — probado con servicios remotos:** operaciones contra Supabase con cuentas ficticias y sus permisos reales. El navegador puede estar servido localmente; esto no acredita un despliegue público. CI remoto sobre datos aislados sigue siendo evidencia aislada, no R de Supabase.
+- **Parcial:** existen comprobaciones relacionadas, pero falta una parte del resultado esperado o los datos exactos del escenario. No equivale a aprobar el caso completo.
+- **M — manual pendiente:** lector de pantalla, dispositivo físico, revisión humana del recorrido o tareas con participantes sin evidencia registrada.
+- **ND — no demostrado:** no se encontró una ejecución que demuestre el resultado indicado. Puede existir implementación o una prueba preparada. **Fallido** identifica una medición adversa conservada.
 
-## Registro por ejecución
+«Probado» se limita al alcance escrito en cada fila. No se calcula un porcentaje global: los 76 escenarios contienen condiciones distintas, y un mismo recorrido puede servir a varios requisitos. Los casos por tamaño, comprobaciones internas, llamadas RPC y repeticiones no se suman como nuevos escenarios de aceptación. Un caso omitido en CI no es un caso aprobado.
+
+## Índice de evidencia
+
+Los identificadores de esta tabla se utilizan en las matrices siguientes. Los enlaces permiten consultar procedimiento, versión, datos ficticios y límites.
+
+| ID | Ejecución y evidencia | Alcance y límite |
+|---|---|---|
+| E01 | [Reglas y recorrido inicial](../verificacion/pruebas-prototipo.md); [pruebas de dominio](../../tests/unit/domain.test.ts) | L: cálculo, publicación, recuperación, ocho tipos y ayuda en la demostración. El informe histórico no demuestra autorización de servidor. Las regresiones siguen en el catálogo actual. |
+| E02 | [Datos aislados](../verificacion/datos-aislados.md); [regresión con migración 15](../verificacion/juego-regresion-base.json) | L: 84 comprobaciones del contrato, permisos, versiones, idempotencia, conservación y sincronización. Metadatos de archivo, no transferencia de bytes. |
+| E03 | [Datos remotos](../verificacion/datos-remotos.md) y [45 resultados](../verificacion/datos-remotos.json) | R: cuatro cuentas JWT, acceso, conflictos concurrentes, intentos, respuestas, Storage privado, tareas y gestión. Cuentas confirmadas administrativamente, sin envío de correo. |
+| E04 | [Integración web](../verificacion/integracion-web.md), [resiliencia](../verificacion/integracion-resiliencia.json) y [consultas acotadas](../verificacion/integracion-acotada.json) | L/R: navegador local con Supabase, lectura publicada, respuesta confirmada, fallo de red, recarga, sesión y archivo real. Los doce recorridos posteriores no se suman como escenarios nuevos a sus versiones anteriores. |
+| E05 | [Gestión de aula](../verificacion/datos-gestion-web.md) | L/R: seis ejecuciones, tres recorridos por dos tamaños; materia, nota manual/cero, equipos, plazos, incidencias y reentrega. El informe declara la pérdida del JSON completo de la batería original y conserva ese límite. |
+| E06 | [Puntuación](../verificacion/puntuacion.md), [aislada](../verificacion/puntuacion-aislada.json) y [remota](../verificacion/puntuacion-remota.json) | L/R: AP-03 a AP-07, AP-13 y AP-14; veinte comprobaciones por entorno. Los resultados numéricos se contrastan mediante el contrato público. |
+| E07 | [Juego y publicación](../verificacion/juego-aceptacion.md), [resultado aislado](../verificacion/juego-aceptacion-aislada.json) | L: 103 comprobaciones en ocho escenarios AP y una regresión adicional; no 103 casos de aceptación. Incluye el fallo anterior de clasificación diferida y su corrección. |
+| E08 | [Publicación remota](../verificacion/juego-privacidad-remota.json), [migración aplicada](../verificacion/migracion-publicacion-remota.json) | R: AP-16 acotado, 33 comprobaciones y 53 llamadas RPC; migración 15, clasificación 10/10 conservada durante revisión privada, republicación 10/8 y equipo 9. No mide concurrencia ni interfaz. |
+| E09 | [Sincronización](../verificacion/datos-sincronizacion.md) y [carrera guiada](../verificacion/datos-carrera-guiada.md) | R: 24 comprobaciones de proyección/huella; carrera específica respuesta/cierre, treinta rondas y 150 operaciones por ejecución. No demuestra todas las carreras posibles ni Q-06. |
+| E10 | [Distribución de resultados](../verificacion/resultados-distribucion.md) y [registro](../verificacion/resultados-distribucion.json) | L/R: AP-26, cuatro ejecuciones en escritorio/móvil, notas 0/20/80/100, pendientes, filtros y tabla/gráfico. Amplía el [informe anterior de filtros](../verificacion/resultados-filtros.md). |
+| E11 | [Editor y apariencia](../diseno/revision-editor-apariencia-2026-09-29.md); [biblioteca, editor y lectura](../diseno/revision-biblioteca-editor-2026-09-29.md) | L: interfaz de demostración, borradores, copia, teclado, imágenes, lectura, temas y axe en estados concretos. La revisión posterior registra 48 unitarias y 68 ejecuciones públicas comprobadas mediante lote inicial y repetición parcial; 22 autenticadas omitidas. Video externo simulado. |
+| E12 | [Pantallas de plataforma](../diseno/revision-pantallas-2026-09-29.md) y [casos](../../tests/e2e/pantallas.spec.ts) | L: seis casos de inicio, materia, quiz, revisión y resultados; 1440, 390 y 320 px, ambos temas. Repetidos sobre el compilado local de producción, seis aprobados en 9,3 s. Sin aprobación estética ni evaluación con personas. |
+| E13 | [Validación de archivos](../../tests/unit/files.test.ts), [endpoint de archivos](../../src/app/api/files/route.ts) e [integración web](../verificacion/integracion-web.md) | L: tamaño individual, firma, extensión engañosa, macros y expansión DOCX; L/R: subida y descarga de PNG real. No demuestra por sí solo toda la secuencia adversa AP-21. |
+| E14 | [Recuperación aislada](../verificacion/recuperacion-aislada.md) y [registro](../verificacion/recuperacion-aislada.json) | L: nueve comprobaciones al restaurar PGlite con doce migraciones. No restaura Auth ni objetos de Storage reales; AP-36 operativo sigue abierto. |
+| E15 | [Carga](../verificacion/datos-carga.md) y [diagnóstico tras migración 14](../verificacion/datos-protocolo-60s-migracion14.md) | R: diagnóstico de un minuto, 200/200 respuestas auditadas; p95 de confirmación 3.867,53 ms frente a 1.500 ms. Q-06 completo no aprobado; falta escenario sostenido por ambos modos y consumo facturable final Q-09. |
+| E16 | [CI registrado](../verificacion/ci-integracion.json); [36638120416](https://github.com/CubeFreaKLab/aulify/actions/runs/36638120416) sobre e13afb4 y [36640029110](https://github.com/CubeFreaKLab/aulify/actions/runs/36640029110) sobre 1019e4b | CI completado con éxito, incluidos construcción y navegador; estado y pasos comprobados por API. Los conteos locales no se atribuyen al artefacto de CI. El registro incluye mantenimiento programado con éxito, sin logs de objetos eliminados de esas ejecuciones. No incluye los ensayos privados remotos. |
+| E17 | [Pruebas exactas AC-19/AC-21/AC-22/AC-37](../../tests/unit/domain.test.ts); registro de ejecución al final de esta matriz | L: 28 pruebas de dominio aprobadas el 29 de septiembre, incluyendo los cuatro escenarios identificados. Tres casos nuevos y sustitución del vencimiento anterior; no 28 escenarios nuevos. No ejecuta SQL ni navegador. |
+
+## Requisitos e implementación
+
+La columna de tareas conserva la asignación prevista; no modifica su estado. Los módulos señalan dónde está implementado el comportamiento. La existencia de código no sustituye la evidencia ni cierra los pendientes de las matrices AC/AP.
+
+| Requisito | Reglas; tareas | Implementación | Casos y evidencia disponible |
+|---|---|---|---|
+| RF-01 · Cuentas | CU-01, CU-06; T-01, T-06 | [Auth web](../../src/app/api/auth/route.ts), [confirmación](../../src/app/auth/confirm/route.ts), [sesión](../../src/lib/supabase/server.ts) | AC-01 a AC-03, AC-06. E03/E04 prueban acceso y aislamiento; confirmación y recuperación por correo ND. |
+| RF-02 · Materias y pertenencia | CU-02 a CU-06; IN-04 a IN-07; T-07, T-18 | [Gestión](../../src/components/classroom-management.tsx), [contrato SQL](../../supabase/CONTRACT.md), [mantenimiento](../../tools/datos/maintenance.mjs) | AC-04 a AC-06; AP-29 a AP-32, AP-37. E02/E03/E05: ingreso, retiro y archivo; límite exacto y purga aislados. Plazo operativo de purga ND. |
+| RF-03 · Editor por bloques | RE-02, RE-03, RE-06; T-08 | [Editor](../../src/components/rich-editor.tsx), [pantalla](../../src/components/editor-screen.tsx), [documento](../../src/lib/rich-document.ts) | AC-07 a AC-09, AC-28, AC-35; AP-33. E02/E03/E04/E11: borrador, conflicto, publicación, teclado e imágenes. Errores por bloque y revisión manual aún parciales. |
+| RF-04 · Biblioteca y versiones | RE-01, RE-02, RE-04, RE-05; T-09 | [Biblioteca](../../src/components/library-screen.tsx), [operaciones](../../src/domain/operations.ts), [migraciones](../../supabase/migrations) | AC-10, AC-11, AC-35, AC-36; AP-01/AP-02. E01/E02/E03/E11: copias, versión y bloqueo; carrera inicio/configuración y copia entre materias completas ND. |
+| RF-05 · Participación y tiempo | Reglas AC-01 a AC-09; T-11, T-12 | [Actividad](../../src/components/activity-screen.tsx), [comandos](../../src/app/api/commands/route.ts), [sincronización](../../src/app/api/sync/route.ts) | AC-12 a AC-20, AC-36; AP-09/AP-10. E01 a E05/E07/E09: intentos, idempotencia, cierre y plazos. Manipulación del reloj y desconexión docente requieren casos completos. |
+| RF-06 · Juego y equipos | JU-03 a JU-08; EV-01; T-15 | [Actividad](../../src/components/activity-screen.tsx), [gestión](../../src/components/classroom-management.tsx), [contrato SQL](../../supabase/CONTRACT.md) | AP-11 a AP-20. E03/E05 a E09: uso único, puntuación, equipos y privacidad; carrera entre pistas y secuencia completa de racha/sonido ND. |
+| RF-07 · Corrección y puntuación | PR-01, PR-02; EV-01 a EV-04; T-10, T-14, T-15 | [Reglas](../../src/domain/rules.ts), [operaciones](../../src/domain/operations.ts), [SQL de comandos](../../supabase/migrations/20260928064810_aulify_commands.sql) | AC-15, AC-19, AC-21, AC-22, AC-37; AP-03 a AP-07, AP-13/AP-14. E06 demuestra los siete escenarios AP numéricos; E17 comprueba ejemplos AC exactos en el dominio local. |
+| RF-08 · Notas y promedio | EV-04 a EV-08; JU-01; T-14 | [Resultados](../../src/components/results-screen.tsx), [reglas](../../src/domain/rules.ts), [publicación diferida](../../supabase/migrations/20260929221908_aulify_deferred_ranking_publication.sql) | AC-22 a AC-26, AC-38; AP-15/AP-16/AP-24/AP-25. E01 a E08/E10: pendientes, cero explícito, historial y reserva; filas inferiores separan combinaciones no ensayadas. |
+| RF-09 · Integridad e incidencias | IN-01 a IN-03, IN-06, IN-07; T-17 | [Gestión](../../src/components/classroom-management.tsx), [actividad](../../src/components/activity-screen.tsx), [contrato SQL](../../supabase/CONTRACT.md) | AC-06, AC-16 a AC-20; AP-27 a AP-29. E03 a E05/E09: permisos, reintento, señal y resolución; señal desactivada/retención detallada pendientes. |
+| RF-10 · Tareas con archivos | TA-01 a TA-03; T-13 | [Archivos](../../src/app/api/files/route.ts), [validación](../../src/lib/file-validation.ts), [carga](../../src/lib/upload.ts) | AP-21 a AP-24. E02 a E05/E13: bytes privados y versiones; límites combinados, carga fallida y matriz completa de plazos parciales. |
+| RF-11 · Evaluación manual | TA-04; EV-05 a EV-08; T-14 | [Gestión de notas](../../src/components/classroom-management.tsx), [resultados](../../src/components/results-screen.tsx) | AP-25/AP-26. E03/E05/E10: publicación individual, cero motivado, pendientes y distribución. |
+| RF-12 · Seguimiento | SE-01 a SE-03; EV-08; T-16 | [Resultados](../../src/components/results-screen.tsx), [distribución](../../src/components/result-distribution.tsx), [analítica](../../src/lib/result-analytics.ts) | AP-26/AP-38. E10/E12: filtros, fronteras y correspondencia tabla/gráfico; evaluación con personas M. |
+| RF-13 · Tipos de preguntas | PR-01, PR-02; T-10 | [Autoría](../../src/components/question-author.tsx), [respuesta](../../src/components/question-input.tsx), [reglas](../../src/domain/rules.ts) | AC-09, AC-14, AC-15; AP-03 a AP-07. E01/E03/E06/E11/E12: ocho tipos y escritura manual; accesibilidad manual M. |
+| RF-14 · Mezcla | PR-03, PR-04; IN-01; T-11, T-17 | [Operaciones](../../src/domain/operations.ts), [SQL de comandos](../../supabase/migrations/20260928064810_aulify_commands.sql) | AC-17; AP-08/AP-09. E03/E07: conjunto, orden, dependencias y recuperación; reconexión remota con el escenario AP-08 completo pendiente. |
+| RF-15 · Retroalimentación | Reglas AC-04, AC-05; JU-01 a JU-03; T-11, T-15 | [Actividad](../../src/components/activity-screen.tsx), [resultados](../../src/components/results-screen.tsx), [proyecciones SQL](../../supabase/migrations/20260928064815_aulify_projections_storage.sql) | AC-13 a AC-16, AC-26; AP-15 a AP-18. E01/E03/E04/E07/E08: reserva y publicación; texto/iconos/sonido requieren completar revisión manual. |
+| RF-16 · Configuración | Regla AC-01; RE-05; T-12 | [Editor](../../src/components/editor-screen.tsx), [gestión](../../src/components/classroom-management.tsx), [reglas](../../src/domain/rules.ts) | AC-12, AC-20, AC-36; AP-15/AP-20. E02/E03/E05/E07: bloqueo, incompatibilidades y ampliación; comprensión del resumen M. |
+| RF-17 · Ayuda | AY-01 a AY-04; T-22 | [Ayuda por rol](../../src/components/workspace.tsx), [preferencias del dominio](../../src/domain/operations.ts) | AC-31 a AC-34; AP-34. E01: omisión/persistencia local sin consumir intentos. Otra cuenta/dispositivo, nueva versión y lector de pantalla pendientes. |
+| RNF-01 · Adaptación | Q-02; T-04, T-19, T-22 | [Estilos](../../src/styles), [recorridos](../../tests/e2e) | AC-27/AC-28/AC-33; AP-38. E04/E05/E10 a E12: Chromium 1440, 390 y estados a 320; 360 × 800 completo y texto 200 % no demostrados. |
+| RNF-02 · Usabilidad y accesibilidad | Q-02/Q-03/Q-07; T-04, T-19, T-22 | [Controles](../../src/components/ui.tsx), [recorridos](../../tests/e2e) | AC-27 a AC-34; AP-17/AP-33/AP-38. E01/E04/E05/E10 a E12: axe, teclado/foco parciales y reflujo; lector, dispositivos y tareas con personas M. |
+| RNF-03 · Capacidad | Q-04/Q-06; T-01, T-20 | [Generador del protocolo](../../tools/datos/load-protocol.mjs), [sincronización](../../src/app/api/sync/route.ts) | AP-35. E15 conserva p95 adverso; no se aprueba la meta de 204 sesiones. E09 demuestra integridad de una carrera específica, no capacidad. |
+| RNF-04 · Servicios gratuitos | Q-09; T-01, T-20, T-21 | [Contrato de servicios](../../supabase/CONTRACT.md), [mediciones](../../tools/datos/load-report.mjs) | AP-35/AP-36. E03/E15 utilizan Supabase Free; cuotas finales y escenario completo simultáneo Q-06/Q-09 ND. |
+| RNF-05 · Privacidad y autorización | IN-01 a IN-07; Q-04/Q-05; T-03, T-06, T-13, T-17, T-18 | [Permisos](../modelado/permisos.md), [migraciones](../../supabase/migrations), [archivos](../../src/app/api/files/route.ts) | AC-03/AC-06/AC-10/AC-11/AC-16/AC-26; AP-15, AP-20 a AP-24, AP-27 a AP-33, AP-37. E02 a E09/E13; no declara completo todo el catálogo negativo. |
+| RNF-06 · Reproducibilidad | Q-01/Q-08; T-03, T-05, T-21 | [Migraciones](../../supabase/migrations), [CI](../../.github/workflows/web.yml), [recuperación](../../tools/datos/recovery-check.mjs) | AP-31/AP-36 y regresiones. E02/E14/E16: instalación, SQL, compilación y restauración aislada; recuperación remota, HTTPS y purga medida pendientes. |
+
+## Casos AC de la entrega 001
+
+La columna pendiente concreta qué falta para cerrar el escenario completo. No se atribuyen los valores de un ejemplo a otro porque compartan una fórmula.
+
+| Caso | Estado y evidencia | Resultado demostrado y pendiente |
+|---|---|---|
+| AC-01 | ND | Hay registro/confirmación implementados; E03 usa cuentas ya confirmadas administrativamente. Falta intentar crear materia e ingresar con una cuenta sin confirmar. |
+| AC-02 | ND | Falta entrega real del enlace de recuperación, primer uso, reuso y vencimiento. Formularios o respuestas simuladas no lo demuestran. |
+| AC-03 | Parcial L; R pendiente | El endpoint devuelve un mensaje genérico y trata 429; los formularios se prueban con servidor simulado. Falta comparar cuentas existente/inexistente y límite real del proveedor. |
+| AC-04 | Parcial L/R · E01/E02/E03 | Aprobación necesaria, separación de membresías e idempotencia local verificadas. Falta repetir solicitud y aprobación remotas en la secuencia exacta y contar sus filas. |
+| AC-05 | Parcial L/R · E05 | Renovación de invitación desde interfaz; falta verificar conjuntamente rechazo del código anterior, acceso de E1 y solicitudes pendientes conservadas. |
+| AC-06 | Parcial L/R · E02/E03/E04/E09 | Se rechazan visitantes, docentes ajenos, estudiantes sin pertenencia/retirados y lectura de intentos/notas ajenos. Falta un registro que cruce cada identidad E2/E3/D2 con todas las lecturas y escrituras del caso. |
+| AC-07 | Probado L/R · E04/E11 | Guardado, recarga y publicación de lectura con servicios reales; orden/formato y controles nuevos conservados en demostración en dos tamaños. Las propiedades nuevas de imagen no se atribuyen a un recorrido remoto. |
+| AC-08 | Parcial L/R · E01/E03 | Dos guardados remotos desde la misma revisión aceptan uno y rechazan el otro. Falta el recorrido visible de conflicto entre dos pestañas. |
+| AC-09 | Parcial L · E01/E11 | Validación y publicación de contenido ejercitadas; falta matriz conjunta de título vacío, quiz inválido y selección sin solución, con foco/error por bloque y borrador conservado. |
+| AC-10 | Parcial L/R · E01/E02/E03 | Versiones separadas y actividad respondida inmutable; falta la secuencia remota explícita responder V1, publicar V2 y comparar soluciones, valores y resultado de V1. |
+| AC-11 | ND de la carrera | E02/E03 prueban bloqueo después del inicio, no actualización de reglas simultánea con primer inicio. |
+| AC-12 | Parcial L/R · E01/E05/E06 | Máximo, peso, exclusión del promedio y límites calculados. Falta recorrido comparativo práctica que no cuenta/examen que sí, con resumen y cálculo contrastados. |
+| AC-13 | Probado L/R · E03/E04 | Avance sin estado intermedio de guardado ni señales de acierto; respuesta y snapshot sin soluciones/puntos reservados. |
+| AC-14 | Parcial L/R; M · E01/E03 | Retroalimentación inmediata autorizada y preguntas operables. Falta revisión completa de correcto/incorrecto, texto/iconos, lectura sin avance forzado y accesibilidad manual. |
+| AC-15 | Probado L/R · E01/E04/E06 | Respuesta escrita coincidente con guía queda pendiente, sin corrección automática ni nota final prematura. |
+| AC-16 | Probado L/R · E03/E04 | Se pierde confirmación después de persistir; reintento conserva una respuesta, puntuación y consumo único. |
+| AC-17 | Parcial L/R · E01/E03/E04 | Carrera de tres inicios devuelve un intento; recarga/reconexión conservan intento y orden. Falta combinar dos pestañas y contraste explícito de plazo en el mismo escenario. |
+| AC-18 | Parcial L · E17 | Vencimiento, respuestas conservadas y envío tardío rechazado con reloj controlado del dominio. Falta manipulación del reloj del navegador frente al plazo real del servidor y envío tardío remoto. |
+| AC-19 | Probado L · E17; R pendiente | Escrita enviada conservada al vencer, una sola respuesta, omisión sin puntos, pendiente y nota ausente; publicar antes de corregir se rechaza. Tras asignar 3 de 3 a la escrita, la pregunta omitida de 2 mantiene la nota en 60/100. Falta repetir el vencimiento exacto contra servidor remoto. |
+| AC-20 | Parcial L/R · E05 | Ampliación desde interfaz y plazo en servidor; falta comprobar conjuntamente límite de cierre general, registro y comunicación a cada participante. |
+| AC-21 | Probado L · E17 | Ejemplo exacto 2, 0 y 4 sobre 2, 3 y 5, máximo 20 = 12,00. Antes de revisar la tercera respuesta la nota es nula y no se permite publicar. No se atribuye este ejemplo al ensayo remoto E06. |
+| AC-22 | Parcial L/R · E07/E08/E17 | E17 reproduce 60/80/pendiente: conserva 60 publicado hasta republicar, elige el intento de 80 y mantiene el tercero pendiente. Falta comprobar la indicación visible de esa revisión pendiente; E07/E08 cubren otras combinaciones de publicación, no este ejemplo exacto remoto. |
+| AC-23 | Probado L · E01 | Unitario: 12/20 con peso 2 y 90/100 con peso 1 = 70; revisiones no duplicadas, cero publicado incluido y pendientes excluidos. No constituye un ensayo remoto de la fórmula. |
+| AC-24 | Parcial L · E01/E11 | Promedio vacío o con actividades excluidas devuelve ausencia, no cero. Falta aserción específica del mensaje de ausencia en el recorrido integrado. |
+| AC-25 | Parcial L/R · E01/E03/E05/E08 | Publicación anterior se conserva durante revisión privada; historial y republicación comprobados. Falta el ejemplo exacto 12 → 14 con motivo contrastado desde ambas interfaces. |
+| AC-26 | Probado L; R parcial · E01/E03/E07/E08 | Dominio exige cierre y publicación; ocultamiento permanente no libera soluciones al publicar. Remoto AP-16 prueba clasificación tras cierre, no todas las combinaciones de publicación antes de cierre. |
+| AC-27 | Parcial L/R · E04/E05/E10/E11/E12 | Recorridos en 1440 × 900 y 390 × 844; capturas/acciones de estados a 320. Falta el recorrido completo especificado a 360 × 800. |
+| AC-28 | Parcial L; M · E01/E11/E12 | Alternativas de teclado para bloques/imágenes, foco y reflujo a 320 en estados concretos. Falta todo el recorrido con texto al 200 % y revisión manual sin trampas. |
+| AC-29 | M | No hay evidencia con lector de pantalla de pregunta, error de envío, nueva pregunta y fin. Axe no sustituye esta comprobación. |
+| AC-30 | Parcial L/R; M · E01/E04/E11 | Movimiento reducido en escenas/vista previa y pérdida de confirmación en quiz; fallo de escritura local conserva borrador. Falta combinación completa de movimiento reducido y desconexión del editor remoto. |
+| AC-31 | Parcial L · E01 | Invitación y herramientas por rol en demostración; falta primera entrada de ambos perfiles confirmados con cuentas reales. |
+| AC-32 | Parcial L · E01 | Omitir guía y recargar conserva preferencia. Falta cerrar sesión, volver y reabrir Ayuda en el recorrido integrado. |
+| AC-33 | Parcial L; M · E01/E11 | Diálogos con foco y móvil en estados concretos; falta la guía completa con lector, teclado y movimiento reducido. |
+| AC-34 | Parcial L · E01 | Omitir ayuda no consume intentos. Falta recorrer sin datos y abrir ayuda durante participación, comprobando ausencia de superposición y continuidad del reloj. |
+| AC-35 | Probado L/R · E04 | Publicar lectura sin quiz y consultarla como estudiante sin crear actividad evaluada ni nota. |
+| AC-36 | Parcial L/R · E02/E03/E05 | Reglas bloqueadas tras inicio y ampliación autorizada comprobadas. Falta ensayo individual de todos los campos valor/peso/intentos/visibilidad y versión intacta. |
+| AC-37 | Probado L · E17 | 1/3 sobre 100 = 33,33, conservando la fracción 1/3; 2,01 sobre 200, normalizado a 100, produce exactamente 1,005 y se presenta como 1,01. Falta contraste de esos valores por SQL remoto. |
+| AC-38 | Parcial L/R · E05 | Se publica cero con motivo por ausencia en una tarea. Falta ejecutar el caso sobre un quiz no iniciado y contrastar ausencia previa de cero, inclusión en promedio y distinción de intento respondido. |
+
+## Casos AP del producto
+
+| Caso | Estado y evidencia | Resultado demostrado y pendiente |
+|---|---|---|
+| AP-01 | Parcial L · E01/E11 | Copia editable independiente y versiones conservadas; falta reutilización entre materias con respuestas existentes y comprobación explícita de que no copia estudiantes/respuestas. |
+| AP-02 | Parcial L/R · E04/E11 | Lectura sin evaluación publicada y consultada; biblioteca muestra quiz independiente. Falta publicar ambos en una misma ejecución y contrastar ausencia de nota de lectura. |
+| AP-03 | Probado L/R · E06 | Selección múltiple exacta = 4; omisión de opción o extra = 0. |
+| AP-04 | Probado L/R · E06 | Tres de cuatro relaciones sobre 8 = 6, sin redondear cada par. |
+| AP-05 | Probado L/R · E06 | Dos de cuatro posiciones sobre 5 = 2,5. |
+| AP-06 | Probado L/R · E06 | Dos de tres espacios con opciones sobre 6 = 4; escritura sigue manual. |
+| AP-07 | Probado L/R · E06 | Cerrada con revisión manual pendiente; puntos fuera de [0, máximo] rechazados sin reemplazar estado. |
+| AP-08 | Probado L; R parcial · E07/E03 | A/B dependientes, C/D independientes, explicaciones y orden persistente al recuperar. Falta reconexión remota con ese conjunto completo. |
+| AP-09 | Probado L; R parcial · E07/E03/E09 | Sala sin intento, inicio repetido, E1 responde/E2 omite, cierre confirmado y última escrita pendiente. El remoto y la carrera guiada cubren partes; no reproducen toda esa secuencia en navegador. |
+| AP-10 | ND de la secuencia completa | La sala espera al docente en E03 y existe recuperación. Falta desconexión/reconexión docente sin avance automático y rechazo de nuevo participante tardío en el mismo ensayo. |
+| AP-11 | Probado L/R · E03/E06/E07 | Consumo único de pista/doble y reenvío idempotente; el ensayo de segundo intento con usos agotados es aislado. |
+| AP-12 | ND | Falta registrar pista inexistente sin consumo y carrera remota de dos pistas distintas con un solo ganador. El replay de una misma pista en E03 no prueba esa carrera. |
+| AP-13 | Probado L/R · E06 | Doble: correcta 2 → extra 2; incorrecta 0; manual 3 tras revisión. |
+| AP-14 | Probado L/R · E06 | B = 6, Q = 10, D = 2, M = 20: juego 8, nota 12/16 según configuración y tope M. |
+| AP-15 | Probado L/R del contrato; interfaz parcial · E03/E04/E07 | Incompatibilidad de ocultamiento con racha/clasificación rechazada; ACK/snapshot reservados, nota agregada publicable. Falta comprobar la explicación visible de ambas incompatibilidades. |
+| AP-16 | Probado L/R · E07/E08 | Cierre sin publicación no libera clasificación; revisión privada no cambia datos/huella estudiantiles y republicación libera 10/8, equipo 9. La regresión de mejor juego en otro intento está probada solo en L. |
+| AP-17 | Parcial L; M · E01/E11/E12 | Preferencia de movimiento reducido y control de sonido presentes/operables en estados probados. Falta secuencia racha de dos correctas, manual que interrumpe y siguiente correcta, sin puntos por velocidad/racha. |
+| AP-18 | Probado L · E07 | 10/10/8 produce puestos 1/1/3; pendiente manual mantiene provisional. No se atribuye este conjunto exacto al remoto AP-16. |
+| AP-19 | Probado L · E07 | Equipos de dos y tres promedian 8; no iniciado aporta cero al equipo sin intento ni nota personal. |
+| AP-20 | Probado L; R parcial · E03/E05/E07/E08 | Cambio/reparto iniciado rechazado y listas intactas en L; permisos, alias e identidad docente también remotos. Falta combinar bloqueo y todos los roles en una misma ejecución remota. |
+| AP-21 | Parcial L/R · E02/E13 | Tamaño individual, ejecutable renombrado y archivo no validado rechazados; transferencia privada real en E04. Faltan seis archivos, total 21 MiB y carga incompleta que conserve entrega válida en una secuencia adversa. |
+| AP-22 | Parcial L/R · E02/E03/E05 | Versiones preservadas y descarga ajena rechazada. Falta reemplazo explícito antes del cierre y sin calificar, contrastado contra el archivo anterior. |
+| AP-23 | Parcial L/R · E05 | Reentrega individual con fecha y permiso consumido. Falta matriz entrega tardía deshabilitada/habilitada, marca tardía y fronteras de ventana. |
+| AP-24 | Parcial L/R · E03/E05 | Reentrega calificada mantiene versión y nota publicadas. Falta carga fallida seguida de evaluación y republicación en la secuencia completa. |
+| AP-25 | Parcial L/R · E03/E05 | Actividad manual, publicación individual, pendiente y cero motivado. Falta comprobar explícitamente que el segundo estudiante no tiene entrega/intento fabricado. |
+| AP-26 | Probado L/R · E10 | Dos materias, filtros y fronteras 0/20/80/100, pendiente separado, fechas inclusivas, tabla/gráfico y ausencia de promedio entre materias. |
+| AP-27 | Parcial L/R · E05 | Señal de visibilidad, comentario docente y resolución sin sanción automática. Falta inspección de datos mínimos y aviso/limitación completos en el mismo caso. |
+| AP-28 | ND de la secuencia completa | No hay registro específico de señal desactivada sin eventos ni vencimiento que elimine detalle y conserve únicamente resolución mínima. |
+| AP-29 | Parcial L/R · E02/E03/E05 | Retiro revoca acceso, resolución y reingreso no restituyen oportunidades. Falta matriz completa evaluación/exclusión, omisiones, motivo y usos de potenciadores después de readmitir. |
+| AP-30 | Parcial L/R · E03/E05 | Archivo revoca acceso y restauración no reabre intentos. Falta confirmar archivo con intento abierto y comparar plazo general sin ampliación. |
+| AP-31 | Parcial L; operación ND · E02 | A los treinta días exactos se rechaza restauración; purga no completa mientras existen bytes y conserva biblioteca. Falta fallo parcial/reintento completo y medir eliminación remota dentro de 24 h. |
+| AP-32 | Parcial L · E02 | Archivo exclusivo descubierto y biblioteca independiente conservada. Falta el escenario explícito de un mismo archivo referenciado por biblioteca autorizada y materia vencida, con bytes reales. |
+| AP-33 | Parcial L; R pendiente · E11 | Imagen exige alternativa y lector filtra enlaces inseguros; navegación de contenido comprobada. Falta envío adverso de URL/script por contrato remoto, rechazo sin ejecución y orientación del error. |
+| AP-34 | ND de la secuencia completa | E01 conserva preferencia local al omitir. Falta otra sesión/dispositivo, nueva versión tutorial y ayuda estática durante intento activo. |
+| AP-35 | No aprobado; diagnóstico fallido R · E15 | p95 3.867,53 ms supera 1.500 ms; integridad 200/200 en un minuto no cierra calentamiento, quince minutos por modo, propagación guiada ni cuotas Q-09. |
+| AP-36 | Parcial L; R operativo ND · E14/E16 | Instalación/migraciones/compilación en CI y restauración aislada. Falta respaldo remoto con Storage/Auth, restauración separada, despliegue y comprobación posterior. |
+| AP-37 | Parcial L/R · E02/E05 | Límite de comprobaciones de código probado en SQL aislado; renovación desde interfaz remota. Falta combinarlos con solicitudes pendientes conservadas en una sola ejecución. |
+| AP-38 | Parcial L/R; M · E04/E05/E10/E11/E12 | Escritorio y móvil emulado, teclado/axe y reflujo en estados identificados. Pendientes Firefox/WebKit, teléfonos físicos, lector y evaluación de tareas con participantes. |
+
+## Pendientes y discrepancias documentales
+
+Las cabeceras de los dos catálogos AC/AP remiten a esta matriz para separar los criterios del estado ejecutado. Los casos no se consideran cerrados por haber escrito esta relación ni por disponer de implementación.
+
+Los informes históricos mantienen sus fechas, versiones y límites. En particular, el texto de datos remotos remite a «55 comprobaciones» aisladas, mientras la regresión E02 registra 84; no son conteos equivalentes ni deben sumarse. La [inspección inicial de viabilidad](../verificacion/viabilidad-servicios.md) antecede a la integración real y no debe utilizarse como estado actual de Auth/RLS/Storage. El informe aislado de recuperación sigue correspondiendo a doce migraciones, no a las incorporadas después. Las revisiones posteriores del [modelo](../modelado/README.md) conservan sus propios informes y no reciben automáticamente los resultados de E02/E08.
+
+La prueba anterior de vencimiento afirmaba conservar escritura pendiente en su título, pero no enviaba ninguna respuesta. E17 la sustituye por la secuencia real AC-19 e incorpora los ejemplos exactos AC-21/AC-22/AC-37; todos pasaron sin cambiar la implementación. La indicación visible del pendiente AC-22 sigue sin demostrarse con esa prueba de dominio. Otro límite concreto es AC-38: el recorrido de cero explícito existente utiliza una tarea, mientras el catálogo exige un quiz no iniciado.
+
+Las carencias transversales son correo real; los escenarios exactos y carreras señalados; revisión manual de accesibilidad y usabilidad; compatibilidad fuera de Chromium; capacidad Q-06 y cuotas Q-09 conjuntas; purga con plazo medido; respaldo/restauración remotos y despliegue por HTTPS. El mantenimiento manual registrado en E16 eliminó cero archivos. Las ejecuciones programadas [36638509107](https://github.com/CubeFreaKLab/aulify/actions/runs/36638509107) y [36571189662](https://github.com/CubeFreaKLab/aulify/actions/runs/36571189662) terminaron con éxito según API; esto sí acredita activación por horario, pero sin logs descargados ni escenario de objetos vencidos no demuestra cantidad eliminada o plazo de purga. Los avisos del asesor de Supabase y sus límites se conservan en E07; aprobar AP-16 no los elimina.
+
+## Registro de nuevas ejecuciones
+
+**E17 — 29 de septiembre de 2026, 18:44:59 America/La_Paz (22:44:59 UTC).** Windows, Node.js 24.14.1, Vitest 5.0.2. Comando: `npx vitest run tests/unit/domain.test.ts --reporter=verbose`. Resultado observado: un archivo, 28 pruebas aprobadas, 392 ms; sin fallos. ESLint del archivo, Prettier y `git diff --check` también aprobaron. Los cambios de prueba estaban sin commit; el SHA-256 del archivo ejecutado es `27b5a786e34714c31a0d99dd9e328595d5a20b0620c71fadc59b21f4f9225184`. Esta ejecución complementa las evidencias anteriores, sin sumar sus repeticiones ni demostrar persistencia remota, navegador o despliegue. El registro conserva la salida observada; no se generó un informe JSON adicional.
 
 | Campo | Qué registrar |
 |---|---|
-| Identificación | ID de ejecución, caso AC/AP, requisito, tarea y versión del spec. |
-| Versión y entorno | Commit, fecha real, dependencias, configuración, navegador/dispositivo o servicio relevante. |
+| Identificación | Caso AC/AP, requisito, tarea y versión del criterio. |
+| Versión y entorno | Commit y, si hay cambios sin commit, huellas; fecha real, dependencias, navegador/dispositivo, servicio y compilación. |
 | Preparación | Datos ficticios, estado inicial, permisos y dependencias disponibles. |
-| Procedimiento | Pasos/comando reproducibles y resultado esperado vigente. |
-| Resultado | Observado, aprobado/fallido/bloqueado/no ejecutado, mediciones y limitaciones. |
-| Evidencia | Informe, captura, traza o consulta que respalde el resultado; sin datos privados. |
-| Seguimiento | Defecto, corrección y nueva ejecución vinculados; conservar el fallo original. |
+| Procedimiento | Comando/pasos reproducibles y resultado esperado vigente. |
+| Resultado | Observado, aprobado/fallido/bloqueado/no ejecutado, mediciones, partes no cubiertas y motivo del bloqueo. |
+| Evidencia | Informe, captura, traza o consulta sin sesiones, credenciales ni datos de personas reales. |
+| Seguimiento | Fallo original, corrección y repetición vinculados; no sumar la repetición como escenario nuevo. |
 
-El [modelo de datos 1.0](../modelado/README.md) ya está disponible. Los vínculos siguientes son evidencia de diseño documental; las migraciones todavía no existen. Las fuentes editables y el commit permiten reproducir las figuras.
-
-| Requisitos | Modelo disponible |
-|---|---|
-| RF-01, RF-02, RF-17 | [Identidad y pertenencia](../modelado/diagramas/01-identidad.svg): perfiles, códigos, solicitudes, membresías, eventos y ayuda. |
-| RF-03, RF-04, RF-13, RF-14 | [Autoría](../modelado/diagramas/02-autoria.svg): borrador, versiones, bloques, grupos, preguntas, elementos y secretos. |
-| RF-05, RF-16 | [Actividades](../modelado/diagramas/03-actividades.svg): subtipos, participantes, plazos y sesión guiada. |
-| RF-05, RF-06, RF-14, RF-15 | [Participación](../modelado/diagramas/04-participacion.svg): intentos, orden, respuestas, equipos y consumos. |
-| RF-07, RF-08, RF-10, RF-11, RF-12 | [Evaluación](../modelado/diagramas/05-evaluacion.svg): revisiones, entregas y publicaciones; gráficos y promedios se derivan. |
-| RF-02, RF-09, RNF-05, RNF-06 | [Operación](../modelado/diagramas/06-operacion.svg) y [permisos](../modelado/permisos.md): incidencias, conservación e invariantes. |
-| RNF-01, RNF-02, RNF-03, RNF-04 | [Casos y estados](../modelado/casos-y-operaciones.md) para diseñar la experiencia; rendimiento, usabilidad, accesibilidad y consumo siguen pendientes de medición. |
-
-## Cambios y finalización
-
-### Evidencia del prototipo 0.1.0
-
-| Requisitos relacionados | Comprobación disponible | Límite |
-|---|---|---|
-| RF-03, RF-04, RF-13 | Guardado de bloques enriquecidos, recarga, ordenación por teclado, copias y versiones; ocho tipos de pregunta. | Adaptador local, sin persistencia ni autorización de servidor. |
-| RF-05, RF-06, RF-07, RF-08, RF-14, RF-15, RF-16 | Recorrido de publicación, participación, revisión manual y nota; ayudas de un uso, corrección oculta y sesión guiada. | La sala comparte almacenamiento entre pestañas; no acredita sincronización remota ni equipos. |
-| RF-10, RF-12, RF-17 | Metadatos de entregas, revisión, filtros y tabla/gráfico; ayuda por rol sin consumir intentos. | No almacena bytes de archivos; falta almacenamiento privado y evaluación con usuarios. |
-| RNF-01, RNF-02 | Playwright en escritorio y móvil emulado; teclado, foco, movimiento reducido, reflujo y análisis axe en estados identificados. | No certifica WCAG completo ni reemplaza pruebas con lectores de pantalla o teléfonos físicos. |
-| RNF-06 | Dependencias fijadas, construcción y flujo de GitHub Actions con informe por versión. | CI no despliega ni comprueba migraciones o recuperación de datos. |
-
-Procedimientos, versiones y resultados en [pruebas del prototipo](../verificacion/pruebas-prototipo.md). Estos casos de demostración no se contabilizan como aprobaciones de los 76 escenarios integrados.
-
-Si cambia una regla, actualizar su caso y esta matriz antes de implementar. Al terminar una tarea, registrar qué casos se ejecutaron, cuáles faltan y dónde están sus resultados. La comprobación de enlaces o de este documento acredita coherencia documental, no funcionamiento del producto. El estado consolidado se conserva en [estado del desarrollo](../estado-del-desarrollo.md).
+El [modelo de datos](../modelado/README.md), sus [diagramas](../modelado/diagramas), [permisos](../modelado/permisos.md) y [operaciones](../modelado/casos-y-operaciones.md) documentan la estructura. Las [migraciones](../../supabase/migrations) y sus ensayos aportan la evidencia de ejecución separada. Una figura o una comprobación de enlaces solo demuestra coherencia documental. El estado consolidado del trabajo permanece en [estado del desarrollo](../estado-del-desarrollo.md).

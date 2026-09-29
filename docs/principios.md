@@ -50,7 +50,7 @@ La creación, participación y revisión deben tener una buena experiencia en ce
 
 El quiz mantiene una interacción continua. Cuando no se muestra la corrección, el avance individual pasa a la siguiente pregunta sin una pantalla de confirmación de guardado. En modo guiado, quien ya respondió pasa mediante una transición breve a una vista del progreso grupal hasta que el docente abra la siguiente pregunta. Los aciertos permanecen ocultos cuando así se configure.
 
-Los criterios concretos y sus comprobaciones están en la especificación y el plan de calidad; su ejecución está pendiente. La conformidad se declarará únicamente con evidencia de verificación.
+Los criterios concretos están en la especificación y el plan de calidad; la [matriz de trazabilidad](calidad/trazabilidad.md) distingue las comprobaciones ejecutadas, su alcance y los pendientes. La conformidad se declarará únicamente con evidencia de verificación.
 
 ## 8. Desarrollo verificable
 

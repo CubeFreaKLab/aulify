@@ -446,6 +446,176 @@ describe('intento, orden e idempotencia', () => {
 });
 
 describe('revisión, publicación y visibilidad', () => {
+  it('AC-21: 2, 0 y 4 sobre 2, 3 y 5 dan 12/20 solo después de revisar la escrita', () => {
+    const questions: Question[] = [
+      single,
+      { ...single, id: 'q2', points: 3 },
+      { ...open, id: 'q3', points: 5 },
+    ];
+    let state = fixture(questions, { maxGrade: 20, shuffleQuestions: false });
+    state = startAttempt(state, DEMO_IDS.activity, DEMO_IDS.student, student()).state;
+    state = submitAnswer(state, 'attempt-camila', 'q1', correct, 'ac21-1', false, student()).state;
+    state = submitAnswer(
+      state,
+      'attempt-camila',
+      'q2',
+      { type: 'single', optionId: 'rabbit' },
+      'ac21-2',
+      false,
+      student(),
+    ).state;
+    state = submitAnswer(
+      state,
+      'attempt-camila',
+      'q3',
+      { type: 'open', text: 'Las plantas transforman energía para producir alimento.' },
+      'ac21-3',
+      false,
+      student(),
+    ).state;
+    expect(scoreAttempt(state, state.attempts[0])).toMatchObject({
+      basePoints: 2,
+      maximumPoints: 10,
+      pending: 1,
+      complete: false,
+      grade: null,
+    });
+    expect(() => publishGrade(state, DEMO_IDS.activity, DEMO_IDS.student, teacher())).toThrow(
+      /Completa la revisión/,
+    );
+    state = reviewAnswer(
+      state,
+      'attempt-camila',
+      'q3',
+      4,
+      'Explicación parcial.',
+      undefined,
+      teacher(),
+    ).state;
+    expect(scoreAttempt(state, state.attempts[0])).toMatchObject({
+      basePoints: 6,
+      maximumPoints: 10,
+      pending: 0,
+      complete: true,
+      grade: 12,
+    });
+  });
+  it('AC-22: entre 60, 80 y un intento pendiente, publica 80 sin sustituir antes la nota de 60', () => {
+    let state = fixture([{ ...open, points: 5 }], {
+      maxGrade: 100,
+      maxAttempts: 3,
+      shuffleQuestions: false,
+    });
+    for (const [index, points] of [3, 4, null].entries()) {
+      const attemptId = `ac22-attempt-${index + 1}`;
+      state = startAttempt(state, DEMO_IDS.activity, DEMO_IDS.student, student(attemptId)).state;
+      state = submitAnswer(
+        state,
+        attemptId,
+        open.id,
+        { type: 'open', text: `Explicación del intento ${index + 1}.` },
+        `ac22-answer-${index + 1}`,
+        false,
+        student(attemptId),
+      ).state;
+      if (points !== null) {
+        state = reviewAnswer(
+          state,
+          attemptId,
+          open.id,
+          points,
+          'Revisión docente.',
+          undefined,
+          teacher(),
+        ).state;
+      }
+      if (index === 0) {
+        state = publishGrade(
+          state,
+          DEMO_IDS.activity,
+          DEMO_IDS.student,
+          teacher('ac22-publication-1'),
+        ).state;
+      }
+    }
+    expect(state.attempts.map((attempt) => scoreAttempt(state, attempt).grade)).toEqual([
+      60,
+      80,
+      null,
+    ]);
+    expect(scoreAttempt(state, state.attempts[2])).toMatchObject({ pending: 1, complete: false });
+    expect(studentResults(state, DEMO_IDS.subject, DEMO_IDS.student, NOW)[0]).toMatchObject({
+      grade: 60,
+      status: 'published',
+    });
+    expect(state.evaluations).toHaveLength(1);
+    state = publishGrade(
+      state,
+      DEMO_IDS.activity,
+      DEMO_IDS.student,
+      teacher('ac22-publication-2'),
+      '',
+      'Se publica el mejor intento corregido.',
+    ).state;
+    expect(state.evaluations.map(({ grade, attemptId }) => ({ grade, attemptId }))).toEqual([
+      { grade: 60, attemptId: 'ac22-attempt-1' },
+      { grade: 80, attemptId: 'ac22-attempt-2' },
+    ]);
+    expect(studentResults(state, DEMO_IDS.subject, DEMO_IDS.student, NOW)[0].grade).toBe(80);
+    expect(scoreAttempt(state, state.attempts[2])).toMatchObject({ pending: 1, grade: null });
+  });
+  it('AC-37: redondea 1/3 sobre 100 a 33,33 y el resultado exacto 1,005 a 1,01', () => {
+    const ordering: Question = {
+      id: 'ac37-order',
+      type: 'ordering',
+      prompt: 'Ordena los tres pasos.',
+      points: 1,
+      items: ['a', 'b', 'c'].map((id) => ({ id, text: id })),
+      correctOrder: ['a', 'b', 'c'],
+    };
+    let fractional = fixture([ordering], { maxGrade: 100, shuffleQuestions: false });
+    fractional = startAttempt(fractional, DEMO_IDS.activity, DEMO_IDS.student, student()).state;
+    fractional = submitAnswer(
+      fractional,
+      'attempt-camila',
+      ordering.id,
+      { type: 'ordering', itemIds: ['a', 'c', 'b'] },
+      'ac37-third',
+      false,
+      student(),
+    ).state;
+    expect(fractional.attempts[0].answers[0].reviews[0].points).toEqual({
+      numerator: 1,
+      denominator: 3,
+    });
+    expect(scoreAttempt(fractional, fractional.attempts[0]).grade).toBe(33.33);
+
+    let half = fixture([{ ...open, points: 200 }], { maxGrade: 100 });
+    half = startAttempt(half, DEMO_IDS.activity, DEMO_IDS.student, student()).state;
+    half = submitAnswer(
+      half,
+      'attempt-camila',
+      open.id,
+      { type: 'open', text: 'Una explicación que requiere revisión.' },
+      'ac37-half',
+      false,
+      student(),
+    ).state;
+    half = reviewAnswer(
+      half,
+      'attempt-camila',
+      open.id,
+      2.01,
+      'Crédito parcial.',
+      undefined,
+      teacher(),
+    ).state;
+    expect(half.attempts[0].answers[0].reviews[0].points).toEqual({
+      numerator: 201,
+      denominator: 100,
+    });
+    expect(scoreAttempt(half, half.attempts[0]).grade).toBe(1.01);
+  });
   it('mantiene pendientes fuera de la nota; una revisión privada no reemplaza la publicada', () => {
     let state = completed(fixture());
     expect(scoreAttempt(state, state.attempts[0])).toMatchObject({
@@ -632,24 +802,57 @@ describe('adaptador de demostración y restauración', () => {
     fail = false;
     expect(repository.load().resources[0].title).toBe(state.resources[0].title);
   });
-  it('materializa el vencimiento al recargar, conserva escritura pendiente y no consume otro intento', () => {
+  it('AC-19: al vencer conserva la escrita enviada, deja la omisión en cero y espera revisión', () => {
     let time = NOW,
       seq = 0;
     const storage = new MemoryStorage();
-    const state = fixture([open], { timeLimitMinutes: 1 });
+    const state = fixture([open, single], { timeLimitMinutes: 1, shuffleQuestions: false });
     storage.setItem(DEMO_STORAGE_KEY, JSON.stringify(state));
     const repository = createDemoRepository(storage, { now: () => time, id: () => `id-${++seq}` });
     const attempt = repository.startAttempt(DEMO_IDS.activity, DEMO_IDS.student);
+    const value: AnswerValue = {
+      type: 'open',
+      text: 'Las plantas transforman la energía de la luz.',
+    };
+    repository.submitAnswer(attempt.id, open.id, value, 'ac19-written');
+    expect(repository.load().attempts[0].status).toBe('in-progress');
     time = '2026-09-27T16:01:00.000Z';
-    expect(repository.load().attempts.find((item) => item.id === attempt.id)).toMatchObject({
+    const expired = repository.load();
+    expect(expired.attempts[0]).toMatchObject({
       status: 'closed',
       closeReason: 'expired',
-      answers: [],
+      answers: [{ questionId: open.id, value, idempotencyKey: 'ac19-written', reviews: [] }],
     });
-    expect(repository.load().attempts).toHaveLength(1);
-    expect(() =>
-      repository.submitAnswer(attempt.id, 'q2', { type: 'open', text: 'Tarde' }, 'late'),
-    ).toThrow(/terminó/);
+    expect(expired.attempts[0].answers).toHaveLength(1);
+    expect(expired.attempts).toHaveLength(1);
+    expect(scoreAttempt(expired, expired.attempts[0])).toMatchObject({
+      basePoints: 0,
+      maximumPoints: 5,
+      pending: 1,
+      complete: false,
+      grade: null,
+    });
+    expect(repository.studentResults(DEMO_IDS.subject, DEMO_IDS.student)[0]).toMatchObject({
+      grade: null,
+      status: 'pending-review',
+    });
+    expect(() => repository.publishGrade(DEMO_IDS.activity, DEMO_IDS.student)).toThrow(
+      /Completa la revisión/,
+    );
+    expect(() => repository.submitAnswer(attempt.id, single.id, correct, 'late')).toThrow(
+      /terminó/,
+    );
+    repository.reviewAnswer(attempt.id, open.id, 3, 'Explicación completa.');
+    const reviewed = repository.load();
+    expect(reviewed.attempts[0].answers).toHaveLength(1);
+    expect(scoreAttempt(reviewed, reviewed.attempts[0])).toMatchObject({
+      basePoints: 3,
+      maximumPoints: 5,
+      pending: 0,
+      complete: true,
+      grade: 60,
+    });
+    expect(reviewed.evaluations).toHaveLength(0);
   });
   it('requiere aprobación para entrar y permite decidir solicitudes idempotentemente', () => {
     let seq = 0;
