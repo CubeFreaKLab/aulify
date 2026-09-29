@@ -1,6 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { decodeDemoState } from '../../src/domain';
 import type { DemoState } from '../../src/domain/types';
 
 // Windows headless safeguard required by scroll-craft. Dragging is not claimed by these tests.
@@ -210,7 +211,7 @@ test('lector: estructura, tablas, desplegables, código y enlaces seguros', asyn
   page,
 }, testInfo) => {
   await enterDemo(page, 'docente');
-  await page.evaluate(() => {
+  const stored = await page.evaluate(() => {
     const state = JSON.parse(localStorage.getItem('aulify.demo.v1')!) as DemoState;
     const resource = state.resources.find((r) => r.id === 'resource-ecosystems')!;
     resource.editorDocument = [
@@ -253,15 +254,18 @@ test('lector: estructura, tablas, desplegables, código y enlaces seguros', asyn
         content: [
           {
             type: 'link',
-            href: 'javascript:alert(1)',
-            content: [{ text: 'Enlace no ejecutable' }],
+            href: 'https://example.test/material',
+            content: [{ text: 'Material de referencia' }],
           },
         ],
       },
       { id: 'quiz', type: 'quiz', props: { label: 'Actividad interactiva' } },
     ];
     localStorage.setItem('aulify.demo.v1', JSON.stringify(state));
+    return JSON.stringify(state);
   });
+  // La lectura usa datos restaurables; el filtrado de contenido legado se prueba en el componente.
+  expect(() => decodeDemoState(stored)).not.toThrow();
   await page.goto('/demo/previa/resource-ecosystems');
   const reader = page.locator('.rich-reader');
   await expect(
@@ -274,8 +278,11 @@ test('lector: estructura, tablas, desplegables, código y enlaces seguros', asyn
   await expect(reader.locator('strong', { hasText: 'Detalle de la observación' })).toBeVisible();
   await expect(reader.getByRole('columnheader', { name: 'Factor' })).toBeVisible();
   await expect(reader.locator('pre')).toHaveText('<script>alert("nunca")</script>');
-  await expect(reader.getByRole('link', { name: 'Enlace no ejecutable' })).toHaveCount(0);
-  await expect(reader.getByText('Enlace no ejecutable', { exact: true })).toBeVisible();
+  await expect(reader.getByRole('link', { name: 'Material de referencia' })).toHaveAttribute(
+    'href',
+    'https://example.test/material',
+  );
+  await expect(reader.locator('script')).toHaveCount(0);
   await expectNoHorizontalOverflow(page);
   const axe = await new AxeBuilder({ page })
     .include('.rich-reader')

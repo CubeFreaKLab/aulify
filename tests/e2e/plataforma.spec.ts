@@ -67,9 +67,12 @@ for (const motion of ['no-preference', 'reduce'] as const) {
     await page.emulateMedia({ reducedMotion: motion });
     await enterDemo(page, 'docente');
     await page.goto('/demo/biblioteca');
+    // La navegación enfoca el h1 en el siguiente frame; termina antes de probar otro foco.
+    await expect(page.getByRole('heading', { name: 'Biblioteca', exact: true })).toBeFocused();
     const trigger = page.getByRole('button', { name: 'Vista previa', exact: true }).first();
     const dialog = page.getByRole('dialog', { name: 'Vista previa', exact: true });
     await trigger.focus();
+    await expect(trigger).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(dialog).toBeVisible();
     await expect(
