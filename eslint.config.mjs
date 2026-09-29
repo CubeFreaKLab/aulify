@@ -11,6 +11,8 @@ export default defineConfig([
     'next-env.d.ts',
     'coverage/**',
     'playwright-report/**',
+    'playwright-compatibility-report/**',
     'test-results/**',
+    'test-results-compatibility/**',
   ]),
 ]);
