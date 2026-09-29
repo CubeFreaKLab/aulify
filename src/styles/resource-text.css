@@ -1,0 +1,158 @@
+:root {
+  --resource-gray-text: #545956;
+  --resource-gray-background: #eceeeb;
+  --resource-brown-text: #674734;
+  --resource-brown-background: #f1e8e0;
+  --resource-red-text: #a4262c;
+  --resource-red-background: #fbe7e8;
+  --resource-orange-text: #904019;
+  --resource-orange-background: #fbeadf;
+  --resource-yellow-text: #715500;
+  --resource-yellow-background: #faf1cf;
+  --resource-green-text: #17643b;
+  --resource-green-background: #e1f2e6;
+  --resource-blue-text: #215987;
+  --resource-blue-background: #e4eff9;
+  --resource-purple-text: #683b92;
+  --resource-purple-background: #efe6f8;
+  --resource-pink-text: #923467;
+  --resource-pink-background: #f7e4ee;
+}
+:root[data-theme='dark'] {
+  --resource-gray-text: #d2d7d3;
+  --resource-gray-background: #303331;
+  --resource-brown-text: #e9c2a8;
+  --resource-brown-background: #3a2e26;
+  --resource-red-text: #ffb4b7;
+  --resource-red-background: #422729;
+  --resource-orange-text: #ffc29f;
+  --resource-orange-background: #402e23;
+  --resource-yellow-text: #eed28a;
+  --resource-yellow-background: #3a321d;
+  --resource-green-text: #a6e0b9;
+  --resource-green-background: #23382b;
+  --resource-blue-text: #aecff2;
+  --resource-blue-background: #263443;
+  --resource-purple-text: #d9b9f2;
+  --resource-purple-background: #352b40;
+  --resource-pink-text: #f2b8d4;
+  --resource-pink-background: #3d2933;
+}
+.block-editor .bn-container.bn-ariakit {
+  --bn-colors-highlights-gray-text: var(--resource-gray-text);
+  --bn-colors-highlights-gray-background: var(--resource-gray-background);
+  --bn-colors-highlights-brown-text: var(--resource-brown-text);
+  --bn-colors-highlights-brown-background: var(--resource-brown-background);
+  --bn-colors-highlights-red-text: var(--resource-red-text);
+  --bn-colors-highlights-red-background: var(--resource-red-background);
+  --bn-colors-highlights-orange-text: var(--resource-orange-text);
+  --bn-colors-highlights-orange-background: var(--resource-orange-background);
+  --bn-colors-highlights-yellow-text: var(--resource-yellow-text);
+  --bn-colors-highlights-yellow-background: var(--resource-yellow-background);
+  --bn-colors-highlights-green-text: var(--resource-green-text);
+  --bn-colors-highlights-green-background: var(--resource-green-background);
+  --bn-colors-highlights-blue-text: var(--resource-blue-text);
+  --bn-colors-highlights-blue-background: var(--resource-blue-background);
+  --bn-colors-highlights-purple-text: var(--resource-purple-text);
+  --bn-colors-highlights-purple-background: var(--resource-purple-background);
+  --bn-colors-highlights-pink-text: var(--resource-pink-text);
+  --bn-colors-highlights-pink-background: var(--resource-pink-background);
+}
+.reader-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  max-width: 880px;
+  margin: 0 auto 24px;
+}
+.reader-toolbar p {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+}
+.reader-toolbar strong {
+  font-weight: 550;
+  color: var(--ink);
+}
+.reader-paper.rich-reader {
+  max-width: 880px;
+  margin-inline: auto;
+  border-radius: 6px;
+  padding: 48px 64px;
+}
+.reader-paper.rich-reader h1 {
+  margin-top: 0;
+  font-size: 36px;
+  font-weight: 800;
+}
+.rich-reader {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.rich-reader .reader-block {
+  margin-block: 18px;
+}
+.rich-reader .reader-block[style*='background-color'] {
+  padding: 12px 16px;
+  border-radius: 5px;
+}
+.rich-reader .reader-block p {
+  max-width: none;
+  line-height: inherit;
+}
+.rich-reader figure img {
+  margin-inline: auto;
+  max-height: 720px;
+  object-fit: contain;
+}
+.rich-reader figcaption {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+.preview-questions {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 64px;
+  border-top: 1px solid var(--line);
+}
+.preview-questions h2 {
+  font-size: 23px;
+}
+.preview-questions > p {
+  margin: 10px 0 28px;
+  color: var(--muted);
+}
+.preview-question {
+  padding-block: 24px;
+  border-top: 1px solid var(--line);
+}
+.preview-question h3 {
+  font-size: 17px;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+@media (max-width: 600px) {
+  .reader-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .reader-toolbar p {
+    text-align: left;
+  }
+  .reader-paper.rich-reader {
+    padding: 28px 24px;
+  }
+  .reader-paper.rich-reader h1 {
+    font-size: 28px;
+  }
+  .preview-questions {
+    padding: 24px 8px;
+  }
+}

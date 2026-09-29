@@ -263,7 +263,7 @@ test('lector: estructura, tablas, desplegables, código y enlaces seguros', asyn
   ).toBeVisible();
   await expect(reader.locator('ol>li')).toHaveCount(2);
   await expect(reader.getByText('Detalle de la observación', { exact: true })).not.toBeVisible();
-  await reader.getByText('Una pista', { exact: true }).focus();
+  await reader.locator('summary').filter({ hasText: 'Una pista' }).focus();
   await page.keyboard.press('Enter');
   await expect(reader.locator('strong', { hasText: 'Detalle de la observación' })).toBeVisible();
   await expect(reader.getByRole('columnheader', { name: 'Factor' })).toBeVisible();
@@ -280,4 +280,63 @@ test('lector: estructura, tablas, desplegables, código y enlaces seguros', asyn
     body: await page.screenshot({ fullPage: true }),
     contentType: 'image/png',
   });
+});
+
+test('lector conserva colores, resaltado y alineación del editor en ambos temas', async ({
+  page,
+}) => {
+  await enterDemo(page, 'docente');
+  await page.evaluate(() => {
+    const state = JSON.parse(localStorage.getItem('aulify.demo.v1')!) as DemoState;
+    const resource = state.resources.find((r) => r.id === 'resource-ecosystems')!;
+    resource.editorDocument = [
+      {
+        id: 'colored',
+        type: 'paragraph',
+        props: { textAlignment: 'center', textColor: 'blue' },
+        content: [
+          { type: 'text', text: 'Observación centrada. ', styles: {} },
+          {
+            type: 'text',
+            text: 'Plantas y luz',
+            styles: { textColor: 'green', backgroundColor: 'yellow', bold: true },
+          },
+        ],
+      },
+      ...['gray', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink'].map(
+        (c) => ({
+          id: c,
+          type: 'paragraph',
+          props: { textColor: c, backgroundColor: c },
+          content: [{ type: 'text', text: `Ejemplo ${c}`, styles: {} }],
+        }),
+      ),
+    ];
+    localStorage.setItem('aulify.demo.v1', JSON.stringify(state));
+  });
+  for (const theme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+    await page.goto('/demo/editor/resource-ecosystems');
+    const original = page.locator('.bn-editor').getByText('Plantas y luz', { exact: true });
+    await expect(original).toBeVisible();
+    const styles = await original.evaluate((e) => ({
+      color: getComputedStyle(e).color,
+      background: getComputedStyle(e.closest('[data-style-type="backgroundColor"]') || e)
+        .backgroundColor,
+    }));
+    await page.goto('/demo/previa/resource-ecosystems');
+    const output = page.locator('.rich-reader').getByText('Plantas y luz', { exact: true });
+    await expect(output).toHaveCSS('color', styles.color);
+    await expect(output.locator('..')).toHaveCSS('background-color', styles.background);
+    await expect(page.locator('.rich-reader .reader-block').first()).toHaveCSS(
+      'text-align',
+      'center',
+    );
+    const scan = await new AxeBuilder({ page })
+      .include('.rich-reader')
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .analyze();
+    expect(scan.violations).toEqual([]);
+    await expectNoHorizontalOverflow(page);
+  }
 });

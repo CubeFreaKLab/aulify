@@ -1,32 +1,12 @@
 'use client';
-/* eslint-disable @next/next/no-img-element -- Authenticated and external teaching materials need direct loading with an explicit error state. */
-import { Fragment, type ReactNode, useState } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import type { Block } from '@/domain/types';
-import { safeImageUrl } from '@/domain';
 import { type RichBlock, textOf } from '@/lib/rich-document';
+import { resourceTextStyle } from '@/lib/resource-text-style';
+import { ResourceImage } from './resource-image';
 import '@/styles/rich-editor.css';
-
-function SafeImage({ url, alt, caption }: { url: string; alt: string; caption?: string }) {
-  const [failed, setFailed] = useState(false);
-  if (!safeImageUrl(url))
-    return <p className="notice">La dirección de esta imagen no es válida.</p>;
-  return (
-    <figure>
-      {failed ? (
-        <p className="notice">Imagen no disponible. {alt}</p>
-      ) : (
-        <img
-          src={url}
-          alt={alt}
-          loading="lazy"
-          referrerPolicy="no-referrer"
-          onError={() => setFailed(true)}
-        />
-      )}
-      {caption && <figcaption>{caption}</figcaption>}
-    </figure>
-  );
-}
+import '@/styles/resource-text.css';
+import { ResourceVideo } from './resource-video';
 
 export function InlineContent({ content }: { content: unknown }): ReactNode {
   if (typeof content === 'string') return content;
@@ -56,7 +36,11 @@ export function InlineContent({ content }: { content: unknown }): ReactNode {
     if (item.styles?.italic) value = <em>{value}</em>;
     if (item.styles?.underline) value = <u>{value}</u>;
     if (item.styles?.strike) value = <s>{value}</s>;
-    return <Fragment key={i}>{value}</Fragment>;
+    return (
+      <span key={i} style={resourceTextStyle(item.styles)}>
+        {value}
+      </span>
+    );
   });
 }
 
@@ -86,6 +70,7 @@ function ReadTable({ content }: { content: unknown }) {
                 return (
                   <Tag
                     key={colIndex}
+                    style={resourceTextStyle((cell as { props?: Record<string, unknown> })?.props)}
                     scope={
                       isHeader ? (rowIndex < (table.headerRows || 0) ? 'col' : 'row') : undefined
                     }
@@ -116,7 +101,7 @@ function NativeBlocks({ blocks, depth = 0 }: { blocks: unknown[]; depth?: number
       nodes.push(
         <Tag key={b.id || i}>
           {group.map((item, n) => (
-            <li key={item.id || n}>
+            <li key={item.id || n} style={resourceTextStyle(item.props)}>
               <InlineContent content={item.content} />
               {item.children?.length ? (
                 <NativeBlocks blocks={item.children} depth={depth + 1} />
@@ -199,23 +184,21 @@ function NativeBlocks({ blocks, depth = 0 }: { blocks: unknown[]; depth?: number
     else if (b.type === 'divider') node = <hr />;
     else if (b.type === 'image' && typeof b.props?.url === 'string')
       node = (
-        <SafeImage
+        <ResourceImage
           url={b.props.url}
           alt={String(b.props.alt || b.props.caption || '')}
           caption={typeof b.props.caption === 'string' ? b.props.caption : undefined}
+          widthPercent={b.props.widthPercent}
+          imageAlignment={b.props.imageAlignment}
         />
       );
     else if (b.type === 'video')
-      node =
-        typeof b.props?.url === 'string' && /^https:\/\//i.test(b.props.url) ? (
-          <p>
-            <a href={b.props.url} target="_blank" rel="noopener noreferrer">
-              {String(b.props.caption || 'Ver video de la clase')} ↗
-            </a>
-          </p>
-        ) : (
-          <p className="notice">El video necesita un enlace HTTPS válido.</p>
-        );
+      node = (
+        <ResourceVideo
+          url={String(b.props?.url || '')}
+          title={String(b.props?.caption || 'Video de la clase')}
+        />
+      );
     else
       node = (
         <>
@@ -224,7 +207,7 @@ function NativeBlocks({ blocks, depth = 0 }: { blocks: unknown[]; depth?: number
         </>
       );
     nodes.push(
-      <div className="reader-block" key={b.id || i}>
+      <div className="reader-block" key={b.id || i} style={resourceTextStyle(b.props)}>
         {node}
       </div>,
     );
@@ -274,11 +257,15 @@ export function ResourceReader({
                   </ul>
                 )
               ) : b.type === 'image' ? (
-                <SafeImage url={b.url} alt={b.alt} caption={b.caption} />
-              ) : b.type === 'video' && /^https:\/\//i.test(b.url) ? (
-                <a href={b.url} target="_blank" rel="noopener noreferrer">
-                  {b.title} ↗
-                </a>
+                <ResourceImage
+                  url={b.url}
+                  alt={b.alt}
+                  caption={b.caption}
+                  widthPercent={b.widthPercent}
+                  imageAlignment={b.imageAlignment}
+                />
+              ) : b.type === 'video' ? (
+                <ResourceVideo url={b.url} title={b.title} />
               ) : null}
             </div>
           ))

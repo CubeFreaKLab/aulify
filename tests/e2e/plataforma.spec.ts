@@ -68,7 +68,7 @@ for (const motion of ['no-preference', 'reduce'] as const) {
     await enterDemo(page, 'docente');
     await page.goto('/demo/biblioteca');
     const trigger = page.getByRole('button', { name: 'Vista previa', exact: true }).first();
-    const dialog = page.getByRole('dialog', { name: 'Un vistazo al recurso' });
+    const dialog = page.getByRole('dialog', { name: 'Vista previa', exact: true });
     await trigger.focus();
     await page.keyboard.press('Enter');
     await expect(dialog).toBeVisible();
@@ -81,7 +81,7 @@ for (const motion of ['no-preference', 'reduce'] as const) {
     await page.keyboard.press('Enter');
     await expect(dialog).toBeVisible();
     await dialog.getByRole('link', { name: 'Explorar el recurso completo' }).click();
-    await expect(page.getByRole('heading', { name: 'Así lo verá tu clase.' })).toBeVisible();
+    await expect(page.locator('.rich-reader h1')).toHaveText('Ecosistemas: todo está conectado');
     expect(
       await page.evaluate(
         () => (JSON.parse(localStorage.getItem('aulify.demo.v1')!) as DemoState).attempts.length,
@@ -264,7 +264,7 @@ test('recurso → publicación → quiz oculto → revisión → nota publicada'
     'Las plantas transforman la luz en alimento para el ecosistema.',
   );
   await page.getByRole('button', { name: 'Vista previa', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Así lo verá tu clase.' })).toBeVisible();
+  await expect(page.locator('.reader-toolbar')).toContainText('Vista previa');
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   const attemptsBefore = await page.evaluate(
     () => (JSON.parse(localStorage.getItem('aulify.demo.v1')!) as DemoState).attempts.length,

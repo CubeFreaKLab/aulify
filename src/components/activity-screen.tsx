@@ -69,34 +69,35 @@ export function ActivityScreen({
       );
     return (
       <>
-        <PageHeading
-          title="Así lo verá tu clase."
-          description="La vista previa no publica el recurso ni consume intentos."
-        >
-          <Link href={`/demo/editor/${preview.id}`} className="button secondary">
-            <ArrowLeft size={16} />
+        <header className="reader-toolbar">
+          <Link href={`/demo/editor/${preview.id}`} className="editor-back">
+            <ArrowLeft size={16} aria-hidden="true" />
             Volver al editor
           </Link>
-        </PageHeading>
+          <p>
+            <strong>Vista previa</strong>
+            <span>Esta vista no publica cambios ni registra respuestas.</span>
+          </p>
+        </header>
         <ResourceReader
           title={preview.title}
           blocks={preview.blocks}
           document={preview.editorDocument}
         />
-        <div className="reader">
-          <div className="quiz-invitation">
+        {questionsOf(preview).length > 0 && (
+          <section className="preview-questions" aria-label="Vista previa de las preguntas">
             <h2>{questionsOf(preview).length} preguntas para participar</h2>
             <p>Revisa las consignas antes de publicar.</p>
             {questionsOf(preview).map((q, i) => (
-              <div style={{ marginTop: 22 }} key={q.id}>
-                <h3 style={{ fontSize: 17, marginBottom: 12 }}>
+              <div className="preview-question" key={q.id}>
+                <h3>
                   {i + 1}. {q.prompt}
                 </h3>
                 <PreviewQuestion question={q} />
               </div>
             ))}
-          </div>
-        </div>
+          </section>
+        )}
       </>
     );
   }

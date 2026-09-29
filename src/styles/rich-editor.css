@@ -297,7 +297,7 @@
   }
 }
 
-.block-editor .bn-container[data-color-scheme] {
+.block-editor .bn-container.bn-ariakit {
   --bn-colors-editor-background: var(--white);
   --bn-colors-editor-text: var(--ink);
   --bn-colors-menu-background: var(--white);
@@ -306,6 +306,13 @@
 .block-editor .bn-block-content blockquote {
   color: var(--ink);
   border-left-color: var(--green-text);
+}
+.block-editor .bn-block-content.ProseMirror-selectednode > *::after,
+.block-editor .ProseMirror-selectednode > .bn-block-content > *::after,
+.block-editor .bn-block-content .ProseMirror-selectednode::after,
+.block-editor .bn-inline-content .ProseMirror-selectednode::after {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--green-text);
 }
 .block-editor .bn-block-content[data-content-type='checkListItem'] input[type='checkbox'] {
   width: 24px;
@@ -493,7 +500,7 @@
   outline: 2px solid var(--focus) !important;
   outline-offset: -2px;
 }
-.bn-container[data-color-scheme] .bn-suggestion-menu {
+.bn-container.bn-ariakit .bn-suggestion-menu {
   width: 320px;
   max-height: min(380px, var(--popover-available-height, 380px));
 }

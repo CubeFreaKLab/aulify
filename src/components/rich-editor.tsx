@@ -31,12 +31,20 @@ import { createContext, useContext, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import '@blocknote/ariakit/style.css';
 import '@/styles/rich-editor.css';
+import '@/styles/resource-text.css';
 import type { Block } from '@/domain/types';
 import { safeImageUrl } from '@/domain';
 import { duplicateTree, semanticBlocks, textOf } from '@/lib/rich-document';
 import { uploadFile } from '@/lib/upload';
+import {
+  resourceImageLayout,
+  resourceImageStyle,
+  type ImageLayout,
+} from '@/lib/resource-image-layout';
+import { ResourceImage } from './resource-image';
 import { useResolvedTheme } from './theme';
 import { Button, DialogPanel, Field } from './ui';
+import { VideoBlockEditor } from './video-block-editor';
 export { semanticBlocks } from '@/lib/rich-document';
 
 const ImageEditorContext = createContext<(id: string) => void>(() => {});
@@ -45,42 +53,29 @@ function ImageBlockView({
   url,
   alt,
   caption,
+  widthPercent,
+  imageAlignment,
+  onLayoutChange,
 }: {
   id: string;
   url: string;
   alt: string;
   caption: string;
+  widthPercent: number;
+  imageAlignment: string;
+  onLayoutChange: (layout: ImageLayout) => void;
 }) {
   const edit = useContext(ImageEditorContext);
-  const [failed, setFailed] = useState(false);
   return (
-    <figure className="editor-image">
-      {url && safeImageUrl(url) && !failed ? (
-        <img
-          key={url}
-          src={url}
-          alt={alt || caption}
-          referrerPolicy="no-referrer"
-          onError={() => setFailed(true)}
-        />
-      ) : (
-        <p className="notice">
-          {url ? 'La imagen no está disponible.' : 'Añade una imagen y describe lo que muestra.'}
-        </p>
-      )}
-      {caption && <figcaption>{caption}</figcaption>}
-      <button
-        type="button"
-        className="button secondary small"
-        onClick={() => {
-          setFailed(false);
-          edit(id);
-        }}
-      >
-        <ImagePlus size={16} />
-        {url ? 'Editar imagen' : 'Elegir imagen'}
-      </button>
-    </figure>
+    <ResourceImage
+      url={url}
+      alt={alt || caption}
+      caption={caption}
+      widthPercent={widthPercent}
+      imageAlignment={imageAlignment}
+      onEdit={() => edit(id)}
+      onLayoutChange={onLayoutChange}
+    />
   );
 }
 const imageBlock = createReactBlockSpec(
@@ -91,16 +86,25 @@ const imageBlock = createReactBlockSpec(
       alt: { default: '' },
       caption: { default: '' },
       fileId: { default: '' },
+      widthPercent: { default: 100 },
+      imageAlignment: { default: 'center', values: ['left', 'center', 'right'] as const },
     },
     content: 'none',
   },
   {
-    render: ({ block }) => <ImageBlockView id={block.id} {...block.props} />,
+    render: ({ block, editor }) => (
+      <ImageBlockView
+        id={block.id}
+        {...block.props}
+        onLayoutChange={(layout) => editor.updateBlock(block, { props: layout })}
+      />
+    ),
     toExternalHTML: ({ block }) => (
-      <figure>
+      <figure style={resourceImageStyle(resourceImageLayout(block.props))}>
         <img
           src={safeImageUrl(block.props.url) ? block.props.url : undefined}
           alt={block.props.alt || block.props.caption}
+          style={{ width: '100%', height: 'auto' }}
         />
         <figcaption>{block.props.caption}</figcaption>
       </figure>
@@ -115,25 +119,11 @@ const videoBlock = createReactBlockSpec(
   },
   {
     render: ({ block, editor }) => (
-      <div className="editor-video">
-        <label>
-          Enlace al video (HTTPS)
-          <input
-            type="url"
-            value={block.props.url}
-            onChange={(e) => editor.updateBlock(block, { props: { url: e.target.value } })}
-            placeholder="https://…"
-          />
-        </label>
-        <label>
-          Título del video
-          <input
-            value={block.props.caption}
-            onChange={(e) => editor.updateBlock(block, { props: { caption: e.target.value } })}
-          />
-        </label>
-        <small>El estudiante abrirá el enlace en otra pestaña.</small>
-      </div>
+      <VideoBlockEditor
+        url={block.props.url}
+        caption={block.props.caption}
+        onChange={(props) => editor.updateBlock(block, { props })}
+      />
     ),
   },
 );
@@ -265,6 +255,7 @@ function nativeBlocks(blocks: Block[]): EditorBlock[] {
             alt: block.alt,
             caption: block.caption || '',
             fileId: block.fileId || '',
+            ...resourceImageLayout(block),
           },
         },
       ];
@@ -331,7 +322,11 @@ export default function RichEditor({
   const [error, setError] = useState('');
   const editor = useCreateBlockNote({
     schema,
-    dictionary: es,
+    dictionary: {
+      ...es,
+      placeholders: { ...es.placeholders, default: 'Escribe o usa / para añadir un bloque' },
+    },
+    dropCursor: { color: 'var(--green-text)', width: 3 },
     domAttributes: { editor: { 'aria-label': 'Contenido del recurso' } },
     initialContent: (initialDocument?.length
       ? initialDocument

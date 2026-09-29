@@ -1,4 +1,5 @@
 import type { Block } from '@/domain/types';
+import { resourceImageLayout } from './resource-image-layout';
 
 export type RichBlock = {
   id?: string;
@@ -53,6 +54,7 @@ export function semanticBlocks(document: unknown[]): Block[] {
           alt: String(item.props.alt || item.props.caption || ''),
           ...(fileId ? { fileId } : {}),
           ...(item.props.caption ? { caption: String(item.props.caption) } : {}),
+          ...resourceImageLayout(item.props),
         });
       } else if (item.type === 'video' && typeof item.props?.url === 'string')
         result.push({

@@ -71,7 +71,16 @@ export type Block =
   | { id: Id; type: 'heading'; text: string; level: 2 | 3 }
   | { id: Id; type: 'text'; text: string }
   | { id: Id; type: 'list'; items: string[]; ordered: boolean }
-  | { id: Id; type: 'image'; url: string; alt: string; caption?: string; fileId?: Id }
+  | {
+      id: Id;
+      type: 'image';
+      url: string;
+      alt: string;
+      caption?: string;
+      fileId?: Id;
+      widthPercent?: number;
+      imageAlignment?: 'left' | 'center' | 'right';
+    }
   | { id: Id; type: 'video'; url: string; title: string }
   | { id: Id; type: 'quiz'; questions: Question[] };
 export interface Resource {
