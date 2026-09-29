@@ -8,7 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 const run = process.argv.includes('--run');
 const accountPath = '.local-private/remote-test-accounts.json';
 const scriptPath = 'tools/datos/game-privacy-remote.mjs';
-const migrationPath = 'supabase/migrations/20260928135711_aulify_deferred_ranking_publication.sql';
+const migrationPath = 'supabase/migrations/20260929221908_aulify_deferred_ranking_publication.sql';
 const reportIndex = process.argv.indexOf('--report');
 const reportPath =
   reportIndex < 0

@@ -35,7 +35,7 @@ Las claves privadas quedan en variables de servidor. La clave publicable puede u
 
 ## 3. Modelo y migraciones
 
-El [modelo 1.2](docs/modelado/README.md) reúne 44 relaciones del dominio y tres técnicas para límites de frecuencia y revisiones de sincronización, con Auth externo. Incluye diccionario, DBML, diagramas, normalización, invariantes y permisos. Las doce migraciones versionadas materializan el modelo, comandos, proyecciones, conservación, reservas de archivo, reentregas y sincronización. También optimizan permisos por consulta, serializan respuesta y cierre guiado y limitan la proyección a la actividad abierta.
+El [modelo 1.2](docs/modelado/README.md) reúne 44 relaciones del dominio y tres técnicas para límites de frecuencia y revisiones de sincronización, con Auth externo. Incluye diccionario, DBML, diagramas, normalización, invariantes y permisos. Las quince migraciones versionadas y aplicadas materializan el modelo, comandos, proyecciones, conservación, reservas de archivo, reentregas y sincronización. También optimizan permisos por consulta, serializan respuesta y cierre guiado, limitan la proyección a la actividad abierta y conservan la clasificación publicada durante una corrección privada. Los informes anteriores identifican su propio corte de migraciones.
 
 PGlite reproduce las migraciones en una base nueva y comprueba restricciones y accesos. Los ensayos remotos utilizan Auth, JWT, PostgreSQL y Storage reales; cada evidencia conserva sus límites. El JSONB de los bloques se valida y versiona, sin sustituir las relaciones de materias, integrantes, intentos, respuestas y evaluaciones.
 

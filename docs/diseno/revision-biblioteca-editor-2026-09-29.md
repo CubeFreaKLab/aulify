@@ -24,6 +24,8 @@ Fecha: 29 de septiembre de 2026. Código: `348c136` y `e13afb4`. Compilación de
 
 El lote general utilizó la compilación `wq8OuG8ga9i5m6gzVi2b9`. La compilación final de capturas añade únicamente el ajuste visual del contorno de selección de bloques; también compiló correctamente. La verificación de navegación, biblioteca, lectura, paleta e imágenes está implementada en `tests/e2e`. Los informes de Playwright se generan localmente y pueden contener rutas del equipo; aquí se conserva el resumen del alcance sin publicar datos de acceso.
 
+GitHub Actions aprobó la revisión `e13afb4` en la [ejecución 36638120416](https://github.com/CubeFreaKLab/aulify/actions/runs/36638120416). Se comprobó la finalización de sus pasos, incluidos construcción y navegador. Los recuentos de la tabla anterior corresponden al ensayo local descrito y no se presentan como una transcripción del artefacto remoto.
+
 ## Evidencia visual
 
 El [manifiesto](capturas/biblioteca-editor-2026-09-29/manifest.json) identifica ruta, tamaño, tema y compilación. Son capturas de la aplicación local con datos ficticios, no resultados de una evaluación con personas.

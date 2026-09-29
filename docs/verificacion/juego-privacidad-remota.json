@@ -1,0 +1,179 @@
+{
+  "startedAt": "2026-09-29T22:20:42.828Z",
+  "revision": "a97d13f9d133f2f72239b96234aaa44d2a49ec93",
+  "environment": "Supabase remoto, JWT de cuatro cuentas ficticias existentes y cliente anónimo",
+  "script": {
+    "path": "tools/datos/game-privacy-remote.mjs",
+    "sha256": "ad04ac74d920cafb3a2f2f9219c18a176c71228c7360c31dcd4ebc797f92c564"
+  },
+  "expectedMigration": {
+    "path": "supabase/migrations/20260929221908_aulify_deferred_ranking_publication.sql",
+    "sha256": "62f5a233be8ff1965ac5e7ae815891720abe4a89e25b99ffb1cd6ee39c2ce946"
+  },
+  "fixture": "AP-16: dos estudiantes, una actividad guiada, automática 8 y manual 2, un equipo de dos.",
+  "checks": [
+    {
+      "detail": "JWT de teacher corresponde a la cuenta preparada",
+      "result": "passed"
+    },
+    {
+      "detail": "El perfil persistido de teacher coincide con su función",
+      "result": "passed"
+    },
+    {
+      "detail": "JWT de teacherOther corresponde a la cuenta preparada",
+      "result": "passed"
+    },
+    {
+      "detail": "El perfil persistido de teacherOther coincide con su función",
+      "result": "passed"
+    },
+    {
+      "detail": "JWT de student corresponde a la cuenta preparada",
+      "result": "passed"
+    },
+    {
+      "detail": "El perfil persistido de student coincide con su función",
+      "result": "passed"
+    },
+    {
+      "detail": "JWT de studentOther corresponde a la cuenta preparada",
+      "result": "passed"
+    },
+    {
+      "detail": "El perfil persistido de studentOther coincide con su función",
+      "result": "passed"
+    },
+    {
+      "detail": "Docente ajeno no consulta clasificación",
+      "result": "rejected-as-expected",
+      "code": "MEMBERSHIP_REQUIRED"
+    },
+    {
+      "detail": "Cliente anónimo no ejecuta el contrato de clasificación",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "detail": "student: respuesta automática diferida no revela retroalimentación",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: respuesta automática diferida no revela retroalimentación",
+      "result": "passed"
+    },
+    {
+      "detail": "La sesión finaliza normalmente al cerrar la última pregunta",
+      "result": "passed"
+    },
+    {
+      "detail": "Cerrar sin publicar conserva clasificación reservada",
+      "result": "passed"
+    },
+    {
+      "detail": "Una publicación pendiente impide liberar la clasificación",
+      "result": "passed"
+    },
+    {
+      "detail": "student: ambas publicaciones liberan 10/10 definitivo",
+      "result": "passed"
+    },
+    {
+      "detail": "student: equipo publicado con promedio 10",
+      "result": "passed"
+    },
+    {
+      "detail": "student: clasificación con alias, sin identidad de compañeros",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: ambas publicaciones liberan 10/10 definitivo",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: equipo publicado con promedio 10",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: clasificación con alias, sin identidad de compañeros",
+      "result": "passed"
+    },
+    {
+      "detail": "student: revisión privada conserva exactamente clasificación y equipos publicados",
+      "result": "passed"
+    },
+    {
+      "detail": "student: revisión privada conserva contenido de la proyección",
+      "result": "passed"
+    },
+    {
+      "detail": "student: revisión privada no cambia huella de sincronización",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: revisión privada conserva exactamente clasificación y equipos publicados",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: revisión privada conserva contenido de la proyección",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: revisión privada no cambia huella de sincronización",
+      "result": "passed"
+    },
+    {
+      "detail": "Docente consulta los nuevos puntos 10/8 todavía privados",
+      "result": "passed"
+    },
+    {
+      "detail": "Docente identifica las cuentas de su clasificación",
+      "result": "passed"
+    },
+    {
+      "detail": "La republicación cambia la nota individual a 16/20",
+      "result": "passed"
+    },
+    {
+      "detail": "student: republicación libera 10/8 y promedio de equipo 9",
+      "result": "passed"
+    },
+    {
+      "detail": "studentOther: republicación libera 10/8 y promedio de equipo 9",
+      "result": "passed"
+    },
+    {
+      "detail": "Republicar cambia la huella del estudiante evaluado",
+      "result": "passed"
+    }
+  ],
+  "rpcCalls": 53,
+  "limitations": [
+    "No aplica migraciones ni consulta su historial remoto; comprobar aplicación antes de ejecutar.",
+    "No mide capacidad, SMTP, interfaz, accesibilidad ni concurrencia.",
+    "Compara snapshots excluyendo solo state.revision, que representa la hora de lectura; compara aparte aulify_sync.revision.",
+    "Los archivos privados, credenciales, JWT e identidades no se incluyen en este informe."
+  ],
+  "observation": {
+    "publishedPoints": [
+      10,
+      10
+    ],
+    "afterPrivateReview": [
+      10,
+      10
+    ],
+    "teacherAfterPrivateReview": [
+      10,
+      8
+    ],
+    "republishedPoints": [
+      10,
+      8
+    ],
+    "republishedTeamAverage": 9
+  },
+  "status": "passed",
+  "cleanup": "Materia ficticia archivada; biblioteca ficticia conservada.",
+  "completedAt": "2026-09-29T22:21:00.208Z"
+}

@@ -1,0 +1,37 @@
+{
+  "verifiedAt": "2026-09-29T22:19:30.910Z",
+  "migration": {
+    "previousLocalVersion": "20260928135711",
+    "version": "20260929221908",
+    "name": "aulify_deferred_ranking_publication",
+    "applied": true,
+    "localRemoteCount": 15
+  },
+  "function": {
+    "signature": "app.ranking(uuid)",
+    "securityDefiner": true,
+    "searchPath": "",
+    "privileges": "{postgres=X/postgres}",
+    "beforeDefinitionMd5": "51b6cd90f759fe49c2f466d20395f873",
+    "afterDefinitionMd5": "e49d27da74db225acafcef4b625c1ee7"
+  },
+  "securityAdvisories": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 41,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "count": 1,
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ],
+  "limitations": [
+    "Los avisos RLS sin políticas corresponden a tablas privadas operadas mediante funciones autorizadas, sin concesiones directas a clientes.",
+    "La protección de contraseñas filtradas sigue deshabilitada; no se modificó el plan gratuito.",
+    "La presencia de la función no acredita por sí sola su conducta. El ensayo remoto separado registra 33 comprobaciones."
+  ]
+}

@@ -31,11 +31,14 @@ Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en
 | Gestión integrada | Seis de los casos de navegador ejercitan materias, equipos, evaluación y reentrega con cuentas reales de prueba | [Gestión web](verificacion/datos-gestion-web.md) |
 | Cierre guiado concurrente | Treinta rondas y 150 operaciones remotas repetidas sin errores técnicos después de corregir el bloqueo | [Concurrencia](verificacion/datos-carrera-guiada.md) |
 | Sincronización por actividad | 24 comprobaciones remotas, contadores privados, lectura acotada y carrera guiada repetida sin errores técnicos | [Sincronización](verificacion/datos-sincronizacion.md) |
+| Publicación de clasificación | Migración 15 aplicada y 33 comprobaciones remotas aprobadas: una corrección privada conserva clasificación y huella estudiantil hasta republicar | [Juego y publicación](verificacion/juego-aceptacion.md) |
 | Seguimiento y distribución | Cuatro ejecuciones de navegador: filtros, filas únicas, notas límite y pendientes; escritorio y móvil, con tablas equivalentes | [Distribución](verificacion/resultados-distribucion.md) |
 | Recuperación aislada | Nueve comprobaciones de una copia PGlite con datos ficticios; no es recuperación de Supabase | [Informe de recuperación](verificacion/recuperacion-aislada.md) |
 | Diseño editable | Once composiciones nativas de Figma, fundamentos y componentes; móvil de 390 px | [Figma](diseno/figma-editable.md) |
 
 Los conteos describen ejecuciones distintas. No equivalen a cerrar automáticamente los 76 escenarios AC/AP del producto. La evaluación técnica incluye estados de teclado, reflujo y análisis axe; no acredita por sí sola conformidad completa con WCAG ni una evaluación de usabilidad con personas.
+
+El historial vigente contiene quince migraciones locales y remotas. La última quedó registrada en Supabase como `20260929221908`; su archivo local adoptó ese identificador sin cambiar el SQL que se había ensayado como `20260928135711`. Los informes de doce y catorce migraciones conservan su revisión histórica. El CI [36638120416](https://github.com/CubeFreaKLab/aulify/actions/runs/36638120416) aprobó todos sus pasos sobre `e13afb4`; esta ejecución corresponde a la unidad visual y al SQL versionado de esa revisión, antes del cambio de nombre de la última migración.
 
 La verificación posterior de [consultas acotadas](verificacion/integracion-acotada.json) cubre los doce recorridos de integración mediante un lote de diez aprobados y la repetición de dos tras corregir su preparación. Los recorridos de resultados se registran aparte. El CI conserva siempre su revisión exacta; no se atribuye a código posterior.
 
