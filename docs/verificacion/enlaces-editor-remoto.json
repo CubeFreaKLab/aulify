@@ -1,0 +1,108 @@
+{
+  "startedAt": "2026-09-29T23:21:38.246Z",
+  "revision": "b16851656bdc435c7ef192312867c8aa861c18f1",
+  "environment": "Supabase remoto, JWT de una docente ficticia existente y clave publicable",
+  "script": {
+    "path": "tools/datos/editor-links-remote.mjs",
+    "sha256": "cf076a18ec6ebd580774d2b320a975fb46e9cd995cdb4d45d70237fc55ebf4af"
+  },
+  "expectedMigration": {
+    "path": "supabase/migrations/20260929231531_aulify_editor_link_validation.sql",
+    "sha256": "c414dacd0c2d27335aefb9a3a981ac805f48997a3acb9e0fd5a390f876255132"
+  },
+  "fixture": "AP-33: un recurso nuevo con enlace HTTPS anidado y código literal educativo.",
+  "checks": [
+    {
+      "detail": "JWT corresponde a la cuenta ficticia preparada",
+      "result": "passed"
+    },
+    {
+      "detail": "El perfil persistido tiene función docente",
+      "result": "passed"
+    },
+    {
+      "detail": "HTTPS y código literal se guardan intactos",
+      "result": "passed"
+    },
+    {
+      "detail": "El borrador válido comienza en revisión 1",
+      "result": "passed"
+    },
+    {
+      "detail": "El recurso todavía no tiene versiones publicadas",
+      "result": "passed"
+    },
+    {
+      "detail": "JavaScript: se rechaza con error orientable",
+      "result": "passed"
+    },
+    {
+      "detail": "JavaScript: no cambia contenido, revisión ni fecha del borrador",
+      "result": "passed"
+    },
+    {
+      "detail": "JavaScript: no crea una versión",
+      "result": "passed"
+    },
+    {
+      "detail": "tipo nulo: se rechaza con error orientable",
+      "result": "passed"
+    },
+    {
+      "detail": "tipo nulo: no cambia contenido, revisión ni fecha del borrador",
+      "result": "passed"
+    },
+    {
+      "detail": "tipo nulo: no crea una versión",
+      "result": "passed"
+    },
+    {
+      "detail": "control interno: se rechaza con error orientable",
+      "result": "passed"
+    },
+    {
+      "detail": "control interno: no cambia contenido, revisión ni fecha del borrador",
+      "result": "passed"
+    },
+    {
+      "detail": "control interno: no crea una versión",
+      "result": "passed"
+    },
+    {
+      "detail": "La publicación conserva HTTPS y código literal",
+      "result": "passed"
+    },
+    {
+      "detail": "Se persiste exactamente una versión del recurso ficticio",
+      "result": "passed"
+    },
+    {
+      "detail": "La lectura posterior conserva el documento publicado completo",
+      "result": "passed"
+    },
+    {
+      "detail": "La publicación mantiene la revisión 1 del borrador",
+      "result": "passed"
+    }
+  ],
+  "rpcCalls": 11,
+  "limits": {
+    "maxRpcCalls": 15,
+    "accountsCreated": 0,
+    "resourcesCreatedAtMost": 1
+  },
+  "limitations": [
+    "No aplica migraciones ni consulta su historial remoto; requiere verificar su aplicación antes del ensayo.",
+    "No mide capacidad, concurrencia, interfaz, accesibilidad ni ejecución de enlaces.",
+    "Compara el borrador completo, incluida su revisión, y las versiones propias del recurso; state.revision cambia con la hora de lectura y no se usa como revisión persistida.",
+    "No publica credenciales, JWT, direcciones de cuentas, identificadores ni documentos ajenos."
+  ],
+  "cleanup": "Un recurso ficticio conservado en la biblioteca de la cuenta de prueba.",
+  "observation": {
+    "rejectedVariants": 3,
+    "draftRevision": 1,
+    "publishedVersions": 1
+  },
+  "status": "passed",
+  "completedAt": "2026-09-29T23:21:44.788Z"
+}

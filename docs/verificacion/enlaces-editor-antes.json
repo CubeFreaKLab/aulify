@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-29T23:04:43.250Z",
+  "environment": "Next.js desarrollo 3002, Chromium, demostración ficticia",
+  "result": {
+    "editor": {
+      "links": [
+        {
+          "text": "Enlace marcador AP-33",
+          "href": ""
+        }
+      ],
+      "markerExecuted": false,
+      "literalExecuted": false,
+      "savedHref": "javascript:void(globalThis.__aulify_ap33_marker='opened')"
+    },
+    "reader": {
+      "links": [],
+      "markerTextVisible": true,
+      "literalVisible": true,
+      "markerExecuted": false,
+      "literalExecuted": false
+    }
+  },
+  "externalRequests": [],
+  "limitations": [
+    "No se pulsó el enlace ni se afirmó ejecución de JavaScript; se inspeccionó carga y DOM.",
+    "El archivo reproduce comportamiento previo a la validación nueva."
+  ]
+}

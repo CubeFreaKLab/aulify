@@ -825,5 +825,209 @@
       }
     ],
     "evidenceSource": "GitHub REST API: run and jobs; logs and artifacts not downloaded for this entry"
+  },
+  {
+    "id": 36642510552,
+    "name": "Calidad de Aulify",
+    "event": "push",
+    "sha": "927e910d29eb3ee8a2fadf150a01d6b456e91cde",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36642510552",
+    "createdAt": "2026-09-29T22:57:00Z",
+    "updatedAt": "2026-09-29T23:01:33Z",
+    "observedAt": "2026-09-29T23:03:34.027Z",
+    "jobs": [
+      {
+        "id": 109657815738,
+        "name": "Tipos, reglas y recorridos de demostración",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar casos numéricos de puntuación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia y permisos de la proyección docente",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar participación, equipos y privacidad de publicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar revisiones independientes por participante",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "success"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "evidenceSource": "GitHub REST API: run and jobs; logs and artifacts not downloaded for this entry"
+  },
+  {
+    "id": 36644805645,
+    "name": "Calidad de Aulify",
+    "event": "push",
+    "sha": "26477d9b5969bf136e2c6a39235f77b57dc977d9",
+    "status": "completed",
+    "conclusion": "failure",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36644805645",
+    "createdAt": "2026-09-29T23:21:58Z",
+    "updatedAt": "2026-09-29T23:26:02Z",
+    "observedAt": "2026-09-29T23:28:29.332Z",
+    "jobs": [
+      {
+        "id": 109665189179,
+        "name": "Tipos, reglas y recorridos de demostración",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar casos numéricos de puntuación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia y permisos de la proyección docente",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar participación, equipos y privacidad de publicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar revisiones independientes por participante",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "failure"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "evidenceSource": "GitHub REST API: run and jobs; logs and artifacts not downloaded for this entry"
   }
 ]
