@@ -44,6 +44,8 @@ GEMINI.md
 # Informes locales y estado de pruebas
 playwright-report/
 test-results/
+playwright-compatibility-report/
+test-results-compatibility/
 blob-report/
 playwright/.auth/
 supabase/.temp/

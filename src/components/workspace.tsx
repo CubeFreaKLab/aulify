@@ -134,7 +134,11 @@ export function Workspace() {
           <div className="row">
             <button
               className="icon-button app-mobile-menu"
-              onClick={() => setMobile(!mobile)}
+              onClick={(event) => {
+                // WebKit does not focus native buttons on pointer activation.
+                event.currentTarget.focus({ preventScroll: true });
+                setMobile(!mobile);
+              }}
               aria-label={mobile ? 'Cerrar navegación' : 'Abrir navegación'}
               aria-expanded={mobile}
               aria-controls={mobile ? 'mobile-navigation' : undefined}

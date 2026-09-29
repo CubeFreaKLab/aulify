@@ -59,9 +59,10 @@ test('bloques: slash buscable, formato, controles por teclado y recuperación', 
     const clipboard = new DataTransfer();
     clipboard.setData('text/html', '<p><strong>Texto pegado con formato</strong></p>');
     clipboard.setData('text/plain', 'Texto pegado con formato');
-    element.dispatchEvent(
-      new ClipboardEvent('paste', { clipboardData: clipboard, bubbles: true, cancelable: true }),
-    );
+    const paste = new ClipboardEvent('paste', { bubbles: true, cancelable: true });
+    // Firefox ignores constructor clipboardData for synthetic events.
+    Object.defineProperty(paste, 'clipboardData', { value: clipboard });
+    element.dispatchEvent(paste);
   });
   await expect(editor.getByText('Texto pegado con formato', { exact: true })).toBeVisible();
   await page.getByText('Ordenar bloques con botones', { exact: true }).click();
@@ -85,6 +86,11 @@ test('bloques: slash buscable, formato, controles por teclado y recuperación', 
   await expectNoHorizontalOverflow(page);
   expect(errors).toEqual([]);
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(editor.getByText('Pista para la actividad', { exact: true })).toHaveCSS(
+    'color',
+    'rgb(242, 243, 241)',
+  );
   const result = await new AxeBuilder({ page })
     .include('.block-editor')
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
