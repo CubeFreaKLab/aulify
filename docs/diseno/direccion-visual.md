@@ -32,7 +32,7 @@ Referencias de presentación: [Leonardo](https://leonardo.ai/) y [Mind Robotics]
 
 ## Plataforma
 
-Barra lateral de destinos, encabezado con contexto y un área principal amplia. El docente ve acciones y trabajo pendiente; el estudiante ve su siguiente actividad. El editor usa una hoja central, herramientas junto al bloque activo y propiedades en un panel cuando hacen falta. La configuración muestra primero decisiones esenciales y despliega las avanzadas.
+Barra lateral de destinos, encabezado con contexto y un área principal amplia. El docente ve acciones y trabajo pendiente; el estudiante ve su siguiente actividad. El editor usa una hoja central de hasta 880 px, sin panel lateral de consejos. Biblioteca, guardado, vista previa y publicación se agrupan en una barra compacta. El título y los bloques comparten el eje de lectura; el menú de inserción y el formato aparecen junto al texto. En celular se aprovecha el ancho disponible y las acciones de publicación ocupan una fila propia. Las preguntas se separan por líneas y conservan sus controles de edición. La ayuda queda en un desplegable. La configuración muestra primero decisiones esenciales y despliega las avanzadas.
 
 El quiz utiliza una pregunta protagonista, alternativas amplias y progreso discreto. Sus transiciones mantienen continuidad. Los colores, sonidos y puntuaciones respetan la visibilidad del resultado configurada. Las respuestas escritas pasan a revisión manual. Los gráficos tienen tablas equivalentes.
 
@@ -49,5 +49,7 @@ Los SVG originales de marca se conservan. Se generaron dos conceptos de composic
 ## Apariencia y verificación del refinamiento
 
 Claro, oscuro y sistema comparten la misma jerarquía. La preferencia se conserva por navegador y se sincroniza entre pestañas; un script temprano aplica el fondo antes de presentar el contenido. El cambio utiliza una transición breve, con alternativa inmediata al pedir movimiento reducido. Los colores de acción y sus textos se separan de los colores de marca para mantener contraste.
+
+La revisión del 29 de septiembre utiliza superficies grafito neutras en oscuro y reserva el verde para acentos. Los menús del editor comparten estas superficies, incluidos los elementos que Ariakit muestra fuera del contenido editable. Las ilustraciones conservan su tinta y papel: no se invierten ni se colorean con filtros. La escala del cuaderno de portada contempla su rotación para evitar cortes a 320 y 390 px. La ilustración del inicio permanece visible y completa en móvil. Véase [revisión del editor y apariencia](revision-editor-apariencia-2026-09-29.md) para evidencia y límites.
 
 La [verificación visual 1.1](verificacion-visual-1.1.md) registra los recorridos y límites de esta revisión. Las [capturas del refinamiento](capturas/refinamiento/README.md) sustituyen la evidencia inválida de la primera portada.

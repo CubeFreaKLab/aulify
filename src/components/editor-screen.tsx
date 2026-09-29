@@ -2,18 +2,8 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useWorkspaceRouter as useRouter } from './workspace-link';
-import {
-  Eye,
-  ArrowUpRight,
-  Check,
-  Cloud,
-  Heading2,
-  Type,
-  List,
-  HelpCircle,
-  BookOpen,
-} from 'lucide-react';
+import Link, { useWorkspaceRouter as useRouter } from './workspace-link';
+import { Eye, ArrowUpRight, Check, Cloud, ArrowLeft, HelpCircle, BookOpen } from 'lucide-react';
 import {
   defaultActivitySettings,
   questionsOf,
@@ -23,7 +13,7 @@ import {
   type User,
 } from '@/domain';
 import { runDemo, getDemoRepository, remoteCommand } from '@/demo/store';
-import { Button, Badge, PageHeading, DialogPanel, Field, EmptyState } from './ui';
+import { Button, DialogPanel, Field, EmptyState } from './ui';
 import { QuestionAuthor } from './question-author';
 const RichEditor = dynamic(() => import('./rich-editor'), {
   ssr: false,
@@ -162,36 +152,39 @@ function EditorForm({
   const questions = questionsOf(draft);
   return (
     <>
-      <PageHeading
-        title="Dale forma a tu clase."
-        description="Explica con claridad. Deja espacio para descubrir."
-      >
-        <Badge tone={saving === 'error' ? 'red' : saving === 'saved' ? 'green' : ''}>
+      <h1 className="sr-only">Editar recurso</h1>
+      <header className="editor-command-bar">
+        <Link href="/demo/biblioteca" className="editor-back">
+          <ArrowLeft size={17} aria-hidden="true" /> Biblioteca
+        </Link>
+        <span className={`editor-save-state ${saving}`} role="status">
           {saving === 'saved' ? <Check size={13} /> : <Cloud size={13} />}{' '}
           {saving === 'saved'
             ? 'Borrador guardado'
             : saving === 'pending'
               ? 'Guardando…'
               : 'No se pudo guardar'}
-        </Badge>
-        <Button
-          variant="secondary"
-          onPress={async () => {
-            if (await save()) router.push(`/demo/previa/${draft.id}`);
-          }}
-        >
-          <Eye size={16} />
-          Vista previa
-        </Button>
-        <Button
-          onPress={async () => {
-            if (await save()) setPublishing(true);
-          }}
-        >
-          Publicar
-          <ArrowUpRight size={16} />
-        </Button>
-      </PageHeading>
+        </span>
+        <div className="editor-publish-actions">
+          <Button
+            variant="secondary"
+            onPress={async () => {
+              if (await save()) router.push(`/demo/previa/${draft.id}`);
+            }}
+          >
+            <Eye size={16} />
+            Vista previa
+          </Button>
+          <Button
+            onPress={async () => {
+              if (await save()) setPublishing(true);
+            }}
+          >
+            Publicar
+            <ArrowUpRight size={16} />
+          </Button>
+        </div>
+      </header>
       {conflict && (
         <div className="notice warning" role="alert" style={{ marginBottom: 20 }}>
           <strong>El borrador no se guardó.</strong>
@@ -265,12 +258,6 @@ function EditorForm({
                 if (e.key === 'Enter') e.preventDefault();
               }}
             />
-            <div className="editor-meta">
-              <BookOpen size={14} />
-              <span>Recurso de clase</span>
-              <span>·</span>
-              <span>Solo tú puedes editarlo</span>
-            </div>
           </div>
           <RichEditor
             key={editorKey}
@@ -301,46 +288,22 @@ function EditorForm({
             }
           />
         </div>
-        <aside className="editor-aside">
-          <div className="surface">
-            <h2>Tu caja de herramientas</h2>
-            <p>
-              Escribe <strong>/</strong> en una línea nueva para añadir un bloque.
-            </p>
-            <div className="tool-list">
-              <div className="row">
-                <Heading2 size={17} />
-                Títulos
-              </div>
-              <div className="row">
-                <Type size={17} />
-                Texto
-              </div>
-              <div className="row">
-                <List size={17} />
-                Listas
-              </div>
-              <a href="#preguntas" className="row">
-                <HelpCircle size={17} />
-                Preguntas
-              </a>
-            </div>
-            <div className="divider" />
-            <h2>Un paso a la vez</h2>
-            <p>Una explicación breve, un ejemplo cercano y una pregunta para pensar.</p>
-            <div className="divider" />
-            <p>
-              Los cambios se guardan como borrador. La clase ve una versión nueva cuando la
-              publicas.
-            </p>
-          </div>
-          <p className="muted" style={{ marginTop: 15, fontSize: 11 }}>
-            {live
-              ? 'Borrador privado. La clase accede solo al contenido publicado.'
-              : 'Edición local con datos de demostración.'}
-          </p>
-        </aside>
       </div>
+      <details className="editor-writing-help">
+        <summary>
+          <HelpCircle size={15} aria-hidden="true" /> Ayuda para editar
+        </summary>
+        <p>
+          Escribe / para elegir un bloque. Selecciona texto para darle formato. Usa el asa junto a
+          cada bloque para moverlo, o los botones de «Ordenar bloques» si usas teclado.
+        </p>
+        <p>
+          Los cambios se guardan como borrador. Tu clase ve el contenido cuando lo publicas.
+          {live
+            ? ' Solo tú puedes editar este recurso.'
+            : ' Estás trabajando con datos locales de demostración.'}
+        </p>
+      </details>
       <DialogPanel
         open={publishing}
         onClose={() => setPublishing(false)}

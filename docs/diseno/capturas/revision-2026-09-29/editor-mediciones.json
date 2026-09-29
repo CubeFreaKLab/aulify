@@ -1,0 +1,78 @@
+[
+  {
+    "device": "escritorio",
+    "theme": "light",
+    "menu": {
+      "x": 463,
+      "y": 142,
+      "width": 320,
+      "height": 380
+    },
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "style": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(15, 15, 15)"
+    },
+    "overflow": 0
+  },
+  {
+    "device": "escritorio",
+    "theme": "dark",
+    "menu": {
+      "x": 463,
+      "y": 142,
+      "width": 320,
+      "height": 380
+    },
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "style": {
+      "background": "rgb(34, 36, 38)",
+      "color": "rgb(242, 243, 241)"
+    },
+    "overflow": 0
+  },
+  {
+    "device": "movil",
+    "theme": "light",
+    "menu": {
+      "x": 28,
+      "y": 202,
+      "width": 320,
+      "height": 380
+    },
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "style": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(15, 15, 15)"
+    },
+    "overflow": 0
+  },
+  {
+    "device": "movil",
+    "theme": "dark",
+    "menu": {
+      "x": 28,
+      "y": 202,
+      "width": 320,
+      "height": 380
+    },
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "style": {
+      "background": "rgb(34, 36, 38)",
+      "color": "rgb(242, 243, 241)"
+    },
+    "overflow": 0
+  }
+]

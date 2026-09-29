@@ -46,16 +46,16 @@
   content: url('/brand/aulify-logo-white.svg');
 }
 :root[data-theme='dark'] .subject-card-head {
-  background: #284632;
+  background: #263b31;
 }
 :root[data-theme='dark'] .subject-card:nth-child(2) .subject-card-head {
-  background: #443d27;
+  background: #3c362b;
 }
 :root[data-theme='dark'] .subject-card:nth-child(3) .subject-card-head {
-  background: #30394a;
+  background: #2e3642;
 }
 :root[data-theme='dark'] .auth-story {
-  background: var(--mint-soft);
+  background: #25362d;
 }
 :root[data-theme='dark'] .auth-illustration img {
   mix-blend-mode: normal;
@@ -80,6 +80,39 @@
 :root[data-theme='dark'] .quiz-invitation .button {
   background: #0f0f0f;
   color: #fafaf8;
+}
+:root[data-theme='dark'] ::selection {
+  color: var(--on-mint);
+  background: var(--mint);
+}
+:root[data-theme='dark'] .welcome-panel {
+  background: var(--white);
+  border-color: var(--line);
+}
+:root[data-theme='dark'] .welcome-art {
+  background: #27382e;
+}
+:root[data-theme='dark'] .notice,
+:root[data-theme='dark'] .auth-status,
+:root[data-theme='dark'] .quiz-feedback {
+  border-color: #45624f;
+}
+:root[data-theme='dark'] .notice.error {
+  border-color: #85564e;
+}
+:root[data-theme='dark'] .notice.warning,
+:root[data-theme='dark'] .quiz-feedback.incorrect {
+  border-color: #7c6a43;
+}
+/* The illustrated sheets keep their ink-on-paper identity in both themes. */
+:root[data-theme='dark'] .l-paper {
+  --ink: #17201a;
+  --white: #e9eee6;
+  --surface-muted: #d8e2d7;
+  --line-strong: #849789;
+  color: var(--ink);
+  border-color: #b0bcb0;
+  box-shadow: 4px 7px 0 #00000020;
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(root),

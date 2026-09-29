@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '@fontsource-variable/inter';
 import { ThemeProvider } from '@/components/theme';
 import { themeInit } from '@/lib/theme-init';
@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   description:
     'Crea recursos de clase, comparte actividades interactivas y acompaña a tus estudiantes de secundaria.',
   icons: { icon: '/brand/aulify-symbol.svg' },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  interactiveWidget: 'resizes-content',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

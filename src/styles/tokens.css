@@ -44,22 +44,22 @@
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --paper: #131813;
-  --ink: #f2f5ef;
-  --white: #1c231d;
-  --surface-muted: #29322a;
-  --muted: #b7c2b7;
-  --line: #364037;
-  --line-strong: #748375;
-  --green-text: #91e5ab;
-  --mint-soft: #213d2b;
+  --paper: #18191b;
+  --ink: #f2f3f1;
+  --white: #222426;
+  --surface-muted: #2d3032;
+  --muted: #b3b8b6;
+  --line: #393d3f;
+  --line-strong: #747d79;
+  --green-text: #8adbaa;
+  --mint-soft: #22342b;
   --danger: #ffb0a3;
   --danger-soft: #40251f;
   --amber: #f1d28f;
   --amber-soft: #3d331d;
   --focus: #b8fac6;
-  --on-ink: #131813;
-  --action-green: #b8fac6;
+  --on-ink: #18191b;
+  --action-green: #8adbaa;
   --on-green: #102717;
   --shadow-card: 0 6px 24px #00000018;
   --shadow-float: 0 16px 70px #00000038;

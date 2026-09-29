@@ -33,6 +33,12 @@ test('bloques: slash buscable, formato, controles por teclado y recuperación', 
   await page.keyboard.press('End');
   await page.keyboard.press('Enter');
   await page.keyboard.type('/cita');
+  const menuBounds = await page.getByRole('listbox').boundingBox();
+  expect(menuBounds).not.toBeNull();
+  expect(menuBounds!.x).toBeGreaterThanOrEqual(0);
+  expect(menuBounds!.x + menuBounds!.width).toBeLessThanOrEqual(page.viewportSize()!.width);
+  expect(menuBounds!.y).toBeGreaterThanOrEqual(0);
+  expect(menuBounds!.y + menuBounds!.height).toBeLessThanOrEqual(page.viewportSize()!.height);
   await page.getByRole('option', { name: 'Cita Cita o extracto', exact: true }).click();
   await page.keyboard.type('Toda vida depende de conexiones.');
   await page.keyboard.press('Control+b');

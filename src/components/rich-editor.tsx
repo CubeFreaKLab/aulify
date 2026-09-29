@@ -141,9 +141,12 @@ const quizBlock = createReactBlockSpec(
   { type: 'quiz', propSchema: { label: { default: 'Actividad interactiva' } }, content: 'none' },
   {
     render: () => (
-      <div className="notice" style={{ width: '100%' }}>
-        <strong>Actividad interactiva</strong>
-        <p>Las preguntas de este recurso aparecen al terminar la explicación.</p>
+      <div className="editor-quiz-link">
+        <MessageCircleQuestion size={22} aria-hidden="true" />
+        <div>
+          <strong>Actividad interactiva</strong>
+          <p>Preguntas al finalizar la lectura.</p>
+        </div>
         <button
           type="button"
           className="button ghost small"
@@ -499,24 +502,26 @@ export default function RichEditor({
       <div className="block-editor">
         <div className="editor-controls" role="group" aria-label="Herramientas del documento">
           <button
-            className="button ghost small"
+            className="icon-button editor-history-button"
             type="button"
+            aria-label="Deshacer"
+            title="Deshacer (Ctrl+Z)"
             onClick={() => {
               setMessage(editor.undo() ? 'Cambio deshecho.' : 'No hay cambios para deshacer.');
             }}
           >
             <Undo2 size={17} />
-            Deshacer
           </button>
           <button
-            className="button ghost small"
+            className="icon-button editor-history-button"
             type="button"
+            aria-label="Rehacer"
+            title="Rehacer (Ctrl+Mayús+Z)"
             onClick={() => {
               setMessage(editor.redo() ? 'Cambio restaurado.' : 'No hay cambios para rehacer.');
             }}
           >
             <Redo2 size={17} />
-            Rehacer
           </button>
           <label className="editor-insert-label">
             <Plus size={16} />
@@ -542,7 +547,7 @@ export default function RichEditor({
           </label>
         </div>
         <p className="editor-help">
-          Escribe <kbd>/</kbd> para buscar un bloque. Selecciona texto para darle formato.
+          Escribe <kbd>/</kbd> para añadir un bloque o selecciona texto para darle formato.
         </p>
         <BlockNoteView
           editor={editor}

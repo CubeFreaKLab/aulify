@@ -102,15 +102,15 @@
   position: relative;
   height: 620px;
   isolation: isolate;
-  width: 106%;
-  margin-left: -5%;
+  width: 100%;
+  min-width: 0;
   view-timeline-name: --school-scene;
   view-timeline-axis: block;
 }
 .l-scene-book {
   position: absolute;
-  width: 105%;
-  left: -5%;
+  width: 98%;
+  left: 1%;
   top: 178px;
   z-index: 2;
   transform: rotate(-5deg);
@@ -119,6 +119,7 @@
 .l-scene-book img {
   width: 100%;
   height: auto;
+  object-fit: contain;
 }
 .l-scene-line {
   position: absolute;
@@ -931,8 +932,8 @@
   }
   .l-scene-book {
     top: 188px;
-    width: 113%;
-    left: -10%;
+    width: 98%;
+    left: 1%;
   }
   .l-paper-question {
     width: 181px;
@@ -1032,8 +1033,8 @@
   }
   .l-scene-book {
     top: 140px;
-    left: -8%;
-    width: 116%;
+    left: 3%;
+    width: 94%;
   }
   .l-paper-question {
     left: 5%;

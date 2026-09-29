@@ -98,7 +98,7 @@ export function QuestionAuthor({
     <section className="quiz-block" id="preguntas" aria-label="Preguntas del recurso">
       <div className="row between">
         <div>
-          <h2>Tu clase también responde.</h2>
+          <h2>Preguntas del recurso</h2>
         </div>
         <span className="badge">{questions.length} preguntas</span>
       </div>

@@ -1,6 +1,10 @@
 # Estado del desarrollo
 
-Actualizado: 28 de septiembre de 2026. Integración con servicios reales en verificación.
+Actualizado: 29 de septiembre de 2026. Integración con servicios reales y revisión visual en curso.
+
+## Revisión visual más reciente
+
+Se simplificó el editor para priorizar el documento, se corrigieron superficies y menús del tema oscuro y se ajustó la composición de las ilustraciones en móvil. La [revisión del editor y apariencia](diseno/revision-editor-apariencia-2026-09-29.md) registra capturas reales y 14 ejecuciones locales aprobadas en navegador. Son comprobaciones del alcance descrito; no acreditan la aceptación del diseño completo, pruebas con usuarios ni un nuevo despliegue. La navegación móvil, biblioteca, lector y el resto de pantallas continúan en revisión. Figma y los manuales aún requieren sincronizar estas modificaciones.
 
 Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en el navegador y `/aula` requiere una sesión de Supabase. La demostración permite explorar la interfaz; el aula utiliza operaciones autorizadas en PostgreSQL y archivos privados en Storage.
 
