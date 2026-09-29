@@ -1033,6 +1033,23 @@ tr:last-child td {
 .subject-panel {
   animation: navigation-forward var(--motion-fast) var(--ease-standard);
 }
+.subject-panel:has(> .list-panel) {
+  margin-bottom: 22px;
+}
+@media (max-width: 380px) {
+  .subject-panel .list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .subject-panel .list-item > .button {
+    width: 100%;
+    min-height: 44px;
+  }
+  .subject-panel .list-item > .row {
+    min-width: 0;
+  }
+}
 @keyframes navigation-forward {
   from {
     transform: translateX(12px);

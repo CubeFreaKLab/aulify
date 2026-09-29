@@ -1,7 +1,15 @@
 'use client';
 
 import Link from './workspace-link';
-import { BarChart3, Check, ClipboardCheck, FileText, Plus, Upload } from 'lucide-react';
+import {
+  ArrowLeftRight,
+  BarChart3,
+  Check,
+  ClipboardCheck,
+  FileText,
+  Plus,
+  Upload,
+} from 'lucide-react';
 import { useRef, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { uploadFile } from '@/lib/upload';
@@ -835,11 +843,17 @@ export function ResultsScreen({ state, user }: ScreenProps) {
             <h2>Calificaciones por actividad</h2>
             <Badge>{rows.filter((row) => row.status === 'published').length} publicadas</Badge>
           </div>
+          <p className="results-scroll-help" id="results-scroll-help">
+            <ArrowLeftRight size={16} aria-hidden="true" />
+            Desliza la tabla para ver las notas y el detalle. También puedes usar las flechas del
+            teclado.
+          </p>
           <div
-            className="table-wrap"
+            className="table-wrap results-activity-table"
             tabIndex={0}
             role="region"
             aria-label="Tabla de calificaciones, desplazable horizontalmente"
+            aria-describedby="results-scroll-help"
           >
             <table>
               <caption className="sr-only">Resultados filtrados por materia, curso y año</caption>

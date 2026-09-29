@@ -1,0 +1,662 @@
+{
+  "capturedAt": "2026-09-29T22:21:04.049Z",
+  "environment": "Next webpack dev3002 con datos ficticios; no es producción.",
+  "captures": [
+    {
+      "name": "inicio",
+      "file": "inicio-escritorio-light.png",
+      "route": "/demo",
+      "device": "escritorio",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "materia",
+      "file": "materia-escritorio-light.png",
+      "route": "/demo/materia/subject-biology",
+      "device": "escritorio",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "revision",
+      "file": "revision-escritorio-light.png",
+      "route": "/demo/revision",
+      "device": "escritorio",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "resultados",
+      "file": "resultados-escritorio-light.png",
+      "route": "/demo/resultados",
+      "device": "escritorio",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "data": "Muestra ficticia: dos respuestas manuales corregidas y nota publicada mediante la interfaz local. Las otras participaciones permanecen pendientes.",
+      "capturedAt": "2026-09-29T22:25:13.858Z"
+    },
+    {
+      "name": "quiz",
+      "file": "quiz-escritorio-light.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "escritorio",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "inicio",
+      "file": "inicio-escritorio-dark.png",
+      "route": "/demo",
+      "device": "escritorio",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "materia",
+      "file": "materia-escritorio-dark.png",
+      "route": "/demo/materia/subject-biology",
+      "device": "escritorio",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "revision",
+      "file": "revision-escritorio-dark.png",
+      "route": "/demo/revision",
+      "device": "escritorio",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "resultados",
+      "file": "resultados-escritorio-dark.png",
+      "route": "/demo/resultados",
+      "device": "escritorio",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "data": "Muestra ficticia: dos respuestas manuales corregidas y nota publicada mediante la interfaz local. Las otras participaciones permanecen pendientes.",
+      "capturedAt": "2026-09-29T22:25:16.520Z"
+    },
+    {
+      "name": "quiz",
+      "file": "quiz-escritorio-dark.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "escritorio",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "name": "inicio",
+      "file": "inicio-movil390-light.png",
+      "route": "/demo",
+      "device": "movil390",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "materia",
+      "file": "materia-movil390-light.png",
+      "route": "/demo/materia/subject-biology",
+      "device": "movil390",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "revision",
+      "file": "revision-movil390-light.png",
+      "route": "/demo/revision",
+      "device": "movil390",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "resultados",
+      "file": "resultados-movil390-light.png",
+      "route": "/demo/resultados",
+      "device": "movil390",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": [
+        {
+          "tag": "TABLE",
+          "cls": "",
+          "text": "Resultados filtrados por materia, curso y añoEstudianteActividadMateri"
+        },
+        {
+          "tag": "THEAD",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Estado"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Nota"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Fecha de actividad"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Detalle"
+        },
+        {
+          "tag": "TBODY",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "badge ",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "—"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "results-note",
+          "text": "—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "06/10/2026"
+        },
+        {
+          "tag": "TIME",
+          "cls": "",
+          "text": "06/10/2026"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Revisar"
+        }
+      ],
+      "data": "Muestra ficticia: dos respuestas manuales corregidas y nota publicada mediante la interfaz local. Las otras participaciones permanecen pendientes.",
+      "capturedAt": "2026-09-29T22:25:19.102Z"
+    },
+    {
+      "name": "quiz",
+      "file": "quiz-movil390-light.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "movil390",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "inicio",
+      "file": "inicio-movil390-dark.png",
+      "route": "/demo",
+      "device": "movil390",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "materia",
+      "file": "materia-movil390-dark.png",
+      "route": "/demo/materia/subject-biology",
+      "device": "movil390",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "revision",
+      "file": "revision-movil390-dark.png",
+      "route": "/demo/revision",
+      "device": "movil390",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "resultados",
+      "file": "resultados-movil390-dark.png",
+      "route": "/demo/resultados",
+      "device": "movil390",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": [
+        {
+          "tag": "TABLE",
+          "cls": "",
+          "text": "Resultados filtrados por materia, curso y añoEstudianteActividadMateri"
+        },
+        {
+          "tag": "THEAD",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Estado"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Nota"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Fecha de actividad"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Detalle"
+        },
+        {
+          "tag": "TBODY",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "badge ",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "—"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "results-note",
+          "text": "—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "06/10/2026"
+        },
+        {
+          "tag": "TIME",
+          "cls": "",
+          "text": "06/10/2026"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Revisar"
+        }
+      ],
+      "data": "Muestra ficticia: dos respuestas manuales corregidas y nota publicada mediante la interfaz local. Las otras participaciones permanecen pendientes.",
+      "capturedAt": "2026-09-29T22:25:21.720Z"
+    },
+    {
+      "name": "quiz",
+      "file": "quiz-movil390-dark.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "movil390",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "name": "inicio",
+      "file": "inicio-movil320-light.png",
+      "route": "/demo",
+      "device": "movil320",
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "materia",
+      "file": "materia-movil320-light.png",
+      "route": "/demo/materia/subject-biology",
+      "device": "movil320",
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "revision",
+      "file": "revision-movil320-light.png",
+      "route": "/demo/revision",
+      "device": "movil320",
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "resultados",
+      "file": "resultados-movil320-light.png",
+      "route": "/demo/resultados",
+      "device": "movil320",
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": [
+        {
+          "tag": "TABLE",
+          "cls": "",
+          "text": "Resultados filtrados por materia, curso y añoEstudianteActividadMateri"
+        },
+        {
+          "tag": "THEAD",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Materia y grupo"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Estado"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Nota"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Fecha de actividad"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Detalle"
+        },
+        {
+          "tag": "TBODY",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Biología3° A · 2026"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "badge ",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "—"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "results-note",
+          "text": "—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "06/10/2026"
+        }
+      ],
+      "data": "Muestra ficticia: dos respuestas manuales corregidas y nota publicada mediante la interfaz local. Las otras participaciones permanecen pendientes.",
+      "capturedAt": "2026-09-29T22:25:24.282Z"
+    },
+    {
+      "name": "quiz",
+      "file": "quiz-movil320-light.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "movil320",
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "quiz-relaciones",
+      "file": "quiz-relaciones-movil320-light.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "movil320",
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "inicio",
+      "file": "inicio-movil320-dark.png",
+      "route": "/demo",
+      "device": "movil320",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "materia",
+      "file": "materia-movil320-dark.png",
+      "route": "/demo/materia/subject-biology",
+      "device": "movil320",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "revision",
+      "file": "revision-movil320-dark.png",
+      "route": "/demo/revision",
+      "device": "movil320",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "resultados",
+      "file": "resultados-movil320-dark.png",
+      "route": "/demo/resultados",
+      "device": "movil320",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": [
+        {
+          "tag": "TABLE",
+          "cls": "",
+          "text": "Resultados filtrados por materia, curso y añoEstudianteActividadMateri"
+        },
+        {
+          "tag": "THEAD",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "EstudianteActividadMateria y grupoEstadoNotaFecha de actividadDetalle"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Materia y grupo"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Estado"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Nota"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Fecha de actividad"
+        },
+        {
+          "tag": "TH",
+          "cls": "",
+          "text": "Detalle"
+        },
+        {
+          "tag": "TBODY",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TR",
+          "cls": "",
+          "text": "Camila RíosExplora un ecosistemaQuizBiología3° A · 2026Sin participar—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Biología3° A · 2026"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "badge ",
+          "text": "Sin participar"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "—"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "results-note",
+          "text": "—"
+        },
+        {
+          "tag": "TD",
+          "cls": "",
+          "text": "06/10/2026"
+        }
+      ],
+      "data": "Muestra ficticia: dos respuestas manuales corregidas y nota publicada mediante la interfaz local. Las otras participaciones permanecen pendientes.",
+      "capturedAt": "2026-09-29T22:25:26.851Z"
+    },
+    {
+      "name": "quiz",
+      "file": "quiz-movil320-dark.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "movil320",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    },
+    {
+      "name": "quiz-relaciones",
+      "file": "quiz-relaciones-movil320-dark.png",
+      "route": "/demo/actividad/activity-ecosystems",
+      "device": "movil320",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    }
+  ]
+}
