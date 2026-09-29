@@ -1,6 +1,6 @@
 # Aceptación de 001
 
-Estado: versión 1.0; todos los casos pendientes de ejecución. Las decisiones D-01 a D-07 proceden de [spec.md](spec.md).
+Catálogo de criterios de aceptación, versión 1.0. El estado ejecutado y sus límites se consultan en la [matriz de trazabilidad](../../docs/calidad/trazabilidad.md); la existencia de un caso en esta tabla no significa que esté aprobado. Las decisiones D-01 a D-07 proceden de [spec.md](spec.md).
 
 Datos de prueba ficticios: docente D1 con materias M1 y M2; docente D2 con M3; estudiante E1 aprobado en M1; E2 con solicitud pendiente; E3 aprobado solo en M2. Nunca usar nombres, correos o respuestas reales de estudiantes en capturas de prueba.
 

@@ -33,6 +33,6 @@ Vercel permite condicionar la promoción a resultados de GitHub; esta configurac
 
 ## Seguimiento y recuperación
 
-El flujo de mantenimiento programa la conservación cada seis horas. Revisar sus ejecuciones y cuotas de base, archivos, transferencia y funciones. Un disparo manual correcto no demuestra un plazo de limpieza garantizado.
+El flujo de mantenimiento programa la conservación cada seis horas. Las ejecuciones `36571189662` y `36638509107` constan con evento `schedule` y pasos aprobados en el [registro de CI](../verificacion/ci-integracion.json). Se comprobó así su activación automática; un éxito observado no garantiza los horarios futuros del proveedor. Revisar sus ejecuciones y cuotas de base, archivos, transferencia y funciones.
 
 Un retorno a una versión anterior del código no revierte automáticamente una migración ni restaura archivos. Antes de cambios incompatibles se necesita un respaldo operativo y una restauración comprobada de datos y objetos privados. La [restauración aislada](../verificacion/recuperacion-aislada.md) aporta una comprobación técnica, pero no sustituye la recuperación del servicio alojado.

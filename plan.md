@@ -1,6 +1,6 @@
 # Plan técnico de Aulify
 
-**Actualizado el 28 de septiembre de 2026.** Aplicación integrada con Supabase, migraciones aplicadas y verificaciones de datos y navegador realizadas. Carga, correo general y despliegue continúan en comprobación. El [estado del desarrollo](docs/estado-del-desarrollo.md) identifica resultados y límites.
+**Actualizado el 29 de septiembre de 2026.** Aplicación integrada con Supabase, migraciones aplicadas y verificaciones de datos y navegador realizadas. Carga, correo general y despliegue continúan en comprobación. El [estado del desarrollo](docs/estado-del-desarrollo.md) identifica resultados y límites.
 
 Los comportamientos del producto están en [specification.md](specification.md), el recorrido inicial en [entrega 001](specs/001-recurso-interactivo/spec.md) y las decisiones de alcance en sus casos de aceptación. Este plan explica cómo se construye y verifica la solución.
 

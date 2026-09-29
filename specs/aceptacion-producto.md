@@ -1,6 +1,6 @@
 # Aceptación del alcance completo
 
-Versión 1.0. Todos los casos están **no ejecutados**. Complementan los [casos de 001](001-recurso-interactivo/aceptacion.md); no los reemplazan. Datos ficticios y resultados vinculados a una versión según el [plan de calidad](../docs/calidad/plan-de-calidad.md).
+Catálogo de criterios de aceptación, versión 1.0. El estado ejecutado y sus límites se consultan en la [matriz de trazabilidad](../docs/calidad/trazabilidad.md); la existencia de un caso en esta tabla no significa que esté aprobado. Complementan los [casos de 001](001-recurso-interactivo/aceptacion.md); no los reemplazan. Datos ficticios y resultados vinculados a una versión según el [plan de calidad](../docs/calidad/plan-de-calidad.md).
 
 | Caso | Regla | Escenario | Resultado esperado |
 |---|---|---|---|
