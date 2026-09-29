@@ -1,3 +1,4 @@
+import { editorLinkError, isAllowedEditorHref } from './editor-links';
 import type {
   ActivitySettings,
   AnswerValue,
@@ -300,6 +301,8 @@ export function validateEditorDocument(value: unknown): void {
     );
     activePath.add(item);
     for (const [key, nested] of Object.entries(item)) {
+      if (key === 'href')
+        requireRule(isAllowedEditorHref(nested), 'INVALID_EDITOR_LINK', editorLinkError);
       requireRule(
         !['correctOptionId', 'correctOptionIds', 'correctOrder', 'manualGuide'].includes(key),
         'PRIVATE_EDITOR_CONTENT',

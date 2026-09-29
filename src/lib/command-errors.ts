@@ -1,3 +1,5 @@
+import { editorLinkError } from '../domain/editor-links';
+
 const messages: Record<string, string> = {
   FORBIDDEN: 'No tienes permiso para realizar esta acción.',
   AUTH_REQUIRED: 'Tu sesión terminó. Vuelve a iniciar sesión.',
@@ -11,6 +13,9 @@ const messages: Record<string, string> = {
     'Otra pestaña modificó este borrador. Conserva una copia o recarga la versión guardada.',
   MANUAL_GUIDE_REQUIRED: 'Añade una guía de corrección a las preguntas escritas.',
   INVALID_IMAGE: 'Revisa la imagen: necesita un archivo válido y texto alternativo.',
+  INVALID_EDITOR_LINK: editorLinkError,
+  INVALID_EDITOR_DOCUMENT:
+    'Revisa la estructura del documento del editor e intenta guardarlo de nuevo.',
   INVALID_SETTINGS: 'Revisa la configuración de la actividad: alguna combinación no es válida.',
   ACTIVITY_LOCKED: 'La actividad ya tiene intentos. Publica otra versión para cambiar sus reglas.',
   ACTIVITY_CLOSED: 'Esta actividad está cerrada.',

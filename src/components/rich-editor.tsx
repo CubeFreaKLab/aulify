@@ -34,6 +34,7 @@ import '@/styles/rich-editor.css';
 import '@/styles/resource-text.css';
 import type { Block } from '@/domain/types';
 import { safeImageUrl } from '@/domain';
+import { isAllowedEditorHref } from '@/domain/editor-links';
 import { duplicateTree, semanticBlocks, textOf } from '@/lib/rich-document';
 import { uploadFile } from '@/lib/upload';
 import {
@@ -331,7 +332,7 @@ export default function RichEditor({
     initialContent: (initialDocument?.length
       ? initialDocument
       : nativeBlocks(blocks)) as EditorBlock[],
-    link: { isValidLink: (href: string) => /^https?:\/\//i.test(href) },
+    link: { isValidLink: isAllowedEditorHref },
   });
   function command(action: () => void) {
     editor.transact((tr) => {
