@@ -1,0 +1,178 @@
+{
+  "startedAt": "2026-09-29T22:40:19.915Z",
+  "migration": "20260929223641_aulify_participant_teacher_revision.sql",
+  "environment": "PGlite aislado; operaciones secuenciales, sin red ni concurrencia real.",
+  "checks": [
+    {
+      "name": "Base: respuesta automática escribe dos veces la fila docente compartida",
+      "result": "passed"
+    },
+    {
+      "name": "Migración conserva snapshot completo teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Migración conserva snapshot completo a",
+      "result": "passed"
+    },
+    {
+      "name": "Migración conserva snapshot completo b",
+      "result": "passed"
+    },
+    {
+      "name": "Migración conserva huella estudiantil a",
+      "result": "passed"
+    },
+    {
+      "name": "Migración conserva huella estudiantil b",
+      "result": "passed"
+    },
+    {
+      "name": "Agregado docente estable sin cambios",
+      "result": "passed"
+    },
+    {
+      "name": "Cambio único de formato de huella docente al migrar",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta no escribe la fila técnica de actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta escribe solo la fila técnica del participante autor",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta automática incrementa dos revisiones docentes propias y una estudiantil",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta invalida docente y autor sin invalidar otro estudiante",
+      "result": "passed"
+    },
+    {
+      "name": "ACK conserva respuesta y oculta solución",
+      "result": "passed"
+    },
+    {
+      "name": "Reintento idempotente conserva ACK y no escribe contadores",
+      "result": "passed"
+    },
+    {
+      "name": "Corrección privada solo invalida al docente",
+      "result": "passed"
+    },
+    {
+      "name": "Corrección privada conserva proyección estudiantil",
+      "result": "passed"
+    },
+    {
+      "name": "Corrección privada no escribe contador común",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación invalida solo al estudiante correspondiente",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación expone la nota correcta y autorizada",
+      "result": "passed"
+    },
+    {
+      "name": "Participante nuevo invalida docente sin revelar cambio a otro estudiante",
+      "result": "passed"
+    },
+    {
+      "name": "Borrado de participante incrementa revisión común y elimina metadatos derivados",
+      "result": "passed"
+    },
+    {
+      "name": "Borrado invalida docente sin alterar huella estudiantil ajena",
+      "result": "passed"
+    },
+    {
+      "name": "Identidad del agregado distingue reemplazo con igual contador y marca común",
+      "result": "passed"
+    },
+    {
+      "name": "Cambio público conserva invalidación común para ambos estudiantes",
+      "result": "passed"
+    },
+    {
+      "name": "Participante ausente conserva fallback de revisión común",
+      "result": "passed"
+    },
+    {
+      "name": "Docente ajeno no accede a huella",
+      "result": "passed",
+      "details": {
+        "code": "42501"
+      }
+    },
+    {
+      "name": "Estudiante no aprobado no accede a huella",
+      "result": "passed",
+      "details": {
+        "code": "42501"
+      }
+    },
+    {
+      "name": "Estudiante no lee contadores privados",
+      "result": "passed",
+      "details": {
+        "code": "42501"
+      }
+    },
+    {
+      "name": "Cliente no ejecuta helper privado",
+      "result": "passed",
+      "details": {
+        "code": "42501"
+      }
+    },
+    {
+      "name": "Anónimo no ejecuta sincronización",
+      "result": "passed",
+      "details": {
+        "code": "42501"
+      }
+    },
+    {
+      "name": "Retiro revoca acceso independientemente del contador",
+      "result": "passed",
+      "details": {
+        "code": "42501"
+      }
+    }
+  ],
+  "contention": {
+    "executed": false,
+    "reason": "Docker Desktop Linux Engine no está disponible; no se ejecutó el ensayo con dos sesiones PostgreSQL."
+  },
+  "baselineMigrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql"
+  ],
+  "migrationSha256": "3575310698289b9543d02832e0634259f48e0edb120411be856880acf56b23a2",
+  "status": "passed",
+  "finishedAt": "2026-09-29T22:40:22.193Z",
+  "limitations": [
+    "No mide concurrencia, bloqueo entre sesiones, red, PostgREST, CPU remota ni latencia Q-06.",
+    "Las comprobaciones de escrituras usan la identidad física de filas en una base aislada; no sustituyen un ensayo simultáneo.",
+    "El caso de reemplazo ajusta de forma administrativa la marca común únicamente para aislar la propiedad del agregado con identidad."
+  ]
+}

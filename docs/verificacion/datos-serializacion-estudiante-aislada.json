@@ -1,0 +1,183 @@
+{
+  "startedAt": "2026-09-29T22:33:21.470Z",
+  "environment": "PGlite aislado, 50 participantes con ocho respuestas de diez; sin concurrencia ni tráfico remoto.",
+  "migrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql"
+  ],
+  "stages": [
+    {
+      "name": "baseline",
+      "student": {
+        "samples": 30,
+        "p50Ms": 6.072599999999966,
+        "p95Ms": 10.13610000000017,
+        "bytes": 16628
+      },
+      "teacher": {
+        "samples": 30,
+        "p50Ms": 23.148799999999937,
+        "p95Ms": 25.027399999999943,
+        "bytes": 287645
+      }
+    },
+    {
+      "name": "reuseQuestions",
+      "student": {
+        "samples": 30,
+        "p50Ms": 5.021499999999833,
+        "p95Ms": 5.541400000000067,
+        "bytes": 16628
+      },
+      "teacher": {
+        "samples": 30,
+        "p50Ms": 23.171800000000076,
+        "p95Ms": 28.346800000000258,
+        "bytes": 287645
+      }
+    },
+    {
+      "name": "reuseQuestionsAttemptActivity",
+      "student": {
+        "samples": 30,
+        "p50Ms": 4.296499999999469,
+        "p95Ms": 6.124800000000505,
+        "bytes": 16628
+      },
+      "teacher": {
+        "samples": 30,
+        "p50Ms": 22.863900000000285,
+        "p95Ms": 26.195200000000114,
+        "bytes": 287645
+      }
+    },
+    {
+      "name": "baselineRepeated",
+      "student": {
+        "samples": 30,
+        "p50Ms": 5.609400000000278,
+        "p95Ms": 8.718800000000556,
+        "bytes": 16628
+      },
+      "teacher": {
+        "samples": 30,
+        "p50Ms": 22.716600000000653,
+        "p95Ms": 23.84820000000036,
+        "bytes": 287645
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "Proyección completa student baseline",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa teacher baseline",
+      "pass": true
+    },
+    {
+      "name": "ACK con nueve respuestas y sin corrección oculta baseline",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa student reuseQuestions",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa teacher reuseQuestions",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa student reuseQuestionsAttemptActivity",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa teacher reuseQuestionsAttemptActivity",
+      "pass": true
+    },
+    {
+      "name": "ACK con nueve respuestas y sin corrección oculta reuseQuestionsAttemptActivity",
+      "pass": true
+    },
+    {
+      "name": "Snapshot deniega docente ajeno",
+      "pass": true
+    },
+    {
+      "name": "Snapshot deniega perfil inexistente",
+      "pass": true
+    },
+    {
+      "name": "Helper privado deniega ejecución directa authenticated",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa student baselineRepeated",
+      "pass": true
+    },
+    {
+      "name": "Proyección completa teacher baselineRepeated",
+      "pass": true
+    },
+    {
+      "name": "ACK con nueve respuestas y sin corrección oculta baselineRepeated",
+      "pass": true
+    }
+  ],
+  "commandStages": [
+    {
+      "name": "baseline",
+      "samples": 12,
+      "p50Ms": 2.680500000000393,
+      "p95Ms": 3.132499999999709,
+      "includesDeferredTriggers": true,
+      "persisted": false,
+      "teacherRevisionIncrementsPerAnswer": [
+        2
+      ]
+    },
+    {
+      "name": "reuseQuestionsAttemptActivity",
+      "samples": 12,
+      "p50Ms": 2.717999999999847,
+      "p95Ms": 3.5460000000002765,
+      "includesDeferredTriggers": true,
+      "persisted": false,
+      "teacherRevisionIncrementsPerAnswer": [
+        2
+      ]
+    },
+    {
+      "name": "baselineRepeated",
+      "samples": 12,
+      "p50Ms": 2.5882000000001426,
+      "p95Ms": 2.978399999999965,
+      "includesDeferredTriggers": true,
+      "persisted": false,
+      "teacherRevisionIncrementsPerAnswer": [
+        2
+      ]
+    }
+  ],
+  "finishedAt": "2026-09-29T22:33:28.817Z",
+  "limitations": [
+    "Muestra de selección simple y un intento por estudiante; faltan pruebas exhaustivas con los demás tipos antes de migrar.",
+    "No mide CPU remota, contención, PostgREST, colas HTTP ni capacidad Q06.",
+    "Solo elimina reloj de transporte y orden no contractual de la colección de intentos al comparar. No elimina campos de permisos ni contenido.",
+    "Las muestras del comando se revierten tras ejecutar los triggers diferidos; no incluyen durabilidad del COMMIT, red, proxy ni contención entre clientes. Las funciones modificadas solo pertenecen a la ruta de lectura; una diferencia temporal del ACK entre etapas no acredita mejora del comando."
+  ]
+}

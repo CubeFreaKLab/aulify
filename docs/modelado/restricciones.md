@@ -68,3 +68,5 @@ Storage y PostgreSQL no forman una sola transacción de archivos. Las cargas se 
 ## Revisiones técnicas de sincronización
 
 Las tablas de revisión tienen PK/FK por actividad o participante, borrado en cascada y contadores no negativos. Solo disparadores internos los actualizan, de forma diferida dentro de la transacción. Una actualización sin cambio de valores no incrementa la revisión. La autorización siempre se consulta en las relaciones vigentes; la revisión opaca solo indica si corresponde descargar una proyección nueva.
+
+Desde el modelo 1.3, el contador docente personal pertenece a `participant_sync_versions`. La huella docente incluye pares de identidad y revisión ordenados por participante; no se usa una suma que pueda coincidir al reemplazar filas. Los eventos públicos o sin participante vigente conservan la revisión común. El borrado de un participante invalida al docente mediante esa marca y el cambio del conjunto. Las pruebas aisladas comprueban que responder no escribe la fila común; los bloqueos entre sesiones y la latencia remota requieren su propio ensayo.

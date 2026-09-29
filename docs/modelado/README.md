@@ -1,10 +1,10 @@
 # Modelo de Aulify
 
-Versión 1.2 · 28 de septiembre de 2026 · Basado en la especificación funcional 1.0.
+Versión 1.3 · 29 de septiembre de 2026 · Basado en la especificación funcional 1.0.
 
 El modelo describe cómo organizar y conservar la información del producto completo. Incluye **44 relaciones de dominio, tres relaciones técnicas para limitar intentos de código y sincronizar actividades y la identidad externa de Supabase Auth**. La división responde a versiones, permisos e historial: una tabla única de recursos o resultados mezclaría datos que cambian y se publican en momentos distintos.
 
-El modelo lógico está acompañado por [migraciones SQL](../../supabase/migrations), contratos de servidor y pruebas en PostgreSQL aislado. Las doce migraciones se aplicaron en el proyecto de Aulify; la ampliación de sincronización se verifica por separado en el [informe de sincronización](../verificacion/datos-sincronizacion.md). [45 comprobaciones remotas](../verificacion/datos-remotos.md) verificaron Auth, permisos, Storage y concurrencia. El envío de correo y la aplicación web completa requieren verificaciones adicionales. El [informe de datos](../verificacion/datos-aislados.md) distingue lo ejecutado y las comprobaciones pendientes.
+El modelo lógico está acompañado por [migraciones SQL](../../supabase/migrations), contratos de servidor y pruebas en PostgreSQL aislado. Dieciséis migraciones están aplicadas en el proyecto de Aulify. La decimosexta separa el contador docente por participante y cuenta con verificación local y una regresión remota acotada de privacidad y sincronización. El [informe de esta revisión](../verificacion/datos-revision-participante.md) distingue su alcance de las pruebas anteriores de Auth, permisos, Storage y sincronización. El envío de correo, la capacidad y el despliegue conservan sus verificaciones pendientes.
 
 ## Cómo recorrerlo
 
@@ -58,3 +58,5 @@ Para 001 se necesitan identidad/pertenencia, recurso y borrador, versiones, sele
 La implementación física añade descripción de materia, documento de presentación publicado, nota de entrega y metadatos de reserva/purga de archivos. `join_request_checks` conserva solo cuenta y hora para limitar también códigos inválidos; se depura a los diez minutos. El [contrato](../../supabase/CONTRACT.md) define comandos y proyecciones, y el [ADR inicial](../decisiones/0003-modelo-relacional.md) conserva la justificación de la base relacional.
 
 La revisión 1.2 incorpora `activity_sync_versions` y `participant_sync_versions`: contadores derivados actualizados al confirmar transacciones. No contienen respuestas, calificaciones ni decisiones de acceso. Mantienen las 44 relaciones del dominio y elevan a 47 el total de tablas propias.
+
+La revisión 1.3 añade `participant_sync_versions.teacher_revision`. Las respuestas y correcciones personales actualizan la fila de ese participante. La huella docente combina la marca común y un agregado estable de identidades y revisiones; los cambios privados siguen fuera de la huella estudiantil. El total de relaciones se conserva. Esta modificación evita la escritura de una fila común en ese recorrido; no demuestra por sí sola la capacidad remota requerida.

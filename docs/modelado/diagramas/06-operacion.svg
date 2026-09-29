@@ -9,7 +9,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 1343.17)">
 <title>modelo</title>
 <polygon fill="#ffffff" stroke="none" points="-28.8,28.8 -28.8,-1343.17 461.05,-1343.17 461.05,28.8 -28.8,28.8"/>
-<text text-anchor="middle" x="216.12" y="-1291.38" font-family="Arial" font-size="20.00">Integridad y conservación · modelo lógico 1.2</text>
+<text text-anchor="middle" x="216.12" y="-1291.38" font-family="Arial" font-size="20.00">Integridad y conservación · modelo lógico 1.3</text>
 <!-- activities -->
 <g id="node1" class="node">
 <title>activities</title>
@@ -134,7 +134,7 @@
 <polygon fill="none" stroke="#cddad4" points="244,-1215.62 244,-1249.38 432.25,-1249.38 432.25,-1215.62 244,-1215.62"/>
 <text text-anchor="start" x="253" y="-1227.08" font-family="Arial" font-size="14.00">PK: participant_id</text>
 <polygon fill="none" stroke="#cddad4" points="244,-1181.88 244,-1215.62 432.25,-1215.62 432.25,-1181.88 244,-1181.88"/>
-<text text-anchor="start" x="253" y="-1193.33" font-family="Arial" font-size="14.00" fill="#63716b">2 campos · ver diccionario</text>
+<text text-anchor="start" x="253" y="-1193.33" font-family="Arial" font-size="14.00" fill="#63716b">3 campos · ver diccionario</text>
 </g>
 <!-- participants -->
 <g id="node9" class="node">

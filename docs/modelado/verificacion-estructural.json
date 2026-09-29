@@ -1,8 +1,8 @@
 {
-  "modelo_sha256": "860258d5ee4c0114131675496c27f5f782679cefaef947cd4f345a40a518d9e7",
+  "modelo_sha256": "192288752db9ab33afe7e0172c922bd50523f5e629391c54f47928bb5c926b36",
   "relaciones_propias": 47,
   "externas": 1,
-  "campos": 294,
+  "campos": 295,
   "claves_foraneas": 78,
   "validacion": "estructura, claves candidatas, tipos, reglas y derivados coherentes",
   "base_de_datos_ejecutada": false

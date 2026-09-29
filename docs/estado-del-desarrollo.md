@@ -8,7 +8,7 @@ Se simplificó el editor para priorizar el documento, se corrigieron superficies
 
 La revisión local reúne 48 pruebas unitarias aprobadas, construcción/análisis/formato correctos y 68 recorridos públicos de navegador aprobados al combinar el lote inicial con la repetición de dos casos cuyo selector se corrigió. Los 22 recorridos autenticados se omitieron en ese lote. Las 18 capturas de escritorio y móvil en ambos temas identifican su compilación. Una [segunda unidad de pantallas](diseno/revision-pantallas-2026-09-29.md) añade seis casos de adaptación de materia, revisión, resultados y quiz; los seis se repitieron con éxito sobre el compilado de producción local `NM4iMNbRDIkrz8dBQyrB4`. Estas comprobaciones no acreditan aceptación estética, pruebas con personas ni un nuevo despliegue.
 
-La [sincronización de Figma](diseno/revision-biblioteca-figma-2026-09-29.md) incorpora catorce composiciones y dos muestras de controles en ambos temas, con texto, vectores, componentes y variables editables. Son estados estáticos; no se declara un prototipo interactivo completo.
+La [sincronización de Figma](diseno/revision-biblioteca-figma-2026-09-29.md) incorpora catorce composiciones y dos muestras de controles en ambos temas, con texto, vectores, componentes y variables editables. Son estados estáticos; no se declara un prototipo interactivo completo. La [verificación entre motores](verificacion/compatibilidad-editor-navegacion.md) añade Firefox y WebKit al editor y la navegación, y corrige el retorno del foco al cerrar el menú.
 
 Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en el navegador y `/aula` requiere una sesión de Supabase. La demostración permite explorar la interfaz; el aula utiliza operaciones autorizadas en PostgreSQL y archivos privados en Storage.
 
@@ -26,7 +26,7 @@ Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en
 
 | Capa | Resultado comprobado | Evidencia |
 |---|---|---|
-| Modelo y PostgreSQL aislado | Modelo 1.2, doce migraciones y 84 comprobaciones aprobadas en PGlite | [Informe aislado](verificacion/datos-aislados.md) |
+| Modelo y PostgreSQL aislado | Modelo 1.3, dieciséis migraciones y 84 comprobaciones de regresión aprobadas en PGlite | [Regresión actual](verificacion/datos-regresion-revision-participante.json) |
 | Supabase real | 45 comprobaciones de Auth, permisos, operaciones, concurrencia y Storage con cuatro cuentas ficticias | [Informe remoto](verificacion/datos-remotos.md) |
 | Aplicación compilada | 42 pruebas unitarias; tipos, análisis estático y construcción satisfactorios | [Integración web](verificacion/integracion-web.md) |
 | Navegador autenticado | Último lote: doce aprobados en escritorio y móvil, incluidos reintento de respuesta, reconexión y JWT alterado | [Confirmación y conexión](verificacion/integracion-resiliencia.json) |
@@ -34,13 +34,14 @@ Aulify dispone de dos entradas separadas: `/demo` conserva una clase ficticia en
 | Cierre guiado concurrente | Treinta rondas y 150 operaciones remotas repetidas sin errores técnicos después de corregir el bloqueo | [Concurrencia](verificacion/datos-carrera-guiada.md) |
 | Sincronización por actividad | 24 comprobaciones remotas, contadores privados, lectura acotada y carrera guiada repetida sin errores técnicos | [Sincronización](verificacion/datos-sincronizacion.md) |
 | Publicación de clasificación | Migración 15 aplicada y 33 comprobaciones remotas aprobadas: una corrección privada conserva clasificación y huella estudiantil hasta republicar | [Juego y publicación](verificacion/juego-aceptacion.md) |
+| Revisión docente por participante | Migración 16 aplicada: 31 comprobaciones específicas locales y regresión remota de 33 comprobaciones / 53 RPC; no demuestra capacidad | [Revisión por participante](verificacion/datos-revision-participante.md) |
 | Seguimiento y distribución | Cuatro ejecuciones de navegador: filtros, filas únicas, notas límite y pendientes; escritorio y móvil, con tablas equivalentes | [Distribución](verificacion/resultados-distribucion.md) |
 | Recuperación aislada | Nueve comprobaciones de una copia PGlite con datos ficticios; no es recuperación de Supabase | [Informe de recuperación](verificacion/recuperacion-aislada.md) |
 | Diseño editable | Once composiciones nativas de Figma, fundamentos y componentes; móvil de 390 px | [Figma](diseno/figma-editable.md) |
 
 Los conteos describen ejecuciones distintas. No equivalen a cerrar automáticamente los 76 escenarios AC/AP del producto. La evaluación técnica incluye estados de teclado, reflujo y análisis axe; no acredita por sí sola conformidad completa con WCAG ni una evaluación de usabilidad con personas.
 
-El historial vigente contiene quince migraciones locales y remotas. La última quedó registrada en Supabase como `20260929221908`; su archivo local adoptó ese identificador sin cambiar el SQL que se había ensayado como `20260928135711`. Los informes de doce y catorce migraciones conservan su revisión histórica. El CI [36640029110](https://github.com/CubeFreaKLab/aulify/actions/runs/36640029110) aprobó todos sus pasos sobre `1019e4b`, incluida la última unidad móvil. El [registro de ejecuciones](verificacion/ci-integracion.json) identifica revisión, estado y pasos observados; no atribuye a sus entradas obtenidas por API conteos extraídos de registros que no se descargaron.
+El historial vigente contiene dieciséis migraciones locales y remotas. La última quedó registrada en Supabase como `20260929224538`; su archivo local adoptó ese identificador sin cambiar el SQL ensayado. Los informes anteriores conservan su revisión histórica. El CI [36640029110](https://github.com/CubeFreaKLab/aulify/actions/runs/36640029110) aprobó todos sus pasos sobre `1019e4b`, incluida la última unidad móvil; no cubre la migración 16 ni la corrección posterior de WebKit. El [registro de ejecuciones](verificacion/ci-integracion.json) identifica revisión, estado y pasos observados; no atribuye a sus entradas obtenidas por API conteos extraídos de registros que no se descargaron.
 
 La verificación posterior de [consultas acotadas](verificacion/integracion-acotada.json) cubre los doce recorridos de integración mediante un lote de diez aprobados y la repetición de dos tras corregir su preparación. Los recorridos de resultados se registran aparte. El CI conserva siempre su revisión exacta; no se atribuye a código posterior.
 

@@ -8,7 +8,13 @@ import { createClient } from '@supabase/supabase-js';
 const run = process.argv.includes('--run');
 const accountPath = '.local-private/remote-test-accounts.json';
 const scriptPath = 'tools/datos/game-privacy-remote.mjs';
-const migrationPath = 'supabase/migrations/20260929221908_aulify_deferred_ranking_publication.sql';
+const migrationIndex = process.argv.indexOf('--migration');
+const migrationName = migrationIndex < 0
+  ? '20260929221908_aulify_deferred_ranking_publication.sql'
+  : process.argv[migrationIndex + 1];
+if (!/^\d{14}_[a-z0-9_]+\.sql$/.test(migrationName ?? ''))
+  throw new Error('--migration requiere el nombre de una migración SQL local.');
+const migrationPath = `supabase/migrations/${migrationName}`;
 const reportIndex = process.argv.indexOf('--report');
 const reportPath =
   reportIndex < 0
@@ -36,7 +42,7 @@ async function preflight() {
       }),
   );
   if (
-    !accounts.projectRef ||
+    accounts.projectRef !== 'bnqyyumfmyexsqszglab' ||
     env.NEXT_PUBLIC_SUPABASE_URL !== `https://${accounts.projectRef}.supabase.co` ||
     !env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   )
@@ -442,7 +448,7 @@ try {
         accounts: Object.keys(roles),
         remoteRequests: 0,
         instruction:
-          'Aplicar y verificar migración 15, coordinar una ventana sin carga y ejecutar con --run.',
+          'Aplicar y verificar la migración esperada, coordinar una ventana sin carga y ejecutar con --run.',
       }),
     );
 } catch {

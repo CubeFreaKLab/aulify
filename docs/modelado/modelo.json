@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "specification": "1.0",
   "status": "Modelo de 44 relaciones de dominio y 3 técnicas. Estado de aplicación de migraciones y pruebas en docs/verificacion; la validación estructural no acredita capacidad.",
   "groups": {
@@ -3542,7 +3542,7 @@
           "name": "teacher_revision",
           "type": "bigint",
           "nullable": false,
-          "description": "Revisión de cambios observables por el propietario, incluidos los privados. Contador no negativo, valor inicial cero."
+          "description": "Revisión de cambios comunes observables por el propietario y eventos sin participante vigente. Los cambios personales tienen contador docente separado. Contador no negativo, valor inicial cero."
         }
       ],
       "pk": [
@@ -3583,6 +3583,12 @@
           "type": "bigint",
           "nullable": false,
           "description": "Revisión de cambios visibles del participante; excluye correcciones todavía privadas. Contador no negativo, valor inicial cero."
+        },
+        {
+          "name": "teacher_revision",
+          "type": "bigint",
+          "nullable": false,
+          "description": "Revisión de cambios personales visibles al docente, incluidas correcciones privadas. Se agrega con identidad y orden estable para la huella docente; no altera la huella estudiantil. Contador no negativo, valor inicial cero."
         }
       ],
       "pk": [

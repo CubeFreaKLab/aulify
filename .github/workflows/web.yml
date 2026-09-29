@@ -13,6 +13,7 @@ on:
         'tools/datos/scoring-acceptance.mjs',
         'tools/datos/teacher-projection-check.mjs',
         'tools/datos/game-acceptance.mjs',
+        'tools/datos/participant-sync-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -32,6 +33,7 @@ on:
         'tools/datos/scoring-acceptance.mjs',
         'tools/datos/teacher-projection-check.mjs',
         'tools/datos/game-acceptance.mjs',
+        'tools/datos/participant-sync-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -84,6 +86,8 @@ jobs:
         run: node tools/datos/teacher-projection-check.mjs
       - name: Verificar participación, equipos y privacidad de publicación
         run: node tools/datos/game-acceptance.mjs
+      - name: Verificar revisiones independientes por participante
+        run: node tools/datos/participant-sync-check.mjs
       - name: Construir aplicación
         run: npm run build
       - name: Preparar Chromium

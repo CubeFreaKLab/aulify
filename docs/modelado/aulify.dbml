@@ -2,7 +2,7 @@
 // CHECK, índices parciales, transacciones y permisos: restricciones.md y permisos.md.
 Project aulify {
   database_type: 'PostgreSQL'
-  Note: 'Modelo lógico 1.2; app es un esquema no expuesto. Auth es externo.'
+  Note: 'Modelo lógico 1.3; app es un esquema no expuesto. Auth es externo.'
 }
 
 Table auth.users {
@@ -645,7 +645,7 @@ Table app.activity_sync_versions {
   Note: "Metadatos técnicos derivados para detectar cambios sin reconstruir la actividad; no sustituyen permisos ni datos de dominio."
   activity_id uuid [not null, note: "Identificador de la entidad cuya revisión se conserva."]
   public_revision bigint [not null, note: "Revisión de cambios visibles de la sesión o actividad. Contador no negativo, valor inicial cero."]
-  teacher_revision bigint [not null, note: "Revisión de cambios observables por el propietario, incluidos los privados. Contador no negativo, valor inicial cero."]
+  teacher_revision bigint [not null, note: "Revisión de cambios comunes observables por el propietario y eventos sin participante vigente. Los cambios personales tienen contador docente separado. Contador no negativo, valor inicial cero."]
   indexes {
     activity_id [pk]
   }
@@ -655,6 +655,7 @@ Table app.participant_sync_versions {
   Note: "Metadatos técnicos derivados para detectar cambios sin reconstruir la actividad; no sustituyen permisos ni datos de dominio."
   participant_id uuid [not null, note: "Identificador de la entidad cuya revisión se conserva."]
   student_revision bigint [not null, note: "Revisión de cambios visibles del participante; excluye correcciones todavía privadas. Contador no negativo, valor inicial cero."]
+  teacher_revision bigint [not null, note: "Revisión de cambios personales visibles al docente, incluidas correcciones privadas. Se agrega con identidad y orden estable para la huella docente; no altera la huella estudiantil. Contador no negativo, valor inicial cero."]
   indexes {
     participant_id [pk]
   }

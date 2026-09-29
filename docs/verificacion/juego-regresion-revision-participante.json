@@ -1,0 +1,588 @@
+{
+  "startedAt": "2026-09-29T22:41:10.275Z",
+  "revision": "1019e4b7a91f49c7c46789ce0f463a4a9f026ee8",
+  "environment": "PGlite aislado, rol authenticated y Auth/Storage mínimos",
+  "migrationCutoff": null,
+  "script": {
+    "path": "tools/datos/game-acceptance.mjs",
+    "sha256": "a3bd12d86d5d047e7ab9a46a991c93509cc6ff869c70958b4a777381337aec68"
+  },
+  "migrations": [
+    {
+      "name": "20260928064804_aulify_relational_core.sql",
+      "sha256": "e1d28fb97669dc12533cc3feb9b2a7aac91b2dace27e9773e30ffa1400b01181"
+    },
+    {
+      "name": "20260928064810_aulify_commands.sql",
+      "sha256": "0dcd33f6f5e76d4edfb94ed189470d1d886331aa5826a4cfce9328cc06d6d448"
+    },
+    {
+      "name": "20260928064815_aulify_projections_storage.sql",
+      "sha256": "b8efde826282aaf71a0c4c9312f176509b174bb2c140d2816b01e612109167ec"
+    },
+    {
+      "name": "20260928064819_aulify_retention_hardening.sql",
+      "sha256": "958e71a40caca23e48afa1e835da7275b030909fe8cec61397d91ab4d4a0beb3"
+    },
+    {
+      "name": "20260928064824_aulify_join_rate_limit.sql",
+      "sha256": "9821fd7b7f15735ddbc55ba315c08f19804a711c09ff0e67244e147cb8718fea"
+    },
+    {
+      "name": "20260928064828_aulify_upload_reservations.sql",
+      "sha256": "b85eeb9ab40fcd5a45acc191d0ad100f223d6eb4255c206426164b709fbe4514"
+    },
+    {
+      "name": "20260928070919_aulify_resubmission_projection.sql",
+      "sha256": "5aa4204dd42805437ca5d9962584690ea68950be9674f3976d45dd47a70b675c"
+    },
+    {
+      "name": "20260928072137_aulify_activity_sync_digest.sql",
+      "sha256": "6b1cf2533b6fc28d1c6b6ac6d4feb73a2fcccd56090aac13f1cb23376319b0f1"
+    },
+    {
+      "name": "20260928074757_aulify_snapshot_authorized_sets.sql",
+      "sha256": "cd887b55ef3024631ae3ed149a1b72b120d20a976a1c24c1827cb111d2e732f8"
+    },
+    {
+      "name": "20260928080625_aulify_guided_answer_close_lock.sql",
+      "sha256": "16a5cb140f1bbb47efb0044988f669a66cce8fe583351cfe2e5a7205477403b2"
+    },
+    {
+      "name": "20260928083328_aulify_scoped_activity_sync.sql",
+      "sha256": "e7d3e3957bcb7ada38db53cb6cf37250ea283a01000e684a4c78434954febd34"
+    },
+    {
+      "name": "20260928083904_aulify_private_lock_revision.sql",
+      "sha256": "39d743f9a8136d9a5c5a6f43618c73d59a65481bb2f97245100a6d8c12bfeeb7"
+    },
+    {
+      "name": "20260928123500_aulify_independent_matching_answers.sql",
+      "sha256": "e1f5f3c74795baf66d678087fb45463912716cefa9a9e856d70306610db30b51"
+    },
+    {
+      "name": "20260928130653_aulify_teacher_attempt_projection.sql",
+      "sha256": "46c4145e4797d0b27587f9a361cf589212e655679dbbe88f0b6cca7ab4b2b5c0"
+    },
+    {
+      "name": "20260929221908_aulify_deferred_ranking_publication.sql",
+      "sha256": "62f5a233be8ff1965ac5e7ae815891720abe4a89e25b99ffb1cd6ee39c2ce946"
+    },
+    {
+      "name": "20260929223641_aulify_participant_teacher_revision.sql",
+      "sha256": "3575310698289b9543d02832e0634259f48e0edb120411be856880acf56b23a2"
+    }
+  ],
+  "cases": [
+    {
+      "scenario": "AP-08",
+      "fixture": "Dos preguntas dependientes A/B y dos independientes C/D; mezcla de preguntas/opciones; recuperación del mismo intento.",
+      "checks": [
+        {
+          "detail": "El orden contiene el mismo conjunto de cuatro preguntas",
+          "result": "passed"
+        },
+        {
+          "detail": "A y B permanecen consecutivas y en orden interno",
+          "result": "passed"
+        },
+        {
+          "detail": "La explicación viaja con el identificador de la pregunta mezclada",
+          "result": "passed"
+        },
+        {
+          "detail": "Nueva entrada conserva intento, preguntas, opciones y plazo",
+          "result": "passed"
+        },
+        {
+          "detail": "Recupera la respuesta confirmada",
+          "result": "passed"
+        },
+        {
+          "detail": "La proyección respeta el orden persistido",
+          "result": "passed"
+        },
+        {
+          "detail": "Explicación correcta para otra pregunta del orden mezclado",
+          "result": "passed"
+        },
+        {
+          "detail": "Corregir por identificador conserva el acierto con opciones mezcladas",
+          "result": "passed"
+        },
+        {
+          "detail": "Explicación correcta para otra pregunta del orden mezclado",
+          "result": "passed"
+        },
+        {
+          "detail": "Corregir por identificador conserva el acierto con opciones mezcladas",
+          "result": "passed"
+        },
+        {
+          "detail": "Explicación correcta para otra pregunta del orden mezclado",
+          "result": "passed"
+        },
+        {
+          "detail": "Corregir por identificador conserva el acierto con opciones mezcladas",
+          "result": "passed"
+        },
+        {
+          "detail": "E2 recibe el mismo conjunto sin exigir orden exclusivo",
+          "result": "passed"
+        },
+        {
+          "detail": "El grupo dependiente también conserva el orden para E2",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-09",
+      "fixture": "E1/E2 en sala, doble inicio, E1 responde y E2 omite automática de 2; última escrita de 3 pendiente en ambos.",
+      "checks": [
+        {
+          "detail": "E1: entrar a sala no consume intento",
+          "result": "passed"
+        },
+        {
+          "detail": "E2: entrar a sala no consume intento",
+          "result": "passed"
+        },
+        {
+          "detail": "Dos inicios crean exactamente un intento por inscrito",
+          "result": "passed"
+        },
+        {
+          "detail": "E1 espera apertura docente de la segunda pregunta",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Cerrar omisión de E2 requiere confirmación",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "E2 no responde la pregunta ya cerrada",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Cerrar la última pregunta finaliza la sesión",
+          "result": "passed"
+        },
+        {
+          "detail": "E1: cierre normal conserva escritura pendiente",
+          "result": "passed"
+        },
+        {
+          "detail": "E1: no publica nota incompleta",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "E2: cierre normal conserva escritura pendiente",
+          "result": "passed"
+        },
+        {
+          "detail": "E2: no publica nota incompleta",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Omisión aporta cero solo a E2; conserva los 2 puntos de E1",
+          "result": "passed"
+        },
+        {
+          "detail": "E1 termina con 5/5 y nota 20",
+          "result": "passed"
+        },
+        {
+          "detail": "E2 conserva cero por omisión: 3/5 y nota 12",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-11",
+      "fixture": "Pista y doble en intento 1; reenvío idéntico; intento 2 no recupera ninguno de los usos.",
+      "checks": [
+        {
+          "detail": "Primera petición autoriza la pista",
+          "result": "passed"
+        },
+        {
+          "detail": "Repetir petición recupera la misma pista",
+          "result": "passed"
+        },
+        {
+          "detail": "Reenvío de respuesta cerrada no crea duplicado",
+          "result": "passed"
+        },
+        {
+          "detail": "Se inicia la segunda oportunidad",
+          "result": "passed"
+        },
+        {
+          "detail": "Segundo intento conserva ambos usos consumidos",
+          "result": "passed"
+        },
+        {
+          "detail": "Segunda oportunidad no recupera pista",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Segunda oportunidad no recupera doble",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Doble rechazado no confirma la respuesta",
+          "result": "passed"
+        },
+        {
+          "detail": "Un único consumo de cada potenciador en toda la actividad",
+          "result": "passed"
+        },
+        {
+          "detail": "Mejor juego conserva 4 puntos; no suma reenvíos ni oportunidades",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-15",
+      "fixture": "Ocultar siempre; rechazos separados de racha y clasificación; nota agregada 20/20.",
+      "checks": [
+        {
+          "detail": "La configuración oculta rechaza ranking",
+          "result": "rejected-as-expected",
+          "code": "23514"
+        },
+        {
+          "detail": "La configuración oculta rechaza streaks",
+          "result": "rejected-as-expected",
+          "code": "23514"
+        },
+        {
+          "detail": "ACK sin puntos, acierto ni explicación",
+          "result": "passed"
+        },
+        {
+          "detail": "ACK sin revisiones privadas",
+          "result": "passed"
+        },
+        {
+          "detail": "readActivity sin soluciones, explicación, guía ni pista",
+          "result": "passed"
+        },
+        {
+          "detail": "readAttempt sin revisiones",
+          "result": "passed"
+        },
+        {
+          "detail": "Sin nota antes de publicación",
+          "result": "passed"
+        },
+        {
+          "detail": "Snapshot estudiantil sin versiones privadas",
+          "result": "passed"
+        },
+        {
+          "detail": "Snapshot acotado sin campos reservados",
+          "result": "passed"
+        },
+        {
+          "detail": "Snapshot acotado sin correcciones",
+          "result": "passed"
+        },
+        {
+          "detail": "Clasificación no disponible al estudiante",
+          "result": "passed"
+        },
+        {
+          "detail": "Docente conserva puntos del juego",
+          "result": "passed"
+        },
+        {
+          "detail": "Nota 20 publicada sin desglose reservado",
+          "result": "passed"
+        },
+        {
+          "detail": "Publicar agregado no habilita clasificación oculta",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-16",
+      "fixture": "Guiada diferida: dos participantes, pregunta automática 8 y manual 2; cerrar, corregir y publicar uno por uno.",
+      "checks": [
+        {
+          "detail": "Sesión cerrada normalmente",
+          "result": "passed"
+        },
+        {
+          "detail": "Cierre sin publicaciones no libera clasificación",
+          "result": "passed"
+        },
+        {
+          "detail": "Cierre sin publicaciones no libera soluciones",
+          "result": "passed"
+        },
+        {
+          "detail": "Corrección completa sin publicar conserva nota y revisión privadas",
+          "result": "passed"
+        },
+        {
+          "detail": "Completar corrección no equivale a publicar clasificación",
+          "result": "passed"
+        },
+        {
+          "detail": "Una publicación pendiente bloquea clasificación para E1",
+          "result": "passed"
+        },
+        {
+          "detail": "Una publicación pendiente bloquea clasificación para E2",
+          "result": "passed"
+        },
+        {
+          "detail": "E2 conserva soluciones privadas tras publicar E1",
+          "result": "passed"
+        },
+        {
+          "detail": "E2 conserva revisiones privadas tras publicar E1",
+          "result": "passed"
+        },
+        {
+          "detail": "Cierre y todas las publicaciones habilitan clasificación definitiva",
+          "result": "passed"
+        },
+        {
+          "detail": "E2 obtiene su revisión después de publicar",
+          "result": "passed"
+        },
+        {
+          "detail": "Una corrección posterior sin republicar no revela sus puntos mediante clasificación diferida",
+          "result": "passed"
+        },
+        {
+          "detail": "La corrección privada conserva la clasificación completa, incluidos equipos y estado",
+          "result": "passed"
+        },
+        {
+          "detail": "E1: proyección idéntica después de la revisión privada",
+          "result": "passed"
+        },
+        {
+          "detail": "E1: huella de sincronización idéntica después de la revisión privada",
+          "result": "passed"
+        },
+        {
+          "detail": "E2: proyección idéntica después de la revisión privada",
+          "result": "passed"
+        },
+        {
+          "detail": "E2: huella de sincronización idéntica después de la revisión privada",
+          "result": "passed"
+        },
+        {
+          "detail": "E2 conserva la nota y el desglose publicados hasta republicar",
+          "result": "passed"
+        },
+        {
+          "detail": "El docente conserva acceso a los puntos revisados todavía privados",
+          "result": "passed"
+        },
+        {
+          "detail": "La republicación explícita libera la clasificación revisada",
+          "result": "passed"
+        },
+        {
+          "detail": "El equipo se actualiza a promedio 9 solo al republicar",
+          "result": "passed"
+        }
+      ],
+      "privateRevisionObservation": {
+        "publishedPoints": [
+          10,
+          10
+        ],
+        "afterUnpublishedCorrection": {
+          "available": true,
+          "points": [
+            10,
+            10
+          ]
+        }
+      },
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-16 historial",
+      "fixture": "Mejor nota y mejor juego pertenecen a intentos distintos: base 6 con doble frente a base 10 sin doble.",
+      "checks": [
+        {
+          "detail": "Se publica la mejor nota del segundo intento, sin premiar el doble del primero",
+          "result": "passed"
+        },
+        {
+          "detail": "La clasificación conserva el mejor juego 12 del primer intento, distinto de la mejor nota",
+          "result": "passed"
+        },
+        {
+          "detail": "Corregir otro intento sin publicar conserva juego histórico 12",
+          "result": "passed"
+        },
+        {
+          "detail": "Corrección del otro intento no cambia la huella estudiantil",
+          "result": "passed"
+        },
+        {
+          "detail": "Docente ve el nuevo mejor juego 16",
+          "result": "passed"
+        },
+        {
+          "detail": "Republicar permite el mejor juego revisado 16 sin sustituirlo por la nota",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-18",
+      "fixture": "Tres participantes con puntos 10, 10, 8; actividad cerrada; segunda clasificación con revisión pendiente.",
+      "checks": [
+        {
+          "detail": "10, 10, 8 producen puestos 1, 1, 3",
+          "result": "passed"
+        },
+        {
+          "detail": "Clasificación cerrada y corregida es definitiva",
+          "result": "passed"
+        },
+        {
+          "detail": "Manual pendiente mantiene clasificación provisional después del cierre",
+          "result": "passed"
+        },
+        {
+          "detail": "Resolver la última corrección retira el estado provisional",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-19",
+      "fixture": "Equipo de dos: 10+6; equipo de tres: 12+12+0, E5 no inicia. Promedios esperados 8 y 8.",
+      "checks": [
+        {
+          "detail": "Promedios 8/8 empatan pese a tamaños 2/3",
+          "result": "passed"
+        },
+        {
+          "detail": "E5 aporta cero a clasificación",
+          "result": "passed"
+        },
+        {
+          "detail": "Ausencia de intento no crea corrección pendiente",
+          "result": "passed"
+        },
+        {
+          "detail": "Solo existen los cuatro intentos iniciados",
+          "result": "passed"
+        },
+        {
+          "detail": "No se publica nota cero para E5",
+          "result": "passed"
+        },
+        {
+          "detail": "E5 sigue sin iniciar y sin nota personal",
+          "result": "passed"
+        },
+        {
+          "detail": "E5 no recibe intento ficticio",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": "AP-20",
+      "fixture": "Equipos iniciados; docente propietario, E1, estudiante ajeno, docente ajeno y rol anónimo.",
+      "checks": [
+        {
+          "detail": "Rechaza cambiar lista congelada",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Rechaza volver a repartir equipos después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "detail": "Rechazos conservan listas originales",
+          "result": "passed"
+        },
+        {
+          "detail": "Docente relaciona cada alias con la cuenta",
+          "result": "passed"
+        },
+        {
+          "detail": "Proyección docente identifica a sus integrantes",
+          "result": "passed"
+        },
+        {
+          "detail": "Estudiante recibe mismos alias estables, equipos y puntos permitidos",
+          "result": "passed"
+        },
+        {
+          "detail": "Clasificación estudiantil contiene solo alias, equipo, puntos y puesto",
+          "result": "passed"
+        },
+        {
+          "detail": "Clasificación estudiantil sin UUID de cuentas",
+          "result": "passed"
+        },
+        {
+          "detail": "Clasificación estudiantil sin correos",
+          "result": "passed"
+        },
+        {
+          "detail": "Nueva consulta conserva alias",
+          "result": "passed"
+        },
+        {
+          "detail": "outsider no accede a clasificación ajena",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "detail": "otherTeacher no accede a clasificación ajena",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "detail": "Rol anónimo no ejecuta el contrato",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Auth y Storage mínimos; no verifica Supabase remoto, JWT ni transporte HTTP.",
+    "No verifica explicación visual de incompatibilidades, sonido, animación ni accesibilidad.",
+    "PGlite utiliza una conexión; no acredita carreras concurrentes ni capacidad.",
+    "No acredita otros escenarios AP por el número de aserciones."
+  ],
+  "status": "passed",
+  "completedAt": "2026-09-29T22:41:18.057Z"
+}
