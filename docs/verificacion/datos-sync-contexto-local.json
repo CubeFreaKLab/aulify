@@ -1,0 +1,425 @@
+{
+  "startedAt": "2026-09-30T00:53:24.411Z",
+  "migration": "20260930005228_aulify_sync_context_reads.sql",
+  "environment": "PGlite aislado; sin red ni concurrencia real.",
+  "checks": [
+    {
+      "name": "Conserva ACL, SECURITY DEFINER/INVOKER y search_path",
+      "result": "passed"
+    },
+    {
+      "name": "No introduce escrituras ni bloqueos de fila",
+      "result": "passed"
+    },
+    {
+      "name": "Quiz sin duración: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Quiz sin duración: a",
+      "result": "passed"
+    },
+    {
+      "name": "Quiz sin duración: b",
+      "result": "passed"
+    },
+    {
+      "name": "Quiz sin duración: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad sin participantes: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad sin participantes: a",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: otherTeacher",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: withdrawn",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: unapproved",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: unconfirmed",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: noProfile",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: missingIdentity",
+      "result": "passed"
+    },
+    {
+      "name": "Permiso denegado: anonymous",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad inexistente: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad no quiz: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad inexistente: a",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad no quiz: a",
+      "result": "passed"
+    },
+    {
+      "name": "Propietario también participante: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Propietario también participante: a",
+      "result": "passed"
+    },
+    {
+      "name": "Propietario también participante: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Sin publicar: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Sin publicar: a",
+      "result": "passed"
+    },
+    {
+      "name": "Sin publicar: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Materia archivada: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Materia archivada: a",
+      "result": "passed"
+    },
+    {
+      "name": "Materia archivada: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Materia en purga: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Materia en purga: a",
+      "result": "passed"
+    },
+    {
+      "name": "Materia en purga: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Sin contador común: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Sin contador común: a",
+      "result": "passed"
+    },
+    {
+      "name": "Sin contador común: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Sin contador propio: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Sin contador propio: a",
+      "result": "passed"
+    },
+    {
+      "name": "Sin contador propio: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Sin ajustes opcionales: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Sin ajustes opcionales: a",
+      "result": "passed"
+    },
+    {
+      "name": "Sin ajustes opcionales: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Sin cierre: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Sin cierre: a",
+      "result": "passed"
+    },
+    {
+      "name": "Sin cierre: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Antes de apertura: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Antes de apertura: a",
+      "result": "passed"
+    },
+    {
+      "name": "Antes de apertura: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Instante de apertura: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Instante de apertura: a",
+      "result": "passed"
+    },
+    {
+      "name": "Instante de apertura: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Instante de cierre: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Instante de cierre: a",
+      "result": "passed"
+    },
+    {
+      "name": "Instante de cierre: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Cierre vencido: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Cierre vencido: a",
+      "result": "passed"
+    },
+    {
+      "name": "Cierre vencido: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Duración sin ampliaciones: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Duración sin ampliaciones: a",
+      "result": "passed"
+    },
+    {
+      "name": "Duración sin ampliaciones: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Duración sin cierre común: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Duración sin cierre común: a",
+      "result": "passed"
+    },
+    {
+      "name": "Duración sin cierre común: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliaciones comunes y personales: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliaciones comunes y personales: a",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliaciones comunes y personales: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliación no limita intento sin duración: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliación no limita intento sin duración: a",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliación no limita intento sin duración: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Ningún intento abierto con duración: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Ningún intento abierto con duración: a",
+      "result": "passed"
+    },
+    {
+      "name": "Ningún intento abierto con duración: noParticipant",
+      "result": "passed"
+    },
+    {
+      "name": "Huella inicial: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Huella inicial: a",
+      "result": "passed"
+    },
+    {
+      "name": "Huella inicial: b",
+      "result": "passed"
+    },
+    {
+      "name": "Tras respuesta: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Tras respuesta: a",
+      "result": "passed"
+    },
+    {
+      "name": "Tras respuesta: b",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta invalida solo docente y autor",
+      "result": "passed"
+    },
+    {
+      "name": "Reintento idempotente",
+      "result": "passed"
+    },
+    {
+      "name": "Reintento conserva huella",
+      "result": "passed"
+    },
+    {
+      "name": "Antes de revisión privada: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Antes de revisión privada: a",
+      "result": "passed"
+    },
+    {
+      "name": "Antes de revisión privada: b",
+      "result": "passed"
+    },
+    {
+      "name": "Tras revisión privada: teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Tras revisión privada: a",
+      "result": "passed"
+    },
+    {
+      "name": "Tras revisión privada: b",
+      "result": "passed"
+    },
+    {
+      "name": "Revisión privada no modifica huellas estudiantiles",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación de nota: autor",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación de nota: compañero",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación de nota: docente",
+      "result": "passed"
+    },
+    {
+      "name": "Publicación invalida solo al estudiante destinatario",
+      "result": "passed"
+    },
+    {
+      "name": "Participante incorporado: docente",
+      "result": "passed"
+    },
+    {
+      "name": "Participante sin intento: estudiante",
+      "result": "passed"
+    },
+    {
+      "name": "Participante eliminado: docente",
+      "result": "passed"
+    },
+    {
+      "name": "Participante eliminado: estudiante",
+      "result": "passed"
+    },
+    {
+      "name": "Borrado conserva invalidación docente",
+      "result": "passed"
+    },
+    {
+      "name": "Participante reinsertado: docente",
+      "result": "passed"
+    },
+    {
+      "name": "Reinserción conserva identidad en la huella docente",
+      "result": "passed"
+    }
+  ],
+  "scriptSha256": "aadbd307e432c5e90d312424d67e803f6a7992b49966684c0847255b17911312",
+  "baselineMigrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql",
+    "20260930000631_aulify_teacher_review_projection.sql"
+  ],
+  "baselineFunctionSha256": "7fefecab32064643e4b645c92d19fa34413506d65fbbe20eadcadf7d05cd0c70",
+  "migrationSha256": "9f902396491da6a509dd3268dfcd2c8ae66296b1eb5eae5353e3008bfa1947c9",
+  "status": "passed",
+  "finishedAt": "2026-09-30T00:53:26.805Z",
+  "limitations": [
+    "Compara las funciones sobre el mismo estado y dentro de la misma transacción para fijar now(); clock_timestamp se valida por separado.",
+    "No mide PostgreSQL remoto, plan de producción, espera del pool, concurrencia, red, carga ni Q-06.",
+    "La candidata solo agrupa lecturas del polling; no demuestra que fueran la causa del p95 observado."
+  ]
+}

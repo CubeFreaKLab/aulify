@@ -1,0 +1,63 @@
+{
+  "observedAt": "2026-09-30T00:54:02.575Z",
+  "projectRef": "bnqyyumfmyexsqszglab",
+  "migration": "20260930005228_aulify_sync_context_reads.sql",
+  "sqlSha256": "9f902396491da6a509dd3268dfcd2c8ae66296b1eb5eae5353e3008bfa1947c9",
+  "applied": true,
+  "comparison": {
+    "student": {
+      "before": [
+        {
+          "value": {
+            "revision": "6b65769d2a77a004724c75ddc48eac7c",
+            "nextDeadline": "2026-09-30T01:27:30.518+00:00"
+          }
+        }
+      ],
+      "after": [
+        {
+          "value": {
+            "revision": "6b65769d2a77a004724c75ddc48eac7c",
+            "nextDeadline": "2026-09-30T01:27:30.518+00:00"
+          }
+        }
+      ]
+    },
+    "teacher": {
+      "before": [
+        {
+          "value": {
+            "revision": "f7d9c12018e2a171afcff2b1cdacfc2c",
+            "nextDeadline": "2026-09-30T01:27:30.518+00:00"
+          }
+        }
+      ],
+      "after": [
+        {
+          "value": {
+            "revision": "f7d9c12018e2a171afcff2b1cdacfc2c",
+            "nextDeadline": "2026-09-30T01:27:30.518+00:00"
+          }
+        }
+      ]
+    }
+  },
+  "security": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 41,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "count": 1,
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ],
+  "limitations": [
+    "Comparación acotada de una actividad y dos roles ficticios; el reloj serverTime se excluye.",
+    "No carga ni comprobación de Q-06. No se modificaron tablas, índices o permisos."
+  ]
+}
