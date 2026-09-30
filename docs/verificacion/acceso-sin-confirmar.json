@@ -1,0 +1,104 @@
+{
+  "startedAt": "2026-09-29T23:57:33.026Z",
+  "revision": "bb1bf43b651f378e84a6fe51d02b128c94d0330c",
+  "script": {
+    "path": "tools/datos/unconfirmed-access.mjs",
+    "sha256": "bd664815f8e7488d0637f535c994088bb07745bb94e4d56bf7d766fafe72ee4e"
+  },
+  "environment": "Aplicación compilada local y Supabase Auth real; cuentas ficticias nuevas sin confirmar",
+  "checks": [
+    {
+      "detail": "El servidor corresponde al build local registrado",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: cuenta preparada sin correo confirmado",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: Auth rechaza acceso y no emite sesión",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: la aplicación orienta a confirmar el correo",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: no hay cookie de sesión válida",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: operación de materia rechazada sin identidad confirmada",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: aula privada no expuesta",
+      "result": "passed"
+    },
+    {
+      "detail": "teacher: los intentos no confirman la cuenta",
+      "result": "passed"
+    },
+    {
+      "detail": "student: cuenta preparada sin correo confirmado",
+      "result": "passed"
+    },
+    {
+      "detail": "student: Auth rechaza acceso y no emite sesión",
+      "result": "passed"
+    },
+    {
+      "detail": "student: la aplicación orienta a confirmar el correo",
+      "result": "passed"
+    },
+    {
+      "detail": "student: no hay cookie de sesión válida",
+      "result": "passed"
+    },
+    {
+      "detail": "student: operación de materia rechazada sin identidad confirmada",
+      "result": "passed"
+    },
+    {
+      "detail": "student: aula privada no expuesta",
+      "result": "passed"
+    },
+    {
+      "detail": "student: los intentos no confirman la cuenta",
+      "result": "passed"
+    }
+  ],
+  "cleanup": [
+    {
+      "role": "teacher",
+      "removed": true
+    },
+    {
+      "role": "student",
+      "removed": true
+    }
+  ],
+  "limits": {
+    "maximumAccounts": 2,
+    "sentEmails": 0
+  },
+  "limitations": [
+    "No recorre el formulario de registro ni confirma enlaces por correo.",
+    "No comprueba SMTP, recuperación, rendimiento ni navegadores."
+  ],
+  "buildId": "Uh-fjoiC7EsPHOpmME_0K",
+  "status": "passed",
+  "completedAt": "2026-09-29T23:57:36.014Z",
+  "initialCleanup": [
+    {
+      "role": "teacher",
+      "removed": false
+    },
+    {
+      "role": "student",
+      "removed": false
+    }
+  ],
+  "cleanupMethod": "Eliminación transaccional de los dos perfiles ficticios, con verificación de identidad, ausencia de sesiones y referencias; eliminación por Auth Admin y lectura posterior 404.",
+  "cleanupVerifiedAt": "2026-09-30T00:03:34.167Z"
+}
