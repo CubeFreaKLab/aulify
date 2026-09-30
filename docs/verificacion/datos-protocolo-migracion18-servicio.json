@@ -1,0 +1,44 @@
+{
+  "window": {
+    "start": "2026-09-30T00:27:40Z",
+    "end": "2026-09-30T00:28:43Z"
+  },
+  "source": "Supabase unified edge_logs, consulta agregada posterior al ensayo",
+  "field": "response.origin_time",
+  "unit": "No confirmada en la referencia oficial consultada; se conserva el valor del proveedor, sin atribuirlo a duración SQL.",
+  "reference": "https://supabase.com/docs/guides/observability/log-field-reference",
+  "rows": [
+    {
+      "max_origin_time": 5681,
+      "mean_origin_time": 1658.1908212560386,
+      "p95_origin_time": 3874,
+      "path": "/rest/v1/rpc/aulify_activity_snapshot",
+      "requests": 414,
+      "status": "200",
+      "timed": 414
+    },
+    {
+      "max_origin_time": 5183,
+      "mean_origin_time": 1017.875,
+      "p95_origin_time": 3203,
+      "path": "/rest/v1/rpc/aulify_command",
+      "requests": 200,
+      "status": "200",
+      "timed": 200
+    },
+    {
+      "max_origin_time": 6443,
+      "mean_origin_time": 347.21728447815406,
+      "p95_origin_time": 1795,
+      "path": "/rest/v1/rpc/aulify_sync",
+      "requests": 9361,
+      "status": "200",
+      "timed": 9361
+    }
+  ],
+  "limitations": [
+    "No correlaciona solicitudes individuales con el generador.",
+    "Incluye 414 snapshots frente a 413 medidos; la ventana amplia puede incluir auditoría.",
+    "No contiene métricas de CPU, espera del pool ni tiempos internos de cada sentencia."
+  ]
+}
