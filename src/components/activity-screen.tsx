@@ -38,6 +38,7 @@ import {
 import { Button, Badge, EmptyState, PageHeading } from './ui';
 import { QuestionInput } from './question-input';
 import { ResourceReader } from './resource-reader';
+import { StaticAttemptHelp } from './help-guide';
 import '../styles/quiz.css';
 
 export function ActivityScreen({
@@ -470,6 +471,7 @@ function QuizPlayer({
       </header>
       <main id="contenido" className="quiz-canvas">
         {notices}
+        <StaticAttemptHelp />
         {signalError && (
           <p className="notice">
             No se pudo enviar una señal de visibilidad. Esto no modifica tu respuesta ni tu

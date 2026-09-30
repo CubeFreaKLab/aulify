@@ -1,0 +1,171 @@
+{
+  "formatVersion": 1,
+  "requirement": "RF-17 / AY-01–04 / AP-34",
+  "reportedLocalDate": "2026-09-29",
+  "guideVersion": 2,
+  "local": {
+    "mode": "Next.js desarrollo, datos ficticios del navegador",
+    "stats": {
+      "startTime": "2026-09-30T00:01:16.924Z",
+      "duration": 45569,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "scenario": "AP-34: una preferencia anterior permite invitación discreta a la nueva guía, sin diálogo automático",
+        "project": "chromium-escritorio",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 2557.0
+      },
+      {
+        "scenario": "AC-31/33/34: cinco pasos de teacher sin datos, teclado, retroceso y foco",
+        "project": "chromium-escritorio",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 4354.0
+      },
+      {
+        "scenario": "AC-31/33/34: cinco pasos de student sin datos, teclado, retroceso y foco",
+        "project": "chromium-escritorio",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 4230.0
+      },
+      {
+        "scenario": "AC-32: omitir persiste al volver y permite repetir desde Ayuda",
+        "project": "chromium-escritorio",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 4882.0
+      },
+      {
+        "scenario": "AP-34/AC-34: ayuda estática durante intento temporizado, sin superposición ni pausa",
+        "project": "chromium-escritorio",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 5788.0
+      },
+      {
+        "scenario": "AP-34: una preferencia anterior permite invitación discreta a la nueva guía, sin diálogo automático",
+        "project": "chromium-movil",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 2431.0
+      },
+      {
+        "scenario": "AC-31/33/34: cinco pasos de teacher sin datos, teclado, retroceso y foco",
+        "project": "chromium-movil",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 4243.0
+      },
+      {
+        "scenario": "AC-31/33/34: cinco pasos de student sin datos, teclado, retroceso y foco",
+        "project": "chromium-movil",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 4385.0
+      },
+      {
+        "scenario": "AC-32: omitir persiste al volver y permite repetir desde Ayuda",
+        "project": "chromium-movil",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 4936.0
+      },
+      {
+        "scenario": "AP-34/AC-34: ayuda estática durante intento temporizado, sin superposición ni pausa",
+        "project": "chromium-movil",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 5378.0
+      }
+    ],
+    "finalSourceHashes": [
+      {
+        "path": "src/domain/help.ts",
+        "sha256": "d29081d3fa75d7762d7685ebfc286ad8c5944daeb29fd6ab669026df13a038c0"
+      },
+      {
+        "path": "src/components/help-guide.tsx",
+        "sha256": "1ec5e508639cf3215c48d98e0399feca3e3436a0da70a51b5574474449e0d410"
+      },
+      {
+        "path": "src/components/workspace.tsx",
+        "sha256": "1f5f5851ac419e7d469ba5d1bc3dfc384cc0e82031dfd3dda460218212723f40"
+      },
+      {
+        "path": "src/components/activity-screen.tsx",
+        "sha256": "b58deda484e70c18a662ec2045545ddbd50aed45251f6a5a91d28199413d91c9"
+      },
+      {
+        "path": "tests/e2e/ayuda.spec.ts",
+        "sha256": "8cff9db53c2554181bc8edf01b890e04436dda5ebf2effe3e0dbf2ba6871747f"
+      },
+      {
+        "path": "tests/e2e/ayuda-integrada.spec.ts",
+        "sha256": "eb5b0273196ce52a4ba70ea6d90f6acb2681e6f4a9eeb1105343d215b5f09992"
+      }
+    ]
+  },
+  "remote": {
+    "mode": "Next.js desarrollo con Supabase real, una cuenta docente ficticia existente",
+    "stats": {
+      "startTime": "2026-09-29T23:54:44.53Z",
+      "duration": 25172.27,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "scenario": "AP-34 remoto: preferencia de la misma cuenta en sesiones independientes de escritorio y móvil",
+        "project": "chromium-escritorio",
+        "outcome": "expected",
+        "expected": "passed",
+        "attempts": 1,
+        "durationMs": 23800.0
+      }
+    ],
+    "contexts": 2,
+    "authenticatedAccesses": 3,
+    "outcomes": ["skipped", "completed", "completed recuperado"],
+    "sameAccount": true,
+    "otherDomainDataUnchanged": true,
+    "ownPreferencesOnly": true,
+    "newAccounts": 0,
+    "emailsSent": 0,
+    "schemaChanges": 0,
+    "note": "Ejecutado antes de los ajustes finales de foco y orden de guardado; esos ajustes se comprobaron en la suite local final."
+  },
+  "checks": {
+    "typescript": "passed",
+    "targetedEslint": "passed",
+    "keyboardAndFocus": "passed",
+    "reducedMotion": "passed",
+    "horizontalOverflow": "none observed",
+    "axeLastGuideStepBothRoles": "zero violations detected",
+    "timedAttempt": "clock progressed; business state unchanged; no dialog"
+  },
+  "limitations": [
+    "Chromium móvil emulado; no dispositivo físico",
+    "Sin lector de pantalla manual",
+    "Sin recrear el registro inicial real de ambos perfiles",
+    "No evidencia del servidor de producción ni de CI"
+  ]
+}

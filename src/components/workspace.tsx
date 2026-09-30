@@ -40,6 +40,7 @@ import { WorkspaceTransition } from './workspace-transition';
 import { ThemeSwitcher } from './theme';
 import { WorkspaceNavigation } from './workspace-navigation';
 import { ResourceReader } from './resource-reader';
+import { HelpGuide, HelpSteps } from './help-guide';
 import { SubjectManagement, ManualActivities } from './classroom-management';
 
 export function Workspace() {
@@ -275,9 +276,6 @@ function Dashboard({
 }) {
   const teacher = user.role === 'teacher';
   const router = useRouter();
-  const [help, setHelp] = useState(
-    !state.helpPreferences.some((p) => p.userId === user.id && p.status !== 'offered'),
-  );
   const activities = state.activities.filter((a) => subjects.some((s) => s.id === a.subjectId));
   const firstResource = state.resources.find((resource) => resource.ownerId === user.id);
   return (
@@ -297,6 +295,7 @@ function Dashboard({
           </Button>
         )}
       </PageHeading>
+      <HelpGuide state={state} user={user} placement="dashboard" />
       <section className="welcome-panel">
         <div className="welcome-copy">
           <h2>{teacher ? 'Una explicación puede ser el comienzo.' : 'Todo está conectado.'}</h2>
@@ -401,39 +400,6 @@ function Dashboard({
           </div>
         ))}
       </div>
-      <DialogPanel
-        open={help}
-        onClose={() => {
-          runDemo((r) => r.setHelpPreference(user.id, 'skipped'));
-          setHelp(false);
-        }}
-        title={teacher ? 'Tu primera clase, paso a paso' : 'Este es tu espacio para aprender'}
-      >
-        <HelpSteps teacher={teacher} />
-        <div className="dialog-actions">
-          <Button
-            variant="ghost"
-            onPress={() => {
-              runDemo((r) => r.setHelpPreference(user.id, 'skipped'));
-              setHelp(false);
-            }}
-          >
-            Ahora no
-          </Button>
-          <Button
-            onPress={() => {
-              runDemo((r) => r.setHelpPreference(user.id, 'completed'));
-              setHelp(false);
-              router.push(teacher ? '/demo/biblioteca' : '/demo/materias');
-            }}
-          >
-            Empezar a explorar
-          </Button>
-        </div>
-        <p className="muted" style={{ fontSize: 12, marginTop: 14 }}>
-          Puedes volver a esta guía desde Ayuda.
-        </p>
-      </DialogPanel>
     </>
   );
 }
@@ -845,44 +811,6 @@ function SubjectScreen({
   );
 }
 
-export function HelpSteps({ teacher }: { teacher: boolean }) {
-  return (
-    <div>
-      {(teacher
-        ? [
-            [
-              'Crea tu materia',
-              'Añade el curso y año. Comparte el código y aprueba a tus estudiantes.',
-            ],
-            [
-              'Prepara un recurso',
-              'Combina explicaciones con preguntas. Guarda el borrador y publica cuando esté listo.',
-            ],
-            [
-              'Acompaña y revisa',
-              'Lee las respuestas, corrige las escritas y publica las notas cuando estén listas.',
-            ],
-          ]
-        : [
-            ['Únete a tu clase', 'Usa el código que te dé tu docente y espera su aprobación.'],
-            [
-              'Lee, piensa y participa',
-              'Explora el recurso y responde a tu ritmo, según las reglas de la actividad.',
-            ],
-            ['Consulta tus resultados', 'Tus notas aparecen cuando el docente las publica.'],
-          ]
-      ).map(([title, text], i) => (
-        <div className="help-step" key={title}>
-          <span className="step-number">{i + 1}</span>
-          <div>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 function HelpScreen({
   state,
   user,
@@ -948,18 +876,7 @@ function HelpScreen({
                 ? 'Tus cambios se guardan en tu cuenta. Si pierdes la conexión, conserva abierta la página y espera antes de reintentar.'
                 : 'Estás explorando una clase con datos ficticios guardados en este navegador.'}
             </p>
-            <Button
-              variant="secondary"
-              style={{ marginTop: 20 }}
-              onPress={() =>
-                runDemo(
-                  (r) => r.setHelpPreference(user.id, 'offered'),
-                  'La guía volverá a aparecer al entrar a tu inicio.',
-                )
-              }
-            >
-              Volver a ofrecer la guía inicial
-            </Button>
+            <HelpGuide state={state} user={user} placement="help" />
             <Link className="button ghost" href="/demo">
               Ir a mi inicio
             </Link>
