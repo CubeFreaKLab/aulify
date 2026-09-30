@@ -9,6 +9,7 @@ const scriptPath = 'tools/datos/retention-shared-files-check.mjs';
 const reportPath = 'docs/verificacion/conservacion-archivos-compartidos.json';
 const prefix = `ap31-ap32-${new Date().toISOString().slice(0, 10)}-${randomUUID().slice(0, 8)}`;
 const bytesRoot = path.resolve('.local-private', prefix);
+await fs.mkdir(path.dirname(bytesRoot), { recursive: true });
 await fs.mkdir(bytesRoot, { recursive: false });
 const hash = (value) => createHash('sha256').update(value).digest('hex');
 const report = {
