@@ -1,43 +1,40 @@
 .theme-switcher {
   display: inline-flex;
-  width: fit-content;
-  padding: 3px;
-  gap: 2px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--paper);
-}
-.theme-switcher button {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  min-height: 38px;
-  min-width: 40px;
-  padding: 7px 10px;
-  border: 0;
-  border-radius: 8px;
-  color: var(--muted);
-  background: transparent;
-  font-size: 12px;
-}
-.theme-switcher button:hover {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
   color: var(--ink);
+  cursor: pointer;
+}
+.theme-switcher:hover {
   background: var(--surface-muted);
 }
-.theme-switcher button[aria-pressed='true'] {
-  color: var(--ink);
-  background: var(--surface-muted);
+.theme-switcher:focus-visible {
+  outline-offset: 3px;
 }
-.theme-switcher.compact button {
-  padding: 7px;
+/* Circle reveal, following the mask pattern at theme-toggle.rdsx.dev. */
+html[data-theme-transition='circle']::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+  mix-blend-mode: normal;
 }
-.theme-switcher button:focus-visible {
-  outline-offset: 1px;
+html[data-theme-transition='circle']::view-transition-new(root) {
+  z-index: 2;
+  mix-blend-mode: normal;
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="white"/></svg>')
+    center / 0 no-repeat;
+  animation: theme-circle 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-::view-transition-group(root) {
-  animation-duration: 230ms;
-  animation-timing-function: var(--ease-standard);
+@keyframes theme-circle {
+  to {
+    mask-size: 200vmax;
+  }
 }
 .sidebar-bottom .theme-switcher {
   margin: 8px 0 12px;
@@ -45,26 +42,19 @@
 :root[data-theme='dark'] img[src='/brand/aulify-logo.svg'] {
   content: url('/brand/aulify-logo-white.svg');
 }
-:root[data-theme='dark'] .subject-card-head {
-  background: #263b31;
-}
-:root[data-theme='dark'] .subject-card:nth-child(2) .subject-card-head {
-  background: #3c362b;
-}
-:root[data-theme='dark'] .subject-card:nth-child(3) .subject-card-head {
-  background: #2e3642;
-}
-:root[data-theme='dark'] .auth-story {
-  background: #25362d;
+:root[data-theme='dark'] .subject-card-head,
+:root[data-theme='dark'] .subject-card:nth-child(2) .subject-card-head,
+:root[data-theme='dark'] .subject-card:nth-child(3) .subject-card-head,
+:root[data-theme='dark'] .auth-story,
+:root[data-theme='dark'] .welcome-art {
+  background: #282828;
 }
 :root[data-theme='dark'] .auth-illustration img {
   mix-blend-mode: normal;
 }
 :root[data-theme='dark'] .finish-icon,
 :root[data-theme='dark'] .powerup[aria-pressed='true'],
-:root[data-theme='dark'] .help-step-number {
-  color: var(--on-mint);
-}
+:root[data-theme='dark'] .help-step-number,
 :root[data-theme='dark'] .nav-link.active,
 :root[data-theme='dark'] .avatar:not(.dark),
 :root[data-theme='dark'] .step-number,
@@ -89,13 +79,10 @@
   background: var(--white);
   border-color: var(--line);
 }
-:root[data-theme='dark'] .welcome-art {
-  background: #27382e;
-}
 :root[data-theme='dark'] .notice,
 :root[data-theme='dark'] .auth-status,
 :root[data-theme='dark'] .quiz-feedback {
-  border-color: #45624f;
+  border-color: #555;
 }
 :root[data-theme='dark'] .notice.error {
   border-color: #85564e;
@@ -104,20 +91,10 @@
 :root[data-theme='dark'] .quiz-feedback.incorrect {
   border-color: #7c6a43;
 }
-/* The illustrated sheets keep their ink-on-paper identity in both themes. */
-:root[data-theme='dark'] .l-paper {
-  --ink: #17201a;
-  --white: #e9eee6;
-  --surface-muted: #d8e2d7;
-  --line-strong: #849789;
-  color: var(--ink);
-  border-color: #b0bcb0;
-  box-shadow: 4px 7px 0 #00000020;
-}
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(root),
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  html[data-theme-transition='circle']::view-transition-old(root),
+  html[data-theme-transition='circle']::view-transition-new(root) {
     animation: none;
+    mask: none;
   }
 }

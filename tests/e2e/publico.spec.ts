@@ -2,51 +2,27 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { expectLoadedImages, expectNoHorizontalOverflow } from './helpers';
 
-test('landing: marca, ilustraciones, vínculos y pregunta pública operativos', async ({
-  page,
-}, testInfo) => {
+test('inicio mínimo: marca y accesos operativos', async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Que tu clase');
-  await expect(page.getByRole('link', { name: 'Explorar una clase', exact: true })).toHaveAttribute(
-    'href',
-    '/demo?perfil=docente',
-  );
-  await expect(page.getByRole('link', { name: 'Soy estudiante', exact: true })).toHaveAttribute(
-    'href',
-    '/demo?perfil=estudiante',
-  );
+  await expect(page.getByRole('heading', { level: 1, name: 'Aulify' })).toBeVisible();
+  for (const [name, href] of [
+    ['Entrar', '/acceso'],
+    ['Registrarse', '/registro'],
+    ['Demo docente', '/demo?perfil=docente'],
+    ['Demo estudiante', '/demo?perfil=estudiante'],
+  ]) {
+    await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute('href', href);
+  }
+  await expect(page.locator('.theme-switcher')).toHaveCount(1);
   await expectLoadedImages(page);
   await expectNoHorizontalOverflow(page);
-  const example = page.locator('#probar');
-  await page.getByRole('link', { name: 'Probar una pregunta', exact: true }).click();
-  await expect(example.getByRole('button', { name: 'Responder', exact: true })).toBeDisabled();
-  await example.getByRole('radio').first().check();
-  await example.getByRole('button', { name: 'Responder', exact: true }).click();
-  await expect(example.getByRole('button', { name: /Siguiente/ })).toBeVisible();
-  await expect(example.getByText(/no generan una nota/)).toBeVisible();
-  await testInfo.attach('landing', {
+  await testInfo.attach('inicio', {
     body: await page.screenshot({ fullPage: true }),
     contentType: 'image/png',
   });
   expect(errors).toEqual([]);
-});
-
-test('landing: movimiento reducido mantiene la escena estable al desplazarse', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
-  const scene = page.getByRole('group', { name: /Un cuaderno, explicaciones y preguntas/ });
-  await expect(scene).toBeVisible();
-  const book = scene.locator('.l-scene-book');
-  const before = await book.evaluate((element) => getComputedStyle(element).transform);
-  await scene.scrollIntoViewIfNeeded();
-  await page.mouse.wheel(0, 400);
-  await expect
-    .poll(() => book.evaluate((element) => getComputedStyle(element).transform))
-    .toBe(before);
-  await expect(page.getByRole('link', { name: 'Explorar una clase', exact: true })).toBeAttached();
-  await expectNoHorizontalOverflow(page);
 });
 
 test('landing y acceso conservan reflujo a 320 píxeles CSS', async ({ page }) => {

@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useSyncExternalStore } from 'react';
 import { flushSync } from 'react-dom';
-import { Monitor, Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 
 type Theme = 'system' | 'light' | 'dark';
 const storageKey = 'aulify.theme';
@@ -61,8 +61,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       document.startViewTransition &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
+      document.documentElement.dataset.themeTransition = 'circle';
       const transition = document.startViewTransition(update);
-      void transition.finished.catch(() => {});
+      void transition.finished
+        .catch(() => {})
+        .finally(() => {
+          delete document.documentElement.dataset.themeTransition;
+        });
     } else update();
   }, []);
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
@@ -82,34 +87,18 @@ export function useResolvedTheme() {
 }
 
 export function ThemeSwitcher({ compact = false }: { compact?: boolean }) {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
+  const dark = useResolvedTheme() === 'dark';
+  const label = dark ? 'Tema claro' : 'Tema oscuro';
   return (
-    <div
+    <button
       className={`theme-switcher${compact ? ' compact' : ''}`}
-      role="group"
-      aria-label="Apariencia"
+      type="button"
+      aria-label={label}
+      title={label}
+      onClick={() => setTheme(dark ? 'light' : 'dark')}
     >
-      {(
-        [
-          { value: 'light', label: 'Tema claro', icon: Sun },
-          { value: 'dark', label: 'Tema oscuro', icon: Moon },
-          { value: 'system', label: 'Tema del sistema', icon: Monitor },
-        ] as const
-      ).map(({ value, label, icon: Icon }) => (
-        <button
-          key={value}
-          type="button"
-          aria-label={label}
-          title={label}
-          aria-pressed={theme === value}
-          onClick={() => setTheme(value)}
-        >
-          <Icon size={17} aria-hidden="true" />
-          {!compact && (
-            <span>{value === 'system' ? 'Sistema' : value === 'light' ? 'Claro' : 'Oscuro'}</span>
-          )}
-        </button>
-      ))}
-    </div>
+      {dark ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
+    </button>
   );
 }
