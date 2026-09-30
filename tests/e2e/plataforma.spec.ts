@@ -47,8 +47,11 @@ test('ayuda opcional, navegación por rol y acceso no concedido a herramientas d
 
 test('diálogo por teclado devuelve foco y no altera los datos al cerrar', async ({ page }) => {
   await enterDemo(page, 'docente');
+  // El cierre de la ayuda devuelve el foco al título en el siguiente frame.
+  await expect(page.getByRole('heading', { name: 'Hola, Elena.', exact: true })).toBeFocused();
   const trigger = page.getByRole('button', { name: 'Cambiar perfil', exact: true });
   await trigger.focus();
+  await expect(trigger).toBeFocused();
   await page.keyboard.press('Enter');
   const dialog = page.getByRole('dialog', { name: 'Explora otro lado de la clase' });
   await expect(dialog).toBeVisible();
