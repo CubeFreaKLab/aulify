@@ -2197,5 +2197,139 @@
       }
     ],
     "evidenceSource": "GitHub REST API: run and jobs; logs and artifacts not downloaded for this entry"
+  },
+  {
+    "id": 36663401624,
+    "name": "Calidad de Aulify",
+    "event": "push",
+    "sha": "493a5b1e94e238b4823d391c72dcabf2da936617",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36663401624",
+    "createdAt": "2026-09-30T03:13:08Z",
+    "updatedAt": "2026-09-30T03:18:57Z",
+    "observedAt": "2026-09-30T03:22:59.373Z",
+    "jobs": [
+      {
+        "id": 109722839422,
+        "name": "Tipos, reglas y recorridos de demostración",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar registro de tiempos sin datos privados",
+            "conclusion": "success"
+          },
+          {
+            "name": "Rechazar aprobación de carga con muestras incompletas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar retención desde el cierre efectivo",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar retiro, resolución y restauración",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar casos numéricos de puntuación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia y permisos de la proyección docente",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar proyección de revisiones y respuestas omitidas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar conservación de archivos y reintentos de purga",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar participación, equipos y privacidad de publicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar revisiones independientes por participante",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia del contexto de sincronización",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar proyección y permisos de actividad estudiantil",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "success"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "evidenceSource": "GitHub REST API: run and jobs; logs and artifacts not downloaded for this entry"
   }
 ]

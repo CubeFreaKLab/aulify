@@ -1,0 +1,200 @@
+{
+  "fixture": {
+    "runId": "15291357-c248-41ec-a85d-6ec9ae7a8666",
+    "subject": "6f3aad45-edfb-4ae8-a86d-fa066fd15b44",
+    "control": "4d822327-3ade-4e7b-ad5e-57f920636b8e",
+    "resource": "8051eb6e-4e1a-4d49-afea-317a4404ee02",
+    "version": "7475b244-98ee-4e6c-9f2b-0dd2b59db6e0",
+    "submission": "fa3b633d-049a-498e-9fa1-1c8e42ffb685",
+    "shared": "1a460a34-a3b6-4c02-b09a-50eba130bae9",
+    "exclusiveA": "d93ab51e-6f12-4f22-907b-af53461d247f",
+    "exclusiveB": "d099cf79-230f-4601-a86a-c91efc088242",
+    "jobId": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe"
+  },
+  "phases": {
+    "prepared": {
+      "files": [
+        {
+          "id": "1a460a34-a3b6-4c02-b09a-50eba130bae9",
+          "job": null,
+          "state": "ready",
+          "objectExists": true
+        },
+        {
+          "id": "d099cf79-230f-4601-a86a-c91efc088242",
+          "job": null,
+          "state": "ready",
+          "objectExists": true
+        },
+        {
+          "id": "d93ab51e-6f12-4f22-907b-af53461d247f",
+          "job": null,
+          "state": "ready",
+          "objectExists": true
+        }
+      ],
+      "jobId": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+      "queue": null,
+      "action": "prepare",
+      "checkedAt": "2026-09-30T03:20:23.819955+00:00",
+      "protected": {
+        "draft": "4015ffc1f0ed35b398613c9c367f8720",
+        "control": "72f860729d8bbf750e39d1da1202d095",
+        "version": "2c434a96cb2451daf072a04d5e6e46f6",
+        "subjects": "63b9ca24295a6e3050fa484233f81e70",
+        "otherFiles": "58f4f8ba5fcbaeb182d46daf4f18c0f0",
+        "authAccounts": 208,
+        "profileIdentities": "1ba34258ced8444e211e53ad797fb9a0"
+      },
+      "subjectExists": true,
+      "sharedDraftRefs": 1,
+      "sharedPublishedRefs": 1,
+      "sharedSubmissionRefs": 1
+    },
+    "firstTick": {
+      "files": [
+        {
+          "id": "1a460a34-a3b6-4c02-b09a-50eba130bae9",
+          "job": null,
+          "state": "ready",
+          "objectExists": true
+        },
+        {
+          "id": "d099cf79-230f-4601-a86a-c91efc088242",
+          "job": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+          "state": "delete_pending",
+          "objectExists": true
+        },
+        {
+          "id": "d93ab51e-6f12-4f22-907b-af53461d247f",
+          "job": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+          "state": "delete_pending",
+          "objectExists": true
+        }
+      ],
+      "jobId": null,
+      "queue": {
+        "files": [
+          {
+            "id": "d93ab51e-6f12-4f22-907b-af53461d247f",
+            "path": "c471dab7-9f83-4f01-9920-49231e6872b6/d93ab51e-6f12-4f22-907b-af53461d247f",
+            "bucket": "aulify-files"
+          },
+          {
+            "id": "d099cf79-230f-4601-a86a-c91efc088242",
+            "path": "c471dab7-9f83-4f01-9920-49231e6872b6/d099cf79-230f-4601-a86a-c91efc088242",
+            "bucket": "aulify-files"
+          }
+        ]
+      },
+      "action": "tick",
+      "checkedAt": "2026-09-30T03:20:34.023966+00:00",
+      "protected": {
+        "draft": "4015ffc1f0ed35b398613c9c367f8720",
+        "control": "72f860729d8bbf750e39d1da1202d095",
+        "version": "2c434a96cb2451daf072a04d5e6e46f6",
+        "subjects": "63b9ca24295a6e3050fa484233f81e70",
+        "otherFiles": "58f4f8ba5fcbaeb182d46daf4f18c0f0",
+        "authAccounts": 208,
+        "profileIdentities": "1ba34258ced8444e211e53ad797fb9a0"
+      },
+      "subjectExists": false,
+      "sharedDraftRefs": 1,
+      "sharedPublishedRefs": 1,
+      "sharedSubmissionRefs": 0
+    },
+    "partialRetry": {
+      "job": {
+        "id": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+        "phase": "objects",
+        "status": "running",
+        "completedAt": null
+      },
+      "files": [
+        {
+          "id": "1a460a34-a3b6-4c02-b09a-50eba130bae9",
+          "job": null,
+          "state": "ready",
+          "objectExists": true
+        },
+        {
+          "id": "d099cf79-230f-4601-a86a-c91efc088242",
+          "job": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+          "state": "delete_pending",
+          "objectExists": true
+        },
+        {
+          "id": "d93ab51e-6f12-4f22-907b-af53461d247f",
+          "job": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+          "state": "delete_pending",
+          "objectExists": false
+        }
+      ],
+      "jobId": null,
+      "queue": {
+        "files": [
+          {
+            "id": "d93ab51e-6f12-4f22-907b-af53461d247f",
+            "path": "c471dab7-9f83-4f01-9920-49231e6872b6/d93ab51e-6f12-4f22-907b-af53461d247f",
+            "bucket": "aulify-files"
+          },
+          {
+            "id": "d099cf79-230f-4601-a86a-c91efc088242",
+            "path": "c471dab7-9f83-4f01-9920-49231e6872b6/d099cf79-230f-4601-a86a-c91efc088242",
+            "bucket": "aulify-files"
+          }
+        ]
+      },
+      "action": "tick",
+      "checkedAt": "2026-09-30T03:21:16.810928+00:00",
+      "protected": {
+        "draft": "4015ffc1f0ed35b398613c9c367f8720",
+        "control": "72f860729d8bbf750e39d1da1202d095",
+        "version": "2c434a96cb2451daf072a04d5e6e46f6",
+        "subjects": "63b9ca24295a6e3050fa484233f81e70",
+        "otherFiles": "58f4f8ba5fcbaeb182d46daf4f18c0f0",
+        "authAccounts": 208,
+        "profileIdentities": "1ba34258ced8444e211e53ad797fb9a0"
+      },
+      "subjectExists": false,
+      "sharedDraftRefs": 1,
+      "sharedPublishedRefs": 1,
+      "sharedSubmissionRefs": 0
+    },
+    "finalTick": {
+      "job": {
+        "id": "d7e61772-ac8f-40f7-aff3-f8520ef75cfe",
+        "phase": "records",
+        "status": "done",
+        "completedAt": "2026-09-30T03:21:26.228734+00:00"
+      },
+      "files": [
+        {
+          "id": "1a460a34-a3b6-4c02-b09a-50eba130bae9",
+          "job": null,
+          "state": "ready",
+          "objectExists": true
+        }
+      ],
+      "jobId": null,
+      "queue": {
+        "files": []
+      },
+      "action": "tick",
+      "checkedAt": "2026-09-30T03:21:36.456332+00:00",
+      "protected": {
+        "draft": "4015ffc1f0ed35b398613c9c367f8720",
+        "control": "72f860729d8bbf750e39d1da1202d095",
+        "version": "2c434a96cb2451daf072a04d5e6e46f6",
+        "subjects": "63b9ca24295a6e3050fa484233f81e70",
+        "otherFiles": "58f4f8ba5fcbaeb182d46daf4f18c0f0",
+        "authAccounts": 208,
+        "profileIdentities": "1ba34258ced8444e211e53ad797fb9a0"
+      },
+      "subjectExists": false,
+      "sharedDraftRefs": 1,
+      "sharedPublishedRefs": 1,
+      "sharedSubmissionRefs": 0
+    }
+  }
+}

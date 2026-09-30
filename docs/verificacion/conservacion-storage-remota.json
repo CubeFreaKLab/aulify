@@ -1,0 +1,158 @@
+{
+  "startedAt": "2026-09-30T03:17:47.657Z",
+  "environment": "Supabase remoto, PostgreSQL y Storage privados",
+  "runId": "15291357-c248-41ec-a85d-6ec9ae7a8666",
+  "checks": [
+    {
+      "label": "El contrato de entrega rechaza el archivo de otra cuenta",
+      "result": "passed",
+      "at": "2026-09-30T03:17:55.729Z"
+    },
+    {
+      "label": "Tres objetos reales conservan sus bytes y metadatos",
+      "result": "passed",
+      "at": "2026-09-30T03:17:57.469Z"
+    },
+    {
+      "label": "La materia vencida no se restaura",
+      "result": "passed",
+      "at": "2026-09-30T03:20:42.378Z"
+    },
+    {
+      "label": "La confirmación rechaza metadatos con objetos todavía presentes",
+      "result": "passed",
+      "at": "2026-09-30T03:20:42.592Z"
+    },
+    {
+      "label": "El objeto compartido conserva los bytes tras retirar la materia",
+      "result": "passed",
+      "at": "2026-09-30T03:20:42.846Z"
+    },
+    {
+      "label": "El docente conserva acceso autorizado al archivo de biblioteca",
+      "result": "passed",
+      "at": "2026-09-30T03:20:43.017Z"
+    },
+    {
+      "label": "Un borrado parcial no permite confirmar el lote completo",
+      "result": "passed",
+      "at": "2026-09-30T03:20:43.520Z"
+    },
+    {
+      "label": "El segundo objeto sigue presente después del fallo parcial",
+      "result": "passed",
+      "at": "2026-09-30T03:20:43.824Z"
+    },
+    {
+      "label": "El reintento admite repetir el borrado y elimina el segundo objeto",
+      "result": "passed",
+      "at": "2026-09-30T03:21:26.273Z"
+    },
+    {
+      "label": "Confirma ambos metadatos sólo después de retirar sus objetos",
+      "result": "passed",
+      "at": "2026-09-30T03:21:26.521Z"
+    },
+    {
+      "label": "Repetir la confirmación no duplica la eliminación",
+      "result": "passed",
+      "at": "2026-09-30T03:21:26.718Z"
+    },
+    {
+      "label": "La biblioteca conserva sus bytes íntegros al terminar el reintento",
+      "result": "passed",
+      "at": "2026-09-30T03:21:26.775Z"
+    },
+    {
+      "label": "El fixture vencido existe antes del mantenimiento",
+      "result": "passed"
+    },
+    {
+      "label": "Tres metadatos y objetos presentes antes de purgar",
+      "result": "passed"
+    },
+    {
+      "label": "Los tres objetos comienzan listos y presentes",
+      "result": "passed"
+    },
+    {
+      "label": "Topología compartida comprobada antes de purgar",
+      "result": "passed"
+    },
+    {
+      "label": "La cola inicial contiene sólo los dos exclusivos",
+      "result": "passed"
+    },
+    {
+      "label": "La materia vencida se elimina con sus relaciones",
+      "result": "passed"
+    },
+    {
+      "label": "Se retira la referencia vencida al compartido",
+      "result": "passed"
+    },
+    {
+      "label": "El trabajo queda en curso mientras faltan bytes",
+      "result": "passed"
+    },
+    {
+      "label": "El reintento ofrece los mismos pendientes sin duplicación",
+      "result": "passed"
+    },
+    {
+      "label": "El fallo parcial dejó dos metadatos y un solo objeto exclusivo",
+      "result": "passed"
+    },
+    {
+      "label": "El trabajo sólo finaliza tras confirmar ambos objetos",
+      "result": "passed"
+    },
+    {
+      "label": "El mantenimiento final no devuelve objetos ya completados",
+      "result": "passed"
+    },
+    {
+      "label": "Sólo permanece el objeto compartido autorizado",
+      "result": "passed"
+    },
+    {
+      "label": "Biblioteca y versión conservan sus referencias",
+      "result": "passed"
+    },
+    {
+      "label": "firstTick: materias ajenas, control, biblioteca, otros archivos e identidades conservados",
+      "result": "passed"
+    },
+    {
+      "label": "partialRetry: materias ajenas, control, biblioteca, otros archivos e identidades conservados",
+      "result": "passed"
+    },
+    {
+      "label": "finalTick: materias ajenas, control, biblioteca, otros archivos e identidades conservados",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Cuentas ficticias existentes; no se prueba SMTP.",
+    "La referencia biblioteca/entrega se siembra por SQL como topología histórica. El comando público rechaza el archivo ajeno.",
+    "El vencimiento se prepara con fechas sintéticas, explícitas; no representa treinta días transcurridos.",
+    "El fallo parcial se introduce omitiendo un borrado antes de confirmar, sin simular una caída del proveedor.",
+    "Ejecución manual controlada; no acredita todavía el plazo de la ejecución programada ni la carrera remota restauración/purga."
+  ],
+  "status": "passed",
+  "completedStorageAt": "2026-09-30T03:21:26.775Z",
+  "databaseEvidence": "conservacion-storage-sql.json",
+  "manualEligibilityToCompletionSeconds": 62.409,
+  "timingScope": "Tiempo real del ensayo manual desde elegibilidad sintética; no latencia del cron ni espera real de treinta días.",
+  "scripts": [
+    {
+      "path": "tools/datos/retention-storage-remote.mjs",
+      "sha256": "08aacab81e6f6cdedf5f91710d944dfb0c52404f277c67130322ca62cf88c765"
+    },
+    {
+      "path": "tools/datos/retention-storage-state.sql",
+      "sha256": "663fb23006bd90ac981f7c58557dcb95a6e9bd23e0300c99553826a1b6f4b79c"
+    }
+  ],
+  "completedAt": "2026-09-30T03:22:58.483Z"
+}

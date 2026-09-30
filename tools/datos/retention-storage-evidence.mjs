@@ -1,0 +1,35 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const path='docs/verificacion/conservacion-storage-remota.json';
+const report=JSON.parse(await fs.readFile(path,'utf8'));
+const evidence=JSON.parse(await fs.readFile('docs/verificacion/conservacion-storage-sql.json','utf8'));
+const {fixture:f,phases:p}=evidence;
+assert.equal(report.runId,f.runId);assert.equal(report.status,'storage-steps-passed');
+const equal=(actual,expected,label)=>{assert.deepEqual(actual,expected);report.checks.push({label,result:'passed'});};
+const queueIds=phase=>phase.queue.files.map(file=>file.id).sort();
+equal(p.prepared.subjectExists,true,'El fixture vencido existe antes del mantenimiento');
+equal(p.prepared.files.length,3,'Tres metadatos y objetos presentes antes de purgar');
+equal(p.prepared.files.every(file=>file.state==='ready'&&file.objectExists),true,'Los tres objetos comienzan listos y presentes');
+equal([p.prepared.sharedDraftRefs,p.prepared.sharedPublishedRefs,p.prepared.sharedSubmissionRefs],[1,1,1],'Topología compartida comprobada antes de purgar');
+equal(queueIds(p.firstTick),[f.exclusiveA,f.exclusiveB].sort(),'La cola inicial contiene sólo los dos exclusivos');
+equal(p.firstTick.subjectExists,false,'La materia vencida se elimina con sus relaciones');
+equal(p.firstTick.sharedSubmissionRefs,0,'Se retira la referencia vencida al compartido');
+equal(p.partialRetry.job.status,'running','El trabajo queda en curso mientras faltan bytes');
+equal(queueIds(p.partialRetry),[f.exclusiveA,f.exclusiveB].sort(),'El reintento ofrece los mismos pendientes sin duplicación');
+equal(p.partialRetry.files.filter(file=>file.id!==f.shared).map(file=>file.objectExists).sort(),[false,true],'El fallo parcial dejó dos metadatos y un solo objeto exclusivo');
+equal(p.finalTick.job.status,'done','El trabajo sólo finaliza tras confirmar ambos objetos');
+equal(queueIds(p.finalTick),[],'El mantenimiento final no devuelve objetos ya completados');
+equal(p.finalTick.files.map(file=>({id:file.id,state:file.state,exists:file.objectExists})),[{id:f.shared,state:'ready',exists:true}],'Sólo permanece el objeto compartido autorizado');
+equal([p.finalTick.sharedDraftRefs,p.finalTick.sharedPublishedRefs],[1,1],'Biblioteca y versión conservan sus referencias');
+for(const [name,phase]of Object.entries(p)){
+ if(name==='prepared')continue;
+ equal(phase.protected,p.prepared.protected,`${name}: materias ajenas, control, biblioteca, otros archivos e identidades conservados`);
+}
+report.databaseEvidence='conservacion-storage-sql.json';
+report.manualEligibilityToCompletionSeconds=(Date.parse(p.finalTick.job.completedAt)-Date.parse(p.prepared.checkedAt))/1000;
+report.timingScope='Tiempo real del ensayo manual desde elegibilidad sintética; no latencia del cron ni espera real de treinta días.';
+report.scripts=await Promise.all(['tools/datos/retention-storage-remote.mjs','tools/datos/retention-storage-state.sql'].map(async path=>({path,sha256:createHash('sha256').update(await fs.readFile(path)).digest('hex')})));
+report.status='passed';report.completedAt=new Date().toISOString();
+await fs.writeFile(path,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({status:report.status,checks:report.checks.length,manualSeconds:report.manualEligibilityToCompletionSeconds}));

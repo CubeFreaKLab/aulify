@@ -12,6 +12,8 @@ Una unidad posterior corrige [conservación de señales](verificacion/conservaci
 
 El CI [36662286541](https://github.com/CubeFreaKLab/aulify/actions/runs/36662286541) aprobó `c0f67a3`, incluido el drenaje del ejecutor y la alineación de la migración 21. Posteriormente, cuatro comprobaciones transaccionales en PostgreSQL remoto verificaron la frontera de conservación de señales y la resolución docente; todos los efectos del ensayo se revirtieron. Esto cierra el caso funcional AP-28, sin acreditar la purga operativa de archivos ni su plazo.
 
+El CI [36663401624](https://github.com/CubeFreaKLab/aulify/actions/runs/36663401624) aprobó `493a5b1`, con el registro de tiempos por etapa. Una [verificación remota de Storage](verificacion/conservacion-storage-remota.md) posterior aprobó 29 comprobaciones: conserva el archivo compartido, elimina los exclusivos y completa un reintento después de un borrado parcial. AP-32 queda cubierto; AP-31 aún requiere carrera remota y plazo programado. No se ha repetido la carga sostenida.
+
 ## Revisión visual más reciente
 
 Se simplificó el editor para priorizar el documento, se corrigieron superficies y menús del tema oscuro y se ajustó la composición de las ilustraciones en móvil. La [primera revisión](diseno/revision-editor-apariencia-2026-09-29.md) conserva su evidencia. La [revisión de biblioteca y editor](diseno/revision-biblioteca-editor-2026-09-29.md) incorpora navegación móvil con gestión de foco, muestras reales del contenido, imágenes ajustables sin deformación, video con carga explícita y lectura que conserva formato y paleta.
