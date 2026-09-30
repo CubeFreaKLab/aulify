@@ -1,0 +1,148 @@
+{
+  "capturedAt": "2026-09-30T00:12:57.066Z",
+  "environment": "Next.js producción local",
+  "url": "http://127.0.0.1:3001",
+  "buildId": "NJgfZnpvHJ7YBpHn4hEBZ",
+  "browser": "153.0.8010.12",
+  "data": "Datos ficticios locales de /demo; sin sesiones remotas",
+  "externalRequestsDenied": 0,
+  "e2e": {
+    "suite": "tests/e2e/ayuda.spec.ts",
+    "stats": {
+      "startTime": "2026-09-30T00:10:34.057Z",
+      "duration": 16934.363999999998,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "captures": [
+    {
+      "filename": "docente-ofrecimiento-escritorio.png",
+      "role": "docente",
+      "moment": "Invitación inicial opcional",
+      "route": "/demo",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "mobileEmulation": false,
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "fullPage": false,
+      "viewportWidth": 1440,
+      "scrollWidth": 1440,
+      "dialogCount": 1,
+      "capturedAt": "2026-09-30T00:12:55.104Z",
+      "sha256": "a1d4a12c07a47663b06ce75d5b70bb5c13978f6bc29eb74aef78804abdfdf173",
+      "imageWidth": 1440,
+      "imageHeight": 900
+    },
+    {
+      "filename": "docente-paso4-movil.png",
+      "role": "docente",
+      "moment": "Paso 4 de 5: Previsualiza y publica",
+      "route": "/demo",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobileEmulation": true,
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "fullPage": false,
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "dialogCount": 1,
+      "capturedAt": "2026-09-30T00:12:55.577Z",
+      "sha256": "d06ee3be7ea29668ea16a0b9262d5ee03898b2f17b199768226f863c6289da11",
+      "imageWidth": 390,
+      "imageHeight": 844
+    },
+    {
+      "filename": "estudiante-ofrecimiento-escritorio.png",
+      "role": "estudiante",
+      "moment": "Invitación inicial opcional",
+      "route": "/demo",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "mobileEmulation": false,
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "fullPage": false,
+      "viewportWidth": 1440,
+      "scrollWidth": 1440,
+      "dialogCount": 1,
+      "capturedAt": "2026-09-30T00:12:56.036Z",
+      "sha256": "e0b39df8fff123faa5f2771a3738a8ea549b1b92a2b85b42eb3c10ccd6f55d86",
+      "imageWidth": 1440,
+      "imageHeight": 900
+    },
+    {
+      "filename": "estudiante-paso4-movil.png",
+      "role": "estudiante",
+      "moment": "Paso 4 de 5: Piensa y responde",
+      "route": "/demo",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobileEmulation": true,
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "fullPage": false,
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "dialogCount": 1,
+      "capturedAt": "2026-09-30T00:12:56.507Z",
+      "sha256": "c149080b6827cabe9f28c8078516230fa205ad7bce58b2fec6bc5737e84b8988",
+      "imageWidth": 390,
+      "imageHeight": 844
+    },
+    {
+      "filename": "estudiante-ayuda-estatica-quiz-movil.png",
+      "role": "estudiante",
+      "moment": "Ayuda estática desplegada durante un intento temporizado",
+      "route": "/demo/actividad/activity-ecosystems",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mobileEmulation": true,
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "reducedMotion": "reduce",
+      "fullPage": true,
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "dialogCount": 0,
+      "capturedAt": "2026-09-30T00:12:57.063Z",
+      "sha256": "7f12679a735571da23e64313ad127b0483d9df306790863324289562dafc447b",
+      "imageWidth": 390,
+      "imageHeight": 1160
+    }
+  ],
+  "visualReview": {
+    "status": "reviewed",
+    "reviewedAt": "2026-09-30T00:13:48.4945886Z",
+    "scope": "Inspección de las cinco imágenes PNG originales, sin edición",
+    "observations": [
+      "Invitaciones docente y estudiante: título del rol, cierre y ambas decisiones completos; foco inicial visible en el diálogo.",
+      "Paso 4 docente y estudiante a 390 px: título, explicación, Anterior, Siguiente y cierre visibles dentro de la pantalla, sin recorte horizontal.",
+      "Actividad móvil: ayuda estática integrada en el flujo, sin diálogo ni capa superpuesta; reloj 2:59 visible y controles de respuesta conservados.",
+      "La captura del intento es de página completa y requiere desplazamiento vertical normal en el dispositivo emulado."
+    ],
+    "limitations": [
+      "Pantalla móvil emulada, no dispositivo físico",
+      "Tema claro; movimiento reducido",
+      "No es una comprobación manual con lector de pantalla"
+    ]
+  }
+}
