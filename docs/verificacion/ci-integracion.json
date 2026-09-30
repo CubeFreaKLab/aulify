@@ -3917,5 +3917,164 @@
       "browserSkipped": 28,
       "browserFlaky": 0
     }
+  },
+  {
+    "id": 36696391140,
+    "name": "Calidad de Aulify",
+    "event": "push",
+    "sha": "4cbdca3bc7beb0a86ab94e07266d030128fb4aba",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36696391140",
+    "createdAt": "2026-09-30T09:28:59Z",
+    "updatedAt": "2026-09-30T09:34:35Z",
+    "observedAt": "2026-09-30T09:35:05.621Z",
+    "jobs": [
+      {
+        "id": 109825272488,
+        "name": "Tipos, reglas y recorridos de demostración",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar registro de tiempos sin datos privados",
+            "conclusion": "success"
+          },
+          {
+            "name": "Rechazar aprobación de carga con muestras incompletas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Restringir el destino y las credenciales de las pruebas de carga",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar retención desde el cierre efectivo",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar retiro, resolución y restauración",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar casos numéricos de puntuación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia y permisos de la proyección docente",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar proyección de revisiones y respuestas omitidas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar conservación de archivos y reintentos de purga",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar participación, equipos y privacidad de publicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar revisiones independientes por participante",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia del contexto de sincronización",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar proyección y permisos de actividad estudiantil",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar resumen del aula y conservación del historial",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "success"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "evidenceSource": "GitHub REST API: run, jobs and downloaded job logs",
+    "logEvidence": [
+      {
+        "jobId": 109825272488,
+        "sha256": "db424663c1da3b2a1d1a236d0b84829a32262a8fd8f5e90c618d8993bd1481c3"
+      }
+    ],
+    "observedCounts": {
+      "unitTests": 162,
+      "unitFiles": 18,
+      "loadTargetChecks": 4,
+      "sqlChecks": 85,
+      "teacherProjectionChecks": 26,
+      "overviewChecks": 32,
+      "browserPassed": 90,
+      "browserSkipped": 30,
+      "browserFlaky": 0
+    }
   }
 ]

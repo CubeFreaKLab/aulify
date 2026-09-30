@@ -212,5 +212,12 @@
     "El acceso, la preparación de datos, las publicaciones de nota y las aserciones complementarias utilizan API autenticada; duplicación, edición, publicación de recursos, lectura y respuestas se ejecutan por interfaz.",
     "AP-15 comprueba la explicación y la configuración; la reserva de datos y publicación de nota conserva la evidencia remota previa E03/E04/E07.",
     "No verifica SMTP, capacidad ni el despliegue HTTPS. La Preview permanece en f9a7013."
-  ]
+  ],
+  "ci": {
+    "id": 36696391140,
+    "sha": "4cbdca3bc7beb0a86ab94e07266d030128fb4aba",
+    "status": "success",
+    "evidence": "ci-integracion.json",
+    "authenticatedScenarios": "AP-01/AP-02 se ejecutaron localmente con Supabase y se omiten en CI sin credenciales; el caso de configuración AP-15 sí se ejecutó en CI en dos tamaños."
+  }
 }

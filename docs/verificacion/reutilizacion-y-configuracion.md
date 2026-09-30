@@ -41,3 +41,5 @@ npx playwright test tests/e2e/reutilizacion-integrada.spec.ts tests/e2e/retroali
 ```
 
 La prueba remota limita el destino a la aplicación local y al proyecto reservado. Sin las credenciales locales se omite en CI; la prueba de configuración puede ejecutarse allí. Estos resultados no acreditan dispositivos físicos, SMTP, capacidad, restauración operativa ni producción. La Preview desplegada conserva su revisión y evidencia propias.
+
+El [CI 36696391140](https://github.com/CubeFreaKLab/aulify/actions/runs/36696391140) aprobó la revisión `4cbdca3`: 162 pruebas unitarias y 90 recorridos de navegador, sin casos inestables. Se omiten 30 ejecuciones autenticadas; AP-01/AP-02 conservan su evidencia local con Supabase descrita arriba. La prueba de explicación de AP-15 sí se ejecutó en CI. Los conteos de SQL y las huellas de logs descargados están en el [registro](ci-integracion.json).
