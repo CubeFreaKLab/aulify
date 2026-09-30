@@ -1,0 +1,235 @@
+{
+  "startedAt": "2026-09-30T00:53:32.304Z",
+  "status": "passed",
+  "environment": "PostgreSQL nativo local; clúster exclusivo nuevo; conexiones concurrentes reales",
+  "script": {
+    "path": "tools/datos/retention-race-check.mjs",
+    "sha256": "834b58a7c8ca3f0820ab66f135aeafcf221048fdeac141957c906621a02a7a21"
+  },
+  "migrationCutoff": "20260930000631_aulify_teacher_review_projection.sql",
+  "scenarios": [
+    {
+      "name": "Restauración antes del límite mantiene bloqueo al cruzarlo",
+      "result": "restauración preservada; mantenimiento SKIP LOCKED"
+    },
+    {
+      "name": "Purga bloquea primero una materia vencida",
+      "lockObserved": {
+        "blocked": true,
+        "waitType": "Lock"
+      },
+      "result": "restauración espera y rechaza después del commit"
+    },
+    {
+      "name": "Restauración revierte al cruzar el límite",
+      "result": "primer tick omite; siguiente tick purga"
+    },
+    {
+      "name": "Consumidores concurrentes y fallo transaccional",
+      "result": "SKIP LOCKED y rollback permiten reintento sin doble eliminación"
+    },
+    {
+      "name": "Límite exacto según reloj transaccional PostgreSQL",
+      "result": "restauración rechazada"
+    }
+  ],
+  "checks": [
+    {
+      "detail": "El ensayo fija las dieciocho migraciones confirmadas",
+      "result": "passed"
+    },
+    {
+      "detail": "Restauración obtiene el bloqueo antes del límite",
+      "result": "passed"
+    },
+    {
+      "detail": "Purga posterior al límite omite la materia bloqueada por restauración",
+      "result": "passed"
+    },
+    {
+      "detail": "La sesión observadora aún ve el archivo no confirmado",
+      "result": "passed"
+    },
+    {
+      "detail": "La restauración confirmada sobrevive al siguiente lote",
+      "result": "passed"
+    },
+    {
+      "detail": "La restauración cancela el trabajo pendiente",
+      "result": "passed"
+    },
+    {
+      "detail": "Restauración espera el bloqueo transaccional de la purga",
+      "result": "passed"
+    },
+    {
+      "detail": "Después del borrado confirmado, restauración es rechazada",
+      "result": "passed"
+    },
+    {
+      "detail": "Purga confirmada elimina únicamente la materia vencida",
+      "result": "passed"
+    },
+    {
+      "detail": "Rollback de restauración conserva materia archivada y sin marca de purga",
+      "result": "passed"
+    },
+    {
+      "detail": "El lote posterior retoma la materia tras rollback de restauración",
+      "result": "passed"
+    },
+    {
+      "detail": "Un segundo consumidor no procesa la materia bloqueada por el primero",
+      "result": "passed"
+    },
+    {
+      "detail": "Observador no ve el borrado sin confirmar del primer consumidor",
+      "result": "passed"
+    },
+    {
+      "detail": "Rollback revierte el lote completo de purga",
+      "result": "passed"
+    },
+    {
+      "detail": "Otro consumidor puede completar el trabajo revertido",
+      "result": "passed"
+    },
+    {
+      "detail": "Repetir el lote confirmado es idempotente",
+      "result": "passed"
+    },
+    {
+      "detail": "Fixture alcanza exactamente treinta días, sin tolerancia ni espera estimada",
+      "result": "passed"
+    },
+    {
+      "detail": "Restauración rechazada exactamente a los treinta días",
+      "result": "passed"
+    },
+    {
+      "detail": "Rechazo en el límite no cambia la materia",
+      "result": "passed"
+    },
+    {
+      "detail": "Cuenta ajena no puede restaurar una materia",
+      "result": "passed"
+    },
+    {
+      "detail": "Cuenta ajena no puede restaurar una materia",
+      "result": "passed"
+    },
+    {
+      "detail": "Rol autenticado no puede ejecutar mantenimiento",
+      "result": "passed"
+    },
+    {
+      "detail": "Rol anónimo no puede invocar restauración",
+      "result": "passed"
+    },
+    {
+      "detail": "Materia de control conserva todas sus columnas",
+      "result": "passed"
+    },
+    {
+      "detail": "Todas las cuentas conservan su perfil",
+      "result": "passed"
+    },
+    {
+      "detail": "Biblioteca, versión y archivo compartido permanecen íntegros tras la purga concurrente",
+      "result": "passed"
+    },
+    {
+      "detail": "El objeto compartido no entra en la eliminación de la materia vencida",
+      "result": "passed"
+    },
+    {
+      "detail": "El docente conserva el acceso autorizado al archivo de biblioteca",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "No ejecuta mantenimiento remoto ni prueba el servicio de objetos de Supabase.",
+    "Auth y Storage se representan con esquemas de prueba; los comandos de dominio y mantenimiento son los migrados sin modificación.",
+    "Se ajusta archived_at en los fixtures para alcanzar el límite de treinta días sin esperar ese plazo; no mide el objetivo operativo de veinticuatro horas.",
+    "PGlite tiene una sola conexión exclusiva; no se usa para demostrar bloqueos entre sesiones."
+  ],
+  "postgresVersion": "postgres (PostgreSQL) 17.6",
+  "migrations": [
+    {
+      "filename": "20260928064804_aulify_relational_core.sql",
+      "sha256": "e1d28fb97669dc12533cc3feb9b2a7aac91b2dace27e9773e30ffa1400b01181"
+    },
+    {
+      "filename": "20260928064810_aulify_commands.sql",
+      "sha256": "0dcd33f6f5e76d4edfb94ed189470d1d886331aa5826a4cfce9328cc06d6d448"
+    },
+    {
+      "filename": "20260928064815_aulify_projections_storage.sql",
+      "sha256": "b8efde826282aaf71a0c4c9312f176509b174bb2c140d2816b01e612109167ec"
+    },
+    {
+      "filename": "20260928064819_aulify_retention_hardening.sql",
+      "sha256": "958e71a40caca23e48afa1e835da7275b030909fe8cec61397d91ab4d4a0beb3"
+    },
+    {
+      "filename": "20260928064824_aulify_join_rate_limit.sql",
+      "sha256": "9821fd7b7f15735ddbc55ba315c08f19804a711c09ff0e67244e147cb8718fea"
+    },
+    {
+      "filename": "20260928064828_aulify_upload_reservations.sql",
+      "sha256": "b85eeb9ab40fcd5a45acc191d0ad100f223d6eb4255c206426164b709fbe4514"
+    },
+    {
+      "filename": "20260928070919_aulify_resubmission_projection.sql",
+      "sha256": "5aa4204dd42805437ca5d9962584690ea68950be9674f3976d45dd47a70b675c"
+    },
+    {
+      "filename": "20260928072137_aulify_activity_sync_digest.sql",
+      "sha256": "6b1cf2533b6fc28d1c6b6ac6d4feb73a2fcccd56090aac13f1cb23376319b0f1"
+    },
+    {
+      "filename": "20260928074757_aulify_snapshot_authorized_sets.sql",
+      "sha256": "cd887b55ef3024631ae3ed149a1b72b120d20a976a1c24c1827cb111d2e732f8"
+    },
+    {
+      "filename": "20260928080625_aulify_guided_answer_close_lock.sql",
+      "sha256": "16a5cb140f1bbb47efb0044988f669a66cce8fe583351cfe2e5a7205477403b2"
+    },
+    {
+      "filename": "20260928083328_aulify_scoped_activity_sync.sql",
+      "sha256": "e7d3e3957bcb7ada38db53cb6cf37250ea283a01000e684a4c78434954febd34"
+    },
+    {
+      "filename": "20260928083904_aulify_private_lock_revision.sql",
+      "sha256": "39d743f9a8136d9a5c5a6f43618c73d59a65481bb2f97245100a6d8c12bfeeb7"
+    },
+    {
+      "filename": "20260928123500_aulify_independent_matching_answers.sql",
+      "sha256": "e1f5f3c74795baf66d678087fb45463912716cefa9a9e856d70306610db30b51"
+    },
+    {
+      "filename": "20260928130653_aulify_teacher_attempt_projection.sql",
+      "sha256": "46c4145e4797d0b27587f9a361cf589212e655679dbbe88f0b6cca7ab4b2b5c0"
+    },
+    {
+      "filename": "20260929221908_aulify_deferred_ranking_publication.sql",
+      "sha256": "62f5a233be8ff1965ac5e7ae815891720abe4a89e25b99ffb1cd6ee39c2ce946"
+    },
+    {
+      "filename": "20260929224538_aulify_participant_teacher_revision.sql",
+      "sha256": "3575310698289b9543d02832e0634259f48e0edb120411be856880acf56b23a2"
+    },
+    {
+      "filename": "20260929231531_aulify_editor_link_validation.sql",
+      "sha256": "c414dacd0c2d27335aefb9a3a981ac805f48997a3acb9e0fd5a390f876255132"
+    },
+    {
+      "filename": "20260930000631_aulify_teacher_review_projection.sql",
+      "sha256": "75070a9dddba44f22a1b5e17af502d7662a0348f88402a5691b0f0a0e3be1b99"
+    }
+  ],
+  "independentBackendCount": 4,
+  "clusterStopped": true,
+  "finishedAt": "2026-09-30T00:53:53.292Z",
+  "newClusterRetained": true
+}
