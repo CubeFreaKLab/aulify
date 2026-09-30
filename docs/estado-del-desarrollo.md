@@ -12,9 +12,13 @@ Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación com
 
 `/demo` ofrece una clase ficticia en el navegador. `/aula` exige sesión de Supabase y utiliza operaciones autorizadas de PostgreSQL y archivos privados de Storage.
 
+## Actualización de interfaz pública
+
+El inicio y las pantallas de acceso se simplificaron. La cabecera sitúa la marca a la izquierda y los accesos a la derecha; los enlaces de demostración quedan al pie. Acceso, registro y recuperación comparten un formulario centrado sobre superficies neutras. Construcción y ESLint correctos; catorce recorridos públicos aprobados en Chromium de escritorio y móvil, incluida adaptación a 320 px. La transición circular del tema conserva la comprobación de la revisión anterior. Esta actualización no modifica autenticación, datos ni reglas académicas. El rediseño de la presentación comercial sigue pendiente.
+
 ## Funciones disponibles
 
-- Landing ilustrada, tipografía Inter, temas claro, oscuro y del sistema, y movimiento reducido.
+- Inicio mínimo con logo y accesos en la cabecera, centro vacío y demos al pie. Tipografía Inter, un botón de tema con transición circular y preferencia inicial del sistema. Acceso y registro usan formularios centrados sin panel ilustrado. Se respeta movimiento reducido.
 - Acceso con correo y contraseña, sesión protegida, salida y limpieza de datos de la cuenta anterior. Registro y recuperación tienen formularios y endpoints; su envío general depende de SMTP.
 - Materias con curso y año, código renovable, solicitud y aprobación, retiro, archivo y restauración durante treinta días.
 - Biblioteca y editor por bloques con borradores, detección de conflictos, vista previa, lectura y versiones publicadas independientes. Incluye imágenes privadas, encabezados, listas, tareas, desplegables, tablas, código, enlaces y preguntas.

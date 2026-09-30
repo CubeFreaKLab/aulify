@@ -142,23 +142,6 @@ export function AuthScreen({
       </header>
 
       <main id="contenido" className="auth-layout">
-        <section className="auth-story" aria-labelledby="auth-story-title">
-          <div className="auth-story-copy">
-            <span className="auth-story-eyebrow">El aula, un poco más tuya.</span>
-            <h2 id="auth-story-title">
-              Las ideas crecen
-              <br /> cuando se
-              <br /> <span>comparten.</span>
-            </h2>
-            <p>Un espacio para explicar, preguntar y descubrir juntos.</p>
-          </div>
-          <div className="auth-illustration">
-            <Image src="/brand/student-login.svg" alt="" width={657} height={937} priority />
-            <span className="auth-pencil-line" aria-hidden="true" />
-          </div>
-          <p className="auth-story-caption">Hecho para las clases de secundaria.</p>
-        </section>
-
         <section className="auth-panel" aria-labelledby="auth-title">
           <div className="auth-form-container">
             <div className="auth-heading">
