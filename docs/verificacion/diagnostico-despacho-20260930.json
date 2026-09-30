@@ -1,0 +1,187 @@
+{
+  "measuredAt": "2026-09-30T07:20:14.177Z",
+  "status": "capacity-not-approved",
+  "applicationCommit": "1e4160b0dda0d0c4647f3f24063ce45d26e9b6b7",
+  "reportCommit": "809b3bb2df698599d6b5853aa9b13d2ac134d460",
+  "buildId": "LxncBY74HOrDyZhjUMIuv",
+  "environment": "Next.js compilado en Windows local; Supabase Free remoto. Preloader de instrumentación activo.",
+  "window": {
+    "start": "2026-09-30T07:19:14.027Z",
+    "end": "2026-09-30T07:20:14.177Z",
+    "elapsedMs": 60153.5805
+  },
+  "burst": {
+    "target": 200,
+    "dispatched": 200,
+    "windowMs": 1891.2108000000007,
+    "confirmed": 200,
+    "confirmationP95Ms": 5096.830800000011
+  },
+  "integrity": {
+    "persisted": 200,
+    "confirmed": 200,
+    "missingOrChangedConfirmed": 0
+  },
+  "measurements": {
+    "sync": {
+      "count": 10021,
+      "failed": 0,
+      "p95Ms": 1159.046199999997
+    },
+    "snapshot": {
+      "count": 413,
+      "failed": 0,
+      "p95Ms": 6090.983599999992
+    },
+    "answer": {
+      "count": 200,
+      "failed": 0,
+      "p95Ms": 5096.798999999999
+    }
+  },
+  "estimatedBytes": 68605480,
+  "answerDispatch": {
+    "count": 200,
+    "dispatchCount": {
+      "count": 200,
+      "min": 1,
+      "p50": 1,
+      "p95": 1,
+      "max": 1
+    },
+    "poolAndConnectMs": {
+      "count": 200,
+      "min": 0.04889999999431893,
+      "p50": 524.4386999999988,
+      "p95": 3992.1919999999955,
+      "max": 4179.256299999994
+    },
+    "upstreamMs": {
+      "count": 200,
+      "min": 205.1631999999954,
+      "p50": 530.1296000000002,
+      "p95": 3293.8522999999986,
+      "max": 3490.0034999999916
+    },
+    "completeMs": {
+      "count": 200,
+      "min": 309.1953999999969,
+      "p50": 3378.028600000005,
+      "p95": 5059.279999999999,
+      "max": 7007.3533000000025
+    }
+  },
+  "pools": [
+    {
+      "role": "reads",
+      "queued": {
+        "count": 236,
+        "min": 0,
+        "p50": 0,
+        "p95": 107,
+        "max": 108
+      },
+      "running": {
+        "count": 236,
+        "min": 11,
+        "p50": 37,
+        "p95": 96,
+        "max": 96
+      },
+      "connected": {
+        "count": 236,
+        "min": 27,
+        "p50": 96,
+        "p95": 96,
+        "max": 96
+      }
+    },
+    {
+      "role": "commands",
+      "queued": {
+        "count": 236,
+        "min": 0,
+        "p50": 0,
+        "p95": 59,
+        "max": 89
+      },
+      "running": {
+        "count": 236,
+        "min": 0,
+        "p50": 0,
+        "p95": 32,
+        "max": 32
+      },
+      "connected": {
+        "count": 236,
+        "min": 0,
+        "p50": 32,
+        "p95": 32,
+        "max": 32
+      }
+    }
+  ],
+  "sql": {
+    "before": "2026-09-30 07:19:03.599833+00",
+    "after": "2026-09-30 07:20:35.01992+00",
+    "counters": [
+      {
+        "function": "aulify_sync",
+        "calls": 10021,
+        "executionMs": 10262.513647990068,
+        "averageExecutionMs": 1.0241007532172506
+      },
+      {
+        "function": "aulify_command",
+        "calls": 404,
+        "executionMs": 15173.385176009964,
+        "averageExecutionMs": 37.55788409903457
+      },
+      {
+        "function": "aulify_activity_snapshot",
+        "calls": 430,
+        "executionMs": 56311.853250999935,
+        "averageExecutionMs": 130.95779825813938
+      }
+    ],
+    "scope": "Diferencias de pg_stat_statements; incluye preparación de intentos y auditoría. Son promedios SQL, no percentiles ni latencia HTTP."
+  },
+  "deployedRuntime": {
+    "deployment": "dpl_4KGmpDfwJEdA91hYu1fDWxjB7LSz",
+    "applicationCommit": "27e4df6",
+    "visibleApiRegion": "gru1",
+    "runtime": "Node.js 24.x",
+    "source": "Panel Resources de Vercel y vercel.json; no prueba de carga del despliegue."
+  },
+  "limitations": [
+    "poolAndConnectMs incluye cola y establecimiento de conexión, medidos hasta onConnect del dispatcher.",
+    "upstreamMs comprende transporte y servicio hasta cabeceras; no permite aislar red, pasarela o SQL.",
+    "No sumar percentiles de etapas independientes ni atribuir causalmente diferencias entre ensayos instrumentados y no instrumentados.",
+    "Muestreo del pool cada 250 ms; sus máximos son observados, no continuos.",
+    "Contador de planificación cero no demuestra ausencia de costo de planificación.",
+    "La muestra pg_stat_activity se tomó después de la ráfaga y no describe su contención.",
+    "La región de la vista previa está verificada; no se ha medido allí el escenario completo."
+  ],
+  "artifacts": [
+    {
+      "role": "profile",
+      "path": "registro privado de profile",
+      "sha256": "7e355230bf22dfd9ffcffad16b4839012f7aec8c756b32915e84870946c3df7c"
+    },
+    {
+      "role": "sql",
+      "path": "registro privado de sql",
+      "sha256": "3080bb2dd6e9a6f7a0703242393fc984337831b7834f0eea2f2fe1acc74c5ee7"
+    },
+    {
+      "role": "report",
+      "path": "docs/verificacion/datos-protocolo-60s-20260930071801.json",
+      "sha256": "7d720b34c57ff8c26d9ca8e044781e5bd9fd02e01dd2b8cb46a1408fd4f14146"
+    },
+    {
+      "role": "instrument",
+      "path": "registro privado de instrument",
+      "sha256": "aec7ba99fc8286ac604d71a9d938578d67322a76339de8f8fe7a6107b7ce60d9"
+    }
+  ]
+}

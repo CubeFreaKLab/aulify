@@ -21,4 +21,6 @@ El ejecutor limita el destino al proyecto y equipo conocidos, exige manifiesto c
 
 Cuatro pruebas locales de `load-target.test.mjs` aprobaron rechazo de destinos distintos o producción, tratamiento de redirecciones, ausencia de secretos en metadatos y comprobación del compilado servido. También aprobaron las tres pruebas existentes de espera del servicio. La comprobación de sintaxis y ESLint aprobó. GitHub Actions incorpora las cuatro pruebas de destino; su resultado remoto debe consultarse en la ejecución correspondiente, sin atribuirle el resultado local.
 
+La ejecución [36684781440](https://github.com/CubeFreaKLab/aulify/actions/runs/36684781440), revisión `42c56d7`, completó con éxito ese paso: cuatro pruebas aprobadas y cero fallos. Los registros descargados también confirmaron 159 pruebas unitarias, 88 recorridos de navegador y 26 ejecuciones autenticadas omitidas. Las huellas y pasos están en [ci-integracion.json](ci-integracion.json). Este CI verifica el ejecutor y la aplicación; no ejecuta una carga contra Supabase o Vercel.
+
 Los resultados identifican por separado el commit del ejecutor, la revisión de la aplicación desplegada y su compilado. Conservan presupuesto, corte ante fallos, auditoría de persistencia y separación entre diagnóstico y aceptación. No trasladar un resultado local a Vercel ni aprobar Q-06/Q-09 con este diagnóstico abreviado.
