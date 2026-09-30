@@ -39,3 +39,5 @@ Prettier se ejecutó únicamente sobre los tres archivos modificados de código 
 Esta es una corrección reproducida de forma aislada. No demuestra que el marcador latente causara la interrupción previa de la preparación a los 15 segundos, y no verifica el requisito de capacidad Q-06. La medición posterior conservó el build anterior `NJgfZnpvHJ7YBpHn4hEBZ`, sin este cambio.
 
 Después del sondeo se integró la corrección en el commit `c5db1cc`. La compilación `NZlgLN2ir82OxW0NAxSk9` terminó correctamente y la batería local aprobó 141 pruebas en quince archivos. El lint focalizado también pasó. Estos resultados amplían la comprobación aislada; no simulan un fallo real del proveedor ni sustituyen la verificación posterior en CI.
+
+El [CI 36650885473](https://github.com/CubeFreaKLab/aulify/actions/runs/36650885473), sobre `0b0f6db` e incluyendo `c5db1cc`, terminó con todos sus pasos aprobados. La API de GitHub confirmó ejecución y trabajos; el registro está en [ci-integracion.json](ci-integracion.json). No se descargaron sus logs para atribuirle conteos ni se extiende el resultado a modificaciones posteriores.
