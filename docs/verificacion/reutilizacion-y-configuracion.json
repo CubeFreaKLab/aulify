@@ -1,0 +1,216 @@
+{
+  "status": "passed",
+  "generatedAt": "2026-09-30T09:27:57.766Z",
+  "cases": [
+    "AP-01",
+    "AP-02",
+    "AP-15"
+  ],
+  "environment": "Next.js compilado local y Supabase remoto para AP-01/AP-02. AP-15 usa el adaptador de demostración. Chromium de escritorio y móvil emulado; contextos estudiantiles separados con anchos de 1440 y 390 px.",
+  "buildId": "tEAccMCKzII8FVQ3Dr2xd",
+  "applicationFiles": [
+    {
+      "path": "src/components/editor-screen.tsx",
+      "sha256": "529ebe3c48c4b1047bbd22ed3ab8a9e8b5e7b315c1e3806966c9ce46973524c0"
+    },
+    {
+      "path": "src/components/question-author.tsx",
+      "sha256": "f48e040a4462d1f2f237ed783af59bfad2620505f99699f6e71e5f0a0f6eb9f0"
+    },
+    {
+      "path": "tests/e2e/reutilizacion-integrada.spec.ts",
+      "sha256": "ba8467424c063d6dd034c79a6250bafce239fbd514d1d06d084e1ef0474fc783"
+    },
+    {
+      "path": "tests/e2e/retroalimentacion-config.spec.ts",
+      "sha256": "93cad0bc5f8e2fe5fadcb3e5961cbf5640e1fedef157b8c04bfb3ea1f59c3bd4"
+    }
+  ],
+  "browserResults": {
+    "startTime": "2026-09-30T09:25:36.032Z",
+    "duration": 52212.345,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "resultSha256": "08c98477deba58ad763770649bec49fc03e691d0d192dd8a2394b7de117064d1"
+  },
+  "runs": [
+    {
+      "startedAt": "2026-09-30T09:25:39.303Z",
+      "status": "passed",
+      "cases": [
+        "AP-01",
+        "AP-02"
+      ],
+      "project": "chromium-escritorio",
+      "baseURL": "http://127.0.0.1:3001",
+      "commit": "7ebac0d1897f8f1bef9ec1ebd83083e913d766e7",
+      "buildId": "tEAccMCKzII8FVQ3Dr2xd",
+      "sourceSha256": "ba8467424c063d6dd034c79a6250bafce239fbd514d1d06d084e1ef0474fc783",
+      "checks": [
+        "Materia A con E1 aprobado, quiz independiente respondido y nota 20/20 publicada antes de duplicar.",
+        "Duplicación y edición por interfaz; copia publicada en B, sin integrantes, intentos ni notas. Original, versión respondida, respuesta y evaluación intactos.",
+        "E2 se incorpora a B mediante código y aprobación; ambas materias mantienen pertenencia y acceso separados.",
+        "Lectura publicada desde el editor y consultada visualmente por E2, sin pregunta, intento ni nota nueva.",
+        "Quiz B usa su configuración: una respuesta, nota 30/30 y segundo intento rechazado. A conserva 20/20 y su historia original."
+      ],
+      "subjectIds": [
+        "c77e891c-03a7-4b35-bd7a-9c2756c572d7",
+        "47932956-4eae-4351-ada2-43e7b5741a46"
+      ],
+      "original": {
+        "resourceId": "7f8fccb8-3de9-4c43-b9b0-1b28a07f0c21",
+        "versionId": "62e82114-e809-411c-8cce-0ae36d031d77",
+        "activityId": "7c509793-1ecc-4357-ba19-33614f35f5a1",
+        "attemptId": "9c03be78-7689-4c89-9139-03b2d03978bd",
+        "grade": 20
+      },
+      "copy": {
+        "resourceId": "ac2412b7-23fc-482c-9e45-81ea6973cd32",
+        "activityId": "cb4083e3-8bc2-40fa-92c4-788326c7a528",
+        "versionId": "baa7b068-30df-4bb6-97e7-313672cb7da5",
+        "attemptId": "8655e4e6-8ecd-4a11-b107-5b77091c14d2",
+        "grade": 30,
+        "attempts": 1
+      },
+      "reading": {
+        "resourceId": "3f395fdd-c2f9-45ab-b7e8-4dd10680a106",
+        "publicationId": "d77e00b1-6205-465c-ba11-46a679fec348",
+        "noAttemptOrGrade": true
+      },
+      "cleanup": [
+        {
+          "subjectId": "c77e891c-03a7-4b35-bd7a-9c2756c572d7",
+          "archived": true
+        },
+        {
+          "subjectId": "47932956-4eae-4351-ada2-43e7b5741a46",
+          "archived": true
+        }
+      ],
+      "localSessionsClosed": [
+        true,
+        true,
+        true
+      ],
+      "finishedAt": "2026-09-30T09:26:03.147Z",
+      "durationMs": 23933,
+      "evidenceSha256": "eb035be3637bb6a75de30bf06235350745fed7257c505b34c8fcc0c933ac9f61"
+    },
+    {
+      "startedAt": "2026-09-30T09:26:06.023Z",
+      "status": "passed",
+      "cases": [
+        "AP-01",
+        "AP-02"
+      ],
+      "project": "chromium-movil",
+      "baseURL": "http://127.0.0.1:3001",
+      "commit": "7ebac0d1897f8f1bef9ec1ebd83083e913d766e7",
+      "buildId": "tEAccMCKzII8FVQ3Dr2xd",
+      "sourceSha256": "ba8467424c063d6dd034c79a6250bafce239fbd514d1d06d084e1ef0474fc783",
+      "checks": [
+        "Materia A con E1 aprobado, quiz independiente respondido y nota 20/20 publicada antes de duplicar.",
+        "Duplicación y edición por interfaz; copia publicada en B, sin integrantes, intentos ni notas. Original, versión respondida, respuesta y evaluación intactos.",
+        "E2 se incorpora a B mediante código y aprobación; ambas materias mantienen pertenencia y acceso separados.",
+        "Lectura publicada desde el editor y consultada visualmente por E2, sin pregunta, intento ni nota nueva.",
+        "Quiz B usa su configuración: una respuesta, nota 30/30 y segundo intento rechazado. A conserva 20/20 y su historia original."
+      ],
+      "subjectIds": [
+        "ce5d9dd9-0894-4d21-b11d-3bb19414678c",
+        "4ed10d70-c22f-44f3-8129-9db28219632c"
+      ],
+      "original": {
+        "resourceId": "e1602b5d-ee4d-4d0e-b456-3c65295b8a37",
+        "versionId": "d110d83a-8f15-4cd8-823a-f8cf260c18a2",
+        "activityId": "385f0895-3dd8-40c7-b780-98287db9e180",
+        "attemptId": "a0d2a88c-fc08-48a3-a920-6da7f1989d7a",
+        "grade": 20
+      },
+      "copy": {
+        "resourceId": "e0b8a7b0-167b-4903-add3-6ebf7ead4d67",
+        "activityId": "4c33746f-3a7e-4706-8578-546d10cf0868",
+        "versionId": "024ee1b4-68c1-4371-b568-1decde8f134a",
+        "attemptId": "93b1ee93-3905-435f-8200-361a46ca83d2",
+        "grade": 30,
+        "attempts": 1
+      },
+      "reading": {
+        "resourceId": "3c801177-84db-4c92-88fb-2e736a65a157",
+        "publicationId": "beaa9bfd-206a-415e-aada-ec0c8c28e1b1",
+        "noAttemptOrGrade": true
+      },
+      "cleanup": [
+        {
+          "subjectId": "ce5d9dd9-0894-4d21-b11d-3bb19414678c",
+          "archived": true
+        },
+        {
+          "subjectId": "4ed10d70-c22f-44f3-8129-9db28219632c",
+          "archived": true
+        }
+      ],
+      "localSessionsClosed": [
+        true,
+        true,
+        true
+      ],
+      "finishedAt": "2026-09-30T09:26:28.167Z",
+      "durationMs": 22231,
+      "evidenceSha256": "63343002881ebecdd2e30df39f6abb520c2853cca000a1e58aae6af70daa5705"
+    }
+  ],
+  "configuration": [
+    {
+      "project": "chromium-escritorio",
+      "status": "passed",
+      "durationMs": 1880,
+      "screenshot": "docs/diseno/capturas/reutilizacion-2026-09-30/configuracion-escritorio.png"
+    },
+    {
+      "project": "chromium-movil",
+      "status": "passed",
+      "durationMs": 1666,
+      "screenshot": "docs/diseno/capturas/reutilizacion-2026-09-30/configuracion-movil.png"
+    }
+  ],
+  "captures": [
+    {
+      "path": "docs/diseno/capturas/reutilizacion-2026-09-30/configuracion-escritorio.png",
+      "sha256": "418b6c9f177dea315e433002d9362a2dd6941412f8b35ccae6683fc0f9646de1"
+    },
+    {
+      "path": "docs/diseno/capturas/reutilizacion-2026-09-30/configuracion-movil.png",
+      "sha256": "62a3e17cff8718f06e0789027ec671c38010b15840c692d038000a781b190ae2"
+    },
+    {
+      "path": "docs/diseno/capturas/reutilizacion-2026-09-30/lectura-estudiante-escritorio.png",
+      "sha256": "0b37d33c8c2ee38fe9637eb79e78197519bec2e4740d6f3ea80b865897e4bc13"
+    },
+    {
+      "path": "docs/diseno/capturas/reutilizacion-2026-09-30/copia-docente-escritorio.png",
+      "sha256": "97fdafbe91940fa9a412185e6c7896f12f856da2ba0c6800d829ad46a487a8ed"
+    },
+    {
+      "path": "docs/diseno/capturas/reutilizacion-2026-09-30/lectura-estudiante-movil.png",
+      "sha256": "06200be588eac4e760834325a10ec9924d5ae67ff1ca9a10a3588cbc4a413c7e"
+    },
+    {
+      "path": "docs/diseno/capturas/reutilizacion-2026-09-30/copia-docente-movil.png",
+      "sha256": "c7e23cb93e303c5aa7b67b384d0f94969aa69c1f8ad27d0740ebabee3b9da648"
+    }
+  ],
+  "earlierRun": {
+    "status": "passed",
+    "scenarios": 4,
+    "evidenceSha256": "f2d2da3ca4b6f943610dc3b313e87777d43f4c32b10c6e5e5da5a45d4bc5f1d9",
+    "note": "Primer ensayo aprobado; se repitió para esperar la carga completa del editor, encuadrar la explicación y comprobar el singular «1 pregunta». No se suma como escenarios nuevos."
+  },
+  "limitations": [
+    "Sin teléfonos físicos ni lector de pantalla manual.",
+    "El acceso, la preparación de datos, las publicaciones de nota y las aserciones complementarias utilizan API autenticada; duplicación, edición, publicación de recursos, lectura y respuestas se ejecutan por interfaz.",
+    "AP-15 comprueba la explicación y la configuración; la reserva de datos y publicación de nota conserva la evidencia remota previa E03/E04/E07.",
+    "No verifica SMTP, capacidad ni el despliegue HTTPS. La Preview permanece en f9a7013."
+  ]
+}

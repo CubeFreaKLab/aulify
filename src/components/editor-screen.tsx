@@ -443,6 +443,7 @@ function EditorForm({
                   <Field id="feedback" label="Cuándo mostrar las respuestas">
                     <select
                       id="feedback"
+                      aria-describedby="feedback-visibility-help"
                       value={settings.feedback}
                       onChange={(e) =>
                         setSettings({
@@ -458,6 +459,16 @@ function EditorForm({
                       <option value="after-close">Después del cierre y publicación</option>
                       <option value="hidden">Mantener ocultas</option>
                     </select>
+                    <p
+                      id="feedback-visibility-help"
+                      className="notice"
+                      role="status"
+                      aria-atomic="true"
+                    >
+                      {settings.feedback === 'hidden'
+                        ? 'Al mantener ocultas las respuestas, se desactivan las rachas y la clasificación para estudiantes porque pueden revelar aciertos. Puedes publicar la nota final por separado; las respuestas y sus correcciones seguirán ocultas.'
+                        : 'La publicación de la nota es independiente de cuándo se muestran las respuestas.'}
+                    </p>
                   </Field>
                   <Field id="pace" label="Ritmo de participación">
                     <select
@@ -511,6 +522,11 @@ function EditorForm({
                     <label className="checkbox-label" key={key}>
                       <input
                         type="checkbox"
+                        aria-describedby={
+                          (key === 'ranking' || key === 'streaks') && settings.feedback === 'hidden'
+                            ? 'feedback-visibility-help'
+                            : undefined
+                        }
                         disabled={
                           (key === 'shuffleQuestions' && settings.pace === 'guided') ||
                           ((key === 'ranking' || key === 'streaks') &&

@@ -100,7 +100,9 @@ export function QuestionAuthor({
         <div>
           <h2>Preguntas del recurso</h2>
         </div>
-        <span className="badge">{questions.length} preguntas</span>
+        <span className="badge">
+          {questions.length} {questions.length === 1 ? 'pregunta' : 'preguntas'}
+        </span>
       </div>
       <p className="muted" style={{ fontSize: 13, marginTop: 9 }}>
         Combina preguntas. Las respuestas escritas las revisas tú.
