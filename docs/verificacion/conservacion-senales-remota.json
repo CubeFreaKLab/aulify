@@ -1,0 +1,43 @@
+{
+  "project": "bnqyyumfmyexsqszglab",
+  "migration": "20260930024809_aulify_visibility_effective_closure.sql",
+  "generatedLocallyAs": "20260930023242_aulify_visibility_effective_closure.sql",
+  "alignment": "Archivo renombrado para coincidir con la versión asignada por el servicio. Comparación MD5 del SQL sin espacios en blanco: cf20b99cb696ed9c05dc98950cbe4af2 en ambos lados.",
+  "before": {
+    "migrations": 20,
+    "latest": "20260930011205",
+    "old_expression": true,
+    "anon_execute": false,
+    "authenticated_execute": false,
+    "service_execute": true
+  },
+  "application": {
+    "success": true
+  },
+  "after": {
+    "checked_at": "2026-09-30 02:48:29.853559+00",
+    "migrations": 21,
+    "latest": "20260930024809",
+    "corrected_expression": true,
+    "anon_execute": false,
+    "authenticated_execute": false,
+    "service_execute": true
+  },
+  "securityAdvisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "title": "RLS Enabled No Policy"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "title": "Leaked Password Protection Disabled"
+    }
+  ],
+  "limitations": [
+    "Verifica definición y permisos de la función, sin ejecutar tick remoto ni eliminar señales del proyecto.",
+    "La frontera temporal y conservación de resolución se probaron en PGlite; no demuestra la frecuencia ni el plazo operativo de la purga remota.",
+    "El análisis de seguridad conserva una advertencia sobre protección de contraseñas filtradas; esta migración no cambia Auth."
+  ]
+}
