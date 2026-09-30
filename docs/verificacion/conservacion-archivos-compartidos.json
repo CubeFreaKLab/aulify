@@ -1,0 +1,175 @@
+{
+  "startedAt": "2026-09-29T23:58:24.650Z",
+  "environment": "PostgreSQL aislado en PGlite; bytes reales en directorio local exclusivo",
+  "prefix": "ap31-ap32-2026-09-29-13540d9d",
+  "script": {
+    "path": "tools/datos/retention-shared-files-check.mjs",
+    "sha256": "68cf708b1e7427c1d71d7169269c4145a86345e46119d3c0ad50d68284e3fcfc"
+  },
+  "checks": [
+    {
+      "detail": "El contrato no permite entregar un archivo de otra cuenta",
+      "result": "passed"
+    },
+    {
+      "detail": "El archivo compartido tiene referencia autorizada en borrador",
+      "result": "passed"
+    },
+    {
+      "detail": "El archivo compartido tiene referencia autorizada en versión publicada",
+      "result": "passed"
+    },
+    {
+      "detail": "La topología histórica también referencia el mismo objeto desde la entrega",
+      "result": "passed"
+    },
+    {
+      "detail": "La materia ficticia vencida no se restaura",
+      "result": "passed"
+    },
+    {
+      "detail": "La cola contiene solo los dos archivos exclusivos, no el compartido",
+      "result": "passed"
+    },
+    {
+      "detail": "Se eliminan las relaciones de la materia vencida",
+      "result": "passed"
+    },
+    {
+      "detail": "Se elimina la referencia vencida al archivo compartido",
+      "result": "passed"
+    },
+    {
+      "detail": "Los bytes compartidos se conservan íntegros tras quitar la materia",
+      "result": "passed"
+    },
+    {
+      "detail": "La biblioteca sigue autorizando la lectura del objeto compartido",
+      "result": "passed"
+    },
+    {
+      "detail": "No se confirman metadatos mientras persisten objetos",
+      "result": "passed"
+    },
+    {
+      "detail": "Fallo parcial: falta borrar el segundo objeto y la confirmación completa se rechaza",
+      "result": "passed"
+    },
+    {
+      "detail": "El fallo parcial conserva ambos metadatos pendientes para reintentar",
+      "result": "passed"
+    },
+    {
+      "detail": "El trabajo no se declara terminado tras el fallo parcial",
+      "result": "passed"
+    },
+    {
+      "detail": "El siguiente tick vuelve a entregar los pendientes sin duplicarlos",
+      "result": "passed"
+    },
+    {
+      "detail": "El reintento elimina dos metadatos después de eliminar los bytes",
+      "result": "passed"
+    },
+    {
+      "detail": "Repetir la confirmación ya aplicada es idempotente",
+      "result": "passed"
+    },
+    {
+      "detail": "El tick final no vuelve a ofrecer archivos completados",
+      "result": "passed"
+    },
+    {
+      "detail": "El trabajo finaliza únicamente tras confirmar todos sus objetos exclusivos",
+      "result": "passed"
+    },
+    {
+      "detail": "La materia de control se conserva íntegra",
+      "result": "passed"
+    },
+    {
+      "detail": "El borrador independiente se conserva íntegro",
+      "result": "passed"
+    },
+    {
+      "detail": "La versión publicada independiente se conserva íntegra",
+      "result": "passed"
+    },
+    {
+      "detail": "Las cuentas de control se conservan íntegras",
+      "result": "passed"
+    },
+    {
+      "detail": "Solo permanece el archivo compartido en el directorio exclusivo del ensayo",
+      "result": "passed"
+    },
+    {
+      "detail": "El hash final del archivo compartido coincide con su carga inicial",
+      "result": "passed"
+    },
+    {
+      "detail": "El comando público vincula la versión de biblioteca a una lectura de la materia",
+      "result": "passed"
+    },
+    {
+      "detail": "Purgar la materia de lectura no propone borrar la imagen de biblioteca",
+      "result": "passed"
+    },
+    {
+      "detail": "La actividad de lectura exclusiva de la materia vencida se elimina",
+      "result": "passed"
+    },
+    {
+      "detail": "La versión publicada permanece tras eliminar su actividad de lectura",
+      "result": "passed"
+    },
+    {
+      "detail": "Los bytes permanecen intactos en el recorrido público de lectura",
+      "result": "passed"
+    },
+    {
+      "detail": "La docente mantiene acceso por biblioteca después de purgar la lectura",
+      "result": "passed"
+    },
+    {
+      "detail": "Ambos recorridos completan su trabajo de purga",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "No ejecuta mantenimiento remoto ni prueba la API de Storage de Supabase.",
+    "La referencia compartida biblioteca/entrega se siembra por SQL como topología histórica; los comandos públicos exigen propietarios distintos por rol y no permiten crearla directamente.",
+    "El fallo parcial se introduce entre el borrado local de bytes y la confirmación SQL; no simula una caída real de Supabase.",
+    "No mide el objetivo operativo de 24 horas ni una carrera concurrente restauración/purga."
+  ],
+  "migrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql",
+    "20260929235447_aulify_teacher_review_projection.sql"
+  ],
+  "observation": {
+    "filesCreated": 3,
+    "sharedBytes": 68,
+    "exclusiveBytesDeleted": 136,
+    "retries": 1,
+    "completedJobs": 2,
+    "remoteMutations": 0
+  },
+  "status": "passed",
+  "completedAt": "2026-09-29T23:58:26.458Z"
+}
