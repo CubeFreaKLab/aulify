@@ -26,7 +26,7 @@ La comprobación inicial falló al localizar el aviso de cierre. El selector com
 
 El almacén ahora distingue el aviso de una operación de los fallos de lectura. Conserva el primero durante la sincronización y lo retira al cerrarlo o al completar una acción posterior. Una confirmación antigua no puede ocultar un error más reciente. Los errores de lectura siguen desapareciendo al recuperarse la conexión. Limpiar la sesión elimina también estos avisos.
 
-Las once pruebas del almacén aprobaron, incluidas las tres regresiones nuevas y las de recuperación, permisos y respuestas confirmadas existentes. La batería completa aprobó 162 pruebas en dieciocho archivos. Compilación, TypeScript, ESLint y formato también aprobaron localmente. Estos resultados no se atribuyen a GitHub Actions hasta observar su ejecución.
+Las once pruebas del almacén aprobaron, incluidas las tres regresiones nuevas y las de recuperación, permisos y respuestas confirmadas existentes. La batería completa aprobó 162 pruebas en dieciocho archivos. Compilación, TypeScript, ESLint y formato también aprobaron localmente. El [CI 36691946349](https://github.com/CubeFreaKLab/aulify/actions/runs/36691946349), sobre `f9a7013`, también aprobó: 162 pruebas unitarias y 88 recorridos de navegador, sin casos inestables. Omite 28 ejecuciones autenticadas; los dos recorridos remotos de este informe tienen la evidencia separada descrita arriba. Los logs descargados y sus huellas están en [el registro de CI](ci-integracion.json).
 
 Se ajustaron los textos de la sesión finalizada: ahora indican revisar respuestas y publicar calificaciones; dejaron de indicar abrir una siguiente pregunta inexistente.
 

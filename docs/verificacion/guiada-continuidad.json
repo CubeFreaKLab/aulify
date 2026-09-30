@@ -183,5 +183,12 @@
     "Preparación, repetición de inicio, intentos tardíos y comprobaciones de notas usan API autenticada; incorporación, comienzo, respuestas, confirmación de omisión y cierre se operan visualmente.",
     "Movimiento reducido y tema claro. No acredita lector de pantalla ni pruebas con personas.",
     "La primera ejecución aprobada anterior al ajuste de textos no se suma a los dos recorridos finales."
-  ]
+  ],
+  "ci": {
+    "id": 36691946349,
+    "sha": "f9a701379dafc2ea90db0277536e59a4ed1c3f36",
+    "status": "success",
+    "evidence": "ci-integracion.json",
+    "authenticatedScenarios": "Los dos recorridos de este informe se ejecutaron localmente con Supabase; se omiten en el CI sin credenciales."
+  }
 }
