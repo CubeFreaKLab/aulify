@@ -1,0 +1,23 @@
+{
+  "source": "Supabase MCP execute_sql, PostgreSQL remoto",
+  "script": "tools/datos/visibility-retention-remote.sql",
+  "checks": [
+    "Señal registrada mediante comando autenticado",
+    "Un microsegundo antes de treinta días conserva el detalle",
+    "En la frontera exacta elimina el detalle",
+    "Conserva la resolución docente sin sanción automática"
+  ],
+  "status": "passed",
+  "checkedAt": "2026-09-30T03:06:33.433015+00:00",
+  "migration": "20260930024809",
+  "tickCalls": 2,
+  "rolledBack": true,
+  "fixtureAbsent": true,
+  "activityCountAfter": 175,
+  "activityCountBefore": 175,
+  "limitations": [
+    "Los roles authenticated/service_role se seleccionaron dentro de una sesión administrativa; no se ensayó la entrega de un JWT por HTTP.",
+    "Los timestamps del fixture se ajustaron en una subtransacción revertida. No representa treinta días transcurridos ni demuestra la frecuencia del cron.",
+    "tick es global: sus efectos de base de datos se revirtieron con la subtransacción; no se ejecutaron eliminaciones mediante Storage HTTP."
+  ]
+}
