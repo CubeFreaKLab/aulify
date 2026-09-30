@@ -1,0 +1,212 @@
+{
+  "status": "passed",
+  "generatedAt": "2026-09-30T09:39:26.010Z",
+  "buildId": "Pb51vnlIAGabS-c69l1xt",
+  "baseCommit": "ef9865aae79c925a41e0366e6dd3c905e952f979",
+  "scope": "Regresión local de preferencia de sonido con intercalación controlada por microtarea, usando /demo y audio nativo. No representa latencia remota ni aprobación completa de AP-17.",
+  "files": [
+    {
+      "path": "src/components/activity-screen.tsx",
+      "sha256": "cc431dd345d4c3a305e16e5497e219a94338b507bd3a83a278d04b3f01d6c3e6"
+    },
+    {
+      "path": "tests/e2e/preferencia-sonido.spec.ts",
+      "sha256": "db986d95f43b15d5aae9fef9cfced9e7cd31e47fd535cb27abc03991bda4aea9"
+    }
+  ],
+  "before": {
+    "revision": "4cbdca3bc7beb0a86ab94e07266d030128fb4aba",
+    "buildId": "tEAccMCKzII8FVQ3Dr2xd",
+    "sourceSha256": "07d9f32e58c657c85628675c7ce725d2ab8ad4d26c5966ed386d8eed19dd3aa0",
+    "reportSha256": "10dee0cf4fa199a2f6d1743baeaaff839bc2c39ab3ca654b8698828ee2e91ed6",
+    "cases": [
+      {
+        "mode": "baseline",
+        "events": [
+          {
+            "kind": "audio-created",
+            "time": 296.20000000298023,
+            "button": "Silenciar sonidos",
+            "pressed": "true",
+            "state": "running"
+          },
+          {
+            "kind": "oscillator-start",
+            "time": 317.70000000298023,
+            "button": "Silenciar sonidos",
+            "pressed": "true",
+            "state": "running"
+          },
+          {
+            "kind": "audio-state",
+            "time": 323.3999999985099,
+            "button": "Silenciar sonidos",
+            "pressed": "true",
+            "state": "running"
+          }
+        ],
+        "starts": 1,
+        "startAfterMutedRender": false,
+        "answerCount": 1
+      },
+      {
+        "mode": "mute-before-continuation",
+        "events": [
+          {
+            "kind": "audio-created",
+            "time": 202.89999999850988,
+            "button": "Silenciar sonidos",
+            "pressed": "true",
+            "state": "running"
+          },
+          {
+            "kind": "answer-persisted",
+            "time": 204,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          },
+          {
+            "kind": "mute-dispatched",
+            "time": 204.29999999701977,
+            "button": "Silenciar sonidos",
+            "pressed": "true",
+            "found": true
+          },
+          {
+            "kind": "after-mute-microtask",
+            "time": 208.89999999850988,
+            "button": "Activar sonidos",
+            "pressed": "false"
+          },
+          {
+            "kind": "oscillator-start",
+            "time": 210.89999999850988,
+            "button": "Activar sonidos",
+            "pressed": "false",
+            "state": "running"
+          },
+          {
+            "kind": "audio-state",
+            "time": 215.69999999552965,
+            "button": "Activar sonidos",
+            "pressed": "false",
+            "state": "running"
+          }
+        ],
+        "starts": 1,
+        "startAfterMutedRender": true,
+        "answerCount": 1
+      }
+    ]
+  },
+  "after": {
+    "statistics": {
+      "startTime": "2026-09-30T09:38:05.597Z",
+      "duration": 5545.1939999999995,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "resultSha256": "85d2865d426d8be0e397a5b2d71d1ce3dc700798bda25841956c6e66fdb96971",
+    "runs": [
+      {
+        "project": "chromium-escritorio",
+        "title": "sonido al confirmar con preferencia activa",
+        "status": "passed",
+        "durationMs": 1029,
+        "controlledMicrotask": false,
+        "events": [
+          {
+            "kind": "oscillator-start",
+            "time": 301.29999999701977,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          }
+        ],
+        "oscillatorStarts": 1,
+        "persistedAnswers": 1
+      },
+      {
+        "project": "chromium-escritorio",
+        "title": "sonido al confirmar con preferencia silenciada antes de continuar",
+        "status": "passed",
+        "durationMs": 832,
+        "controlledMicrotask": true,
+        "events": [
+          {
+            "kind": "answer-persisted",
+            "time": 279.3999999985099,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          },
+          {
+            "kind": "mute-dispatched",
+            "time": 279.70000000298023,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          },
+          {
+            "kind": "after-mute",
+            "time": 283.70000000298023,
+            "button": "Activar sonidos",
+            "pressed": "false"
+          }
+        ],
+        "oscillatorStarts": 0,
+        "persistedAnswers": 1
+      },
+      {
+        "project": "chromium-movil",
+        "title": "sonido al confirmar con preferencia activa",
+        "status": "passed",
+        "durationMs": 925,
+        "controlledMicrotask": false,
+        "events": [
+          {
+            "kind": "oscillator-start",
+            "time": 318.29999999701977,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          }
+        ],
+        "oscillatorStarts": 1,
+        "persistedAnswers": 1
+      },
+      {
+        "project": "chromium-movil",
+        "title": "sonido al confirmar con preferencia silenciada antes de continuar",
+        "status": "passed",
+        "durationMs": 765,
+        "controlledMicrotask": true,
+        "events": [
+          {
+            "kind": "answer-persisted",
+            "time": 226.10000000149012,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          },
+          {
+            "kind": "mute-dispatched",
+            "time": 226.60000000149012,
+            "button": "Silenciar sonidos",
+            "pressed": "true"
+          },
+          {
+            "kind": "after-mute",
+            "time": 230.69999999552965,
+            "button": "Activar sonidos",
+            "pressed": "false"
+          }
+        ],
+        "oscillatorStarts": 0,
+        "persistedAnswers": 1
+      }
+    ]
+  },
+  "limitations": [
+    "El clic de silenciamiento se fuerza por microtarea tras persistir localmente; no es una ventana humana de interacción en almacenamiento síncrono.",
+    "Se registran invocaciones nativas a oscillator.start(), no una medición acústica.",
+    "AP-17 conserva pendiente la secuencia completa de rachas, escritura manual y ausencia de puntos por rapidez."
+  ]
+}

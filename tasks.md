@@ -63,3 +63,5 @@ La [revisión de biblioteca, editor y lector del 29 de septiembre](docs/diseno/r
 La [continuidad guiada](docs/verificacion/guiada-continuidad.md) añade evidencia a T-11/T-12: AP-09/AP-10 comprobados en escritorio y móvil con Supabase, aviso de confirmación conservado y cierre con revisión manual pendiente. Se mantiene la capacidad y la operación como tareas abiertas; estos recorridos no son una carga sostenida.
 
 La [reutilización y configuración](docs/verificacion/reutilizacion-y-configuracion.md) comprueba AP-01/AP-02 y completa la explicación de AP-15: copia entre materias con historial intacto, lectura sin nota, quiz independiente y opciones de ocultamiento comprensibles. Aporta evidencia a T-09/T-12 en escritorio y móvil; las comprobaciones remotas y de demostración se distinguen en el informe.
+
+La [preferencia de sonido](docs/verificacion/preferencia-sonido.md) corrige en T-15 una continuación que utilizaba el estado anterior al silenciamiento. Cuatro ejecuciones locales con audio nativo e intercalación controlada verifican sonido activo y desactivado antes de confirmar. AP-17 conserva pendiente su secuencia completa de rachas y corrección manual.

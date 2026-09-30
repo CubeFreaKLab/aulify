@@ -266,6 +266,7 @@ function QuizPlayer({
   const [double, setDouble] = useState(false);
   const [hint, setHint] = useState('');
   const [soundOn, setSoundOn] = useState(activity.settings.sound);
+  const soundPreference = useRef(activity.settings.sound);
   const [streak, setStreak] = useState(0);
   const audio = useRef<AudioContext | null>(null);
   const [signalError, setSignalError] = useState(false);
@@ -343,7 +344,7 @@ function QuizPlayer({
     const answerKey = `${attempt.id}:${question.id}`;
     if (!submissionKeys.current.has(answerKey))
       submissionKeys.current.set(answerKey, crypto.randomUUID());
-    if (soundOn) {
+    if (activity.settings.sound && soundPreference.current) {
       try {
         audio.current ||= new AudioContext();
         void audio.current.resume();
@@ -366,7 +367,7 @@ function QuizPlayer({
     );
     submitting.current = false;
     if (!result) return;
-    if (soundOn && audio.current?.state === 'running') {
+    if (activity.settings.sound && soundPreference.current && audio.current?.state === 'running') {
       const oscillator = audio.current.createOscillator(),
         gain = audio.current.createGain();
       oscillator.frequency.value = 440;
@@ -461,7 +462,15 @@ function QuizPlayer({
           </div>
         </div>
         {activity.settings.sound && (
-          <Button variant="ghost small" aria-pressed={soundOn} onPress={() => setSoundOn(!soundOn)}>
+          <Button
+            variant="ghost small"
+            aria-pressed={soundOn}
+            onPress={() => {
+              const next = !soundPreference.current;
+              soundPreference.current = next;
+              setSoundOn(next);
+            }}
+          >
             {soundOn ? 'Silenciar sonidos' : 'Activar sonidos'}
           </Button>
         )}
