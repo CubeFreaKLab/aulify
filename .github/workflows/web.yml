@@ -97,7 +97,7 @@ jobs:
       - name: Verificar reglas del dominio
         run: npm test
       - name: Verificar registro de tiempos sin datos privados
-        run: node --test tools/datos/server-timing.test.mjs
+        run: node --test tools/datos/server-timing.test.mjs tools/datos/server-timing-aggregate.test.mjs
       - name: Rechazar aprobación de carga con muestras incompletas
         run: node --test tools/datos/load-criteria.test.mjs tools/datos/load-workers.test.mjs
       - name: Verificar retención desde el cierre efectivo

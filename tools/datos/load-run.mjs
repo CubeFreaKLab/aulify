@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import { retryAfterMs } from './load-waits.mjs';
 import { loadCriteria } from './load-criteria.mjs';
 import { parallel } from './load-workers.mjs';
+import {observeServerTiming,summarizeServerTiming} from './server-timing-aggregate.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import crypto from 'node:crypto';
 import os from 'node:os';
@@ -34,7 +35,7 @@ report.environment.confirmation = 'ACK después de persistir, con Attempt autori
 report.environment.logicalBodyBudgetBytes = budgetBytes;
 report.buildChecks = [initialBuildCheck];
 report.scriptSha256 = crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-run.mjs')).digest('hex');
-report.expectedMigration = {path:'supabase/migrations/20260930011205_aulify_student_activity_projection.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260930011205_aulify_student_activity_projection.sql')).digest('hex')};
+report.expectedMigration = {path:'supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql')).digest('hex')};
 report.environment.preparation = 'Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.';
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
@@ -53,16 +54,19 @@ const persist = async () => {
 };
 const saveCookies = async () => fs.writeFile(privatePath, JSON.stringify(Object.fromEntries(sessions.map(s => [s.id, { cookies: Object.fromEntries(s.jar), savedAt: new Date().toISOString() }]))) + '\n');
 function setCookies(s, response) { for (const header of response.headers.getSetCookie()) { const pair = header.split(';', 1)[0], i = pair.indexOf('='); if (pair.slice(i + 1)) s.jar.set(pair.slice(0, i), pair.slice(i + 1)); else s.jar.delete(pair.slice(0, i)); } }
-function record(target, tag, status, ms, bytes) {
+function record(target, tag, status, ms, bytes, timingHeader) {
   totalRequests++; bodyBytes += bytes;
   if (!target) {
-    const operation = (report.setupOperations ||= {})[tag] ||= {count:0,failed:0,statuses:{}};
+    const operation = (report.setupOperations ||= {})[tag] ||= {count:0,failed:0,statuses:{},latencies:[]};
     operation.count++;operation.statuses[status]=(operation.statuses[status]||0)+1;
+    operation.latencies.push(ms);
+    if(status===200)observeServerTiming(operation,timingHeader,ms);
     if(status<200||status>=300)operation.failed++;
     return;
   }
   const operation = target.operations[tag] ||= { count: 0, failed: 0, latencies: [], statuses: {} };
   operation.count++; operation.latencies.push(ms); operation.statuses[status] = (operation.statuses[status] || 0) + 1;
+  if(status===200)observeServerTiming(operation,timingHeader,ms);
   target.requestCount++; if (status < 200 || status >= 300) { operation.failed++; target.failedRequests++; }
   target.bodyBytes += bytes;
   recent.push({ at: Date.now(), failed: status < 200 || status >= 300 });
@@ -73,7 +77,7 @@ async function request(s, route, { method = 'GET', body, tag = route, metric = t
   try {
     const response = await fetch(base + route, { method, headers: { Cookie: [...s.jar].map(([k, v]) => `${k}=${v}`).join('; '), Origin: base, 'Sec-Fetch-Site': 'same-origin', ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(15_000) });
     setCookies(s, response); const text = await response.text();
-    record(target, tag, response.status, performance.now() - start, Buffer.byteLength(text));
+    record(target, tag, response.status, performance.now() - start, Buffer.byteLength(text),response.headers.get('Server-Timing'));
     if (!response.ok) { const error = new Error(`HTTP_${response.status}`); error.recorded = true; error.status = response.status; error.category=rpcFailureCategory(response.headers); error.tag=tag; error.retryAfterMs = retryAfterMs(response.headers.get('Retry-After')); throw error; }
     return { value: JSON.parse(text), elapsed: performance.now() - start };
   } catch (error) { if (!error.recorded) {record(target, tag, 0, performance.now() - start, 0);error.category=transportFailureCategory(error);error.tag=tag;} throw error; }
@@ -148,6 +152,11 @@ function startPolling() {
 }
 async function until(target) { while (Date.now() < target) { if (aborted) throw new Error('LOAD_ABORTED'); await delay(Math.min(1000, target - Date.now())); } }
 const percentile = (values, p) => { if (!values.length) return null; const sorted = [...values].sort((a, b) => a - b); return Number(sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * p) - 1)].toFixed(2)); };
+const summarizeOperations = operations => Object.fromEntries(Object.entries(operations).map(([k,v])=>[k,{
+ count:v.count,failed:v.failed,p50Ms:percentile(v.latencies,0.5),p95Ms:percentile(v.latencies,0.95),
+ maxMs:Math.round(v.latencies.reduce((maximum,value)=>Math.max(maximum,value),0)),statuses:v.statuses,
+ serverTiming:summarizeServerTiming(v,percentile),
+}]));
 function summarize(current) {
   current.successfulAcknowledgementSamples = current.responseAckMs.length;
   current.observedConfirmationSamples = current.confirmationMs.length;
@@ -156,7 +165,8 @@ function summarize(current) {
   current.responseAckP95Ms = percentile(current.responseAckMs, 0.95);
   current.propagationP95Ms = percentile(current.propagationMs, 0.95);
   current.failureRate = current.requestCount ? current.failedRequests / current.requestCount : null;
-  current.operations = Object.fromEntries(Object.entries(current.operations).map(([k, v]) => [k, { count: v.count, failed: v.failed, p50Ms: percentile(v.latencies, 0.5), p95Ms: percentile(v.latencies, 0.95), maxMs: Math.round(v.latencies.reduce((maximum,value)=>Math.max(maximum,value),0)), statuses: v.statuses }]));
+  current.operations = summarizeOperations(current.operations);
+  current.responseAckByQuestion = Object.fromEntries(Object.entries(current.responseAckByQuestion||{}).map(([index,values])=>[index,{samples:values.length,p50Ms:percentile(values,0.5),p95Ms:percentile(values,0.95)}]));
   delete current.confirmationMs; delete current.responseAckMs; delete current.propagationMs;
 }
 async function makeActivities(mode, stage) {
@@ -188,7 +198,11 @@ async function answer(s, index, current) {
     try {
       const result = await command(s, 'submitAnswer', s.attemptId, question.id, { type: 'single', optionId: question.correctOptionId }, key, false);
       if (!result.attempt.answers.some(a => a.questionId === question.id && a.idempotencyKey === key)) throw new Error('CONFIRMATION_MISSING');
-      if (!current.confirmed.has(`${s.attemptId}:${question.id}`)) current.responseAckMs.push(performance.now() - started);
+      if (!current.confirmed.has(`${s.attemptId}:${question.id}`)) {
+        const elapsed=performance.now()-started;
+        current.responseAckMs.push(elapsed);
+        ((current.responseAckByQuestion ||= {})[index+1] ||= []).push(elapsed);
+      }
       current.confirmed.set(`${s.attemptId}:${question.id}`, key);
       // El comando responde después del COMMIT y aporta el intento autorizado.
       // Aplicarlo reproduce el avance inmediato del cliente; las lecturas antiguas no lo revierten.
@@ -302,6 +316,7 @@ try {
 } finally {
   clearInterval(monitor); loopDelay.disable();
   report.completedAt = new Date().toISOString();
+  report.setupOperations = summarizeOperations(report.setupOperations||{});
   report.generatorEventLoop = { p95Ms: Number((loopDelay.percentile(95) / 1e6).toFixed(2)), maxMs: Number((loopDelay.max / 1e6).toFixed(2)) };
   await saveCookies(); await persist();
   if (report.status.includes('failed') || report.status.startsWith('stopped')) process.exitCode = 1;

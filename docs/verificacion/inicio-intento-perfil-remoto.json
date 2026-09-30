@@ -1,0 +1,160 @@
+{
+  "observedAt": "2026-09-30 03:07:06 UTC",
+  "source": "Supabase MCP execute_sql, PostgreSQL remoto sin carga concurrente",
+  "script": "tools/datos/start-attempt-profile.sql",
+  "baseline": {
+    "samples": [
+      {
+        "sample": 1,
+        "attempt_ms": 83.79,
+        "deferred_ms": 17.08,
+        "membership_ms": 19.259,
+        "participant_ms": 16.792,
+        "serialization_ms": 11.728
+      },
+      {
+        "sample": 2,
+        "attempt_ms": 24.425,
+        "deferred_ms": 2.452,
+        "membership_ms": 0.712,
+        "participant_ms": 2.428,
+        "serialization_ms": 6.421
+      },
+      {
+        "sample": 3,
+        "attempt_ms": 18.996,
+        "deferred_ms": 2.332,
+        "membership_ms": 0.634,
+        "participant_ms": 1.701,
+        "serialization_ms": 7.148
+      },
+      {
+        "sample": 4,
+        "attempt_ms": 17.042,
+        "deferred_ms": 1.935,
+        "membership_ms": 0.656,
+        "participant_ms": 1.553,
+        "serialization_ms": 5.783
+      },
+      {
+        "sample": 5,
+        "attempt_ms": 13.116,
+        "deferred_ms": 1.528,
+        "membership_ms": 0.666,
+        "participant_ms": 0.915,
+        "serialization_ms": 4.937
+      }
+    ],
+    "activity": "6d74b971-e6c0-46e9-85bd-3e4993a23218",
+    "rollback": true
+  },
+  "subsequent": {
+    "samples": [
+      {
+        "sample": 1,
+        "attempt_ms": 22.033,
+        "deferred_ms": 5.081,
+        "membership_ms": 2.427,
+        "participant_ms": 5.192,
+        "serialization_ms": 4.422
+      },
+      {
+        "sample": 2,
+        "attempt_ms": 15.413,
+        "deferred_ms": 0.965,
+        "membership_ms": 0.705,
+        "participant_ms": 1.057,
+        "serialization_ms": 3.819
+      },
+      {
+        "sample": 3,
+        "attempt_ms": 16.807,
+        "deferred_ms": 2.764,
+        "membership_ms": 0.608,
+        "participant_ms": 0.922,
+        "serialization_ms": 4.318
+      },
+      {
+        "sample": 4,
+        "attempt_ms": 15.091,
+        "deferred_ms": 0.537,
+        "membership_ms": 0.605,
+        "participant_ms": 0.778,
+        "serialization_ms": 2.594
+      },
+      {
+        "sample": 5,
+        "attempt_ms": 11.615,
+        "deferred_ms": 0.755,
+        "membership_ms": 0.626,
+        "participant_ms": 0.765,
+        "serialization_ms": 2.359
+      },
+      {
+        "sample": 6,
+        "attempt_ms": 16.978,
+        "deferred_ms": 0.549,
+        "membership_ms": 0.697,
+        "participant_ms": 0.79,
+        "serialization_ms": 7.777
+      },
+      {
+        "sample": 7,
+        "attempt_ms": 11.922,
+        "deferred_ms": 0.5,
+        "membership_ms": 0.15,
+        "participant_ms": 0.218,
+        "serialization_ms": 2.302
+      },
+      {
+        "sample": 8,
+        "attempt_ms": 11.909,
+        "deferred_ms": 0.471,
+        "membership_ms": 0.148,
+        "participant_ms": 0.224,
+        "serialization_ms": 1.003
+      },
+      {
+        "sample": 9,
+        "attempt_ms": 5.099,
+        "deferred_ms": 0.477,
+        "membership_ms": 0.187,
+        "participant_ms": 0.301,
+        "serialization_ms": 1.002
+      },
+      {
+        "sample": 10,
+        "attempt_ms": 8.865,
+        "deferred_ms": 1.802,
+        "membership_ms": 0.141,
+        "participant_ms": 0.205,
+        "serialization_ms": 0.918
+      },
+      {
+        "sample": 11,
+        "attempt_ms": 8.74,
+        "deferred_ms": 0.515,
+        "membership_ms": 0.144,
+        "participant_ms": 0.214,
+        "serialization_ms": 0.966
+      },
+      {
+        "sample": 12,
+        "attempt_ms": 6.664,
+        "deferred_ms": 0.442,
+        "membership_ms": 0.146,
+        "participant_ms": 0.212,
+        "serialization_ms": 0.94
+      }
+    ],
+    "activity": "6d74b971-e6c0-46e9-85bd-3e4993a23218",
+    "rollback": true
+  },
+  "remainingFixtureMembersAfter": 4,
+  "limitations": [
+    "Las operaciones medidas se revirtieron en subtransacciones; no quedaron participantes o intentos nuevos.",
+    "Se midieron componentes SQL con una identidad ficticia autorizada, no todo el recorrido HTTP, ni red, ni un escenario concurrente.",
+    "La serie posterior no mostró un salto de duración al superar cinco ejecuciones. Esto no descarta planes distintos en otras sesiones.",
+    "No reproduce la espera histórica de varios segundos ni prueba su causa. No cierra Q-06/Q-09."
+  ]
+}
