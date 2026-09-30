@@ -278,14 +278,20 @@ async function runPhase(mode, stage, seconds) {
   }
   await persist();
   try { await auditIntegrity(current); } catch(error) { current.integrityAuditStatus=`No completada: ${error.name}`;phaseError ||= error; }
-  if (!aborted && !phaseError) {
+  try { if (!aborted && !phaseError) {
     const resultStart = performance.now();
     await parallel(students, 6, async s => { const teacher = teachers.find(t => t.group === s.group); await command(teacher, 'publishGrade', s.activityId, s.id); });
     current.publishAllElapsedMs = Math.round(performance.now() - resultStart);
     const resultLatencies = [];
-    await parallel(students, 8, async s => { const started = performance.now(); const {value:data} = await refresh(s, 'publishedResults'); if (!data.studentResults[fixtures.groups.find(g => g.group === s.group).subjectId]?.some(r => r.activityId === s.activityId && r.grade === 100)) current.unobservedResults = (current.unobservedResults || 0) + 1; resultLatencies.push(performance.now() - started); });
-    current.observedResultSamples = resultLatencies.length;
-    current.resultsReadP95Ms = percentile(resultLatencies, 0.95);
+    try {
+      await parallel(students, 8, async s => { const started = performance.now(); const {value:data} = await refresh(s, 'publishedResults'); if (!data.studentResults[fixtures.groups.find(g => g.group === s.group).subjectId]?.some(r => r.activityId === s.activityId && r.grade === 100)) current.unobservedResults = (current.unobservedResults || 0) + 1; resultLatencies.push(performance.now() - started); });
+    } finally {
+      current.observedResultSamples = resultLatencies.length;
+      current.resultsReadP95Ms = percentile(resultLatencies, 0.95);
+    }
+  }} catch(error) {
+    phaseError ||= error;
+    current.resultAuditStatus = `No completada: ${error.name}`;
   }
   summarize(current);
   current.criteria = loadCriteria(current);

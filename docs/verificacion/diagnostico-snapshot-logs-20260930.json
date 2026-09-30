@@ -1,0 +1,25 @@
+{
+  "project": "bnqyyumfmyexsqszglab",
+  "window": {
+    "from": "2026-09-30T03:44:00Z",
+    "to": "2026-09-30T03:50:00Z"
+  },
+  "source": "Supabase unified logs / postgres_logs",
+  "filter": "sql_state_code = 57014",
+  "result": [
+    {
+      "at": "2026-09-30 03:49:34.232 UTC",
+      "code": "57014",
+      "context": "SQL statement \"select *        from app.question_secrets where version_id=v and question_key=k\"\nPL/pgSQL function app.question_json(uuid,uuid,boolean) line 4 at SQL statement\nPL/pgSQL function app.present_question(uuid,uuid,uuid) line 2 during statement block local variable initialization\nSQL statement \"select coalesce(jsonb_agg(z.question order by coalesce(aq.position,g.position*1000+qu.position)),'[]'::jsonb)\n         from app.questions qu\n join app.question_groups g using(version_id,group_key)\n left join app.attempt_questions aq\n  on aq.version_id=qu.version_id and aq.question_key=qu.question_key and aq.attempt_id=t\n cross join lateral(select app.present_question(qu.version_id,qu.question_key,t) question) z\n where qu.version_id=x.version_id\"\nPL/pgSQL function app.student_activity(uuid) line 23 at SQL statement\nPL/pgSQL function app.snapshot() line 29 at assignment\nSQL function \"aulify_snapshot\" statement 1",
+      "detail": "",
+      "pid": "221052"
+    },
+    {
+      "at": "2026-09-30 03:49:40.625 UTC",
+      "code": "57014",
+      "context": "SQL statement \"select a.*,qs.bonus_affects_grade,at.closed_at,at.close_reason,r.decision        from app.attempts at join app.participants p on p.id=at.participant_id join app.activities a on a.id=p.activity_id join app.quiz_settings qs on qs.activity_id=a.id left join app.attempt_resolutions r on r.attempt_id=at.id where at.id=t\"\nPL/pgSQL function app.attempt_score(uuid) line 11 at SQL statement\nSQL expression \"exists(select 1 from app.attempts where participant_id=x.participant_id and not (app.attempt_score(id)->>'complete')::boolean) or exists(select 1 from app.submissions where participant_id=x.participant_id) and not exists(select 1 from app.evaluation_revisions where participant_id=x.participant_id)\"\nPL/pgSQL function app.student_results(uuid) line 6 at IF\nPL/pgSQL function app.snapshot() line 30 at assignment\nSQL function \"aulify_snapshot\" statement 1",
+      "detail": "",
+      "pid": "221813"
+    }
+  ]
+}
