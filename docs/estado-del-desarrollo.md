@@ -2,7 +2,9 @@
 
 Actualizado: 29 de septiembre de 2026. Integración con servicios reales y revisión visual en curso.
 
-La integración más reciente tiene veinte migraciones aplicadas y el compilado local `kWhdsczTz0VM4q1tEx6j6`. Pasaron 149 pruebas locales en dieciséis archivos y la construcción. El [arreglo de sincronización](verificacion/sincronizacion-proyeccion-reintento.md) evita aceptar una revisión cuando falla la descarga de sus datos; ocho pruebas específicas y un recorrido posterior de navegador con servicios reales verifican reintento, conservación de respuestas y reanudación. Este último caso pasó sin reintentos del ejecutor. El CI [36654411825](https://github.com/CubeFreaKLab/aulify/actions/runs/36654411825), sobre `a385bd6`, terminó con todos sus pasos aprobados, incluidos los ensayos de las veinte migraciones. No se le atribuyen cambios posteriores.
+La integración más reciente tiene veinte migraciones aplicadas y el compilado local `9b84oYZaFQkaf5OmYT5AJ`. Pasaron 151 pruebas locales en diecisiete archivos y la construcción. El [arreglo de sincronización](verificacion/sincronizacion-proyeccion-reintento.md) evita aceptar una revisión cuando falla la descarga de sus datos; ocho pruebas específicas y un recorrido posterior de navegador con servicios reales verifican reintento, conservación de respuestas y reanudación. Este último caso pasó sin reintentos del ejecutor. El CI [36658415886](https://github.com/CubeFreaKLab/aulify/actions/runs/36658415886), sobre `05ccfa0`, terminó con todos sus pasos aprobados, incluidos los ensayos de las veinte migraciones. No cubre el cambio posterior de transporte.
+
+El [transporte con conexiones acotadas](verificacion/transporte-acotado.md) mejoró el diagnóstico de sesenta segundos: 200 respuestas confirmadas y persistidas, cero fallos en 11.641 solicitudes y p95 de confirmación de 797,21 ms. Sigue pendiente el [escenario sostenido](verificacion/protocolo-carga-sostenida.md) en ambas modalidades. Esta medición breve no cierra Q-06 ni Q-09. Las [cuotas observadas](verificacion/cuotas-supabase-20260929.md) permanecen dentro del plan gratuito.
 
 ## Revisión visual más reciente
 

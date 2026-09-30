@@ -19,6 +19,7 @@ on:
         'tools/datos/sync-context-check.mjs',
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/server-timing*.mjs',
+        'tools/datos/load-criteria*.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -44,6 +45,7 @@ on:
         'tools/datos/sync-context-check.mjs',
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/server-timing*.mjs',
+        'tools/datos/load-criteria*.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -90,6 +92,8 @@ jobs:
         run: npm test
       - name: Verificar registro de tiempos sin datos privados
         run: node --test tools/datos/server-timing.test.mjs
+      - name: Rechazar aprobación de carga con muestras incompletas
+        run: node --test tools/datos/load-criteria.test.mjs
       - name: Verificar migraciones y permisos en PostgreSQL aislado
         run: node tools/datos/check.mjs
       - name: Verificar casos numéricos de puntuación

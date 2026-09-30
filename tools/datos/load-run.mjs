@@ -1,21 +1,39 @@
 import fs from 'node:fs/promises';
 import { retryAfterMs } from './load-waits.mjs';
+import { loadCriteria } from './load-criteria.mjs';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { performance, monitorEventLoopDelay } from 'node:perf_hooks';
 
-const base = process.env.AULIFY_LOAD_URL || 'http://127.0.0.1:3002';
-if (!/^http:\/\/127\.0\.0\.1:\d+$/.test(base)) throw new Error('La prueba se limita al servidor local autorizado.');
+const base = process.env.AULIFY_LOAD_URL;
+const expectedBuild = process.env.AULIFY_EXPECTED_BUILD_ID;
+if (base !== 'http://127.0.0.1:3001' || !expectedBuild) throw new Error('Definir servidor compilado 3001 y AULIFY_EXPECTED_BUILD_ID explícitamente.');
+const budgetBytes = Number(process.env.AULIFY_LOAD_BUDGET_BYTES || 1_000_000_000);
+if (!Number.isSafeInteger(budgetBytes) || budgetBytes < 1 || budgetBytes > 2_500_000_000) throw new Error('Presupuesto fuera del límite preventivo.');
+const verifyBuild = async () => {
+  if ((await fs.readFile('.next/BUILD_ID','utf8')).trim() !== expectedBuild) throw new Error('Compilado local distinto del esperado.');
+  const response = await fetch(base+'/', {signal:AbortSignal.timeout(15000)});
+  if (!response.ok || !(await response.text()).includes(expectedBuild)) throw new Error('El servidor no entrega el compilado esperado.');
+  return {at:new Date().toISOString(),expectedBuild,diskMatches:true,servedHtmlMatches:true};
+};
+const initialBuildCheck = await verifyBuild();
 const accounts = JSON.parse(await fs.readFile('.local-private/load-accounts.json', 'utf8'));
 const fixtures = JSON.parse(await fs.readFile('.local-private/load-fixtures.json', 'utf8'));
 if (accounts.projectRef !== 'bnqyyumfmyexsqszglab' || fixtures.projectRef !== accounts.projectRef || accounts.users.length !== 204 || fixtures.groups.length !== 4 || fixtures.groups.some(g => g.students.length !== 50 || g.questions.length !== 10)) throw new Error('Preparación incompleta o proyecto incorrecto.');
+const localEnv = Object.fromEntries((await fs.readFile('.env.local','utf8')).split(/\r?\n/).filter(line=>line.trim()&&!line.startsWith('#')).map(line=>{const i=line.indexOf('=');return[line.slice(0,i),line.slice(i+1).replace(/^['"]|['"]$/g,'')];}));
+if (localEnv.NEXT_PUBLIC_SUPABASE_URL !== `https://${accounts.projectRef}.supabase.co`) throw new Error('El proyecto configurado no es el autorizado.');
 const privatePath = '.local-private/load-http-sessions.json';
-const reportPath = 'docs/verificacion/datos-carga.json';
+const reportPath = `docs/verificacion/datos-carga-${new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)}.json`;
 const runId = crypto.randomUUID();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: (await fs.readFile('.next/BUILD_ID','utf8')).trim(), environment: { application: 'Next.js production local HTTP', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', 'La aplicación está en una computadora local, no en el alojamiento público.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
 report.environment.confirmation = 'ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.';
+report.environment.logicalBodyBudgetBytes = budgetBytes;
+report.buildChecks = [initialBuildCheck];
+report.scriptSha256 = crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-run.mjs')).digest('hex');
+report.expectedMigration = {path:'supabase/migrations/20260930011205_aulify_student_activity_projection.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260930011205_aulify_student_activity_projection.sql')).digest('hex')};
+report.environment.preparation = 'Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.';
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
 report.previousReport = 'datos-carga-20260928-0811.md';
@@ -58,15 +76,25 @@ async function parallel(items, limit, callback) { let index = 0; await Promise.a
 function needsTokenRefresh(s){try{let v=[...s.jar].filter(([k])=>k.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,v])=>v).join('');v=decodeURIComponent(v);if(v.startsWith('base64-'))v=Buffer.from(v.slice(7),'base64url').toString();return(JSON.parse(v).expires_at??0)*1000<Date.now()+90000;}catch{return true;}}
 async function prepareSessions() {
   let previousRenewal=0;
+  const activityByGroup = new Map();
   for (const [index, s] of sessions.entries()) {
+    if (!s.jar.size) throw new Error('Falta una sesión ficticia existente; no se crea ni sustituye automáticamente.');
+    if (needsTokenRefresh(s)) { await delay(Math.max(0,2500-(Date.now()-previousRenewal))); previousRenewal=Date.now(); }
     let ready = false;
-    if (s.jar.size) { if(needsTokenRefresh(s)){await delay(Math.max(0,2500-(Date.now()-previousRenewal)));previousRenewal=Date.now();} try { await request(s, '/api/workspace', { metric: false }); ready = true; } catch(error) {if(error.status===503||error.status===429){console.log('Auth temporalmente no disponible durante preparación; espera de 60 segundos.');report.authentication.rateLimitWaits++;await delay(Math.max(60000,error.retryAfterMs||0));await request(s, '/api/workspace', {metric:false});ready=true;}else s.jar.clear();} }
-    if (!ready) {
-      for (let retry = 0; retry < 10; retry++) {
-        try { await request(s, '/api/auth', { method: 'POST', metric: false, body: { action: 'access', email: s.email, password: s.password } }); ready = true; break; }
-        catch (error) { if (error.status !== 429) throw new Error(`No se pudo preparar sesión ficticia ${index + 1}.`); report.authentication.rateLimitWaits++; console.log('Auth solicita esperar: pausa de 60 segundos.'); await delay(Math.max(60_000,error.retryAfterMs||0)); }
+    for (let retry = 0; retry < 3; retry++) {
+      try {
+        const route = activityByGroup.has(s.group) ? `/api/workspace?activity=${activityByGroup.get(s.group)}` : '/api/workspace';
+        const {value} = await request(s, route, {metric:false});
+        if (s.role === 'teacher') {
+          const activity = value.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
+          if (activity) activityByGroup.set(s.group, activity.id);
+        }
+        ready=true; break;
+      } catch(error) {
+        if (![429,503].includes(error.status) && !['TimeoutError','TypeError'].includes(error.name)) throw error;
+        report.authentication.rateLimitWaits++;
+        await delay(Math.max(30000,error.retryAfterMs||0));
       }
-      await delay(2500);
     }
     if (!ready) throw new Error('Auth mantuvo el límite de frecuencia. No se inició la carga.');
     report.authentication.preparedSessions++;
@@ -86,7 +114,7 @@ function observe(s, value, target) {
 async function refresh(s, tag = 'snapshot') {
   if (s.refresh) return s.refresh;
   const target = phase, epoch = s.mutationEpoch;
-  s.refresh = request(s, tag==='publishedResults' ? '/api/workspace' : `/api/workspace?activity=${s.activityId}`, { tag }).then(result => { if(s.mutationEpoch===epoch)observe(s, result.value, target); return s.latest ?? result.value; }).finally(() => { s.refresh = null; });
+  s.refresh = request(s, tag==='publishedResults' ? '/api/workspace' : `/api/workspace?activity=${s.activityId}`, { tag }).then(result => { const applied=s.mutationEpoch===epoch; if(applied)observe(s, result.value, target); return {applied,value:s.latest ?? result.value}; }).finally(() => { s.refresh = null; });
   return s.refresh;
 }
 function startPolling() {
@@ -96,7 +124,7 @@ function startPolling() {
     s.running = (async () => {
       try {
         const result = (await request(s, `/api/sync?activity=${s.activityId}`, { tag: 'sync' })).value;
-        if (s.lastRevision !== result.revision) { await refresh(s); s.lastRevision = result.revision; }
+        if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(snapshot.applied)s.lastRevision = result.revision; }
         s.retryAt=0;s.retryMs=1000;
       } catch (error) {
         if (error.status===401 || error.status===403) {
@@ -165,7 +193,7 @@ async function answer(s, index, current) {
       }
       current.confirmationMs.push(performance.now() - started);
       return;
-    } catch { if (aborted) return; if (retry === 2) { if(current.confirmed.has(`${s.attemptId}:${question.id}`))current.unobservedConfirmations++;else current.unconfirmedAnswers++; return; } await delay(300); }
+    } catch(error) { if (aborted) return; if (retry === 2 || error.status===401 || error.status===403 || error.status===400) { if(current.confirmed.has(`${s.attemptId}:${question.id}`))current.unobservedConfirmations++;else current.unconfirmedAnswers++; return; } await delay(Math.max(300,error.retryAfterMs||0)); }
   }
 }
 async function auditIntegrity(current) {
@@ -182,6 +210,7 @@ async function auditIntegrity(current) {
 }
 async function runPhase(mode, stage, seconds) {
   phase = null;
+  report.buildChecks.push(await verifyBuild());
   await makeActivities(mode, stage);
   const current = { name: `${mode}-${stage}`, mode, stage, targetSeconds: seconds, startedAt: new Date().toISOString(), requestCount: 0, failedRequests: 0, bodyBytes: 0, operations: {}, responseAckMs: [], confirmationMs: [], propagationMs: [], skippedPollTicks: 0, confirmed: new Map(), unsentAnswers: 0, unconfirmedAnswers: 0, unobservedConfirmations: 0, burst: null };
   report.phases.push(current); phase = current; recent.length = 0;
@@ -227,11 +256,12 @@ async function runPhase(mode, stage, seconds) {
     await parallel(students, 6, async s => { const teacher = teachers.find(t => t.group === s.group); await command(teacher, 'publishGrade', s.activityId, s.id); });
     current.publishAllElapsedMs = Math.round(performance.now() - resultStart);
     const resultLatencies = [];
-    await parallel(students, 8, async s => { const started = performance.now(); const data = await refresh(s, 'publishedResults'); if (!data.studentResults[fixtures.groups.find(g => g.group === s.group).subjectId]?.some(r => r.activityId === s.activityId && r.grade === 100)) current.unobservedResults = (current.unobservedResults || 0) + 1; resultLatencies.push(performance.now() - started); });
+    await parallel(students, 8, async s => { const started = performance.now(); const {value:data} = await refresh(s, 'publishedResults'); if (!data.studentResults[fixtures.groups.find(g => g.group === s.group).subjectId]?.some(r => r.activityId === s.activityId && r.grade === 100)) current.unobservedResults = (current.unobservedResults || 0) + 1; resultLatencies.push(performance.now() - started); });
+    current.observedResultSamples = resultLatencies.length;
     current.resultsReadP95Ms = percentile(resultLatencies, 0.95);
   }
   summarize(current);
-  current.criteria = { durationCompleted: current.elapsedSeconds >= seconds && !current.interrupted, confirmationP95: current.confirmationP95Ms !== null && current.confirmationP95Ms <= 1500, propagationP95: mode !== 'guided' || current.propagationP95Ms !== null && current.propagationP95Ms <= 2000, validRequestFailureRate: current.failureRate !== null && current.failureRate < 0.01, integrity: current.integrity?.missingOrChangedConfirmed === 0 && current.integrity?.duplicateQuestions === 0 && current.integrity?.persistedAnswers === 2000, burst: stage !== 'measurement' || current.burst?.dispatched === 200 && current.burst.windowMs <= 2000 };
+  current.criteria = loadCriteria(current);
   await saveCookies(); await persist();
   console.log(`FIN ${current.name}: confirmación p95=${current.confirmationP95Ms}ms; propagación p95=${current.propagationP95Ms}ms; errores=${current.failedRequests}/${current.requestCount}.`);
   if (phaseError) throw phaseError;
@@ -239,13 +269,14 @@ async function runPhase(mode, stage, seconds) {
 const monitor = setInterval(async () => {
   while (recent.length && recent[0].at < Date.now() - 60_000) recent.shift();
   const fraction = recent.length ? recent.filter(r => r.failed).length / recent.length : 0;
-  if (bodyBytes * 2 + totalRequests * 1024 > 1_000_000_000) abortReason = 'Corte preventivo: estimación de transferencia adicional superior a 1 GB.';
+  if (bodyBytes * 2 + totalRequests * 1024 > budgetBytes) abortReason = `Corte preventivo: transferencia adicional estimada superior a ${budgetBytes} bytes.`;
   if (phase && recent.length >= 100 && fraction > 0.1 && new Date().getTime() - new Date(phase.startedAt).getTime() >= 60_000) abortReason = 'Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto.';
   if (abortReason) aborted = true;
   if (phase) console.log(`Avance ${phase.name}: ${Math.round((Date.now() - new Date(phase.startedAt).getTime()) / 1000)}s; ${phase.requestCount} solicitudes; ${phase.failedRequests} fallos; estimación ${Math.round((bodyBytes * 2 + totalRequests * 1024) / 1e6)}MB.`);
   await persist();
 }, 60_000);
 try {
+  console.log(`CARGA: ${reportPath}; build ${expectedBuild}; presupuesto ${budgetBytes} bytes.`);
   await prepareSessions();
   if (process.argv.includes('--sessions-only')) { report.status = 'sessions-prepared'; await persist(); }
   else {
