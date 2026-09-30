@@ -18,4 +18,6 @@ El mantenimiento sigue siendo global. El [script SQL](../../tools/datos/retentio
 
 La preparación representó el vencimiento mediante fechas sintéticas. Desde esa elegibilidad hasta completar el trabajo transcurrieron **62,409 segundos reales**, con ejecución manual y fallo parcial deliberado. No son treinta días transcurridos ni una medición del retraso del programador. AP-32 queda cubierto por el ensayo remoto; AP-31 conserva pendiente la carrera remota restauración/purga y la comprobación del objetivo operativo de 24 horas mediante ejecución programada.
 
+La [observación programada posterior](conservacion-programada.md) verificó ese objetivo de 24 horas en otro caso ficticio, con espera real del programador. Permanece pendiente la carrera remota; ambos ensayos conservan separados sus procedimientos y resultados.
+
 Las etapas están separadas en `prepare`, SQL de elegibilidad y mantenimiento, `partial`, nuevo mantenimiento, `finish` y lectura final. No deben repetirse sobre un manifiesto ya completado. El [validador de evidencias](../../tools/datos/retention-storage-evidence.mjs) compara los estados conservados con las condiciones esperadas. Las herramientas no se ejecutan contra Supabase desde CI.

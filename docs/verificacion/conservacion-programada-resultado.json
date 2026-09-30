@@ -1,0 +1,17 @@
+{
+  "job": {
+    "id": "f64c3e18-d491-4379-8c89-68aa9a75aa75",
+    "phase": "records",
+    "due_at": "2026-09-30T03:25:14.339833+00:00",
+    "status": "done",
+    "subject_id": null,
+    "retry_count": 0,
+    "completed_at": "2026-09-30T05:33:12.835102+00:00",
+    "next_retry_at": null,
+    "last_error_code": null
+  },
+  "checkedAt": "2026-09-30T06:16:18.583952+00:00",
+  "subjectExists": false,
+  "fileMetadataExists": false,
+  "storageObjectExists": false
+}

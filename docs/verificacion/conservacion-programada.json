@@ -1,7 +1,7 @@
 {
   "runId": "fc7947c2-cfd7-4c70-8e95-450287b40c74",
   "startedAt": "2026-09-30T03:24:12.645Z",
-  "status": "awaiting-scheduled-run",
+  "status": "scheduled-observation-passed",
   "limitations": [
     "Vencimiento representado por fechas sintéticas; la espera del cron se mide con reloj real a partir de la elegibilidad preparada.",
     "Un solo fixture no demuestra un SLA general de disponibilidad del programador.",
@@ -22,5 +22,63 @@
     "file_state": "ready",
     "object_present": true
   },
-  "nextStep": "Observar una ejecución con event=schedule; contrastar job, metadatos y ausencia real del objeto. No ejecutar tick manual mientras esté pendiente."
+  "nextStep": "Observación programada completada para este fixture; queda la carrera remota de AP-31.",
+  "completedAt": "2026-09-30T05:33:12.835102+00:00",
+  "observedAt": "2026-09-30T06:17:23.078Z",
+  "eligibilityToCompletionSeconds": 7678.496,
+  "databaseEvidence": "conservacion-programada-resultado.json",
+  "scheduledRun": {
+    "id": 36673912107,
+    "event": "schedule",
+    "sha": "d41e381358c1d3d7c28bd21a077b8df0b5b482ef",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36673912107",
+    "createdAt": "2026-09-30T05:32:55Z",
+    "updatedAt": "2026-09-30T05:33:33Z",
+    "logEvidence": [
+      {
+        "jobId": 109754624849,
+        "sha256": "760b35325dd51612ee733e5afb815fa7d4ce30e3e8ba79f14aee8316a3930242"
+      }
+    ]
+  },
+  "storageEvidence": {
+    "listedObject": false,
+    "downloadFound": false,
+    "downloadErrorStatus": "404",
+    "downloadError": "Object not found"
+  },
+  "script": {
+    "path": "tools/datos/retention-scheduled-observe.mjs",
+    "sha256": "877c38e99b137319191179c863b6d1b75bf6cfd4be53b254827b3edbe7fddeda"
+  },
+  "checks": [
+    {
+      "detail": "Ejecución automática con evento schedule y resultado success",
+      "result": "passed"
+    },
+    {
+      "detail": "Trabajo terminado dentro de la ventana de esa ejecución",
+      "result": "passed"
+    },
+    {
+      "detail": "Eliminación dentro de las 24 horas desde la elegibilidad",
+      "result": "passed"
+    },
+    {
+      "detail": "Materia y metadato ausentes",
+      "result": "passed"
+    },
+    {
+      "detail": "Objeto ausente en metadatos de Storage y listado autorizado",
+      "result": "passed"
+    },
+    {
+      "detail": "Descarga autorizada responde objeto no encontrado",
+      "result": "passed"
+    },
+    {
+      "detail": "Registro del mantenimiento confirma un archivo completado",
+      "result": "passed"
+    }
+  ]
 }

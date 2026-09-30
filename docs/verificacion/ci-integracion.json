@@ -3231,5 +3231,65 @@
       "browserSkipped": 24,
       "browserFlaky": 0
     }
+  },
+  {
+    "id": 36673912107,
+    "name": "Conservación y limpieza de Aulify",
+    "event": "schedule",
+    "sha": "d41e381358c1d3d7c28bd21a077b8df0b5b482ef",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36673912107",
+    "createdAt": "2026-09-30T05:32:55Z",
+    "updatedAt": "2026-09-30T05:33:33Z",
+    "observedAt": "2026-09-30T06:16:01.053Z",
+    "jobs": [
+      {
+        "id": 109754624849,
+        "name": "limpiar",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la versión publicada",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Aplicar plazos y eliminar archivos sin referencias autorizadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la versión publicada",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "evidenceSource": "GitHub REST API: run, jobs and downloaded job logs",
+    "logEvidence": [
+      {
+        "jobId": 109754624849,
+        "sha256": "760b35325dd51612ee733e5afb815fa7d4ce30e3e8ba79f14aee8316a3930242"
+      }
+    ],
+    "observedMaintenanceResult": {
+      "deletedFileRecords": 1,
+      "completedAt": "2026-09-30T05:33:29.223Z"
+    }
   }
 ]

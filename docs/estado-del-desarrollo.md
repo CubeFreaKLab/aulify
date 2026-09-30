@@ -42,7 +42,7 @@ Figma reúne veintidós vistas, cinco composiciones de ayuda y un catálogo de c
 | Ayuda y cuentas | [Ayuda por cuenta](verificacion/ayuda-por-cuenta.md) y [rechazo de cuentas sin confirmar](verificacion/acceso-sin-confirmar.md). | Primera entrada completa de ambos roles, entrega de correo y lector de pantalla manual pendientes. |
 | Conservación de señales | [Frontera de treinta días](verificacion/conservacion-senales.md): once comprobaciones locales y cuatro remotas con reversión incondicional. | Fechas de prueba sintéticas; no representa esperar treinta días reales. |
 | Archivos y borrado parcial | [29 comprobaciones remotas](verificacion/conservacion-storage-remota.md): bytes y metadatos exclusivos eliminados, archivo compartido conservado y reintento idempotente. | AP-32 cubierto. El plazo programado y la carrera remota de AP-31 se comprueban por separado. |
-| Limpieza programada | Dos ejecuciones con evento `schedule` aprobadas; una [observación de eliminación](verificacion/conservacion-programada.md) está preparada. | Activación automática no equivale a demostrar el plazo del archivo preparado; no ejecutar mantenimiento manual durante esa observación. |
+| Limpieza programada | [Observación completada](verificacion/conservacion-programada.md): ejecución `schedule` 36673912107, materia y archivo eliminados en 2 h 7 min 58,496 s desde la elegibilidad; siete comprobaciones. | Antigüedad de treinta días sintética; espera del programador real. Un caso no constituye un SLA general. La carrera remota sigue pendiente. |
 | Recuperación | [Nueve comprobaciones aisladas](verificacion/recuperacion-aislada.md) con datos ficticios. | No es una restauración operativa de Supabase Auth, base de datos y Storage. |
 | Accesibilidad | Recorridos de teclado, foco, reflujo y análisis axe en los lotes identificados. | No acredita conformidad completa con WCAG ni evaluación con personas. |
 
@@ -63,7 +63,7 @@ Un [diagnóstico posterior de la cola](verificacion/cola-transporte-20260930.md)
 ## Pendientes de liberación
 
 1. Resolver el problema de capacidad y verificar cuatro grupos de cincuenta estudiantes con sus docentes, en ambas modalidades y dentro de las cuotas Free.
-2. Completar la observación programada y la carrera remota de restauración/purga de AP-31.
+2. Completar la carrera remota de restauración/purga de AP-31. La observación programada del plazo ya aprobó para el caso preparado.
 3. Configurar y verificar publicación por HTTPS, condiciones de CI/CD, confirmación y recuperación por correo. El dominio propio sigue fuera de esta entrega.
 4. Comprobar recuperación operativa de base, cuentas y archivos; completar revisión manual de accesibilidad y primera entrada de ambos roles.
 5. Consolidar documentación y manuales sobre una revisión verificable. Jira y QMetry no están configurados; los casos, incidencias y resultados existentes se mantienen en el repositorio.
