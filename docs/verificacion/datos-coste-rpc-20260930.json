@@ -1,0 +1,160 @@
+{
+  "observedAt": "2026-09-30T00:44:50.425784Z",
+  "source": "extensions.pg_stat_statements; sentencias normalizadas WITH pgrst_source AS que contienen cada RPC, sin devolver texto SQL ni valores.",
+  "statsReset": "2026-09-28T02:56:33.711057Z",
+  "baseline": "datos-planes-rpc-20260929.json",
+  "current": [
+    {
+      "rpc": "aulify_sync",
+      "calls": 64330,
+      "totalExecMs": 1022700.388,
+      "sharedBlksHit": 4798668,
+      "sharedBlksRead": 0
+    },
+    {
+      "rpc": "aulify_activity_snapshot",
+      "calls": 4373,
+      "totalExecMs": 474498.008,
+      "sharedBlksHit": 4236653,
+      "sharedBlksRead": 0
+    },
+    {
+      "rpc": "aulify_command",
+      "calls": 6401,
+      "totalExecMs": 405718.38,
+      "sharedBlksHit": 1458746,
+      "sharedBlksRead": 19
+    },
+    {
+      "rpc": "aulify_snapshot",
+      "calls": 3836,
+      "totalExecMs": 1550016.566,
+      "sharedBlksHit": 10869084,
+      "sharedBlksRead": 10
+    }
+  ],
+  "syncDelta": {
+    "calls": 9361,
+    "totalExecMs": 12043.938,
+    "meanExecMs": 1.2866080546950112,
+    "matchesMeasuredSyncCount": true
+  },
+  "studentProjection": {
+    "plan": [
+      {
+        "QUERY PLAN": [
+          {
+            "Plan": {
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "CTE Name": "projection",
+              "Alias": "projection",
+              "Startup Cost": 0.29,
+              "Total Cost": 0.31,
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Actual Startup Time": 322.064,
+              "Actual Total Time": 322.067,
+              "Actual Rows": 1,
+              "Actual Loops": 1,
+              "Shared Hit Blocks": 4819,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 2,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Result",
+                  "Parent Relationship": "InitPlan",
+                  "Subplan Name": "CTE identity",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Startup Cost": 0,
+                  "Total Cost": 0.01,
+                  "Plan Rows": 1,
+                  "Plan Width": 32,
+                  "Actual Startup Time": 0.009,
+                  "Actual Total Time": 0.009,
+                  "Actual Rows": 1,
+                  "Actual Loops": 1,
+                  "Shared Hit Blocks": 0,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                },
+                {
+                  "Node Type": "CTE Scan",
+                  "Parent Relationship": "InitPlan",
+                  "Subplan Name": "CTE projection",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "CTE Name": "identity",
+                  "Alias": "identity",
+                  "Startup Cost": 0,
+                  "Total Cost": 0.28,
+                  "Plan Rows": 1,
+                  "Plan Width": 4,
+                  "Actual Startup Time": 322.062,
+                  "Actual Total Time": 322.063,
+                  "Actual Rows": 1,
+                  "Actual Loops": 1,
+                  "Shared Hit Blocks": 4819,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 2,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            },
+            "Planning": {
+              "Shared Hit Blocks": 6,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0
+            },
+            "Planning Time": 0.161,
+            "Triggers": [],
+            "Execution Time": 322.194
+          }
+        ]
+      }
+    ],
+    "sameStatementRepeated": [
+      {
+        "bytes": 15036,
+        "bytes2": 15036,
+        "first_ms": "55.354000",
+        "repeated_ms": "21.659000"
+      }
+    ]
+  },
+  "limitations": [
+    "Los contadores cubren desde la lectura de referencia hasta observedAt; no son percentiles ni una captura restringida a la ventana de carga.",
+    "La igualdad de 9361 llamadas coincide con el sondeo; no identifica cada solicitud por separado.",
+    "No se restablecieron estadísticas. pg_stat_statements.track=all no estaba permitido; no se cambió ese parámetro.",
+    "La proyección corresponde a un alumno ficticio, actividad vigente y 50 intentos sin vencer; no es una ráfaga ni promete latencia bajo concurrencia."
+  ]
+}

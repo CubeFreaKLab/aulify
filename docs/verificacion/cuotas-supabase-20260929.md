@@ -20,3 +20,7 @@ El panel informa que no se excedieron las cuotas. El margen aritmético de trans
 También aparecen 0,165/1 GB de ingestión de registros y 1,038/100 GB consultados, ambos señalados como próximos controles. El panel sitúa su aplicación al inicio de 2027; no se presentan como cargos activados durante esta comprobación.
 
 La lectura permite preparar un diagnóstico limitado, manteniendo sus cortes de seguridad. No aprueba Q-06 ni Q-09: todavía falta ejecutar y medir el escenario completo dentro de sus cuotas. Los ceros de Realtime corresponden a la arquitectura actual de consultas HTTP, no a una prueba de doscientas conexiones en ese servicio.
+
+## Lectura posterior
+
+El 30 de septiembre a las 00:59 UTC se volvió a observar el mismo panel, organización y ciclo. El resumen mostró **0,175/5 GB de transferencia**, **0,043/0,5 GB de base de datos** y **209/50.000 usuarios activos**. Storage y transferencia desde caché seguían en cero redondeado; Realtime permanecía en cero conexiones y mensajes. El panel indicó que no se excedieron las cuotas Free. Los contadores de registros mostraban 0,19/1 GB de ingestión y 2,454/100 GB consultados, todavía identificados como próximos controles. Se mantienen las advertencias de actualización diferida; no se cambió el plan ni se activó facturación.
