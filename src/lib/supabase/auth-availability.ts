@@ -10,7 +10,7 @@ export function isAuthUnavailable(error?: AuthFailure | null) {
 
 // Auth puede borrar su almacenamiento al rechazar una renovación vencida con 429.
 // Conservamos las cookies durante un fallo temporal, sin aceptar la identidad.
-export function authAvailability(url: string) {
+export function authAvailability(url: string, transport: typeof fetch = globalThis.fetch) {
   const authUrl = new URL('/auth/v1/', url);
   const failures = new Map<string, AuthFailure>();
   const guardedFetch: typeof fetch = async (input, init) => {
@@ -21,7 +21,7 @@ export function authAvailability(url: string) {
     const method = init?.method ?? (input instanceof Request ? input.method : 'GET');
     const operation = `${method.toUpperCase()} ${target.href}`;
     try {
-      const response = await globalThis.fetch(input, init);
+      const response = await transport(input, init);
       if (isAuth) {
         if (isAuthUnavailable({ status: response.status }))
           failures.set(operation, { status: response.status });

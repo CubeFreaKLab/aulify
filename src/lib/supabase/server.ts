@@ -3,11 +3,12 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { supabaseConfig } from './config';
 import { authAvailability } from './auth-availability';
+import { supabaseTransport } from './transport';
 
 export async function createSupabaseServer() {
   const cookieStore = await cookies();
   const { url, key } = supabaseConfig();
-  const availability = authAvailability(url);
+  const availability = authAvailability(url, supabaseTransport(url));
   return createServerClient(url, key, {
     global: { fetch: availability.fetch },
     cookieOptions: {
