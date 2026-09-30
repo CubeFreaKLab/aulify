@@ -68,7 +68,7 @@ La [ejecución 36392124813](https://github.com/CubeFreaKLab/aulify/actions/runs/
 
 La [ejecución 36396177901](https://github.com/CubeFreaKLab/aulify/actions/runs/36396177901), sobre `1dc862b`, volvió a aprobar los controles: 36 pruebas unitarias, 70 comprobaciones aisladas de datos y 52 casos públicos de navegador. Los dieciocho casos autenticados se omitieron deliberadamente. Esta ejecución comprueba la revisión indicada; los cambios posteriores requieren su propia verificación.
 
-La [ejecución manual 36392156874](https://github.com/CubeFreaKLab/aulify/actions/runs/36392156874) comprobó el flujo de conservación contra Supabase. Terminó correctamente y no encontró archivos para eliminar (`deletedFileRecords: 0`). El cron está configurado cada seis horas; todavía no se observó una activación por horario. Esta ejecución no demuestra por sí sola recuperación desde un respaldo ni un plazo garantizado de purga.
+La [ejecución manual 36392156874](https://github.com/CubeFreaKLab/aulify/actions/runs/36392156874) comprobó el flujo de conservación contra Supabase. Terminó correctamente y no encontró archivos para eliminar (`deletedFileRecords: 0`). El cron está configurado cada seis horas. Posteriormente, [36571189662](https://github.com/CubeFreaKLab/aulify/actions/runs/36571189662) y [36638509107](https://github.com/CubeFreaKLab/aulify/actions/runs/36638509107) registraron el evento `schedule` y todos sus pasos aprobados, según la API de GitHub conservada en el informe. Esto acredita activación por horario, sin atribuir una cantidad de archivos eliminados a registros que no se descargaron. No demuestra por sí solo recuperación desde un respaldo ni un plazo garantizado de purga.
 
 ## Alcance de la evidencia restante
 
