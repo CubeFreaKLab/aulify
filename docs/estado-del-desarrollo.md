@@ -6,7 +6,7 @@ Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación com
 
 - Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintidós migraciones locales y remotas; la última es `20260930040716_aulify_workspace_overview.sql`.
 - Compilado local: `P6WDnTpFwNCt3ILdxXorb`, con la consulta general resumida de la migración 22. El historial se conserva y las preguntas completas se cargan al abrir cada actividad.
-- Último CI comprobado: [36663401624](https://github.com/CubeFreaKLab/aulify/actions/runs/36663401624), aprobado sobre `493a5b1`. No se atribuye ese resultado a revisiones posteriores. Los pasos y revisiones observados se conservan en el [registro de integración](verificacion/ci-integracion.json).
+- Último CI comprobado: [36668172476](https://github.com/CubeFreaKLab/aulify/actions/runs/36668172476), aprobado sobre `569aef7`. Incluye las veintidós migraciones y el resumen del aula. No se atribuye ese resultado a revisiones posteriores. Los pasos y revisiones observados se conservan en el [registro de integración](verificacion/ci-integracion.json).
 - Supabase continúa en Free. El [registro de cuotas](verificacion/cuotas-supabase-20260929.md) distingue consumo mostrado y estimaciones del ejecutor.
 - Vercel Hobby tiene un proyecto preparado con variables de entorno. Todavía no hay una publicación verificada; el [procedimiento de despliegue](operacion/despliegue.md) distingue preparación, candidato y producción.
 
