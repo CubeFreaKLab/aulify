@@ -51,6 +51,8 @@ La retroalimentación automática inmediata es un contrato distinto de la consul
 
 Señales de visibilidad tienen una retención distinta: 30 días tras cierre efectivo de actividad; su resolución mínima permanece mientras exista la materia. No establecer FK desde resolución a una señal individual que obligue a conservar todo el detalle. Registrar únicamente código de error y contexto técnico mínimo en procesos de limpieza.
 
+Para ese cómputo, el cierre efectivo es el vencimiento general con sus ampliaciones o el cierre de la sesión guiada, el que ocurra primero. La entrega anticipada de un intento individual no cierra la actividad para los demás participantes. La [verificación de conservación](../verificacion/conservacion-senales.md) reproduce la frontera de treinta días y conserva la resolución docente independiente del detalle.
+
 Respaldos del proveedor y objetos activos tienen ciclos distintos. La versión de producción deberá documentar respaldo, recuperación y retención disponible; el modelo no promete borrado instantáneo de copias externas.
 
 ## Casos negativos obligatorios

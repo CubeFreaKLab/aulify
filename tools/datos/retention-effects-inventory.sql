@@ -9,7 +9,7 @@ with counts as (
     (select count(*) from app.integrity_events ev
       join app.attempts at on ev.attempt_id=at.id
       join app.participants p on at.participant_id=p.id
-      where app.deadline(p.activity_id)+interval '30 days'<=now()) as due_integrity_events,
+      where least(app.deadline(p.activity_id),(select gs.closed_at from app.guided_sessions gs where gs.activity_id=p.activity_id))+interval '30 days'<=now()) as due_integrity_events,
     (select count(*) from app.purge_jobs pj
       join app.subjects s on s.id=pj.subject_id
       where pj.status in ('scheduled','failed') and pj.due_at<=now()

@@ -1,10 +1,10 @@
 {
-  "startedAt": "2026-09-29T23:58:24.650Z",
+  "startedAt": "2026-09-30T02:33:21.959Z",
   "environment": "PostgreSQL aislado en PGlite; bytes reales en directorio local exclusivo",
-  "prefix": "ap31-ap32-2026-09-29-13540d9d",
+  "prefix": "ap31-ap32-2026-09-30-76950562",
   "script": {
     "path": "tools/datos/retention-shared-files-check.mjs",
-    "sha256": "68cf708b1e7427c1d71d7169269c4145a86345e46119d3c0ad50d68284e3fcfc"
+    "sha256": "32ccca7958c79960203428e647d5ed72a8f319ef335f9e620655112de77b8abb"
   },
   "checks": [
     {
@@ -160,7 +160,10 @@
     "20260929221908_aulify_deferred_ranking_publication.sql",
     "20260929224538_aulify_participant_teacher_revision.sql",
     "20260929231531_aulify_editor_link_validation.sql",
-    "20260929235447_aulify_teacher_review_projection.sql"
+    "20260930000631_aulify_teacher_review_projection.sql",
+    "20260930005228_aulify_sync_context_reads.sql",
+    "20260930011205_aulify_student_activity_projection.sql",
+    "20260930023242_aulify_visibility_effective_closure.sql"
   ],
   "observation": {
     "filesCreated": 3,
@@ -171,5 +174,5 @@
     "remoteMutations": 0
   },
   "status": "passed",
-  "completedAt": "2026-09-29T23:58:26.458Z"
+  "completedAt": "2026-09-30T02:33:23.734Z"
 }

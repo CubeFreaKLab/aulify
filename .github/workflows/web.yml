@@ -20,6 +20,8 @@ on:
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
+        'tools/datos/visibility-retention-check.mjs',
+        'tools/datos/administrative-close-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -46,6 +48,8 @@ on:
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
+        'tools/datos/visibility-retention-check.mjs',
+        'tools/datos/administrative-close-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -94,6 +98,10 @@ jobs:
         run: node --test tools/datos/server-timing.test.mjs
       - name: Rechazar aprobación de carga con muestras incompletas
         run: node --test tools/datos/load-criteria.test.mjs
+      - name: Verificar retención desde el cierre efectivo
+        run: node tools/datos/visibility-retention-check.mjs
+      - name: Verificar retiro, resolución y restauración
+        run: node tools/datos/administrative-close-check.mjs
       - name: Verificar migraciones y permisos en PostgreSQL aislado
         run: node tools/datos/check.mjs
       - name: Verificar casos numéricos de puntuación

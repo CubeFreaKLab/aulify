@@ -6,6 +6,8 @@ La integración más reciente tiene veinte migraciones aplicadas y el compilado 
 
 El [transporte con conexiones acotadas](verificacion/transporte-acotado.md) mejoró el diagnóstico de sesenta segundos: 200 respuestas confirmadas y persistidas, cero fallos en 11.641 solicitudes y p95 de confirmación de 797,21 ms. Sigue pendiente el [escenario sostenido](verificacion/protocolo-carga-sostenida.md) en ambas modalidades. Esta medición breve no cierra Q-06 ni Q-09. Las [cuotas observadas](verificacion/cuotas-supabase-20260929.md) permanecen dentro del plan gratuito.
 
+El CI [36659862478](https://github.com/CubeFreaKLab/aulify/actions/runs/36659862478) de `9d12a3f` aprobó todos sus pasos, incluido transporte y evaluación de muestras completas. Una unidad posterior corrige [conservación de señales](verificacion/conservacion-senales.md): once comprobaciones específicas y 32 de regresión de archivos aprobadas. Esa migración 21 está sólo local mientras se ejecuta la carga remota sobre veinte. Los [cierres administrativos](verificacion/cierres-administrativos.md) añaden 41 comprobaciones de retiro, resolución y restauración, sin cambios al comportamiento de esos comandos.
+
 ## Revisión visual más reciente
 
 Se simplificó el editor para priorizar el documento, se corrigieron superficies y menús del tema oscuro y se ajustó la composición de las ilustraciones en móvil. La [primera revisión](diseno/revision-editor-apariencia-2026-09-29.md) conserva su evidencia. La [revisión de biblioteca y editor](diseno/revision-biblioteca-editor-2026-09-29.md) incorpora navegación móvil con gestión de foco, muestras reales del contenido, imágenes ajustables sin deformación, video con carga explícita y lectura que conserva formato y paleta.
