@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   try {
     const { data, error, status } = activityId
       ? await supabase.rpc('aulify_activity_snapshot', { p_activity_id: activityId })
-      : await supabase.rpc('aulify_snapshot');
+      : await supabase.rpc('aulify_workspace_overview');
     const rpcEndedAt = performance.now();
     if (error)
       return readRpcFailureResponse('workspace', error, performance.now() - startedAt, status);

@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-09-30T04:13:06.223Z",
+  "environment": "Chromium, compilado local3001, Supabase remoto; datos ficticios existentes",
+  "checks": [
+    {
+      "role": "student",
+      "check": "Materia muestra número de preguntas",
+      "passed": true
+    },
+    {
+      "role": "student",
+      "check": "Abrir actividad carga proyección sin error de interfaz",
+      "passed": true
+    },
+    {
+      "role": "student",
+      "check": "Resultados se abren al salir de la actividad",
+      "passed": true
+    },
+    {
+      "role": "teacher",
+      "check": "Materia muestra número de preguntas",
+      "passed": true
+    },
+    {
+      "role": "teacher",
+      "check": "Abrir actividad carga proyección sin error de interfaz",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "finishedAt": "2026-09-30T04:13:13.682Z"
+}

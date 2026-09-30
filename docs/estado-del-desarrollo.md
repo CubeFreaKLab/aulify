@@ -4,8 +4,8 @@ Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación com
 
 ## Versión y servicios
 
-- Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintiuna migraciones locales y remotas; la última es `20260930024809_aulify_visibility_effective_closure.sql`.
-- Compilado local: `9b84oYZaFQkaf5OmYT5AJ`, con el transporte de `02a6ab1`. La migración 21 se aplicó después de construirlo; corrige conservación sin cambiar el contrato web.
+- Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintidós migraciones locales y remotas; la última es `20260930040716_aulify_workspace_overview.sql`.
+- Compilado local: `P6WDnTpFwNCt3ILdxXorb`, con la consulta general resumida de la migración 22. El historial se conserva y las preguntas completas se cargan al abrir cada actividad.
 - Último CI comprobado: [36663401624](https://github.com/CubeFreaKLab/aulify/actions/runs/36663401624), aprobado sobre `493a5b1`. No se atribuye ese resultado a revisiones posteriores. Los pasos y revisiones observados se conservan en el [registro de integración](verificacion/ci-integracion.json).
 - Supabase continúa en Free. El [registro de cuotas](verificacion/cuotas-supabase-20260929.md) distingue consumo mostrado y estimaciones del ejecutor.
 - Vercel Hobby tiene un proyecto preparado con variables de entorno. Todavía no hay una publicación verificada; el [procedimiento de despliegue](operacion/despliegue.md) distingue preparación, candidato y producción.
@@ -52,7 +52,7 @@ Los escenarios AC/AP y sus evidencias se consultan en la [matriz de trazabilidad
 
 El [diagnóstico de sesenta segundos](verificacion/transporte-acotado.md) confirmó 200 respuestas sin pérdida y obtuvo p95 de 797,21 ms. La [prueba sostenida posterior](verificacion/carga-sostenida-20260930.md) conservó 2.000 respuestas sin fallos durante cinco minutos, pero su p95 de 2.347,96 ms superó la meta de 1.500 ms. Después falló la preparación de nuevos intentos y no se ejecutaron las mediciones completas ni el modo guiado.
 
-El ejecutor ahora separa tiempos de preparación, servicio de datos y respuesta HTTP, registra demoras por pregunta y espera las solicitudes en curso antes de informar un fallo. El [diagnóstico limitado posterior](verificacion/diagnostico-snapshot-20260930.md) conservó 2.000 respuestas, con p95 de confirmación de 1.141,10 ms y cinco fallos de lectura durante el calentamiento. Después de publicar las notas, fallaron tres de las 51 consultas de resultados iniciadas y se detuvo. PostgreSQL identifica cancelaciones en la consulta general de historial; esa ruta requiere corrección. No es una aprobación de Q-06/Q-09 y se mantienen sus umbrales.
+El ejecutor ahora separa tiempos de preparación, servicio de datos y respuesta HTTP, registra demoras por pregunta y espera las solicitudes en curso antes de informar un fallo. El [diagnóstico limitado posterior](verificacion/diagnostico-snapshot-20260930.md) conservó 2.000 respuestas, con p95 de confirmación de 1.141,10 ms y cinco fallos de lectura durante el calentamiento. Después de publicar las notas, fallaron tres de las 51 consultas de resultados iniciadas y se detuvo. PostgreSQL identifica cancelaciones en la consulta general de historial; esa ruta se corrigió después en la migración 22. La regresión HTTP posterior abrió los resultados de 200 cuentas, con concurrencia ocho, sin errores y p95 de 755,40 ms; conserva historial y calificaciones. Véase el [informe del resumen del aula](verificacion/resumen-aula-20260930.md). Esta comprobación específica no sustituye la prueba completa de capacidad. No es una aprobación de Q-06/Q-09 y se mantienen sus umbrales.
 
 ## Pendientes de liberación
 

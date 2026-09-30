@@ -1,0 +1,819 @@
+{
+  "startedAt": "2026-09-30T04:10:13.742Z",
+  "scope": "Regresión de apertura de resultados: lectura HTTP, 200 cuentas existentes, concurrencia 8; sin escrituras ni Q-06/Q-09.",
+  "buildId": "P6WDnTpFwNCt3ILdxXorb",
+  "checks": [],
+  "samples": [
+    {
+      "durationMs": 2790.6872,
+      "serverTiming": "prepare;dur=94.91, rpc;dur=1647.63, encode;dur=0.63"
+    },
+    {
+      "durationMs": 2847.0331,
+      "serverTiming": "prepare;dur=110.44, rpc;dur=1653.23, encode;dur=0.75"
+    },
+    {
+      "durationMs": 2850.5783,
+      "serverTiming": "prepare;dur=80.12, rpc;dur=1696.57, encode;dur=0.65"
+    },
+    {
+      "durationMs": 2860.3669,
+      "serverTiming": "prepare;dur=113.40, rpc;dur=1667.30, encode;dur=0.47"
+    },
+    {
+      "durationMs": 2940.5103,
+      "serverTiming": "prepare;dur=117.08, rpc;dur=1744.22, encode;dur=0.39"
+    },
+    {
+      "durationMs": 2941.0885,
+      "serverTiming": "prepare;dur=88.11, rpc;dur=1786.23, encode;dur=0.37"
+    },
+    {
+      "durationMs": 2957.3765,
+      "serverTiming": "prepare;dur=107.80, rpc;dur=1761.90, encode;dur=0.40"
+    },
+    {
+      "durationMs": 2959.7838,
+      "serverTiming": "prepare;dur=107.36, rpc;dur=1766.89, encode;dur=0.39"
+    },
+    {
+      "durationMs": 766.3668000000002,
+      "serverTiming": "prepare;dur=1.40, rpc;dur=750.67, encode;dur=1.83"
+    },
+    {
+      "durationMs": 755.3985000000002,
+      "serverTiming": "prepare;dur=3.67, rpc;dur=734.66, encode;dur=0.35"
+    },
+    {
+      "durationMs": 648.1423,
+      "serverTiming": "prepare;dur=1.36, rpc;dur=639.58, encode;dur=0.27"
+    },
+    {
+      "durationMs": 747.031,
+      "serverTiming": "prepare;dur=1.08, rpc;dur=733.92, encode;dur=0.26"
+    },
+    {
+      "durationMs": 661.2541999999999,
+      "serverTiming": "prepare;dur=3.21, rpc;dur=651.30, encode;dur=0.30"
+    },
+    {
+      "durationMs": 777.9155999999998,
+      "serverTiming": "prepare;dur=6.58, rpc;dur=755.87, encode;dur=0.25"
+    },
+    {
+      "durationMs": 709.9611,
+      "serverTiming": "prepare;dur=5.49, rpc;dur=694.40, encode;dur=0.26"
+    },
+    {
+      "durationMs": 709.0137,
+      "serverTiming": "prepare;dur=2.41, rpc;dur=694.51, encode;dur=0.24"
+    },
+    {
+      "durationMs": 439.58529999999973,
+      "serverTiming": "prepare;dur=0.89, rpc;dur=432.57, encode;dur=1.25"
+    },
+    {
+      "durationMs": 666.8552999999997,
+      "serverTiming": "prepare;dur=0.85, rpc;dur=658.36, encode;dur=0.91"
+    },
+    {
+      "durationMs": 680.4132,
+      "serverTiming": "prepare;dur=1.61, rpc;dur=664.63, encode;dur=0.69"
+    },
+    {
+      "durationMs": 697.9369999999999,
+      "serverTiming": "prepare;dur=3.85, rpc;dur=683.53, encode;dur=0.34"
+    },
+    {
+      "durationMs": 699.9643999999998,
+      "serverTiming": "prepare;dur=5.77, rpc;dur=685.50, encode;dur=0.33"
+    },
+    {
+      "durationMs": 684.2162000000003,
+      "serverTiming": "prepare;dur=0.73, rpc;dur=680.14, encode;dur=0.23"
+    },
+    {
+      "durationMs": 672.3218000000002,
+      "serverTiming": "prepare;dur=1.24, rpc;dur=665.75, encode;dur=0.31"
+    },
+    {
+      "durationMs": 673.9358000000002,
+      "serverTiming": "prepare;dur=2.08, rpc;dur=667.37, encode;dur=0.26"
+    },
+    {
+      "durationMs": 376.64760000000024,
+      "serverTiming": "prepare;dur=0.78, rpc;dur=371.99, encode;dur=0.38"
+    },
+    {
+      "durationMs": 585.0523000000003,
+      "serverTiming": "prepare;dur=3.67, rpc;dur=571.42, encode;dur=0.31"
+    },
+    {
+      "durationMs": 610.2341999999999,
+      "serverTiming": "prepare;dur=3.53, rpc;dur=599.86, encode;dur=0.33"
+    },
+    {
+      "durationMs": 631.0065000000004,
+      "serverTiming": "prepare;dur=5.67, rpc;dur=614.93, encode;dur=0.28"
+    },
+    {
+      "durationMs": 620.1516000000001,
+      "serverTiming": "prepare;dur=1.21, rpc;dur=610.74, encode;dur=0.29"
+    },
+    {
+      "durationMs": 630.4558999999999,
+      "serverTiming": "prepare;dur=2.79, rpc;dur=619.36, encode;dur=0.28"
+    },
+    {
+      "durationMs": 605.9498999999996,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=600.87, encode;dur=0.46"
+    },
+    {
+      "durationMs": 660.1055999999999,
+      "serverTiming": "prepare;dur=3.61, rpc;dur=646.91, encode;dur=0.34"
+    },
+    {
+      "durationMs": 662.8905999999997,
+      "serverTiming": "prepare;dur=1.89, rpc;dur=649.38, encode;dur=0.43"
+    },
+    {
+      "durationMs": 353.53179999999975,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=345.33, encode;dur=1.47"
+    },
+    {
+      "durationMs": 389.4912000000004,
+      "serverTiming": "prepare;dur=2.32, rpc;dur=380.57, encode;dur=0.57"
+    },
+    {
+      "durationMs": 505.89320000000043,
+      "serverTiming": "prepare;dur=1.33, rpc;dur=497.99, encode;dur=0.33"
+    },
+    {
+      "durationMs": 508.98209999999926,
+      "serverTiming": "prepare;dur=0.85, rpc;dur=503.86, encode;dur=0.34"
+    },
+    {
+      "durationMs": 512.5533999999998,
+      "serverTiming": "prepare;dur=4.77, rpc;dur=498.68, encode;dur=0.58"
+    },
+    {
+      "durationMs": 558.2073,
+      "serverTiming": "prepare;dur=0.69, rpc;dur=552.70, encode;dur=0.62"
+    },
+    {
+      "durationMs": 545.4228999999996,
+      "serverTiming": "prepare;dur=2.26, rpc;dur=531.47, encode;dur=0.31"
+    },
+    {
+      "durationMs": 568.9782000000005,
+      "serverTiming": "prepare;dur=5.63, rpc;dur=552.98, encode;dur=0.27"
+    },
+    {
+      "durationMs": 378.10339999999997,
+      "serverTiming": "prepare;dur=1.94, rpc;dur=367.34, encode;dur=0.30"
+    },
+    {
+      "durationMs": 431.27419999999984,
+      "serverTiming": "prepare;dur=1.40, rpc;dur=419.81, encode;dur=1.69"
+    },
+    {
+      "durationMs": 462.5112999999992,
+      "serverTiming": "prepare;dur=0.86, rpc;dur=455.85, encode;dur=0.87"
+    },
+    {
+      "durationMs": 506.9937,
+      "serverTiming": "prepare;dur=0.98, rpc;dur=501.99, encode;dur=0.29"
+    },
+    {
+      "durationMs": 525.5474999999997,
+      "serverTiming": "prepare;dur=1.74, rpc;dur=514.56, encode;dur=1.43"
+    },
+    {
+      "durationMs": 527.6529999999993,
+      "serverTiming": "prepare;dur=1.09, rpc;dur=518.73, encode;dur=1.38"
+    },
+    {
+      "durationMs": 511.3174999999992,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=506.49, encode;dur=0.44"
+    },
+    {
+      "durationMs": 439.53329999999914,
+      "serverTiming": "prepare;dur=0.65, rpc;dur=435.37, encode;dur=0.45"
+    },
+    {
+      "durationMs": 508.21870000000035,
+      "serverTiming": "prepare;dur=1.98, rpc;dur=502.80, encode;dur=0.31"
+    },
+    {
+      "durationMs": 367.9291000000003,
+      "serverTiming": "prepare;dur=0.75, rpc;dur=363.76, encode;dur=0.27"
+    },
+    {
+      "durationMs": 266.7010999999993,
+      "serverTiming": "prepare;dur=1.59, rpc;dur=255.82, encode;dur=1.49"
+    },
+    {
+      "durationMs": 283.9937,
+      "serverTiming": "prepare;dur=0.69, rpc;dur=275.58, encode;dur=1.32"
+    },
+    {
+      "durationMs": 354.5482000000002,
+      "serverTiming": "prepare;dur=5.35, rpc;dur=335.12, encode;dur=0.27"
+    },
+    {
+      "durationMs": 382.4988999999996,
+      "serverTiming": "prepare;dur=1.75, rpc;dur=369.60, encode;dur=1.60"
+    },
+    {
+      "durationMs": 422.8243000000002,
+      "serverTiming": "prepare;dur=2.80, rpc;dur=405.14, encode;dur=0.82"
+    },
+    {
+      "durationMs": 398.8805999999995,
+      "serverTiming": "prepare;dur=0.87, rpc;dur=394.04, encode;dur=0.44"
+    },
+    {
+      "durationMs": 430.8288999999995,
+      "serverTiming": "prepare;dur=1.06, rpc;dur=423.45, encode;dur=0.67"
+    },
+    {
+      "durationMs": 408.8845000000001,
+      "serverTiming": "prepare;dur=0.78, rpc;dur=404.28, encode;dur=0.35"
+    },
+    {
+      "durationMs": 354.7950000000001,
+      "serverTiming": "prepare;dur=0.94, rpc;dur=350.03, encode;dur=0.37"
+    },
+    {
+      "durationMs": 326.89719999999943,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=320.68, encode;dur=0.39"
+    },
+    {
+      "durationMs": 304.8851999999997,
+      "serverTiming": "prepare;dur=1.45, rpc;dur=299.98, encode;dur=0.30"
+    },
+    {
+      "durationMs": 405.58010000000013,
+      "serverTiming": "prepare;dur=2.31, rpc;dur=386.56, encode;dur=1.33"
+    },
+    {
+      "durationMs": 389.4219000000003,
+      "serverTiming": "prepare;dur=1.36, rpc;dur=382.48, encode;dur=0.26"
+    },
+    {
+      "durationMs": 378.4324000000006,
+      "serverTiming": "prepare;dur=0.72, rpc;dur=373.51, encode;dur=0.24"
+    },
+    {
+      "durationMs": 413.96339999999964,
+      "serverTiming": "prepare;dur=1.10, rpc;dur=408.23, encode;dur=0.26"
+    },
+    {
+      "durationMs": 422.85660000000007,
+      "serverTiming": "prepare;dur=1.20, rpc;dur=417.24, encode;dur=0.26"
+    },
+    {
+      "durationMs": 476.1837000000005,
+      "serverTiming": "prepare;dur=1.51, rpc;dur=468.50, encode;dur=0.27"
+    },
+    {
+      "durationMs": 416.39810000000034,
+      "serverTiming": "prepare;dur=1.12, rpc;dur=408.87, encode;dur=0.26"
+    },
+    {
+      "durationMs": 311.08680000000004,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=307.02, encode;dur=0.22"
+    },
+    {
+      "durationMs": 296.6255999999994,
+      "serverTiming": "prepare;dur=1.07, rpc;dur=290.64, encode;dur=0.28"
+    },
+    {
+      "durationMs": 303.46910000000025,
+      "serverTiming": "prepare;dur=0.84, rpc;dur=299.33, encode;dur=0.25"
+    },
+    {
+      "durationMs": 300.79729999999927,
+      "serverTiming": "prepare;dur=1.81, rpc;dur=294.64, encode;dur=0.24"
+    },
+    {
+      "durationMs": 332.1099000000004,
+      "serverTiming": "prepare;dur=0.72, rpc;dur=325.70, encode;dur=1.57"
+    },
+    {
+      "durationMs": 341.3762999999999,
+      "serverTiming": "prepare;dur=2.91, rpc;dur=328.66, encode;dur=0.26"
+    },
+    {
+      "durationMs": 374.7471999999998,
+      "serverTiming": "prepare;dur=1.58, rpc;dur=365.86, encode;dur=0.25"
+    },
+    {
+      "durationMs": 390.7677999999996,
+      "serverTiming": "prepare;dur=0.93, rpc;dur=386.32, encode;dur=0.21"
+    },
+    {
+      "durationMs": 400.34400000000005,
+      "serverTiming": "prepare;dur=0.70, rpc;dur=396.35, encode;dur=0.26"
+    },
+    {
+      "durationMs": 300.3180000000002,
+      "serverTiming": "prepare;dur=2.50, rpc;dur=291.26, encode;dur=0.24"
+    },
+    {
+      "durationMs": 316.65620000000035,
+      "serverTiming": "prepare;dur=2.73, rpc;dur=307.92, encode;dur=0.27"
+    },
+    {
+      "durationMs": 324.0636000000004,
+      "serverTiming": "prepare;dur=2.13, rpc;dur=314.45, encode;dur=0.25"
+    },
+    {
+      "durationMs": 289.47080000000005,
+      "serverTiming": "prepare;dur=1.66, rpc;dur=282.01, encode;dur=0.52"
+    },
+    {
+      "durationMs": 322.6269000000002,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=318.30, encode;dur=0.24"
+    },
+    {
+      "durationMs": 388.09979999999996,
+      "serverTiming": "prepare;dur=0.75, rpc;dur=383.50, encode;dur=0.24"
+    },
+    {
+      "durationMs": 407.40290000000005,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=403.17, encode;dur=0.37"
+    },
+    {
+      "durationMs": 388.4297999999999,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=384.47, encode;dur=0.28"
+    },
+    {
+      "durationMs": 361.7962000000007,
+      "serverTiming": "prepare;dur=0.65, rpc;dur=357.90, encode;dur=0.28"
+    },
+    {
+      "durationMs": 349.1700000000001,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=344.98, encode;dur=0.30"
+    },
+    {
+      "durationMs": 363.64599999999973,
+      "serverTiming": "prepare;dur=0.77, rpc;dur=359.42, encode;dur=0.31"
+    },
+    {
+      "durationMs": 314.4364999999998,
+      "serverTiming": "prepare;dur=1.54, rpc;dur=307.17, encode;dur=0.43"
+    },
+    {
+      "durationMs": 290.3206,
+      "serverTiming": "prepare;dur=0.79, rpc;dur=285.78, encode;dur=0.43"
+    },
+    {
+      "durationMs": 267.96360000000004,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=263.68, encode;dur=0.27"
+    },
+    {
+      "durationMs": 331.5594000000001,
+      "serverTiming": "prepare;dur=0.84, rpc;dur=327.20, encode;dur=0.23"
+    },
+    {
+      "durationMs": 317.0519999999997,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=311.35, encode;dur=0.24"
+    },
+    {
+      "durationMs": 374.8843000000006,
+      "serverTiming": "prepare;dur=1.20, rpc;dur=369.60, encode;dur=0.26"
+    },
+    {
+      "durationMs": 398.9274999999998,
+      "serverTiming": "prepare;dur=1.05, rpc;dur=393.92, encode;dur=0.26"
+    },
+    {
+      "durationMs": 398.4501999999993,
+      "serverTiming": "prepare;dur=0.78, rpc;dur=394.29, encode;dur=0.22"
+    },
+    {
+      "durationMs": 325.91889999999876,
+      "serverTiming": "prepare;dur=0.70, rpc;dur=317.69, encode;dur=1.33"
+    },
+    {
+      "durationMs": 410.34450000000015,
+      "serverTiming": "prepare;dur=0.70, rpc;dur=403.83, encode;dur=0.98"
+    },
+    {
+      "durationMs": 340.7613000000001,
+      "serverTiming": "prepare;dur=0.72, rpc;dur=335.88, encode;dur=0.39"
+    },
+    {
+      "durationMs": 296.5771000000004,
+      "serverTiming": "prepare;dur=0.79, rpc;dur=291.86, encode;dur=0.34"
+    },
+    {
+      "durationMs": 303.08450000000084,
+      "serverTiming": "prepare;dur=0.80, rpc;dur=298.75, encode;dur=0.26"
+    },
+    {
+      "durationMs": 337.48070000000007,
+      "serverTiming": "prepare;dur=0.86, rpc;dur=332.60, encode;dur=0.43"
+    },
+    {
+      "durationMs": 360.15840000000026,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=355.17, encode;dur=0.56"
+    },
+    {
+      "durationMs": 394.78720000000067,
+      "serverTiming": "prepare;dur=0.74, rpc;dur=390.69, encode;dur=0.33"
+    },
+    {
+      "durationMs": 347.1813999999995,
+      "serverTiming": "prepare;dur=4.38, rpc;dur=330.48, encode;dur=0.27"
+    },
+    {
+      "durationMs": 394.6806000000015,
+      "serverTiming": "prepare;dur=2.41, rpc;dur=379.16, encode;dur=0.48"
+    },
+    {
+      "durationMs": 379.2510999999995,
+      "serverTiming": "prepare;dur=0.98, rpc;dur=371.15, encode;dur=0.46"
+    },
+    {
+      "durationMs": 325.270199999999,
+      "serverTiming": "prepare;dur=0.96, rpc;dur=320.24, encode;dur=0.23"
+    },
+    {
+      "durationMs": 361.6275999999998,
+      "serverTiming": "prepare;dur=0.64, rpc;dur=352.29, encode;dur=1.73"
+    },
+    {
+      "durationMs": 293.1765000000014,
+      "serverTiming": "prepare;dur=1.10, rpc;dur=284.05, encode;dur=1.32"
+    },
+    {
+      "durationMs": 321.20989999999983,
+      "serverTiming": "prepare;dur=1.21, rpc;dur=315.14, encode;dur=0.26"
+    },
+    {
+      "durationMs": 300.5561999999991,
+      "serverTiming": "prepare;dur=0.75, rpc;dur=296.54, encode;dur=0.24"
+    },
+    {
+      "durationMs": 352.08569999999963,
+      "serverTiming": "prepare;dur=0.80, rpc;dur=347.33, encode;dur=0.39"
+    },
+    {
+      "durationMs": 348.8125,
+      "serverTiming": "prepare;dur=1.69, rpc;dur=342.17, encode;dur=0.29"
+    },
+    {
+      "durationMs": 331.03709999999955,
+      "serverTiming": "prepare;dur=0.69, rpc;dur=327.05, encode;dur=0.21"
+    },
+    {
+      "durationMs": 402.8294999999998,
+      "serverTiming": "prepare;dur=1.02, rpc;dur=397.24, encode;dur=0.23"
+    },
+    {
+      "durationMs": 304.6998000000003,
+      "serverTiming": "prepare;dur=2.89, rpc;dur=288.68, encode;dur=0.22"
+    },
+    {
+      "durationMs": 337.3819999999996,
+      "serverTiming": "prepare;dur=1.04, rpc;dur=324.30, encode;dur=0.25"
+    },
+    {
+      "durationMs": 277.34699999999975,
+      "serverTiming": "prepare;dur=1.93, rpc;dur=269.93, encode;dur=1.31"
+    },
+    {
+      "durationMs": 298.1756999999998,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=294.47, encode;dur=0.25"
+    },
+    {
+      "durationMs": 306.5735999999997,
+      "serverTiming": "prepare;dur=2.05, rpc;dur=298.43, encode;dur=0.24"
+    },
+    {
+      "durationMs": 279.47099999999955,
+      "serverTiming": "prepare;dur=0.79, rpc;dur=275.05, encode;dur=0.22"
+    },
+    {
+      "durationMs": 368.41129999999976,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=363.26, encode;dur=0.58"
+    },
+    {
+      "durationMs": 306.6890999999996,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=301.69, encode;dur=0.54"
+    },
+    {
+      "durationMs": 408.83150000000023,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=404.70, encode;dur=0.29"
+    },
+    {
+      "durationMs": 397.8649000000005,
+      "serverTiming": "prepare;dur=0.67, rpc;dur=394.02, encode;dur=0.28"
+    },
+    {
+      "durationMs": 347.6920000000009,
+      "serverTiming": "prepare;dur=1.78, rpc;dur=341.10, encode;dur=0.32"
+    },
+    {
+      "durationMs": 361.33280000000013,
+      "serverTiming": "prepare;dur=1.15, rpc;dur=355.22, encode;dur=0.27"
+    },
+    {
+      "durationMs": 309.8115999999991,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=305.35, encode;dur=0.43"
+    },
+    {
+      "durationMs": 307.505000000001,
+      "serverTiming": "prepare;dur=0.69, rpc;dur=302.88, encode;dur=0.36"
+    },
+    {
+      "durationMs": 290.6187000000009,
+      "serverTiming": "prepare;dur=1.57, rpc;dur=283.24, encode;dur=0.23"
+    },
+    {
+      "durationMs": 261.84220000000096,
+      "serverTiming": "prepare;dur=1.56, rpc;dur=254.71, encode;dur=0.25"
+    },
+    {
+      "durationMs": 316.6939999999995,
+      "serverTiming": "prepare;dur=3.32, rpc;dur=304.61, encode;dur=1.28"
+    },
+    {
+      "durationMs": 347.1345000000001,
+      "serverTiming": "prepare;dur=2.35, rpc;dur=338.79, encode;dur=0.45"
+    },
+    {
+      "durationMs": 323.5753999999997,
+      "serverTiming": "prepare;dur=0.75, rpc;dur=318.26, encode;dur=0.57"
+    },
+    {
+      "durationMs": 351.96999999999935,
+      "serverTiming": "prepare;dur=0.76, rpc;dur=347.71, encode;dur=0.24"
+    },
+    {
+      "durationMs": 341.22769999999946,
+      "serverTiming": "prepare;dur=1.06, rpc;dur=335.93, encode;dur=0.21"
+    },
+    {
+      "durationMs": 395.90260000000126,
+      "serverTiming": "prepare;dur=1.32, rpc;dur=387.28, encode;dur=0.93"
+    },
+    {
+      "durationMs": 334.60549999999967,
+      "serverTiming": "prepare;dur=1.30, rpc;dur=327.53, encode;dur=0.46"
+    },
+    {
+      "durationMs": 344.17109999999957,
+      "serverTiming": "prepare;dur=2.09, rpc;dur=337.31, encode;dur=0.32"
+    },
+    {
+      "durationMs": 298.27050000000054,
+      "serverTiming": "prepare;dur=2.89, rpc;dur=282.23, encode;dur=0.30"
+    },
+    {
+      "durationMs": 328.72659999999996,
+      "serverTiming": "prepare;dur=1.30, rpc;dur=322.52, encode;dur=0.27"
+    },
+    {
+      "durationMs": 310.10619999999835,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=302.25, encode;dur=1.36"
+    },
+    {
+      "durationMs": 370.03529999999955,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=365.16, encode;dur=0.59"
+    },
+    {
+      "durationMs": 339.34619999999995,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=335.42, encode;dur=0.22"
+    },
+    {
+      "durationMs": 331.6762999999992,
+      "serverTiming": "prepare;dur=1.92, rpc;dur=321.91, encode;dur=0.25"
+    },
+    {
+      "durationMs": 337.73989999999867,
+      "serverTiming": "prepare;dur=3.26, rpc;dur=330.14, encode;dur=0.24"
+    },
+    {
+      "durationMs": 334.70989999999983,
+      "serverTiming": "prepare;dur=0.67, rpc;dur=330.64, encode;dur=0.26"
+    },
+    {
+      "durationMs": 310.4964999999993,
+      "serverTiming": "prepare;dur=0.83, rpc;dur=306.02, encode;dur=0.23"
+    },
+    {
+      "durationMs": 345.9524999999994,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=342.02, encode;dur=0.30"
+    },
+    {
+      "durationMs": 296.72389999999905,
+      "serverTiming": "prepare;dur=1.30, rpc;dur=290.15, encode;dur=0.25"
+    },
+    {
+      "durationMs": 353.27679999999964,
+      "serverTiming": "prepare;dur=2.04, rpc;dur=341.21, encode;dur=0.26"
+    },
+    {
+      "durationMs": 386.02340000000004,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=382.06, encode;dur=0.28"
+    },
+    {
+      "durationMs": 327.1805000000004,
+      "serverTiming": "prepare;dur=1.04, rpc;dur=322.17, encode;dur=0.29"
+    },
+    {
+      "durationMs": 319.1399999999994,
+      "serverTiming": "prepare;dur=0.72, rpc;dur=315.25, encode;dur=0.27"
+    },
+    {
+      "durationMs": 382.7599000000009,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=378.24, encode;dur=0.29"
+    },
+    {
+      "durationMs": 401.1792000000005,
+      "serverTiming": "prepare;dur=0.70, rpc;dur=397.13, encode;dur=0.24"
+    },
+    {
+      "durationMs": 310.3014000000003,
+      "serverTiming": "prepare;dur=1.11, rpc;dur=305.27, encode;dur=0.25"
+    },
+    {
+      "durationMs": 333.1797999999999,
+      "serverTiming": "prepare;dur=0.69, rpc;dur=328.99, encode;dur=0.22"
+    },
+    {
+      "durationMs": 313.8839000000007,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=309.67, encode;dur=0.24"
+    },
+    {
+      "durationMs": 279.84979999999996,
+      "serverTiming": "prepare;dur=1.65, rpc;dur=273.06, encode;dur=0.24"
+    },
+    {
+      "durationMs": 357.52839999999924,
+      "serverTiming": "prepare;dur=0.99, rpc;dur=352.76, encode;dur=0.23"
+    },
+    {
+      "durationMs": 350.5426000000007,
+      "serverTiming": "prepare;dur=0.81, rpc;dur=346.58, encode;dur=0.23"
+    },
+    {
+      "durationMs": 337.1725999999999,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=333.17, encode;dur=0.23"
+    },
+    {
+      "durationMs": 350.1972999999998,
+      "serverTiming": "prepare;dur=0.65, rpc;dur=346.24, encode;dur=0.24"
+    },
+    {
+      "durationMs": 304.27009999999973,
+      "serverTiming": "prepare;dur=0.67, rpc;dur=300.20, encode;dur=0.22"
+    },
+    {
+      "durationMs": 383.53039999999964,
+      "serverTiming": "prepare;dur=0.74, rpc;dur=379.35, encode;dur=0.28"
+    },
+    {
+      "durationMs": 363.5637999999999,
+      "serverTiming": "prepare;dur=0.69, rpc;dur=359.54, encode;dur=0.27"
+    },
+    {
+      "durationMs": 352.1263000000017,
+      "serverTiming": "prepare;dur=0.74, rpc;dur=347.58, encode;dur=0.29"
+    },
+    {
+      "durationMs": 409.3608000000004,
+      "serverTiming": "prepare;dur=0.81, rpc;dur=404.87, encode;dur=0.27"
+    },
+    {
+      "durationMs": 373.9279999999999,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=369.91, encode;dur=0.25"
+    },
+    {
+      "durationMs": 453.5082000000002,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=449.59, encode;dur=0.35"
+    },
+    {
+      "durationMs": 424.60939999999937,
+      "serverTiming": "prepare;dur=0.65, rpc;dur=420.45, encode;dur=0.25"
+    },
+    {
+      "durationMs": 325.866,
+      "serverTiming": "prepare;dur=0.64, rpc;dur=322.13, encode;dur=0.23"
+    },
+    {
+      "durationMs": 433.5761999999995,
+      "serverTiming": "prepare;dur=1.82, rpc;dur=428.75, encode;dur=0.22"
+    },
+    {
+      "durationMs": 359.22389999999905,
+      "serverTiming": "prepare;dur=0.63, rpc;dur=355.46, encode;dur=0.23"
+    },
+    {
+      "durationMs": 345.8057000000008,
+      "serverTiming": "prepare;dur=0.65, rpc;dur=342.09, encode;dur=0.24"
+    },
+    {
+      "durationMs": 233.17330000000038,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=229.30, encode;dur=0.23"
+    },
+    {
+      "durationMs": 238.5674999999992,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=234.70, encode;dur=0.23"
+    },
+    {
+      "durationMs": 345.4446000000007,
+      "serverTiming": "prepare;dur=1.61, rpc;dur=340.64, encode;dur=0.23"
+    },
+    {
+      "durationMs": 351.1702000000005,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=347.14, encode;dur=0.31"
+    },
+    {
+      "durationMs": 390.09169999999904,
+      "serverTiming": "prepare;dur=0.67, rpc;dur=386.29, encode;dur=0.26"
+    },
+    {
+      "durationMs": 401.0587000000014,
+      "serverTiming": "prepare;dur=0.95, rpc;dur=396.78, encode;dur=0.24"
+    },
+    {
+      "durationMs": 421.2394999999997,
+      "serverTiming": "prepare;dur=0.68, rpc;dur=417.24, encode;dur=0.26"
+    },
+    {
+      "durationMs": 410.28889999999956,
+      "serverTiming": "prepare;dur=0.75, rpc;dur=406.30, encode;dur=0.24"
+    },
+    {
+      "durationMs": 382.85809999999947,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=378.91, encode;dur=0.21"
+    },
+    {
+      "durationMs": 353.3886000000002,
+      "serverTiming": "prepare;dur=0.73, rpc;dur=349.82, encode;dur=0.21"
+    },
+    {
+      "durationMs": 263.0588000000007,
+      "serverTiming": "prepare;dur=0.71, rpc;dur=257.47, encode;dur=0.23"
+    },
+    {
+      "durationMs": 249.71969999999965,
+      "serverTiming": "prepare;dur=0.72, rpc;dur=245.81, encode;dur=0.21"
+    },
+    {
+      "durationMs": 284.7592999999997,
+      "serverTiming": "prepare;dur=0.65, rpc;dur=281.09, encode;dur=0.24"
+    },
+    {
+      "durationMs": 302.96849999999904,
+      "serverTiming": "prepare;dur=0.63, rpc;dur=299.19, encode;dur=0.23"
+    },
+    {
+      "durationMs": 345.8590000000004,
+      "serverTiming": "prepare;dur=0.67, rpc;dur=342.07, encode;dur=0.23"
+    },
+    {
+      "durationMs": 368.2489999999998,
+      "serverTiming": "prepare;dur=2.89, rpc;dur=359.37, encode;dur=0.23"
+    },
+    {
+      "durationMs": 408.3741000000009,
+      "serverTiming": "prepare;dur=2.17, rpc;dur=399.96, encode;dur=0.23"
+    },
+    {
+      "durationMs": 419.0810999999994,
+      "serverTiming": "prepare;dur=1.30, rpc;dur=411.15, encode;dur=0.23"
+    },
+    {
+      "durationMs": 366.4961000000003,
+      "serverTiming": "prepare;dur=1.68, rpc;dur=360.79, encode;dur=0.24"
+    },
+    {
+      "durationMs": 284.83339999999953,
+      "serverTiming": "prepare;dur=0.66, rpc;dur=281.15, encode;dur=0.22"
+    },
+    {
+      "durationMs": 411.27980000000025,
+      "serverTiming": "prepare;dur=0.99, rpc;dur=405.26, encode;dur=0.22"
+    },
+    {
+      "durationMs": 310.8007000000016,
+      "serverTiming": "prepare;dur=0.63, rpc;dur=307.00, encode;dur=0.21"
+    }
+  ],
+  "failures": [],
+  "bytes": 11188647,
+  "summary": {
+    "success": 200,
+    "failed": 0,
+    "p50": 363.64599999999973,
+    "p95": 755.3985000000002,
+    "max": 2959.7838
+  },
+  "finishedAt": "2026-09-30T04:10:26.399Z",
+  "passed": true
+}

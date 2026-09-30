@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-09-30T04:11:55.758Z",
+  "environment": "Supabase PostgreSQL remoto; JWT simulado de una cuenta ficticia dentro de transacción revertida; permisos HTTP verificados por separado.",
+  "migration": "20260930040716_aulify_workspace_overview.sql",
+  "comparison": {
+    "equivalent_remaining_fields": true,
+    "activities": 22,
+    "attempts": 22,
+    "empty_questions": {},
+    "full_bytes": 366575,
+    "overview_bytes": 104951
+  },
+  "completeness": {
+    "attempts": 100,
+    "mismatches": 0
+  },
+  "permissions": {
+    "anonOverview": false,
+    "authenticatedOverview": true,
+    "authenticatedCompleteHelper": false
+  },
+  "securityAdvisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 41,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "count": 1,
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ]
+}

@@ -23,7 +23,12 @@ const routes = [
     path: `/api/workspace?activity=${activity}`,
     rpc: 'aulify_activity_snapshot',
   },
-  { handler: workspace, scope: 'workspace', path: '/api/workspace', rpc: 'aulify_snapshot' },
+  {
+    handler: workspace,
+    scope: 'workspace',
+    path: '/api/workspace',
+    rpc: 'aulify_workspace_overview',
+  },
 ] as const;
 
 describe.each(routes)('fallos de lectura en $rpc', ({ handler, scope, path, rpc }) => {
@@ -147,7 +152,7 @@ describe.each(routes)('fallos de lectura en $rpc', ({ handler, scope, path, rpc 
     );
     expect(response.headers.get('X-Aulify-Rpc-Failure')).toBeNull();
     expect(console.warn).not.toHaveBeenCalled();
-    if (rpc === 'aulify_snapshot') expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith(rpc);
+    if (rpc === 'aulify_workspace_overview') expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith(rpc);
     else expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith(rpc, { p_activity_id: activity });
   });
 

@@ -31,6 +31,7 @@ export interface DemoSnapshot {
   live: boolean;
 }
 export interface WorkspaceExtras {
+  activityQuestionCounts?: Record<string, number>;
   teams: { id: string; activityId: string; name: string; studentIds: string[] }[];
   incidents: { attempt_id: string; status: string; comment: string; signalCount: number }[];
   participants: { id: string; activityId: string; studentId: string; alias: string }[];

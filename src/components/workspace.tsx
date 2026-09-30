@@ -687,8 +687,10 @@ function SubjectScreen({
                           ? questionsOf(
                               state.versions.find((v) => v.id === a.versionId) || { blocks: [] },
                             ).length
-                          : getDemoRepository().studentActivity(a.id, user.id).questions
-                              .length}{' '}
+                          : live
+                            ? getWorkspaceExtras().activityQuestionCounts?.[a.id]
+                            : getDemoRepository().studentActivity(a.id, user.id).questions
+                                .length}{' '}
                         preguntas
                       </p>
                     </div>
