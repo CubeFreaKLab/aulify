@@ -36,4 +36,6 @@ Prettier se ejecutó únicamente sobre los tres archivos modificados de código 
 
 ## Alcance de la evidencia
 
-Esta es una corrección reproducida de forma aislada. No demuestra que el marcador latente causara la interrupción previa de la preparación a los 15 segundos, y no verifica el requisito de capacidad Q-06. La medición en curso utiliza el build anterior `NJgfZnpvHJ7YBpHn4hEBZ`; este cambio queda pendiente de su siguiente compilación.
+Esta es una corrección reproducida de forma aislada. No demuestra que el marcador latente causara la interrupción previa de la preparación a los 15 segundos, y no verifica el requisito de capacidad Q-06. La medición posterior conservó el build anterior `NJgfZnpvHJ7YBpHn4hEBZ`, sin este cambio.
+
+Después del sondeo se integró la corrección en el commit `c5db1cc`. La compilación `NZlgLN2ir82OxW0NAxSk9` terminó correctamente y la batería local aprobó 141 pruebas en quince archivos. El lint focalizado también pasó. Estos resultados amplían la comprobación aislada; no simulan un fallo real del proveedor ni sustituyen la verificación posterior en CI.
