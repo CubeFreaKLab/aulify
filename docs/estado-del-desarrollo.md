@@ -4,7 +4,7 @@ Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación com
 
 ## Versión y servicios
 
-- Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintidós migraciones locales y remotas; la última es `20260930040716_aulify_workspace_overview.sql`.
+- Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintitrés migraciones locales y remotas; la última es `20260930051014_aulify_completion_grade_existence.sql`.
 - Compilado local: `P6WDnTpFwNCt3ILdxXorb`, con la consulta general resumida de la migración 22. El historial se conserva y las preguntas completas se cargan al abrir cada actividad.
 - Último CI comprobado: [36669578313](https://github.com/CubeFreaKLab/aulify/actions/runs/36669578313), aprobado sobre `1194382`. Incluye las veintidós migraciones y el resumen del aula. No se atribuye ese resultado a revisiones posteriores. Los pasos y revisiones observados se conservan en el [registro de integración](verificacion/ci-integracion.json).
 - Supabase continúa en Free. El [registro de cuotas](verificacion/cuotas-supabase-20260929.md) distingue consumo mostrado y estimaciones del ejecutor.
@@ -55,6 +55,8 @@ El [diagnóstico de sesenta segundos](verificacion/transporte-acotado.md) confir
 El ejecutor ahora separa tiempos de preparación, servicio de datos y respuesta HTTP, registra demoras por pregunta y espera las solicitudes en curso antes de informar un fallo. El [diagnóstico limitado posterior](verificacion/diagnostico-snapshot-20260930.md) conservó 2.000 respuestas, con p95 de confirmación de 1.141,10 ms y cinco fallos de lectura durante el calentamiento. Después de publicar las notas, fallaron tres de las 51 consultas de resultados iniciadas y se detuvo. PostgreSQL identifica cancelaciones en la consulta general de historial; esa ruta se corrigió después en la migración 22. La regresión HTTP posterior abrió los resultados de 200 cuentas, con concurrencia ocho, sin errores y p95 de 755,40 ms; conserva historial y calificaciones. Véase el [informe del resumen del aula](verificacion/resumen-aula-20260930.md). Esta comprobación específica no sustituye la prueba completa de capacidad. No es una aprobación de Q-06/Q-09 y se mantienen sus umbrales.
 
 La [medición individual de quince minutos](verificacion/carga-individual-20260930.md), ya con la migración 22, conservó las 2.000 respuestas sin duplicaciones y registró 174.364 solicitudes sin fallos en esa ventana. Su p95 de confirmación fue de 2.665,11 ms, superior a la meta. Después fallaron tres de las 84 lecturas de resultados iniciadas; el modo guiado no comenzó. Q-06 y Q-09 permanecen abiertos. No se repite el ensayo completo sin una corrección justificada.
+
+La [migración 23](verificacion/completitud-existencia.md) simplifica la detección de revisión pendiente: 32 comprobaciones específicas y 85 generales locales aprobadas; cien intentos remotos sin diferencias. Las lecturas HTTP de 24 cuentas aprobaron dos pasadas con concurrencia ocho. No modifica el envío de respuestas ni acredita capacidad sostenida. El último CI citado arriba corresponde a la revisión previa; la nueva función requiere su propia ejecución.
 
 ## Pendientes de liberación
 

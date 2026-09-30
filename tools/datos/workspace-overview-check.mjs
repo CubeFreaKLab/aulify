@@ -50,7 +50,10 @@ for (const [name, signature] of [
   );
 }
 await db.exec(await fs.readFile('supabase/migrations/' + target, 'utf8'));
-report.migrationFiles = [...baseline, target];
+const subsequent = files.filter((file) => file > target);
+for (const file of subsequent)
+  await db.exec(await fs.readFile('supabase/migrations/' + file, 'utf8'));
+report.migrationFiles = [...baseline, target, ...subsequent];
 report.migrationSha256 = crypto
   .createHash('sha256')
   .update(await fs.readFile('supabase/migrations/' + target))
@@ -371,7 +374,9 @@ report.checks.push({
 report.finishedAt = new Date().toISOString();
 report.result = 'passed';
 await fs.writeFile(
-  'docs/verificacion/datos-resumen-aula-local.json',
+  subsequent.length
+    ? 'docs/verificacion/datos-completitud-existencia-local.json'
+    : 'docs/verificacion/datos-resumen-aula-local.json',
   JSON.stringify(report, null, 2) + '\n',
 );
 await db.close();

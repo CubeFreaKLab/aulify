@@ -1,0 +1,1010 @@
+{
+  "observedAt": "2026-09-30T05:10:46.577Z",
+  "scope": "Comparación remota de cien intentos existentes antes/después del helper de completitud y contra el cálculo de puntuación. No prueba de carga.",
+  "migration": "20260930051014_aulify_completion_grade_existence.sql",
+  "before": [
+    {
+      "id": "9bc28e45-f93a-4ff3-a086-290685f74596",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "98187f73-b538-4365-86ea-747dca153fc3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c87de4de-40b2-44eb-9cc4-7814bb5bc075",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "7c4b1893-bdc4-4072-9a6f-7e39def35483",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6db7264e-699b-48aa-8fe3-d80255d6d073",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "bbca81a7-8e3a-441d-8a2c-8a59ec17463d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8213c061-ad4a-498f-8ec8-2ba334433174",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "5f04f348-9ab5-4d2c-b213-cf4db770196c",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "25466259-eb98-44d3-8e5d-5d580d41e808",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "724a4931-d781-4a6a-a593-7985185c44cf",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1cb029f5-4967-4e51-8c6f-841b0ca591a4",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "35c6a1d7-ec3e-45d2-b3b5-6fc0d8ba3507",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8b2ed301-0973-4b3c-93e2-723b34ed0861",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a17f6c51-a638-44aa-a122-23526caa925d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "253718de-e43c-41d8-ac1a-4ed6318399b2",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c1ea130f-b176-4bf7-8a64-7ab587977b9f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "797b0574-96c6-4118-abd3-e0785f49e7a6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "068173d1-4c93-4e88-ba80-aeeca4047ee6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "ba3d1147-66e3-4223-9885-7aeac92da34f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "579e4344-5be8-430f-904a-ec0241deaa21",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "88984994-99d9-4488-b721-44e2beaa70b3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d6f38bcf-72fe-46fb-8b0c-38dad922c6b3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2d68787b-2ece-42ba-bfba-8067ade36510",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "602e956d-ed5a-4530-a7f4-b2b4e6eff736",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "de60b16e-f1f1-4758-b9ac-2875762efb87",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "7b038c66-6fce-459d-aa86-a7d071aad695",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a3492c64-2b37-47d6-acd0-c16f6a0ba315",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6098be56-58c8-4192-a51c-d078f045e48b",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6ea25a2d-72ad-4b2e-ad5d-c67af536f958",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "107d2012-d272-48e9-bceb-938e9c48a047",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "3106ee1b-cfa4-4c21-88d7-6ec9bb7ad40d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "50eadef0-969b-4709-973c-51211c30f972",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1b396484-cda4-4a0e-a0b8-9d6bb35f8ec4",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1c672841-f8bb-4d29-a98a-b5b538176788",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "4150cbfe-ed65-496a-8203-d0b842dfb988",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "9beb0700-f317-460b-b24a-3e17b1aa40d2",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "4fe03521-dbda-498a-ad70-2f99c614645f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8b41a1f1-648c-47aa-91a9-d7d436cffa6f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "85b38ac3-b8c4-4b6f-9318-ae7c1652eb90",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "16b2efaf-c263-4ef9-b812-c66233ded07f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "708e820c-3494-4d87-94f4-447aae45e5e3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2e531ea6-8a86-41fd-b658-e050d319bf6b",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "46c19e37-ab3c-4e82-8c4f-a5f351877a4f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "e8d4f8ac-6ebd-4dd7-bb50-3bd37ee761a9",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "ae627632-82d5-4da3-b837-3752d7a069ee",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "756d706d-67c1-41a8-8ccd-2280af8cd521",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a8ebaf69-0599-41de-b719-bdded658e9d3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d3a22b1e-664f-41da-8b8c-35ef896d7695",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a512ecf3-7891-4981-96af-7edc051b3bd6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "7250396e-58b0-47aa-bc68-2f20b7ec6cdd",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "de1f3da0-18de-4dab-bb1c-07ecee5c72a4",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "3b295d6a-5f2c-45d5-a671-27fa19d29cfd",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a14d6bf1-9e58-493c-a85a-75252877b6d6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "220312f8-b286-4f44-a3a1-12682ff9b705",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2955dc6a-dc51-4b03-a3b6-03dcd45e2276",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "bb127e2a-de2e-47d5-9bab-5ae55c6ceee9",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "753b513d-507a-4865-8f20-95c2d7f5deab",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8eee7a6d-82e0-48e0-b882-02ba2f7094a8",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "9355ae18-492d-44c8-856c-527ebb1c51f3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "961a6486-c16d-40d8-aea1-b59d142b66e6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "55a6c01c-9b07-4a12-8a33-d1f01c7158f0",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "714edfd7-d864-48c1-af27-77af8d5df4c0",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "35a28ac3-8aca-4b59-ba09-25b2ad0845da",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "5f71bcdb-df13-41bb-8d06-39af315366f3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "4a320efa-3df6-4d28-be33-47d4c4cf4fc5",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a3def274-66f1-41f0-b4f7-b11ab3a3fb26",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "888b881c-c652-4e0d-8d93-1643be9ece10",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d9319120-7e6c-49c0-8da2-7b96d32b9110",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "e21b31fc-642d-4073-9f75-4fc18c5ea9ad",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "61a1e76e-5261-4c08-8d4f-554cb494e818",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a1974fa5-ee53-408a-b711-ee9bc7f0f37d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d8a35147-98de-4f2a-8839-d1e999b58b6b",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c47db46a-20df-44cc-8aed-19d418b3d656",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "96b7fcfd-a13c-4a9f-8f51-3de4faa45136",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c3fc99ea-b976-4ecf-9dab-a4f336bb405c",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "43402516-38b2-48d9-aeb7-32aa8ff86a40",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "614d96bd-c312-4edb-85a4-048eb78efddc",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "cb001442-9a1e-4628-8d1e-ad086a33dd32",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "87454a60-87e0-4f41-82a2-45a6836a2629",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "67295150-be42-413d-85a1-999f5a09fb30",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "0a04d08d-392e-45ff-a8f4-134a5107cf31",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "99264296-79f3-437b-abe2-ea8c70c60f36",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "010b9785-2aeb-44f8-8966-13186dd00a18",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "5538b049-f9a0-4a47-bbec-5630fc6edf74",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "92cdcb46-7ee0-4cb7-a4fc-67fcdc599ae7",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1b7ff201-df5f-4c2b-a46d-f44fc35b85ea",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1a6884ef-b02e-4dc8-9876-9f4334a229bc",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d839dddb-7771-47b0-b9a6-4994b0d6bf5c",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "af27b44d-01a7-45d0-8bb7-ee7517b14f38",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a4c77b4a-9849-4962-8c42-fd0df0f5e207",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "fe0c46a2-8a47-4476-8daf-24779e7ac6ed",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6f3ac185-608d-4359-bea0-4af7e47df5f2",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d7ffea60-dd3c-4e07-9cd8-28628d256836",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c3827887-5563-4b5e-a8c9-d7865dce16e1",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "54953510-b7ec-47ee-a704-b06e85478dc7",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2d6facdc-3536-4fa4-bfe2-9fbf1a61fc45",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d0255e1f-a5eb-4efe-afe0-4e132d303677",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "045102a0-70c4-4edf-b9b0-ae8c6fd21cfe",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "50e61555-e972-4b85-989a-36ef3803de1d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "93f8aa5c-ca7d-4622-85db-c9108c6660ae",
+      "complete": true,
+      "score_complete": true
+    }
+  ],
+  "after": [
+    {
+      "id": "010b9785-2aeb-44f8-8966-13186dd00a18",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "045102a0-70c4-4edf-b9b0-ae8c6fd21cfe",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "068173d1-4c93-4e88-ba80-aeeca4047ee6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "0a04d08d-392e-45ff-a8f4-134a5107cf31",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "107d2012-d272-48e9-bceb-938e9c48a047",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "16b2efaf-c263-4ef9-b812-c66233ded07f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1a6884ef-b02e-4dc8-9876-9f4334a229bc",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1b396484-cda4-4a0e-a0b8-9d6bb35f8ec4",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1b7ff201-df5f-4c2b-a46d-f44fc35b85ea",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1c672841-f8bb-4d29-a98a-b5b538176788",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "1cb029f5-4967-4e51-8c6f-841b0ca591a4",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "220312f8-b286-4f44-a3a1-12682ff9b705",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "253718de-e43c-41d8-ac1a-4ed6318399b2",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "25466259-eb98-44d3-8e5d-5d580d41e808",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2955dc6a-dc51-4b03-a3b6-03dcd45e2276",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2d68787b-2ece-42ba-bfba-8067ade36510",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2d6facdc-3536-4fa4-bfe2-9fbf1a61fc45",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "2e531ea6-8a86-41fd-b658-e050d319bf6b",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "3106ee1b-cfa4-4c21-88d7-6ec9bb7ad40d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "35a28ac3-8aca-4b59-ba09-25b2ad0845da",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "35c6a1d7-ec3e-45d2-b3b5-6fc0d8ba3507",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "3b295d6a-5f2c-45d5-a671-27fa19d29cfd",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "4150cbfe-ed65-496a-8203-d0b842dfb988",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "43402516-38b2-48d9-aeb7-32aa8ff86a40",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "46c19e37-ab3c-4e82-8c4f-a5f351877a4f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "4a320efa-3df6-4d28-be33-47d4c4cf4fc5",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "4fe03521-dbda-498a-ad70-2f99c614645f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "50e61555-e972-4b85-989a-36ef3803de1d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "50eadef0-969b-4709-973c-51211c30f972",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "54953510-b7ec-47ee-a704-b06e85478dc7",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "5538b049-f9a0-4a47-bbec-5630fc6edf74",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "55a6c01c-9b07-4a12-8a33-d1f01c7158f0",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "579e4344-5be8-430f-904a-ec0241deaa21",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "5f04f348-9ab5-4d2c-b213-cf4db770196c",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "5f71bcdb-df13-41bb-8d06-39af315366f3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "602e956d-ed5a-4530-a7f4-b2b4e6eff736",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6098be56-58c8-4192-a51c-d078f045e48b",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "614d96bd-c312-4edb-85a4-048eb78efddc",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "61a1e76e-5261-4c08-8d4f-554cb494e818",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "67295150-be42-413d-85a1-999f5a09fb30",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6db7264e-699b-48aa-8fe3-d80255d6d073",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6ea25a2d-72ad-4b2e-ad5d-c67af536f958",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "6f3ac185-608d-4359-bea0-4af7e47df5f2",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "708e820c-3494-4d87-94f4-447aae45e5e3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "714edfd7-d864-48c1-af27-77af8d5df4c0",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "724a4931-d781-4a6a-a593-7985185c44cf",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "7250396e-58b0-47aa-bc68-2f20b7ec6cdd",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "753b513d-507a-4865-8f20-95c2d7f5deab",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "756d706d-67c1-41a8-8ccd-2280af8cd521",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "797b0574-96c6-4118-abd3-e0785f49e7a6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "7b038c66-6fce-459d-aa86-a7d071aad695",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "7c4b1893-bdc4-4072-9a6f-7e39def35483",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8213c061-ad4a-498f-8ec8-2ba334433174",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "85b38ac3-b8c4-4b6f-9318-ae7c1652eb90",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "87454a60-87e0-4f41-82a2-45a6836a2629",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "888b881c-c652-4e0d-8d93-1643be9ece10",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "88984994-99d9-4488-b721-44e2beaa70b3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8b2ed301-0973-4b3c-93e2-723b34ed0861",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8b41a1f1-648c-47aa-91a9-d7d436cffa6f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "8eee7a6d-82e0-48e0-b882-02ba2f7094a8",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "92cdcb46-7ee0-4cb7-a4fc-67fcdc599ae7",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "9355ae18-492d-44c8-856c-527ebb1c51f3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "93f8aa5c-ca7d-4622-85db-c9108c6660ae",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "961a6486-c16d-40d8-aea1-b59d142b66e6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "96b7fcfd-a13c-4a9f-8f51-3de4faa45136",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "98187f73-b538-4365-86ea-747dca153fc3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "99264296-79f3-437b-abe2-ea8c70c60f36",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "9bc28e45-f93a-4ff3-a086-290685f74596",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "9beb0700-f317-460b-b24a-3e17b1aa40d2",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a14d6bf1-9e58-493c-a85a-75252877b6d6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a17f6c51-a638-44aa-a122-23526caa925d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a1974fa5-ee53-408a-b711-ee9bc7f0f37d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a3492c64-2b37-47d6-acd0-c16f6a0ba315",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a3def274-66f1-41f0-b4f7-b11ab3a3fb26",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a4c77b4a-9849-4962-8c42-fd0df0f5e207",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a512ecf3-7891-4981-96af-7edc051b3bd6",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "a8ebaf69-0599-41de-b719-bdded658e9d3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "ae627632-82d5-4da3-b837-3752d7a069ee",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "af27b44d-01a7-45d0-8bb7-ee7517b14f38",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "ba3d1147-66e3-4223-9885-7aeac92da34f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "bb127e2a-de2e-47d5-9bab-5ae55c6ceee9",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "bbca81a7-8e3a-441d-8a2c-8a59ec17463d",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c1ea130f-b176-4bf7-8a64-7ab587977b9f",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c3827887-5563-4b5e-a8c9-d7865dce16e1",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c3fc99ea-b976-4ecf-9dab-a4f336bb405c",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c47db46a-20df-44cc-8aed-19d418b3d656",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "c87de4de-40b2-44eb-9cc4-7814bb5bc075",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "cb001442-9a1e-4628-8d1e-ad086a33dd32",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d0255e1f-a5eb-4efe-afe0-4e132d303677",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d3a22b1e-664f-41da-8b8c-35ef896d7695",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d6f38bcf-72fe-46fb-8b0c-38dad922c6b3",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d7ffea60-dd3c-4e07-9cd8-28628d256836",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d839dddb-7771-47b0-b9a6-4994b0d6bf5c",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d8a35147-98de-4f2a-8839-d1e999b58b6b",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "d9319120-7e6c-49c0-8da2-7b96d32b9110",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "de1f3da0-18de-4dab-bb1c-07ecee5c72a4",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "de60b16e-f1f1-4758-b9ac-2875762efb87",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "e21b31fc-642d-4073-9f75-4fc18c5ea9ad",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "e8d4f8ac-6ebd-4dd7-bb50-3bd37ee761a9",
+      "complete": true,
+      "score_complete": true
+    },
+    {
+      "id": "fe0c46a2-8a47-4476-8daf-24779e7ac6ed",
+      "complete": true,
+      "score_complete": true
+    }
+  ],
+  "differences": []
+}

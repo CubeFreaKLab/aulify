@@ -1,0 +1,1019 @@
+{
+  "purpose": "Diagnóstico de lectura de resultados; 24 cuentas existentes, dos pasadas con concurrencia 8. No ensayo sostenido.",
+  "migration": "20260930051014_aulify_completion_grade_existence.sql",
+  "buildId": "P6WDnTpFwNCt3ILdxXorb",
+  "before": {
+    "at": "2026-09-30T05:04:27.031Z",
+    "purpose": "Diagnóstico de lectura de resultados; 24 cuentas existentes, dos pasadas con concurrencia 8. No ensayo sostenido.",
+    "samples": [
+      {
+        "pass": 1,
+        "index": 5,
+        "status": 200,
+        "ms": 2416.9998,
+        "timing": "prepare;dur=76.02, rpc;dur=1536.83, encode;dur=0.36",
+        "failure": null,
+        "bytes": 78087,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 4,
+        "status": 200,
+        "ms": 2420.2538,
+        "timing": "prepare;dur=84.30, rpc;dur=1538.78, encode;dur=0.32",
+        "failure": null,
+        "bytes": 78424,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 7,
+        "status": 200,
+        "ms": 2422.298,
+        "timing": "prepare;dur=89.03, rpc;dur=1515.66, encode;dur=0.37",
+        "failure": null,
+        "bytes": 76137,
+        "attempts": 13
+      },
+      {
+        "pass": 1,
+        "index": 6,
+        "status": 200,
+        "ms": 2424.4456,
+        "timing": "prepare;dur=73.06, rpc;dur=1541.06, encode;dur=0.34",
+        "failure": null,
+        "bytes": 78088,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 0,
+        "status": 200,
+        "ms": 2538.3522000000003,
+        "timing": "prepare;dur=86.37, rpc;dur=1638.77, encode;dur=0.46",
+        "failure": null,
+        "bytes": 115485,
+        "attempts": 24
+      },
+      {
+        "pass": 1,
+        "index": 3,
+        "status": 200,
+        "ms": 2529.1376999999998,
+        "timing": "prepare;dur=114.75, rpc;dur=1606.36, encode;dur=0.43",
+        "failure": null,
+        "bytes": 114144,
+        "attempts": 24
+      },
+      {
+        "pass": 1,
+        "index": 1,
+        "status": 200,
+        "ms": 2537.4289,
+        "timing": "prepare;dur=88.78, rpc;dur=1662.49, encode;dur=0.38",
+        "failure": null,
+        "bytes": 112725,
+        "attempts": 23
+      },
+      {
+        "pass": 1,
+        "index": 2,
+        "status": 200,
+        "ms": 2538.6327,
+        "timing": "prepare;dur=95.43, rpc;dur=1637.16, encode;dur=0.46",
+        "failure": null,
+        "bytes": 116277,
+        "attempts": 24
+      },
+      {
+        "pass": 1,
+        "index": 9,
+        "status": 200,
+        "ms": 538.0196000000001,
+        "timing": "prepare;dur=3.08, rpc;dur=527.29, encode;dur=0.34",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 8,
+        "status": 200,
+        "ms": 551.1257,
+        "timing": "prepare;dur=2.17, rpc;dur=531.03, encode;dur=0.28",
+        "failure": null,
+        "bytes": 76139,
+        "attempts": 13
+      },
+      {
+        "pass": 1,
+        "index": 10,
+        "status": 200,
+        "ms": 600.2553000000003,
+        "timing": "prepare;dur=3.75, rpc;dur=587.36, encode;dur=0.39",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 11,
+        "status": 200,
+        "ms": 599.7215000000001,
+        "timing": "prepare;dur=1.00, rpc;dur=586.84, encode;dur=0.37",
+        "failure": null,
+        "bytes": 78095,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 12,
+        "status": 200,
+        "ms": 545.4728999999998,
+        "timing": "prepare;dur=0.66, rpc;dur=537.66, encode;dur=1.17",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 13,
+        "status": 200,
+        "ms": 532.7062000000001,
+        "timing": "prepare;dur=0.76, rpc;dur=526.30, encode;dur=0.99",
+        "failure": null,
+        "bytes": 78092,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 14,
+        "status": 200,
+        "ms": 543.7265000000002,
+        "timing": "prepare;dur=2.13, rpc;dur=535.69, encode;dur=0.54",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 15,
+        "status": 200,
+        "ms": 546.665,
+        "timing": "prepare;dur=1.58, rpc;dur=540.92, encode;dur=0.34",
+        "failure": null,
+        "bytes": 78091,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 16,
+        "status": 200,
+        "ms": 407.4274999999998,
+        "timing": "prepare;dur=0.69, rpc;dur=402.46, encode;dur=0.60",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 17,
+        "status": 200,
+        "ms": 470.5198999999998,
+        "timing": "prepare;dur=0.65, rpc;dur=466.70, encode;dur=0.31",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 18,
+        "status": 200,
+        "ms": 471.1935999999996,
+        "timing": "prepare;dur=1.79, rpc;dur=463.10, encode;dur=0.61",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 19,
+        "status": 200,
+        "ms": 476.5108,
+        "timing": "prepare;dur=1.21, rpc;dur=469.47, encode;dur=0.52",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 21,
+        "status": 200,
+        "ms": 475.3786,
+        "timing": "prepare;dur=1.84, rpc;dur=460.19, encode;dur=0.58",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 22,
+        "status": 200,
+        "ms": 496.71330000000034,
+        "timing": "prepare;dur=1.92, rpc;dur=484.68, encode;dur=0.79",
+        "failure": null,
+        "bytes": 78102,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 23,
+        "status": 200,
+        "ms": 497.25580000000036,
+        "timing": "prepare;dur=1.17, rpc;dur=489.75, encode;dur=0.71",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 20,
+        "status": 200,
+        "ms": 525.7208,
+        "timing": "prepare;dur=3.85, rpc;dur=507.73, encode;dur=0.66",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 7,
+        "status": 200,
+        "ms": 665.6107000000002,
+        "timing": "prepare;dur=2.85, rpc;dur=646.35, encode;dur=0.31",
+        "failure": null,
+        "bytes": 76137,
+        "attempts": 13
+      },
+      {
+        "pass": 2,
+        "index": 6,
+        "status": 200,
+        "ms": 666.7751000000003,
+        "timing": "prepare;dur=3.75, rpc;dur=647.59, encode;dur=0.27",
+        "failure": null,
+        "bytes": 78088,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 5,
+        "status": 200,
+        "ms": 668.7854000000002,
+        "timing": "prepare;dur=3.87, rpc;dur=650.48, encode;dur=0.30",
+        "failure": null,
+        "bytes": 78087,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 4,
+        "status": 200,
+        "ms": 677.9863,
+        "timing": "prepare;dur=4.61, rpc;dur=659.66, encode;dur=0.27",
+        "failure": null,
+        "bytes": 78424,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 0,
+        "status": 200,
+        "ms": 871.7936000000004,
+        "timing": "prepare;dur=8.39, rpc;dur=853.39, encode;dur=0.39",
+        "failure": null,
+        "bytes": 115485,
+        "attempts": 24
+      },
+      {
+        "pass": 2,
+        "index": 1,
+        "status": 200,
+        "ms": 878.0365000000002,
+        "timing": "prepare;dur=7.56, rpc;dur=859.72, encode;dur=0.37",
+        "failure": null,
+        "bytes": 112725,
+        "attempts": 23
+      },
+      {
+        "pass": 2,
+        "index": 2,
+        "status": 200,
+        "ms": 879.0802000000003,
+        "timing": "prepare;dur=6.87, rpc;dur=860.64, encode;dur=0.40",
+        "failure": null,
+        "bytes": 116277,
+        "attempts": 24
+      },
+      {
+        "pass": 2,
+        "index": 3,
+        "status": 200,
+        "ms": 881.1254999999996,
+        "timing": "prepare;dur=5.35, rpc;dur=862.62, encode;dur=0.38",
+        "failure": null,
+        "bytes": 114144,
+        "attempts": 24
+      },
+      {
+        "pass": 2,
+        "index": 8,
+        "status": 200,
+        "ms": 364.3856999999998,
+        "timing": "prepare;dur=2.50, rpc;dur=351.00, encode;dur=1.72",
+        "failure": null,
+        "bytes": 76139,
+        "attempts": 13
+      },
+      {
+        "pass": 2,
+        "index": 10,
+        "status": 200,
+        "ms": 377.10549999999967,
+        "timing": "prepare;dur=0.97, rpc;dur=368.27, encode;dur=0.62",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 9,
+        "status": 200,
+        "ms": 379.8229999999994,
+        "timing": "prepare;dur=2.05, rpc;dur=370.72, encode;dur=0.33",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 11,
+        "status": 200,
+        "ms": 396.6207999999997,
+        "timing": "prepare;dur=0.63, rpc;dur=393.04, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78095,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 12,
+        "status": 200,
+        "ms": 427.5841999999993,
+        "timing": "prepare;dur=0.64, rpc;dur=419.87, encode;dur=1.11",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 15,
+        "status": 200,
+        "ms": 430.0643,
+        "timing": "prepare;dur=1.25, rpc;dur=422.28, encode;dur=0.54",
+        "failure": null,
+        "bytes": 78091,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 14,
+        "status": 200,
+        "ms": 442.1085000000003,
+        "timing": "prepare;dur=2.65, rpc;dur=433.03, encode;dur=0.44",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 13,
+        "status": 200,
+        "ms": 447.0763999999999,
+        "timing": "prepare;dur=2.32, rpc;dur=439.32, encode;dur=0.41",
+        "failure": null,
+        "bytes": 78092,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 17,
+        "status": 200,
+        "ms": 655.3912,
+        "timing": "prepare;dur=1.71, rpc;dur=646.47, encode;dur=1.22",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 18,
+        "status": 200,
+        "ms": 657.4645999999993,
+        "timing": "prepare;dur=1.11, rpc;dur=650.15, encode;dur=1.02",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 16,
+        "status": 200,
+        "ms": 676.0902000000006,
+        "timing": "prepare;dur=2.28, rpc;dur=663.00, encode;dur=0.76",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 19,
+        "status": 200,
+        "ms": 636.5481,
+        "timing": "prepare;dur=0.65, rpc;dur=631.66, encode;dur=0.63",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 21,
+        "status": 200,
+        "ms": 529.6898000000001,
+        "timing": "prepare;dur=1.23, rpc;dur=523.76, encode;dur=0.30",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 23,
+        "status": 200,
+        "ms": 517.2806,
+        "timing": "prepare;dur=0.93, rpc;dur=511.07, encode;dur=0.40",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 20,
+        "status": 200,
+        "ms": 548.2575000000006,
+        "timing": "prepare;dur=1.74, rpc;dur=539.58, encode;dur=0.27",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 22,
+        "status": 200,
+        "ms": 529.0014000000001,
+        "timing": "prepare;dur=2.99, rpc;dur=520.91, encode;dur=0.38",
+        "failure": null,
+        "bytes": 78102,
+        "attempts": 14
+      }
+    ],
+    "summary": [
+      {
+        "pass": 1,
+        "samples": 24,
+        "errors": 0,
+        "p50": 545.4728999999998,
+        "p95": 2538.3522000000003,
+        "max": 2538.6327
+      },
+      {
+        "pass": 2,
+        "samples": 24,
+        "errors": 0,
+        "p50": 548.2575000000006,
+        "p95": 879.0802000000003,
+        "max": 881.1254999999996
+      }
+    ]
+  },
+  "after": {
+    "at": "2026-09-30T05:11:18.057Z",
+    "purpose": "Diagnóstico de lectura de resultados; 24 cuentas existentes, dos pasadas con concurrencia 8. No ensayo sostenido.",
+    "samples": [
+      {
+        "pass": 1,
+        "index": 4,
+        "status": 200,
+        "ms": 1918.1107000000002,
+        "timing": "prepare;dur=6.43, rpc;dur=1883.38, encode;dur=0.33",
+        "failure": null,
+        "bytes": 78424,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 7,
+        "status": 200,
+        "ms": 1920.7807,
+        "timing": "prepare;dur=2.90, rpc;dur=1890.75, encode;dur=0.29",
+        "failure": null,
+        "bytes": 76137,
+        "attempts": 13
+      },
+      {
+        "pass": 1,
+        "index": 5,
+        "status": 200,
+        "ms": 1930.0463,
+        "timing": "prepare;dur=5.84, rpc;dur=1901.01, encode;dur=0.30",
+        "failure": null,
+        "bytes": 78087,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 6,
+        "status": 200,
+        "ms": 1931.1072,
+        "timing": "prepare;dur=5.27, rpc;dur=1901.60, encode;dur=0.32",
+        "failure": null,
+        "bytes": 78088,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 0,
+        "status": 200,
+        "ms": 2081.1532,
+        "timing": "prepare;dur=7.51, rpc;dur=2035.23, encode;dur=0.43",
+        "failure": null,
+        "bytes": 115485,
+        "attempts": 24
+      },
+      {
+        "pass": 1,
+        "index": 3,
+        "status": 200,
+        "ms": 2057.0313,
+        "timing": "prepare;dur=8.83, rpc;dur=2029.06, encode;dur=0.39",
+        "failure": null,
+        "bytes": 114144,
+        "attempts": 24
+      },
+      {
+        "pass": 1,
+        "index": 1,
+        "status": 200,
+        "ms": 2068.4349,
+        "timing": "prepare;dur=7.17, rpc;dur=2046.78, encode;dur=0.38",
+        "failure": null,
+        "bytes": 112725,
+        "attempts": 23
+      },
+      {
+        "pass": 1,
+        "index": 2,
+        "status": 200,
+        "ms": 2069.8501,
+        "timing": "prepare;dur=6.68, rpc;dur=2048.45, encode;dur=0.39",
+        "failure": null,
+        "bytes": 116277,
+        "attempts": 24
+      },
+      {
+        "pass": 1,
+        "index": 8,
+        "status": 200,
+        "ms": 351.44000000000005,
+        "timing": "prepare;dur=1.42, rpc;dur=344.46, encode;dur=0.29",
+        "failure": null,
+        "bytes": 76139,
+        "attempts": 13
+      },
+      {
+        "pass": 1,
+        "index": 10,
+        "status": 200,
+        "ms": 547.2780999999998,
+        "timing": "prepare;dur=1.39, rpc;dur=542.33, encode;dur=0.35",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 11,
+        "status": 200,
+        "ms": 595.4407999999999,
+        "timing": "prepare;dur=1.07, rpc;dur=589.85, encode;dur=0.47",
+        "failure": null,
+        "bytes": 78095,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 13,
+        "status": 200,
+        "ms": 476.58600000000024,
+        "timing": "prepare;dur=2.41, rpc;dur=469.22, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78092,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 12,
+        "status": 200,
+        "ms": 479.1203999999998,
+        "timing": "prepare;dur=2.10, rpc;dur=471.82, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 14,
+        "status": 200,
+        "ms": 498.80009999999993,
+        "timing": "prepare;dur=2.06, rpc;dur=491.52, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 9,
+        "status": 200,
+        "ms": 645.0494999999999,
+        "timing": "prepare;dur=1.53, rpc;dur=638.79, encode;dur=0.27",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 15,
+        "status": 200,
+        "ms": 521.9999000000003,
+        "timing": "prepare;dur=3.74, rpc;dur=513.69, encode;dur=0.32",
+        "failure": null,
+        "bytes": 78091,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 16,
+        "status": 200,
+        "ms": 369.09310000000005,
+        "timing": "prepare;dur=0.78, rpc;dur=361.65, encode;dur=2.06",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 17,
+        "status": 200,
+        "ms": 253.2139000000002,
+        "timing": "prepare;dur=0.68, rpc;dur=249.27, encode;dur=0.30",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 18,
+        "status": 200,
+        "ms": 409.2824999999998,
+        "timing": "prepare;dur=0.85, rpc;dur=405.06, encode;dur=0.32",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 20,
+        "status": 200,
+        "ms": 426.4188000000004,
+        "timing": "prepare;dur=1.57, rpc;dur=420.08, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 21,
+        "status": 200,
+        "ms": 401.3532,
+        "timing": "prepare;dur=1.61, rpc;dur=395.92, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 22,
+        "status": 200,
+        "ms": 418.0490999999997,
+        "timing": "prepare;dur=1.05, rpc;dur=413.01, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78102,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 23,
+        "status": 200,
+        "ms": 410.0518000000002,
+        "timing": "prepare;dur=0.66, rpc;dur=406.34, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 1,
+        "index": 19,
+        "status": 200,
+        "ms": 530.7985000000003,
+        "timing": "prepare;dur=2.23, rpc;dur=524.66, encode;dur=0.30",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 7,
+        "status": 200,
+        "ms": 587.0425999999998,
+        "timing": "prepare;dur=2.83, rpc;dur=568.11, encode;dur=0.28",
+        "failure": null,
+        "bytes": 76137,
+        "attempts": 13
+      },
+      {
+        "pass": 2,
+        "index": 4,
+        "status": 200,
+        "ms": 591.8284000000003,
+        "timing": "prepare;dur=4.41, rpc;dur=573.91, encode;dur=0.30",
+        "failure": null,
+        "bytes": 78424,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 5,
+        "status": 200,
+        "ms": 596.7084,
+        "timing": "prepare;dur=3.67, rpc;dur=578.79, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78087,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 6,
+        "status": 200,
+        "ms": 597.9295999999999,
+        "timing": "prepare;dur=3.63, rpc;dur=579.32, encode;dur=0.26",
+        "failure": null,
+        "bytes": 78088,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 2,
+        "status": 200,
+        "ms": 721.1343000000002,
+        "timing": "prepare;dur=7.02, rpc;dur=702.23, encode;dur=0.63",
+        "failure": null,
+        "bytes": 116277,
+        "attempts": 24
+      },
+      {
+        "pass": 2,
+        "index": 3,
+        "status": 200,
+        "ms": 749.9785999999999,
+        "timing": "prepare;dur=5.20, rpc;dur=731.98, encode;dur=0.37",
+        "failure": null,
+        "bytes": 114144,
+        "attempts": 24
+      },
+      {
+        "pass": 2,
+        "index": 1,
+        "status": 200,
+        "ms": 756.0056999999997,
+        "timing": "prepare;dur=7.84, rpc;dur=738.07, encode;dur=0.35",
+        "failure": null,
+        "bytes": 112725,
+        "attempts": 23
+      },
+      {
+        "pass": 2,
+        "index": 0,
+        "status": 200,
+        "ms": 757.5671000000002,
+        "timing": "prepare;dur=8.64, rpc;dur=739.91, encode;dur=0.38",
+        "failure": null,
+        "bytes": 115485,
+        "attempts": 24
+      },
+      {
+        "pass": 2,
+        "index": 8,
+        "status": 200,
+        "ms": 250.39139999999998,
+        "timing": "prepare;dur=1.67, rpc;dur=241.92, encode;dur=1.38",
+        "failure": null,
+        "bytes": 76139,
+        "attempts": 13
+      },
+      {
+        "pass": 2,
+        "index": 9,
+        "status": 200,
+        "ms": 326.6367,
+        "timing": "prepare;dur=1.81, rpc;dur=318.96, encode;dur=0.88",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 11,
+        "status": 200,
+        "ms": 421.8726999999999,
+        "timing": "prepare;dur=1.19, rpc;dur=414.90, encode;dur=1.68",
+        "failure": null,
+        "bytes": 78095,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 10,
+        "status": 200,
+        "ms": 425.7756999999997,
+        "timing": "prepare;dur=1.58, rpc;dur=418.28, encode;dur=0.27",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 13,
+        "status": 200,
+        "ms": 359.16129999999976,
+        "timing": "prepare;dur=0.70, rpc;dur=349.72, encode;dur=1.55",
+        "failure": null,
+        "bytes": 78092,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 12,
+        "status": 200,
+        "ms": 402.82199999999966,
+        "timing": "prepare;dur=1.21, rpc;dur=396.09, encode;dur=0.62",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 14,
+        "status": 200,
+        "ms": 463.56699999999955,
+        "timing": "prepare;dur=1.54, rpc;dur=457.76, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 15,
+        "status": 200,
+        "ms": 505.3288999999995,
+        "timing": "prepare;dur=0.98, rpc;dur=500.47, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78091,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 16,
+        "status": 200,
+        "ms": 465.26089999999976,
+        "timing": "prepare;dur=2.41, rpc;dur=453.76, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78097,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 17,
+        "status": 200,
+        "ms": 454.1390000000001,
+        "timing": "prepare;dur=0.75, rpc;dur=445.65, encode;dur=0.28",
+        "failure": null,
+        "bytes": 78090,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 19,
+        "status": 200,
+        "ms": 486.08399999999983,
+        "timing": "prepare;dur=0.79, rpc;dur=480.67, encode;dur=0.29",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 18,
+        "status": 200,
+        "ms": 489.3819999999996,
+        "timing": "prepare;dur=1.64, rpc;dur=483.45, encode;dur=0.27",
+        "failure": null,
+        "bytes": 78094,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 21,
+        "status": 200,
+        "ms": 403.39750000000004,
+        "timing": "prepare;dur=1.29, rpc;dur=396.82, encode;dur=0.32",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 22,
+        "status": 200,
+        "ms": 392.4537,
+        "timing": "prepare;dur=0.64, rpc;dur=388.64, encode;dur=0.32",
+        "failure": null,
+        "bytes": 78102,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 23,
+        "status": 200,
+        "ms": 350.4468000000006,
+        "timing": "prepare;dur=0.66, rpc;dur=346.78, encode;dur=0.34",
+        "failure": null,
+        "bytes": 78096,
+        "attempts": 14
+      },
+      {
+        "pass": 2,
+        "index": 20,
+        "status": 200,
+        "ms": 568.8823000000002,
+        "timing": "prepare;dur=1.90, rpc;dur=557.45, encode;dur=0.50",
+        "failure": null,
+        "bytes": 78098,
+        "attempts": 14
+      }
+    ],
+    "summary": [
+      {
+        "pass": 1,
+        "samples": 24,
+        "errors": 0,
+        "p50": 521.9999000000003,
+        "p95": 2069.8501,
+        "max": 2081.1532
+      },
+      {
+        "pass": 2,
+        "samples": 24,
+        "errors": 0,
+        "p50": 465.26089999999976,
+        "p95": 756.0056999999997,
+        "max": 757.5671000000002
+      }
+    ]
+  },
+  "shapeUnchanged": true,
+  "limitations": [
+    "Muestra limitada de 24 cuentas existentes, no capacidad sostenida.",
+    "La caché y la variación del proveedor pueden influir en las diferencias de tiempo.",
+    "Sin evaluación con usuarios ni cambio de umbrales."
+  ]
+}
