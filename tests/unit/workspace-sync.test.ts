@@ -126,6 +126,72 @@ afterEach(() => {
 });
 
 describe('adopción de revisión tras una proyección vigente', () => {
+  it('conserva el aviso de una operación rechazada al recibir una actualización automática', async () => {
+    const message = 'Quedan respuestas pendientes. Confirma su cierre para continuar.';
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url === '/api/commands') return Response.json({ error: message }, { status: 400 });
+        if (url.startsWith('/api/sync')) return Response.json({ revision: 'R' });
+        return Response.json(workspace());
+      }),
+    );
+    await mount();
+    await store.runDemo((repo) => repo.closeGuidedQuestion('activity', false));
+    expect(mocks.read()?.error).toBe(message);
+    await tick();
+    expect(mocks.read()?.error).toBe(message);
+    store.clearNotice();
+    await store.refreshDemo();
+    expect(mocks.read()?.error).toBeNull();
+  });
+
+  it('retira el aviso cuando se confirma la operación y no reaparece tras otra lectura', async () => {
+    let rejected = true;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url === '/api/commands')
+          return rejected
+            ? Response.json({ error: 'Confirma el cierre.' }, { status: 400 })
+            : Response.json({ result: true });
+        return Response.json(workspace());
+      }),
+    );
+    await mount();
+    await store.runDemo((repo) => repo.closeGuidedQuestion('activity', false));
+    expect(mocks.read()?.error).toBe('Confirma el cierre.');
+    rejected = false;
+    await store.runDemo((repo) => repo.closeGuidedQuestion('activity', true), 'Cierre confirmado.');
+    expect(mocks.read()).toMatchObject({ error: null, message: 'Cierre confirmado.' });
+    await store.refreshDemo();
+    expect(mocks.read()?.error).toBeNull();
+  });
+
+  it('una confirmación anterior no borra el rechazo posterior de otra operación', async () => {
+    const previous = deferred();
+    let commands = 0;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url === '/api/commands')
+          return ++commands === 1
+            ? previous.promise
+            : Response.json({ error: 'Confirma la nueva operación.' }, { status: 400 });
+        return Response.json(workspace());
+      }),
+    );
+    await mount();
+    const earlier = store.runDemo((repo) => repo.openNextGuidedQuestion('activity'));
+    await store.runDemo((repo) => repo.closeGuidedQuestion('activity', false));
+    previous.resolve(Response.json({ result: true }));
+    await earlier;
+    expect(mocks.read()?.error).toBe('Confirma la nueva operación.');
+    store.clearWorkspaceSession();
+    await mount();
+    expect(mocks.read()?.error).toBeNull();
+  });
+
   it('reintenta el snapshot fallido aunque sync repita la misma revisión', async () => {
     let reads = 0,
       polls = 0;

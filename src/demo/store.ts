@@ -69,6 +69,7 @@ let activeActivityScope: string | null = null;
 let generation = 0;
 let projectionEpoch = 0;
 let automaticRetryAt = 0;
+let commandNotice: { message: string } | null = null;
 type ImmediateFeedback = {
   points: Rational;
   explanation: string | null;
@@ -88,6 +89,7 @@ export function clearWorkspaceSession() {
   activeActivityScope = null;
   refreshPending = null;
   automaticRetryAt = 0;
+  commandNotice = null;
   feedbackByAnswer.clear();
   emit();
 }
@@ -223,7 +225,7 @@ function remoteRepository(): WorkspaceRepository {
               }
             : remote.studentActivities,
         };
-        snapshot = { ...snapshot, state, error: null, message: null };
+        snapshot = { ...snapshot, state, error: commandNotice?.message || null, message: null };
       }
       return attempt;
     },
@@ -308,7 +310,7 @@ async function refreshProjection(): Promise<RefreshResult> {
         state: data.state,
         userId: data.userId,
         live: true,
-        error: null,
+        error: commandNotice?.message || null,
         message: snapshot?.message || null,
       };
       emit();
@@ -327,13 +329,15 @@ async function refreshProjection(): Promise<RefreshResult> {
   })();
   return refreshPending;
 }
-function showError(error: unknown) {
+function showError(error: unknown, source: 'command' | 'projection' = 'projection') {
+  const message = error instanceof Error ? error.message : 'No se pudo completar la acción.';
+  if (source === 'command') commandNotice = { message };
   snapshot = {
     state: snapshot?.state || null,
     userId: snapshot?.userId || '',
     live: activeMode || false,
     message: null,
-    error: error instanceof Error ? error.message : 'No se pudo completar la acción.',
+    error: commandNotice?.message || message,
   };
   emit();
 }
@@ -347,16 +351,23 @@ export async function runDemo<T>(
     return;
   }
   const currentGeneration = generation;
+  const noticeBefore = commandNotice;
   try {
     const result = await operation(repository);
     if (currentGeneration !== generation) return undefined;
+    // Una confirmación anterior no debe ocultar el error de otra operación más reciente.
+    if (commandNotice === noticeBefore) {
+      commandNotice = null;
+      if (noticeBefore && snapshot?.error === noticeBefore.message)
+        snapshot = { ...snapshot, error: null };
+    }
     if (!activeMode || options?.refresh !== 'deferred') await refreshDemo();
     if (currentGeneration !== generation) return undefined;
     if (snapshot) snapshot = { ...snapshot, message: snapshot.error ? null : message || null };
     emit();
     return result;
   } catch (error) {
-    if (currentGeneration === generation) showError(error);
+    if (currentGeneration === generation) showError(error, 'command');
     return undefined;
   }
 }
@@ -368,6 +379,7 @@ export function switchProfile(userId: string) {
   if (!snapshot || activeMode) return;
   try {
     window.sessionStorage.setItem('aulify.demo.profile', userId);
+    commandNotice = null;
     snapshot = { ...snapshot, userId, error: null, message: null };
     emit();
   } catch (error) {
@@ -375,6 +387,7 @@ export function switchProfile(userId: string) {
   }
 }
 export function clearNotice() {
+  commandNotice = null;
   if (snapshot) {
     snapshot = { ...snapshot, message: null, error: null };
     emit();
@@ -471,6 +484,7 @@ export function useDemo() {
           remote = null;
           refreshPending = null;
           feedbackByAnswer.clear();
+          commandNotice = null;
           snapshot = { state: null, userId: '', live: true, error: error.message, message: null };
           emit();
           if (error.status === 403) await refreshDemo();

@@ -59,3 +59,5 @@ No marcar una tarea como completada solo porque exista código. Enlazar su evide
 La [matriz de trazabilidad](docs/calidad/trazabilidad.md) y el [plan de calidad](docs/calidad/plan-de-calidad.md) completan los criterios y su evidencia.
 
 La [revisión de biblioteca, editor y lector del 29 de septiembre](docs/diseno/revision-biblioteca-editor-2026-09-29.md) aporta evidencia adicional a T-04, T-08, T-09 y T-19: navegación por teclado, imágenes sin deformación, formato compartido, persistencia local y adaptación de las vistas comprobadas. La integración autenticada y los criterios completos de liberación mantienen sus comprobaciones separadas.
+
+La [continuidad guiada](docs/verificacion/guiada-continuidad.md) añade evidencia a T-11/T-12: AP-09/AP-10 comprobados en escritorio y móvil con Supabase, aviso de confirmación conservado y cierre con revisión manual pendiente. Se mantiene la capacidad y la operación como tareas abiertas; estos recorridos no son una carga sostenida.

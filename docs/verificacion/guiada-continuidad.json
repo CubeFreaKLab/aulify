@@ -1,0 +1,187 @@
+{
+  "status": "passed",
+  "generatedAt": "2026-09-30T08:45:12.090Z",
+  "cases": ["AP-09", "AP-10"],
+  "environment": "Aplicación Next compilada local con Supabase remoto. Chromium escritorio y móvil emulado; participantes en contextos independientes con tamaños de 1440 y 390 px.",
+  "buildId": "53g5fvMCLq04i5j55mrWy",
+  "applicationFiles": [
+    {
+      "path": "src/demo/store.ts",
+      "sha256": "0b73c14317e35e2d83e9304ed6397993173fe5f38f8ed9a82b78000a1b1ec280"
+    },
+    {
+      "path": "src/components/activity-screen.tsx",
+      "sha256": "07d9f32e58c657c85628675c7ce725d2ab8ad4d26c5966ed386d8eed19dd3aa0"
+    }
+  ],
+  "runs": [
+    {
+      "startedAt": "2026-09-30T08:43:10.756Z",
+      "project": "chromium-escritorio",
+      "baseURL": "http://127.0.0.1:3001",
+      "commit": "111a7695ede5d76cea4f4929d6541b00a72b1e74",
+      "buildId": "53g5fvMCLq04i5j55mrWy",
+      "sourceSha256": "f1d1a8e8fbad8edb44bf95d248cb0cf3f035fe239b6014c705751709b02efc42",
+      "storeSourceSha256": "0b73c14317e35e2d83e9304ed6397993173fe5f38f8ed9a82b78000a1b1ec280",
+      "checks": [
+        "E1 y E2 entran por interfaz: sala sin intentos consumidos.",
+        "Inicio visual y repetición HTTP crean exactamente un intento por inscrito.",
+        "Docente sin red: E1 confirma, espera; E2 conserva pregunta; tres observaciones sin avance ni cambio de plazo.",
+        "Tercer estudiante aprobado no entra tarde ni obtiene intento.",
+        "Reconexión y recarga docente conservan pregunta, intentos y plazos de ambos estudiantes.",
+        "Cierre exige confirmación por E2; una vez confirmado no admite su respuesta atrasada.",
+        "Última pregunta cierra ambos intentos normalmente y conserva escritura sin corregir; publicación incompleta rechazada.",
+        "Antes de corregir: E1 conserva dos puntos; omisión de E2 vale cero.",
+        "Corrección y publicación posterior: 20/20 para E1, 12/20 para E2, conservando la omisión."
+      ],
+      "status": "passed",
+      "scope": "Chromium local compilado y Supabase real; cuentas ficticias existentes; red docente interrumpida mediante BrowserContext.setOffline.",
+      "subjectId": "41a822b5-f472-4e42-b485-d28e9c1d2f5f",
+      "activityId": "6d29adb2-d88e-4148-865f-20a186c2a53f",
+      "questionIds": [
+        "7b49b53c-f29d-4cd6-89fd-f8a704aa7efb",
+        "34c8e4ce-8046-4a87-af78-6b0b24c95dc4"
+      ],
+      "attemptIds": [
+        "db797f89-3ff0-4bf5-a009-0a681efd7c01",
+        "282df1f8-4930-4136-8840-8c204a6291a8"
+      ],
+      "deadlines": ["2026-09-30T09:43:16.234+00:00", "2026-09-30T09:43:16.234+00:00"],
+      "offline": {
+        "from": "2026-09-30T08:43:23.590Z",
+        "durationMs": 13450,
+        "samples": [
+          {
+            "at": "2026-09-30T08:43:24.643Z",
+            "questionIndex": 0,
+            "deadline": "2026-09-30T09:43:16.234+00:00"
+          },
+          {
+            "at": "2026-09-30T08:43:30.836Z",
+            "questionIndex": 0,
+            "deadline": "2026-09-30T09:43:16.234+00:00"
+          },
+          {
+            "at": "2026-09-30T08:43:37.040Z",
+            "questionIndex": 0,
+            "deadline": "2026-09-30T09:43:16.234+00:00"
+          }
+        ],
+        "fetchRejected": true,
+        "lateJoinRejected": true
+      },
+      "pendingScores": [2, 0],
+      "publishedGrades": [20, 12],
+      "archivedFixture": true,
+      "finishedAt": "2026-09-30T08:43:43.689Z"
+    },
+    {
+      "startedAt": "2026-09-30T08:43:50.770Z",
+      "project": "chromium-movil",
+      "baseURL": "http://127.0.0.1:3001",
+      "commit": "111a7695ede5d76cea4f4929d6541b00a72b1e74",
+      "buildId": "53g5fvMCLq04i5j55mrWy",
+      "sourceSha256": "f1d1a8e8fbad8edb44bf95d248cb0cf3f035fe239b6014c705751709b02efc42",
+      "storeSourceSha256": "0b73c14317e35e2d83e9304ed6397993173fe5f38f8ed9a82b78000a1b1ec280",
+      "checks": [
+        "E1 y E2 entran por interfaz: sala sin intentos consumidos.",
+        "Inicio visual y repetición HTTP crean exactamente un intento por inscrito.",
+        "Docente sin red: E1 confirma, espera; E2 conserva pregunta; tres observaciones sin avance ni cambio de plazo.",
+        "Tercer estudiante aprobado no entra tarde ni obtiene intento.",
+        "Reconexión y recarga docente conservan pregunta, intentos y plazos de ambos estudiantes.",
+        "Cierre exige confirmación por E2; una vez confirmado no admite su respuesta atrasada.",
+        "Última pregunta cierra ambos intentos normalmente y conserva escritura sin corregir; publicación incompleta rechazada.",
+        "Antes de corregir: E1 conserva dos puntos; omisión de E2 vale cero.",
+        "Corrección y publicación posterior: 20/20 para E1, 12/20 para E2, conservando la omisión."
+      ],
+      "status": "passed",
+      "scope": "Chromium local compilado y Supabase real; cuentas ficticias existentes; red docente interrumpida mediante BrowserContext.setOffline.",
+      "subjectId": "3558927e-431f-4b00-991f-5cd0f2e862be",
+      "activityId": "1d4fbe0f-bd55-4c36-b10f-7db76813d2ea",
+      "questionIds": [
+        "d6307c06-4ba4-489c-bab4-459a62e1ed52",
+        "56e44ed5-1d80-48a7-abf7-cd8abdc15ea3"
+      ],
+      "attemptIds": [
+        "c8271b62-59a5-4d66-a3d1-2a6da2a37410",
+        "dbb75f5d-8441-4e5d-ad9f-ca6795cdb95e"
+      ],
+      "deadlines": ["2026-09-30T09:43:54.181+00:00", "2026-09-30T09:43:54.181+00:00"],
+      "offline": {
+        "from": "2026-09-30T08:44:01.154Z",
+        "durationMs": 30010,
+        "samples": [
+          {
+            "at": "2026-09-30T08:44:02.077Z",
+            "questionIndex": 0,
+            "deadline": "2026-09-30T09:43:54.181+00:00"
+          },
+          {
+            "at": "2026-09-30T08:44:08.262Z",
+            "questionIndex": 0,
+            "deadline": "2026-09-30T09:43:54.181+00:00"
+          },
+          {
+            "at": "2026-09-30T08:44:31.164Z",
+            "questionIndex": 0,
+            "deadline": "2026-09-30T09:43:54.181+00:00"
+          }
+        ],
+        "fetchRejected": true,
+        "lateJoinRejected": true
+      },
+      "pendingScores": [2, 0],
+      "publishedGrades": [20, 12],
+      "archivedFixture": true,
+      "finishedAt": "2026-09-30T08:44:41.090Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/diseno/capturas/guiada-2026-09-30/chromium-escritorio-docente-finalizada.png",
+      "sha256": "21191f15297499795ff47fdda487675dcab81441bf90e51315adb2c925acc8ba",
+      "bytes": 53518
+    },
+    {
+      "path": "docs/diseno/capturas/guiada-2026-09-30/chromium-escritorio-estudiante-espera.png",
+      "sha256": "2b984f0d4ad55108c49a99b4e653f027a9f19ec826f8da5c9239d5ea34f5948b",
+      "bytes": 34609
+    },
+    {
+      "path": "docs/diseno/capturas/guiada-2026-09-30/chromium-movil-docente-finalizada.png",
+      "sha256": "530b656ba5f68d43867d68a6c7f8123b09859127ebf9d5475ab6c04040cc58b7",
+      "bytes": 147970
+    },
+    {
+      "path": "docs/diseno/capturas/guiada-2026-09-30/chromium-movil-estudiante-espera.png",
+      "sha256": "a9abb3be8b51f576dde45d88bd5f1f3f88d6d993c96965698a597c4e47a4a6fa",
+      "bytes": 90838
+    }
+  ],
+  "regressions": {
+    "unitFiles": 18,
+    "unitPassed": 162,
+    "synchronizationUnitPassed": 11,
+    "build": "passed",
+    "types": "passed",
+    "lint": "passed",
+    "format": "passed"
+  },
+  "initialFailure": {
+    "startedAt": "2026-09-30T08:34:33.245Z",
+    "finishedAt": "2026-09-30T08:35:13.423Z",
+    "buildId": "LxncBY74HOrDyZhjUMIuv",
+    "subjectId": "94fffeae-6ba7-441e-84a4-3e030ab17c89",
+    "archivedFixture": true,
+    "result": "failed",
+    "failedAssertion": "Aviso de confirmación visible.",
+    "details": "El selector inicial comparaba texto exacto de un contenedor con un botón. Se corrigió para localizar el alert. Una regresión unitaria independiente reprodujo además la pérdida del aviso después de actualizar datos: esperaba el mensaje y recibía null. Se corrigió el almacén."
+  },
+  "limitations": [
+    "La interrupción de red docente duró el intervalo registrado; no se cortó la conexión del servidor ni Supabase.",
+    "Datos ficticios y correo administrativamente confirmado; no prueba SMTP, carga sostenida ni producción.",
+    "Preparación, repetición de inicio, intentos tardíos y comprobaciones de notas usan API autenticada; incorporación, comienzo, respuestas, confirmación de omisión y cierre se operan visualmente.",
+    "Movimiento reducido y tema claro. No acredita lector de pantalla ni pruebas con personas.",
+    "La primera ejecución aprobada anterior al ajuste de textos no se suma a los dos recorridos finales."
+  ]
+}

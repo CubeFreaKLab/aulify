@@ -636,7 +636,9 @@ function TeacherRoom({
           title={activity.title}
           description={
             guided
-              ? 'Abre cada pregunta cuando tu clase esté lista.'
+              ? activity.guided?.status === 'closed'
+                ? 'Revisa las respuestas antes de publicar las calificaciones.'
+                : 'Abre cada pregunta cuando tu clase esté lista.'
               : 'Consulta el recurso y revisa las participaciones de tu clase.'
           }
         >
@@ -669,7 +671,9 @@ function TeacherRoom({
             <h2 style={{ fontSize: 32, margin: '35px 0 25px' }}>
               {activity.guided?.status === 'running'
                 ? current?.prompt
-                : 'Una pregunta. Toda la clase.'}
+                : activity.guided?.status === 'closed'
+                  ? 'La sesión terminó.'
+                  : 'Una pregunta. Toda la clase.'}
             </h2>
             {activity.guided?.status === 'running' && (
               <p className="muted">{count} estudiantes respondieron esta pregunta.</p>
@@ -723,8 +727,9 @@ function TeacherRoom({
               )}
             </div>
             <p className="notice" style={{ marginTop: 25 }}>
-              Los estudiantes entran desde su materia. Abre la siguiente pregunta cuando tu clase
-              esté lista.
+              {activity.guided?.status === 'closed'
+                ? 'Las respuestas están guardadas. Revisa las preguntas escritas antes de publicar las calificaciones.'
+                : 'Los estudiantes entran desde su materia. Abre la siguiente pregunta cuando tu clase esté lista.'}
             </p>
           </section>
         ) : (
