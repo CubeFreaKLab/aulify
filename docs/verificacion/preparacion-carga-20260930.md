@@ -1,0 +1,9 @@
+# Preparación de sesiones antes del diagnóstico
+
+El [registro de las 00:12 UTC](datos-protocolo-60s-20260930001244.json) terminó sin ejecutar medición. Preparó 97 de las 204 identidades ficticias existentes y se detuvo cuando la siguiente lectura excedió los 15 segundos del cliente. No creó actividades ni ejecutó la ráfaga: todos los contadores de medición son cero. Se recibieron 3.295.334 bytes durante la preparación.
+
+El build fue `NJgfZnpvHJ7YBpHn4hEBZ`, con dieciocho migraciones. Las solicitudes anteriores devolvieron HTTP 200; no hubo 429 ni 503 durante esta preparación. El silencio de los registros RPC no permite localizar el tiempo perdido entre renovación de Auth, transporte y consulta. No se presenta este aborto como un nuevo resultado de Q-06 ni como efecto de la optimización SQL.
+
+Se comprobó que la aplicación seguía disponible y se realizó una sola lectura posterior con el mismo jar de la identidad afectada. Devolvió HTTP 200 en 6.535 ms y renovó su sesión; únicamente esas cookies se fusionaron en el archivo privado. Esa lectura recuperó el aula completa, mientras que la original estaba acotada a una actividad, por lo que sus tiempos no son comparables. No se crearon cuentas ni se restablecieron contraseñas.
+
+El ejecutor ya esperaba ante 429/503, pero detenía la preparación inmediatamente ante un timeout de transporte. Se extendió el mismo máximo de tres lecturas, con espera mínima de 30 segundos, a `client_timeout` y `client_transport`. Un 401/403 sigue deteniendo la preparación; tampoco se reintentan comandos de escritura. Se conserva el límite de 15 segundos de solicitud y no cambian el escenario, los umbrales ni la ventana medida. El diagnóstico podrá volver a prepararse usando las sesiones válidas conservadas, sin contabilizar este intento incompleto como prueba de capacidad.

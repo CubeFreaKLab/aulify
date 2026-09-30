@@ -1,0 +1,777 @@
+{
+  "startedAt": "2026-09-30T00:12:44.893Z",
+  "scope": "Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.",
+  "buildId": "NJgfZnpvHJ7YBpHn4hEBZ",
+  "commit": "cfbc64226746562561ab7f64ae6dce2b49bcafa3",
+  "sessions": 204,
+  "teachers": 4,
+  "students": 200,
+  "pollMs": 1000,
+  "seconds": 60,
+  "records": [
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 6792.404799999999,
+      "bytes": 1060409
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 771.8307999999997,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 565.1132999999991,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 960.2806,
+      "bytes": 14315
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 572.4491999999991,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1278.7129999999997,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 760.7085000000006,
+      "bytes": 14317
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 938.8633999999984,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 449.4218000000001,
+      "bytes": 14317
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 788.210500000001,
+      "bytes": 14317
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 443.3263999999981,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 493.58740000000034,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 447.18680000000313,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 408.9720000000016,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 450.72179999999935,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 416.53480000000127,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 448.76600000000326,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 414.1958000000013,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 446.170100000003,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 410.08920000000217,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 441.11900000000605,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1293.786699999997,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 619.6905000000042,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1513.5198999999993,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1035.342700000001,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 788.6203999999998,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 755.3236999999936,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1006.9454000000114,
+      "bytes": 14316
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 985.0072999999975,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1515.2096999999922,
+      "bytes": 14316
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 462.42179999999644,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 423.710699999996,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 463.9313000000111,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 418.3890000000101,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 451.0078000000067,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 800.0521000000008,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 790.9701000000059,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 414.37489999999525,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 454.24250000000757,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 419.6698000000033,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 483.3758999999991,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 821.7339000000065,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 583.5730999999942,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 626.6967000000004,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1097.8383999999933,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 3044.565100000007,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 465.98459999999614,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 599.8405000000057,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 652.4800000000105,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 418.5929000000033,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 462.8883999999962,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 3277.512699999992,
+      "bytes": 874595
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 392.89910000000964,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 579.1857000000018,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 399.1265999999887,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 433.21040000001085,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 401.1958000000159,
+      "bytes": 14317
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 450.87690000000293,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 402.9511999999813,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 447.5064999999886,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 400.00500000000466,
+      "bytes": 14319
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 446.8796999999904,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 433.7392000000109,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 447.4106000000029,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 403.12140000000363,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 447.4282999999996,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 397.0883000000031,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 467.979800000001,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 404.7484000000113,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 460.7321000000229,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 397.29180000000633,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 456.7838000000047,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 417.37469999998575,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 468.703199999989,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 420.72789999999804,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 561.813599999994,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 917.5360000000219,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 795.2692000000097,
+      "bytes": 14316
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1790.488400000002,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 960.7309999999998,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1062.5795000000217,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 573.0127999999968,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1069.7839000000095,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1071.8486000000266,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1056.507500000007,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 689.1018999999797,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 620.2597999999998,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 875.6778000000049,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 1325.8157999999821,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 456.8773999999976,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 409.8564999999944,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 357.113400000002,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 421.87180000002263,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 364.39199999999255,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 420.79610000000685,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 370.50519999998505,
+      "bytes": 14320
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 200,
+      "ms": 433.92840000000433,
+      "bytes": 14318
+    },
+    {
+      "stage": "authenticationPreparation",
+      "measurement": false,
+      "status": 0,
+      "ms": 15005.075400000002,
+      "failureCategory": "client_timeout"
+    }
+  ],
+  "activities": [],
+  "authentication": {
+    "prepared": 97,
+    "temporaryWaits": 0,
+    "spacingMs": 2500
+  },
+  "limitations": [
+    "Aplicación compilada local y base remota Free; no mide render de 204 navegadores.",
+    "Una pregunta single-choice por estudiante y sin sesión guiada.",
+    "Preparación y auditoría fuera de medición.",
+    "Consumo estimado, no contador facturable."
+  ],
+  "buildChecks": [
+    {
+      "base": "http://127.0.0.1:3001",
+      "expectedBuild": "NJgfZnpvHJ7YBpHn4hEBZ",
+      "verifiedAt": "2026-09-30T00:12:44.892Z",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    }
+  ],
+  "expectedMigration": {
+    "path": "supabase/migrations/20260930000631_aulify_teacher_review_projection.sql",
+    "sha256": "75070a9dddba44f22a1b5e17af502d7662a0348f88402a5691b0f0a0e3be1b99"
+  },
+  "scriptSha256": "66630a4f8e19fc941cb81eccb9a5c5d3a5aee01f43efb3e92680af1364f95340",
+  "instrumentation": {
+    "version": "rpc-failure-v1",
+    "header": "X-Aulify-Rpc-Failure",
+    "sources": {
+      "src/lib/rpc-failure.ts": "0fec125749d6c1b288850a6857008d8aa384f8c7603d1f6df65e32c0ca2f03a8",
+      "src/app/api/sync/route.ts": "175605bf2a0d9c7a0d8d607421367d0bce29750a3ca25ab4cc1e3d90c05b8ade",
+      "src/app/api/workspace/route.ts": "638a2c643c02ef110a228ce628b39bb429c836c4fde3c6c68c94470bad0aa319",
+      "src/app/api/commands/route.ts": "0ba4f4bbf597f24cd2c760d59ab8b98226c8ee4c7465672b39ccfc2681cd5aaf",
+      "tools/datos/load-failure-category.mjs": "66f5006d7d05c8fd89b4cee31eb8f1679f5ea5a9196a3ae2c907435d5f0573c5"
+    },
+    "limitations": [
+      "Cabecera disponible en fallosRPC de sync/workspace; comandos y Auth pueden quedar unclassified.",
+      "Hashes de fuente local; la correspondencia de fuente y compilado debe verificarse antes de autorizar una medición."
+    ]
+  },
+  "retryPolicy": {
+    "initialMs": 1000,
+    "maximumBackoffMs": 8000,
+    "respectsRetryAfter": true
+  },
+  "status": "failed",
+  "failure": "El diagnóstico no terminó. Revisar etapas, estados HTTP y categorías registradas.",
+  "completedAt": "2026-09-30T00:17:08.823Z",
+  "observedBodyBytes": 3295334,
+  "conservativeEstimatedBytes": 6691020,
+  "generator": {
+    "node": "v24.14.1",
+    "os": "win32",
+    "eventLoopP95Ms": 0.000511
+  },
+  "measurements": {
+    "sync": {
+      "count": 0,
+      "failed": 0,
+      "p95Ms": null
+    },
+    "snapshot": {
+      "count": 0,
+      "failed": 0,
+      "p95Ms": null
+    },
+    "answer": {
+      "count": 0,
+      "failed": 0,
+      "p95Ms": null
+    }
+  },
+  "failuresByCategory": {
+    "sync": {},
+    "snapshot": {},
+    "answer": {}
+  }
+}

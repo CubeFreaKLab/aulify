@@ -27,7 +27,7 @@ report.buildChecks=[initialBuildCheck];
 report.expectedMigration={path:'supabase/migrations/20260930000631_aulify_teacher_review_projection.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260930000631_aulify_teacher_review_projection.sql')).digest('hex')};
 report.scriptSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-protocol.mjs')).digest('hex');
 report.instrumentation={version:'rpc-failure-v1',header:'X-Aulify-Rpc-Failure',sources:Object.fromEntries(await Promise.all(['src/lib/rpc-failure.ts','src/app/api/sync/route.ts','src/app/api/workspace/route.ts','src/app/api/commands/route.ts','tools/datos/load-failure-category.mjs'].map(async path=>[path,crypto.createHash('sha256').update(await fs.readFile(path)).digest('hex')]))),limitations:['Cabecera disponible en fallosRPC de sync/workspace; comandos y Auth pueden quedar unclassified.','Hashes de fuente local; la correspondencia de fuente y compilado debe verificarse antes de autorizar una medición.']};
-report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true};
+report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true,preparation:{readAttempts:3,minimumWaitMs:30000,retryable:[429,503,'client_timeout','client_transport'],commandsRetried:false}};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
 const parallel=async(items,n,fn)=>{let i=0;await Promise.all(Array.from({length:Math.min(n,items.length)},async()=>{while(i<items.length){const j=i++;await fn(items[j]);}}));};
@@ -50,7 +50,7 @@ try{
   for(let retry=0;retry<3;retry++){
    const r=await request(s,activityByGroup.has(s.group)?`/api/workspace?activity=${activityByGroup.get(s.group)}`:'/api/workspace',undefined,'authenticationPreparation');
    if(!r.error){ready=true;if(s.role==='teacher'){const a=r.data.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];if(a)activityByGroup.set(s.group,a.id);}break;}
-   if(![429,503].includes(r.error))throw new Error(`Preparación ficticia: HTTP ${r.error}`);
+   if(![429,503,'client_timeout','client_transport'].includes(r.error))throw new Error(`Preparación ficticia: HTTP ${r.error}`);
    report.authentication.temporaryWaits++;await delay(Math.max(30000,r.retryAfterMs||0));
   }
   if(!ready)throw new Error('Auth permanece temporalmente indisponible; sin medición');
