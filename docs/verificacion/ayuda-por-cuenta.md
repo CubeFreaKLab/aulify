@@ -1,5 +1,7 @@
 # Ayuda por cuenta, rol y versión
 
+La [comprobación posterior de primera entrada](ayuda-primera-entrada.md), del 30 de septiembre, añade ambos perfiles con Supabase real sobre un compilado de producción local. El informe que sigue conserva el alcance de su ejecución anterior.
+
 Verificación del 29 de septiembre de 2026 para RF-17, AY-01 a AY-04 y AP-34. Evidencia resumida y sin identidades en [ayuda-por-cuenta.json](ayuda-por-cuenta.json).
 
 La interfaz anterior ignoraba la versión al decidir si ofrecer ayuda; una preferencia completada de versión 1 impedía invitar a una nueva guía. Tampoco permitía avanzar y retroceder entre los cinco momentos requeridos, y repetir desde Ayuda programaba otra apertura en Inicio. El escenario de nueva versión falló antes de la corrección por ausencia de invitación.

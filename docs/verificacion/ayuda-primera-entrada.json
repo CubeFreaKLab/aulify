@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-30T06:37:05.929Z",
+  "durationMs": 28132,
+  "applicationRevision": "27e4df6d3ce94a82fc2840462f84da41e4a3a163",
+  "buildId": "ou5DbbEjvpmQk0PkLvYqG",
+  "project": "bnqyyumfmyexsqszglab",
+  "environment": "Compilado local en HTTP y Supabase remoto; Chromium",
+  "script": {
+    "path": "tests/e2e/ayuda-primera-entrada.spec.ts",
+    "sha256": "bdac2aa259a5a0e20dccc0ead13e573ccf6e9976898a7a3f586dc3013c8a00d4"
+  },
+  "reportSha256": "6f9fc5c3b951baa9e79675d061e144f3cb6aa8e543ab319fa8bfef3c6448f828",
+  "testCases": 1,
+  "guideVersion": 2,
+  "outcomes": [
+    {
+      "role": "teacher",
+      "steps": 5,
+      "firstVisit": true,
+      "recovered": true,
+      "domainUnchanged": true
+    },
+    {
+      "role": "student",
+      "steps": 5,
+      "firstVisit": true,
+      "recovered": true,
+      "domainUnchanged": true
+    }
+  ],
+  "newAccounts": 0,
+  "emailsSent": 0,
+  "preparation": {
+    "existingTeacher": true,
+    "newStudentAccounts": 1,
+    "administrativelyConfirmed": true,
+    "sentEmails": 0,
+    "preferencesReset": false
+  },
+  "viewports": {
+    "teacher": {
+      "width": 1440,
+      "height": 900
+    },
+    "student": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "checks": [
+    "Primera visita sin preferencias previas",
+    "Invitación inicial y cinco pasos propios por rol",
+    "Foco del encabezado y botones dentro de la pantalla",
+    "Sin desbordamiento horizontal",
+    "Guía completada persistida",
+    "Estado de negocio idéntico salvo preferencia y revisión",
+    "Salida revoca el acceso del navegador al aula",
+    "Nueva sesión independiente conserva la preferencia y no abre el diálogo"
+  ],
+  "limitations": [
+    "No prueba registro ni confirmación o recuperación mediante correo.",
+    "No acredita despliegue HTTPS, lector de pantalla manual, dispositivo físico ni usabilidad con personas.",
+    "Las cuentas de prueba se conservan; sus sesiones de navegador se cerraron.",
+    "La ejecución inicial usó un estudiante con intento abierto: falló su precondición, antes de abrir la guía. Se conservó el historial y se preparó otra cuenta."
+  ]
+}
