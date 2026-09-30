@@ -2606,6 +2606,168 @@
         ]
       }
     ],
-    "evidenceSource": "GitHub REST API: run and jobs; logs and artifacts not downloaded for this entry"
+    "evidenceSource": "GitHub REST API: run, jobs and downloaded job log; SHA-256 retained without credentials",
+    "logSha256": "04d417206e4d576bb40a20b7358016657aa3ceceecec2d92397d62bb836cdeac",
+    "observedCounts": {
+      "unitFiles": 17,
+      "unitTests": 151,
+      "generalSqlChecks": 85,
+      "teacherProjectionDifferentialChecks": 26,
+      "workspaceOverviewChecks": 32,
+      "browserPassed": 87,
+      "browserFlaky": 1,
+      "browserSkipped": 24
+    },
+    "skippedScope": "Doce escenarios autenticados ejecutables en dos proyectos de Chromium. Requieren entorno remoto privado y no se consideran aprobados por omisión."
+  },
+  {
+    "id": 36669578313,
+    "name": "Calidad de Aulify",
+    "event": "push",
+    "sha": "11943829653b0c20113d00a72bbd5347055b56be",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/36669578313",
+    "createdAt": "2026-09-30T04:36:08Z",
+    "updatedAt": "2026-09-30T04:40:57Z",
+    "observedAt": "2026-09-30T04:41:20.612Z",
+    "jobs": [
+      {
+        "id": 109741474783,
+        "name": "Tipos, reglas y recorridos de demostración",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Instalar dependencias fijadas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar formato",
+            "conclusion": "success"
+          },
+          {
+            "name": "Analizar código",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar tipos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar reglas del dominio",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar registro de tiempos sin datos privados",
+            "conclusion": "success"
+          },
+          {
+            "name": "Rechazar aprobación de carga con muestras incompletas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar retención desde el cierre efectivo",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar retiro, resolución y restauración",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar casos numéricos de puntuación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia y permisos de la proyección docente",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar proyección de revisiones y respuestas omitidas",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar conservación de archivos y reintentos de purga",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar participación, equipos y privacidad de publicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar revisiones independientes por participante",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar equivalencia del contexto de sincronización",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar proyección y permisos de actividad estudiantil",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verificar resumen del aula y conservación del historial",
+            "conclusion": "success"
+          },
+          {
+            "name": "Construir aplicación",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preparar Chromium",
+            "conclusion": "success"
+          },
+          {
+            "name": "Comprobar recorridos y accesibilidad automática",
+            "conclusion": "success"
+          },
+          {
+            "name": "Conservar informe y evidencia de fallos",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Preparar Node.js 24",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Obtener la revisión",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "evidenceSource": "GitHub REST API: run, jobs and downloaded job log; SHA-256 retained without credentials",
+    "logSha256": "5baaffac16f39a9e3d58301215579d50d091e28e4b69141a947617b15aaf7c1d",
+    "observedCounts": {
+      "unitFiles": 17,
+      "unitTests": 151,
+      "generalSqlChecks": 85,
+      "teacherProjectionDifferentialChecks": 26,
+      "workspaceOverviewChecks": 32,
+      "browserPassed": 88,
+      "browserFlaky": 0,
+      "browserSkipped": 24
+    },
+    "skippedScope": "Doce escenarios autenticados ejecutables en dos proyectos de Chromium. Requieren entorno remoto privado y no se consideran aprobados por omisión."
   }
 ]

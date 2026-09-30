@@ -1,0 +1,615 @@
+{
+  "runId": "1d5c6041-9899-44e1-b29a-9d1cbbb01a1a",
+  "startedAt": "2026-09-30T04:15:23.311Z",
+  "status": "failed",
+  "commit": "db3b1ad5c9b2ac4a307bb491f2281a6eb0513096",
+  "compiledCommit": "db3b1ad5c9b2ac4a307bb491f2281a6eb0513096",
+  "buildId": "P6WDnTpFwNCt3ILdxXorb",
+  "environment": {
+    "application": "Next.js production local HTTP",
+    "base": "http://127.0.0.1:3001",
+    "database": "Supabase Free, PostgreSQL 17, sa-east-1",
+    "generator": {
+      "node": "v24.14.1",
+      "os": "win32 10.0.26220",
+      "cpu": "Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 34257453056
+    },
+    "activeSessions": 204,
+    "teachers": 4,
+    "students": 200,
+    "studentsPerClass": 50,
+    "questionsPerActivity": 10,
+    "pollingMs": 1000,
+    "polling": "GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional",
+    "warmupSeconds": 300,
+    "measurementSeconds": 900,
+    "logicalBodyBudgetBytes": 2500000000,
+    "confirmation": "ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.",
+    "preparation": "Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.",
+    "retryPolicy": {
+      "initialMs": 1000,
+      "maximumBackoffMs": 8000,
+      "respectsRetryAfter": true
+    },
+    "fixtureHistory": "Las cuentas conservan el calentamiento fallido previo; el primer grupo conserva además las actividades cerradas de las pruebas de concurrencia guiada. No se borró ese historial para reducir el costo de lectura."
+  },
+  "phases": [
+    {
+      "name": "individual-warmup",
+      "mode": "individual",
+      "stage": "warmup",
+      "targetSeconds": 300,
+      "startedAt": "2026-09-30T04:16:22.453Z",
+      "requestCount": 60203,
+      "failedRequests": 0,
+      "bodyBytes": 81191806,
+      "operations": {
+        "sync": {
+          "count": 55864,
+          "failed": 0,
+          "p50Ms": 296.93,
+          "p95Ms": 959.32,
+          "maxMs": 4768,
+          "statuses": {
+            "200": 55864
+          },
+          "serverTiming": {
+            "samples": 55864,
+            "p95Ms": {
+              "prepare": 55.63,
+              "rpc": 910.57,
+              "encode": 0.05,
+              "outsideHandler": 124.28
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "snapshot": {
+          "count": 2339,
+          "failed": 0,
+          "p50Ms": 462.54,
+          "p95Ms": 1963.02,
+          "maxMs": 5526,
+          "statuses": {
+            "200": 2339
+          },
+          "serverTiming": {
+            "samples": 2339,
+            "p95Ms": {
+              "prepare": 22.82,
+              "rpc": 1927.74,
+              "encode": 0.57,
+              "outsideHandler": 58.82
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "submitAnswer": {
+          "count": 2000,
+          "failed": 0,
+          "p50Ms": 361.08,
+          "p95Ms": 2010.31,
+          "maxMs": 4707,
+          "statuses": {
+            "200": 2000
+          },
+          "serverTiming": {
+            "samples": 2000,
+            "p95Ms": {
+              "prepare": 18.7,
+              "rpc": 2006.24,
+              "encode": 0.08,
+              "outsideHandler": 79.32
+            },
+            "negativeResiduals": 0
+          }
+        }
+      },
+      "skippedPollTicks": 4911,
+      "unsentAnswers": 0,
+      "unconfirmedAnswers": 0,
+      "unobservedConfirmations": 0,
+      "burst": null,
+      "responseAckByQuestion": {
+        "1": {
+          "samples": 200,
+          "p50Ms": 229.55,
+          "p95Ms": 1738.18
+        },
+        "2": {
+          "samples": 200,
+          "p50Ms": 351.87,
+          "p95Ms": 3062.18
+        },
+        "3": {
+          "samples": 200,
+          "p50Ms": 310.18,
+          "p95Ms": 1592.96
+        },
+        "4": {
+          "samples": 200,
+          "p50Ms": 218.3,
+          "p95Ms": 318.91
+        },
+        "5": {
+          "samples": 200,
+          "p50Ms": 737.21,
+          "p95Ms": 4038.19
+        },
+        "6": {
+          "samples": 200,
+          "p50Ms": 405.01,
+          "p95Ms": 1080.43
+        },
+        "7": {
+          "samples": 200,
+          "p50Ms": 457.42,
+          "p95Ms": 1626.73
+        },
+        "8": {
+          "samples": 200,
+          "p50Ms": 308.91,
+          "p95Ms": 488.72
+        },
+        "9": {
+          "samples": 200,
+          "p50Ms": 555.22,
+          "p95Ms": 1005.45
+        },
+        "10": {
+          "samples": 200,
+          "p50Ms": 390.96,
+          "p95Ms": 1532.8
+        }
+      },
+      "completedAt": "2026-09-30T04:21:22.787Z",
+      "elapsedSeconds": 300.334,
+      "integrity": {
+        "expectedAnswers": 2000,
+        "persistedAnswers": 2000,
+        "confirmedAnswers": 2000,
+        "missingOrChangedConfirmed": 0,
+        "duplicateQuestions": 0
+      },
+      "publishAllElapsedMs": 9533,
+      "observedResultSamples": 200,
+      "resultsReadP95Ms": 628.8,
+      "successfulAcknowledgementSamples": 2000,
+      "observedConfirmationSamples": 2000,
+      "observedPropagationSamples": 0,
+      "confirmationP95Ms": 2010.39,
+      "responseAckP95Ms": 2010.36,
+      "propagationP95Ms": null,
+      "failureRate": 0,
+      "criteria": {
+        "durationCompleted": true,
+        "confirmationP95": false,
+        "propagationP95": true,
+        "validRequestFailureRate": true,
+        "integrity": true,
+        "publishedResults": true,
+        "burst": true
+      }
+    },
+    {
+      "name": "individual-measurement",
+      "mode": "individual",
+      "stage": "measurement",
+      "targetSeconds": 900,
+      "startedAt": "2026-09-30T04:21:54.883Z",
+      "requestCount": 174364,
+      "failedRequests": 0,
+      "bodyBytes": 93304658,
+      "operations": {
+        "sync": {
+          "count": 170044,
+          "failed": 0,
+          "p50Ms": 310.34,
+          "p95Ms": 675.83,
+          "maxMs": 7463,
+          "statuses": {
+            "200": 170044
+          },
+          "serverTiming": {
+            "samples": 170044,
+            "p95Ms": {
+              "prepare": 52.72,
+              "rpc": 587.59,
+              "encode": 0.06,
+              "outsideHandler": 125.67
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "snapshot": {
+          "count": 2320,
+          "failed": 0,
+          "p50Ms": 629.43,
+          "p95Ms": 2780.89,
+          "maxMs": 5597,
+          "statuses": {
+            "200": 2320
+          },
+          "serverTiming": {
+            "samples": 2320,
+            "p95Ms": {
+              "prepare": 20.33,
+              "rpc": 2761.33,
+              "encode": 0.57,
+              "outsideHandler": 49.78
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "submitAnswer": {
+          "count": 2000,
+          "failed": 0,
+          "p50Ms": 537.49,
+          "p95Ms": 2665.07,
+          "maxMs": 4856,
+          "statuses": {
+            "200": 2000
+          },
+          "serverTiming": {
+            "samples": 2000,
+            "p95Ms": {
+              "prepare": 25.48,
+              "rpc": 2660.92,
+              "encode": 0.12,
+              "outsideHandler": 80.59
+            },
+            "negativeResiduals": 0
+          }
+        }
+      },
+      "skippedPollTicks": 12095,
+      "unsentAnswers": 0,
+      "unconfirmedAnswers": 0,
+      "unobservedConfirmations": 0,
+      "burst": {
+        "target": 200,
+        "dispatched": 200,
+        "windowMs": 1890,
+        "targetWindowMs": 2000
+      },
+      "responseAckByQuestion": {
+        "1": {
+          "samples": 200,
+          "p50Ms": 265.02,
+          "p95Ms": 2175.49
+        },
+        "2": {
+          "samples": 200,
+          "p50Ms": 573.31,
+          "p95Ms": 3588.84
+        },
+        "3": {
+          "samples": 200,
+          "p50Ms": 462.31,
+          "p95Ms": 2050.03
+        },
+        "4": {
+          "samples": 200,
+          "p50Ms": 501.47,
+          "p95Ms": 4282.15
+        },
+        "5": {
+          "samples": 200,
+          "p50Ms": 1847.83,
+          "p95Ms": 2085.1
+        },
+        "6": {
+          "samples": 200,
+          "p50Ms": 390.31,
+          "p95Ms": 1898.86
+        },
+        "7": {
+          "samples": 200,
+          "p50Ms": 477.35,
+          "p95Ms": 2008.83
+        },
+        "8": {
+          "samples": 200,
+          "p50Ms": 654.29,
+          "p95Ms": 2336.58
+        },
+        "9": {
+          "samples": 200,
+          "p50Ms": 604.56,
+          "p95Ms": 3339.5
+        },
+        "10": {
+          "samples": 200,
+          "p50Ms": 477.11,
+          "p95Ms": 1099.15
+        }
+      },
+      "completedAt": "2026-09-30T04:36:54.974Z",
+      "elapsedSeconds": 900.091,
+      "integrity": {
+        "expectedAnswers": 2000,
+        "persistedAnswers": 2000,
+        "confirmedAnswers": 2000,
+        "missingOrChangedConfirmed": 0,
+        "duplicateQuestions": 0
+      },
+      "publishAllElapsedMs": 7691,
+      "observedResultSamples": 81,
+      "resultsReadP95Ms": 9686.24,
+      "resultAuditStatus": "No completada: Error",
+      "successfulAcknowledgementSamples": 2000,
+      "observedConfirmationSamples": 2000,
+      "observedPropagationSamples": 0,
+      "confirmationP95Ms": 2665.11,
+      "responseAckP95Ms": 2665.11,
+      "propagationP95Ms": null,
+      "failureRate": 0,
+      "criteria": {
+        "durationCompleted": true,
+        "confirmationP95": false,
+        "propagationP95": true,
+        "validRequestFailureRate": true,
+        "integrity": true,
+        "publishedResults": false,
+        "burst": true
+      }
+    }
+  ],
+  "authentication": {
+    "rateLimitWaits": 0,
+    "preparedSessions": 204
+  },
+  "limitations": [
+    "El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.",
+    "La aplicación está en una computadora local, no en el alojamiento público.",
+    "Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.",
+    "La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos."
+  ],
+  "protocol": "full-q06",
+  "buildChecks": [
+    {
+      "at": "2026-09-30T04:15:23.307Z",
+      "expectedBuild": "P6WDnTpFwNCt3ILdxXorb",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    },
+    {
+      "at": "2026-09-30T04:16:14.288Z",
+      "expectedBuild": "P6WDnTpFwNCt3ILdxXorb",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    },
+    {
+      "at": "2026-09-30T04:21:46.482Z",
+      "expectedBuild": "P6WDnTpFwNCt3ILdxXorb",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    }
+  ],
+  "scriptSha256": "070533e1180dff82671990f7d6f3d9e3b19724006f271eb4d60677a5119ca3c2",
+  "expectedMigration": {
+    "path": "supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql",
+    "sha256": "724e45231319644bc11069192ceac4886c74cebc41b6278f298623affd4d308e"
+  },
+  "sourceDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "previousReport": "datos-carga-20260928-0811.md",
+  "setupOperations": {
+    "/api/workspace": {
+      "count": 4,
+      "failed": 0,
+      "p50Ms": 1868.72,
+      "p95Ms": 4419.33,
+      "maxMs": 4419,
+      "statuses": {
+        "200": 4
+      },
+      "serverTiming": {
+        "samples": 4,
+        "p95Ms": {
+          "prepare": 2.12,
+          "rpc": 4395,
+          "encode": 12.48,
+          "outsideHandler": 19.89
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=afaf899b-0b16-4e26-adc2-c8673fc040f1": {
+      "count": 50,
+      "failed": 0,
+      "p50Ms": 201.98,
+      "p95Ms": 285.88,
+      "maxMs": 411,
+      "statuses": {
+        "200": 50
+      },
+      "serverTiming": {
+        "samples": 50,
+        "p95Ms": {
+          "prepare": 2.18,
+          "rpc": 279.25,
+          "encode": 0.84,
+          "outsideHandler": 11.45
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=948e2bf7-2abd-47e2-ac4a-abc3adfc4b3f": {
+      "count": 50,
+      "failed": 0,
+      "p50Ms": 194.16,
+      "p95Ms": 211.6,
+      "maxMs": 244,
+      "statuses": {
+        "200": 50
+      },
+      "serverTiming": {
+        "samples": 50,
+        "p95Ms": {
+          "prepare": 2.76,
+          "rpc": 204.79,
+          "encode": 0.84,
+          "outsideHandler": 13.81
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=6c33ea35-d0da-44c4-a4d0-2d8b8f3436a6": {
+      "count": 50,
+      "failed": 0,
+      "p50Ms": 193.06,
+      "p95Ms": 208.09,
+      "maxMs": 246,
+      "statuses": {
+        "200": 50
+      },
+      "serverTiming": {
+        "samples": 50,
+        "p95Ms": {
+          "prepare": 3.44,
+          "rpc": 201.16,
+          "encode": 0.9,
+          "outsideHandler": 13.92
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=8c970b91-af43-463e-971e-2cf7afa2e684": {
+      "count": 50,
+      "failed": 0,
+      "p50Ms": 194.3,
+      "p95Ms": 237.52,
+      "maxMs": 246,
+      "statuses": {
+        "200": 50
+      },
+      "serverTiming": {
+        "samples": 50,
+        "p95Ms": {
+          "prepare": 2.1,
+          "rpc": 231.42,
+          "encode": 0.82,
+          "outsideHandler": 9.89
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "createActivity": {
+      "count": 8,
+      "failed": 0,
+      "p50Ms": 285.01,
+      "p95Ms": 990.41,
+      "maxMs": 990,
+      "statuses": {
+        "200": 8
+      },
+      "serverTiming": {
+        "samples": 8,
+        "p95Ms": {
+          "prepare": 3.78,
+          "rpc": 987.26,
+          "encode": 0.24,
+          "outsideHandler": 9.32
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "startAttempt": {
+      "count": 400,
+      "failed": 0,
+      "p50Ms": 183.37,
+      "p95Ms": 260.62,
+      "maxMs": 1050,
+      "statuses": {
+        "200": 400
+      },
+      "serverTiming": {
+        "samples": 400,
+        "p95Ms": {
+          "prepare": 5.55,
+          "rpc": 251.52,
+          "encode": 0.32,
+          "outsideHandler": 14.72
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "integrityAudit": {
+      "count": 8,
+      "failed": 0,
+      "p50Ms": 946,
+      "p95Ms": 1304.35,
+      "maxMs": 1304,
+      "statuses": {
+        "200": 8
+      },
+      "serverTiming": {
+        "samples": 8,
+        "p95Ms": {
+          "prepare": 0.72,
+          "rpc": 1299.61,
+          "encode": 1.45,
+          "outsideHandler": 99.31
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "publishGrade": {
+      "count": 400,
+      "failed": 0,
+      "p50Ms": 169.88,
+      "p95Ms": 523.48,
+      "maxMs": 3659,
+      "statuses": {
+        "200": 400
+      },
+      "serverTiming": {
+        "samples": 400,
+        "p95Ms": {
+          "prepare": 4.21,
+          "rpc": 516.14,
+          "encode": 0.22,
+          "outsideHandler": 10.67
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "publishedResults": {
+      "count": 284,
+      "failed": 3,
+      "p50Ms": 405.53,
+      "p95Ms": 2982.16,
+      "maxMs": 13496,
+      "statuses": {
+        "200": 281,
+        "503": 3
+      },
+      "serverTiming": {
+        "samples": 281,
+        "p95Ms": {
+          "prepare": 4.13,
+          "rpc": 2799.91,
+          "encode": 1.47,
+          "outsideHandler": 14.63
+        },
+        "negativeResiduals": 0
+      }
+    }
+  },
+  "failure": {
+    "type": "Error",
+    "reason": "HTTP_503",
+    "operation": "publishedResults",
+    "category": "database_cancelled"
+  },
+  "completedAt": "2026-09-30T04:37:33.580Z",
+  "generatorEventLoop": {
+    "p95Ms": 32.23,
+    "maxMs": 475.79
+  },
+  "observedApplicationBodyBytes": 210396177,
+  "totalRequests": 235871,
+  "conservativeEstimatedBytes": 662324258
+}

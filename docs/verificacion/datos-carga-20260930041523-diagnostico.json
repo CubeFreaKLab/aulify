@@ -1,0 +1,58 @@
+{
+  "observedAt": "2026-09-30T04:42:28.723Z",
+  "scope": "Lectura de errores PostgreSQL y comparación aislada del plan; sin carga concurrente, con reversión. No es una corrección ni aprobación de capacidad.",
+  "errors": [
+    {
+      "at": "2026-09-30T04:37:26.140000",
+      "message": "canceling statement due to statement timeout",
+      "sqlState": "57014",
+      "context": null
+    },
+    {
+      "at": "2026-09-30T04:37:25.935000",
+      "message": "canceling statement due to statement timeout",
+      "sqlState": "57014",
+      "context": "SQL statement \"select jsonb_agg(jsonb_build_object('questionId',aq.question_key,'points',g.points_num/g.points_den,'maximum',qu.max_points,'explanation',sec.feedback,'comment',g.comment) order by aq.position)              from app.evaluation_question_grades eq join app.question_grades g on g.id=eq.question_grade_id join app.attempt_questions aq on aq.id=g.attempt_question_id join app.questions qu using(version_id,question_key) join app.question_secrets sec using(version_id,question_key) where eq.evaluation_id=x.evaluation_id\"\nPL/pgSQL function app.student_results(uuid) line 10 at SQL statement\nPL/pgSQL function app.snapshot_data(boolean) line 30 at assignment\nSQL function \"aulify_workspace_overview\" statement 1"
+    },
+    {
+      "at": "2026-09-30T04:37:25.576000",
+      "message": "canceling statement due to statement timeout",
+      "sqlState": "57014",
+      "context": "PL/pgSQL assignment \"extra:=extra||jsonb_build_object('activityQuestionCounts',coalesce((\n  select jsonb_object_agg(a.id,(select count(*) from app.questions q where q.version_id=a.version_id))\n  from app.activities a where a.kind='quiz' and\n   (a.subject_id=any(owned_subjects) or a.subject_id=any(visible_subjects) and a.published_at is not null)\n ),'{}'::jsonb))\"\nPL/pgSQL function app.snapshot_data(boolean) line 35 at assignment\nSQL function \"aulify_workspace_overview\" statement 1"
+    }
+  ],
+  "isolatedPlanProfile": [
+    {
+      "measurements": [
+        {
+          "ms": 572.466,
+          "mode": "force_custom_plan",
+          "bytes": 122385,
+          "attempts": 24,
+          "iteration": 1
+        },
+        {
+          "ms": 152.41,
+          "mode": "force_custom_plan",
+          "bytes": 122385,
+          "attempts": 24,
+          "iteration": 2
+        },
+        {
+          "ms": 129.015,
+          "mode": "force_generic_plan",
+          "bytes": 122385,
+          "attempts": 24,
+          "iteration": 1
+        },
+        {
+          "ms": 91.241,
+          "mode": "force_generic_plan",
+          "bytes": 122385,
+          "attempts": 24,
+          "iteration": 2
+        }
+      ]
+    }
+  ]
+}
