@@ -15,3 +15,11 @@ La implementación anterior delegaba al pool predeterminado. La documentación d
 Un servidor HTTP local recibió veinte POST simultáneos mediante un pool configurado con cuatro conexiones: no se superó ese límite, los veinte cuerpos y tokens ficticios permanecieron asociados a su solicitud y no hubo duplicación. En otro caso, el servidor cortó la conexión después de recibir un POST; el cliente propagó el fallo sin reenviarlo. Se cerraron servidores y pools de ambos ensayos.
 
 Pasaron **151 pruebas locales en diecisiete archivos**, incluidos los escenarios de Auth, y el análisis estático focal. La construcción final con límite 64 terminó correctamente: `9b84oYZaFQkaf5OmYT5AJ`. El ensayo local verifica transporte y aislamiento, no rendimiento remoto. Q-06 sigue pendiente hasta medir el escenario correspondiente.
+
+## Diagnóstico remoto de sesenta segundos
+
+Entre 02:15:35 y 02:16:35 UTC del 30 de septiembre, el compilado indicado atendió 204 sesiones HTTP contra Supabase Free y conservó las veinte migraciones. Las 200 respuestas de una ráfaga de 1.885,49 ms quedaron confirmadas y persistidas; la auditoría no detectó claves perdidas o cambiadas. Hubo 11.641 solicitudes durante la medición, sin fallos. El p95 de confirmación fue **797,21 ms**, frente a 3.231,21 ms en el diagnóstico instrumentado previo. La observación respalda continuar con la prueba completa, pero una comparación secuencial breve no demuestra por sí sola capacidad sostenida ni aísla todas las variaciones de red.
+
+El p95 de sincronización fue 917,98 ms y el de descarga de la proyección, 2.210,45 ms. La propagación guiada todavía requiere medición independiente. Los cuerpos recibidos sumaron 17.928.210 bytes incluyendo preparación y auditoría; el cálculo preventivo fue 48.198.692 bytes, que no es el contador facturable del proveedor.
+
+Se conservan las [mediciones originales](datos-protocolo-60s-20260930021436.json) y el [resumen de tiempos](datos-tiempos-rutas-pool64.json). Q-06 y Q-09 siguen abiertos hasta cubrir los cuatro grupos, diez preguntas y las fases completas de cada modalidad.
