@@ -16,7 +16,8 @@ export async function createSupabaseServer() {
       httpOnly: true,
       secure:
         process.env.NODE_ENV === 'production' &&
-        process.env.NEXT_PUBLIC_SITE_URL?.startsWith('https://'),
+        (process.env.VERCEL === '1' ||
+          process.env.NEXT_PUBLIC_SITE_URL?.startsWith('https://') === true),
     },
     cookies: {
       getAll: () => cookieStore.getAll(),
