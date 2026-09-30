@@ -31,6 +31,8 @@ Para el escenario sostenido se admite un presupuesto preventivo máximo de 2,5 G
 
 ## Revisión previa al diagnóstico de tiempos
 
+Antes de iniciar el escenario sostenido posterior a la migración 22, el 30 de septiembre a las 04:16 UTC, se observó **0,347/5 GB de transferencia**, **0,054/0,5 GB de base de datos** (51,55 MB en el detalle) y 209 usuarios activos. La transferencia seguía mostrando el valor previo, por lo que se considera el retraso de actualización. Los registros mostraron 0,443/1 GB y 4,314/100 GB, todavía como controles próximos de 2027. Se mantuvo Free y el corte preventivo de 2,5 GB estimados adicionales. El diagnóstico precedente consumió 280 MB estimados y la regresión posterior recibió 11,19 MB de JSON; se conserva margen adicional frente a ambas medidas.
+
 Lectura posterior del mismo panel, registrada el 30 de septiembre a las 03:33 UTC: **0,347/5 GB de transferencia**, **0,052/0,5 GB de base de datos** y **209/50.000 usuarios activos**. El detalle de base de datos muestra 49,39 MB. Storage y transferencia desde caché permanecen en cero redondeado; Realtime, en cero conexiones y mensajes. El panel identifica Free, el mismo ciclo y ninguna cuota excedida. Los registros muestran 0,443/1 GB de ingestión y 4,314/100 GB consultados, todavía señalados como próximos controles de 2027.
 
 Esta lectura permite un diagnóstico adicional con límite preventivo de **500 MB estimados**, inferior al presupuesto del protocolo completo. Repite únicamente cinco minutos individuales y la preparación posterior que falló, ahora con tiempos HTTP por etapa y por número de pregunta. No cambia la aplicación, no ejecuta mantenimiento y no aprueba capacidad. El retraso de actualización del panel impide tratar el margen mostrado como consumo instantáneo.
