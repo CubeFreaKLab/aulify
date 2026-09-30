@@ -1,6 +1,6 @@
 import { Pool } from 'undici';
 
-const transports = new Map<string, ReturnType<typeof createBoundedTransport>>();
+const transports = new Map<string, ReturnType<typeof createSupabaseTransport>>();
 
 export function createBoundedTransport(url: string, connections = 128, timeoutMs = 12_000) {
   const origin = new URL(url).origin;
@@ -30,11 +30,36 @@ export function createBoundedTransport(url: string, connections = 128, timeoutMs
   return { fetch, close: () => pool.close() };
 }
 
+export function createSupabaseTransport(
+  url: string,
+  readConnections = 96,
+  commandConnections = 32,
+  timeoutMs = 12_000,
+) {
+  const reads = createBoundedTransport(url, readConnections, timeoutMs);
+  const commands = createBoundedTransport(url, commandConnections, timeoutMs);
+  const fetch: typeof globalThis.fetch = (input, init) => {
+    const target = new URL(
+      typeof input === 'string' ? input : input instanceof URL ? input : input.url,
+    );
+    // Reservar conexiones para confirmar cambios aunque el sondeo acumule lecturas.
+    // Ambos transportes validan el origen y conservan cabeceras, cancelación y plazo.
+    const transport = target.pathname === '/rest/v1/rpc/aulify_command' ? commands : reads;
+    return transport.fetch(input, init);
+  };
+  return {
+    fetch,
+    close: async () => {
+      await Promise.all([reads.close(), commands.close()]);
+    },
+  };
+}
+
 export function supabaseTransport(url: string): typeof globalThis.fetch {
   const origin = new URL(url).origin;
   let transport = transports.get(origin);
   if (!transport) {
-    transport = createBoundedTransport(origin);
+    transport = createSupabaseTransport(origin);
     transports.set(origin, transport);
   }
   return transport.fetch;
