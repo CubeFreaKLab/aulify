@@ -4,6 +4,14 @@ El 30 de septiembre de 2026 se desplegó Aulify en Vercel **Preview**, conservan
 
 ## Vista previa vigente
 
+El candidato `f9a701379dafc2ea90db0277536e59a4ed1c3f36` se redesplegó en Preview conservando el paso de compilación ignorada del proyecto. Vercel completó la construcción en 47 segundos y lo identifica como **Ready**, despliegue `dpl_DKCdR82HDcKYXdnuMc8hgTF4VojS`. Su [dirección HTTPS](https://aulify-3h0jxa3ot-jdanielchfhd-9543s-projects.vercel.app) mantiene la protección de Vercel. Output identifica el compilado `cnVtGnuJSRSUOe6Bf9Kjp`; Resources muestra `GRU1` y Node.js 24.x en los endpoints observados.
+
+Se comprobó acceso docente, lectura de una actividad guiada finalizada de una materia archivada y el texto corregido «La sesión terminó». La materia permaneció de solo lectura. El borrador ficticio existente conservó el título «Verificación HTTPS · continuidad guiada» y su contenido después de volver a abrirlo y recargar. El estudiante consultó cuatro notas incluidas y promedio 66,67, concordantes en gráfico y tabla, y no pudo abrir el editor docente. Ambas sesiones se cerraron. Se guardaron cuatro capturas, inspeccionadas visualmente, en la evidencia privada.
+
+El [CI de esta revisión](https://github.com/CubeFreaKLab/aulify/actions/runs/36691946349) aprobó 162 pruebas unitarias y 88 recorridos de Chromium, con 28 ejecuciones autenticadas omitidas, además de cuatro comprobaciones del destino de carga y los lotes SQL identificados en `ci-integracion.json`. La prueba completa de [continuidad guiada](guiada-continuidad.md) se ejecutó separadamente en el navegador local con Supabase; esta comprobación HTTPS verifica el despliegue y los recorridos descritos, sin atribuirle la desconexión ni la carga. Producción, SMTP y el acceso temporal de automatización siguen pendientes.
+
+## Vista previa anterior: conexiones reservadas
+
 El candidato `1e4160b0dda0d0c4647f3f24063ce45d26e9b6b7` se redesplegó en Preview conservando el paso de compilación ignorada del proyecto. Vercel completó la construcción en 49 segundos y lo identifica como **Ready**, despliegue `dpl_E8wR4jEVPhsfwsZ9eumYEnd48uPj`. Su [dirección HTTPS](https://aulify-cfz2ib249-jdanielchfhd-9543s-projects.vercel.app) mantiene la protección de Vercel. El árbol Output identifica el compilado `p_zQcyB0xs2sfzo2QGtG6`; Resources muestra `GRU1` y Node.js 24.x en los endpoints observados.
 
 Sobre esta dirección se comprobó nuevamente el ingreso docente y estudiantil. El docente abrió el borrador ficticio existente, cambió su título a «Verificación HTTPS · versión actual» y recuperó ese título y el contenido previo después de recargar. El estudiante consultó la materia ficticia Biología: gráfico y tabla indicaron cuatro notas incluidas y promedio 66,67. La dirección del editor docente mostró «Este espacio no está disponible» para el estudiante. Ambas sesiones se cerraron después de sus recorridos. Las capturas de guardado y resultados se conservaron en la evidencia privada.

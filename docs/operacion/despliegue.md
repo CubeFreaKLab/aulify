@@ -4,7 +4,7 @@ Estado al 30 de septiembre: Aulify dispone de una [vista previa HTTPS verificada
 
 ## Configuración realizada
 
-El proyecto reserva `aulify-cubefreaklab.vercel.app` como dirección de producción. La dirección inicial del proveedor se conserva mediante una redirección. La vista previa tiene su propia URL y no se promovió a ese dominio. El despliegue actualizado `dpl_E8wR4jEVPhsfwsZ9eumYEnd48uPj` corresponde a `1e4160b` y figura Ready; conservó el entorno Preview y el paso de compilación ignorada del proyecto.
+El proyecto reserva `aulify-cubefreaklab.vercel.app` como dirección de producción. La dirección inicial del proveedor se conserva mediante una redirección. La vista previa tiene su propia URL y no se promovió a ese dominio. El despliegue actualizado `dpl_DKCdR82HDcKYXdnuMc8hgTF4VojS` corresponde a `f9a7013` y figura Ready; conservó el entorno Preview y el paso de compilación ignorada del proyecto. Su compilado es `cnVtGnuJSRSUOe6Bf9Kjp`, con el CI de esa revisión aprobado y los recorridos HTTPS descritos en la evidencia enlazada.
 
 Se guardaron `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` como configuración de producción y vistas previas. `NEXT_PUBLIC_SITE_URL` corresponde al origen HTTPS previsto, únicamente en producción. `SUPABASE_SECRET_KEY` se guardó con tipo **Secret**, sólo en producción, sin un valor legible después de guardar. Los archivos temporales de importación contenían exclusivamente estas variables y se eliminaron tras la operación; no forman parte de Git.
 
@@ -16,7 +16,7 @@ Mientras se corrige el rendimiento, el paso de compilación ignorada permite **O
 
 La base utiliza Supabase en `sa-east-1`. [vercel.json](../../vercel.json) selecciona `gru1`, São Paulo, para las funciones de la aplicación. Ubicar ambos servicios en la misma región evita un trayecto interregional en cada consulta; su efecto debe medirse después de desplegar. Hobby admite una única región. [Configuración de funciones](https://vercel.com/docs/functions/configuring-functions/region), [regiones de Vercel](https://vercel.com/docs/regions).
 
-El panel Resources del candidato `1e4160b` confirmó `GRU1` y Node.js 24.x en los endpoints observados. El [procedimiento de diagnóstico de Preview](../verificacion/carga-vista-previa.md) prepara una medición con acceso de automatización autorizado y metadatos del compilado servido. La clave de automatización todavía no se creó; su habilitación está pendiente de autorización. No se desactivó Vercel Authentication para facilitar la prueba.
+El panel Resources del candidato `f9a7013` confirmó `GRU1` y Node.js 24.x en los endpoints observados. El [procedimiento de diagnóstico de Preview](../verificacion/carga-vista-previa.md) prepara una medición con acceso de automatización autorizado y metadatos del compilado servido. La clave de automatización todavía no se creó; su habilitación está pendiente de autorización. No se desactivó Vercel Authentication para facilitar la prueba.
 
 Se mantienen los planes gratuitos y se supervisan sus cuotas. Una compilación local no mide los límites de CPU, duración o transferencia del alojamiento. El procedimiento no activa facturación ni presupone recursos ilimitados.
 
