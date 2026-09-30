@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-09-30 03:25:14.357358+00",
+  "job_id": "f64c3e18-d491-4379-8c89-68aa9a75aa75",
+  "status": "scheduled",
+  "eligible_at": "2026-09-30 03:25:14.339833+00",
+  "target_by": "2026-10-01 03:25:14.339833+00",
+  "subject_id": "c7f3610f-30bc-4905-82a4-96da26660077",
+  "synthetic_archived_at": "2026-08-31 03:25:14.339833+00",
+  "file_id": "23b15f77-2a60-4087-a2b9-60fe305d0f0b",
+  "file_state": "ready",
+  "object_present": true
+}
