@@ -1,0 +1,1125 @@
+{
+  "recordedAt": "2026-09-30T07:03:59.738Z",
+  "readTransport": {
+    "startedAt": "2026-09-30T06:55:17.954Z",
+    "completedAt": "2026-09-30T06:55:50.624Z",
+    "scope": "Comparación acotada de lectura aulify_sync; no prueba de capacidad ni escritura",
+    "status": "completed",
+    "undici": "7.30.0",
+    "concurrency": 96,
+    "requestsPerRound": 240,
+    "rounds": [
+      {
+        "mode": "http1",
+        "options": {
+          "connections": 128,
+          "pipelining": 1,
+          "allowH2": false,
+          "maxConcurrentStreams": 100,
+          "keepAliveTimeout": 30000
+        },
+        "startedAt": "2026-09-30T06:55:26.523Z",
+        "connections": [
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          }
+        ],
+        "elapsedMs": 3272.8603000000003,
+        "count": 240,
+        "failed": 0,
+        "p50Ms": 1259.5215000000007,
+        "p95Ms": 2574.4323999999997,
+        "maxMs": 3147.711799999999,
+        "connectionCount": 96,
+        "protocols": [
+          "http/1.1"
+        ],
+        "tlsValidated": true
+      },
+      {
+        "mode": "h2",
+        "options": {
+          "connections": 4,
+          "pipelining": 1,
+          "allowH2": true,
+          "maxConcurrentStreams": 100,
+          "keepAliveTimeout": 30000
+        },
+        "startedAt": "2026-09-30T06:55:30.199Z",
+        "connections": [
+          {
+            "protocol": "h2",
+            "authorized": true
+          },
+          {
+            "protocol": "h2",
+            "authorized": true
+          },
+          {
+            "protocol": "h2",
+            "authorized": true
+          },
+          {
+            "protocol": "h2",
+            "authorized": true
+          }
+        ],
+        "elapsedMs": 9114.1445,
+        "count": 240,
+        "failed": 0,
+        "p50Ms": 3566.7664000000004,
+        "p95Ms": 3686.058900000002,
+        "maxMs": 3780.0650000000023,
+        "connectionCount": 4,
+        "protocols": [
+          "h2"
+        ],
+        "tlsValidated": true
+      },
+      {
+        "mode": "h2",
+        "options": {
+          "connections": 4,
+          "pipelining": 1,
+          "allowH2": true,
+          "maxConcurrentStreams": 100,
+          "keepAliveTimeout": 30000
+        },
+        "startedAt": "2026-09-30T06:55:39.670Z",
+        "connections": [
+          {
+            "protocol": "h2",
+            "authorized": true
+          },
+          {
+            "protocol": "h2",
+            "authorized": true
+          },
+          {
+            "protocol": "h2",
+            "authorized": true
+          },
+          {
+            "protocol": "h2",
+            "authorized": true
+          }
+        ],
+        "elapsedMs": 9010.642499999998,
+        "count": 240,
+        "failed": 0,
+        "p50Ms": 3511.6929999999993,
+        "p95Ms": 3616.536899999999,
+        "maxMs": 3648.1661999999997,
+        "connectionCount": 4,
+        "protocols": [
+          "h2"
+        ],
+        "tlsValidated": true
+      },
+      {
+        "mode": "http1",
+        "options": {
+          "connections": 128,
+          "pipelining": 1,
+          "allowH2": false,
+          "maxConcurrentStreams": 100,
+          "keepAliveTimeout": 30000
+        },
+        "startedAt": "2026-09-30T06:55:49.025Z",
+        "connections": [
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          },
+          {
+            "protocol": "http/1.1",
+            "authorized": true
+          }
+        ],
+        "elapsedMs": 785.5093000000015,
+        "count": 240,
+        "failed": 0,
+        "p50Ms": 201.20490000000063,
+        "p95Ms": 484.2042000000001,
+        "maxMs": 490.65409999999974,
+        "connectionCount": 96,
+        "protocols": [
+          "http/1.1"
+        ],
+        "tlsValidated": true
+      }
+    ],
+    "readCalls": 968,
+    "observedBodyBytes": 142206,
+    "conservativeEstimatedBytes": 1275644,
+    "edgeLocations": [
+      "LPB"
+    ],
+    "rawSha256": "a4d7ee31333cacbbe919b9fa7ce2ca82fed59812bcc60cec25a83ab130799b92"
+  },
+  "sql": {
+    "measuredAt": "2026-09-30T06:48:07.338491+00:00",
+    "samples": [
+      {
+        "stage": "ordinary",
+        "sample": 1,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 73.047,
+        "commandMs": 65.697
+      },
+      {
+        "stage": "ordinary",
+        "sample": 2,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 16.695,
+        "commandMs": 12.261
+      },
+      {
+        "stage": "ordinary",
+        "sample": 3,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 14.981,
+        "commandMs": 11.308
+      },
+      {
+        "stage": "ordinary",
+        "sample": 4,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 12.708,
+        "commandMs": 10.523
+      },
+      {
+        "stage": "ordinary",
+        "sample": 5,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 16.689,
+        "commandMs": 12.901
+      },
+      {
+        "stage": "ordinary",
+        "sample": 6,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 10.028,
+        "commandMs": 8.953
+      },
+      {
+        "stage": "ordinary",
+        "sample": 7,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 6.12,
+        "commandMs": 5.46
+      },
+      {
+        "stage": "ordinary",
+        "sample": 8,
+        "status": "in-progress",
+        "answers": 1,
+        "totalMs": 7.069,
+        "commandMs": 6.568
+      },
+      {
+        "stage": "last",
+        "sample": 1,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 8.633,
+        "commandMs": 7.781
+      },
+      {
+        "stage": "last",
+        "sample": 2,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 7.845,
+        "commandMs": 7.014
+      },
+      {
+        "stage": "last",
+        "sample": 3,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 5.72,
+        "commandMs": 4.931
+      },
+      {
+        "stage": "last",
+        "sample": 4,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 6.053,
+        "commandMs": 5.049
+      },
+      {
+        "stage": "last",
+        "sample": 5,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 5.99,
+        "commandMs": 5.191
+      },
+      {
+        "stage": "last",
+        "sample": 6,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 6.276,
+        "commandMs": 5.478
+      },
+      {
+        "stage": "last",
+        "sample": 7,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 5.286,
+        "commandMs": 4.318
+      },
+      {
+        "stage": "last",
+        "sample": 8,
+        "status": "closed",
+        "answers": 10,
+        "totalMs": 7.697,
+        "commandMs": 6.907
+      }
+    ],
+    "allChangesRolledBack": true,
+    "limitations": [
+      "Una conexión SQL sin concurrencia.",
+      "No mide HTTP, espera del pool, contención bajo carga ni confirmación durable de commit.",
+      "SET CONSTRAINTS ALL IMMEDIATE ejecutado dentro de cada muestra.",
+      "Toda la transacción finaliza con ROLLBACK; ninguna respuesta o actividad queda persistida."
+    ]
+  },
+  "candidate": {
+    "commit": "1e4160b0dda0d0c4647f3f24063ce45d26e9b6b7",
+    "buildId": "LxncBY74HOrDyZhjUMIuv",
+    "sourceSha256": "1fc8528df5e6a06b814ec27545a71fa47a62d0fe3960adb0ed347c5bf9ce60a5",
+    "readConnections": 96,
+    "commandConnections": 32,
+    "totalConnectionsPerModule": 128,
+    "tests": {
+      "unit": 159,
+      "files": 18,
+      "transport": 6,
+      "typecheck": "passed",
+      "lintFocused": "passed",
+      "build": "passed"
+    },
+    "remoteDiagnostic": {
+      "report": "docs/verificacion/datos-protocolo-60s-20260930070024.json",
+      "status": "completed",
+      "startedAt": "2026-09-30T07:09:13.321Z",
+      "endedAt": "2026-09-30T07:10:13.821Z",
+      "elapsedMs": 60505.08470000001,
+      "burst": {
+        "target": 200,
+        "dispatched": 200,
+        "windowMs": 1891.8208999999333,
+        "confirmed": 200,
+        "confirmationP95Ms": 3290.3259000000544
+      },
+      "integrity": {
+        "persisted": 200,
+        "confirmed": 200,
+        "missingOrChangedConfirmed": 0
+      },
+      "measurements": {
+        "sync": {
+          "count": 10941,
+          "failed": 0,
+          "p95Ms": 800.3179000000237
+        },
+        "snapshot": {
+          "count": 411,
+          "failed": 0,
+          "p95Ms": 3295.549400000018
+        },
+        "answer": {
+          "count": 200,
+          "failed": 0,
+          "p95Ms": 3290.2888000000967
+        }
+      },
+      "conservativeEstimatedBytes": 67995792,
+      "localMigrationCount": 23,
+      "latestMigration": "supabase/migrations/20260930051014_aulify_completion_grade_existence.sql",
+      "capacityApproved": false
+    },
+    "buildProvenance": {
+      "sourceMatchesGitCommit": true,
+      "note": "El diagnóstico se inició antes del commit 1e4160b; el build y la huella de transport.ts corresponden a su código."
+    },
+    "ci": {
+      "run": 36681478392,
+      "commit": "1e4160b0dda0d0c4647f3f24063ce45d26e9b6b7",
+      "conclusion": "success",
+      "unitTests": 159,
+      "browserPassed": 88,
+      "browserSkipped": 26
+    }
+  }
+}
