@@ -1,0 +1,137 @@
+{
+  "source": "docs/verificacion/datos-protocolo-60s-20260930020714.json",
+  "buildId": "qXB8VvHBsVVEAq3ph37vn",
+  "commit": "5a2594ce9b8ac1b295acc8d4aa5b8609d20b8ec4",
+  "window": {
+    "start": "2026-09-30T02:08:07.593Z",
+    "end": "2026-09-30T02:09:07.777Z"
+  },
+  "milliseconds": {
+    "sync": {
+      "requests": 10010,
+      "measured": 10010,
+      "p95Http": 1759.8338000000003,
+      "p95Stages": {
+        "prepare": 13.23,
+        "rpc": 1714.65,
+        "encode": 0.05
+      },
+      "p95OutsideHandler": 26.273999999995,
+      "slowest": [
+        {
+          "startedAt": "2026-09-30T02:08:29.701Z",
+          "httpMs": 7262.5285,
+          "serverTiming": {
+            "prepare": 4.2,
+            "rpc": 7252.88,
+            "encode": 0.04
+          }
+        },
+        {
+          "startedAt": "2026-09-30T02:08:31.131Z",
+          "httpMs": 6341.751199999999,
+          "serverTiming": {
+            "prepare": 4.15,
+            "rpc": 6316.24,
+            "encode": 0.03
+          }
+        },
+        {
+          "startedAt": "2026-09-30T02:08:31.796Z",
+          "httpMs": 6191.146099999998,
+          "serverTiming": {
+            "prepare": 6.9,
+            "rpc": 6174.44,
+            "encode": 0.03
+          }
+        }
+      ]
+    },
+    "snapshot": {
+      "requests": 411,
+      "measured": 411,
+      "p95Http": 4731.167499999996,
+      "p95Stages": {
+        "prepare": 34.73,
+        "rpc": 4679.54,
+        "encode": 0.16
+      },
+      "p95OutsideHandler": 102.11449999999779,
+      "slowest": [
+        {
+          "startedAt": "2026-09-30T02:08:31.297Z",
+          "httpMs": 6834.503299999997,
+          "serverTiming": {
+            "prepare": 3.82,
+            "rpc": 6812.75,
+            "encode": 0.09
+          }
+        },
+        {
+          "startedAt": "2026-09-30T02:08:31.181Z",
+          "httpMs": 6826.267500000002,
+          "serverTiming": {
+            "prepare": 1.79,
+            "rpc": 6819.86,
+            "encode": 0.1
+          }
+        },
+        {
+          "startedAt": "2026-09-30T02:08:31.276Z",
+          "httpMs": 6331.8052000000025,
+          "serverTiming": {
+            "prepare": 5.58,
+            "rpc": 6301.58,
+            "encode": 0.13
+          }
+        }
+      ]
+    },
+    "answer": {
+      "requests": 200,
+      "measured": 200,
+      "p95Http": 3231.17319999999,
+      "p95Stages": {
+        "prepare": 89.58,
+        "rpc": 3023.16,
+        "encode": 0.06
+      },
+      "p95OutsideHandler": 198.01250000000115,
+      "slowest": [
+        {
+          "startedAt": "2026-09-30T02:08:29.147Z",
+          "httpMs": 4874.387300000002,
+          "serverTiming": {
+            "prepare": 16.02,
+            "rpc": 4760.3,
+            "encode": 0.05
+          }
+        },
+        {
+          "startedAt": "2026-09-30T02:08:29.178Z",
+          "httpMs": 4610.669799999989,
+          "serverTiming": {
+            "prepare": 12.45,
+            "rpc": 4513.33,
+            "encode": 0.04
+          }
+        },
+        {
+          "startedAt": "2026-09-30T02:08:29.101Z",
+          "httpMs": 4482.7878000000055,
+          "serverTiming": {
+            "prepare": 49.18,
+            "rpc": 4344.1,
+            "encode": 0.04
+          }
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Tiempos de solicitudes correctas con las tres etapas instrumentadas.",
+    "RPC incluye transporte y servicio; no representa exclusivamente SQL.",
+    "Fuera del handler se calcula por solicitud, no por resta entre percentiles.",
+    "Los percentiles de etapas pueden pertenecer a solicitudes distintas y no se suman."
+  ]
+}
