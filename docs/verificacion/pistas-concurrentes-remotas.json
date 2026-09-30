@@ -1,0 +1,243 @@
+{
+  "status": "passed-remote-contract",
+  "runId": "42376615-d88a-469e-8d5e-aded849c4396",
+  "startedAt": "2026-09-30T08:16:17.286Z",
+  "commit": "a9973cf931a6729975ccf0e1632135b425dda3b3",
+  "script": {
+    "path": "tools/datos/hint-concurrency-remote.mjs",
+    "preparationSha256": "1f5b062e0cf17cabd8eacb5f4af028a85b2817b35b3d459aca2a37854605fad5",
+    "raceAndFinishSha256": "ca56a34f5db5860deb0d8e177d945df29c8833ab7abb29823737f3142c7701c7",
+    "revisionNote": "Tras preparar el caso se añadió programación relativa de la carrera y conservación del fallo de coordinación previo; después de la ejecución se formateó el archivo para publicación.",
+    "publishedSha256": "4fd913b732ac56d567a84cca63bc3b3ee2c41bad36f715d97af8a602e6c1e5cc"
+  },
+  "migrations": [
+    {
+      "name": "20260928064804_aulify_relational_core.sql",
+      "sha256": "e1d28fb97669dc12533cc3feb9b2a7aac91b2dace27e9773e30ffa1400b01181"
+    },
+    {
+      "name": "20260928064810_aulify_commands.sql",
+      "sha256": "0dcd33f6f5e76d4edfb94ed189470d1d886331aa5826a4cfce9328cc06d6d448"
+    },
+    {
+      "name": "20260928064815_aulify_projections_storage.sql",
+      "sha256": "b8efde826282aaf71a0c4c9312f176509b174bb2c140d2816b01e612109167ec"
+    },
+    {
+      "name": "20260928064819_aulify_retention_hardening.sql",
+      "sha256": "958e71a40caca23e48afa1e835da7275b030909fe8cec61397d91ab4d4a0beb3"
+    },
+    {
+      "name": "20260928064824_aulify_join_rate_limit.sql",
+      "sha256": "9821fd7b7f15735ddbc55ba315c08f19804a711c09ff0e67244e147cb8718fea"
+    },
+    {
+      "name": "20260928064828_aulify_upload_reservations.sql",
+      "sha256": "b85eeb9ab40fcd5a45acc191d0ad100f223d6eb4255c206426164b709fbe4514"
+    },
+    {
+      "name": "20260928070919_aulify_resubmission_projection.sql",
+      "sha256": "5aa4204dd42805437ca5d9962584690ea68950be9674f3976d45dd47a70b675c"
+    },
+    {
+      "name": "20260928072137_aulify_activity_sync_digest.sql",
+      "sha256": "6b1cf2533b6fc28d1c6b6ac6d4feb73a2fcccd56090aac13f1cb23376319b0f1"
+    },
+    {
+      "name": "20260928074757_aulify_snapshot_authorized_sets.sql",
+      "sha256": "cd887b55ef3024631ae3ed149a1b72b120d20a976a1c24c1827cb111d2e732f8"
+    },
+    {
+      "name": "20260928080625_aulify_guided_answer_close_lock.sql",
+      "sha256": "16a5cb140f1bbb47efb0044988f669a66cce8fe583351cfe2e5a7205477403b2"
+    },
+    {
+      "name": "20260928083328_aulify_scoped_activity_sync.sql",
+      "sha256": "e7d3e3957bcb7ada38db53cb6cf37250ea283a01000e684a4c78434954febd34"
+    },
+    {
+      "name": "20260928083904_aulify_private_lock_revision.sql",
+      "sha256": "39d743f9a8136d9a5c5a6f43618c73d59a65481bb2f97245100a6d8c12bfeeb7"
+    },
+    {
+      "name": "20260928123500_aulify_independent_matching_answers.sql",
+      "sha256": "e1f5f3c74795baf66d678087fb45463912716cefa9a9e856d70306610db30b51"
+    },
+    {
+      "name": "20260928130653_aulify_teacher_attempt_projection.sql",
+      "sha256": "46c4145e4797d0b27587f9a361cf589212e655679dbbe88f0b6cca7ab4b2b5c0"
+    },
+    {
+      "name": "20260929221908_aulify_deferred_ranking_publication.sql",
+      "sha256": "62f5a233be8ff1965ac5e7ae815891720abe4a89e25b99ffb1cd6ee39c2ce946"
+    },
+    {
+      "name": "20260929224538_aulify_participant_teacher_revision.sql",
+      "sha256": "3575310698289b9543d02832e0634259f48e0edb120411be856880acf56b23a2"
+    },
+    {
+      "name": "20260929231531_aulify_editor_link_validation.sql",
+      "sha256": "c414dacd0c2d27335aefb9a3a981ac805f48997a3acb9e0fd5a390f876255132"
+    },
+    {
+      "name": "20260930000631_aulify_teacher_review_projection.sql",
+      "sha256": "75070a9dddba44f22a1b5e17af502d7662a0348f88402a5691b0f0a0e3be1b99"
+    },
+    {
+      "name": "20260930005228_aulify_sync_context_reads.sql",
+      "sha256": "9f902396491da6a509dd3268dfcd2c8ae66296b1eb5eae5353e3008bfa1947c9"
+    },
+    {
+      "name": "20260930011205_aulify_student_activity_projection.sql",
+      "sha256": "d3b41c91c645cf1ec69af3512fa9d638967037de0e108162c1cbabac33c80fb5"
+    },
+    {
+      "name": "20260930024809_aulify_visibility_effective_closure.sql",
+      "sha256": "724e45231319644bc11069192ceac4886c74cebc41b6278f298623affd4d308e"
+    },
+    {
+      "name": "20260930040716_aulify_workspace_overview.sql",
+      "sha256": "259aff2e695a100203eabca39a9b37a089637c0a9da1edc091d68e0abacfe767"
+    },
+    {
+      "name": "20260930051014_aulify_completion_grade_existence.sql",
+      "sha256": "47e23bbf53ec3178e351a5feafd5866bb1d6a3bba0ba0611047b8404acab4469"
+    }
+  ],
+  "environment": "Supabase remoto; tres sesiones reales de cuentas ficticias; dos solicitudes HTTP independientes del mismo estudiante",
+  "checks": [
+    {
+      "detail": "Pregunta sin pista: rechazo sin consumir",
+      "result": "passed"
+    },
+    {
+      "detail": "Pregunta inexistente: rechazo sin consumir",
+      "result": "passed"
+    },
+    {
+      "detail": "La proyección inicial no revela ninguna pista",
+      "result": "passed"
+    },
+    {
+      "detail": "Dos solicitudes: una sola pista revelada",
+      "result": "passed"
+    },
+    {
+      "detail": "La pregunta elegible conserva la pista correcta",
+      "result": "passed"
+    },
+    {
+      "detail": "La otra pregunta no revela una pista adicional",
+      "result": "passed"
+    },
+    {
+      "detail": "Solicitudes HTTP superpuestas",
+      "result": "passed"
+    },
+    {
+      "detail": "Reenvío de la pista ganadora devuelve la misma",
+      "result": "passed"
+    },
+    {
+      "detail": "Otra pista permanece rechazada después de la carrera",
+      "result": "passed"
+    },
+    {
+      "detail": "La proyección posterior no expone la pista perdedora",
+      "result": "passed"
+    },
+    {
+      "detail": "Se archiva únicamente la materia del ensayo y se cierra su intento",
+      "result": "passed"
+    },
+    {
+      "detail": "Se cierran las tres sesiones creadas sin cerrar otras sesiones de las cuentas",
+      "result": "passed"
+    },
+    {
+      "detail": "SQL: una pista persistida antes y después de repetir la solicitud",
+      "result": "passed"
+    },
+    {
+      "detail": "SQL: sin consumo de la otra pregunta; intento cerrado por archivo",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Comprueba el contrato remoto, no interacción visual de dos pestañas ni carga sostenida.",
+    "Las solicitudes apuntan a preguntas distintas: sólo la primera sin responder es elegible en avance individual.",
+    "La coordinación inicial abortó antes de enviar RPCs; la carrera válida tuvo HTTP superpuesto, sin observación directa de bloqueo SQL. La petición de la pregunta posterior respondió QUESTION_ORDER."
+  ],
+  "beforeSnapshotHash": "571532c366eb53e8405950341710101b30a9ed42b6ea0b58c4f5f1508f59439c",
+  "fixture": {
+    "subject": "9086eaf0-f983-4b07-b9e8-ab2d7a7df587",
+    "activity": "7a9f0e1a-5b07-4fe9-b6b9-e6893fa51daa",
+    "attempt": "ca393cc1-04ef-404e-b64d-24a2f7eca224",
+    "retention": "Materia ficticia archivada mediante el comando del producto; se conserva con su política de treinta días. No se ejecutó mantenimiento global."
+  },
+  "preparationFailures": ["Horario de coordinación inválido."],
+  "race": [
+    {
+      "tab": "A",
+      "sentAt": "2026-09-30T08:18:18.295Z",
+      "endedAt": "2026-09-30T08:18:18.945Z",
+      "durationMs": 650.0532999999996,
+      "status": 200,
+      "revealed": true,
+      "hasData": true,
+      "error": null
+    },
+    {
+      "tab": "B",
+      "sentAt": "2026-09-30T08:18:18.295Z",
+      "endedAt": "2026-09-30T08:18:18.940Z",
+      "durationMs": 644.4677999999985,
+      "status": 400,
+      "revealed": false,
+      "hasData": false,
+      "error": {
+        "code": "P0001",
+        "message": "QUESTION_ORDER"
+      }
+    }
+  ],
+  "afterSnapshotHash": "0ac421ca29b88b7d2ec96ba4ffa625c0ca3fdf0af12115b0a1907dbdbb95545f",
+  "finishedAt": "2026-09-30T08:22:31.036Z",
+  "auditedAt": "2026-09-30 08:23:03.852019+00",
+  "sqlAudit": {
+    "beforeFinish": {
+      "observed_at": "2026-09-30 08:22:19.100506+00",
+      "attempt_id": "ca393cc1-04ef-404e-b64d-24a2f7eca224",
+      "closed_at": null,
+      "archived_at": null,
+      "hint_uses": 1,
+      "uses": [
+        {
+          "kind": "hint",
+          "position": 2,
+          "consumed_at": "2026-09-30T08:18:18.675765+00:00"
+        }
+      ]
+    },
+    "afterFinish": {
+      "observed_at": "2026-09-30 08:23:03.852019+00",
+      "attempt_id": "ca393cc1-04ef-404e-b64d-24a2f7eca224",
+      "closed_at": "2026-09-30 08:22:30.135448+00",
+      "close_reason": "archive",
+      "archived_at": "2026-09-30 08:22:30.135448+00",
+      "hint_uses": 1,
+      "third_question_uses": 0,
+      "unique_constraints": ["PRIMARY KEY (participant_id, kind)", "UNIQUE (request_key)"]
+    }
+  },
+  "coordinationBarrier": [
+    {
+      "evidence": {
+        "waiters": [],
+        "holderPid": 256837,
+        "observedAt": "2026-09-30T08:17:06.704784+00:00",
+        "usesWhileBlocked": 0
+      }
+    }
+  ]
+}
