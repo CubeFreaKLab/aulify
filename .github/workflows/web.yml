@@ -18,6 +18,7 @@ on:
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
         'tools/datos/student-activity-projection-check.mjs',
+        'tools/datos/server-timing*.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -42,6 +43,7 @@ on:
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
         'tools/datos/student-activity-projection-check.mjs',
+        'tools/datos/server-timing*.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -86,6 +88,8 @@ jobs:
         run: npm run typecheck
       - name: Verificar reglas del dominio
         run: npm test
+      - name: Verificar registro de tiempos sin datos privados
+        run: node --test tools/datos/server-timing.test.mjs
       - name: Verificar migraciones y permisos en PostgreSQL aislado
         run: node tools/datos/check.mjs
       - name: Verificar casos numéricos de puntuación

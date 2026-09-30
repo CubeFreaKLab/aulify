@@ -11,6 +11,7 @@ vi.mock('@/lib/supabase/server', () => ({
 vi.mock('@/lib/http', () => import('../../src/lib/http'));
 vi.mock('@/lib/command-errors', () => import('../../src/lib/command-errors'));
 vi.mock('@/lib/rpc-failure', () => import('../../src/lib/rpc-failure'));
+vi.mock('@/lib/response-timing', () => import('../../src/lib/response-timing'));
 
 function request(
   action = 'submitAnswer',
@@ -84,6 +85,9 @@ describe('errores RPC de comandos', () => {
     const response = await POST(request());
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ result });
+    expect(response.headers.get('Server-Timing')).toMatch(
+      /^prepare;dur=\d+\.\d{2}, rpc;dur=\d+\.\d{2}, encode;dur=\d+\.\d{2}$/,
+    );
     expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith('aulify_command', {
       p_action: 'submitAnswer',
       p_payload: { args: ['attempt', 'question', 'answer', 'key'] },

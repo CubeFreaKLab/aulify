@@ -3,6 +3,7 @@ import { createSupabaseServer } from '@/lib/supabase/server';
 import { authFailureResponse, isSameOrigin, jsonResponse, readJson } from '@/lib/http';
 import { commandError } from '@/lib/command-errors';
 import { classifyRpcFailure, logRpcFailure } from '@/lib/rpc-failure';
+import { responseTiming } from '@/lib/response-timing';
 
 function rpcFailureResponse(error: unknown, durationMs: number, upstreamStatus?: number) {
   const failure = classifyRpcFailure(error, upstreamStatus);
@@ -68,6 +69,7 @@ const actions = new Set([
 ]);
 
 export async function POST(request: NextRequest) {
+  const handlerStartedAt = performance.now();
   if (!isSameOrigin(request)) return jsonResponse({ error: 'Origen de solicitud no válido.' }, 403);
   try {
     const body = await readJson(request, 2_097_152);
@@ -92,13 +94,14 @@ export async function POST(request: NextRequest) {
       return rpcFailureResponse(error, performance.now() - startedAt);
     }
     const { data, error, status } = result;
+    const rpcEndedAt = performance.now();
     if (error) return rpcFailureResponse(error, performance.now() - startedAt, status);
     if (data?.error)
       return jsonResponse(
         { error: commandError(data.error.code || '') },
         data.error.code === 'RATE_LIMIT' ? 429 : 400,
       );
-    return jsonResponse({ result: data });
+    return responseTiming(jsonResponse({ result: data }), handlerStartedAt, startedAt, rpcEndedAt);
   } catch {
     return jsonResponse({ error: 'No pudimos procesar la solicitud.' }, 400);
   }

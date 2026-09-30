@@ -10,6 +10,7 @@ vi.mock('@/lib/supabase/server', () => ({
 }));
 vi.mock('@/lib/http', () => import('../../src/lib/http'));
 vi.mock('@/lib/rpc-failure', () => import('../../src/lib/rpc-failure'));
+vi.mock('@/lib/response-timing', () => import('../../src/lib/response-timing'));
 
 const activity = '10000000-0000-4000-8000-000000000001';
 const secret = 'SQL secreto / JWT privado / respuesta del estudiante';
@@ -141,6 +142,9 @@ describe.each(routes)('fallos de lectura en $rpc', ({ handler, scope, path, rpc 
     const response = await handler(request());
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual(data);
+    expect(response.headers.get('Server-Timing')).toMatch(
+      /^prepare;dur=\d+\.\d{2}, rpc;dur=\d+\.\d{2}, encode;dur=\d+\.\d{2}$/,
+    );
     expect(response.headers.get('X-Aulify-Rpc-Failure')).toBeNull();
     expect(console.warn).not.toHaveBeenCalled();
     if (rpc === 'aulify_snapshot') expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith(rpc);
