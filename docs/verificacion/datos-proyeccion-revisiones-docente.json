@@ -1,0 +1,126 @@
+{
+  "startedAt": "2026-09-29T23:58:00.354Z",
+  "migration": "20260929235447_aulify_teacher_review_projection.sql",
+  "environment": "PGlite aislado; no lee credenciales ni usa servicios remotos.",
+  "checks": [
+    {
+      "name": "Fixture incluye corrección por omisión sin respuesta",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot completo equivalente para teacher",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot completo equivalente para a",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot completo equivalente para b",
+      "result": "passed"
+    },
+    {
+      "name": "Helper docente conserva proyección completa y todos los intentos",
+      "result": "passed"
+    },
+    {
+      "name": "Helper sin privilegio docente conserva proyección propia y revisiones vacías",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad sin intentos conserva array vacío",
+      "result": "passed"
+    },
+    {
+      "name": "Conserva varias revisiones y su orden ascendente",
+      "result": "passed"
+    },
+    {
+      "name": "Conserva comentarios y revisiones privadas del docente",
+      "result": "passed"
+    },
+    {
+      "name": "Respuesta escrita pendiente conserva reviews vacío",
+      "result": "passed"
+    },
+    {
+      "name": "Nota por omisión no inventa una respuesta",
+      "result": "passed"
+    },
+    {
+      "name": "Intento sin respuestas conserva answers vacío",
+      "result": "passed"
+    },
+    {
+      "name": "Conserva orden de las respuestas según posición de pregunta",
+      "result": "passed"
+    },
+    {
+      "name": "Conserva orden completo de preguntas incluidas las omitidas",
+      "result": "passed"
+    },
+    {
+      "name": "Incluye varios intentos del mismo estudiante y otro participante",
+      "result": "passed"
+    },
+    {
+      "name": "No incorpora revisiones ni intentos de otra actividad",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no recibe revisión privada, solución ni guía",
+      "result": "passed"
+    },
+    {
+      "name": "Docente ajeno no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no aprobado no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Cliente teacher no puede invocar el helper privado",
+      "result": "passed"
+    },
+    {
+      "name": "Cliente a no puede invocar el helper privado",
+      "result": "passed"
+    },
+    {
+      "name": "Anónimo no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Conserva helper privado SECURITY DEFINER con search_path vacío",
+      "result": "passed"
+    }
+  ],
+  "baselineMigrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql"
+  ],
+  "migrationSha256": "75070a9dddba44f22a1b5e17af502d7662a0348f88402a5691b0f0a0e3be1b99",
+  "status": "passed",
+  "finishedAt": "2026-09-29T23:58:02.278Z",
+  "limitations": [
+    "Base en memoria con Auth/Storage mínimos; no sustituye JWT ni concurrencia real.",
+    "No mide latencia HTTP, ACK o capacidad Q-06.",
+    "Se normaliza únicamente reloj state.revision y orden no contractual de la lista externa de intentos; preguntas, respuestas y revisiones se comparan en su orden original."
+  ]
+}

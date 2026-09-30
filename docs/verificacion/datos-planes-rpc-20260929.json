@@ -1,0 +1,2070 @@
+{
+  "observedAt": "2026-09-29T23:54:26.436Z",
+  "scope": "Lecturas SQL acotadas y comparación de una variante SELECT; no carga ni modificación remota de esquema o datos de negocio.",
+  "metadata": [
+    {
+      "observed_at": "2026-09-29 23:38:50.572941+00",
+      "server_version": "17.6",
+      "statement_tracking": "top",
+      "function_tracking": "none",
+      "max_connections": "60",
+      "statement_extension_schema": "extensions"
+    }
+  ],
+  "statementStatistics": [
+    {
+      "rpc": "aulify_snapshot",
+      "normalized_statements": 1,
+      "calls": 3820,
+      "total_exec_ms": "1543646.93",
+      "weighted_mean_exec_ms": "404.096",
+      "max_exec_ms": "5837.968",
+      "rows": 3820,
+      "shared_blks_hit": 10676255,
+      "shared_blks_read": 10,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "stats_reset": "2026-09-28 02:56:33.711057+00"
+    },
+    {
+      "rpc": "aulify_sync",
+      "normalized_statements": 1,
+      "calls": 54969,
+      "total_exec_ms": "1010656.45",
+      "weighted_mean_exec_ms": "18.386",
+      "max_exec_ms": "5347.290",
+      "rows": 54969,
+      "shared_blks_hit": 4554210,
+      "shared_blks_read": 0,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "stats_reset": "2026-09-28 02:56:33.711057+00"
+    },
+    {
+      "rpc": "aulify_activity_snapshot",
+      "normalized_statements": 1,
+      "calls": 3660,
+      "total_exec_ms": "397355.68",
+      "weighted_mean_exec_ms": "108.567",
+      "max_exec_ms": "1303.487",
+      "rows": 3660,
+      "shared_blks_hit": 3298243,
+      "shared_blks_read": 0,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "stats_reset": "2026-09-28 02:56:33.711057+00"
+    },
+    {
+      "rpc": "aulify_command",
+      "normalized_statements": 1,
+      "calls": 5994,
+      "total_exec_ms": "395714.16",
+      "weighted_mean_exec_ms": "66.018",
+      "max_exec_ms": "7545.861",
+      "rows": 5994,
+      "shared_blks_hit": 1344833,
+      "shared_blks_read": 19,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "stats_reset": "2026-09-28 02:56:33.711057+00"
+    }
+  ],
+  "jit": [
+    {
+      "rpc": "aulify_snapshot",
+      "calls": 3820,
+      "jit_functions": 0,
+      "jit_generation_ms": "0.000",
+      "jit_emission_ms": "0.000",
+      "jit_optimization_ms": "0.000"
+    },
+    {
+      "rpc": "aulify_sync",
+      "calls": 54969,
+      "jit_functions": 0,
+      "jit_generation_ms": "0.000",
+      "jit_emission_ms": "0.000",
+      "jit_optimization_ms": "0.000"
+    },
+    {
+      "rpc": "aulify_activity_snapshot",
+      "calls": 3660,
+      "jit_functions": 0,
+      "jit_generation_ms": "0.000",
+      "jit_emission_ms": "0.000",
+      "jit_optimization_ms": "0.000"
+    },
+    {
+      "rpc": "aulify_command",
+      "calls": 5994,
+      "jit_functions": 0,
+      "jit_generation_ms": "0.000",
+      "jit_emission_ms": "0.000",
+      "jit_optimization_ms": "0.000"
+    }
+  ],
+  "originLogWindow": {
+    "from": "2026-09-29T23:03:15Z",
+    "to": "2026-09-29T23:04:18Z",
+    "unit": "Campo origin_time bruto; unidad no verificada en fuente primaria durante esta revisión.",
+    "aggregate": [
+      {
+        "entries": 386,
+        "origin_max": 1841,
+        "origin_min": 25,
+        "origin_p50": 178,
+        "origin_p95": 1029,
+        "path": "/rest/v1/rpc/aulify_activity_snapshot",
+        "status": "200"
+      },
+      {
+        "entries": 220,
+        "origin_max": 1749,
+        "origin_min": 13,
+        "origin_p50": 141,
+        "origin_p95": 1013,
+        "path": "/rest/v1/rpc/aulify_command",
+        "status": "200"
+      },
+      {
+        "entries": 8773,
+        "origin_max": 2116,
+        "origin_min": 6,
+        "origin_p50": 15,
+        "origin_p95": 120,
+        "path": "/rest/v1/rpc/aulify_sync",
+        "status": "200"
+      }
+    ]
+  },
+  "fixture": {
+    "participants": 50,
+    "attempts": 50,
+    "questions": 10,
+    "identityValidated": [
+      {
+        "expected_teacher": true,
+        "student_membership": "approved"
+      }
+    ]
+  },
+  "syncStudentPlan": [
+    {
+      "QUERY PLAN": [
+        {
+          "Plan": {
+            "Node Type": "CTE Scan",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "CTE Name": "identity",
+            "Alias": "identity",
+            "Startup Cost": 0.01,
+            "Total Cost": 0.28,
+            "Plan Rows": 1,
+            "Plan Width": 32,
+            "Actual Startup Time": 135.529,
+            "Actual Total Time": 135.531,
+            "Actual Rows": 1,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 1866,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 2,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Result",
+                "Parent Relationship": "InitPlan",
+                "Subplan Name": "CTE identity",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.01,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 0.009,
+                "Actual Total Time": 0.01,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 0,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.082,
+          "Triggers": [],
+          "Execution Time": 135.662
+        }
+      ]
+    }
+  ],
+  "syncTeacherPlan": [
+    {
+      "QUERY PLAN": [
+        {
+          "Plan": {
+            "Node Type": "CTE Scan",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "CTE Name": "identity",
+            "Alias": "identity",
+            "Startup Cost": 0.01,
+            "Total Cost": 0.28,
+            "Plan Rows": 1,
+            "Plan Width": 32,
+            "Actual Startup Time": 32.516,
+            "Actual Total Time": 32.518,
+            "Actual Rows": 1,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 1923,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 1,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Result",
+                "Parent Relationship": "InitPlan",
+                "Subplan Name": "CTE identity",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.01,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 0.009,
+                "Actual Total Time": 0.01,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 0,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.078,
+          "Triggers": [],
+          "Execution Time": 32.673
+        }
+      ]
+    }
+  ],
+  "teacherProjectionFunctionPlan": [
+    {
+      "QUERY PLAN": [
+        {
+          "Plan": {
+            "Node Type": "Result",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 0,
+            "Total Cost": 0.26,
+            "Plan Rows": 1,
+            "Plan Width": 32,
+            "Actual Startup Time": 223.638,
+            "Actual Total Time": 223.638,
+            "Actual Rows": 1,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 4474,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning": {
+            "Shared Hit Blocks": 0,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.074,
+          "Triggers": [],
+          "Execution Time": 224.186
+        }
+      ]
+    }
+  ],
+  "teacherProjection": {
+    "equivalence": [
+      {
+        "equivalent_complete_projection": true,
+        "baseline_attempts": 50,
+        "candidate_attempts": 50,
+        "baseline_json_bytes": 122038,
+        "candidate_json_bytes": 122038
+      }
+    ],
+    "baseline": {
+      "planningMs": 8.1,
+      "executionMs": 301.899,
+      "nodes": [
+        {
+          "node": "Aggregate",
+          "startup": 300.011,
+          "total": 300.05,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 472,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 295.956,
+          "total": 296.052,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 472,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 293.025,
+          "total": 293.086,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 472,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 267.411,
+          "total": 267.411,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 266.451,
+          "total": 267.371,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE answers",
+          "startup": 266.448,
+          "total": 267.272,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 266.41,
+          "total": 266.419,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 265.512,
+          "total": 266.307,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 370,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 265.435,
+          "total": 266.212,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 368,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 134.803,
+          "total": 134.804,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 129.833,
+          "total": 134.762,
+          "rows": 50,
+          "loops": 1,
+          "removed": 450,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "subplan": "CTE assigned",
+          "startup": 129.826,
+          "total": 134.306,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 130.609,
+          "total": 131.346,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE reviews",
+          "startup": 130.607,
+          "total": 131.308,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 130.523,
+          "total": 130.532,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 124.823,
+          "total": 130.458,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "question_grades",
+          "startup": 0.045,
+          "total": 80.722,
+          "rows": 8824,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "responses",
+          "startup": 0.803,
+          "total": 60.524,
+          "rows": 3114,
+          "loops": 1,
+          "sharedHits": 88,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 39.482,
+          "total": 39.484,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 2.587,
+          "total": 39.092,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "attempt_questions",
+          "index": "attempt_questions_attempt_id_position_key",
+          "startup": 0.774,
+          "total": 0.777,
+          "rows": 10,
+          "loops": 50,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 25.593,
+          "total": 25.618,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 96,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 24.694,
+          "total": 24.695,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 14.477,
+          "total": 24.65,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "subplan": "CTE base",
+          "startup": 14.473,
+          "total": 24.59,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 14.415,
+          "total": 24.437,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 43,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 14.355,
+          "total": 24.311,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 40,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "attempts",
+          "startup": 0.713,
+          "total": 14.403,
+          "rows": 1092,
+          "loops": 1,
+          "sharedHits": 22,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 8.467,
+          "total": 8.479,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 18,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.135,
+          "total": 8.448,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 18,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "memberships",
+          "startup": 0.019,
+          "total": 8.274,
+          "rows": 251,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 2.908,
+          "total": 2.909,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.49,
+          "total": 2.778,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE orders",
+          "startup": 0.484,
+          "total": 2.62,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE extensions",
+          "startup": 0.863,
+          "total": 0.865,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.864,
+          "total": 0.864,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.859,
+          "total": 0.861,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "deadline_extensions",
+          "startup": 0.79,
+          "total": 0.792,
+          "rows": 4,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.506,
+          "total": 0.506,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 0.434,
+          "total": 0.494,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.378,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.002,
+          "total": 0.106,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "attempt_resolutions",
+          "index": "attempt_resolutions_pkey",
+          "startup": 0.002,
+          "total": 0.002,
+          "rows": 0,
+          "loops": 50,
+          "sharedHits": 50,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.087,
+          "total": 0.088,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 0.058,
+          "total": 0.066,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 3,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "participants",
+          "startup": 0.042,
+          "total": 0.065,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.052,
+          "total": 0.053,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.038,
+          "total": 0.039,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "powerup_uses",
+          "startup": 0.031,
+          "total": 0.034,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "quiz_settings",
+          "startup": 0.029,
+          "total": 0.032,
+          "rows": 1,
+          "loops": 1,
+          "removed": 75,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "activities",
+          "index": "activities_pkey",
+          "startup": 0.027,
+          "total": 0.031,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "participants_activity_id_alias_no_key",
+          "startup": 0.029,
+          "total": 0.029,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "InitPlan 1",
+          "startup": 0.022,
+          "total": 0.025,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "deadline_extensions",
+          "startup": 0.018,
+          "total": 0.021,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.02,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "powerup_uses_pkey",
+          "startup": 0.015,
+          "total": 0.015,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "BitmapAnd",
+          "startup": 0.012,
+          "total": 0.013,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.002,
+          "total": 0.011,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "deadline_extensions_fk_1_idx",
+          "startup": 0.008,
+          "total": 0.008,
+          "rows": 4,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "deadline_extensions_fk_0_idx",
+          "startup": 0.003,
+          "total": 0.003,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        }
+      ]
+    },
+    "candidate": {
+      "planningMs": 6.753,
+      "executionMs": 13.911,
+      "nodes": [
+        {
+          "node": "Aggregate",
+          "startup": 12.536,
+          "total": 12.568,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 496,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "subplan": "CTE base",
+          "startup": 0.496,
+          "total": 0.998,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "InitPlan 1",
+          "startup": 0.018,
+          "total": 0.021,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "deadline_extensions",
+          "startup": 0.015,
+          "total": 0.017,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "BitmapAnd",
+          "startup": 0.013,
+          "total": 0.014,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "deadline_extensions_fk_1_idx",
+          "startup": 0.009,
+          "total": 0.009,
+          "rows": 4,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "deadline_extensions_fk_0_idx",
+          "startup": 0.002,
+          "total": 0.002,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 0.462,
+          "total": 0.869,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 43,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 0.06,
+          "total": 0.064,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 3,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "activities",
+          "index": "activities_pkey",
+          "startup": 0.026,
+          "total": 0.028,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "quiz_settings",
+          "startup": 0.031,
+          "total": 0.032,
+          "rows": 1,
+          "loops": 1,
+          "removed": 75,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.401,
+          "total": 0.794,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 40,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "attempts",
+          "startup": 0.015,
+          "total": 0.358,
+          "rows": 1092,
+          "loops": 1,
+          "sharedHits": 22,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.237,
+          "total": 0.24,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 18,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.134,
+          "total": 0.218,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 18,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "memberships",
+          "startup": 0.017,
+          "total": 0.059,
+          "rows": 251,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.088,
+          "total": 0.089,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "participants",
+          "startup": 0.048,
+          "total": 0.072,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "participants_activity_id_alias_no_key",
+          "startup": 0.027,
+          "total": 0.028,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "attempt_resolutions",
+          "index": "attempt_resolutions_pkey",
+          "startup": 0.002,
+          "total": 0.002,
+          "rows": 0,
+          "loops": 50,
+          "sharedHits": 50,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "subplan": "CTE assigned",
+          "startup": 2.061,
+          "total": 2.326,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "responses",
+          "startup": 0.02,
+          "total": 0.465,
+          "rows": 3114,
+          "loops": 1,
+          "sharedHits": 88,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.837,
+          "total": 0.841,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 0.038,
+          "total": 0.59,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0,
+          "total": 0.009,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "attempt_questions",
+          "index": "attempt_questions_attempt_id_position_key",
+          "startup": 0.006,
+          "total": 0.008,
+          "rows": 10,
+          "loops": 50,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "subplan": "CTE reviews",
+          "startup": 0.109,
+          "total": 1.763,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 161,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.648,
+          "rows": 50,
+          "loops": 1,
+          "removed": 450,
+          "sharedHits": 11,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "startup": 0.021,
+          "total": 0.022,
+          "rows": 1,
+          "loops": 50,
+          "sharedHits": 150,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "question_grades",
+          "index": "question_grades_attempt_question_id_revision_no_key",
+          "startup": 0.005,
+          "total": 0.006,
+          "rows": 1,
+          "loops": 50,
+          "sharedHits": 150,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE answers",
+          "startup": 4.333,
+          "total": 5.211,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 400,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 4.288,
+          "total": 4.299,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 400,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 4.039,
+          "total": 4.195,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 394,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 3.979,
+          "total": 4.115,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 392,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 2.065,
+          "total": 2.148,
+          "rows": 50,
+          "loops": 1,
+          "removed": 450,
+          "sharedHits": 231,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 1.886,
+          "total": 1.887,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 161,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.112,
+          "total": 1.853,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 161,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.029,
+          "total": 0.03,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "powerup_uses",
+          "startup": 0.019,
+          "total": 0.022,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "powerup_uses_pkey",
+          "startup": 0.007,
+          "total": 0.007,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE orders",
+          "startup": 0.472,
+          "total": 1.684,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 0.424,
+          "total": 0.471,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.105,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE extensions",
+          "startup": 0.077,
+          "total": 0.079,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.075,
+          "total": 0.076,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "deadline_extensions",
+          "startup": 0.019,
+          "total": 0.02,
+          "rows": 4,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.032,
+          "total": 0.033,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.009,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 8.499,
+          "total": 8.596,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 496,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 6.558,
+          "total": 6.622,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 496,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 1.187,
+          "total": 1.214,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 96,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.078,
+          "total": 0.078,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 1.084,
+          "total": 1.084,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.503,
+          "total": 1.051,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 5.342,
+          "total": 5.343,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 400,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 4.335,
+          "total": 5.302,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 400,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 1.919,
+          "total": 1.919,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.478,
+          "total": 1.817,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        }
+      ]
+    },
+    "baselineControl": {
+      "planningMs": 27.825,
+      "executionMs": 31.611,
+      "nodes": [
+        {
+          "node": "Aggregate",
+          "startup": 26.141,
+          "total": 26.169,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 472,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "subplan": "CTE base",
+          "startup": 1.577,
+          "total": 2.35,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "InitPlan 1",
+          "startup": 0.079,
+          "total": 0.082,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "deadline_extensions",
+          "startup": 0.077,
+          "total": 0.079,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "BitmapAnd",
+          "startup": 0.074,
+          "total": 0.076,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "deadline_extensions_fk_1_idx",
+          "startup": 0.035,
+          "total": 0.036,
+          "rows": 4,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "deadline_extensions_fk_0_idx",
+          "startup": 0.038,
+          "total": 0.038,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 1.438,
+          "total": 2.108,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 43,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 0.143,
+          "total": 0.147,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 3,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "activities",
+          "index": "activities_pkey",
+          "startup": 0.074,
+          "total": 0.075,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "quiz_settings",
+          "startup": 0.066,
+          "total": 0.068,
+          "rows": 1,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 1.293,
+          "total": 1.948,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 40,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "attempts",
+          "startup": 0.019,
+          "total": 0.814,
+          "rows": 1092,
+          "loops": 1,
+          "sharedHits": 22,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.913,
+          "total": 0.919,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 18,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.527,
+          "total": 0.893,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 18,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "memberships",
+          "startup": 0.08,
+          "total": 0.402,
+          "rows": 251,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.419,
+          "total": 0.42,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "participants",
+          "startup": 0.13,
+          "total": 0.397,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 9,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "participants_activity_id_alias_no_key",
+          "startup": 0.081,
+          "total": 0.081,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "attempt_resolutions",
+          "index": "attempt_resolutions_pkey",
+          "startup": 0.002,
+          "total": 0.002,
+          "rows": 0,
+          "loops": 50,
+          "sharedHits": 50,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "subplan": "CTE assigned",
+          "startup": 6.074,
+          "total": 6.781,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "responses",
+          "startup": 0.047,
+          "total": 2.233,
+          "rows": 3114,
+          "loops": 1,
+          "sharedHits": 88,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 2.512,
+          "total": 2.513,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Nested Loop",
+          "startup": 0.14,
+          "total": 2.201,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.012,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Index Scan",
+          "relation": "attempt_questions",
+          "index": "attempt_questions_attempt_id_position_key",
+          "startup": 0.034,
+          "total": 0.041,
+          "rows": 10,
+          "loops": 50,
+          "sharedHits": 154,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE reviews",
+          "startup": 6.944,
+          "total": 7.708,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 6.244,
+          "total": 6.253,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 5.833,
+          "total": 6.187,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "question_grades",
+          "startup": 0.045,
+          "total": 3.311,
+          "rows": 8824,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.238,
+          "total": 0.239,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.086,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE answers",
+          "startup": 16.785,
+          "total": 17.659,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 16.748,
+          "total": 16.759,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 14.496,
+          "total": 15.365,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 370,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 14.315,
+          "total": 15.165,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 368,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 6.947,
+          "total": 7.753,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 126,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 7.341,
+          "total": 7.342,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 6.079,
+          "total": 7.304,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 242,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.159,
+          "total": 0.16,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Heap Scan",
+          "relation": "powerup_uses",
+          "startup": 0.133,
+          "total": 0.136,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 2,
+          "diskReads": 0
+        },
+        {
+          "node": "Bitmap Index Scan",
+          "index": "powerup_uses_pkey",
+          "startup": 0.073,
+          "total": 0.073,
+          "rows": 13,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE orders",
+          "startup": 0.609,
+          "total": 1.842,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Sort",
+          "startup": 0.559,
+          "total": 0.604,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.002,
+          "total": 0.184,
+          "rows": 500,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Aggregate",
+          "subplan": "CTE extensions",
+          "startup": 0.147,
+          "total": 0.149,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 0.144,
+          "total": 0.146,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Seq Scan",
+          "relation": "deadline_extensions",
+          "startup": 0.085,
+          "total": 0.086,
+          "rows": 4,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 0.03,
+          "total": 0.031,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.001,
+          "total": 0.01,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 22.541,
+          "total": 22.623,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 472,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 20.446,
+          "total": 20.5,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 472,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash Join",
+          "startup": 2.613,
+          "total": 2.637,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 96,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.148,
+          "total": 0.148,
+          "rows": 0,
+          "loops": 1,
+          "sharedHits": 1,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 2.434,
+          "total": 2.435,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 1.581,
+          "total": 2.402,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 95,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 17.8,
+          "total": 17.801,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 16.787,
+          "total": 17.753,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 376,
+          "diskReads": 0
+        },
+        {
+          "node": "Hash",
+          "startup": 2.074,
+          "total": 2.075,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        },
+        {
+          "node": "CTE Scan",
+          "startup": 0.614,
+          "total": 1.979,
+          "rows": 50,
+          "loops": 1,
+          "sharedHits": 0,
+          "diskReads": 0
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Estadísticas acumuladas desde28septiembre; incluyen distintas migraciones y no aíslan el sondeo16.",
+    "EXPLAIN aislados sin concurrencia: no prueban p95Q06.",
+    "Los tiempos de scans no modificados también variaron; no atribuir una mejora porcentual fija al cambio.",
+    "La proyección completa se comparó ordenando sólo el array externo de intentos por id; el resto del JSON se conservó.",
+    "Auth y dispatcher no cambiaron; el SDK no reintenta automáticamente RPC POST."
+  ],
+  "q06": "pendiente"
+}
