@@ -1,10 +1,10 @@
 # Despliegue y operación
 
-Estado al 30 de septiembre: proyecto Aulify creado en Vercel Hobby, con variables configuradas y sin despliegue verificado. Los resultados locales y de CI se conservan en el [estado del desarrollo](../estado-del-desarrollo.md). El dominio propio se resolverá por separado.
+Estado al 30 de septiembre: Aulify dispone de una [vista previa HTTPS verificada](../verificacion/vista-previa-https.md) en Vercel Hobby, protegida con Vercel Authentication. Se comprobó acceso de ambos roles y persistencia de un borrador con Supabase. Producción continúa pendiente. El dominio propio se resolverá por separado.
 
 ## Configuración realizada
 
-El proyecto reserva `aulify-cubefreaklab.vercel.app` como dirección de producción. La dirección inicial del proveedor se conserva mediante una redirección. El panel todavía muestra «No Deployment»; reservar una dirección no significa que la aplicación esté publicada.
+El proyecto reserva `aulify-cubefreaklab.vercel.app` como dirección de producción. La dirección inicial del proveedor se conserva mediante una redirección. La vista previa tiene su propia URL y no se promovió a ese dominio. El despliegue `dpl_4KGmpDfwJEdA91hYu1fDWxjB7LSz` corresponde a `27e4df6` y figura Ready.
 
 Se guardaron `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` como configuración de producción y vistas previas. `NEXT_PUBLIC_SITE_URL` corresponde al origen HTTPS previsto, únicamente en producción. `SUPABASE_SECRET_KEY` se guardó con tipo **Secret**, sólo en producción, sin un valor legible después de guardar. Los archivos temporales de importación contenían exclusivamente estas variables y se eliminaron tras la operación; no forman parte de Git.
 

@@ -12,6 +12,8 @@ La integración conecta las pantallas a Supabase con permisos y archivos reales.
 
 El [CI 36669578313](https://github.com/CubeFreaKLab/aulify/actions/runs/36669578313) aprobó `1194382`, con veintidós migraciones, 151 pruebas y 88 recorridos de Chromium sin reintentos; las 24 ejecuciones autenticadas omitidas tienen evidencia independiente. El [ensayo individual completo](docs/verificacion/carga-individual-20260930.md) conservó respuestas, pero incumplió latencia y falló al leer algunos resultados. El modo guiado quedó sin ejecutar. Los resultados históricos se conservan por revisión y los criterios de liberación continúan abiertos.
 
+El candidato posterior `27e4df6` tiene CI aprobado con 157 pruebas y 88 recorridos, además de una [vista previa HTTPS comprobada](docs/verificacion/vista-previa-https.md). Se verificaron acceso de ambos roles, persistencia de borrador y resultados estudiantiles. Esto aporta evidencia a T-21; no cierra producción, correo ni capacidad. El [diagnóstico de 128 conexiones](docs/verificacion/diagnostico-transporte-128.md) termina sin fallos, pero incumple la latencia objetivo, por lo que T-20 permanece abierta.
+
 | ID | Tarea | Requisitos | Depende de | Evidencia para completar |
 |---|---|---|---|---|
 | T-01 | Comprobar Supabase Free, despliegue, correo y acceso privado a datos y archivos | RF-01, RF-02, RF-10, RNF-03, RNF-04 | — | Prueba con cuentas ficticias, RLS y Storage comprobados, recuperación por SMTP y transporte de sincronización evaluados frente a cuotas y carga objetivo. |

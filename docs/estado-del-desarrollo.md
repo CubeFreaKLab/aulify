@@ -5,10 +5,10 @@ Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación com
 ## Versión y servicios
 
 - Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintitrés migraciones locales y remotas; la última es `20260930051014_aulify_completion_grade_existence.sql`.
-- Compilado local: `Dzy7Hs2R-JSbzneQEdYCi`, con transporte acotado a 128 conexiones y doce segundos por operación al servicio. El historial se conserva y las preguntas completas se cargan al abrir cada actividad.
-- Último CI comprobado: [36672505350](https://github.com/CubeFreaKLab/aulify/actions/runs/36672505350), aprobado sobre `d41e381`. Incluye las veintitrés migraciones: 151 pruebas unitarias, 85 comprobaciones generales de datos, 26 de proyección docente, 32 del resumen y 88 recorridos de navegador aprobados; 24 casos autenticados se omiten en este entorno y no hubo casos inestables. Los pasos, revisiones y huellas de los registros descargados se conservan en el [registro de integración](verificacion/ci-integracion.json).
+- Compilado local: `ou5DbbEjvpmQk0PkLvYqG`, revisión de aplicación `27e4df6`, con transporte acotado a 128 conexiones y doce segundos por operación al servicio. El historial se conserva y las preguntas completas se cargan al abrir cada actividad. Las cookies de sesión reconocen HTTPS en las vistas previas de Vercel.
+- Último CI comprobado: [36675862768](https://github.com/CubeFreaKLab/aulify/actions/runs/36675862768), aprobado sobre `27e4df6`. Incluye las veintitrés migraciones: 157 pruebas unitarias, 85 comprobaciones generales de datos, 26 de proyección docente, 32 del resumen y 88 recorridos de navegador aprobados; 24 casos autenticados se omiten en este entorno y no hubo casos inestables. Los pasos, revisiones y huellas de los registros descargados se conservan en el [registro de integración](verificacion/ci-integracion.json).
 - Supabase continúa en Free. El [registro de cuotas](verificacion/cuotas-supabase-20260929.md) distingue consumo mostrado y estimaciones del ejecutor.
-- Vercel Hobby tiene un proyecto preparado con variables de entorno. Todavía no hay una publicación verificada; el [procedimiento de despliegue](operacion/despliegue.md) distingue preparación, candidato y producción.
+- Vercel Hobby tiene una [vista previa HTTPS verificada](verificacion/vista-previa-https.md), protegida con Vercel Authentication. Ambos roles acceden a Supabase y el borrador docente persiste al recargar. El [procedimiento de despliegue](operacion/despliegue.md) distingue esta comprobación de la liberación de producción, aún pendiente.
 
 `/demo` ofrece una clase ficticia en el navegador. `/aula` exige sesión de Supabase y utiliza operaciones autorizadas de PostgreSQL y archivos privados de Storage.
 
@@ -35,7 +35,7 @@ Figma reúne veintidós vistas, cinco composiciones de ayuda y un catálogo de c
 
 | Área | Evidencia disponible | Límite de la conclusión |
 |---|---|---|
-| Compilación y dominio | Último lote local: 151 pruebas en diecisiete archivos y construcción aprobadas; integración continua con revisión exacta. | Los conteos pertenecen a sus ejecuciones; no se suman como escenarios independientes. |
+| Compilación y dominio | CI de `27e4df6`: 157 pruebas en dieciocho archivos y construcción aprobadas; revisión exacta desplegada en Preview. | Los conteos pertenecen a sus ejecuciones; no se suman como escenarios independientes. |
 | Permisos e integración | [45 comprobaciones de Supabase real](verificacion/datos-remotos.md), más recorridos posteriores de [reconexión y confirmación](verificacion/integracion-resiliencia.json). | No sustituyen correo, despliegue público ni capacidad sostenida. |
 | Sincronización | [Proyección acotada](verificacion/datos-proyeccion-actividad-estudiante-remota.md), [contexto de actividad](verificacion/sync-contexto-local.md) y [reintento de descarga](verificacion/sincronizacion-proyeccion-reintento.md). | Lecturas correctas y reducción de trabajo no garantizan los umbrales con 200 estudiantes. |
 | Evaluación y juego | [Publicación y participación](verificacion/juego-aceptacion.md), [revisión docente](verificacion/datos-revision-participante.md) y [distribución de resultados](verificacion/resultados-distribucion.md). | Se conserva el entorno y versión de cada ensayo. |
@@ -46,7 +46,7 @@ Figma reúne veintidós vistas, cinco composiciones de ayuda y un catálogo de c
 | Recuperación | [Nueve comprobaciones aisladas](verificacion/recuperacion-aislada.md) con datos ficticios. | No es una restauración operativa de Supabase Auth, base de datos y Storage. |
 | Accesibilidad | Recorridos de teclado, foco, reflujo y análisis axe en los lotes identificados. | No acredita conformidad completa con WCAG ni evaluación con personas. |
 
-Los escenarios AC/AP y sus evidencias se consultan en la [matriz de trazabilidad](calidad/trazabilidad.md). El CI actual aprobó 151 pruebas y 88 recorridos de Chromium sin reintentos. Veinticuatro ejecuciones autenticadas se omiten en CI y mantienen su evidencia separada; no se consideran aprobadas por omisión. Los registros descargados sustentan los recuentos.
+Los escenarios AC/AP y sus evidencias se consultan en la [matriz de trazabilidad](calidad/trazabilidad.md). El CI actual aprobó 157 pruebas y 88 recorridos de Chromium sin reintentos. Veinticuatro ejecuciones autenticadas se omiten en CI y mantienen su evidencia separada; no se consideran aprobadas por omisión. Los registros descargados sustentan los recuentos.
 
 ## Rendimiento
 
@@ -58,7 +58,7 @@ La [medición individual de quince minutos](verificacion/carga-individual-202609
 
 La [migración 23](verificacion/completitud-existencia.md) simplifica la detección de revisión pendiente: 32 comprobaciones específicas y 85 generales aprobadas localmente y en el CI citado; cien intentos remotos sin diferencias. Las lecturas HTTP de 24 cuentas aprobaron dos pasadas con concurrencia ocho. No modifica el envío de respuestas ni acredita capacidad sostenida.
 
-Un [diagnóstico posterior de la cola](verificacion/cola-transporte-20260930.md), todavía con el pool de 64, se detuvo por acumulación de esperas. Conservó las 486 respuestas confirmadas y encontró otras 114 persistidas sin acuse a tiempo. El ajuste posterior a 128 conexiones y doce segundos pasó 154 pruebas locales y la construcción; necesita su propia medición y CI. No cambia los criterios de liberación.
+Un [diagnóstico posterior de la cola](verificacion/cola-transporte-20260930.md), todavía con el pool de 64, se detuvo por acumulación de esperas. Conservó las 486 respuestas confirmadas y encontró otras 114 persistidas sin acuse a tiempo. El [ensayo con 128 conexiones](verificacion/diagnostico-transporte-128.md) completó cinco minutos, 59.259 solicitudes y 2.000 respuestas sin errores ni pérdida, además de publicar y consultar doscientas notas. Su p95 de confirmación fue 3.047,92 ms: sigue sin cumplir la meta. No se ejecutaron las fases de quince minutos ni el modo guiado; los criterios de liberación no cambian.
 
 ## Pendientes de liberación
 
