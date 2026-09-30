@@ -71,4 +71,66 @@ describe('transporte acotado al servicio de datos', () => {
       await new Promise<void>((resolve) => server.close(() => resolve()));
     }
   });
+
+  it('retira un comando cancelado de la cola sin enviarlo después', async () => {
+    const received: string[] = [];
+    let started!: () => void;
+    let release!: () => void;
+    const firstStarted = new Promise<void>((resolve) => (started = resolve));
+    const hold = new Promise<void>((resolve) => (release = resolve));
+    const server = createServer(async (request, response) => {
+      let body = '';
+      for await (const chunk of request) body += chunk;
+      received.push(body);
+      if (body === 'first') {
+        started();
+        await hold;
+      }
+      response.end('ok');
+    });
+    await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+    const origin = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    const transport = createBoundedTransport(origin, 1);
+    try {
+      const first = transport.fetch(origin, { method: 'POST', body: 'first' });
+      await firstStarted;
+      const controller = new AbortController();
+      const cancelled = transport.fetch(origin, {
+        method: 'POST',
+        body: 'cancelled',
+        signal: controller.signal,
+      });
+      const rejection = expect(cancelled).rejects.toMatchObject({ name: 'AbortError' });
+      controller.abort();
+      await rejection;
+      release();
+      await (await first).text();
+      await (await transport.fetch(origin, { method: 'POST', body: 'after' })).text();
+      expect(received).toEqual(['first', 'after']);
+    } finally {
+      release();
+      await transport.close();
+      await new Promise<void>((resolve) => server.close(() => resolve()));
+    }
+  });
+
+  it('limita la espera de un POST lento sin reenviarlo', async () => {
+    let received = 0;
+    const server = createServer(() => {
+      received++;
+    });
+    await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+    const origin = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    const transport = createBoundedTransport(origin, 1, 200);
+    try {
+      await expect(transport.fetch(origin, { method: 'POST', body: 'slow' })).rejects.toMatchObject(
+        { name: 'TimeoutError' },
+      );
+      expect(received).toBe(1);
+    } finally {
+      await transport.close();
+      server.closeAllConnections();
+      await new Promise<void>((resolve) => server.close(() => resolve()));
+    }
+  });
 });

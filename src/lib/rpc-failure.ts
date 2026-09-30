@@ -40,7 +40,9 @@ export function classifyRpcFailure(error: unknown, upstreamStatus?: number): Rpc
     field(error, 'name') === 'TimeoutError' ||
     timeoutCode.test(String(causeCode ?? code ?? '')) ||
     // El SDK conserva el código de la causa dentro de details al normalizar un fallo de fetch.
-    (upstreamStatus === 0 && timeoutCode.test(String(field(error, 'details') ?? '')))
+    (upstreamStatus === 0 &&
+      (timeoutCode.test(String(field(error, 'details') ?? '')) ||
+        String(field(error, 'message') ?? '').startsWith('TimeoutError:')))
   )
     return { status: 503, category: 'transport_timeout' };
   if (

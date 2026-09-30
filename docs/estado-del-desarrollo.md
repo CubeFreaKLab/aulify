@@ -5,8 +5,8 @@ Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación com
 ## Versión y servicios
 
 - Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintitrés migraciones locales y remotas; la última es `20260930051014_aulify_completion_grade_existence.sql`.
-- Compilado local: `P6WDnTpFwNCt3ILdxXorb`, con la consulta general resumida de la migración 22. El historial se conserva y las preguntas completas se cargan al abrir cada actividad.
-- Último CI comprobado: [36669578313](https://github.com/CubeFreaKLab/aulify/actions/runs/36669578313), aprobado sobre `1194382`. Incluye las veintidós migraciones y el resumen del aula. No se atribuye ese resultado a revisiones posteriores. Los pasos y revisiones observados se conservan en el [registro de integración](verificacion/ci-integracion.json).
+- Compilado local: `Dzy7Hs2R-JSbzneQEdYCi`, con transporte acotado a 128 conexiones y doce segundos por operación al servicio. El historial se conserva y las preguntas completas se cargan al abrir cada actividad.
+- Último CI comprobado: [36672505350](https://github.com/CubeFreaKLab/aulify/actions/runs/36672505350), aprobado sobre `d41e381`. Incluye las veintitrés migraciones: 151 pruebas unitarias, 85 comprobaciones generales de datos, 26 de proyección docente, 32 del resumen y 88 recorridos de navegador aprobados; 24 casos autenticados se omiten en este entorno y no hubo casos inestables. Los pasos, revisiones y huellas de los registros descargados se conservan en el [registro de integración](verificacion/ci-integracion.json).
 - Supabase continúa en Free. El [registro de cuotas](verificacion/cuotas-supabase-20260929.md) distingue consumo mostrado y estimaciones del ejecutor.
 - Vercel Hobby tiene un proyecto preparado con variables de entorno. Todavía no hay una publicación verificada; el [procedimiento de despliegue](operacion/despliegue.md) distingue preparación, candidato y producción.
 
@@ -56,7 +56,9 @@ El ejecutor ahora separa tiempos de preparación, servicio de datos y respuesta 
 
 La [medición individual de quince minutos](verificacion/carga-individual-20260930.md), ya con la migración 22, conservó las 2.000 respuestas sin duplicaciones y registró 174.364 solicitudes sin fallos en esa ventana. Su p95 de confirmación fue de 2.665,11 ms, superior a la meta. Después fallaron tres de las 84 lecturas de resultados iniciadas; el modo guiado no comenzó. Q-06 y Q-09 permanecen abiertos. No se repite el ensayo completo sin una corrección justificada.
 
-La [migración 23](verificacion/completitud-existencia.md) simplifica la detección de revisión pendiente: 32 comprobaciones específicas y 85 generales locales aprobadas; cien intentos remotos sin diferencias. Las lecturas HTTP de 24 cuentas aprobaron dos pasadas con concurrencia ocho. No modifica el envío de respuestas ni acredita capacidad sostenida. El último CI citado arriba corresponde a la revisión previa; la nueva función requiere su propia ejecución.
+La [migración 23](verificacion/completitud-existencia.md) simplifica la detección de revisión pendiente: 32 comprobaciones específicas y 85 generales aprobadas localmente y en el CI citado; cien intentos remotos sin diferencias. Las lecturas HTTP de 24 cuentas aprobaron dos pasadas con concurrencia ocho. No modifica el envío de respuestas ni acredita capacidad sostenida.
+
+Un [diagnóstico posterior de la cola](verificacion/cola-transporte-20260930.md), todavía con el pool de 64, se detuvo por acumulación de esperas. Conservó las 486 respuestas confirmadas y encontró otras 114 persistidas sin acuse a tiempo. El ajuste posterior a 128 conexiones y doce segundos pasó 154 pruebas locales y la construcción; necesita su propia medición y CI. No cambia los criterios de liberación.
 
 ## Pendientes de liberación
 

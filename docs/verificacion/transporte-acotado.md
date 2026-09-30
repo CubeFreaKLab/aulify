@@ -1,8 +1,8 @@
 # Conexiones reutilizables hacia Supabase
 
-La aplicación utiliza un pool de **hasta 64 conexiones HTTP/1.1 por origen e instancia del módulo de servidor**, con una solicitud activa por conexión y conservación de conexiones ociosas hasta treinta segundos, sujeta a lo indicado por el servicio. Undici 7.30.0 queda fijado en el archivo de dependencias. No se modifica el dispatcher global de Node ni se comparte información de autenticación: cada solicitud conserva sus propias cabeceras, cuerpo y cancelación.
+La aplicación utiliza un pool de **hasta 128 conexiones HTTP/1.1 por origen e instancia del módulo de servidor**, con una solicitud activa por conexión y conservación de conexiones ociosas hasta treinta segundos, sujeta a lo indicado por el servicio. Cada operación al servicio tiene un plazo de doce segundos, combinado con la cancelación del llamador. Undici 7.30.0 queda fijado en el archivo de dependencias. No se modifica el dispatcher global de Node ni se comparte información de autenticación: cada solicitud conserva sus propias cabeceras y cuerpo.
 
-El cambio se aplica al cliente Supabase de las rutas de servidor. El proxy mantiene su transporte anterior. El pool se reutiliza entre solicitudes a un mismo origen, rechaza destinos distintos y no incorpora un mecanismo de reenvío de comandos. No equivale a limitar a 64 conexiones toda una instalación con varios procesos o funciones.
+El cambio se aplica al cliente Supabase de las rutas de servidor. El proxy mantiene su transporte anterior. El pool se reutiliza entre solicitudes a un mismo origen, rechaza destinos distintos y no incorpora un mecanismo de reenvío de comandos. No equivale a limitar a 128 conexiones toda una instalación con varios procesos o funciones. La [revisión posterior](cola-transporte-20260930.md) explica el aumento desde 64 y el plazo; las mediciones históricas siguientes pertenecen al límite anterior.
 
 ## Motivo y límite de la decisión
 

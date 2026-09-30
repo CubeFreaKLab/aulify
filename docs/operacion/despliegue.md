@@ -10,7 +10,7 @@ Se guardaron `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
 La conexión con `CubeFreaKLab/aulify` está guardada. Se seleccionaron el preset Next.js, Node.js 24 y la máquina Basic del plan Hobby. El control de GitHub **Tipos, reglas y recorridos de demostración** quedó añadido con comportamiento **Blocking** para producción. Se identificó usando una revisión con CI aprobado, sin atribuir ese aprobado a revisiones posteriores.
 
-Mientras se corrige el rendimiento, el paso de compilación ignorada permanece en **Don’t build anything** (`exit 0`). Antes de preparar el candidato debe volver a Automatic, conservando el control bloqueante. La comprobación en interfaz acredita configuración; aún falta observar una promoción detenida por un resultado pendiente/fallido y otra habilitada por el resultado correcto. No se activaron planes de pago ni SMTP.
+Mientras se corrige el rendimiento, el paso de compilación ignorada permite **Only build pre-production**: compila vistas previas y omite producción. Las vistas previas conservan **Vercel Authentication / Standard Protection**. Antes de preparar la promoción debe volver a Automatic, conservando el control bloqueante. La comprobación en interfaz acredita configuración; aún falta observar una promoción detenida por un resultado pendiente/fallido y otra habilitada por el resultado correcto. No se activaron planes de pago ni SMTP.
 
 ## Región y servicios
 

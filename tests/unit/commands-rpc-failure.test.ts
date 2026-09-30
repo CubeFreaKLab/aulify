@@ -152,6 +152,26 @@ describe('errores RPC de comandos', () => {
     });
   });
 
+  it('clasifica el plazo agotado normalizado por el SDK sin confirmar ni repetir la escritura', async () => {
+    const transport = vi.fn(async () => {
+      throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
+    });
+    const client = createClient('https://unit.supabase.co', 'fictitious-publishable-key', {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: { fetch: transport },
+    });
+    mocks.rpc.mockImplementation((name, payload) => client.rpc(name, payload));
+    const response = await POST(request());
+    expect(response.status).toBe(503);
+    expect(response.headers.get('Retry-After')).toBe('30');
+    expect((await response.json()).error).toContain('No pudimos confirmar el cambio');
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(console.warn).toHaveBeenCalledWith('aulify.command.rpc_failure', {
+      category: 'transport_timeout',
+      durationMs: expect.any(Number),
+    });
+  });
+
   it.each([
     [new TypeError('fetch failed'), 503, 'transport'],
     [new TypeError('Cannot read properties of undefined'), 500, 'internal'],

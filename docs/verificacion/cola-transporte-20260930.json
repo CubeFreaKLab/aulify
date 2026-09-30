@@ -1,0 +1,104 @@
+{
+  "at": "2026-09-30T05:39:41.502Z",
+  "compiledCommit": "db3b1ad5c9b2ac4a307bb491f2281a6eb0513096",
+  "build": "P6WDnTpFwNCt3ILdxXorb",
+  "migrations": 23,
+  "instrumentationSha256": "510004c409d294d43b63a25ee2eedd15355920cef52b8b754c0fe165c9d81fa7",
+  "limitations": [
+    "Diagnóstico HTTP local con Supabase remoto; no aprueba Q-06.",
+    "Sondeo de estadísticas de Undici cada 100 ms; la instrumentación puede introducir sobrecarga.",
+    "La cola observada no aísla todos los costos de red o base de datos.",
+    "Las solicitudes canceladas por el cliente pueden haber persistido antes de la cancelación."
+  ],
+  "runs": [
+    {
+      "source": "datos-protocolo-60s-20260930052247.json",
+      "sha256": "d7e7e0bdc81fdc6a6a48776116b72a31f58425214507e8d36da60b4e682310a2",
+      "start": "2026-09-30T05:28:18.979Z",
+      "end": "2026-09-30T05:29:19.162Z",
+      "status": "completed",
+      "confirmationP95Ms": 695.9256000000169,
+      "integrity": {
+        "persisted": 200,
+        "confirmed": 200,
+        "missingOrChangedConfirmed": 0
+      },
+      "requests": {
+        "sync": {
+          "count": 10796,
+          "failed": 0,
+          "p95Ms": 1075.6897999999928
+        },
+        "snapshot": {
+          "count": 410,
+          "failed": 0,
+          "p95Ms": 2853.859999999986
+        },
+        "answer": {
+          "count": 200,
+          "failed": 0,
+          "p95Ms": 695.8894000000437
+        }
+      },
+      "pool": {
+        "connections": 64,
+        "sampleIntervalMs": 100,
+        "samples": 579,
+        "pendingMax": 161,
+        "pendingP95": 125,
+        "queuedMax": 152,
+        "atCapacitySamples": 100
+      }
+    },
+    {
+      "source": "datos-carga-20260930053101.json",
+      "sha256": "967716ce0b05b169b3d6e1743a6c73d44650ae2ce6491499d55bb5bab63ecb26",
+      "start": "2026-09-30T05:32:03.161Z",
+      "end": "2026-09-30T05:34:11.175Z",
+      "status": "stopped-at-safety-limit",
+      "confirmationP95Ms": 4605.15,
+      "integrity": {
+        "expectedAnswers": 2000,
+        "persistedAnswers": 600,
+        "confirmedAnswers": 486,
+        "missingOrChangedConfirmed": 0,
+        "duplicateQuestions": 0
+      },
+      "requests": {
+        "sync": {
+          "count": 10916,
+          "failed": 530,
+          "statuses": {
+            "0": 530,
+            "200": 10386
+          }
+        },
+        "snapshot": {
+          "count": 670,
+          "failed": 32,
+          "statuses": {
+            "0": 32,
+            "200": 638
+          }
+        },
+        "submitAnswer": {
+          "count": 828,
+          "failed": 342,
+          "statuses": {
+            "0": 342,
+            "200": 486
+          }
+        }
+      },
+      "pool": {
+        "connections": 64,
+        "sampleIntervalMs": 100,
+        "samples": 1215,
+        "pendingMax": 676,
+        "pendingP95": 560,
+        "queuedMax": 676,
+        "atCapacitySamples": 804
+      }
+    }
+  ]
+}
