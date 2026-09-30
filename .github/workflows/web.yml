@@ -22,6 +22,8 @@ on:
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
         'tools/datos/load-workers*.mjs',
+        'tools/datos/load-target*.mjs',
+        'tools/datos/load-protocol.mjs',
         'tools/datos/visibility-retention-check.mjs',
         'tools/datos/administrative-close-check.mjs',
         'package.json',
@@ -52,6 +54,8 @@ on:
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
         'tools/datos/load-workers*.mjs',
+        'tools/datos/load-target*.mjs',
+        'tools/datos/load-protocol.mjs',
         'tools/datos/visibility-retention-check.mjs',
         'tools/datos/administrative-close-check.mjs',
         'package.json',
@@ -102,6 +106,8 @@ jobs:
         run: node --test tools/datos/server-timing.test.mjs tools/datos/server-timing-aggregate.test.mjs
       - name: Rechazar aprobación de carga con muestras incompletas
         run: node --test tools/datos/load-criteria.test.mjs tools/datos/load-workers.test.mjs
+      - name: Restringir el destino y las credenciales de las pruebas de carga
+        run: node --test tools/datos/load-target.test.mjs
       - name: Verificar retención desde el cierre efectivo
         run: node tools/datos/visibility-retention-check.mjs
       - name: Verificar retiro, resolución y restauración
