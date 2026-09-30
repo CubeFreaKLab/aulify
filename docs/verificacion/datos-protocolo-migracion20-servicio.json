@@ -1,0 +1,40 @@
+{
+  "window": {
+    "start": "2026-09-30T01:30:24Z",
+    "end": "2026-09-30T01:31:26Z"
+  },
+  "source": "Supabase unified edge_logs, agregado posterior al ensayo",
+  "field": "response.origin_time",
+  "unit": "Unidad no confirmada; valor bruto del proveedor, no tiempo SQL.",
+  "rows": [
+    {
+      "max_origin_time": 1420,
+      "mean_origin_time": 138.40728323699423,
+      "p95_origin_time": 207,
+      "path": "/rest/v1/rpc/aulify_sync",
+      "requests": 8650,
+      "status": "200"
+    },
+    {
+      "max_origin_time": 1241,
+      "mean_origin_time": 415.0201149425287,
+      "p95_origin_time": 954,
+      "path": "/rest/v1/rpc/aulify_activity_snapshot",
+      "requests": 348,
+      "status": "200"
+    },
+    {
+      "max_origin_time": 737,
+      "mean_origin_time": 266.81592039800995,
+      "p95_origin_time": 540,
+      "path": "/rest/v1/rpc/aulify_command",
+      "requests": 201,
+      "status": "200"
+    }
+  ],
+  "limitations": [
+    "No correlaciona solicitudes individuales del generador.",
+    "La ventana incluye solicitudes adyacentes; no comparar percentiles restándolos.",
+    "No identifica la espera de red, conexiones, autenticación o ejecución Next.js."
+  ]
+}
