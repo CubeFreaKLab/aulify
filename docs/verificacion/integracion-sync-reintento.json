@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "scope": "Integración focal de navegador sobre cuentas ficticias existentes; no prueba de carga.",
+  "baseUrl": "http://127.0.0.1:3001",
+  "buildId": "kWhdsczTz0VM4q1tEx6j6",
+  "buildVerifiedOnDiskAndServedBeforeRun": true,
+  "projectRef": "bnqyyumfmyexsqszglab",
+  "migrationAtRun": "20260930011205",
+  "command": "node node_modules/@playwright/test/cli.js test tests/e2e/integrado.spec.ts --grep \"responde, reintenta sin duplicar\" --project chromium-escritorio --workers 1 --retries 0 --reporter=json",
+  "environment": {
+    "AULIFY_REMOTE_E2E": "1",
+    "PLAYWRIGHT_BASE_URL": "http://127.0.0.1:3001",
+    "workers": 1,
+    "retries": 0
+  },
+  "stats": {
+    "startTime": "2026-09-30T01:14:47.307Z",
+    "duration": 17776.027,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "responde, reintenta sin duplicar, avanza sin otra consulta y retoma el intento",
+      "project": "chromium-escritorio",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "startedAt": "2026-09-30T01:14:47.764Z",
+          "durationMs": 17134,
+          "retry": 0,
+          "errorCount": 0,
+          "attachmentCount": 0
+        }
+      ]
+    }
+  ],
+  "rawReportSha256": "a55827afa545194ea68d3d0b21d23790aea905e64259615b096a7d90b6ac5875",
+  "sourceHashesObservedAfterRun": {
+    "src/demo/store.ts": "f8825db693420e8eb16c051c0be5d2cd0d02f8e067f5d5eb769d74f6bdea0905",
+    "tests/e2e/integrado.spec.ts": "c4d8d273bf7b86fe647b22eaf2a007fff9030ae1840e95a37969f94566832819"
+  },
+  "observedChecks": [
+    "Proyección de actividad acotada y sin recursos ajenos.",
+    "Primer ACK sustituido por503; reenvío manual conserva la misma clave idempotente.",
+    "La interfaz avanza con el ACK recibido mientras una lectura anterior sigue retenida.",
+    "Al liberar aquella lectura no retrocede la pregunta ni reaparece el potenciador consumido.",
+    "Recarga y reanudación del mismo intento.",
+    "Tres respuestas persistidas y cierre del intento sin duplicación.",
+    "Soluciones y revisiones privadas ausentes de la proyección estudiantil.",
+    "Proyección docente y navegación final a resultados correctas."
+  ],
+  "sideEffects": {
+    "accountsCreated": 0,
+    "credentialsChanged": false,
+    "existingFictitiousIdentitiesUsed": 2,
+    "fixtureDataCreated": "Recurso, versión, actividad e intento con respuestas mediante los comandos existentes."
+  },
+  "limitations": [
+    "Un caso en Chromium escritorio; no evalúa concurrencia ni latencia Q-06.",
+    "Este caso retrasa un snapshot antiguo e interrumpe un ACK. La secuencia específica sync200 + workspace503 + misma revisión se verificó en la prueba unitaria separada.",
+    "Sin capturas, vídeo ni trazas en este caso aprobado.",
+    "No se compiló, reinició o modificó código durante la ejecución."
+  ]
+}

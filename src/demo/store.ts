@@ -58,7 +58,11 @@ export function getWorkspaceExtras(): WorkspaceExtras {
 let snapshot: DemoSnapshot | null = null;
 let repository: WorkspaceRepository | null = null;
 let remote: ServerSnapshot | null = null;
-let refreshPending: Promise<void> | null = null;
+type RefreshResult =
+  | { status: 'applied'; generation: number; projectionEpoch: number }
+  | { status: 'superseded' }
+  | { status: 'failed'; error: unknown };
+let refreshPending: Promise<RefreshResult> | null = null;
 let activeMode: boolean | null = null;
 let activeActivityScope: string | null = null;
 let generation = 0;
@@ -269,28 +273,35 @@ async function hydrate(live: boolean, activityScope: string | null = null) {
   }
 }
 export async function refreshDemo() {
-  if (!repository) return;
+  // Las llamadas existentes conservan el error visible sin recibir un rechazo sin manejar.
+  await refreshProjection();
+}
+async function refreshProjection(): Promise<RefreshResult> {
+  if (!repository) return { status: 'superseded' };
   if (!activeMode) {
     if (snapshot) {
       try {
         snapshot = { ...snapshot, state: repository.load() };
         emit();
+        return { status: 'applied', generation, projectionEpoch };
       } catch (error) {
         showError(error);
+        return { status: 'failed', error };
       }
     }
-    return;
+    return { status: 'superseded' };
   }
   if (refreshPending) return refreshPending;
   const currentGeneration = generation;
   const currentProjection = projectionEpoch;
-  refreshPending = (async () => {
+  refreshPending = (async (): Promise<RefreshResult> => {
     try {
       const url = activeActivityScope
         ? `/api/workspace?activity=${encodeURIComponent(activeActivityScope)}`
         : '/api/workspace';
       const data = await requestJson<ServerSnapshot>(url);
-      if (currentGeneration !== generation || currentProjection !== projectionEpoch) return;
+      if (currentGeneration !== generation || currentProjection !== projectionEpoch)
+        return { status: 'superseded' };
       remote = data;
       snapshot = {
         state: data.state,
@@ -300,8 +311,15 @@ export async function refreshDemo() {
         message: snapshot?.message || null,
       };
       emit();
+      return {
+        status: 'applied',
+        generation: currentGeneration,
+        projectionEpoch: currentProjection,
+      };
     } catch (error) {
-      if (currentGeneration === generation) showError(error);
+      if (currentGeneration !== generation) return { status: 'superseded' };
+      showError(error);
+      return { status: 'failed', error };
     } finally {
       if (currentGeneration === generation) refreshPending = null;
     }
@@ -420,20 +438,32 @@ export function useDemo() {
         return;
       }
       syncing = true;
+      const currentGeneration = generation;
       try {
         const value = await requestJson<{ revision: string }>(
           `/api/sync?activity=${encodeURIComponent(activityId)}`,
         );
-        if (cancelled) return;
+        if (cancelled || currentGeneration !== generation) return;
         const recovering = failures > 0;
+        if (revision !== value.revision || recovering) {
+          // Una lectura anterior al sondeo no demuestra que esta revisión esté proyectada.
+          if (refreshPending) return;
+          const refreshed = await refreshProjection();
+          if (refreshed.status === 'failed') throw refreshed.error;
+          if (
+            cancelled ||
+            refreshed.status !== 'applied' ||
+            currentGeneration !== generation ||
+            refreshed.generation !== generation ||
+            refreshed.projectionEpoch !== projectionEpoch
+          )
+            return;
+          revision = value.revision;
+        }
         failures = 0;
         retryAt = 0;
-        if (revision !== value.revision || recovering) {
-          revision = value.revision;
-          await refreshDemo();
-        }
       } catch (error) {
-        if (cancelled) return;
+        if (cancelled || currentGeneration !== generation) return;
         if (error instanceof WorkspaceHttpError && [401, 403].includes(error.status)) {
           authorizationLost = true;
           generation++;
