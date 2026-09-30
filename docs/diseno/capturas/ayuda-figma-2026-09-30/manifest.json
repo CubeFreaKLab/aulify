@@ -1,0 +1,281 @@
+{
+  "date": "2026-09-30",
+  "fileKey": "96LeZKgvvAvsYetQEbTrBC",
+  "referenceBuild": "NJgfZnpvHJ7YBpHn4hEBZ",
+  "sourceManifest": "../ayuda-2026-09-30/manifest.json",
+  "visualReview": "passed",
+  "theme": "light",
+  "editable": true,
+  "imagesEmbedded": 0,
+  "screens": [
+    {
+      "id": "108:4318",
+      "name": "Ayuda / Docente / Invitación · Escritorio · Claro",
+      "w": 1440,
+      "h": 900,
+      "counts": {
+        "FRAME": 68,
+        "INSTANCE": 11,
+        "GROUP": 2,
+        "VECTOR": 314,
+        "TEXT": 40,
+        "ELLIPSE": 1,
+        "RECTANGLE": 2
+      },
+      "fonts": [
+        "Inter"
+      ],
+      "images": []
+    },
+    {
+      "id": "108:4757",
+      "name": "Ayuda / Estudiante / Invitación · Escritorio · Claro",
+      "w": 1440,
+      "h": 900,
+      "counts": {
+        "FRAME": 61,
+        "INSTANCE": 10,
+        "GROUP": 2,
+        "VECTOR": 305,
+        "TEXT": 35,
+        "ELLIPSE": 1,
+        "RECTANGLE": 2
+      },
+      "fonts": [
+        "Inter"
+      ],
+      "images": []
+    },
+    {
+      "id": "108:7630",
+      "name": "Ayuda / Docente / Paso 4 · Móvil · Claro",
+      "w": 390,
+      "h": 844,
+      "counts": {
+        "FRAME": 37,
+        "VECTOR": 273,
+        "TEXT": 28,
+        "INSTANCE": 10,
+        "RECTANGLE": 1
+      },
+      "fonts": [
+        "Inter"
+      ],
+      "images": []
+    },
+    {
+      "id": "108:7980",
+      "name": "Ayuda / Estudiante / Paso 4 · Móvil · Claro",
+      "w": 390,
+      "h": 844,
+      "counts": {
+        "FRAME": 37,
+        "VECTOR": 273,
+        "TEXT": 27,
+        "INSTANCE": 9,
+        "RECTANGLE": 1
+      },
+      "fonts": [
+        "Inter"
+      ],
+      "images": []
+    },
+    {
+      "id": "110:3036",
+      "name": "Ayuda / Estudiante / Intento activo · Móvil · Claro",
+      "w": 390,
+      "h": 1160,
+      "counts": {
+        "FRAME": 31,
+        "INSTANCE": 7,
+        "GROUP": 2,
+        "VECTOR": 22,
+        "TEXT": 21
+      },
+      "fonts": [
+        "Inter"
+      ],
+      "images": []
+    },
+    {
+      "id": "110:3830",
+      "name": "Ayuda / Recorridos y estados · Versión 2",
+      "w": 1220,
+      "h": 1036,
+      "counts": {
+        "TEXT": 46,
+        "FRAME": 33,
+        "INSTANCE": 17
+      },
+      "fonts": [
+        "Inter"
+      ],
+      "images": []
+    }
+  ],
+  "preservation": [
+    {
+      "page": "40:855",
+      "preserved": [
+        {
+          "id": "46:2",
+          "ok": true
+        },
+        {
+          "id": "47:204",
+          "ok": true
+        },
+        {
+          "id": "47:716",
+          "ok": true
+        },
+        {
+          "id": "47:1546",
+          "ok": true
+        },
+        {
+          "id": "47:1628",
+          "ok": true
+        },
+        {
+          "id": "47:1958",
+          "ok": true
+        },
+        {
+          "id": "57:582",
+          "ok": true
+        },
+        {
+          "id": "88:626",
+          "ok": true
+        },
+        {
+          "id": "88:627",
+          "ok": true
+        },
+        {
+          "id": "98:1055",
+          "ok": true
+        },
+        {
+          "id": "98:1056",
+          "ok": true
+        },
+        {
+          "id": "98:1057",
+          "ok": true
+        }
+      ],
+      "help": [
+        {
+          "id": "108:4318",
+          "name": "Ayuda / Docente / Invitación · Escritorio · Claro",
+          "w": 1440,
+          "h": 900
+        },
+        {
+          "id": "108:4757",
+          "name": "Ayuda / Estudiante / Invitación · Escritorio · Claro",
+          "w": 1440,
+          "h": 900
+        }
+      ]
+    },
+    {
+      "page": "40:856",
+      "preserved": [
+        {
+          "id": "48:2",
+          "ok": true
+        },
+        {
+          "id": "48:128",
+          "ok": true
+        },
+        {
+          "id": "91:2273",
+          "ok": true
+        },
+        {
+          "id": "91:2274",
+          "ok": true
+        },
+        {
+          "id": "91:2275",
+          "ok": true
+        },
+        {
+          "id": "91:2276",
+          "ok": true
+        },
+        {
+          "id": "98:1664",
+          "ok": true
+        },
+        {
+          "id": "98:1665",
+          "ok": true
+        },
+        {
+          "id": "98:1666",
+          "ok": true
+        },
+        {
+          "id": "98:1667",
+          "ok": true
+        }
+      ],
+      "help": [
+        {
+          "id": "108:7630",
+          "name": "Ayuda / Docente / Paso 4 · Móvil · Claro",
+          "w": 390,
+          "h": 844
+        },
+        {
+          "id": "108:7980",
+          "name": "Ayuda / Estudiante / Paso 4 · Móvil · Claro",
+          "w": 390,
+          "h": 844
+        },
+        {
+          "id": "110:3036",
+          "name": "Ayuda / Estudiante / Intento activo · Móvil · Claro",
+          "w": 390,
+          "h": 1160
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Static editable states; no complete interactive prototype",
+    "Contextual dashboard backgrounds reconstructed from native elements with minor secondary differences",
+    "Light-theme visual review only"
+  ],
+  "captures": [
+    {
+      "filename": "docente-ofrecimiento-escritorio.png",
+      "sha256": "a098a275b8d63728c69cee5745a03a208edf9611ff7c6b65f1f3802bbe60c42a"
+    },
+    {
+      "filename": "docente-paso4-movil.png",
+      "sha256": "a6c277eb25f9fd7353553523055d5a04c3702778289b08116410c663d869a1c5"
+    },
+    {
+      "filename": "estudiante-ayuda-estatica-quiz-movil.png",
+      "sha256": "11c6479b88bb4e69be805499ea7559544e091c4d79523417c073e3def1340e1b"
+    },
+    {
+      "filename": "estudiante-ofrecimiento-escritorio.png",
+      "sha256": "499a72a6357e554623da260c7a3d7b6c49c89631c7a700c6bb3051a272995b49"
+    },
+    {
+      "filename": "estudiante-paso4-movil.png",
+      "sha256": "04031b757ddffb86900a80fd6f03d5a4205a60d121ab592bc16f9103a3621852"
+    },
+    {
+      "filename": "recorridos-estados.png",
+      "sha256": "d1a6a08ff723cdcf4790644f398b5bdcc9543dafb9261de6a0a1540b8a9c79bc"
+    }
+  ]
+}
