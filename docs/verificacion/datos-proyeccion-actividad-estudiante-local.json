@@ -1,0 +1,268 @@
+{
+  "startedAt": "2026-09-30T01:04:37.803Z",
+  "environment": "PGlite en memoria; datos ficticios; sin red, credenciales ni DDL remoto.",
+  "baselineCutoff": "20260930000631",
+  "checks": [
+    {
+      "name": "OID, ACL, volatilidad, SECURITY DEFINER y search_path privado conservados",
+      "result": "passed"
+    },
+    {
+      "name": "Sin participante: ocho variantes y preguntas seguras",
+      "result": "passed"
+    },
+    {
+      "name": "Orden de opciones sin intento depende del estudiante B",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot público completo sin participante",
+      "result": "passed"
+    },
+    {
+      "name": "Comando público readActivity conserva el contrato",
+      "result": "passed"
+    },
+    {
+      "name": "Participante sin intento",
+      "result": "passed"
+    },
+    {
+      "name": "Intento activo con opciones mezcladas y pregunta ordenada",
+      "result": "passed"
+    },
+    {
+      "name": "Orden explícito inverso de preguntas y opciones del intento",
+      "result": "passed"
+    },
+    {
+      "name": "item_order sin items usa orden por estudiante",
+      "result": "passed"
+    },
+    {
+      "name": "item_order con items vacío conserva arrays y orden legado",
+      "result": "passed"
+    },
+    {
+      "name": "Último intento de varios, respuesta y ambos potenciadores",
+      "result": "passed"
+    },
+    {
+      "name": "Intento cerrado y límite agotado no alteran proyección",
+      "result": "passed"
+    },
+    {
+      "name": "Plazo global cierra intento y genera ocho omisiones iguales",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot público al vencer conserva payload y efectos",
+      "result": "passed"
+    },
+    {
+      "name": "Tiempo individual vencido cierra intento",
+      "result": "passed"
+    },
+    {
+      "name": "Ampliación personal mantiene abierto el intento",
+      "result": "passed"
+    },
+    {
+      "name": "Sala guiada sin intento",
+      "result": "passed"
+    },
+    {
+      "name": "Sala guiada iniciada con intento y pregunta abierta",
+      "result": "passed"
+    },
+    {
+      "name": "Varios bloques quiz, dos grupos y merges de propiedades",
+      "result": "passed"
+    },
+    {
+      "name": "Bloques heading/text/list/video/image y editorDocument conservados",
+      "result": "passed"
+    },
+    {
+      "name": "Sin bloque quiz pero con preguntas persistidas",
+      "result": "passed"
+    },
+    {
+      "name": "Cero bloques conserva title/blocks/editorDocument null",
+      "result": "passed"
+    },
+    {
+      "name": "Quiz sin preguntas conserva questions vacío en raíz y bloque",
+      "result": "passed"
+    },
+    {
+      "name": "Lectura sin quiz, intentos ni configuración",
+      "result": "passed"
+    },
+    {
+      "name": "Versión nula mantiene proyección nula y array vacío",
+      "result": "passed"
+    },
+    {
+      "name": "Documento del editor SQL null",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz JSON no objeto (null) conserva forma legada",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz JSON no objeto ([]) conserva forma legada",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz JSON no objeto ([\"legado\"]) conserva forma legada",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz JSON no objeto (\"legado\") conserva forma legada",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz JSON no objeto (7) conserva forma legada",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz JSON no objeto (true) conserva forma legada",
+      "result": "passed"
+    },
+    {
+      "name": "Cuerpo quiz null y cero preguntas mantiene null interno legado",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad no publicada: mismo error privado",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad no publicada: mismo rechazo público",
+      "result": "passed"
+    },
+    {
+      "name": "Materia archivada denegada (helper)",
+      "result": "passed"
+    },
+    {
+      "name": "Materia en purga denegada (helper)",
+      "result": "passed"
+    },
+    {
+      "name": "Membresía retirada denegada (helper)",
+      "result": "passed"
+    },
+    {
+      "name": "Sin membresía denegado (helper)",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad ausente denegada (helper)",
+      "result": "passed"
+    },
+    {
+      "name": "Identificador nulo denegado (helper)",
+      "result": "passed"
+    },
+    {
+      "name": "Materia archivada denegada (snapshot)",
+      "result": "passed"
+    },
+    {
+      "name": "Materia en purga denegada (snapshot)",
+      "result": "passed"
+    },
+    {
+      "name": "Membresía retirada denegada (snapshot)",
+      "result": "passed"
+    },
+    {
+      "name": "Sin membresía denegado (snapshot)",
+      "result": "passed"
+    },
+    {
+      "name": "Actividad ausente denegada (snapshot)",
+      "result": "passed"
+    },
+    {
+      "name": "Identificador nulo denegado (snapshot)",
+      "result": "passed"
+    },
+    {
+      "name": "Docente ajeno no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Correo no confirmado no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Cliente autenticado sin UID no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Rol anónimo no accede al snapshot",
+      "result": "passed"
+    },
+    {
+      "name": "Estudiante no puede invocar helper privado directamente",
+      "result": "passed"
+    },
+    {
+      "name": "Docente no puede invocar helper privado directamente",
+      "result": "passed"
+    },
+    {
+      "name": "Snapshot docente no cambia",
+      "result": "passed"
+    },
+    {
+      "name": "Una llamada ordinaria elimina ocho serializaciones duplicadas de question_json (16 → 8)",
+      "result": "passed"
+    }
+  ],
+  "baselineMigrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql",
+    "20260930000631_aulify_teacher_review_projection.sql"
+  ],
+  "excludedMigrations": [
+    "20260930005228_aulify_sync_context_reads.sql"
+  ],
+  "migration": "20260930005141_aulify_student_activity_projection.sql",
+  "migrationSha256": "d3b41c91c645cf1ec69af3512fa9d638967037de0e108162c1cbabac33c80fb5",
+  "questionJsonCalls": {
+    "questionCount": 8,
+    "quizBlockCount": 1,
+    "baseline": 16,
+    "candidate": 8,
+    "method": "Wrapper contador sobre question_json sólo en la base de prueba, transacción revertida."
+  },
+  "status": "passed",
+  "finishedAt": "2026-09-30T01:04:40.443Z",
+  "limitations": [
+    "PGlite y stubs mínimos de Auth/Storage: no verifica JWT reales, concurrencia, HTTP, ACK ni capacidad Q-06.",
+    "La proyección privada se compara completa sin normalización. En el snapshot público sólo se excluye state.revision, reloj wall-clock ajeno al cambio; todos los arrays conservan su orden.",
+    "Los cierres se comparan bajo el mismo now() y desde un savepoint idéntico; los UUID nuevos de question_grades se omiten únicamente al comparar efectos internos, sin omitir payload.",
+    "Fixtures SQL de múltiples quizzes y cuerpos JSON no objeto cubren formas admitidas por el esquema aunque el publicador actual no las produce.",
+    "El contador prueba eliminación de trabajo duplicado en el caso ordinario; no mide ni atribuye reducción de latencia."
+  ]
+}

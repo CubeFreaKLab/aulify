@@ -17,6 +17,7 @@ on:
         'tools/datos/game-acceptance.mjs',
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
+        'tools/datos/student-activity-projection-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -40,6 +41,7 @@ on:
         'tools/datos/game-acceptance.mjs',
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
+        'tools/datos/student-activity-projection-check.mjs',
         'package.json',
         'package-lock.json',
         '*config*',
@@ -100,6 +102,8 @@ jobs:
         run: node tools/datos/participant-sync-check.mjs
       - name: Verificar equivalencia del contexto de sincronización
         run: node tools/datos/sync-context-check.mjs
+      - name: Verificar proyección y permisos de actividad estudiantil
+        run: node tools/datos/student-activity-projection-check.mjs
       - name: Construir aplicación
         run: npm run build
       - name: Preparar Chromium
@@ -117,6 +121,7 @@ jobs:
             docs/verificacion/datos-proyeccion-docente-aislada.json
             docs/verificacion/datos-proyeccion-revisiones-docente.json
             docs/verificacion/datos-sync-contexto-local.json
+            docs/verificacion/datos-proyeccion-actividad-estudiante-local.json
             docs/verificacion/conservacion-archivos-compartidos.json
             docs/verificacion/juego-aceptacion-aislada.json
           if-no-files-found: ignore
