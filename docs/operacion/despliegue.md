@@ -1,6 +1,16 @@
 # Despliegue y operación
 
-Estado: preparación versionada; no existe todavía una publicación verificada de la integración. Los resultados locales y de CI se conservan en [verificación web](../verificacion/integracion-web.md). El dominio propio se resolverá por separado.
+Estado al 30 de septiembre: proyecto Aulify creado en Vercel Hobby, con variables configuradas y sin despliegue verificado. Los resultados locales y de CI se conservan en el [estado del desarrollo](../estado-del-desarrollo.md). El dominio propio se resolverá por separado.
+
+## Configuración realizada
+
+El proyecto reserva `aulify-cubefreaklab.vercel.app` como dirección de producción. La dirección inicial del proveedor se conserva mediante una redirección. El panel todavía muestra «No Deployment»; reservar una dirección no significa que la aplicación esté publicada.
+
+Se guardaron `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` como configuración de producción y vistas previas. `NEXT_PUBLIC_SITE_URL` corresponde al origen HTTPS previsto, únicamente en producción. `SUPABASE_SECRET_KEY` se guardó con tipo **Secret**, sólo en producción, sin un valor legible después de guardar. Los archivos temporales de importación contenían exclusivamente estas variables y se eliminaron tras la operación; no forman parte de Git.
+
+La conexión con `CubeFreaKLab/aulify` está guardada. Se seleccionaron el preset Next.js, Node.js 24 y la máquina Basic del plan Hobby. El control de GitHub **Tipos, reglas y recorridos de demostración** quedó añadido con comportamiento **Blocking** para producción. Se identificó usando una revisión con CI aprobado, sin atribuir ese aprobado a revisiones posteriores.
+
+Mientras se corrige el rendimiento, el paso de compilación ignorada permanece en **Don’t build anything** (`exit 0`). Antes de preparar el candidato debe volver a Automatic, conservando el control bloqueante. La comprobación en interfaz acredita configuración; aún falta observar una promoción detenida por un resultado pendiente/fallido y otra habilitada por el resultado correcto. No se activaron planes de pago ni SMTP.
 
 ## Región y servicios
 
@@ -29,7 +39,7 @@ No importar una copia indiscriminada del entorno local. Separar vistas previas d
 4. Verificar el candidato por HTTPS: acceso, dos roles, incorporación, publicación, participación, revisión, notas y archivo privado. Registrar URL, revisión, entorno, fecha y resultado sin secretos.
 5. Promover únicamente cuando se cumplan los criterios de liberación. Registrar la versión anterior utilizable para volver atrás.
 
-Vercel permite condicionar la promoción a resultados de GitHub; esta configuración debe comprobarse en el servicio. Hasta entonces, Aulify tiene CI ejecutado y CD pendiente de puesta en operación. [Deployment Checks](https://vercel.com/docs/deployment-checks).
+Vercel permite condicionar la promoción a resultados de GitHub. El control está configurado, pero el ciclo completo todavía requiere comprobarse con un candidato real. Aulify mantiene CI ejecutado y CD pendiente de verificación operativa. Si la revisión candidata sólo cambia documentos y no dispara el flujo por sus filtros de rutas, ejecutar el flujo manualmente sobre esa revisión antes de promocionar. [Deployment Checks](https://vercel.com/docs/deployment-checks).
 
 ## Seguimiento y recuperación
 
