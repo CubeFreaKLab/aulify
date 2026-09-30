@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import { retryAfterMs } from './load-waits.mjs';
 import { loadCriteria } from './load-criteria.mjs';
+import { parallel } from './load-workers.mjs';
+import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
@@ -53,7 +55,12 @@ const saveCookies = async () => fs.writeFile(privatePath, JSON.stringify(Object.
 function setCookies(s, response) { for (const header of response.headers.getSetCookie()) { const pair = header.split(';', 1)[0], i = pair.indexOf('='); if (pair.slice(i + 1)) s.jar.set(pair.slice(0, i), pair.slice(i + 1)); else s.jar.delete(pair.slice(0, i)); } }
 function record(target, tag, status, ms, bytes) {
   totalRequests++; bodyBytes += bytes;
-  if (!target) return;
+  if (!target) {
+    const operation = (report.setupOperations ||= {})[tag] ||= {count:0,failed:0,statuses:{}};
+    operation.count++;operation.statuses[status]=(operation.statuses[status]||0)+1;
+    if(status<200||status>=300)operation.failed++;
+    return;
+  }
   const operation = target.operations[tag] ||= { count: 0, failed: 0, latencies: [], statuses: {} };
   operation.count++; operation.latencies.push(ms); operation.statuses[status] = (operation.statuses[status] || 0) + 1;
   target.requestCount++; if (status < 200 || status >= 300) { operation.failed++; target.failedRequests++; }
@@ -67,12 +74,11 @@ async function request(s, route, { method = 'GET', body, tag = route, metric = t
     const response = await fetch(base + route, { method, headers: { Cookie: [...s.jar].map(([k, v]) => `${k}=${v}`).join('; '), Origin: base, 'Sec-Fetch-Site': 'same-origin', ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(15_000) });
     setCookies(s, response); const text = await response.text();
     record(target, tag, response.status, performance.now() - start, Buffer.byteLength(text));
-    if (!response.ok) { const error = new Error(`HTTP_${response.status}`); error.recorded = true; error.status = response.status; error.retryAfterMs = retryAfterMs(response.headers.get('Retry-After')); throw error; }
+    if (!response.ok) { const error = new Error(`HTTP_${response.status}`); error.recorded = true; error.status = response.status; error.category=rpcFailureCategory(response.headers); error.tag=tag; error.retryAfterMs = retryAfterMs(response.headers.get('Retry-After')); throw error; }
     return { value: JSON.parse(text), elapsed: performance.now() - start };
-  } catch (error) { if (!error.recorded) record(target, tag, 0, performance.now() - start, 0); throw error; }
+  } catch (error) { if (!error.recorded) {record(target, tag, 0, performance.now() - start, 0);error.category=transportFailureCategory(error);error.tag=tag;} throw error; }
 }
 const command = async (s, action, ...args) => (await request(s, '/api/commands', { method: 'POST', body: { action, args }, tag: action })).value.result;
-async function parallel(items, limit, callback) { let index = 0; await Promise.all(Array.from({ length: Math.min(limit, items.length) }, async () => { while (index < items.length) { const i = index++; await callback(items[i], i); } })); }
 function needsTokenRefresh(s){try{let v=[...s.jar].filter(([k])=>k.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,v])=>v).join('');v=decodeURIComponent(v);if(v.startsWith('base64-'))v=Buffer.from(v.slice(7),'base64url').toString();return(JSON.parse(v).expires_at??0)*1000<Date.now()+90000;}catch{return true;}}
 async function prepareSessions() {
   let previousRenewal=0;
@@ -291,7 +297,7 @@ try {
   }
 } catch (error) {
   report.status = aborted ? 'stopped-at-safety-limit' : 'failed';
-  report.failure = { type: error.name, reason: abortReason || error.message.replace(/https?:\/\/\S+/g, '[URL]') };
+  report.failure = { type: error.name, reason: abortReason || error.message.replace(/https?:\/\/\S+/g, '[URL]'), operation:error.tag, category:error.category };
   console.error(`CARGA ${report.status}: ${report.failure.reason}`);
 } finally {
   clearInterval(monitor); loopDelay.disable();

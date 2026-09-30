@@ -20,6 +20,7 @@ on:
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
+        'tools/datos/load-workers*.mjs',
         'tools/datos/visibility-retention-check.mjs',
         'tools/datos/administrative-close-check.mjs',
         'package.json',
@@ -48,6 +49,7 @@ on:
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
+        'tools/datos/load-workers*.mjs',
         'tools/datos/visibility-retention-check.mjs',
         'tools/datos/administrative-close-check.mjs',
         'package.json',
@@ -97,7 +99,7 @@ jobs:
       - name: Verificar registro de tiempos sin datos privados
         run: node --test tools/datos/server-timing.test.mjs
       - name: Rechazar aprobación de carga con muestras incompletas
-        run: node --test tools/datos/load-criteria.test.mjs
+        run: node --test tools/datos/load-criteria.test.mjs tools/datos/load-workers.test.mjs
       - name: Verificar retención desde el cierre efectivo
         run: node tools/datos/visibility-retention-check.mjs
       - name: Verificar retiro, resolución y restauración

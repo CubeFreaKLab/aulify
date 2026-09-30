@@ -1,0 +1,164 @@
+{
+  "runId": "24930805-ca15-4c09-8d0b-0d3367d11733",
+  "startedAt": "2026-09-30T02:26:47.538Z",
+  "status": "failed",
+  "commit": "9d12a3f84479f430bedb41282c56d1df515fd617",
+  "compiledCommit": "02a6ab19d43f59de8fead653e131344038609d02",
+  "buildId": "9b84oYZaFQkaf5OmYT5AJ",
+  "environment": {
+    "application": "Next.js production local HTTP",
+    "base": "http://127.0.0.1:3001",
+    "database": "Supabase Free, PostgreSQL 17, sa-east-1",
+    "generator": {
+      "node": "v24.14.1",
+      "os": "win32 10.0.26220",
+      "cpu": "Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 34257453056
+    },
+    "activeSessions": 204,
+    "teachers": 4,
+    "students": 200,
+    "studentsPerClass": 50,
+    "questionsPerActivity": 10,
+    "pollingMs": 1000,
+    "polling": "GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional",
+    "warmupSeconds": 300,
+    "measurementSeconds": 900,
+    "logicalBodyBudgetBytes": 2500000000,
+    "confirmation": "ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.",
+    "preparation": "Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.",
+    "retryPolicy": {
+      "initialMs": 1000,
+      "maximumBackoffMs": 8000,
+      "respectsRetryAfter": true
+    },
+    "fixtureHistory": "Las cuentas conservan el calentamiento fallido previo; el primer grupo conserva además las actividades cerradas de las pruebas de concurrencia guiada. No se borró ese historial para reducir el costo de lectura."
+  },
+  "phases": [
+    {
+      "name": "individual-warmup",
+      "mode": "individual",
+      "stage": "warmup",
+      "targetSeconds": 300,
+      "startedAt": "2026-09-30T02:35:31.516Z",
+      "requestCount": 59256,
+      "failedRequests": 0,
+      "bodyBytes": 82617478,
+      "operations": {
+        "sync": {
+          "count": 54910,
+          "failed": 0,
+          "p50Ms": 287.63,
+          "p95Ms": 803.51,
+          "maxMs": 8773,
+          "statuses": {
+            "200": 54910
+          }
+        },
+        "snapshot": {
+          "count": 2346,
+          "failed": 0,
+          "p50Ms": 480.93,
+          "p95Ms": 2505.96,
+          "maxMs": 9827,
+          "statuses": {
+            "200": 2346
+          }
+        },
+        "submitAnswer": {
+          "count": 2000,
+          "failed": 0,
+          "p50Ms": 340.24,
+          "p95Ms": 2347.91,
+          "maxMs": 9080,
+          "statuses": {
+            "200": 2000
+          }
+        }
+      },
+      "skippedPollTicks": 5862,
+      "unsentAnswers": 0,
+      "unconfirmedAnswers": 0,
+      "unobservedConfirmations": 0,
+      "burst": null,
+      "completedAt": "2026-09-30T02:40:31.851Z",
+      "elapsedSeconds": 300.335,
+      "integrity": {
+        "expectedAnswers": 2000,
+        "persistedAnswers": 2000,
+        "confirmedAnswers": 2000,
+        "missingOrChangedConfirmed": 0,
+        "duplicateQuestions": 0
+      },
+      "publishAllElapsedMs": 7181,
+      "observedResultSamples": 200,
+      "resultsReadP95Ms": 1905.92,
+      "successfulAcknowledgementSamples": 2000,
+      "observedConfirmationSamples": 2000,
+      "observedPropagationSamples": 0,
+      "confirmationP95Ms": 2347.96,
+      "responseAckP95Ms": 2347.95,
+      "propagationP95Ms": null,
+      "failureRate": 0,
+      "criteria": {
+        "durationCompleted": true,
+        "confirmationP95": false,
+        "propagationP95": true,
+        "validRequestFailureRate": true,
+        "integrity": true,
+        "publishedResults": true,
+        "burst": true
+      }
+    }
+  ],
+  "authentication": {
+    "rateLimitWaits": 0,
+    "preparedSessions": 204
+  },
+  "limitations": [
+    "El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.",
+    "La aplicación está en una computadora local, no en el alojamiento público.",
+    "Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.",
+    "La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos."
+  ],
+  "buildChecks": [
+    {
+      "at": "2026-09-30T02:26:47.534Z",
+      "expectedBuild": "9b84oYZaFQkaf5OmYT5AJ",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    },
+    {
+      "at": "2026-09-30T02:35:20.153Z",
+      "expectedBuild": "9b84oYZaFQkaf5OmYT5AJ",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    },
+    {
+      "at": "2026-09-30T02:41:07.706Z",
+      "expectedBuild": "9b84oYZaFQkaf5OmYT5AJ",
+      "diskMatches": true,
+      "servedHtmlMatches": true
+    }
+  ],
+  "scriptSha256": "1a57ce8c192ba4036975c72b16826efe7467c9619ca4e4cde9ecf2d1ae2d16cf",
+  "expectedMigration": {
+    "path": "supabase/migrations/20260930011205_aulify_student_activity_projection.sql",
+    "sha256": "d3b41c91c645cf1ec69af3512fa9d638967037de0e108162c1cbabac33c80fb5"
+  },
+  "sourceDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "previousReport": "datos-carga-20260928-0811.md",
+  "failure": {
+    "type": "Error",
+    "reason": "HTTP_503"
+  },
+  "completedAt": "2026-09-30T02:41:22.273Z",
+  "generatorEventLoop": {
+    "p95Ms": 31.93,
+    "maxMs": 447.48
+  },
+  "observedApplicationBodyBytes": 128664286,
+  "totalRequests": 60079,
+  "conservativeEstimatedBytes": 318849468
+}

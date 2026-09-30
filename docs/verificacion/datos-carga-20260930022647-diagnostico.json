@@ -1,0 +1,125 @@
+{
+  "report": "datos-carga-20260930022647.json",
+  "databaseEvidence": {
+    "source": "Supabase MCP, consulta de solo lectura posterior al proceso",
+    "commandStatementStats": [
+      {
+        "calls": 10227,
+        "mean_ms": "54.775",
+        "max_ms": "7545.861",
+        "jit_functions": 0,
+        "jit_generation_ms": "0.000",
+        "jit_emission_ms": "0.000",
+        "query_prefix": "WITH pgrst_source AS (SELECT pgrst_call.pgrst_scalar FROM (SELECT $1 AS json_data) pgrst_payload, LATERAL (SELECT \"p_act"
+      },
+      {
+        "calls": 1,
+        "mean_ms": "1.260",
+        "max_ms": "1.260",
+        "jit_functions": 0,
+        "jit_generation_ms": "0.000",
+        "jit_emission_ms": "0.000",
+        "query_prefix": "create function public.aulify_command(p_action text,p_payload jsonb) returns jsonb language sql security invoker set sea"
+      },
+      {
+        "calls": 1,
+        "mean_ms": "0.220",
+        "max_ms": "0.220",
+        "jit_functions": 0,
+        "jit_generation_ms": "0.000",
+        "jit_emission_ms": "0.000",
+        "query_prefix": "revoke all on function public.aulify_command(text,jsonb),public.aulify_snapshot(),app.file(uuid),app.register_file(uuid,"
+      }
+    ],
+    "activityCounts": [
+      {
+        "title": "Carga individual · measurement · 24930805",
+        "participants": 50,
+        "attempts": 50
+      },
+      {
+        "title": "Carga individual · measurement · 24930805",
+        "participants": 46,
+        "attempts": 46
+      },
+      {
+        "title": "Carga individual · measurement · 24930805",
+        "participants": 50,
+        "attempts": 50
+      },
+      {
+        "title": "Carga individual · measurement · 24930805",
+        "participants": 50,
+        "attempts": 50
+      },
+      {
+        "title": "Carga individual · warmup · 24930805",
+        "participants": 50,
+        "attempts": 50
+      },
+      {
+        "title": "Carga individual · warmup · 24930805",
+        "participants": 50,
+        "attempts": 50
+      },
+      {
+        "title": "Carga individual · warmup · 24930805",
+        "participants": 50,
+        "attempts": 50
+      },
+      {
+        "title": "Carga individual · warmup · 24930805",
+        "participants": 50,
+        "attempts": 50
+      }
+    ]
+  },
+  "logs": {
+    "source": "Supabase unified logs, postgres_logs",
+    "start": "2026-09-30T02:41:00Z",
+    "end": "2026-09-30T02:41:45Z",
+    "sample": [
+      {
+        "at": "2026-09-30 02:41:22.480 UTC",
+        "code": "00000",
+        "context": "while locking tuple (8,36) in relation \"activities\"\nSQL statement \"SELECT 1 from app.activities where id=a for update\"\nPL/pgSQL function app.ensure_participant(uuid,uuid) line 3 at PERFORM\nPL/pgSQL function app.command(text,jsonb) line 93 at assignment\nSQL function \"aulify_command\" statement 1",
+        "detail": "Process holding the lock: 213757. Wait queue: 213756."
+      },
+      {
+        "at": "2026-09-30 02:41:22.748 UTC",
+        "code": "00000",
+        "context": "while locking tuple (8,36) in relation \"activities\"\nSQL statement \"SELECT 1 from app.activities where id=a for update\"\nPL/pgSQL function app.ensure_participant(uuid,uuid) line 3 at PERFORM\nPL/pgSQL function app.command(text,jsonb) line 93 at assignment\nSQL function \"aulify_command\" statement 1",
+        "detail": null
+      },
+      {
+        "at": "2026-09-30 02:41:22.749 UTC",
+        "code": "00000",
+        "context": "SQL statement \"SELECT 1 from app.activities where id=a for update\"\nPL/pgSQL function app.ensure_participant(uuid,uuid) line 3 at PERFORM\nPL/pgSQL function app.command(text,jsonb) line 93 at assignment\nSQL function \"aulify_command\" statement 1",
+        "detail": null
+      },
+      {
+        "at": "2026-09-30 02:41:23.139 UTC",
+        "code": "57014",
+        "context": "PL/pgSQL function app.begin_attempt(uuid,uuid,uuid) line 3 at statement block\nPL/pgSQL function app.command(text,jsonb) line 97 at assignment\nSQL function \"aulify_command\" statement 1",
+        "detail": null
+      },
+      {
+        "at": "2026-09-30 02:41:24.142 UTC",
+        "code": "00000",
+        "context": "while locking tuple (8,37) in relation \"activities\"\nSQL statement \"SELECT 1 from app.activities where id=a for update\"\nPL/pgSQL function app.ensure_participant(uuid,uuid) line 3 at PERFORM\nPL/pgSQL function app.command(text,jsonb) line 93 at assignment\nSQL function \"aulify_command\" statement 1",
+        "detail": "Process holding the lock: 213754. Wait queue: 213755."
+      },
+      {
+        "at": "2026-09-30 02:41:24.276 UTC",
+        "code": "00000",
+        "context": "while locking tuple (8,37) in relation \"activities\"\nSQL statement \"SELECT 1 from app.activities where id=a for update\"\nPL/pgSQL function app.ensure_participant(uuid,uuid) line 3 at PERFORM\nPL/pgSQL function app.command(text,jsonb) line 93 at assignment\nSQL function \"aulify_command\" statement 1",
+        "detail": null
+      }
+    ],
+    "limitations": [
+      "Muestra de seis entradas; no representa todos los registros de la ventana.",
+      "Los registros localizan esperas y cancelación; no identifican por sí solos la causa inicial que retuvo el bloqueo."
+    ]
+  },
+  "runnerLimitation": "Tras el primer rechazo de Promise.all, los otros trabajadores siguieron enviando solicitudes de preparación. Las métricas del calentamiento se cerraron antes y permanecen completas; los totales globales del archivo original no incluyen toda la preparación posterior. El generador ya fue corregido para detener el despacho y drenar solicitudes iniciadas antes de cerrar el informe."
+}
