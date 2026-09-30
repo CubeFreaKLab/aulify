@@ -11,6 +11,8 @@ import { performance, monitorEventLoopDelay } from 'node:perf_hooks';
 
 const base = process.env.AULIFY_LOAD_URL;
 const expectedBuild = process.env.AULIFY_EXPECTED_BUILD_ID;
+const diagnosticOnly = process.argv.includes('--diagnostic-individual');
+if (diagnosticOnly && process.argv.includes('--sessions-only')) throw new Error('Seleccionar un solo modo de ejecución.');
 if (base !== 'http://127.0.0.1:3001' || !expectedBuild) throw new Error('Definir servidor compilado 3001 y AULIFY_EXPECTED_BUILD_ID explícitamente.');
 const budgetBytes = Number(process.env.AULIFY_LOAD_BUDGET_BYTES || 1_000_000_000);
 if (!Number.isSafeInteger(budgetBytes) || budgetBytes < 1 || budgetBytes > 2_500_000_000) throw new Error('Presupuesto fuera del límite preventivo.');
@@ -33,6 +35,11 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: (await fs.readFile('.next/BUILD_ID','utf8')).trim(), environment: { application: 'Next.js production local HTTP', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', 'La aplicación está en una computadora local, no en el alojamiento público.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
 report.environment.confirmation = 'ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.';
 report.environment.logicalBodyBudgetBytes = budgetBytes;
+report.protocol = diagnosticOnly ? 'diagnostic-individual-warmup-and-next-preparation' : 'full-q06';
+if (diagnosticOnly) {
+  report.environment.measurementSeconds = 0;
+  report.limitations.push('Diagnóstico limitado: cinco minutos individuales y preparación de otra actividad. No ejecuta las mediciones de quince minutos ni el modo guiado; no puede aprobar Q-06.');
+}
 report.buildChecks = [initialBuildCheck];
 report.scriptSha256 = crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-run.mjs')).digest('hex');
 report.expectedMigration = {path:'supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql')).digest('hex')};
@@ -299,6 +306,17 @@ try {
   console.log(`CARGA: ${reportPath}; build ${expectedBuild}; presupuesto ${budgetBytes} bytes.`);
   await prepareSessions();
   if (process.argv.includes('--sessions-only')) { report.status = 'sessions-prepared'; await persist(); }
+  else if (diagnosticOnly) {
+    report.status = 'running-diagnostic';
+    await runPhase('individual', 'warmup', 300);
+    report.initialSetupOperations = summarizeOperations(report.setupOperations || {});
+    report.setupOperations = {};
+    report.nextPreparation = {startedAt:new Date().toISOString(),status:'running'};
+    await makeActivities('individual', 'diagnostic-next-preparation');
+    report.nextPreparation.completedAt = new Date().toISOString();
+    report.nextPreparation.status = 'completed';
+    report.status = 'diagnostic-completed-not-q06';
+  }
   else {
     report.status = 'running';
     for (const mode of ['individual', 'guided']) {
@@ -310,6 +328,7 @@ try {
     report.status = report.phases.filter(p => p.stage === 'measurement').every(p => Object.values(p.criteria).every(Boolean)) ? 'q06-passed-in-local-environment' : 'q06-failed-in-local-environment';
   }
 } catch (error) {
+  if (report.nextPreparation?.status === 'running') report.nextPreparation.status = 'failed';
   report.status = aborted ? 'stopped-at-safety-limit' : 'failed';
   report.failure = { type: error.name, reason: abortReason || error.message.replace(/https?:\/\/\S+/g, '[URL]'), operation:error.tag, category:error.category };
   console.error(`CARGA ${report.status}: ${report.failure.reason}`);
