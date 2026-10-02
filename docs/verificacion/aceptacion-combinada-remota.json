@@ -1,0 +1,264 @@
+{
+  "startedAt": "2026-10-02T21:40:41.791Z",
+  "revision": "4fa2c2dda6130f3d7e26c37e91272cd8f0c4279b",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "3c162f47719069a4370024007c8501509ec157357e943eee46d280427cd691a5"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AP-08 · mezcla y reconexión JWT",
+      "checks": [
+        {
+          "label": "Mismo conjunto de cuatro preguntas",
+          "result": "passed"
+        }
+      ],
+      "status": "failed",
+      "failure": {
+        "code": "ERR_ASSERTION",
+        "message": "A/B permanecen juntas y ordenadas\n\n0 !== 4\n"
+      }
+    },
+    {
+      "name": "AP-20 · equipos bloqueados y permisos en una ejecución",
+      "checks": [
+        {
+          "label": "teacher no cambia equipos tras iniciar",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "teacherOther no cambia equipos tras iniciar",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "student no cambia equipos tras iniciar",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "studentOther no cambia equipos tras iniciar",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Reparto automático también queda bloqueado",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Rechazos conservan equipos",
+          "result": "passed"
+        },
+        {
+          "label": "Clasificación estudiantil omite identidades ajenas y correos",
+          "result": "passed"
+        },
+        {
+          "label": "Docente ajeno no lee clasificación",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-25 · nota manual individual sin entregas inventadas",
+      "checks": [
+        {
+          "label": "Solo la nota del estudiante evaluado se publica",
+          "result": "passed"
+        },
+        {
+          "label": "No crea entregas de archivos",
+          "result": "passed"
+        },
+        {
+          "label": "No crea intentos de quiz",
+          "result": "passed"
+        },
+        {
+          "label": "Segundo estudiante sin nota ficticia",
+          "result": "passed"
+        },
+        {
+          "label": "Resultado pendiente excluido de la nota publicada",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-29 · retiro, evaluación/exclusión y reingreso",
+      "checks": [
+        {
+          "label": "Retiro revoca lectura",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Retiro revoca respuestas",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Retiro revoca lectura",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Retiro revoca respuestas",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Resolución exige motivo",
+          "result": "rejected-as-expected",
+          "code": "23514"
+        },
+        {
+          "label": "La omisión resuelta equivale a cero y no fabrica respuesta",
+          "result": "passed"
+        },
+        {
+          "label": "Exclusión impide fabricar una nota",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Reingreso no reabre el intento",
+          "result": "passed"
+        },
+        {
+          "label": "Solo se conserva la respuesta que existía",
+          "result": "passed"
+        },
+        {
+          "label": "No devuelve oportunidades consumidas",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Reingreso no reabre el intento",
+          "result": "passed"
+        },
+        {
+          "label": "Solo se conserva la respuesta que existía",
+          "result": "passed"
+        },
+        {
+          "label": "No devuelve oportunidades consumidas",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Pista y doble consumidos permanecen para ambos estudiantes",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-30 · archivo con intento abierto y plazo conservado",
+      "checks": [
+        {
+          "label": "Archivo revoca el acceso",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Restaurar conserva el cierre por archivo",
+          "result": "passed"
+        },
+        {
+          "label": "No amplía el plazo del intento",
+          "result": "passed"
+        },
+        {
+          "label": "No amplía el cierre general",
+          "result": "passed"
+        },
+        {
+          "label": "No restituye el intento consumido",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-28 · seguimiento desactivado sin eventos",
+      "checks": [
+        {
+          "label": "Servidor omite la señal desactivada",
+          "result": "passed"
+        },
+        {
+          "label": "No persiste eventos nuevos",
+          "result": "passed"
+        }
+      ],
+      "limitations": [
+        "Solo cubre seguimiento desactivado; retención y resolución mínima requieren su prueba separada."
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-37 · diez códigos inválidos y renovación con solicitud pendiente",
+      "checks": [
+        {
+          "label": "Código inválido 1",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 2",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 3",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        }
+      ],
+      "status": "failed",
+      "failure": {
+        "code": "ERR_ASSERTION",
+        "message": "Código inválido 4"
+      }
+    }
+  ],
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-02T21:41:15.124Z",
+  "status": "failed"
+}

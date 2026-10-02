@@ -1,0 +1,107 @@
+{
+  "startedAt": "2026-10-02T21:49:06.506Z",
+  "revision": "19e287fe5dfd9be718680bc99aa39f244ffbc255",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "8007b548760f279e6453bcf45e0c9ffc191b0f40b305e230d46e215dc75a550b"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AP-08 · mezcla y reconexión JWT",
+      "checks": [],
+      "status": "failed",
+      "failure": {
+        "code": "RATE_LIMIT",
+        "message": "Espera diez minutos antes de enviar otra solicitud."
+      }
+    },
+    {
+      "name": "AP-37 · diez códigos inválidos y renovación con solicitud pendiente",
+      "checks": [
+        {
+          "label": "Código inválido 1",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 2",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 3",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 4",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 5",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 6",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 7",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 8",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 9",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Código inválido 10",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Undécima comprobación limitada",
+          "result": "rejected-as-expected",
+          "code": "RATE_LIMIT"
+        },
+        {
+          "label": "Renovación cambia el código",
+          "result": "passed"
+        },
+        {
+          "label": "Conserva la solicitud pendiente original",
+          "result": "passed"
+        },
+        {
+          "label": "Solicitud anterior puede aprobarse después de renovar",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-02T21:49:16.213Z",
+  "status": "failed"
+}

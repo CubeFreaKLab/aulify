@@ -1,0 +1,64 @@
+{
+  "startedAt": "2026-10-02T21:53:07.434Z",
+  "revision": "19e287fe5dfd9be718680bc99aa39f244ffbc255",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "8007b548760f279e6453bcf45e0c9ffc191b0f40b305e230d46e215dc75a550b"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AP-08 · mezcla y reconexión JWT",
+      "checks": [
+        {
+          "label": "Mismo conjunto de cuatro preguntas",
+          "result": "passed"
+        },
+        {
+          "label": "A/B permanecen juntas y ordenadas",
+          "result": "passed"
+        },
+        {
+          "label": "Opciones conservan su conjunto",
+          "result": "passed"
+        },
+        {
+          "label": "Opciones conservan su conjunto",
+          "result": "passed"
+        },
+        {
+          "label": "Opciones conservan su conjunto",
+          "result": "passed"
+        },
+        {
+          "label": "Opciones conservan su conjunto",
+          "result": "passed"
+        },
+        {
+          "label": "Explicación asociada a la pregunta mezclada",
+          "result": "passed"
+        },
+        {
+          "label": "Nueva sesión recupera el mismo intento y plazo",
+          "result": "passed"
+        },
+        {
+          "label": "Respuesta conservada sin duplicación",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-02T21:53:13.704Z",
+  "status": "passed"
+}
