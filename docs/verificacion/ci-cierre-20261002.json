@@ -1,0 +1,143 @@
+{
+  "runId": 37072714791,
+  "headSha": "3fae0082505644e3e871d0038ec510a18a08858d",
+  "conclusion": "success",
+  "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/37072714791",
+  "checkedAt": "2026-10-02T22:45:22.337Z",
+  "jobs": [
+    {
+      "name": "Tipos, reglas y recorridos de demostración",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Obtener la revisión",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preparar Node.js 24",
+          "conclusion": "success"
+        },
+        {
+          "name": "Instalar dependencias fijadas",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar formato",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analizar código",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar tipos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar reglas del dominio",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar registro de tiempos sin datos privados",
+          "conclusion": "success"
+        },
+        {
+          "name": "Rechazar aprobación de carga con muestras incompletas",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restringir el destino y las credenciales de las pruebas de carga",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar retención desde el cierre efectivo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar retiro, resolución y restauración",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar casos numéricos de puntuación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar equivalencia y permisos de la proyección docente",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar proyección de revisiones y respuestas omitidas",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar conservación de archivos y reintentos de purga",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar reintentos limitados a un trabajo de eliminación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar participación, equipos y privacidad de publicación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar revisiones independientes por participante",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar equivalencia del contexto de sincronización",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar proyección y permisos de actividad estudiantil",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar resumen del aula y conservación del historial",
+          "conclusion": "success"
+        },
+        {
+          "name": "Construir aplicación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preparar Chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar recorridos y accesibilidad automática",
+          "conclusion": "success"
+        },
+        {
+          "name": "Conservar informe y evidencia de fallos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Preparar Node.js 24",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Obtener la revisión",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "El flujo no envía correos, no mide la carga remota ni verifica una restauración completa de servicios.",
+    "Los ensayos remotos ejecutados desde la computadora tienen sus registros propios y no se atribuyen a este CI."
+  ]
+}

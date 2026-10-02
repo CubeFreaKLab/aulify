@@ -1,16 +1,24 @@
 # Estado del desarrollo
 
-Actualizado el 30 de septiembre de 2026. Aulify funciona con una aplicación compilada local, Supabase y verificaciones registradas. La publicación y los criterios completos de liberación siguen pendientes.
+Actualizado el 2 de octubre de 2026. Aulify funciona con una aplicación compilada local, Supabase y verificaciones registradas. La publicación y los criterios completos de liberación siguen pendientes.
 
 ## Versión y servicios
 
-- Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veintitrés migraciones locales y remotas; la última es `20260930051014_aulify_completion_grade_existence.sql`.
-- Compilado local: `Pb51vnlIAGabS-c69l1xt`, con [preferencia de sonido vigente al confirmar](verificacion/preferencia-sonido.md): cuatro ejecuciones locales de Chromium aprobadas, con intercalación controlada y audio nativo. Construcción, tipos, formato y ESLint comprobados; CI de este cambio pendiente. Conserva la [reutilización y configuración](verificacion/reutilizacion-y-configuracion.md) comprobada en la revisión anterior. Transporte de 96 conexiones para lecturas/otras operaciones y 32 para comandos, con límite de doce segundos. La Preview permanece en `f9a7013`, compilado `cnVtGnuJSRSUOe6Bf9Kjp`, con su verificación HTTPS independiente.
-- Último CI comprobado: [36696391140](https://github.com/CubeFreaKLab/aulify/actions/runs/36696391140), aprobado sobre `4cbdca3`. Verificó 162 pruebas unitarias, cuatro protecciones del destino de carga, 85 comprobaciones generales de datos, 26 de proyección docente, 32 del resumen y 90 recorridos de navegador. Se omiten 30 ejecuciones autenticadas; no hubo casos inestables. AP-01/AP-02 tienen evidencia local con Supabase y AP-15 también se ejecuta en CI. La Preview conserva `f9a7013`, con su CI anterior aprobado. Metadatos y huellas de logs en el [registro de integración](verificacion/ci-integracion.json).
+- Modelo relacional 1.3: 47 tablas, 295 campos y 78 relaciones. Veinticinco migraciones locales y remotas; la última es `20261002221000_aulify_scoped_purge_retry.sql`. Las dos nuevas corrigen el orden de grupos dependientes y acotan reintentos de eliminación, sin cambiar tablas ni relaciones.
+- Compilado local vigente: `DbIsroXTuSqh8Ui1zOamx`, aplicación pública de `4fa2c2d`; los cambios posteriores añaden pruebas, funciones SQL y operación. La Preview permanece en `4fa2c2d`, protegida. Los compilados anteriores de los informes conservan su propia evidencia.
+- Último CI comprobado: [37072714791](https://github.com/CubeFreaKLab/aulify/actions/runs/37072714791), aprobado sobre `3fae008`, incluidas las migraciones 24/25 y el reintento por trabajo. Los pasos aprobados se conservan en [ci-cierre-20261002.json](verificacion/ci-cierre-20261002.json); las pruebas remotas ejecutadas localmente mantienen evidencia separada.
 - Supabase continúa en Free. El [registro de cuotas](verificacion/cuotas-supabase-20260929.md) distingue consumo mostrado y estimaciones del ejecutor.
 - Vercel Hobby tiene una [vista previa HTTPS verificada](verificacion/vista-previa-https.md), protegida con Vercel Authentication. Ambos roles acceden a Supabase y el borrador docente persiste al recargar. El [procedimiento de despliegue](operacion/despliegue.md) distingue esta comprobación de la liberación de producción, aún pendiente.
 
 `/demo` ofrece una clase ficticia en el navegador. `/aula` exige sesión de Supabase y utiliza operaciones autorizadas de PostgreSQL y archivos privados de Storage.
+
+## Verificaciones del cierre técnico
+
+La [comprobación conjunta](verificacion/aceptacion-combinada.md) completa contratos remotos de mezcla/reconexión, equipos, notas manuales, retiro/readmisión y límite/renovación de códigos. Detectó y corrigió la separación de preguntas dependientes mediante la migración 24. La [secuencia de archivos](verificacion/entregas-secuencia.md) comprobó límites combinados, carga incompleta, reemplazo, permisos de reentrega y republicación de notas con Storage real. La [racha con revisión manual](verificacion/racha-revision-manual.md) aprobó dos ejecuciones de demostración en escritorio y móvil emulado.
+
+La migración 25 incorpora un reintento administrativo limitado a un trabajo. [Quince comprobaciones aisladas y dieciséis remotas](verificacion/purga-acotada.md) cubren permisos, solicitudes concurrentes de restauración y purga, fallo parcial e idempotencia sin afectar otras materias. Conservan fechas sintéticas y distinguen la caché del origen. El plazo programado mantiene la observación anterior.
+
+El [respaldo de Storage](operacion/respaldo.md) copió 42 objetos y verificó 22.024.706 bytes por hashes en una carpeta privada. No sustituye la restauración integral de PostgreSQL, Auth y archivos; falta la conexión de base de datos y un destino aislado. El ejecutor completo de carga ya admite la Preview autorizada; todavía no se ha realizado esa medición y Q-06/Q-09 siguen abiertos.
 
 ## Actualización de interfaz pública
 
@@ -46,8 +54,8 @@ Figma reúne veintidós vistas, cinco composiciones de ayuda y un catálogo de c
 | Evaluación y juego | [Publicación](verificacion/juego-aceptacion.md), [revisión](verificacion/datos-revision-participante.md), [distribución](verificacion/resultados-distribucion.md), [pistas simultáneas](verificacion/pistas-concurrentes-remotas.md) y [continuidad guiada](verificacion/guiada-continuidad.md). | AP-09/AP-10 comprobados en navegador local con Supabase, escritorio/móvil; AP-12 mediante contrato remoto. Entorno, revisiones y límites separados por ensayo. |
 | Ayuda y cuentas | [Ayuda por cuenta](verificacion/ayuda-por-cuenta.md), [primera entrada de ambos roles](verificacion/ayuda-primera-entrada.md) y [rechazo de cuentas sin confirmar](verificacion/acceso-sin-confirmar.md). | Primera entrada aprobada sobre el compilado local con Supabase; cuentas confirmadas administrativamente. Entrega de correo y lector de pantalla manual pendientes. |
 | Conservación de señales | [Frontera de treinta días](verificacion/conservacion-senales.md): once comprobaciones locales y cuatro remotas con reversión incondicional. | Fechas de prueba sintéticas; no representa esperar treinta días reales. |
-| Archivos y borrado parcial | [29 comprobaciones remotas](verificacion/conservacion-storage-remota.md): bytes y metadatos exclusivos eliminados, archivo compartido conservado y reintento idempotente. | AP-32 cubierto. El plazo programado y la carrera remota de AP-31 se comprueban por separado. |
-| Limpieza programada | [Observación completada](verificacion/conservacion-programada.md): ejecución `schedule` 36673912107, materia y archivo eliminados en 2 h 7 min 58,496 s desde la elegibilidad; siete comprobaciones. | Antigüedad de treinta días sintética; espera del programador real. Un caso no constituye un SLA general. La carrera remota sigue pendiente. |
+| Archivos y borrado parcial | [29 comprobaciones remotas](verificacion/conservacion-storage-remota.md): bytes y metadatos exclusivos eliminados, archivo compartido conservado y reintento idempotente. | AP-32 cubierto. El plazo programado y la carrera remota posterior de AP-31 se conservan por separado. |
+| Limpieza programada | [Observación completada](verificacion/conservacion-programada.md): ejecución `schedule` 36673912107, materia y archivo eliminados en 2 h 7 min 58,496 s desde la elegibilidad; siete comprobaciones. | Antigüedad de treinta días sintética; espera del programador real. Un caso no constituye un SLA general. La carrera remota posterior se conserva en el informe de reintento por trabajo. |
 | Recuperación | [Nueve comprobaciones aisladas](verificacion/recuperacion-aislada.md) con datos ficticios. | No es una restauración operativa de Supabase Auth, base de datos y Storage. |
 | Accesibilidad | Recorridos de teclado, foco, reflujo y análisis axe en los lotes identificados. | No acredita conformidad completa con WCAG ni evaluación con personas. |
 
@@ -72,7 +80,7 @@ La [instrumentación posterior del despacho](verificacion/diagnostico-despacho-2
 El candidato [con conexiones reservadas](verificacion/conexiones-reservadas.md) impide que una cola de lecturas ocupe todo el cupo de comandos. Dos pruebas HTTP adicionales verifican aislamiento y cancelación. Su diagnóstico remoto completó 11.552 solicitudes sin fallos y conservó 200 respuestas, pero el p95 de confirmación fue 3.290,33 ms: no aprueba la meta. El perfil SQL aislado y la comparación de transportes se conservan por separado y tampoco acreditan Q-06. No se repite un ensayo largo sin otra corrección justificada.
 
 1. Resolver el problema de capacidad y verificar cuatro grupos de cincuenta estudiantes con sus docentes, en ambas modalidades y dentro de las cuotas Free.
-2. Completar la carrera remota de restauración/purga de AP-31. La observación programada del plazo ya aprobó para el caso preparado.
+2. Conservar la evidencia de AP-31 ya comprobada por capas y completar las verificaciones manuales pendientes; no repetir la carrera sin un cambio relevante.
 3. Configurar y verificar publicación por HTTPS, condiciones de CI/CD, confirmación y recuperación por correo. El dominio propio sigue fuera de esta entrega.
 4. Comprobar recuperación operativa de base, cuentas y archivos; completar revisión manual de accesibilidad. La primera entrada de ambos roles ya tiene evidencia con Supabase real.
 5. Consolidar documentación y manuales sobre una revisión verificable. Jira y QMetry no están configurados; los casos, incidencias y resultados existentes se mantienen en el repositorio.
