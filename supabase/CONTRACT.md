@@ -59,6 +59,8 @@ Un bloque imagen guarda `fileId`; el servidor genera `/api/files/<id>` al entreg
 
 `aulify_maintenance('tick',{})` es exclusiva del servicio. Materializa vencimientos, depura señales y elimina las relaciones de materias archivadas vencidas. Devuelve hasta cien archivos exclusivos pendientes de borrar. El proceso elimina los objetos mediante Storage y llama `aulify_maintenance('confirmFiles',{ids:[...]})`; el servidor comprueba que esos bytes ya no existan antes de eliminar metadatos y completar el trabajo. Una caída mantiene los objetos pendientes para el siguiente intento. Ejecutar al menos cada seis horas para disponer de margen frente al objetivo de 24 horas. `tools/datos/maintenance.mjs` implementa el consumidor con variables privadas de entorno; la creación del script no equivale a tener el horario configurado.
 
+Para reintentar un trabajo específico, el servicio puede proporcionar `{jobId: UUID}` tanto en `tick` como en `confirmFiles`, junto a `ids` cuando corresponda. Esta operación no procesa otros trabajos ni realiza la limpieza global de intentos o señales. Rechaza identificadores de archivo ajenos y conserva metadatos mientras haya bytes en Storage. La variante global mantiene su comportamiento; ambas permanecen reservadas al servicio.
+
 ## Límites de verificación
 
 El contrato y las migraciones requieren ejecución de pruebas; su existencia no acredita despliegue, SMTP ni integración de interfaz. Las funciones que manejan almacenamiento necesitan comprobarse con el servicio Storage real, además del PostgreSQL aislado.

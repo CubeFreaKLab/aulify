@@ -14,6 +14,7 @@ on:
         'tools/datos/teacher-projection-check.mjs',
         'tools/datos/teacher-review-projection-check.mjs',
         'tools/datos/retention-shared-files-check.mjs',
+        'tools/datos/maintenance-job-scope-check.mjs',
         'tools/datos/game-acceptance.mjs',
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
@@ -46,6 +47,7 @@ on:
         'tools/datos/teacher-projection-check.mjs',
         'tools/datos/teacher-review-projection-check.mjs',
         'tools/datos/retention-shared-files-check.mjs',
+        'tools/datos/maintenance-job-scope-check.mjs',
         'tools/datos/game-acceptance.mjs',
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
@@ -122,6 +124,8 @@ jobs:
         run: node tools/datos/teacher-review-projection-check.mjs
       - name: Verificar conservación de archivos y reintentos de purga
         run: node tools/datos/retention-shared-files-check.mjs
+      - name: Verificar reintentos limitados a un trabajo de eliminación
+        run: node tools/datos/maintenance-job-scope-check.mjs
       - name: Verificar participación, equipos y privacidad de publicación
         run: node tools/datos/game-acceptance.mjs
       - name: Verificar revisiones independientes por participante

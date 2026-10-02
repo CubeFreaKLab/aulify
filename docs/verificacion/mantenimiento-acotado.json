@@ -1,0 +1,99 @@
+{
+  "startedAt": "2026-10-02T21:59:58.297Z",
+  "environment": "PGlite aislado con Auth/Storage mínimos",
+  "checks": [
+    {
+      "label": "Cliente no ejecuta mantenimiento",
+      "result": "rejected-as-expected"
+    },
+    {
+      "label": "Solo reclama archivos del trabajo elegido",
+      "result": "passed"
+    },
+    {
+      "label": "Elimina registros de la materia elegible",
+      "result": "passed"
+    },
+    {
+      "label": "No reclama otro trabajo elegible",
+      "result": "passed"
+    },
+    {
+      "label": "Conserva archivo ajeno",
+      "result": "passed"
+    },
+    {
+      "label": "Conserva otra materia",
+      "result": "passed"
+    },
+    {
+      "label": "Rechaza confirmación de archivo de otro trabajo",
+      "result": "rejected-as-expected"
+    },
+    {
+      "label": "No elimina metadatos mientras persistan objetos",
+      "result": "rejected-as-expected"
+    },
+    {
+      "label": "Reintento conserva los objetos pendientes",
+      "result": "passed"
+    },
+    {
+      "label": "Confirma borrado después de retirar el objeto",
+      "result": "passed"
+    },
+    {
+      "label": "Confirmación repetida es idempotente",
+      "result": "passed"
+    },
+    {
+      "label": "Trabajo terminado no vuelve a reclamar archivos",
+      "result": "passed"
+    },
+    {
+      "label": "Trabajo elegido termina",
+      "result": "passed"
+    },
+    {
+      "label": "Objeto de control conserva su metadata",
+      "result": "passed"
+    },
+    {
+      "label": "No acepta un trabajo inexistente",
+      "result": "rejected-as-expected"
+    }
+  ],
+  "scriptSha256": "08486dc02703371384d84ba4be671cf3c1b3db0e7a10300ce58bace73ec3ddf1",
+  "limitations": [
+    "No verifica JWT, transferencia de bytes, concurrencia ni recuperación operativa."
+  ],
+  "migrations": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql",
+    "20260930000631_aulify_teacher_review_projection.sql",
+    "20260930005228_aulify_sync_context_reads.sql",
+    "20260930011205_aulify_student_activity_projection.sql",
+    "20260930024809_aulify_visibility_effective_closure.sql",
+    "20260930040716_aulify_workspace_overview.sql",
+    "20260930051014_aulify_completion_grade_existence.sql",
+    "20261002215000_aulify_stable_group_shuffle.sql",
+    "20261002221000_aulify_scoped_purge_retry.sql"
+  ],
+  "status": "passed",
+  "completedAt": "2026-10-02T22:00:00.144Z"
+}

@@ -1,0 +1,78 @@
+{
+  "startedAt": "2026-10-02T22:17:29.079Z",
+  "environment": "Supabase remoto, JWT y Storage real; mantenimiento limitado a los trabajos creados",
+  "checks": [
+    {
+      "label": "Estudiante no obtiene acceso al reintento privilegiado",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "label": "Antes del vencimiento el trabajo no reclama archivos",
+      "result": "passed"
+    },
+    {
+      "label": "Restauración anterior al vencimiento conserva la materia",
+      "result": "passed"
+    },
+    {
+      "label": "Purga elegible confirma su transacción",
+      "result": "passed"
+    },
+    {
+      "label": "Restauración concurrente al vencer es rechazada",
+      "result": "passed"
+    },
+    {
+      "label": "Reclama únicamente los dos objetos exclusivos",
+      "result": "passed"
+    },
+    {
+      "label": "Confirmación incompleta conserva los metadatos",
+      "result": "rejected-as-expected",
+      "code": "P0001"
+    },
+    {
+      "label": "Reintento recupera ambos objetos pendientes después del fallo parcial",
+      "result": "passed"
+    },
+    {
+      "label": "Segundo objeto conserva sus bytes durante la interrupción",
+      "result": "passed"
+    },
+    {
+      "label": "Confirmación final retira los dos metadatos",
+      "result": "passed"
+    },
+    {
+      "label": "Confirmación repetida es idempotente",
+      "result": "passed"
+    },
+    {
+      "label": "Reintento terminado no devuelve objetos",
+      "result": "passed"
+    },
+    {
+      "label": "Materia vencida ya no existe en la proyección",
+      "result": "passed"
+    },
+    {
+      "label": "Biblioteca y otras materias conservan su contenido",
+      "result": "passed"
+    },
+    {
+      "label": "Objeto exclusivo no puede descargarse después de confirmar",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Antigüedad de treinta días sintética; no representa esperar treinta días reales.",
+    "Las solicitudes de restauración y purga son concurrentes; no se instrumentan los tiempos internos de bloqueo SQL.",
+    "El fallo parcial es una interrupción controlada después de borrar un objeto; no se induce una caída del proveedor."
+  ],
+  "status": "failed",
+  "failure": {
+    "code": "ERR_ASSERTION",
+    "message": "Objeto exclusivo no puede descargarse después de confirmar"
+  }
+}
