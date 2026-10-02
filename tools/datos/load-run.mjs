@@ -4,6 +4,7 @@ import { loadCriteria } from './load-criteria.mjs';
 import { parallel } from './load-workers.mjs';
 import {observeServerTiming,summarizeServerTiming} from './server-timing-aggregate.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
+import { loadTargetFromEnvironment } from './load-target.mjs';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
@@ -13,15 +14,10 @@ const base = process.env.AULIFY_LOAD_URL;
 const expectedBuild = process.env.AULIFY_EXPECTED_BUILD_ID;
 const diagnosticOnly = process.argv.includes('--diagnostic-individual');
 if (diagnosticOnly && process.argv.includes('--sessions-only')) throw new Error('Seleccionar un solo modo de ejecución.');
-if (base !== 'http://127.0.0.1:3001' || !expectedBuild) throw new Error('Definir servidor compilado 3001 y AULIFY_EXPECTED_BUILD_ID explícitamente.');
+const loadTarget = await loadTargetFromEnvironment(base);
 const budgetBytes = Number(process.env.AULIFY_LOAD_BUDGET_BYTES || 1_000_000_000);
 if (!Number.isSafeInteger(budgetBytes) || budgetBytes < 1 || budgetBytes > 2_500_000_000) throw new Error('Presupuesto fuera del límite preventivo.');
-const verifyBuild = async () => {
-  if ((await fs.readFile('.next/BUILD_ID','utf8')).trim() !== expectedBuild) throw new Error('Compilado local distinto del esperado.');
-  const response = await fetch(base+'/', {signal:AbortSignal.timeout(15000)});
-  if (!response.ok || !(await response.text()).includes(expectedBuild)) throw new Error('El servidor no entrega el compilado esperado.');
-  return {at:new Date().toISOString(),expectedBuild,diskMatches:true,servedHtmlMatches:true};
-};
+const verifyBuild = () => loadTarget.verifyBuild();
 const initialBuildCheck = await verifyBuild();
 const accounts = JSON.parse(await fs.readFile('.local-private/load-accounts.json', 'utf8'));
 const fixtures = JSON.parse(await fs.readFile('.local-private/load-fixtures.json', 'utf8'));
@@ -32,7 +28,7 @@ const privatePath = '.local-private/load-http-sessions.json';
 const reportPath = `docs/verificacion/datos-carga-${new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)}.json`;
 const runId = crypto.randomUUID();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: (await fs.readFile('.next/BUILD_ID','utf8')).trim(), environment: { application: 'Next.js production local HTTP', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', 'La aplicación está en una computadora local, no en el alojamiento público.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
+const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: expectedBuild, target: loadTarget.metadata, environment: { application: loadTarget.local ? 'Next.js production local HTTP' : 'Next.js Vercel Preview HTTPS', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', loadTarget.local ? 'La aplicación está en una computadora local, no en el alojamiento público.' : 'Vista previa protegida de Vercel; no es producción ni una liberación pública.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
 report.environment.confirmation = 'ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.';
 report.environment.logicalBodyBudgetBytes = budgetBytes;
 report.protocol = diagnosticOnly ? 'diagnostic-individual-warmup-and-next-preparation' : 'full-q06';
@@ -82,7 +78,7 @@ async function request(s, route, { method = 'GET', body, tag = route, metric = t
   if (aborted && metric) throw new Error('LOAD_ABORTED');
   const start = performance.now(), target = metric ? phase : null;
   try {
-    const response = await fetch(base + route, { method, headers: { Cookie: [...s.jar].map(([k, v]) => `${k}=${v}`).join('; '), Origin: base, 'Sec-Fetch-Site': 'same-origin', ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(15_000) });
+    const response = await loadTarget.request(route, { method, headers: { Cookie: [...s.jar].map(([k, v]) => `${k}=${v}`).join('; '), Origin: base, 'Sec-Fetch-Site': 'same-origin', ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(15_000) });
     setCookies(s, response); const text = await response.text();
     record(target, tag, response.status, performance.now() - start, Buffer.byteLength(text),response.headers.get('Server-Timing'));
     if (!response.ok) { const error = new Error(`HTTP_${response.status}`); error.recorded = true; error.status = response.status; error.category=rpcFailureCategory(response.headers); error.tag=tag; error.retryAfterMs = retryAfterMs(response.headers.get('Retry-After')); throw error; }
@@ -331,7 +327,8 @@ try {
       if(warmup.confirmationP95Ms>4500){abortReason='Corte preventivo tras calentamiento completo: p95 de confirmación superior al triple del umbral de 1500 ms; no se inicia medición con saturación persistente.';aborted=true;throw new Error('WARMUP_SATURATION');}
       await runPhase(mode, 'measurement', 900);
     }
-    report.status = report.phases.filter(p => p.stage === 'measurement').every(p => Object.values(p.criteria).every(Boolean)) ? 'q06-passed-in-local-environment' : 'q06-failed-in-local-environment';
+    const environment = loadTarget.local ? 'local-environment' : 'vercel-preview';
+    report.status = report.phases.filter(p => p.stage === 'measurement').every(p => Object.values(p.criteria).every(Boolean)) ? `q06-passed-in-${environment}` : `q06-failed-in-${environment}`;
   }
 } catch (error) {
   if (report.nextPreparation?.status === 'running') report.nextPreparation.status = 'failed';

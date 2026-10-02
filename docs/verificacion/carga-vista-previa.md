@@ -1,6 +1,6 @@
 # Diagnóstico de una vista previa protegida
 
-El ejecutor de sesenta segundos admite el compilado local y una vista previa identificada del proyecto Aulify. Esta preparación no significa que se haya ejecutado o aprobado la carga remota. El escenario completo de cinco más quince minutos conserva su ejecutor y sus criterios anteriores.
+Los ejecutores de sesenta segundos y del escenario completo admiten el compilado local y una vista previa identificada del proyecto Aulify. Esta preparación no significa que se haya ejecutado o aprobado la carga remota. El escenario completo conserva cinco minutos de calentamiento y quince de medición en cada modalidad, con sus criterios anteriores.
 
 ## Identificar el destino
 
@@ -14,6 +14,8 @@ Para `tools/datos/load-protocol.mjs`, proporcionar:
 - `AULIFY_EXPECTED_BUILD_ID`: su identificador de compilado.
 - `AULIFY_LOAD_PREVIEW_MANIFEST`: ruta al manifiesto local.
 - `AULIFY_LOAD_PREVIEW_SECRET_FILE`: ruta al archivo privado con la clave temporal.
+
+Para `tools/datos/load-run.mjs`, usar `AULIFY_LOAD_URL` en lugar de `AULIFY_LOAD_BASE_URL`; las otras tres variables son las mismas. Siete pruebas locales de destino y criterios aprobaron tras adaptar el ejecutor completo. El informe identifica el destino real y ya no exige un directorio `.next` local para medir una Preview. La carga remota sigue pendiente de acceso autorizado; no se aprueban Q-06 ni Q-09 por preparar el ejecutor.
 
 El ejecutor limita el destino al proyecto y equipo conocidos, exige manifiesto concordante y comprueba el compilado servido antes de preparar actividades. Adjunta la clave en una cabecera, sin escribirla en URLs ni resultados. No sigue redirecciones: así evita trasladar cookies o credenciales a un destino diferente. Producción y otros proyectos son rechazados. El modo local conserva el cotejo de `.next/BUILD_ID` y no recibe la clave de Vercel.
 
