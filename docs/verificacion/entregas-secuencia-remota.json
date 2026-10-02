@@ -1,0 +1,116 @@
+{
+  "startedAt": "2026-10-02T21:52:26.641Z",
+  "revision": "19e287fe5dfd9be718680bc99aa39f244ffbc255",
+  "buildId": "DbIsroXTuSqh8Ui1zOamx",
+  "environment": "Aplicación compilada local con Supabase Auth, PostgreSQL y Storage remotos",
+  "scriptSha256": "6c087f0dd2dda818935c093583ccbcea9222d1c94d824eba8f5791ebee9ba828",
+  "cases": [
+    {
+      "name": "AP-21 · secuencia adversa sin reemplazar entrega válida",
+      "checks": [
+        {
+          "label": "Rechaza archivo de 11 MiB",
+          "result": "passed"
+        },
+        {
+          "label": "Rechaza sexto archivo",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Tres archivos de 7 MiB confirmados con bytes reales",
+          "result": "passed"
+        },
+        {
+          "label": "Rechaza total de 21 MiB",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Rechaza contenido de ejecutable con nombre PNG",
+          "result": "passed"
+        },
+        {
+          "label": "Archivo no confirmado no se puede entregar",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Carga incompleta no se puede entregar",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Toda la secuencia conserva la primera entrega intacta",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-22 · reemplazo antes del cierre sin calificación",
+      "checks": [
+        {
+          "label": "Nueva entrega incrementa versión",
+          "result": "passed"
+        },
+        {
+          "label": "Conserva archivo anterior y nuevo por separado",
+          "result": "passed"
+        },
+        {
+          "label": "No fabrica calificaciones",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-24 · carga fallida y republicación sobre la versión conservada",
+      "checks": [
+        {
+          "label": "Nueva carga rechazada por sus bytes",
+          "result": "passed"
+        },
+        {
+          "label": "Carga fallida no consume una entrega válida",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "No aparece una versión nueva después del fallo",
+          "result": "passed"
+        },
+        {
+          "label": "Republicación actualiza la nota de la versión conservada",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AP-23 · entrega tardía y ventana de reentrega",
+      "checks": [
+        {
+          "label": "Rechaza entrega tardía desactivada",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Marca la entrega autorizada como tardía",
+          "result": "passed"
+        },
+        {
+          "label": "Corrección requiere permiso incluso con tardías habilitadas",
+          "result": "rejected-as-expected"
+        }
+      ],
+      "status": "failed",
+      "failure": {
+        "code": "ERR_ASSERTION",
+        "message": "Rechaza antes de abrir la ventana"
+      }
+    }
+  ],
+  "limitations": [
+    "Datos ficticios; no acredita alojamiento público ni carga sostenida.",
+    "Las materias y archivos se conservan archivados para recuperación; no se purgan datos ajenos."
+  ],
+  "cleanup": "materia archivada",
+  "completedAt": "2026-10-02T21:53:10.508Z",
+  "status": "failed"
+}

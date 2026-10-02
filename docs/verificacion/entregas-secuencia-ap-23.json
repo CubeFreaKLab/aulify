@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-10-02T21:54:46.629Z",
+  "revision": "19e287fe5dfd9be718680bc99aa39f244ffbc255",
+  "buildId": "DbIsroXTuSqh8Ui1zOamx",
+  "environment": "Aplicación compilada local con Supabase Auth, PostgreSQL y Storage remotos",
+  "scriptSha256": "6adb23aa9854f7c913da55fc0ef96afd4b571a3e91cabce3e0695a4356f99cca",
+  "cases": [
+    {
+      "name": "AP-23 · entrega tardía y ventana de reentrega",
+      "checks": [
+        {
+          "label": "Rechaza entrega tardía desactivada",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Marca la entrega autorizada como tardía",
+          "result": "passed"
+        },
+        {
+          "label": "Corrección requiere permiso incluso con tardías habilitadas",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Acepta una reentrega dentro de ventana",
+          "result": "passed"
+        },
+        {
+          "label": "Permiso queda consumido",
+          "result": "rejected-as-expected"
+        },
+        {
+          "label": "Rechaza tras vencer la ventana",
+          "result": "rejected-as-expected"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Datos ficticios; no acredita alojamiento público ni carga sostenida.",
+    "Las materias y archivos se conservan archivados para recuperación; no se purgan datos ajenos."
+  ],
+  "cleanup": "materia archivada",
+  "completedAt": "2026-10-02T21:55:08.272Z",
+  "status": "passed"
+}
