@@ -47,7 +47,7 @@ Figma reúne veintidós vistas, cinco composiciones de ayuda y un catálogo de c
 
 | Área | Evidencia disponible | Límite de la conclusión |
 |---|---|---|
-| Compilación y dominio | CI de `4cbdca3`: 162 pruebas en dieciocho archivos y construcción aprobadas; construcción local comprobada. | La Preview conserva `f9a7013`, con su propio CI y compilado. Los conteos pertenecen a sus ejecuciones y no se suman como escenarios independientes. |
+| Compilación y dominio | CI de `3fae008`: 162 pruebas en dieciocho archivos, contratos con veinticinco migraciones, construcción y recorridos de demostración aprobados. | La Preview conserva `4fa2c2d`, con su propio CI y compilado. Los conteos pertenecen a sus ejecuciones y no se suman como escenarios independientes. |
 | Biblioteca y configuración | [Reutilización y configuración](verificacion/reutilizacion-y-configuracion.md): AP-01/AP-02 con Supabase y explicación de AP-15 en demostración. | Cuatro ejecuciones de dos escenarios; datos ficticios, móvil emulado y app local compilada. No acredita producción. |
 | Permisos e integración | [45 comprobaciones de Supabase real](verificacion/datos-remotos.md), más recorridos posteriores de [reconexión y confirmación](verificacion/integracion-resiliencia.json). | No sustituyen correo, despliegue público ni capacidad sostenida. |
 | Sincronización | [Proyección acotada](verificacion/datos-proyeccion-actividad-estudiante-remota.md), [contexto de actividad](verificacion/sync-contexto-local.md) y [reintento de descarga](verificacion/sincronizacion-proyeccion-reintento.md). | Lecturas correctas y reducción de trabajo no garantizan los umbrales con 200 estudiantes. |
@@ -59,7 +59,7 @@ Figma reúne veintidós vistas, cinco composiciones de ayuda y un catálogo de c
 | Recuperación | [Nueve comprobaciones aisladas](verificacion/recuperacion-aislada.md) con datos ficticios. | No es una restauración operativa de Supabase Auth, base de datos y Storage. |
 | Accesibilidad | Recorridos de teclado, foco, reflujo y análisis axe en los lotes identificados. | No acredita conformidad completa con WCAG ni evaluación con personas. |
 
-Los escenarios AC/AP y sus evidencias se consultan en la [matriz de trazabilidad](calidad/trazabilidad.md). El CI comprobado aprobó 162 pruebas y 90 recorridos de Chromium sin reintentos. Treinta ejecuciones autenticadas se omiten en CI y mantienen su evidencia separada; no se consideran aprobadas por omisión. Los registros descargados sustentan los recuentos.
+Los escenarios AC/AP y sus evidencias se consultan en la [matriz de trazabilidad](calidad/trazabilidad.md). La ejecución 37072714791 aprobó 162 pruebas de dominio y el paso de recorridos de demostración. Las ejecuciones autenticadas mantienen su evidencia separada; las omitidas en CI no se consideran aprobadas por omisión. El registro del cierre conserva el resultado de cada paso y la revisión comprobada.
 
 ## Rendimiento
 
