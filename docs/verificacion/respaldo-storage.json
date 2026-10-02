@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "projectRef": "bnqyyumfmyexsqszglab",
+  "bucket": "aulify-files",
+  "objects": 42,
+  "totalBytes": 22024706,
+  "verifiedAt": "2026-10-02T22:23:48.192Z",
+  "manifestSha256": "f9ed4d60473df6d61450bcba0d21fc0053c27771a71a0e092bb6629bc8d6b191",
+  "limitations": [
+    "Copia de archivos con verificación local de bytes; no restaura PostgreSQL ni cuentas de Auth.",
+    "No es una instantánea transaccional conjunta con la base de datos. Debe coordinarse con una pausa de escrituras para una recuperación completa."
+  ]
+}
