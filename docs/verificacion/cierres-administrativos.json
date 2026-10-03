@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-30T02:36:04.035Z",
-  "revision": "9d12a3f84479f430bedb41282c56d1df515fd617",
+  "startedAt": "2026-10-03T15:30:05.288Z",
+  "revision": "e182ade74462eb3f3d320888ebb3b9450a216559",
   "environment": "PGlite aislado; comandos de usuario como authenticated",
   "script": {
     "path": "tools/datos/administrative-close-check.mjs",
@@ -88,8 +88,36 @@
       "sha256": "d3b41c91c645cf1ec69af3512fa9d638967037de0e108162c1cbabac33c80fb5"
     },
     {
-      "name": "20260930023242_aulify_visibility_effective_closure.sql",
+      "name": "20260930024809_aulify_visibility_effective_closure.sql",
       "sha256": "724e45231319644bc11069192ceac4886c74cebc41b6278f298623affd4d308e"
+    },
+    {
+      "name": "20260930040716_aulify_workspace_overview.sql",
+      "sha256": "259aff2e695a100203eabca39a9b37a089637c0a9da1edc091d68e0abacfe767"
+    },
+    {
+      "name": "20260930051014_aulify_completion_grade_existence.sql",
+      "sha256": "47e23bbf53ec3178e351a5feafd5866bb1d6a3bba0ba0611047b8404acab4469"
+    },
+    {
+      "name": "20261002215000_aulify_stable_group_shuffle.sql",
+      "sha256": "05fb92a2cc9b1179f27e8004557c93c0e50eada721951b72ba5f67149205e786"
+    },
+    {
+      "name": "20261002221000_aulify_scoped_purge_retry.sql",
+      "sha256": "e2749343342a5694cc577da7506b09d432cd9d068416d7335ef780f41cc3a4ad"
+    },
+    {
+      "name": "20261003142000_aulify_answer_ack_revision.sql",
+      "sha256": "2b0e967790f59b44d9fc16a5595c9db6010ca263725725562becbc5a09e57d2a"
+    },
+    {
+      "name": "20261003144500_aulify_ack_projection_guard.sql",
+      "sha256": "39e17ec6b1953e179898d55c477fca1e25d4a70d9e43677ae44c23a80d0ebbd0"
+    },
+    {
+      "name": "20261003153300_aulify_ack_authorization_order.sql",
+      "sha256": "54aeb0dea88d5f4f08cf941741caaa2fad6ba89c8eb74de15e26bbc5a2ab84d4"
     }
   ],
   "cases": [
@@ -275,6 +303,6 @@
     "Los datos y fechas de este ensayo son ficticios; no ejecuta operaciones sobre Supabase."
   ],
   "status": "passed",
-  "completedAt": "2026-09-30T02:36:06.249Z",
+  "completedAt": "2026-10-03T15:30:07.196Z",
   "checks": 41
 }

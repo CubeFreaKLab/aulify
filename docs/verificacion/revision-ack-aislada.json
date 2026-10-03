@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-03T15:02:58.261Z",
+  "startedAt": "2026-10-03T15:30:07.301Z",
   "environment": "PGlite aislado, sin red",
   "checks": [
     {
@@ -62,8 +62,9 @@
     "20261002215000_aulify_stable_group_shuffle.sql",
     "20261002221000_aulify_scoped_purge_retry.sql",
     "20261003142000_aulify_answer_ack_revision.sql",
-    "20261003144500_aulify_ack_projection_guard.sql"
+    "20261003144500_aulify_ack_projection_guard.sql",
+    "20261003153300_aulify_ack_authorization_order.sql"
   ],
   "status": "passed",
-  "completedAt": "2026-10-03T15:03:00.143Z"
+  "completedAt": "2026-10-03T15:30:09.027Z"
 }
