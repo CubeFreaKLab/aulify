@@ -406,7 +406,15 @@ async function restoreTest(directory) {
     const ledger = Number(
       await query(env, 'select count(*) from supabase_migrations.schema_migrations'),
     );
-    assert.equal(ledger, 25, 'La copia no contiene el corte de migraciones esperado');
+    const expectedMigrations = manifest.tables.find(
+      (table) => table.schema === 'supabase_migrations' && table.name === 'schema_migrations',
+    )?.rows;
+    assert.ok(Number.isSafeInteger(expectedMigrations), 'Inventario de migraciones ausente');
+    assert.equal(
+      ledger,
+      expectedMigrations,
+      'La copia no contiene el corte de migraciones esperado',
+    );
 
     stage = 'verify-storage-pair';
     const storagePointer = JSON.parse(

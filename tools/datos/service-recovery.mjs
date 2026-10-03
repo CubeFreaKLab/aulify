@@ -298,13 +298,20 @@ async function restoreDatabase() {
     byKey(policy.rls, ['schema', 'name']),
     byKey(manifest.permissions.rls, ['schema', 'name']),
   );
-  assert.equal(Number(await sql('select count(*) from supabase_migrations.schema_migrations')), 25);
+  const migrations = Number(
+    await sql('select count(*) from supabase_migrations.schema_migrations'),
+  );
+  const expectedMigrations = manifest.tables.find(
+    (table) => table.schema === 'supabase_migrations' && table.name === 'schema_migrations',
+  )?.rows;
+  assert.ok(Number.isSafeInteger(expectedMigrations), 'Inventario de migraciones ausente');
+  assert.equal(migrations, expectedMigrations, 'El ledger restaurado no corresponde al respaldo');
   await save('database-checkpoint.json', {
     verifiedAt: new Date().toISOString(),
     tables: restored.length,
     fingerprintsMatch: true,
     policiesMatch: true,
-    migrations: 25,
+    migrations,
   });
   console.log(JSON.stringify({ phase: stage, tables: restored.length, hashesMatch: true }));
 }
