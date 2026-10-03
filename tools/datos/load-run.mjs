@@ -136,7 +136,9 @@ function startPolling() {
     if (s.running || aborted || s.authorizationLost || Date.now() < s.retryAt) { if (phase) phase.skippedPollTicks++; return; }
     s.running = (async () => {
       try {
+        const epoch=s.mutationEpoch;
         const result = (await request(s, `/api/sync?activity=${s.activityId}`, { tag: 'sync' })).value;
+        if(epoch!==s.mutationEpoch)return;
         if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(snapshot.applied)s.lastRevision = result.revision; }
         s.retryAt=0;s.retryMs=1000;
       } catch (error) {
@@ -210,6 +212,7 @@ async function answer(s, index, current) {
       // El comando responde después del COMMIT y aporta el intento autorizado.
       // Aplicarlo reproduce el avance inmediato del cliente; las lecturas antiguas no lo revierten.
       s.mutationEpoch++;
+      if(/^[a-f0-9]{32}$/.test(result.syncRevision??''))s.lastRevision=result.syncRevision;
       if(s.latest){
         s.latest.state.attempts=s.latest.state.attempts.filter(a=>a.id!==s.attemptId).concat(result.attempt);
         if(s.latest.studentActivities?.[s.activityId])s.latest.studentActivities[s.activityId].attempt=result.attempt;

@@ -308,6 +308,101 @@ describe('adopción de revisión tras una proyección vigente', () => {
     expect(mocks.read()?.state?.attempts[0].answers[0].idempotencyKey).toBe('key');
   });
 
+  it('aplica la respuesta confirmada sin volver a descargarla por su misma revisión', async () => {
+    let reads = 0;
+    let current = 'a'.repeat(32);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync')) return Response.json({ revision: current });
+        if (url === '/api/commands') {
+          current = 'b'.repeat(32);
+          return Response.json({
+            result: { attempt: attempt(true), feedback: null, syncRevision: current },
+          });
+        }
+        reads++;
+        return Response.json(workspace(reads));
+      }),
+    );
+    await mount();
+    await tick();
+    expect(reads).toBe(2);
+    await store.runDemo(
+      (repo) =>
+        repo.submitAnswer('attempt', 'question', { type: 'single', optionId: 'one' }, 'key', false),
+      undefined,
+      { refresh: 'deferred' },
+    );
+    await tick(2000);
+    expect(reads).toBe(2);
+    expect(mocks.read()?.state?.attempts[0].answers).toHaveLength(1);
+    current = 'c'.repeat(32);
+    await tick();
+    expect(reads).toBe(3);
+  });
+
+  it('descarta un sondeo iniciado antes de recibir el ACK y conserva la proyección confirmada', async () => {
+    let reads = 0,
+      polls = 0;
+    const pending = deferred();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync'))
+          return ++polls === 1 ? pending.promise : Response.json({ revision: 'b'.repeat(32) });
+        if (url === '/api/commands')
+          return Response.json({
+            result: { attempt: attempt(true), feedback: null, syncRevision: 'b'.repeat(32) },
+          });
+        reads++;
+        return Response.json(workspace(reads));
+      }),
+    );
+    await mount();
+    await tick();
+    await store.runDemo(
+      (repo) =>
+        repo.submitAnswer('attempt', 'question', { type: 'single', optionId: 'one' }, 'key', false),
+      undefined,
+      { refresh: 'deferred' },
+    );
+    pending.resolve(Response.json({ revision: 'a'.repeat(32) }));
+    await tick(0);
+    await tick();
+    expect(reads).toBe(1);
+    expect(mocks.read()?.state?.attempts[0].answers).toHaveLength(1);
+  });
+
+  it('tras un fallo vuelve a leer aunque la revisión coincida con una respuesta confirmada', async () => {
+    let reads = 0,
+      polls = 0;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync'))
+          return ++polls === 2 ? unavailable() : Response.json({ revision: 'b'.repeat(32) });
+        if (url === '/api/commands')
+          return Response.json({
+            result: { attempt: attempt(true), feedback: null, syncRevision: 'b'.repeat(32) },
+          });
+        reads++;
+        return Response.json(workspace(reads, reads > 2));
+      }),
+    );
+    await mount();
+    await tick();
+    await store.runDemo(
+      (repo) =>
+        repo.submitAnswer('attempt', 'question', { type: 'single', optionId: 'one' }, 'key', false),
+      undefined,
+      { refresh: 'deferred' },
+    );
+    await tick(2000);
+    expect(reads).toBe(3);
+    expect(mocks.read()?.error).toBeNull();
+  });
+
   it.each([401, 403])('limpia los datos y detiene el sondeo ante workspace %s', async (status) => {
     let reads = 0,
       polls = 0;

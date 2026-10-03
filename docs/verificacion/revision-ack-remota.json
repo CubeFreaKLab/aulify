@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "verifiedAt": "2026-10-03T14:28:55.104Z",
+  "migration": "20261003142000",
+  "environment": "Auth/PostgREST/PostgreSQL alojados, cuenta ficticia",
+  "confirmedRevisionMatches": true,
+  "idempotentAnswerPresent": true,
+  "hiddenFeedbackPreserved": true,
+  "sourceAnswerAdded": false
+}

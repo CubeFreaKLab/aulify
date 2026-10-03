@@ -17,7 +17,7 @@ const environment=Object.fromEntries((await fs.readFile('.env.local','utf8')).sp
 if(accounts.projectRef!=='bnqyyumfmyexsqszglab'||fixtures.projectRef!==accounts.projectRef||environment.NEXT_PUBLIC_SUPABASE_URL!==`https://${accounts.projectRef}.supabase.co`||accounts.users.length!==204)throw new Error('Proyecto o escenario no autorizado');
 const verifyBuild=()=>target.verifyBuild();
 const initialBuildCheck=await verifyBuild();
-const sessions=accounts.users.map(a=>({...a,jar:new Map(Object.entries(cookies[a.id]?.cookies||{})),lastRevision:null,running:null,retryMs:1000,retryAt:0,authorizationLost:false}));
+const sessions=accounts.users.map(a=>({...a,jar:new Map(Object.entries(cookies[a.id]?.cookies||{})),lastRevision:null,running:null,retryMs:1000,retryAt:0,authorizationLost:false,mutationEpoch:0}));
 const teachers=sessions.filter(a=>a.role==='teacher'),students=sessions.filter(a=>a.role==='student');
 const report={startedAt:new Date().toISOString(),scope:'Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.',buildId:expectedBuild,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sessions:204,teachers:4,students:200,pollMs:1000,seconds:60,records:[],activities:[],authentication:{prepared:0,temporaryWaits:0,spacingMs:2500},limitations:['Aplicación compilada local y base remota Free; no mide render de 204 navegadores.','Una pregunta single-choice por estudiante y sin sesión guiada.','Preparación y auditoría fuera de medición.','Consumo estimado, no contador facturable.']};
 report.buildChecks=[initialBuildCheck];
@@ -31,6 +31,7 @@ report.migrationInventoryScope='Inventario de archivos locales; contrastar con l
 report.scriptSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-protocol.mjs')).digest('hex');
 report.targetAdapterSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-target.mjs')).digest('hex');
 report.instrumentation={version:'rpc-failure-v1',header:'X-Aulify-Rpc-Failure',sources:Object.fromEntries(await Promise.all(['src/lib/rpc-failure.ts','src/lib/response-timing.ts','src/lib/supabase/transport.ts','src/lib/supabase/auth-availability.ts','src/lib/supabase/server.ts','src/app/api/sync/route.ts','src/app/api/workspace/route.ts','src/app/api/commands/route.ts','tools/datos/load-failure-category.mjs'].map(async path=>[path,crypto.createHash('sha256').update(await fs.readFile(path)).digest('hex')]))),limitations:['Cabecera disponible en fallosRPC de sync/workspace; comandos y Auth pueden quedar unclassified.','Hashes de fuente local; la correspondencia de fuente y compilado debe verificarse antes de autorizar una medición.']};
+report.confirmedProjection={version:'answer-ack-revision-v1',scope:'Mismo sondeo cada segundo; no repite snapshot por la revisión exacta de la respuesta ya aplicada. Cambios externos y recuperación conservan sus lecturas.'};
 report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true,preparation:{readAttempts:3,minimumWaitMs:30000,retryable:[429,503,'client_timeout','client_transport'],commandsRetried:false}};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
@@ -67,15 +68,17 @@ try{
  report.buildChecks.push(await verifyBuild());
  report.measurementStartedAt=new Date().toISOString();const began=performance.now();measuring=true;loop.enable();
  const poll=s=>{if(s.running||performance.now()>=began+60000||abortReason||s.authorizationLost||Date.now()<s.retryAt){skipped++;return;}s.running=(async()=>{
+  const epoch=s.mutationEpoch;
   const sync=await request(s,`/api/sync?activity=${s.activityId}`,undefined,'sync');
+  if(epoch!==s.mutationEpoch)return;
   let error=sync.error,serverWait=sync.retryAfterMs||0;
-  if(!error&&s.lastRevision!==sync.data.revision){const snap=await request(s,`/api/workspace?activity=${s.activityId}`,undefined,'snapshot');error=snap.error;serverWait=snap.retryAfterMs||0;if(!error)s.lastRevision=sync.data.revision;}
+  if(!error&&s.lastRevision!==sync.data.revision){const snap=await request(s,`/api/workspace?activity=${s.activityId}`,undefined,'snapshot');error=snap.error;serverWait=snap.retryAfterMs||0;if(!error&&epoch===s.mutationEpoch)s.lastRevision=sync.data.revision;}
   if(error){if(error===401||error===403)s.authorizationLost=true;s.retryAt=Date.now()+Math.max(s.retryMs,serverWait);s.retryMs=Math.min(8000,s.retryMs*2);}else{s.retryAt=0;s.retryMs=1000;}
  })().finally(()=>s.running=null);};
  sessions.forEach((s,i)=>timers.push(setTimeout(()=>{poll(s);timers.push(setInterval(()=>poll(s),1000));},i*1000/204)));
  monitor=setInterval(()=>{const rs=report.records.filter(x=>x.measurement);console.log(`Diagnóstico: ${Math.round((performance.now()-began)/1000)}s, ${rs.length} solicitudes, ${rs.filter(x=>x.status!==200).length} fallos.`);},15000);
  await delay(Math.max(0,began+20000-performance.now()));const acks=[],dispatches=[];
- await Promise.all(students.map(async(s,i)=>{await delay(Math.max(0,began+20000+i*1900/200-performance.now()));if(abortReason)return;const q=fixtures.groups.find(g=>g.group===s.group).questions[0],key=crypto.randomUUID();dispatches.push(performance.now());const start=performance.now();const r=await request(s,'/api/commands',{action:'submitAnswer',args:[s.attemptId,q.id,{type:'single',optionId:q.correctOptionId},key,false]},'answer');if(r.data?.result?.attempt?.answers?.some(a=>a.idempotencyKey===key))acks.push({attemptId:s.attemptId,questionId:q.id,key,ms:performance.now()-start});}));
+ await Promise.all(students.map(async(s,i)=>{await delay(Math.max(0,began+20000+i*1900/200-performance.now()));if(abortReason)return;const q=fixtures.groups.find(g=>g.group===s.group).questions[0],key=crypto.randomUUID();dispatches.push(performance.now());const start=performance.now();const r=await request(s,'/api/commands',{action:'submitAnswer',args:[s.attemptId,q.id,{type:'single',optionId:q.correctOptionId},key,false]},'answer');if(r.data?.result?.attempt?.answers?.some(a=>a.idempotencyKey===key)){s.mutationEpoch++;if(/^[a-f0-9]{32}$/.test(r.data.result.syncRevision??''))s.lastRevision=r.data.result.syncRevision;acks.push({attemptId:s.attemptId,questionId:q.id,key,ms:performance.now()-start});}}));
  report.burst={target:200,dispatched:dispatches.length,windowMs:Math.max(...dispatches)-Math.min(...dispatches),confirmed:acks.length,confirmationP95Ms:p95(acks.map(x=>x.ms))};
  await delay(Math.max(0,began+60000-performance.now()));timers.forEach(clearTimeout);clearInterval(monitor);await Promise.allSettled(sessions.map(s=>s.running));measuring=false;loop.disable();report.measurementEndedAt=new Date().toISOString();report.elapsedMs=performance.now()-began;report.skippedPollTicks=skipped;
  await fs.writeFile('.local-private/protocol-confirmed.json',JSON.stringify({savedAt:new Date().toISOString(),activities:report.activities,acks})+'\n');
