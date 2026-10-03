@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "environment": "PostgreSQL nativo aislado y archivos locales",
+  "sourceProject": "bnqyyumfmyexsqszglab",
+  "postgresVersion": "17.6",
+  "restoredAt": "2026-10-03T00:27:51.554Z",
+  "schemas": [
+    "app",
+    "auth",
+    "public",
+    "storage",
+    "supabase_migrations"
+  ],
+  "tables": 83,
+  "appTables": 47,
+  "migrations": 25,
+  "allTableFingerprintsMatch": true,
+  "rlsPoliciesMatch": true,
+  "storageObjects": 42,
+  "storageBytes": 22024706,
+  "allStorageHashesMatch": true,
+  "originalProjectModified": false,
+  "credentialsPublished": false,
+  "limitations": [
+    "No recrea Supabase Auth HTTP, PostgREST ni Storage HTTP en otro proyecto.",
+    "El cotejo detecta diferencias de objetos entre copias; no crea una instantánea atómica de base y archivos.",
+    "No restaura roles de inicio de sesión, configuración SMTP, Realtime ni Vault."
+  ]
+}

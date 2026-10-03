@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "projectRef": "bnqyyumfmyexsqszglab",
+  "startedAt": "2026-10-03T00:15:21.779Z",
+  "capturedAt": "2026-10-03T00:18:25.711Z",
+  "postgresVersion": "17.6",
+  "schemas": [
+    "app",
+    "auth",
+    "public",
+    "storage",
+    "supabase_migrations"
+  ],
+  "tables": 83,
+  "appTables": 47,
+  "archiveBytes": 6068752,
+  "archiveSha256": "52450d6700182c9075660b9d0017bb67b6a336c9dd9da185d25dcced6ceb3b84",
+  "storageMetadataObjects": 42,
+  "credentialsPublished": false,
+  "limitations": [
+    "No incluye Realtime, Vault ni credenciales de los servicios administrados.",
+    "Las contraseñas cifradas de Auth son datos privados del archivo; no se exportan contraseñas de roles PostgreSQL.",
+    "Los bytes de Storage se respaldan aparte; este archivo no demuestra la restauración de sus servicios HTTP."
+  ]
+}
