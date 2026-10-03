@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "verifiedAt": "2026-10-03T16:03:18.749Z",
+  "migration": "20261003154500",
+  "rolesVerified": 2,
+  "directAndBatchRevisionsMatch": true,
+  "callerSuppliedIdentityIgnored": true,
+  "authenticatedBatchDenied": true,
+  "anonymousBatchDenied": true,
+  "environment": "Aplicación compilada local con Auth/PostgREST/PostgreSQL alojados; cuentas ficticias"
+}

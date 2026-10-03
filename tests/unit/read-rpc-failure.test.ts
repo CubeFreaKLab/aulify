@@ -4,13 +4,14 @@ import { createClient } from '@supabase/supabase-js';
 import { GET as sync } from '../../src/app/api/sync/route';
 import { GET as workspace } from '../../src/app/api/workspace/route';
 
-const mocks = vi.hoisted(() => ({ rpc: vi.fn(), getClaims: vi.fn() }));
+const mocks = vi.hoisted(() => ({ rpc: vi.fn(), getClaims: vi.fn(), batch: vi.fn() }));
 vi.mock('@/lib/supabase/server', () => ({
   createSupabaseServer: async () => ({ auth: { getClaims: mocks.getClaims }, rpc: mocks.rpc }),
 }));
 vi.mock('@/lib/http', () => import('../../src/lib/http'));
 vi.mock('@/lib/rpc-failure', () => import('../../src/lib/rpc-failure'));
 vi.mock('@/lib/response-timing', () => import('../../src/lib/response-timing'));
+vi.mock('@/lib/supabase/sync-batch', () => ({ readVerifiedSync: mocks.batch }));
 
 const activity = '10000000-0000-4000-8000-000000000001';
 const secret = 'SQL secreto / JWT privado / respuesta del estudiante';
@@ -31,14 +32,64 @@ const routes = [
   },
 ] as const;
 
-describe.each(routes)('fallos de lectura en $rpc', ({ handler, scope, path, rpc }) => {
-  const request = () => new NextRequest(`https://aulify.example${path}`);
+describe('Sincronización interna con una identidad verificada', () => {
   beforeEach(() => {
+    vi.stubEnv('SUPABASE_SECRET_KEY', 'unit-test-only');
+    mocks.batch.mockReset();
     mocks.rpc.mockReset();
     mocks.getClaims.mockReset().mockResolvedValue(identity);
     vi.spyOn(console, 'warn').mockImplementation(() => undefined);
   });
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllEnvs();
+  });
+  it('ignora la identidad del query string y devuelve únicamente la revisión autorizada', async () => {
+    const value = {
+      revision: 'a'.repeat(32),
+      serverTime: '2026-10-03T00:00:00Z',
+      nextDeadline: null,
+    };
+    mocks.batch.mockResolvedValue(value);
+    const result = await sync(
+      new NextRequest(`https://aulify.example/api/sync?activity=${activity}&userId=another`),
+    );
+    expect(mocks.batch).toHaveBeenCalledExactlyOnceWith('fictitious', activity);
+    expect(mocks.rpc).not.toHaveBeenCalled();
+    expect(result.headers.get('Cache-Control')).toBe('private, no-store');
+    expect(await result.json()).toEqual(value);
+  });
+  it('no consulta el lote si la sesión no aporta una identidad válida', async () => {
+    mocks.getClaims.mockResolvedValue({ data: null, error: { status: 401 } });
+    const result = await sync(
+      new NextRequest(`https://aulify.example/api/sync?activity=${activity}`),
+    );
+    expect(result.status).toBe(401);
+    expect(mocks.batch).not.toHaveBeenCalled();
+  });
+  it('conserva la espera y no expone el error interno del transporte', async () => {
+    mocks.batch.mockRejectedValue({ code: '57014', message: secret });
+    const result = await sync(
+      new NextRequest(`https://aulify.example/api/sync?activity=${activity}`),
+    );
+    expect(result.status).toBe(503);
+    expect(result.headers.get('Retry-After')).toBe('30');
+    expect(JSON.stringify(await result.json())).not.toContain(secret);
+  });
+});
+
+describe.each(routes)('fallos de lectura en $rpc', ({ handler, scope, path, rpc }) => {
+  const request = () => new NextRequest(`https://aulify.example${path}`);
+  beforeEach(() => {
+    vi.stubEnv('SUPABASE_SECRET_KEY', '');
+    mocks.rpc.mockReset();
+    mocks.getClaims.mockReset().mockResolvedValue(identity);
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllEnvs();
+  });
 
   it.each([
     ['', 0, 'transport'],

@@ -5,6 +5,7 @@ import { parallel } from './load-workers.mjs';
 import {observeServerTiming,summarizeServerTiming} from './server-timing-aggregate.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import { loadTargetFromEnvironment } from './load-target.mjs';
+import { createServerClient } from '@supabase/ssr';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
@@ -86,7 +87,35 @@ async function request(s, route, { method = 'GET', body, tag = route, metric = t
   } catch (error) { if (!error.recorded) {record(target, tag, 0, performance.now() - start, 0);error.category=transportFailureCategory(error);error.tag=tag;} throw error; }
 }
 const command = async (s, action, ...args) => (await request(s, '/api/commands', { method: 'POST', body: { action, args }, tag: action })).value.result;
-function needsTokenRefresh(s){try{let v=[...s.jar].filter(([k])=>k.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,v])=>v).join('');v=decodeURIComponent(v);if(v.startsWith('base64-'))v=Buffer.from(v.slice(7),'base64url').toString();return(JSON.parse(v).expires_at??0)*1000<Date.now()+90000;}catch{return true;}}
+function needsTokenRefresh(s,lifetimeMs=90000){try{let v=[...s.jar].filter(([k])=>k.includes('auth-token')).sort(([a],[b])=>a.localeCompare(b)).map(([,v])=>v).join('');v=decodeURIComponent(v);if(v.startsWith('base64-'))v=Buffer.from(v.slice(7),'base64url').toString();return(JSON.parse(v).expires_at??0)*1000<Date.now()+lifetimeMs;}catch{return true;}}
+async function renewBeforeLongMode() {
+  if (!sessions.some(s=>needsTokenRefresh(s,28*60_000))) return;
+  phase=null;
+  let previous=0;
+  const renewal={startedAt:new Date().toISOString(),prepared:0,scope:'Preparación fuera de las fases, cuentas ficticias existentes; no cambia vigencia ni políticas de Auth'};
+  (report.authentication.longModeRenewals ||= []).push(renewal);
+  for (const s of sessions) {
+    await delay(Math.max(0,2500-(Date.now()-previous)));previous=Date.now();
+    const client=createServerClient(localEnv.NEXT_PUBLIC_SUPABASE_URL,localEnv.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,{
+      auth:{autoRefreshToken:false},
+      cookies:{getAll:()=>[...s.jar].map(([name,value])=>({name,value})),setAll:entries=>{for(const {name,value} of entries){if(value)s.jar.set(name,value);else s.jar.delete(name);}}},
+      global:{fetch:async(input,init)=>{
+        const start=performance.now();
+        const response=await fetch(input,{...init,signal:AbortSignal.timeout(15_000)});
+        const bytes=(await response.clone().arrayBuffer()).byteLength;
+        record(null,'authenticationRenewal',response.status,performance.now()-start,bytes);
+        return response;
+      }},
+    });
+    const {data,error}=await client.auth.refreshSession();
+    if(error||data.user?.id!==s.id||!data.session||needsTokenRefresh(s,50*60_000))
+      throw new Error('La preparación no pudo renovar una sesión ficticia; detalles privados omitidos.');
+    renewal.prepared++;await saveCookies();
+    if(renewal.prepared%25===0||renewal.prepared===204)console.log(`Renovación previa al modo largo: ${renewal.prepared}/204.`);
+  }
+  renewal.completedAt=new Date().toISOString();
+  await persist();
+}
 async function prepareSessions() {
   let previousRenewal=0;
   const activityByGroup = new Map();
@@ -330,6 +359,7 @@ try {
   else {
     report.status = 'running';
     for (const mode of ['individual', 'guided']) {
+      await renewBeforeLongMode();
       await runPhase(mode, 'warmup', 300);
       const warmup=report.phases.at(-1);
       if(warmup.confirmationP95Ms>4500){abortReason='Corte preventivo tras calentamiento completo: p95 de confirmación superior al triple del umbral de 1500 ms; no se inicia medición con saturación persistente.';aborted=true;throw new Error('WARMUP_SATURATION');}

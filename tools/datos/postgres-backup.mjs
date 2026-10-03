@@ -34,7 +34,11 @@ function run(name, args, env, input, timeout = 180_000) {
     child.stderr.on('data', (chunk) => {
       if (errorText.length < 1024 * 1024) errorText += chunk.toString();
     });
-    const timer = setTimeout(() => child.kill(), timeout);
+    let timedOut = false;
+    const timer = setTimeout(() => {
+      timedOut = true;
+      child.kill();
+    }, timeout);
     child.stdout.on('data', (chunk) => {
       size += chunk.length;
       if (size > 16 * 1024 * 1024) child.kill();
@@ -44,7 +48,7 @@ function run(name, args, env, input, timeout = 180_000) {
       clearTimeout(timer);
       reject(new Error(`No se pudo iniciar ${name}`));
     });
-    const complete = (code) => {
+    const complete = async (code) => {
       clearTimeout(timer);
       if (name === 'pg_ctl') {
         // En Windows el servidor puede heredar las tuberías del proceso de arranque.
@@ -53,21 +57,32 @@ function run(name, args, env, input, timeout = 180_000) {
         child.stderr.destroy();
       }
       if (code !== 0) {
-        const category = /schema .*public.*already exists/i.test(errorText)
-          ? 'public-schema-exists'
-          : /role .*does not exist/i.test(errorText)
-            ? 'missing-role'
-            : /function .*does not exist/i.test(errorText)
-              ? 'missing-function'
-              : /type .*does not exist/i.test(errorText)
-                ? 'missing-type'
-                : /extension .*not available/i.test(errorText)
-                  ? 'missing-extension'
-                  : /permission denied/i.test(errorText)
-                    ? 'permission'
-                    : /could not connect|connection refused/i.test(errorText)
-                      ? 'connection'
-                      : 'execution';
+        try {
+          await fs.writeFile(
+            path.join(root, `${name}-${Date.now()}-error-private.log`),
+            errorText,
+            { mode: 0o600 },
+          );
+        } catch {
+          /* La excepción pública nunca contiene el stderr privado. */
+        }
+        const category = timedOut
+          ? 'timeout'
+          : /schema .*public.*already exists/i.test(errorText)
+            ? 'public-schema-exists'
+            : /role .*does not exist/i.test(errorText)
+              ? 'missing-role'
+              : /function .*does not exist/i.test(errorText)
+                ? 'missing-function'
+                : /type .*does not exist/i.test(errorText)
+                  ? 'missing-type'
+                  : /extension .*not available/i.test(errorText)
+                    ? 'missing-extension'
+                    : /permission denied/i.test(errorText)
+                      ? 'permission'
+                      : /could not connect|connection refused/i.test(errorText)
+                        ? 'connection'
+                        : 'execution';
         reject(new Error(`Falló ${name} (${category}); detalles privados omitidos`));
       } else resolve(Buffer.concat(stdout).toString('utf8').trim());
     };
@@ -231,6 +246,8 @@ async function createBackup() {
         `--file=${path.join(folder, 'database.dump')}`,
       ],
       env,
+      undefined,
+      600_000,
     );
     const archive = await fs.readFile(path.join(folder, 'database.dump'));
     assert.ok(archive.length < 256 * 1024 * 1024, 'Respaldo superior al límite privado');
