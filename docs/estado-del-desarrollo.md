@@ -20,7 +20,7 @@ La migración 25 incorpora un reintento administrativo limitado a un trabajo. [Q
 
 La [secuencia de aviso y datos mínimos](verificacion/visibilidad-aviso-datos-minimos.md) verifica un examen con una respuesta por interfaz, señal sintética autenticada y revisión docente. Conserva seis columnas de identificadores y tiempos; no modifica la respuesta ni la puntuación. La emisión física al cambiar de pestaña sigue pendiente porque la sesión de automatización mantuvo ambas pestañas visibles.
 
-El [respaldo remoto y la restauración nativa](verificacion/restauracion-postgres-nativa.md) recuperaron 83 tablas, incluidas las 47 de Aulify, las cuentas de Auth y los metadatos de Storage. Coincidieron las huellas, las políticas de acceso y las 25 migraciones. La copia y recuperación de 42 archivos comprobó 22.024.706 bytes por hashes. La base original permaneció intacta. No recrea las APIs de Supabase en otro proyecto; esa comprobación integral sigue pendiente. El ejecutor completo de carga ya admite la Preview autorizada; Q-06/Q-09 continúan abiertos hasta medirla.
+El [respaldo remoto y la restauración nativa](verificacion/restauracion-postgres-nativa.md) recuperaron 83 tablas, incluidas las 47 de Aulify, las cuentas de Auth y los metadatos de Storage. Coincidieron las huellas, las políticas de acceso y las 25 migraciones. La copia y recuperación de 42 archivos comprobó 22.024.706 bytes por hashes. La base original permaneció intacta. El [ensayo posterior de servicios](verificacion/recuperacion-servicios.md), del 3 de octubre, recreó Auth, PostgREST y Storage en Docker e inició una compilación separada de Aulify contra esa copia. Ambos perfiles accedieron a sus datos; la descarga conservó hashes y se rechazó acceso anónimo. AP-36 cubierto dentro de este despliegue local, sin SMTP ni promoción a producción. Q-06/Q-09 continúan abiertos.
 
 ## Actualización de interfaz pública
 
@@ -86,7 +86,7 @@ El [diagnóstico de la Preview protegida](verificacion/capacidad-preview-2026100
 1. Resolver el problema de capacidad y verificar cuatro grupos de cincuenta estudiantes con sus docentes, en ambas modalidades y dentro de las cuotas Free.
 2. Conservar la evidencia de AP-31 ya comprobada por capas y completar las verificaciones manuales pendientes; no repetir la carrera sin un cambio relevante.
 3. Configurar y verificar publicación por HTTPS, condiciones de CI/CD, confirmación y recuperación por correo. El dominio propio sigue fuera de esta entrega.
-4. Comprobar recuperación operativa de base, cuentas y archivos; completar revisión manual de accesibilidad. La primera entrada de ambos roles ya tiene evidencia con Supabase real.
+4. Conservar la [recuperación operativa comprobada](verificacion/recuperacion-servicios.md) de base, cuentas, archivos y aplicación; completar revisión manual de accesibilidad. La primera entrada de ambos roles ya tiene evidencia con Supabase real.
 5. Consolidar documentación y manuales sobre una revisión verificable. Jira y QMetry no están configurados; los casos, incidencias y resultados existentes se mantienen en el repositorio.
 
 La protección de Auth contra contraseñas filtradas requiere un plan de pago y permanece deshabilitada; se conserva Free y el [aviso del asesor](verificacion/asesores-supabase.json). Este aviso no representa una auditoría completa de seguridad.

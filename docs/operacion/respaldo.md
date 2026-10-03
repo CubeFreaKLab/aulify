@@ -45,7 +45,19 @@ El [ensayo registrado](../verificacion/restauracion-postgres-nativa.md) restaur�
 
 Esta prueba acredita la recuperación lógica y los bytes en un entorno local separado. No recrea las APIs de Supabase Auth, PostgREST y Storage ni demuestra un acceso HTTP del usuario al destino recuperado. Tampoco convierte las copias de base y archivos en una instantánea atómica: el cotejo detecta diferencias, pero todavía se necesita una ventana sin escrituras para un corte conjunto.
 
-## Completar la recuperación del servicio
+## Recuperación de servicios en un destino separado
+
+El [ensayo completo](../verificacion/recuperacion-servicios.md) añade Auth, PostgREST, Storage HTTP y una segunda compilación de Aulify contra la base recuperada. Verificó acceso de ambos perfiles, lectura de sus datos y actividades, aislamiento, descarga de los 42 archivos y rechazo anónimo. El proyecto original permaneció intacto.
+
+```powershell
+node tools/datos/service-recovery.mjs --create
+```
+
+Necesita Docker en funcionamiento y PostgreSQL 17 nativo para importar la copia. Genera un proyecto independiente, credenciales nuevas y puertos exclusivos de loopback; nunca admite un destino remoto ni importa sobre la base original. Los archivos de configuración, datos, sesiones, claves y volúmenes del ensayo son privados. El resumen público solo conserva comprobaciones agregadas. Al terminar detiene los servicios.
+
+`--resume` continúa el último ensayo privado interrumpido, utilizando sus puntos de comprobación. Para comprobar nuevamente un respaldo se crea otro destino con `--create`. `--stop` detiene únicamente el proyecto identificado por el puntero privado y conserva sus volúmenes.
+
+Para una futura migración a otro alojamiento administrado:
 
 1. Preparar un destino Supabase separado y sus credenciales, sin utilizar la base actual para el ensayo.
 2. Conservar la exportación lógica y los archivos en rutas privadas. Las migraciones por sí solas no respaldan cuentas ni contenido.
@@ -55,4 +67,4 @@ Esta prueba acredita la recuperación lógica y los bytes en un entorno local se
 
 El procedimiento oficial distingue esquemas administrados y datos del proyecto; una importación indiscriminada puede producir conflictos de permisos. [Migración mediante respaldo y restauración](https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore).
 
-La conexión de PostgreSQL, el respaldo remoto y la restauración lógica aislada están comprobados. La recuperación integral del servicio HTTP permanece pendiente de un destino Supabase independiente. No se habilitó facturación.
+La conexión PostgreSQL, el respaldo remoto y la recuperación local de datos, cuentas, archivos y aplicación están comprobados. SMTP y publicación en producción se verifican por separado. No se habilitó facturación ni se usó el proyecto original como destino.

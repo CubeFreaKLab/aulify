@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-03T13:57:51.138Z",
+  "environment": "Docker aislado, solo loopback",
+  "services": [
+    "PostgreSQL",
+    "Supabase Auth",
+    "PostgREST",
+    "Supabase Storage",
+    "Aulify Next.js"
+  ],
+  "images": {
+    "db": "postgres:17.6",
+    "auth": "supabase/gotrue:v2.196.0",
+    "rest": "postgrest/postgrest:v14.17",
+    "storage": "supabase/storage-api:v1.79.31",
+    "gateway": "nginx:1.28-alpine"
+  },
+  "database": {
+    "verifiedAt": "2026-10-03T13:39:59.816Z",
+    "tables": 83,
+    "fingerprintsMatch": true,
+    "policiesMatch": true,
+    "migrations": 25
+  },
+  "files": {
+    "verifiedAt": "2026-10-03T13:48:02.851Z",
+    "objects": 42,
+    "bytes": 22024706,
+    "httpHashesMatch": true
+  },
+  "access": {
+    "verifiedAt": "2026-10-03T13:49:31.016Z",
+    "restoredAccounts": 4,
+    "teacherLogin": true,
+    "studentLogin": true,
+    "rpcAuthorization": true,
+    "activityVerified": true,
+    "privateFileAuthorization": true,
+    "signedFileHashMatch": true,
+    "anonymousDataDenied": true,
+    "anonymousFileDenied": true
+  },
+  "web": {
+    "verifiedAt": "2026-10-03T13:57:49.453Z",
+    "buildId": "o3Y3JlhHax6Y3XoN0C9wN",
+    "rolesVerified": 2,
+    "teacherAndStudentLogin": true,
+    "restoredWorkspace": true,
+    "activityRead": true,
+    "privateDownloadHashMatch": true,
+    "anonymousWorkspaceDenied": true,
+    "sourceEnvironmentUnchanged": true,
+    "scope": "Aplicación compilada separadamente contra la copia; recorridos HTTP, sin evaluación visual ni SMTP."
+  },
+  "originalProjectModified": false,
+  "credentialsPublished": false,
+  "servicesStopped": true,
+  "limitations": [
+    "La comprobación se realiza en una copia local, no en otro proyecto administrado ni en Vercel.",
+    "La configuración usa nuevas credenciales locales; no recupera sesiones JWT antiguas ni secretos administrados.",
+    "El SMTP y servicios no utilizados como Realtime o Vault quedan fuera de este ensayo.",
+    "La subida por API preserva rutas y bytes; el servicio puede actualizar metadatos técnicos del objeto."
+  ]
+}
