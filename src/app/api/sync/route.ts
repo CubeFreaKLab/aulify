@@ -3,6 +3,7 @@ import { createSupabaseServer } from '@/lib/supabase/server';
 import { authFailureResponse, jsonResponse } from '@/lib/http';
 import { readRpcFailureResponse } from '@/lib/rpc-failure';
 import { responseTiming } from '@/lib/response-timing';
+import { readVerifiedSync } from '@/lib/supabase/sync-batch';
 
 export async function GET(request: NextRequest) {
   const handlerStartedAt = performance.now();
@@ -14,6 +15,11 @@ export async function GET(request: NextRequest) {
   if (identityError || !data?.claims.sub) return authFailureResponse(identityError);
   const startedAt = performance.now();
   try {
+    if (process.env.SUPABASE_SECRET_KEY) {
+      // El UID procede exclusivamente de la sesión verificada, nunca del query string.
+      const revision = await readVerifiedSync(data.claims.sub, id);
+      return responseTiming(jsonResponse(revision), handlerStartedAt, startedAt, performance.now());
+    }
     const {
       data: revision,
       error,

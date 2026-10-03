@@ -190,6 +190,56 @@ try {
     final.syncProjectionComplete === false && final.attempt.answers.length === 2,
     'Cambio común simulado durante el envío invalida la omisión de lectura, sin perder respuestas',
   );
+  const expected = {};
+  for (const [key, id] of Object.entries(users)) {
+    await actor(id);
+    expected[key] = await sync(activity.id);
+  }
+  await db.exec('reset role;set role service_role');
+  const originalSub = randomUUID();
+  await db.query("select set_config('request.jwt.claim.sub',$1,false)", [originalSub]);
+  const requests = Object.entries(users).map(([key, userId]) => ({
+    key,
+    userId,
+    activityId: activity.id,
+  }));
+  requests.push({ key: 'unknown', userId: randomUUID(), activityId: activity.id });
+  const batch = (await rows('select public.aulify_service_sync_batch($1) result', [requests]))[0]
+    .result;
+  ok(
+    Object.entries(expected).every(
+      ([key, revision]) => batch.find((r) => r.key === key)?.value?.revision === revision,
+    ),
+    'Lote de servicio conserva exactamente las huellas autorizadas de ambos perfiles',
+  );
+  ok(
+    batch.find((r) => r.key === 'unknown')?.error && !batch.find((r) => r.key === 'unknown')?.value,
+    'Identidad inexistente se rechaza sin cancelar a los otros participantes',
+  );
+  ok(
+    (await rows("select current_setting('request.jwt.claim.sub') value"))[0].value === originalSub,
+    'El lote restaura la identidad del llamador al terminar',
+  );
+  await actor(users.student);
+  let denied = false;
+  try {
+    await rows('select public.aulify_service_sync_batch($1)', [requests]);
+  } catch (error) {
+    denied = error.code === '42501';
+  }
+  ok(
+    denied,
+    'Una cuenta autenticada no puede llamar al lote de servicio ni elegir otras identidades',
+  );
+  await db.exec('reset role');
+  ok(
+    !(
+      await rows(
+        "select has_function_privilege('anon','public.aulify_service_sync_batch(jsonb)','execute') value",
+      )
+    )[0].value,
+    'El visitante tampoco puede ejecutar el lote de servicio',
+  );
   report.status = 'passed';
 } catch (error) {
   report.status = 'failed';

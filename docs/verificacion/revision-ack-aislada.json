@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-03T15:30:07.301Z",
+  "startedAt": "2026-10-03T15:47:26.068Z",
   "environment": "PGlite aislado, sin red",
   "checks": [
     {
@@ -33,6 +33,26 @@
     {
       "name": "Cambio común simulado durante el envío invalida la omisión de lectura, sin perder respuestas",
       "status": "passed"
+    },
+    {
+      "name": "Lote de servicio conserva exactamente las huellas autorizadas de ambos perfiles",
+      "status": "passed"
+    },
+    {
+      "name": "Identidad inexistente se rechaza sin cancelar a los otros participantes",
+      "status": "passed"
+    },
+    {
+      "name": "El lote restaura la identidad del llamador al terminar",
+      "status": "passed"
+    },
+    {
+      "name": "Una cuenta autenticada no puede llamar al lote de servicio ni elegir otras identidades",
+      "status": "passed"
+    },
+    {
+      "name": "El visitante tampoco puede ejecutar el lote de servicio",
+      "status": "passed"
     }
   ],
   "migrations": [
@@ -63,8 +83,9 @@
     "20261002221000_aulify_scoped_purge_retry.sql",
     "20261003142000_aulify_answer_ack_revision.sql",
     "20261003144500_aulify_ack_projection_guard.sql",
-    "20261003153300_aulify_ack_authorization_order.sql"
+    "20261003153300_aulify_ack_authorization_order.sql",
+    "20261003154500_aulify_service_sync_batch.sql"
   ],
   "status": "passed",
-  "completedAt": "2026-10-03T15:30:09.027Z"
+  "completedAt": "2026-10-03T15:47:27.876Z"
 }

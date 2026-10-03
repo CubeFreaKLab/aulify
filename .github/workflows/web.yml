@@ -130,7 +130,7 @@ jobs:
         run: node tools/datos/game-acceptance.mjs
       - name: Verificar revisiones independientes por participante
         run: node tools/datos/participant-sync-check.mjs
-      - name: Verificar confirmaciones y conservación de cambios externos
+      - name: Verificar confirmaciones y sincronización agrupada con permisos
         run: node tools/datos/answer-ack-revision-check.mjs
       - name: Verificar equivalencia del contexto de sincronización
         run: node tools/datos/sync-context-check.mjs
