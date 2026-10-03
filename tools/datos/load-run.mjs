@@ -142,6 +142,9 @@ function startPolling() {
         if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(snapshot.applied)s.lastRevision = result.revision; }
         s.retryAt=0;s.retryMs=1000;
       } catch (error) {
+        // La recuperación del cliente vuelve a descargar la proyección,
+        // aunque la huella no haya cambiado durante el fallo temporal.
+        s.lastRevision=null;
         if (error.status===401 || error.status===403) {
           s.latest=null;s.lastRevision=null;s.authorizationLost=true;
           if(error.status===403&&!aborted)try{await refresh(s);}catch{/* La única comprobación adicional también queda medida. */}

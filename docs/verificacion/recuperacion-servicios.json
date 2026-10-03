@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "completedAt": "2026-10-03T13:57:51.138Z",
+  "completedAt": "2026-10-03T15:09:42.325Z",
   "environment": "Docker aislado, solo loopback",
   "services": [
     "PostgreSQL",
@@ -17,20 +17,20 @@
     "gateway": "nginx:1.28-alpine"
   },
   "database": {
-    "verifiedAt": "2026-10-03T13:39:59.816Z",
+    "verifiedAt": "2026-10-03T15:09:00.020Z",
     "tables": 83,
     "fingerprintsMatch": true,
     "policiesMatch": true,
-    "migrations": 25
+    "migrations": 27
   },
   "files": {
-    "verifiedAt": "2026-10-03T13:48:02.851Z",
+    "verifiedAt": "2026-10-03T15:09:05.020Z",
     "objects": 42,
     "bytes": 22024706,
     "httpHashesMatch": true
   },
   "access": {
-    "verifiedAt": "2026-10-03T13:49:31.016Z",
+    "verifiedAt": "2026-10-03T15:09:06.991Z",
     "restoredAccounts": 4,
     "teacherLogin": true,
     "studentLogin": true,
@@ -42,8 +42,8 @@
     "anonymousFileDenied": true
   },
   "web": {
-    "verifiedAt": "2026-10-03T13:57:49.453Z",
-    "buildId": "o3Y3JlhHax6Y3XoN0C9wN",
+    "verifiedAt": "2026-10-03T15:09:40.536Z",
+    "buildId": "hwkVgynyK9HLB51n6cO6Z",
     "rolesVerified": 2,
     "teacherAndStudentLogin": true,
     "restoredWorkspace": true,

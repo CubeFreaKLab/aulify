@@ -31,7 +31,7 @@ report.migrationInventoryScope='Inventario de archivos locales; contrastar con l
 report.scriptSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-protocol.mjs')).digest('hex');
 report.targetAdapterSha256=crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-target.mjs')).digest('hex');
 report.instrumentation={version:'rpc-failure-v1',header:'X-Aulify-Rpc-Failure',sources:Object.fromEntries(await Promise.all(['src/lib/rpc-failure.ts','src/lib/response-timing.ts','src/lib/supabase/transport.ts','src/lib/supabase/auth-availability.ts','src/lib/supabase/server.ts','src/app/api/sync/route.ts','src/app/api/workspace/route.ts','src/app/api/commands/route.ts','tools/datos/load-failure-category.mjs'].map(async path=>[path,crypto.createHash('sha256').update(await fs.readFile(path)).digest('hex')]))),limitations:['Cabecera disponible en fallosRPC de sync/workspace; comandos y Auth pueden quedar unclassified.','Hashes de fuente local; la correspondencia de fuente y compilado debe verificarse antes de autorizar una medición.']};
-report.confirmedProjection={version:'answer-ack-revision-v1',scope:'Sondeo cada segundo cuando no hay respuesta en curso; no repite snapshot solo cuando la base conocida y los cambios proyectados coinciden con el ACK. Cambios externos y recuperación conservan sus lecturas.'};
+report.confirmedProjection={version:'answer-ack-projection-guard-v2',scope:'Sondeo cada segundo cuando no hay respuesta en curso; no repite snapshot solo cuando la base conocida y los cambios proyectados coinciden con el ACK. Cambios externos y recuperación conservan sus lecturas.'};
 report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true,preparation:{readAttempts:3,minimumWaitMs:30000,retryable:[429,503,'client_timeout','client_transport'],commandsRetried:false}};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
@@ -73,7 +73,7 @@ try{
   if(epoch!==s.mutationEpoch)return;
   let error=sync.error,serverWait=sync.retryAfterMs||0;
   if(!error&&s.lastRevision!==sync.data.revision){const snap=await request(s,`/api/workspace?activity=${s.activityId}`,undefined,'snapshot');error=snap.error;serverWait=snap.retryAfterMs||0;if(!error&&epoch===s.mutationEpoch)s.lastRevision=sync.data.revision;}
-  if(error){if(error===401||error===403)s.authorizationLost=true;s.retryAt=Date.now()+Math.max(s.retryMs,serverWait);s.retryMs=Math.min(8000,s.retryMs*2);}else{s.retryAt=0;s.retryMs=1000;}
+  if(error){s.lastRevision=null;if(error===401||error===403)s.authorizationLost=true;s.retryAt=Date.now()+Math.max(s.retryMs,serverWait);s.retryMs=Math.min(8000,s.retryMs*2);}else{s.retryAt=0;s.retryMs=1000;}
  })().finally(()=>s.running=null);};
  sessions.forEach((s,i)=>timers.push(setTimeout(()=>{poll(s);timers.push(setInterval(()=>poll(s),1000));},i*1000/204)));
  monitor=setInterval(()=>{const rs=report.records.filter(x=>x.measurement);console.log(`Diagnóstico: ${Math.round((performance.now()-began)/1000)}s, ${rs.length} solicitudes, ${rs.filter(x=>x.status!==200).length} fallos.`);},15000);
