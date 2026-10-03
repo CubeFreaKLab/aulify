@@ -130,7 +130,10 @@ try {
     false,
   );
   ok(
-    ack.syncRevision === (await sync(activity.id)) && ack.syncRevision !== before,
+    ack.syncRevision === (await sync(activity.id)) &&
+      ack.syncRevision !== before &&
+      ack.syncBaseRevision === before &&
+      ack.syncProjectionComplete === true,
     'ACK corresponde a la revisión persistida después de la transacción',
   );
   ok(
@@ -150,7 +153,9 @@ try {
     false,
   );
   ok(
-    JSON.stringify(replay) === JSON.stringify(ack),
+    JSON.stringify(replay.attempt) === JSON.stringify(ack.attempt) &&
+      replay.feedback === ack.feedback &&
+      replay.syncRevision === ack.syncRevision,
     'Reintento conserva resultado y revisión sin duplicar la respuesta',
   );
   await actor(users.peer);
@@ -166,6 +171,24 @@ try {
   ok(
     properties.prosecdef === false && !properties.anon && properties.authenticated,
     'Conserva invocador y permisos de la entrada pública',
+  );
+  await db.exec('reset role');
+  await db.exec(`create function app.test_external_revision() returns trigger language plpgsql as $$begin
+    update app.activity_sync_versions set public_revision=public_revision+1 where activity_id=(select p.activity_id from app.attempt_questions q join app.attempts a on a.id=q.attempt_id join app.participants p on p.id=a.participant_id where q.id=new.attempt_question_id);
+    return new; end $$;
+    create trigger test_external_revision after insert on app.responses for each row execute function app.test_external_revision();`);
+  await actor(users.student);
+  const final = await cmd(
+    'submitAnswer',
+    attempt.id,
+    resource.blocks[0].questions[1].id,
+    { type: 'single', optionId: question.correctOptionId },
+    randomUUID(),
+    false,
+  );
+  ok(
+    final.syncProjectionComplete === false && final.attempt.answers.length === 2,
+    'Cambio común simulado durante el envío invalida la omisión de lectura, sin perder respuestas',
   );
   report.status = 'passed';
 } catch (error) {

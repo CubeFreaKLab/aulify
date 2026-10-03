@@ -68,6 +68,7 @@ let activeMode: boolean | null = null;
 let activeActivityScope: string | null = null;
 let generation = 0;
 let projectionEpoch = 0;
+let pendingAnswers = 0;
 let automaticRetryAt = 0;
 let commandNotice: { message: string } | null = null;
 type ImmediateFeedback = {
@@ -77,7 +78,7 @@ type ImmediateFeedback = {
   correct: boolean;
 };
 const feedbackByAnswer = new Map<string, ImmediateFeedback>();
-const acknowledgedSyncRevisions = new Map<string, string>();
+const acknowledgedSyncRevisions = new Map<string, { before: string; after: string }>();
 export function getImmediateFeedback(attemptId: string, questionId: string) {
   return feedbackByAnswer.get(`${attemptId}:${questionId}`);
 }
@@ -90,6 +91,7 @@ export function clearWorkspaceSession() {
   activeActivityScope = null;
   refreshPending = null;
   automaticRetryAt = 0;
+  pendingAnswers = 0;
   commandNotice = null;
   feedbackByAnswer.clear();
   acknowledgedSyncRevisions.clear();
@@ -171,11 +173,20 @@ function remoteRepository(): WorkspaceRepository {
     startAttempt: command('startAttempt', 1),
     submitAnswer: async (...args: unknown[]) => {
       const currentGeneration = generation;
-      const result = await remoteCommand<{
+      type AnswerConfirmation = {
         attempt: Attempt;
         feedback: ImmediateFeedback | null;
         syncRevision?: string;
-      }>('submitAnswer', args.slice(0, 5));
+        syncBaseRevision?: string;
+        syncProjectionComplete?: boolean;
+      };
+      pendingAnswers++;
+      let result: AnswerConfirmation;
+      try {
+        result = await remoteCommand<AnswerConfirmation>('submitAnswer', args.slice(0, 5));
+      } finally {
+        if (currentGeneration === generation) pendingAnswers = Math.max(0, pendingAnswers - 1);
+      }
       const attempt: Attempt = {
         ...result.attempt,
         answers: result.attempt.answers.map((answer) => ({
@@ -229,8 +240,17 @@ function remoteRepository(): WorkspaceRepository {
             : remote.studentActivities,
         };
         snapshot = { ...snapshot, state, error: commandNotice?.message || null, message: null };
-        if (result.syncRevision && /^[a-f0-9]{32}$/.test(result.syncRevision))
-          acknowledgedSyncRevisions.set(attempt.activityId, result.syncRevision);
+        if (
+          result.syncProjectionComplete &&
+          result.syncRevision &&
+          /^[a-f0-9]{32}$/.test(result.syncRevision) &&
+          result.syncBaseRevision &&
+          /^[a-f0-9]{32}$/.test(result.syncBaseRevision)
+        )
+          acknowledgedSyncRevisions.set(attempt.activityId, {
+            before: result.syncBaseRevision,
+            after: result.syncRevision,
+          });
       }
       return attempt;
     },
@@ -448,6 +468,7 @@ export function useDemo() {
       if (
         document.visibilityState !== 'visible' ||
         syncing ||
+        pendingAnswers > 0 ||
         authorizationLost ||
         Date.now() < Math.max(retryAt, automaticRetryAt)
       )
@@ -466,7 +487,12 @@ export function useDemo() {
         if (cancelled || currentGeneration !== generation || currentProjection !== projectionEpoch)
           return;
         const recovering = failures > 0;
-        if (!recovering && acknowledgedSyncRevisions.get(activityId) === value.revision) {
+        const acknowledged = acknowledgedSyncRevisions.get(activityId);
+        if (
+          !recovering &&
+          acknowledged?.before === revision &&
+          acknowledged?.after === value.revision
+        ) {
           // Solo omitir la proyección que coincide con el ACK ya aplicado.
           // Un cambio externo, un plazo o la recuperación aún exigen lectura.
           revision = value.revision;

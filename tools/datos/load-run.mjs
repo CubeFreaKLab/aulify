@@ -28,7 +28,7 @@ const privatePath = '.local-private/load-http-sessions.json';
 const reportPath = `docs/verificacion/datos-carga-${new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)}.json`;
 const runId = crypto.randomUUID();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: expectedBuild, target: loadTarget.metadata, environment: { application: loadTarget.local ? 'Next.js production local HTTP' : 'Next.js Vercel Preview HTTPS', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync; GET /api/workspace?activity=UUID solo cuando cambia la huella; reintento 1/2/4/8 s ante fallo sin snapshot adicional', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', loadTarget.local ? 'La aplicación está en una computadora local, no en el alojamiento público.' : 'Vista previa protegida de Vercel; no es producción ni una liberación pública.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
+const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: expectedBuild, target: loadTarget.metadata, environment: { application: loadTarget.local ? 'Next.js production local HTTP' : 'Next.js Vercel Preview HTTPS', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync cada segundo, suspendido durante respuesta propia; snapshot solo para cambios no proyectados por un ACK con base conocida y marca completa; reintento 1/2/4/8 s', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', loadTarget.local ? 'La aplicación está en una computadora local, no en el alojamiento público.' : 'Vista previa protegida de Vercel; no es producción ni una liberación pública.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
 report.environment.confirmation = 'ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.';
 report.environment.logicalBodyBudgetBytes = budgetBytes;
 report.protocol = diagnosticOnly ? 'diagnostic-individual-warmup-and-next-preparation' : 'full-q06';
@@ -133,7 +133,7 @@ async function refresh(s, tag = 'snapshot') {
 function startPolling() {
   const timers = [];
   const poll = s => {
-    if (s.running || aborted || s.authorizationLost || Date.now() < s.retryAt) { if (phase) phase.skippedPollTicks++; return; }
+    if (s.running || s.pendingAnswer || aborted || s.authorizationLost || Date.now() < s.retryAt) { if (phase) phase.skippedPollTicks++; return; }
     s.running = (async () => {
       try {
         const epoch=s.mutationEpoch;
@@ -201,7 +201,9 @@ async function answer(s, index, current) {
   const started = performance.now();
   for (let retry = 0; retry < 3; retry++) {
     try {
-      const result = await command(s, 'submitAnswer', s.attemptId, question.id, { type: 'single', optionId: question.correctOptionId }, key, false);
+      s.pendingAnswer=true;
+      let result;
+      try{result=await command(s, 'submitAnswer', s.attemptId, question.id, { type: 'single', optionId: question.correctOptionId }, key, false);}finally{s.pendingAnswer=false;}
       if (!result.attempt.answers.some(a => a.questionId === question.id && a.idempotencyKey === key)) throw new Error('CONFIRMATION_MISSING');
       if (!current.confirmed.has(`${s.attemptId}:${question.id}`)) {
         const elapsed=performance.now()-started;
@@ -212,7 +214,7 @@ async function answer(s, index, current) {
       // El comando responde después del COMMIT y aporta el intento autorizado.
       // Aplicarlo reproduce el avance inmediato del cliente; las lecturas antiguas no lo revierten.
       s.mutationEpoch++;
-      if(/^[a-f0-9]{32}$/.test(result.syncRevision??''))s.lastRevision=result.syncRevision;
+      if(result.syncProjectionComplete&&result.syncBaseRevision===s.lastRevision&&/^[a-f0-9]{32}$/.test(result.syncRevision??''))s.lastRevision=result.syncRevision;
       if(s.latest){
         s.latest.state.attempts=s.latest.state.attempts.filter(a=>a.id!==s.attemptId).concat(result.attempt);
         if(s.latest.studentActivities?.[s.activityId])s.latest.studentActivities[s.activityId].attempt=result.attempt;

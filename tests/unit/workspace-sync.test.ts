@@ -318,7 +318,13 @@ describe('adopción de revisión tras una proyección vigente', () => {
         if (url === '/api/commands') {
           current = 'b'.repeat(32);
           return Response.json({
-            result: { attempt: attempt(true), feedback: null, syncRevision: current },
+            result: {
+              attempt: attempt(true),
+              feedback: null,
+              syncRevision: current,
+              syncBaseRevision: 'a'.repeat(32),
+              syncProjectionComplete: true,
+            },
           });
         }
         reads++;
@@ -350,16 +356,25 @@ describe('adopción de revisión tras una proyección vigente', () => {
       'fetch',
       vi.fn(async (url: string) => {
         if (url.startsWith('/api/sync'))
-          return ++polls === 1 ? pending.promise : Response.json({ revision: 'b'.repeat(32) });
+          return ++polls === 2
+            ? pending.promise
+            : Response.json({ revision: (polls === 1 ? 'a' : 'b').repeat(32) });
         if (url === '/api/commands')
           return Response.json({
-            result: { attempt: attempt(true), feedback: null, syncRevision: 'b'.repeat(32) },
+            result: {
+              attempt: attempt(true),
+              feedback: null,
+              syncRevision: 'b'.repeat(32),
+              syncBaseRevision: 'a'.repeat(32),
+              syncProjectionComplete: true,
+            },
           });
         reads++;
         return Response.json(workspace(reads));
       }),
     );
     await mount();
+    await tick();
     await tick();
     await store.runDemo(
       (repo) =>
@@ -370,7 +385,82 @@ describe('adopción de revisión tras una proyección vigente', () => {
     pending.resolve(Response.json({ revision: 'a'.repeat(32) }));
     await tick(0);
     await tick();
-    expect(reads).toBe(1);
+    expect(reads).toBe(2);
+    expect(mocks.read()?.state?.attempts[0].answers).toHaveLength(1);
+  });
+
+  it.each(['external', 'unknown'])(
+    'actualiza el estado externo aunque coincida la revisión final del ACK: %s',
+    async (kind) => {
+      let reads = 0,
+        polls = 0;
+      vi.stubGlobal(
+        'fetch',
+        vi.fn(async (url: string) => {
+          if (url.startsWith('/api/sync'))
+            return Response.json({ revision: (++polls === 1 ? 'a' : 'b').repeat(32) });
+          if (url === '/api/commands')
+            return Response.json({
+              result: {
+                attempt: attempt(true),
+                feedback: null,
+                syncRevision: 'b'.repeat(32),
+                syncBaseRevision: (kind === 'unknown' ? 'c' : 'a').repeat(32),
+                syncProjectionComplete: kind !== 'external',
+              },
+            });
+          reads++;
+          return Response.json(workspace(reads, reads > 2));
+        }),
+      );
+      await mount();
+      await tick();
+      await store.runDemo(
+        (repo) =>
+          repo.submitAnswer(
+            'attempt',
+            'question',
+            { type: 'single', optionId: 'one' },
+            'key',
+            false,
+          ),
+        undefined,
+        { refresh: 'deferred' },
+      );
+      await tick();
+      expect(reads).toBe(3);
+      expect(mocks.read()?.state?.revision).toBe(3);
+    },
+  );
+
+  it('suspende el sondeo solo mientras espera la confirmación y lo reanuda después', async () => {
+    let polls = 0;
+    const pending = deferred();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync')) {
+          polls++;
+          return Response.json({ revision: 'a'.repeat(32) });
+        }
+        if (url === '/api/commands') return pending.promise;
+        return Response.json(workspace());
+      }),
+    );
+    await mount();
+    await tick();
+    const sending = store.runDemo(
+      (repo) =>
+        repo.submitAnswer('attempt', 'question', { type: 'single', optionId: 'one' }, 'key', false),
+      undefined,
+      { refresh: 'deferred' },
+    );
+    await tick(3000);
+    expect(polls).toBe(1);
+    pending.resolve(Response.json({ result: { attempt: attempt(true), feedback: null } }));
+    await sending;
+    await tick();
+    expect(polls).toBe(2);
     expect(mocks.read()?.state?.attempts[0].answers).toHaveLength(1);
   });
 
@@ -384,7 +474,13 @@ describe('adopción de revisión tras una proyección vigente', () => {
           return ++polls === 2 ? unavailable() : Response.json({ revision: 'b'.repeat(32) });
         if (url === '/api/commands')
           return Response.json({
-            result: { attempt: attempt(true), feedback: null, syncRevision: 'b'.repeat(32) },
+            result: {
+              attempt: attempt(true),
+              feedback: null,
+              syncRevision: 'b'.repeat(32),
+              syncBaseRevision: 'a'.repeat(32),
+              syncProjectionComplete: true,
+            },
           });
         reads++;
         return Response.json(workspace(reads, reads > 2));
