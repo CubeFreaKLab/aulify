@@ -1,0 +1,14 @@
+{
+  "verifiedAt": "2026-10-03T01:11:09.596Z",
+  "environment": "Vercel Preview protegida",
+  "project": "aulify",
+  "bypassRevokedInPanel": true,
+  "previousSecretRejected": true,
+  "httpStatus": 302,
+  "privateLocalCopyRemoved": true,
+  "generalProtectionUnchanged": true,
+  "limitations": [
+    "El despliegue conserva la variable de sistema antigua hasta reconstruirse; el token fue retirado de la lista de acceso y rechazado por la protección.",
+    "No se publican valores de credenciales, sesiones ni cabeceras."
+  ]
+}

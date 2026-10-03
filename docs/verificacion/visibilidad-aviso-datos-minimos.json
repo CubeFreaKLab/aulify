@@ -1,0 +1,33 @@
+{
+  "capturedAt": "2026-10-03T01:08:14.640Z",
+  "case": "AP-27",
+  "environment": "Aplicación compilada local 4fa2c2d, Chrome y Supabase remoto; dos cuentas ficticias",
+  "revision": "397cad168716ecb36d86e155be7b79222aef663f",
+  "preparation": "Examen individual con seguimiento habilitado y tres preguntas. Una respuesta enviada por interfaz; señal sintética enviada mediante contrato JWT después de comprobar que el navegador controlado no cambiaba visibilityState.",
+  "checks": {
+    "signalArrived": true,
+    "unchangedAnswers": true,
+    "unchangedGrade": true,
+    "attemptRemainedOpen": true,
+    "eventCount": 1,
+    "noticeVisibleBeforeStart": true,
+    "teacherLimitationVisible": true,
+    "teacherReviewStored": true,
+    "unchangedGradeAfterReview": true
+  },
+  "minimalData": {
+    "events": 1,
+    "columns": ["id", "attempt_id", "client_event_key", "hidden_at", "visible_at", "received_at"],
+    "validIntervals": true
+  },
+  "sourceHashes": {
+    "src/components/activity-screen.tsx": "cc431dd345d4c3a305e16e5497e219a94338b507bd3a83a278d04b3f01d6c3e6"
+  },
+  "status": "passed",
+  "limitations": [
+    "No verifica la emisión de visibilitychange al cambiar una pestaña física: la sesión de automatización mantuvo ambas visibles.",
+    "No representa detección de otras aplicaciones ni prueba de trampa.",
+    "No verifica todos los navegadores ni dispositivos físicos."
+  ],
+  "completedAt": "2026-10-03T01:11:52.401Z"
+}
