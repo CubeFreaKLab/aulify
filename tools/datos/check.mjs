@@ -189,9 +189,9 @@ await reject(()=>db.query('select public.aulify_reserve_upload($1,$2,$3,$4,$5,$6
 await db.exec('reset role');
 const catalog=(await db.query(`select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='app' and c.relkind='r'`)).rows;
 assert(catalog.length===47&&catalog.every(x=>x.relrowsecurity),'RLS en las 47 tablas propias');
-const publicFunctions=(await db.query(`select p.proname,p.prosecdef,has_function_privilege('anon',p.oid,'EXECUTE') anon from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'aulify_%'`)).rows;
-const expectedFunctions=['aulify_activity_snapshot','aulify_command','aulify_file','aulify_maintenance','aulify_register_file','aulify_reserve_upload','aulify_snapshot','aulify_sync','aulify_workspace_overview'];
-assert(JSON.stringify(publicFunctions.map(x=>x.proname).sort())===JSON.stringify(expectedFunctions)&&publicFunctions.every(x=>!x.prosecdef&&!x.anon),'nueve wrappers públicos identificados, invoker y sin ejecución anónima');
+const publicFunctions=(await db.query(`select p.proname,p.prosecdef,has_function_privilege('anon',p.oid,'EXECUTE') anon,has_function_privilege('authenticated',p.oid,'EXECUTE') authenticated,has_function_privilege('service_role',p.oid,'EXECUTE') service from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'aulify_%'`)).rows;
+const expectedFunctions=['aulify_activity_snapshot','aulify_command','aulify_file','aulify_maintenance','aulify_register_file','aulify_reserve_upload','aulify_service_sync_batch','aulify_snapshot','aulify_sync','aulify_workspace_overview'];
+assert(JSON.stringify(publicFunctions.map(x=>x.proname).sort())===JSON.stringify(expectedFunctions)&&publicFunctions.every(x=>!x.anon&&(x.proname==='aulify_service_sync_batch'?x.prosecdef&&!x.authenticated&&x.service:!x.prosecdef)),'nueve wrappers invoker y lote definer exclusivo del servicio, sin ejecución anónima');
 await db.exec('set role anon');
 await reject(()=>db.query('select public.aulify_snapshot()'),'anon no obtiene snapshot');
 await reject(()=>db.query('select public.aulify_workspace_overview()'),'anon no obtiene resumen del aula');
