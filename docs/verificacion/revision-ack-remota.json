@@ -1,9 +1,11 @@
 {
   "status": "passed",
-  "verifiedAt": "2026-10-03T14:28:55.104Z",
-  "migration": "20261003142000",
+  "verifiedAt": "2026-10-03T15:15:00.105Z",
+  "migration": "20261003144500",
   "environment": "Auth/PostgREST/PostgreSQL alojados, cuenta ficticia",
   "confirmedRevisionMatches": true,
+  "knownBaseMatches": true,
+  "projectionCompleteForReplay": true,
   "idempotentAnswerPresent": true,
   "hiddenFeedbackPreserved": true,
   "sourceAnswerAdded": false

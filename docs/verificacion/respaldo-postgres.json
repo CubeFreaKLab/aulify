@@ -1,8 +1,8 @@
 {
   "status": "passed",
   "projectRef": "bnqyyumfmyexsqszglab",
-  "startedAt": "2026-10-03T00:15:21.779Z",
-  "capturedAt": "2026-10-03T00:18:25.711Z",
+  "startedAt": "2026-10-03T15:06:02.303Z",
+  "capturedAt": "2026-10-03T15:07:53.312Z",
   "postgresVersion": "17.6",
   "schemas": [
     "app",
@@ -13,8 +13,8 @@
   ],
   "tables": 83,
   "appTables": 47,
-  "archiveBytes": 6068752,
-  "archiveSha256": "52450d6700182c9075660b9d0017bb67b6a336c9dd9da185d25dcced6ceb3b84",
+  "archiveBytes": 6516470,
+  "archiveSha256": "20cfd0f38447f297b2e00e80cf810639389e82452c3e43d1117fa4306808e1d6",
   "storageMetadataObjects": 42,
   "credentialsPublished": false,
   "limitations": [
