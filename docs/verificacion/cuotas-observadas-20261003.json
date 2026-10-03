@@ -1,0 +1,32 @@
+{
+  "recordedAt": "2026-10-03T16:40:34Z",
+  "source": "Panel Usage de la organización Aulify, leído en el navegador durante el ensayo",
+  "plan": "Supabase Free",
+  "billingPeriod": { "from": "2026-09-28", "to": "2026-10-28" },
+  "usage": {
+    "uncachedEgressGB": { "used": 1.148, "included": 5 },
+    "cachedEgressGB": { "used": 0.023, "included": 5 },
+    "databaseGB": { "used": 0.082, "included": 0.5 },
+    "storageGB": { "used": 0.003, "included": 1 },
+    "monthlyActiveUsers": { "used": 211, "included": 50000 },
+    "realtimePeakConnections": { "used": 0, "included": 200 },
+    "realtimeMessages": { "used": 0, "included": 2000000 },
+    "edgeFunctionInvocations": { "used": 0, "included": 500000 },
+    "logIngestionGB": {
+      "used": 1.611,
+      "included": 1,
+      "enforcement": "El panel indica Upcoming; facturación después del período de gracia a inicios de 2027"
+    },
+    "logQueryGB": {
+      "used": 7.224,
+      "included": 100,
+      "enforcement": "El panel indica Upcoming; aplicación después del período de gracia a inicios de 2027"
+    }
+  },
+  "limitations": [
+    "El panel advierte un retraso de actualización de hasta una hora; MAU puede tardar 24 horas.",
+    "Lectura durante el ensayo, no consumo final ni garantía de operación mensual.",
+    "Los valores GB se transcriben tal como los muestra el proveedor, sin reinterpretar unidades.",
+    "No mide las cuotas de Vercel ni habilita facturación."
+  ]
+}

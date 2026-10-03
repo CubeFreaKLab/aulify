@@ -1,5 +1,9 @@
 # Despliegue y operación
 
+Actualización del 3 de octubre: la revisión `5a82990` dispone de una nueva Preview Ready, `dpl_2zbvXM7bt9brApyBK3y76eupHMv1`, en [el enlace protegido del candidato](https://aulify-e263w3fdo-jdanielchfhd-9543s-projects.vercel.app). El navegador autenticado recibió el inicio de Aulify y el build `1Vn8xy4qk9sXkSZdLIkE9` en su HTML. El mismo commit tiene [CI aprobado](../verificacion/ci-sincronizacion-lotes-20261003.json). Se mantuvieron el entorno Preview y el paso de compilación ignorada; no se asignó el dominio de producción.
+
+La prueba automatizada de este candidato sigue pendiente de la configuración privada de la clave de servidor en Preview y del acceso temporal de automatización. Ready y la lectura del inicio no acreditan capacidad, recorrido autenticado completo ni recuperación por correo. El [ensayo de 204 sesiones](../verificacion/capacidad-200-20261003.md) pertenece al compilado local, no a este alojamiento. Los párrafos siguientes conservan las comprobaciones históricas de septiembre con sus propias revisiones.
+
 Estado al 30 de septiembre: Aulify dispone de una [vista previa HTTPS verificada](../verificacion/vista-previa-https.md) en Vercel Hobby, protegida con Vercel Authentication. Se comprobó acceso de ambos roles y persistencia de un borrador con Supabase. Producción continúa pendiente. El dominio propio se resolverá por separado.
 
 ## Configuración realizada
@@ -24,12 +28,12 @@ Se mantienen los planes gratuitos y se supervisan sus cuotas. Una compilación l
 
 Configurar los valores en el gestor protegido del proyecto de alojamiento, fuera del repositorio:
 
-| Variable | Uso |
-|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto de datos. |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Clave publicable; las operaciones continúan sujetas a permisos. |
-| `NEXT_PUBLIC_SITE_URL` | Origen HTTPS definitivo utilizado por la aplicación. |
-| `SUPABASE_SECRET_KEY` | Operaciones de servidor autorizadas; nunca utilizar prefijo `NEXT_PUBLIC_`. |
+| Variable                               | Uso                                                                         |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`             | URL del proyecto de datos.                                                  |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Clave publicable; las operaciones continúan sujetas a permisos.             |
+| `NEXT_PUBLIC_SITE_URL`                 | Origen HTTPS definitivo utilizado por la aplicación.                        |
+| `SUPABASE_SECRET_KEY`                  | Operaciones de servidor autorizadas; nunca utilizar prefijo `NEXT_PUBLIC_`. |
 
 No importar una copia indiscriminada del entorno local. Separar vistas previas de producción y evitar credenciales productivas en código de contribuciones no confiables. Después de elegir el origen HTTPS, configurar las URLs de retorno de Auth y el proveedor SMTP, y probar confirmación y recuperación con cuentas ficticias.
 

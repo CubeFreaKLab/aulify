@@ -5,14 +5,14 @@ El 3 de octubre de 2026 se recuperó una copia de PostgreSQL, Auth, PostgREST y 
 ## Procedimiento y resultados
 
 1. Validar tamaño y SHA-256 del respaldo lógico remoto. Crear un proyecto Docker independiente con puertos publicados únicamente en `127.0.0.1`.
-2. Importar las cinco estructuras respaldadas en PostgreSQL 17.6. Coincidieron los recuentos y las huellas de las **83 tablas**, sus políticas de RLS y las **27 migraciones**. Se comparó por nombre, sin depender de la colación que ordena los nombres de tablas.
+2. Importar las cinco estructuras respaldadas en PostgreSQL 17.6. Coincidieron los recuentos y las huellas de las **83 tablas**, sus políticas de RLS y las **29 migraciones**. Se comparó por nombre, sin depender de la colación que ordena los nombres de tablas.
 3. Configurar contraseñas y claves JWT nuevas para el destino. No copiar claves API ni contraseñas de roles del alojamiento. Iniciar Auth, PostgREST y Storage, con las pertenencias de roles que necesitan sus servicios.
 4. Recuperar **42 objetos, 22.024.706 bytes**, mediante la API de Storage. Descargar todos por HTTP y comprobar sus SHA-256 contra el inventario. Se conservaron las rutas referenciadas por la aplicación.
 5. Iniciar sesión con cuatro cuentas ficticias recuperadas. Coincidieron sus identificadores con los del respaldo. Verificar las proyecciones de docente y estudiante, la lectura de una actividad, el aislamiento del estudiante y el rechazo de acceso anónimo a datos y archivos.
 6. Compilar Aulify en una carpeta privada separada, contra las nuevas APIs. Ambos perfiles iniciaron sesión mediante `/api/auth`, accedieron a `/aula` y leyeron sus datos y actividades mediante `/api/workspace`. La descarga docente mediante `/api/files` coincidió con el hash respaldado. Una petición sin sesión no obtuvo el espacio de trabajo.
 7. Detener la aplicación recuperada y los contenedores del ensayo, conservando sus volúmenes privados. No se cambió la configuración de la aplicación original.
 
-La aplicación recuperada produjo el build `hwkVgynyK9HLB51n6cO6Z`. Las comprobaciones posteriores al despliegue local fueron solicitudes HTTP reales, no respuestas simuladas.
+La repetición final terminó a las **17:05:02 UTC**, usando el respaldo tomado después del ensayo de capacidad. La aplicación recuperada produjo el build `7F_7gG8rB9ESr6Aid6UFj`. Las comprobaciones posteriores al despliegue local fueron solicitudes HTTP reales, no respuestas simuladas. El archivo lógico midió 8.542.962 bytes y su SHA-256 fue `f318002704fad38be95dcba0b26e9984ef829eb8ff72590f35420e1d7bd77a20`. Este resultado actualiza la recuperación anterior de 27 migraciones.
 
 ## Compatibilidad y límites
 

@@ -1,20 +1,14 @@
 {
   "status": "passed",
   "projectRef": "bnqyyumfmyexsqszglab",
-  "startedAt": "2026-10-03T15:06:02.303Z",
-  "capturedAt": "2026-10-03T15:07:53.312Z",
+  "startedAt": "2026-10-03T17:01:12.110Z",
+  "capturedAt": "2026-10-03T17:03:23.010Z",
   "postgresVersion": "17.6",
-  "schemas": [
-    "app",
-    "auth",
-    "public",
-    "storage",
-    "supabase_migrations"
-  ],
+  "schemas": ["app", "auth", "public", "storage", "supabase_migrations"],
   "tables": 83,
   "appTables": 47,
-  "archiveBytes": 6516470,
-  "archiveSha256": "20cfd0f38447f297b2e00e80cf810639389e82452c3e43d1117fa4306808e1d6",
+  "archiveBytes": 8542962,
+  "archiveSha256": "f318002704fad38be95dcba0b26e9984ef829eb8ff72590f35420e1d7bd77a20",
   "storageMetadataObjects": 42,
   "credentialsPublished": false,
   "limitations": [

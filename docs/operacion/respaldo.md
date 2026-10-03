@@ -39,7 +39,7 @@ $backupLocation = (Get-Content .local-private/latest-postgres-backup.json -Raw |
 node tools/datos/postgres-backup.mjs --restore-test $backupLocation
 ```
 
-El ejecutor crea otro clúster, con contraseña aleatoria y escucha exclusiva en `127.0.0.1`. No acepta una conexión de destino remoto. Importa en una transacción, coteja las huellas de todas las tablas, las políticas y el estado de RLS, y verifica las 25 migraciones. Reproduce los archivos en otra carpeta privada y comprueba ruta, identificador, fecha de modificación, tamaño y SHA-256 contra los metadatos respaldados. Al terminar detiene el clúster y retira su archivo temporal de contraseña.
+El ejecutor crea otro clúster, con contraseña aleatoria y escucha exclusiva en `127.0.0.1`. No acepta una conexión de destino remoto. Importa en una transacción, coteja las huellas de todas las tablas, las políticas y el estado de RLS, y verifica las migraciones registradas en el manifiesto del respaldo. Reproduce los archivos en otra carpeta privada y comprueba ruta, identificador, fecha de modificación, tamaño y SHA-256 contra los metadatos respaldados. Al terminar detiene el clúster y retira su archivo temporal de contraseña. El ensayo nativo original utilizó 25 migraciones; la recuperación posterior de servicios utiliza 29.
 
 El [ensayo registrado](../verificacion/restauracion-postgres-nativa.md) restauró 83 tablas, incluidas las 47 de Aulify, y comprobó 42 archivos con 22.024.706 bytes. Las huellas y políticas coincidieron. Para comparar fechas entre sistemas utiliza UTC; esto no cambia las horas guardadas. El origen permaneció intacto.
 
@@ -47,7 +47,7 @@ Esta prueba acredita la recuperación lógica y los bytes en un entorno local se
 
 ## Recuperación de servicios en un destino separado
 
-El [ensayo completo](../verificacion/recuperacion-servicios.md) añade Auth, PostgREST, Storage HTTP y una segunda compilación de Aulify contra la base recuperada. Verificó acceso de ambos perfiles, lectura de sus datos y actividades, aislamiento, descarga de los 42 archivos y rechazo anónimo. El proyecto original permaneció intacto.
+El [ensayo completo](../verificacion/recuperacion-servicios.md), repetido el 3 de octubre con las 29 migraciones actuales, añade Auth, PostgREST, Storage HTTP y una segunda compilación de Aulify contra la base recuperada. Verificó acceso de ambos perfiles, lectura de sus datos y actividades, aislamiento, descarga de los 42 archivos y rechazo anónimo. El proyecto original permaneció intacto.
 
 ```powershell
 node tools/datos/service-recovery.mjs --create

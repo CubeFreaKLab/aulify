@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-10-03T17:12:35.295Z",
+  "phase": "guided-warmup-and-partial-measurement",
+  "sampleCount": 21,
+  "availableSamples": 21,
+  "startedAt": "2026-10-03T16:50:57.779068+00:00",
+  "completedAt": "2026-10-03T16:58:30.785257+00:00",
+  "byOperation": [
+    {
+      "operation": "command",
+      "maximumObservedQueryAgeMs": 6345,
+      "maximumObservedActiveConnections": 7,
+      "observedBlockedConnectionSamples": 0,
+      "waits": ["Client/ClientRead", "none"]
+    },
+    {
+      "operation": "sync_batch",
+      "maximumObservedQueryAgeMs": 4472,
+      "maximumObservedActiveConnections": 1,
+      "observedBlockedConnectionSamples": 0,
+      "waits": ["Client/ClientRead", "none"]
+    },
+    {
+      "operation": "snapshot",
+      "maximumObservedQueryAgeMs": 7104,
+      "maximumObservedActiveConnections": 5,
+      "observedBlockedConnectionSamples": 0,
+      "waits": ["none", "LWLock/BufferContent", "LWLock/WALInsert"]
+    },
+    {
+      "operation": "other",
+      "maximumObservedQueryAgeMs": 3050,
+      "maximumObservedActiveConnections": 7,
+      "observedBlockedConnectionSamples": 0,
+      "waits": ["none", "Client/ClientRead"]
+    }
+  ],
+  "limitations": [
+    "Muestreo cada veinte segundos; no observa todas las consultas ni descarta bloqueos entre muestras.",
+    "La antigüedad de la consulta incluye sus esperas; no es tiempo de CPU ni un EXPLAIN ANALYZE.",
+    "Lectura de estadísticas con consulta de solo lectura, sin reiniciar contadores.",
+    "No contiene textos SQL, usuarios, direcciones ni credenciales."
+  ]
+}

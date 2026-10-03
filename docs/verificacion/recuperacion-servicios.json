@@ -1,14 +1,8 @@
 {
   "status": "passed",
-  "completedAt": "2026-10-03T15:09:42.325Z",
+  "completedAt": "2026-10-03T17:05:02.725Z",
   "environment": "Docker aislado, solo loopback",
-  "services": [
-    "PostgreSQL",
-    "Supabase Auth",
-    "PostgREST",
-    "Supabase Storage",
-    "Aulify Next.js"
-  ],
+  "services": ["PostgreSQL", "Supabase Auth", "PostgREST", "Supabase Storage", "Aulify Next.js"],
   "images": {
     "db": "postgres:17.6",
     "auth": "supabase/gotrue:v2.196.0",
@@ -17,20 +11,20 @@
     "gateway": "nginx:1.28-alpine"
   },
   "database": {
-    "verifiedAt": "2026-10-03T15:09:00.020Z",
+    "verifiedAt": "2026-10-03T17:04:19.414Z",
     "tables": 83,
     "fingerprintsMatch": true,
     "policiesMatch": true,
-    "migrations": 27
+    "migrations": 29
   },
   "files": {
-    "verifiedAt": "2026-10-03T15:09:05.020Z",
+    "verifiedAt": "2026-10-03T17:04:26.071Z",
     "objects": 42,
     "bytes": 22024706,
     "httpHashesMatch": true
   },
   "access": {
-    "verifiedAt": "2026-10-03T15:09:06.991Z",
+    "verifiedAt": "2026-10-03T17:04:28.111Z",
     "restoredAccounts": 4,
     "teacherLogin": true,
     "studentLogin": true,
@@ -42,8 +36,8 @@
     "anonymousFileDenied": true
   },
   "web": {
-    "verifiedAt": "2026-10-03T15:09:40.536Z",
-    "buildId": "hwkVgynyK9HLB51n6cO6Z",
+    "verifiedAt": "2026-10-03T17:05:00.798Z",
+    "buildId": "7F_7gG8rB9ESr6Aid6UFj",
     "rolesVerified": 2,
     "teacherAndStudentLogin": true,
     "restoredWorkspace": true,
