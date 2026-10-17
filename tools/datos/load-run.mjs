@@ -194,7 +194,7 @@ function startPolling() {
         if(epoch!==s.mutationEpoch)return;
         if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(!snapshot.applied)return;s.lastRevision = result.revision; }
         s.checkedHint=currentHint;s.lastRead=performance.now();
-        s.nextDeadline=result.nextDeadline?s.lastRead+Math.max(100,Date.parse(result.nextDeadline)-Date.parse(result.serverTime)):Infinity;
+        s.nextDeadline=result.nextDeadline&&Date.parse(result.nextDeadline)>Date.parse(result.serverTime)?s.lastRead+Math.max(100,Date.parse(result.nextDeadline)-Date.parse(result.serverTime)):Infinity;
         s.retryAt=0;s.retryMs=1000;
       } catch (error) {
         // La recuperación del cliente vuelve a descargar la proyección,

@@ -148,7 +148,7 @@ describe('adopción de revisión tras una proyección vigente', () => {
           return Response.json({
             revision,
             serverTime: new Date().toISOString(),
-            nextDeadline: null,
+            nextDeadline: '2026-09-29T00:00:00Z',
           });
         }
         const value = workspace();

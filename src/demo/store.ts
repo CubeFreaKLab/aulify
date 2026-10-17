@@ -548,9 +548,11 @@ export function useDemo() {
         retryAt = 0;
         checkedHint = currentHint;
         lastRead = performance.now();
-        nextDeadline = value.nextDeadline
-          ? lastRead + Math.max(100, Date.parse(value.nextDeadline) - Date.parse(value.serverTime))
-          : Infinity;
+        nextDeadline =
+          value.nextDeadline && Date.parse(value.nextDeadline) > Date.parse(value.serverTime)
+            ? lastRead +
+              Math.max(100, Date.parse(value.nextDeadline) - Date.parse(value.serverTime))
+            : Infinity;
       } catch (error) {
         if (cancelled || currentGeneration !== generation) return;
         if (error instanceof WorkspaceHttpError && [401, 403].includes(error.status)) {
