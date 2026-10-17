@@ -227,6 +227,7 @@ async function prepareEventStreams(name) {
         bytes:n=>{stats.bytes+=n;bodyBytes+=n;if(phase)phase.bodyBytes+=n;},
         event:event=>{
           const connected=event==='ready';
+          if(event==='unavailable'&&s.eventsConnected){stats.unexpectedFailures++;record(phase,'eventsUnavailable',0,0,0);}
           if(connected&&!s.eventsConnected){s.eventsConnected=true;stats.active++;stats.maximumActive=Math.max(stats.maximumActive,stats.active);stats.ready++;s.hints++;s.onHint?.();}
           else if(['unavailable','rotate','revoked','disconnected'].includes(event)&&s.eventsConnected){s.eventsConnected=false;stats.active--;}
           if(event==='changed'||event==='revoked'){s.hints++;s.onHint?.();}
