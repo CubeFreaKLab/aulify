@@ -46,7 +46,7 @@ report.localMigrations = await Promise.all(migrationFiles.map(async name => {
 }));
 report.expectedMigration = report.localMigrations.at(-1);
 report.migrationInventoryScope = 'Archivos locales; contrastar la última migración con el servicio antes de medir.';
-report.environment.preparation = 'Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.';
+report.environment.preparation = 'Cookies ficticias existentes; una lectura docente por grupo y sondeo autenticado de los estudiantes, sin descargar contenido anterior. Preparación fuera de medición. No se crean cuentas ni se usa contraseña como alternativa.';
 report.environment.participantPreparation = {outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparación ordenada por clase para evitar una cola artificial en el bloqueo de asignación de participantes. Se conservan las 204 sesiones activas, las ventanas completas y la ráfaga de 200 respuestas.'};
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
@@ -135,7 +135,8 @@ async function prepareSessions() {
     let ready = false;
     for (let retry = 0; retry < 3; retry++) {
       try {
-        const route = activityByGroup.has(s.group) ? `/api/workspace?activity=${activityByGroup.get(s.group)}` : '/api/workspace';
+        const route = activityByGroup.has(s.group) && s.role === 'student'
+          ? `/api/sync?activity=${activityByGroup.get(s.group)}` : '/api/workspace';
         const {value} = await request(s, route, {metric:false});
         if (s.role === 'teacher') {
           const activity = value.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];

@@ -23,6 +23,7 @@ const teachers=sessions.filter(a=>a.role==='teacher'),students=sessions.filter(a
 const report={startedAt:new Date().toISOString(),scope:'Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.',buildId:expectedBuild,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sessions:204,teachers:4,students:200,pollMs:1000,seconds:60,records:[],activities:[],authentication:{prepared:0,temporaryWaits:0,spacingMs:2500},limitations:['Aplicación compilada local y base remota Free; no mide render de 204 navegadores.','Una pregunta single-choice por estudiante y sin sesión guiada.','Preparación y auditoría fuera de medición.','Consumo estimado, no contador facturable.']};
 report.buildChecks=[initialBuildCheck];
 report.target=target.metadata;
+report.authentication.strategy='Una lectura docente para obtener el contexto de cada clase; después, sondeo autenticado de los estudiantes sin descargar contenido. Preparación fuera del minuto medido.';
 report.preparation={outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparar cada clase en orden evita formar una cola artificial sobre el bloqueo de asignación de participantes. La medición mantiene las 204 sesiones y la ráfaga de 200 respuestas.'};
 if(!target.local) report.limitations[0]='Aplicación desplegada en una vista previa Vercel protegida y base remota Free; no mide render de 204 navegadores.';
 report.requestTiming={version:2,clock:'performance.timeOrigin + performance.now()',recordOrder:'completion',identitiesIncluded:false,serverTiming:{unit:'ms',fields:['prepare','rpc','encode'],scope:'Sólo respuestas correctas; prepare incluye validación y getClaims en la ruta, no proxy. rpc incluye transporte y lectura del servicio, no sólo SQL. encode mide creación de respuesta; no su transferencia al cliente.'}};
@@ -54,7 +55,7 @@ try{
   if(needsRefresh(s)){await delay(Math.max(0,2500-(Date.now()-previousAuth)));previousAuth=Date.now();}
   let ready=false;
   for(let retry=0;retry<3;retry++){
-   const r=await request(s,activityByGroup.has(s.group)?`/api/workspace?activity=${activityByGroup.get(s.group)}`:'/api/workspace',undefined,'authenticationPreparation');
+   const r=await request(s,activityByGroup.has(s.group)&&s.role==='student'?`/api/sync?activity=${activityByGroup.get(s.group)}`:'/api/workspace',undefined,'authenticationPreparation');
    if(!r.error){ready=true;if(s.role==='teacher'){const a=r.data.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];if(a)activityByGroup.set(s.group,a.id);}break;}
    if(![429,503,'client_timeout','client_transport'].includes(r.error))throw new Error(`Preparación ficticia: HTTP ${r.error}`);
    report.authentication.temporaryWaits++;await delay(Math.max(30000,r.retryAfterMs||0));
