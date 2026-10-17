@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-17T19:01:57.722Z",
+  "startedAt": "2026-10-17T19:31:09.512Z",
   "environment": "PGlite aislado; historial por conjuntos frente al contrato previo",
   "checks": [
     {
@@ -179,9 +179,10 @@
     "20261003154500_aulify_service_sync_batch.sql",
     "20261017172026_aulify_set_based_service_sync.sql",
     "20261017182121_aulify_reuse_rpc_query_plans.sql",
-    "20261017190116_aulify_set_based_workspace_history.sql"
+    "20261017190116_aulify_set_based_workspace_history.sql",
+    "20261017192653_aulify_workspace_parameter_plans.sql"
   ],
   "migrationSha256": "c5ec86b64870718bebe64863d64a3e60cc46439d25f5aacd2460fad47a211f4b",
-  "finishedAt": "2026-10-17T19:02:00.326Z",
+  "finishedAt": "2026-10-17T19:31:12.709Z",
   "result": "passed"
 }
