@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-17T19:03:54.470Z",
+  "scope": "Ocho consultas de historial completo en paralelo; comprobación puntual antes del ensayo, no acredita Q-06.",
+  "build": {
+    "base": "https://aulify-ppq2czt8y-jdanielchfhd-9543s-projects.vercel.app",
+    "expectedBuild": "o1gaqc9RVWTjw8Bk6VZW4",
+    "environment": "vercel-preview",
+    "sourceCommit": "a4145fb6def12f4b06ce4e4dd99b4fa7e4a95616",
+    "verifiedAt": "2026-10-17T19:03:54.465Z",
+    "diskMatches": null,
+    "servedHtmlMatches": true
+  },
+  "concurrency": 8,
+  "records": [
+    {
+      "status": 200,
+      "ms": 3907.0948,
+      "publishedGrades": 11,
+      "bytes": 176608,
+      "serverTiming": "prepare;dur=206.93, rpc;dur=2465.06, encode;dur=2.61"
+    },
+    {
+      "status": 200,
+      "ms": 4190.1349,
+      "publishedGrades": 11,
+      "bytes": 176343,
+      "serverTiming": "prepare;dur=383.38, rpc;dur=2695.15, encode;dur=2.44"
+    },
+    {
+      "status": 200,
+      "ms": 4191.9129,
+      "publishedGrades": 11,
+      "bytes": 176336,
+      "serverTiming": "prepare;dur=382.72, rpc;dur=2705.96, encode;dur=1.71"
+    },
+    {
+      "status": 200,
+      "ms": 4195.9838,
+      "publishedGrades": 11,
+      "bytes": 176601,
+      "serverTiming": "prepare;dur=392.01, rpc;dur=2696.96, encode;dur=2.35"
+    },
+    {
+      "status": 200,
+      "ms": 4198.2563,
+      "publishedGrades": 11,
+      "bytes": 216140,
+      "serverTiming": "prepare;dur=390.54, rpc;dur=2700.43, encode;dur=2.82"
+    },
+    {
+      "status": 200,
+      "ms": 4196.3602,
+      "publishedGrades": 11,
+      "bytes": 176351,
+      "serverTiming": "prepare;dur=343.56, rpc;dur=2711.54, encode;dur=2.35"
+    },
+    {
+      "status": 200,
+      "ms": 4214.6295,
+      "publishedGrades": 11,
+      "bytes": 176337,
+      "serverTiming": "prepare;dur=230.99, rpc;dur=2692.55, encode;dur=2.25"
+    },
+    {
+      "status": 200,
+      "ms": 4222.491099999999,
+      "publishedGrades": 11,
+      "bytes": 220982,
+      "serverTiming": "prepare;dur=599.48, rpc;dur=2686.47, encode;dur=2.26"
+    }
+  ],
+  "passed": true
+}

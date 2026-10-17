@@ -1,0 +1,187 @@
+{
+  "startedAt": "2026-10-17T19:01:57.722Z",
+  "environment": "PGlite aislado; historial por conjuntos frente al contrato previo",
+  "checks": [
+    {
+      "scenario": "Resumen docente conserva historial completo",
+      "passed": true
+    },
+    {
+      "scenario": "Estudiante sin intento: conteo sin preguntas ni soluciones",
+      "passed": true
+    },
+    {
+      "scenario": "Intento abierto conserva estado y preguntas en endpoint específico",
+      "passed": true
+    },
+    {
+      "scenario": "Respuestas escritas mantienen pendiente de revisión",
+      "passed": true
+    },
+    {
+      "scenario": "Docente conserva respuestas y correcciones",
+      "passed": true
+    },
+    {
+      "scenario": "Calificación lista permanece privada hasta publicar",
+      "passed": true
+    },
+    {
+      "scenario": "Nota publicada equivale al contrato anterior",
+      "passed": true
+    },
+    {
+      "scenario": "Revisión privada no altera publicación previa",
+      "passed": true
+    },
+    {
+      "scenario": "Múltiples intentos se conservan",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud equivalente: abiertos, revisados y publicados",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud withdrawal/sin resolución",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud withdrawal/evaluate",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud withdrawal/exclude",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud archive/sin resolución",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud archive/evaluate",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud archive/exclude",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud teacher_early/sin resolución",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud teacher_early/evaluate",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud teacher_early/exclude",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud deadline/sin resolución",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud deadline/evaluate",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud deadline/exclude",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud completed/sin resolución",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud completed/evaluate",
+      "passed": true
+    },
+    {
+      "scenario": "Completitud completed/exclude",
+      "passed": true
+    },
+    {
+      "scenario": "Docente ajeno recibe sólo su espacio",
+      "passed": true
+    },
+    {
+      "scenario": "Retiro revoca actividades y conteos",
+      "passed": true
+    },
+    {
+      "scenario": "Retroalimentación inmediata conserva la publicación y sus revisiones congeladas",
+      "passed": true
+    },
+    {
+      "scenario": "Retroalimentación después del cierre respeta el plazo ampliado",
+      "passed": true
+    },
+    {
+      "scenario": "Ampliaciones generales y personales conservan los mismos plazos",
+      "passed": true
+    },
+    {
+      "scenario": "Agregaciones internas privadas con búsqueda vacía",
+      "passed": true
+    },
+    {
+      "scenario": "Archivo oculta materia e historial al alumno",
+      "passed": true
+    },
+    {
+      "scenario": "Purga impide leer el contenido",
+      "passed": true
+    },
+    {
+      "scenario": "Anon no puede ejecutar el resumen",
+      "passed": true
+    },
+    {
+      "scenario": "Sin identidad no accede; helper de completitud es privado",
+      "passed": true
+    },
+    {
+      "scenario": "Resumen privilegiado conserva búsqueda vacía y acceso restringido",
+      "passed": true
+    }
+  ],
+  "migrationFiles": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql",
+    "20260930000631_aulify_teacher_review_projection.sql",
+    "20260930005228_aulify_sync_context_reads.sql",
+    "20260930011205_aulify_student_activity_projection.sql",
+    "20260930024809_aulify_visibility_effective_closure.sql",
+    "20260930040716_aulify_workspace_overview.sql",
+    "20260930051014_aulify_completion_grade_existence.sql",
+    "20261002215000_aulify_stable_group_shuffle.sql",
+    "20261002221000_aulify_scoped_purge_retry.sql",
+    "20261003142000_aulify_answer_ack_revision.sql",
+    "20261003144500_aulify_ack_projection_guard.sql",
+    "20261003153300_aulify_ack_authorization_order.sql",
+    "20261003154500_aulify_service_sync_batch.sql",
+    "20261017172026_aulify_set_based_service_sync.sql",
+    "20261017182121_aulify_reuse_rpc_query_plans.sql",
+    "20261017190116_aulify_set_based_workspace_history.sql"
+  ],
+  "migrationSha256": "c5ec86b64870718bebe64863d64a3e60cc46439d25f5aacd2460fad47a211f4b",
+  "finishedAt": "2026-10-17T19:02:00.326Z",
+  "result": "passed"
+}
