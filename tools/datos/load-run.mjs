@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import { retryAfterMs } from './load-waits.mjs';
 import { loadCriteria } from './load-criteria.mjs';
 import { parallel } from './load-workers.mjs';
-import { auditPublishedResults } from './load-result-audit.mjs';
+import { auditPublishedResults, temporaryLoadFailure } from './load-result-audit.mjs';
 import {observeServerTiming,summarizeServerTiming} from './server-timing-aggregate.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import { loadTargetFromEnvironment } from './load-target.mjs';
@@ -48,7 +48,7 @@ report.localMigrations = await Promise.all(migrationFiles.map(async name => {
 report.expectedMigration = report.localMigrations.at(-1);
 report.migrationInventoryScope = 'Archivos locales; contrastar la última migración con el servicio antes de medir.';
 report.environment.preparation = 'Cookies ficticias existentes; creación y acceso autorizados a las actividades de la fase, seguidos de la carga inicial del estado de ambos perfiles, como hydrate/refreshProjection del cliente. Preparación fuera de medición; no descarga el historial general para comprobar la sesión. No se crean cuentas ni se usa contraseña como alternativa.';
-report.environment.resultAudit = 'Después de cada fase se publican 200 notas y se consultan historiales completos con ocho lectores. Los fallos temporales quedan como resultados ausentes y no impiden recoger el resto del ensayo. Los 200 resultados correctos siguen siendo obligatorios; una denegación de autorización sigue deteniendo el ensayo.';
+report.environment.resultAudit = 'Después de cada fase los cuatro docentes publican en paralelo, una nota a la vez por docente, y se consultan historiales completos con ocho lectores. La publicación serializa la actividad; no se envían varias escrituras simultáneas del mismo docente para preparar la auditoría. Los fallos temporales de publicación o lectura quedan registrados y no impiden recoger el resto del ensayo. Las 200 publicaciones sin fallo y los 200 resultados correctos siguen siendo obligatorios; una denegación de autorización sigue deteniendo el ensayo.';
 report.environment.participantPreparation = {outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparación ordenada por clase para evitar una cola artificial en el bloqueo de asignación de participantes. Se conservan las 204 sesiones activas, las ventanas completas y la ráfaga de 200 respuestas.'};
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
@@ -334,7 +334,19 @@ async function runPhase(mode, stage, seconds) {
   try { await auditIntegrity(current); } catch(error) { current.integrityAuditStatus=`No completada: ${error.name}`;phaseError ||= error; }
   try { if (!aborted && !phaseError) {
     const resultStart = performance.now();
-    await parallel(students, 6, async s => { const teacher = teachers.find(t => t.group === s.group); await command(teacher, 'publishGrade', s.activityId, s.id); });
+    current.publicationFailures = 0;
+    current.publicationFailureCategories = {};
+    await parallel(teachers, 4, async teacher => {
+      for (const s of students.filter(s => s.group === teacher.group)) {
+        try { await command(teacher, 'publishGrade', s.activityId, s.id); }
+        catch (error) {
+          if (!temporaryLoadFailure(error)) throw error;
+          current.publicationFailures++;
+          const key = `${error.status || 0}:${error.category || error.name}`;
+          current.publicationFailureCategories[key] = (current.publicationFailureCategories[key] || 0) + 1;
+        }
+      }
+    });
     current.publishAllElapsedMs = Math.round(performance.now() - resultStart);
     const audit = await auditPublishedResults(students, async s => {
       const {value:data} = await refresh(s, 'publishedResults');

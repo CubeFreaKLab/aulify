@@ -9,7 +9,7 @@ export function loadCriteria(current) {
     propagationP95: current.mode !== 'guided' || current.observedPropagationSamples === 2000 && current.propagationP95Ms !== null && current.propagationP95Ms <= 2000,
     validRequestFailureRate: current.failureRate !== null && current.failureRate < 0.01,
     integrity: current.integrity?.confirmedAnswers === 2000 && current.integrity?.persistedAnswers === 2000 && current.integrity?.missingOrChangedConfirmed === 0 && current.integrity?.duplicateQuestions === 0,
-    publishedResults: current.observedResultSamples === 200 && (current.unobservedResults || 0) === 0,
+    publishedResults: current.observedResultSamples === 200 && (current.unobservedResults || 0) === 0 && (current.publicationFailures || 0) === 0,
     burst: current.stage !== 'measurement' || current.burst?.dispatched === 200 && current.burst.windowMs <= 2000,
   };
 }
