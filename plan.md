@@ -59,6 +59,8 @@ La huella no incluye respuestas ajenas ni cambia al corregir datos que el estudi
 
 El transporte de servidor mantiene un máximo de 128 conexiones HTTP/1.1 por origen e instancia: 96 para lecturas y otras operaciones y 32 reservadas para comandos. Se mantienen doce segundos por operación y cancelación, sin reenvío automático de escrituras. La [verificación de esta separación](docs/verificacion/conexiones-reservadas.md) distingue el aislamiento local de la capacidad remota todavía pendiente.
 
+El lote de sincronización resuelve como conjuntos las identidades autorizadas y reutiliza el contexto de cada actividad dentro de la consulta. No mantiene una caché de permisos. Conserva las huellas y los plazos del contrato individual, el rechazo independiente de cada identidad y el acceso exclusivo desde el servidor. La [comparación aislada](docs/verificacion/sync-lotes-conjuntos.md) registra sus resultados y distingue esta optimización de la medición completa de capacidad.
+
 Q-06 conserva cuatro grupos de cincuenta estudiantes y cuatro docentes, diez preguntas por actividad y dos fases separadas de cinco minutos de calentamiento más quince de medición. Los objetivos y la ráfaga están en el [plan de calidad](docs/calidad/plan-de-calidad.md). No reducir umbrales después de medir.
 
 ## 6. Archivos y conservación

@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-17T17:22:20.899Z",
+  "environment": "PGlite aislado; sin red ni concurrencia real",
+  "migration": "20261017172026_aulify_set_based_service_sync.sql",
+  "checks": [
+    {
+      "name": "Identidades autorizadas, retiradas, no confirmadas, sin perfil y docente ajeno",
+      "passed": true
+    },
+    {
+      "name": "Duración y plazos de intentos",
+      "passed": true
+    },
+    {
+      "name": "Actividad inexistente",
+      "passed": true
+    },
+    {
+      "name": "Identidad y actividad ausentes",
+      "passed": true
+    },
+    {
+      "name": "Entrada inválida no cancela los otros elementos",
+      "passed": true
+    },
+    {
+      "name": "UUID alternativo conserva conversión original",
+      "passed": true
+    },
+    {
+      "name": "Actividad no publicada",
+      "passed": true
+    },
+    {
+      "name": "Materia archivada",
+      "passed": true
+    },
+    {
+      "name": "Revisión individual cambiada",
+      "passed": true
+    },
+    {
+      "name": "Marcas opcionales ausentes",
+      "passed": true
+    },
+    {
+      "name": "Inicio futuro",
+      "passed": true
+    },
+    {
+      "name": "Plazo común y personal extendido",
+      "passed": true
+    },
+    {
+      "name": "Solo service_role puede ejecutar el lote",
+      "passed": true
+    }
+  ],
+  "benchmark": {
+    "legacy": {
+      "samples": 12,
+      "p50Ms": 14.041900000000169,
+      "p95Ms": 15.33680000000004
+    },
+    "candidate": {
+      "samples": 12,
+      "p50Ms": 2.510699999999815,
+      "p95Ms": 2.5997000000002117
+    }
+  },
+  "status": "passed"
+}

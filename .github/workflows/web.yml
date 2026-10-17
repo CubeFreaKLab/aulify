@@ -18,6 +18,7 @@ on:
         'tools/datos/game-acceptance.mjs',
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
+        'tools/datos/sync-batch-set-check.mjs',
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/workspace-overview-check.mjs',
         'tools/datos/server-timing*.mjs',
@@ -51,6 +52,7 @@ on:
         'tools/datos/game-acceptance.mjs',
         'tools/datos/participant-sync-check.mjs',
         'tools/datos/sync-context-check.mjs',
+        'tools/datos/sync-batch-set-check.mjs',
         'tools/datos/student-activity-projection-check.mjs',
         'tools/datos/workspace-overview-check.mjs',
         'tools/datos/server-timing*.mjs',
@@ -134,6 +136,8 @@ jobs:
         run: node tools/datos/answer-ack-revision-check.mjs
       - name: Verificar equivalencia del contexto de sincronización
         run: node tools/datos/sync-context-check.mjs
+      - name: Verificar equivalencia y permisos del sondeo por conjuntos
+        run: node tools/datos/sync-batch-set-check.mjs
       - name: Verificar proyección y permisos de actividad estudiantil
         run: node tools/datos/student-activity-projection-check.mjs
       - name: Verificar resumen del aula y conservación del historial
