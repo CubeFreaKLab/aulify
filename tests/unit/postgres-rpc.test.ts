@@ -86,4 +86,13 @@ describe('RPC PostgreSQL con identidad limitada a la transacción', () => {
     expect(client.release).toHaveBeenCalledExactlyOnceWith(true);
     expect(databaseFailure(new Error('password=secret'))).toEqual({ code: '08006', message: '' });
   });
+
+  it('trata el límite de clientes de Supavisor como indisponibilidad temporal sin exponer su mensaje', () => {
+    expect(
+      databaseFailure({
+        code: 'XX000',
+        message: '(EMAXCONN) max client connections reached, limit: 200',
+      }),
+    ).toEqual({ code: '53300', message: '' });
+  });
 });

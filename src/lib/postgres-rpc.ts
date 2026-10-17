@@ -58,6 +58,11 @@ COMMIT;`;
 export function databaseFailure(error: unknown): DatabaseFailure {
   const code = error && typeof error === 'object' ? Reflect.get(error, 'code') : undefined;
   const message = error && typeof error === 'object' ? Reflect.get(error, 'message') : undefined;
+  if (
+    typeof message === 'string' &&
+    /\bEMAXCONN\b|\bmax client connections reached\b/i.test(message)
+  )
+    return { code: '53300', message: '' };
   // Only SQLSTATE and a closed application error token leave the driver boundary.
   // Connection strings, server detail, SQL, stack traces and constraint data never do.
   return {

@@ -1,0 +1,87 @@
+# Capacidad: ensayo HTTP con datos ficticios
+
+La prueba se interrumpió al alcanzar un límite preventivo. Q-06 queda sin aprobar.
+
+Ejecución 13f2ae66-8fdf-4cc1-8932-070606e3f910. Inicio real: 2026-10-17T21:50:23.559Z; cierre: 2026-10-17T21:53:55.328Z. Build ID servido: `Vz1bPshXywWxuTG2T9uZu`. Revisión compilada identificada: `6399749a9021c154712bce27f43fc0c5f3f8c16b`. HEAD al iniciar el generador: `6399749a9021c154712bce27f43fc0c5f3f8c16b`. [Mediciones JSON](datos-carga-20261017215023.json).
+
+Motivo registrado: Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto.
+
+El [ensayo anterior](datos-carga-20260928-0811.md) se conserva por separado; las mejoras posteriores no modifican sus resultados.
+
+## Entorno y escenario
+
+Se utilizó la aplicación Next.js compilada en https://aulify-ida1agzy3-jdanielchfhd-9543s-projects.vercel.app, conectada a Supabase Free, PostgreSQL 17, sa-east-1. El generador utilizó v24.14.1, win32 10.0.26220, Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz, 16 procesadores lógicos y 31,9 GiB de memoria.
+
+El escenario exige cuatro docentes y doscientos estudiantes, distribuidos en cuatro materias de cincuenta estudiantes, con diez preguntas por actividad. Cada modalidad tiene cinco minutos de calentamiento y quince de medición. Se prepara una actividad independiente por materia, modalidad y fase; los datos de calentamiento no se reutilizan como resultados medidos.
+
+Se prepararon 204 sesiones HTTP. La autenticación se espació para respetar los límites del servicio; hubo 0 esperas por respuestas temporales durante esta preparación. Las cuentas son ficticias, con confirmación administrativa y sin envío de correo. Sus credenciales y cookies permanecen en archivos locales excluidos de Git.
+
+Docente: cada segundo. Estudiante: avisos SSE de /api/events; comprobación cada 30 segundos y en el plazo del servidor. Sin canal: cada segundo. El mismo ACK y las mismas guardias de proyección siguen vigentes. Sólo se solicita la proyección de actividad cuando cambia la huella o se recupera la conexión. No se acumulan consultas simultáneas de sincronización de una misma sesión. Las respuestas se envían a /api/commands: atraviesan autorización, validación, RPC y persistencia. Los reintentos conservan la clave de idempotencia.
+
+Las cuentas conservan el calentamiento fallido previo; el primer grupo conserva además las actividades cerradas de las pruebas de concurrencia guiada. No se borró ese historial para reducir el costo de lectura.
+
+## Resultados por fase
+
+| Fase | Duración observada / requerida | Solicitudes | Fallos técnicos | p95 de confirmación | p95 de propagación |
+|---|---:|---:|---:|---:|---:|
+| Individual: calentamiento (interrumpida) | 144,66 / 300 s | 2.113 | 503 (23,805 %) | 60.562,78 ms | No aplica |
+| Individual: medición | No ejecutada / 900 s | — | — | — | — |
+| Guiado: calentamiento | No ejecutada / 300 s | — | — | — | — |
+| Guiado: medición | No ejecutada / 900 s | — | — | — | — |
+
+La confirmación reproduce el flujo del cliente: ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar. La propagación guiada se mide desde la apertura solicitada por el docente hasta recibir un estado que muestra la pregunta abierta; no incluye el dibujo de la pantalla.
+
+Los objetivos se mantienen: confirmación p95 ≤ 1,5 s, propagación guiada p95 ≤ 2 s, menos del 1 % de fallos técnicos en solicitudes válidas y ninguna pérdida o duplicación de respuestas confirmadas. Una fase incompleta no demuestra la capacidad del escenario, aunque sus operaciones aisladas hayan funcionado.
+
+## Persistencia, ráfaga y resultados
+
+| Fase | Confirmadas | Persistidas | Confirmadas ausentes o distintas | Duplicadas | Ráfaga de 200 en ≤ 2 s | p95 de consulta de notas |
+|---|---:|---:|---:|---:|---|---:|
+| Individual: calentamiento | 396 | 396 | 0 | 0 | No ejecutada | No medido |
+
+## Avisos y recuperación del transporte
+
+| Fase | Estudiantes conectados simultáneamente | Conexiones HTTP abiertas | Renovaciones programadas | Interrupciones inesperadas |
+|---|---:|---:|---:|---:|
+| individual-warmup | 200 | 200 | 0 | 0 |
+
+Las conexiones SSE se preparan fuera de la medición y se renuevan antes del límite del alojamiento. Las renovaciones programadas no son fallos. Las interrupciones inesperadas durante la fase sí se registran; el estudiante utiliza sondeo de respaldo hasta recuperar los avisos. Estas conexiones HTTP no equivalen al número de sockets compartidos del servidor con Supabase.
+
+La auditoría de persistencia vuelve a consultar el estado del docente y contrasta identificadores de intento, pregunta y clave de idempotencia. El objetivo completo es de 2.000 respuestas por fase. La publicación y consulta final de notas se registran fuera de la ventana de carga y no se atribuyen a una fase cuando esta se interrumpe.
+
+## Consumo y límites
+
+Se observaron 2.725 solicitudes y 14,07 MB de cuerpos de respuesta HTTP. La estimación preventiva fue de 30,93 MB, calculada como el doble de esos cuerpos más 1.024 bytes por solicitud. Es una aproximación conservadora del generador, no un contador de facturación.
+
+El límite preventivo configurado para esta ejecución fue de 1,6 GB adicionales estimados. También se detiene si más del 10 % de solicitudes fallan en una ventana completa de un minuto, con al menos cien solicitudes. La estimación no equivale al tráfico facturado. No se activaron pagos ni se ampliaron cuotas para obtener un resultado.
+
+Este generador no consulta los paneles de facturación. Q-09 requiere contrastar las cuotas y los consumos observados de Supabase y Vercel; los paneles pueden tener retraso. Los navegadores simulados utilizan SSE; el servidor comparte conexiones privadas a Realtime. Los contadores de conexiones, mensajes y transferencia se revisan por separado. Un resultado favorable de Q-06 no acredita por sí solo Q-09.
+
+## Alcance y límites de interpretación
+
+- El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.
+- Vista previa protegida de Vercel; no es producción ni una liberación pública.
+- Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.
+- La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.
+- El retraso del bucle de eventos del generador fue de 32,06 ms en p95 y 92,47 ms de máximo.
+- Los percentiles corresponden a esta red, este generador, esta base y este compilado; no constituyen una promesa para cualquier conexión o alojamiento.
+- Las pruebas funcionales, de permisos y accesibilidad se documentan por separado. Un fallo de capacidad no invalida retrospectivamente una comprobación funcional, ni una comprobación funcional demuestra capacidad.
+
+## Reproducción
+
+Se requiere autorización para utilizar el proyecto de pruebas, sus cuotas gratuitas y las cuentas ficticias privadas. La preparación no se ejecuta en integración continua ni utiliza datos de estudiantes reales.
+
+```powershell
+$env:AULIFY_LOAD_URL='<origen autorizado>'
+$env:AULIFY_EXPECTED_BUILD_ID='<build verificado>'
+$env:AULIFY_LOAD_PREVIEW_MANIFEST='<manifiesto privado verificado>'
+$env:AULIFY_LOAD_PREVIEW_SECRET_FILE='<archivo privado del acceso temporal autorizado>'
+$env:AULIFY_LOAD_BUDGET_BYTES='1600000000'
+$env:AULIFY_COMPILED_COMMIT='<commit compilado identificado>'
+node tools/datos/load-run.mjs
+node tools/datos/load-report.mjs
+```
+
+Se requieren el conjunto ficticio y sus sesiones privadas previamente preparados; no volver a crear las cuentas si ya existen. La Preview necesita un manifiesto y un acceso temporal autorizado vigente. El acceso de esta ejecución ya fue revocado. El servidor debe ser una construcción estable. Preparar una nueva ejecución completa si cambia el código, transporte o infraestructura; conservar los informes anteriores. No recortar fases ni relajar criterios para declarar un aprobado.
+
+Cuotas y tasa de autenticación: [transferencia de Supabase](https://supabase.com/docs/guides/platform/manage-your-usage/egress) y [límites de Auth](https://supabase.com/docs/guides/auth/rate-limits).

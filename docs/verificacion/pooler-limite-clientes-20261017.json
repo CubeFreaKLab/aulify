@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-17T21:54:20Z",
+  "windowStart": "2026-10-17T21:51:00Z",
+  "windowEnd": "2026-10-17T21:54:20Z",
+  "service": "Supavisor",
+  "scope": "Registros agregados del proyecto durante el primer intento con PostgreSQL. Conteos de eventos; no equivalen al número concurrente de clientes.",
+  "events": [
+    {
+      "category": "client_authenticated",
+      "count": 1103
+    },
+    {
+      "category": "max_clients",
+      "count": 446
+    },
+    {
+      "category": "client_terminated",
+      "count": 378
+    },
+    {
+      "category": "checkout_failed_max_clients",
+      "count": 359
+    },
+    {
+      "category": "backend_auth_max_clients",
+      "count": 358
+    }
+  ],
+  "reportedClientLimit": 200,
+  "sourceReport": "datos-carga-20261017215023.json",
+  "conclusion": "Se alcanzó el límite de clientes del pooler. No se amplió ni se contrató un plan."
+}

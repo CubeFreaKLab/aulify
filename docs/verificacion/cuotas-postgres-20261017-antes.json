@@ -1,0 +1,46 @@
+{
+  "observedAt": "2026-10-17T21:48:12.823Z",
+  "phase": "Antes de la medición con transporte PostgreSQL",
+  "sourceCommit": "6399749a9021c154712bce27f43fc0c5f3f8c16b",
+  "supabase": {
+    "plan": "Free",
+    "scope": "Organización Aulify, ciclo 28 sep–28 oct 2026, todos los proyectos; base indicada por proyecto",
+    "egressGb": 1.614,
+    "egressLimitGb": 5,
+    "databaseGb": 0.11,
+    "databaseLimitGb": 0.5,
+    "storageGb": 0.002,
+    "storageLimitGb": 1,
+    "cachedEgressGb": 0.023,
+    "cachedEgressLimitGb": 5,
+    "mau": 211,
+    "mauLimit": 50000,
+    "realtimePeak": 9,
+    "realtimePeakLimit": 200,
+    "realtimeMessages": 42,
+    "realtimeMessagesLimit": 2000000,
+    "activeQuotaExceeded": false,
+    "logIngestion": {
+      "usedGb": 2.032,
+      "referenceGb": 1,
+      "enforcement": "Upcoming; empieza en 2027 según el panel"
+    },
+    "refreshLag": "Hasta una hora para consumo; MAU hasta 24 h"
+  },
+  "vercel": {
+    "plan": "Hobby",
+    "scope": "Equipo personal, All Projects, Last 30 Days; etiqueta del panel Sep 17, 3 p.m. – Oct 17, 3 p.m.",
+    "fastDataGb": 1.63,
+    "fastDataLimitGb": 100,
+    "fastOriginGb": 1.43,
+    "fastOriginLimitGb": 10,
+    "cdnRequests": 370907,
+    "cdnRequestLimit": 1000000,
+    "functionInvocationsApproximate": 384000,
+    "fluidMemoryGbHours": 27.6,
+    "fluidCpuDisplay": "1h 7m",
+    "approximation": "Overview redondea invocaciones, CPU y memoria. No se atribuye todo el consumo a esta carga."
+  },
+  "predeclaredAdditionalEstimatedByteBudget": 1600000000,
+  "scope": "Observación de paneles antes de la carga; no aprueba Q09 ni capacidad."
+}

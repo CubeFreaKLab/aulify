@@ -1,0 +1,155 @@
+{
+  "observedAt": "2026-10-17T21:49:35.216Z",
+  "sourceCommit": "6399749a9021c154712bce27f43fc0c5f3f8c16b",
+  "run": {
+    "id": 39072001302,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/39072001302"
+  },
+  "jobs": [
+    {
+      "name": "Tipos, reglas y recorridos de demostración",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Obtener la revisión",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preparar Node.js 24",
+          "conclusion": "success"
+        },
+        {
+          "name": "Instalar dependencias fijadas",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar formato",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analizar código",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar tipos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar reglas del dominio",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar registro de tiempos sin datos privados",
+          "conclusion": "success"
+        },
+        {
+          "name": "Rechazar aprobación de carga con muestras incompletas",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restringir el destino y las credenciales de las pruebas de carga",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar retención desde el cierre efectivo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar retiro, resolución y restauración",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar migraciones y permisos en PostgreSQL aislado",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar casos numéricos de puntuación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar equivalencia y permisos de la proyección docente",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar proyección de revisiones y respuestas omitidas",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar conservación de archivos y reintentos de purga",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar reintentos limitados a un trabajo de eliminación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar participación, equipos y privacidad de publicación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar revisiones independientes por participante",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar confirmaciones y sincronización agrupada con permisos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar equivalencia del contexto de sincronización",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar equivalencia y permisos del sondeo por conjuntos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar proyección y permisos de actividad estudiantil",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar resumen del aula y conservación del historial",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verificar equivalencia y privacidad del historial por conjuntos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Construir aplicación",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preparar Chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Comprobar recorridos y accesibilidad automática",
+          "conclusion": "success"
+        },
+        {
+          "name": "Conservar informe y evidencia de fallos",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Preparar Node.js 24",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Obtener la revisión",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "scope": "CI de fuente y contratos; no acredita capacidad remota."
+}

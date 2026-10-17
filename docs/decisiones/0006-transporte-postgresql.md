@@ -16,7 +16,9 @@ Cada operación ejecuta las mismas RPC públicas dentro de una transacción. Los
 
 Las identidades y los roles duran solo hasta el cierre de esa transacción. Se entrega el resultado únicamente después de recibir el `COMMIT`; una conexión fallida se destruye y no vuelve al pool. Se conservan ocho segundos de límite SQL, doce segundos de transporte y la ausencia de reenvíos automáticos de escritura.
 
-Hay dos pools por proceso, con cuatro conexiones máximas cada uno: lecturas y comandos. Supavisor limita las conexiones efectivas a PostgreSQL; sus valores observados son quince conexiones por combinación de usuario/base y doscientos clientes en Nano. Esta configuración no demuestra capacidad ni garantiza por sí sola el consumo conjunto de varias instancias de Vercel.
+Hay dos pools por proceso, con dos conexiones máximas cada uno: lecturas y comandos. Se comparten en el registro global del proceso. `attachDatabasePool`, del paquete oficial de Vercel, mantiene la limpieza de conexiones inactivas antes de que Fluid suspenda una instancia; el plazo inactivo es de cinco segundos. Supavisor limita las conexiones efectivas a PostgreSQL; sus valores observados son quince conexiones por combinación de usuario/base y doscientos clientes en Nano. Esta configuración no demuestra capacidad ni garantiza por sí sola el consumo conjunto de varias instancias de Vercel.
+
+El primer calentamiento con el transporte nativo alcanzó el límite de doscientos clientes del pooler y se cortó. Los registros de Supavisor identificaron `EMAXCONN`, incluida la espera fallida para obtener conexiones. Se conserva [el resultado fallido](../verificacion/capacidad-postgres-inicial-20261017.md). La corrección de ciclo de vida y tamaño de los pools responde a ese fallo concreto; todavía requiere medición.
 
 Se utiliza el protocolo de consulta sin sentencias preparadas con nombre. Los nombres de las cuatro RPC y los roles son constantes del servidor. Cada valor se escapa con `pg.escapeLiteral`; no se interpolan valores del cliente sin ese escape. El certificado raíz público se obtuvo desde Database Settings y TLS verifica tanto la cadena como el servidor. La conexión privada no lleva prefijo `NEXT_PUBLIC_` y no se incluye en Git.
 
@@ -29,4 +31,4 @@ Se utiliza el protocolo de consulta sin sentencias preparadas con nombre. Los no
 
 ## Referencias
 
-[Supabase: conexiones y pooler](https://supabase.com/docs/guides/database/connecting-to-postgres/pooling-and-limits), [conexión verificada con certificado](https://supabase.com/docs/guides/database/psql), [transacciones en node-postgres](https://node-postgres.com/features/transactions), [TLS](https://node-postgres.com/features/ssl).
+[Supabase: conexiones y pooler](https://supabase.com/docs/guides/database/connecting-to-postgres/pooling-and-limits), [conexión verificada con certificado](https://supabase.com/docs/guides/database/psql), [transacciones en node-postgres](https://node-postgres.com/features/transactions), [TLS](https://node-postgres.com/features/ssl), [ciclo de vida de pools en Vercel Fluid](https://vercel.com/kb/guide/connection-pooling-with-functions).

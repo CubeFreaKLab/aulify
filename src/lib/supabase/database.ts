@@ -1,14 +1,17 @@
 import 'server-only';
 import { Pool } from 'pg';
+import { attachDatabasePool } from '@vercel/functions';
 import { databaseFailure, executeDatabaseRpc, type DatabaseOperation } from '@/lib/postgres-rpc';
 import { supabaseConfig } from './config';
 import { SUPABASE_POSTGRES_CA } from './postgres-ca';
 
-let pools: { read: Pool; command: Pool } | null = null;
+type DatabasePools = { read: Pool; command: Pool };
+const poolKey = Symbol.for('aulify.postgres.pools');
+const poolRegistry = globalThis as typeof globalThis & { [poolKey]?: DatabasePools };
 export const hasDatabaseTransport = () => Boolean(process.env.AULIFY_DATABASE_URL);
 
 function databasePools() {
-  if (pools) return pools;
+  if (poolRegistry[poolKey]) return poolRegistry[poolKey];
   const { url } = supabaseConfig();
   const project = new URL(url).hostname.split('.')[0];
   const connection = new URL(process.env.AULIFY_DATABASE_URL || '');
@@ -32,9 +35,9 @@ function databasePools() {
       password: decodeURIComponent(connection.password),
       ssl: { rejectUnauthorized: true, ca: SUPABASE_POSTGRES_CA },
       application_name: 'aulify-server',
-      max: 4,
+      max: 2,
       connectionTimeoutMillis: 6_000,
-      idleTimeoutMillis: 10_000,
+      idleTimeoutMillis: 5_000,
       maxLifetimeSeconds: 180,
       query_timeout: 12_000,
       allowExitOnIdle: true,
@@ -42,10 +45,13 @@ function databasePools() {
     pool.on('error', () => {
       console.warn('aulify.database.idle_connection_closed');
     });
+    // Fluid can suspend a process before a normal idle timer runs. Keep its
+    // cleanup alive so suspended instances do not retain pooler client slots.
+    if (process.env.VERCEL === '1') attachDatabasePool(pool);
     return pool;
   };
-  pools = { read: create(), command: create() };
-  return pools;
+  poolRegistry[poolKey] = { read: create(), command: create() };
+  return poolRegistry[poolKey];
 }
 
 /** Called only after getClaims verified the HTTP session, or by the server-only sync queue. */
