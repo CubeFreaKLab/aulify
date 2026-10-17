@@ -47,7 +47,7 @@ report.localMigrations = await Promise.all(migrationFiles.map(async name => {
 }));
 report.expectedMigration = report.localMigrations.at(-1);
 report.migrationInventoryScope = 'Archivos locales; contrastar la última migración con el servicio antes de medir.';
-report.environment.preparation = 'Cookies ficticias existentes; creación y acceso autorizados a las actividades de la fase, seguidos de sondeo autenticado de ambos perfiles. Preparación fuera de medición; no descarga el historial general para comprobar la sesión. No se crean cuentas ni se usa contraseña como alternativa.';
+report.environment.preparation = 'Cookies ficticias existentes; creación y acceso autorizados a las actividades de la fase, seguidos de la carga inicial del estado de ambos perfiles, como hydrate/refreshProjection del cliente. Preparación fuera de medición; no descarga el historial general para comprobar la sesión. No se crean cuentas ni se usa contraseña como alternativa.';
 report.environment.resultAudit = 'Después de cada fase se publican 200 notas y se consultan historiales completos con ocho lectores. Los fallos temporales quedan como resultados ausentes y no impiden recoger el resto del ensayo. Los 200 resultados correctos siguen siendo obligatorios; una denegación de autorización sigue deteniendo el ensayo.';
 report.environment.participantPreparation = {outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparación ordenada por clase para evitar una cola artificial en el bloqueo de asignación de participantes. Se conservan las 204 sesiones activas, las ventanas completas y la ráfaga de 200 respuestas.'};
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
@@ -128,9 +128,11 @@ async function renewBeforeLongMode() {
   renewal.completedAt=new Date().toISOString();
   await persist();
 }
-async function prepareSessions() {
+async function prepareSessions(preparationName = 'sessions-only') {
   let previousRenewal=0;
   const activityByGroup = new Map();
+  const preparation={name:preparationName,startedAt:new Date().toISOString(),prepared:0,outsideMeasurement:true};
+  (report.authentication.activityPreparations ||= []).push(preparation);
   for (const [index, s] of sessions.entries()) {
     if (!s.jar.size) throw new Error('Falta una sesión ficticia existente; no se crea ni sustituye automáticamente.');
     if (needsTokenRefresh(s)) { await delay(Math.max(0,2500-(Date.now()-previousRenewal))); previousRenewal=Date.now(); }
@@ -138,12 +140,13 @@ async function prepareSessions() {
     for (let retry = 0; retry < 3; retry++) {
       try {
         const context = s.activityId || activityByGroup.get(s.group);
-        const route = context ? `/api/sync?activity=${context}` : '/api/workspace';
+        const route = context ? `/api/workspace?activity=${context}` : '/api/workspace';
         const {value} = await request(s, route, {metric:false});
         if (s.role === 'teacher' && !context) {
           const activity = value.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
           if (activity) activityByGroup.set(s.group, activity.id);
         }
+        if (context) observe(s, value, null);
         ready=true; break;
       } catch(error) {
         if (![429,503].includes(error.status) && !['TimeoutError','TypeError'].includes(error.name)) throw error;
@@ -152,10 +155,12 @@ async function prepareSessions() {
       }
     }
     if (!ready) throw new Error('Auth mantuvo el límite de frecuencia. No se inició la carga.');
-    report.authentication.preparedSessions++;
+    report.authentication.preparedSessions=Math.max(report.authentication.preparedSessions,index+1);
+    preparation.prepared++;
     await saveCookies();
     if ((index + 1) % 25 === 0 || index === 203) console.log(`Sesiones HTTP preparadas: ${index + 1}/204`);
   }
+  preparation.completedAt=new Date().toISOString();
 }
 function observe(s, value, target) {
   s.latest = value;
@@ -287,7 +292,7 @@ async function runPhase(mode, stage, seconds) {
   phase = null;
   report.buildChecks.push(await verifyBuild());
   await makeActivities(mode, stage);
-  if (report.authentication.preparedSessions === 0) await prepareSessions();
+  await prepareSessions(`${mode}-${stage}`);
   const current = { name: `${mode}-${stage}`, mode, stage, targetSeconds: seconds, startedAt: new Date().toISOString(), requestCount: 0, failedRequests: 0, bodyBytes: 0, operations: {}, responseAckMs: [], confirmationMs: [], propagationMs: [], skippedPollTicks: 0, confirmed: new Map(), unsentAnswers: 0, unconfirmedAnswers: 0, unobservedConfirmations: 0, burst: null };
   report.phases.push(current); phase = current; recent.length = 0;
   const start = Date.now(), end = start + seconds * 1000, period = seconds * 100;
