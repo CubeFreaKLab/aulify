@@ -137,7 +137,9 @@ assert(privateRoom.state.activities[0].guided.studentIds.length===1&&privateRoom
 await as('teacher');const ownerRoom=(await db.query('select public.aulify_activity_snapshot($1) result',[privacyGuided.id])).rows[0].result;
 assert(ownerRoom.state.activities[0].guided.studentIds.length===2&&('lockedAt' in ownerRoom.state.activities[0]),'docente conserva participantes y bloqueo');
 await command('withdrawMembership',peerMembership.id,'Fin de caso de sala privada');
-await as('teacher');await command('startGuidedSession',guided.id);
+await as('teacher');const beforeGuidedHints=(await messages()).length;await command('startGuidedSession',guided.id);
+const startHints=(await messages()).slice(beforeGuidedHints).filter(m=>m.payload.activityId===guided.id);
+assert(startHints.length>0&&startHints.every(m=>!m.payload.studentId),'inicio guiado usa avisos comunes sin multiplicarlos por estudiante');
 await as('student');const gat=await command('startAttempt',guided.id);
 const guidedKey=id();const immediate=await command('submitAnswer',gat.id,questions[0].id,answers[0],guidedKey,false);assert(immediate.feedback.correct===true,'retroalimentación inmediata');
 await as('teacher');await command('closeGuidedQuestion',guided.id,false);await command('openNextGuidedQuestion',guided.id);
