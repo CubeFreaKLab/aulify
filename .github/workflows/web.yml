@@ -25,6 +25,7 @@ on:
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
         'tools/datos/load-workers*.mjs',
+        'tools/datos/load-result-audit*.mjs',
         'tools/datos/load-target*.mjs',
         'tools/datos/load-protocol.mjs',
         'tools/datos/load-run.mjs',
@@ -61,6 +62,7 @@ on:
         'tools/datos/server-timing*.mjs',
         'tools/datos/load-criteria*.mjs',
         'tools/datos/load-workers*.mjs',
+        'tools/datos/load-result-audit*.mjs',
         'tools/datos/load-target*.mjs',
         'tools/datos/load-protocol.mjs',
         'tools/datos/load-run.mjs',
@@ -113,7 +115,7 @@ jobs:
       - name: Verificar registro de tiempos sin datos privados
         run: node --test tools/datos/server-timing.test.mjs tools/datos/server-timing-aggregate.test.mjs
       - name: Rechazar aprobación de carga con muestras incompletas
-        run: node --test tools/datos/load-criteria.test.mjs tools/datos/load-workers.test.mjs
+        run: node --test tools/datos/load-criteria.test.mjs tools/datos/load-workers.test.mjs tools/datos/load-result-audit.test.mjs
       - name: Restringir el destino y las credenciales de las pruebas de carga
         run: node --test tools/datos/load-target.test.mjs
       - name: Verificar retención desde el cierre efectivo

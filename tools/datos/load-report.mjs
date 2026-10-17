@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 const source = process.argv[2] || "docs/verificacion/datos-carga.json";
 const output = process.argv[3] || "docs/verificacion/datos-carga.md";
 const data = JSON.parse(await fs.readFile(source, "utf8"));
-if (["preparing", "running"].includes(data.status)) {
+if (["preparing", "running", "running-diagnostic"].includes(data.status)) {
   throw new Error("La ejecución sigue activa; el informe final requiere su cierre.");
 }
 
@@ -20,6 +20,8 @@ const phaseName = (phase) =>
 const status = {
   "q06-passed-in-local-environment": "Los criterios instrumentados de Q-06 se cumplieron en este entorno local.",
   "q06-failed-in-local-environment": "Q-06 no se cumplió en este entorno local.",
+  "q06-passed-in-vercel-preview": "Los criterios instrumentados de Q-06 se cumplieron en esta Preview de Vercel con Supabase Free.",
+  "q06-failed-in-vercel-preview": "Q-06 no se cumplió en esta Preview de Vercel con Supabase Free.",
   "stopped-at-safety-limit": "La prueba se interrumpió al alcanzar un límite preventivo. Q-06 queda sin aprobar.",
   failed: "La ejecución terminó con un fallo. Q-06 queda sin aprobar.",
   "sessions-prepared": "Solo se prepararon las sesiones; no se ejecutó la carga.",
@@ -43,7 +45,7 @@ lines.push(
   "",
   "El escenario exige cuatro docentes y doscientos estudiantes, distribuidos en cuatro materias de cincuenta estudiantes, con diez preguntas por actividad. Cada modalidad tiene cinco minutos de calentamiento y quince de medición. Se prepara una actividad independiente por materia, modalidad y fase; los datos de calentamiento no se reutilizan como resultados medidos.",
   "",
-  `Se prepararon ${data.authentication.preparedSessions} sesiones HTTP. La autenticación se espació para respetar los límites del servicio; hubo ${data.authentication.rateLimitWaits} esperas de sesenta segundos por respuestas 429 durante esta preparación. Las cuentas son ficticias, con confirmación administrativa y sin envío de correo. Sus credenciales y cookies permanecen en archivos locales excluidos de Git.`,
+  `Se prepararon ${data.authentication.preparedSessions} sesiones HTTP. La autenticación se espació para respetar los límites del servicio; hubo ${data.authentication.rateLimitWaits} esperas por respuestas temporales durante esta preparación. Las cuentas son ficticias, con confirmación administrativa y sin envío de correo. Sus credenciales y cookies permanecen en archivos locales excluidos de Git.`,
   "",
   "Cada sesión consulta /api/sync cada segundo y solicita /api/workspace únicamente cuando cambia la huella de revisión. No se acumulan consultas simultáneas de sincronización de una misma sesión. Las respuestas se envían a /api/commands: atraviesan autorización, validación, RPC y persistencia. Los reintentos conservan la clave de idempotencia.",
   ...(data.environment.fixtureHistory ? ["",data.environment.fixtureHistory] : []),
@@ -89,9 +91,9 @@ lines.push(
   "",
   `Se observaron ${number(data.totalRequests, 0)} solicitudes y ${number(data.observedApplicationBodyBytes / 1e6)} MB de cuerpos de respuesta HTTP. La estimación preventiva fue de ${number(data.conservativeEstimatedBytes / 1e6)} MB, calculada como el doble de esos cuerpos más 1.024 bytes por solicitud. Es una aproximación conservadora del generador, no un contador de facturación.`,
   "",
-  "El ensayo se detiene si esa estimación supera 1 GB adicional o si más del 10 % de solicitudes fallan en una ventana completa de un minuto, con al menos cien solicitudes. No se activaron pagos ni se ampliaron cuotas para obtener un resultado.",
+  `El límite preventivo configurado para esta ejecución fue de ${number((data.environment.logicalBodyBudgetBytes ?? 1e9) / 1e9)} GB adicionales estimados. También se detiene si más del 10 % de solicitudes fallan en una ventana completa de un minuto, con al menos cien solicitudes. La estimación no equivale al tráfico facturado. No se activaron pagos ni se ampliaron cuotas para obtener un resultado.`,
   "",
-  "Antes de la carga se observó el plan Free de la organización: 5 GB de transferencia de salida al mes, base de datos de 500 MB, Storage de 1 GB y 50.000 usuarios activos mensuales. El tablero mostraba aproximadamente 26 MB de base y 0 GB de transferencia; este último contador puede retrasarse una hora. Q-09 necesita contrastar el consumo final cuando el contador se actualice. Esta sincronización utiliza HTTP y no consume conexiones Realtime.",
+  "Este generador no consulta los paneles de facturación. Q-09 requiere contrastar las cuotas y los consumos observados de Supabase y Vercel en el informe de servicios asociado a la ejecución; los paneles pueden tener retraso. Esta sincronización utiliza HTTP y no abre conexiones Realtime. Un resultado favorable de Q-06 no acredita por sí solo Q-09.",
   "",
   "## Alcance y límites de interpretación",
   "",

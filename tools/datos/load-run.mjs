@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import { retryAfterMs } from './load-waits.mjs';
 import { loadCriteria } from './load-criteria.mjs';
 import { parallel } from './load-workers.mjs';
+import { auditPublishedResults } from './load-result-audit.mjs';
 import {observeServerTiming,summarizeServerTiming} from './server-timing-aggregate.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import { loadTargetFromEnvironment } from './load-target.mjs';
@@ -46,7 +47,8 @@ report.localMigrations = await Promise.all(migrationFiles.map(async name => {
 }));
 report.expectedMigration = report.localMigrations.at(-1);
 report.migrationInventoryScope = 'Archivos locales; contrastar la última migración con el servicio antes de medir.';
-report.environment.preparation = 'Cookies ficticias existentes; una lectura docente por grupo y sondeo autenticado de los estudiantes, sin descargar contenido anterior. Preparación fuera de medición. No se crean cuentas ni se usa contraseña como alternativa.';
+report.environment.preparation = 'Cookies ficticias existentes; creación y acceso autorizados a las actividades de la fase, seguidos de sondeo autenticado de ambos perfiles. Preparación fuera de medición; no descarga el historial general para comprobar la sesión. No se crean cuentas ni se usa contraseña como alternativa.';
+report.environment.resultAudit = 'Después de cada fase se publican 200 notas y se consultan historiales completos con ocho lectores. Los fallos temporales quedan como resultados ausentes y no impiden recoger el resto del ensayo. Los 200 resultados correctos siguen siendo obligatorios; una denegación de autorización sigue deteniendo el ensayo.';
 report.environment.participantPreparation = {outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparación ordenada por clase para evitar una cola artificial en el bloqueo de asignación de participantes. Se conservan las 204 sesiones activas, las ventanas completas y la ráfaga de 200 respuestas.'};
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
@@ -135,10 +137,10 @@ async function prepareSessions() {
     let ready = false;
     for (let retry = 0; retry < 3; retry++) {
       try {
-        const route = activityByGroup.has(s.group) && s.role === 'student'
-          ? `/api/sync?activity=${activityByGroup.get(s.group)}` : '/api/workspace';
+        const context = s.activityId || activityByGroup.get(s.group);
+        const route = context ? `/api/sync?activity=${context}` : '/api/workspace';
         const {value} = await request(s, route, {metric:false});
-        if (s.role === 'teacher') {
+        if (s.role === 'teacher' && !context) {
           const activity = value.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
           if (activity) activityByGroup.set(s.group, activity.id);
         }
@@ -285,6 +287,7 @@ async function runPhase(mode, stage, seconds) {
   phase = null;
   report.buildChecks.push(await verifyBuild());
   await makeActivities(mode, stage);
+  if (report.authentication.preparedSessions === 0) await prepareSessions();
   const current = { name: `${mode}-${stage}`, mode, stage, targetSeconds: seconds, startedAt: new Date().toISOString(), requestCount: 0, failedRequests: 0, bodyBytes: 0, operations: {}, responseAckMs: [], confirmationMs: [], propagationMs: [], skippedPollTicks: 0, confirmed: new Map(), unsentAnswers: 0, unconfirmedAnswers: 0, unobservedConfirmations: 0, burst: null };
   report.phases.push(current); phase = current; recent.length = 0;
   const start = Date.now(), end = start + seconds * 1000, period = seconds * 100;
@@ -328,13 +331,15 @@ async function runPhase(mode, stage, seconds) {
     const resultStart = performance.now();
     await parallel(students, 6, async s => { const teacher = teachers.find(t => t.group === s.group); await command(teacher, 'publishGrade', s.activityId, s.id); });
     current.publishAllElapsedMs = Math.round(performance.now() - resultStart);
-    const resultLatencies = [];
-    try {
-      await parallel(students, 8, async s => { const started = performance.now(); const {value:data} = await refresh(s, 'publishedResults'); if (!data.studentResults[fixtures.groups.find(g => g.group === s.group).subjectId]?.some(r => r.activityId === s.activityId && r.grade === 100)) current.unobservedResults = (current.unobservedResults || 0) + 1; resultLatencies.push(performance.now() - started); });
-    } finally {
-      current.observedResultSamples = resultLatencies.length;
-      current.resultsReadP95Ms = percentile(resultLatencies, 0.95);
-    }
+    const audit = await auditPublishedResults(students, async s => {
+      const {value:data} = await refresh(s, 'publishedResults');
+      return data.studentResults[fixtures.groups.find(g => g.group === s.group).subjectId]?.some(r => r.activityId === s.activityId && r.grade === 100);
+    });
+    current.observedResultSamples = audit.latencies.length;
+    current.resultsReadP95Ms = percentile(audit.latencies, 0.95);
+    current.unobservedResults = audit.unobservedResults;
+    current.resultReadFailures = audit.failures;
+    current.resultAuditStatus = audit.unobservedResults ? `Completada con ${audit.unobservedResults} resultados ausentes; criterio no aprobado.` : '200 notas correctas observadas.';
   }} catch(error) {
     phaseError ||= error;
     current.resultAuditStatus = `No completada: ${error.name}`;
@@ -357,8 +362,7 @@ const monitor = setInterval(async () => {
 try {
   console.log(`CARGA: ${reportPath}; build ${expectedBuild}; presupuesto ${budgetBytes} bytes.`);
   if (!diagnosticOnly && !process.argv.includes('--sessions-only')) await renewBeforeLongMode();
-  await prepareSessions();
-  if (process.argv.includes('--sessions-only')) { report.status = 'sessions-prepared'; await persist(); }
+  if (process.argv.includes('--sessions-only')) { await prepareSessions(); report.status = 'sessions-prepared'; await persist(); }
   else if (diagnosticOnly) {
     report.status = 'running-diagnostic';
     await runPhase('individual', 'warmup', 300);
