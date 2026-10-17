@@ -39,7 +39,13 @@ if (diagnosticOnly) {
 }
 report.buildChecks = [initialBuildCheck];
 report.scriptSha256 = crypto.createHash('sha256').update(await fs.readFile('tools/datos/load-run.mjs')).digest('hex');
-report.expectedMigration = {path:'supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql',sha256:crypto.createHash('sha256').update(await fs.readFile('supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql')).digest('hex')};
+const migrationFiles = (await fs.readdir('supabase/migrations')).filter(name => name.endsWith('.sql')).sort();
+report.localMigrations = await Promise.all(migrationFiles.map(async name => {
+  const path = `supabase/migrations/${name}`;
+  return {path, sha256:crypto.createHash('sha256').update(await fs.readFile(path)).digest('hex')};
+}));
+report.expectedMigration = report.localMigrations.at(-1);
+report.migrationInventoryScope = 'Archivos locales; contrastar la última migración con el servicio antes de medir.';
 report.environment.preparation = 'Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.';
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
@@ -107,7 +113,10 @@ async function renewBeforeLongMode() {
         return response;
       }},
     });
-    const {data,error}=await client.auth.refreshSession();
+    // initialize recupera automáticamente una sesión vencida. Consultarla antes
+    // de pedir otra renovación evita dos canjes del mismo participante.
+    let {data,error}=await client.auth.getSession();
+    if(!error&&data.session&&needsTokenRefresh(s,50*60_000))({data,error}=await client.auth.refreshSession());
     if(error||data.user?.id!==s.id||!data.session||needsTokenRefresh(s,50*60_000))
       throw new Error('La preparación no pudo renovar una sesión ficticia; detalles privados omitidos.');
     renewal.prepared++;await saveCookies();
