@@ -356,6 +356,7 @@ const monitor = setInterval(async () => {
 }, 60_000);
 try {
   console.log(`CARGA: ${reportPath}; build ${expectedBuild}; presupuesto ${budgetBytes} bytes.`);
+  if (!diagnosticOnly && !process.argv.includes('--sessions-only')) await renewBeforeLongMode();
   await prepareSessions();
   if (process.argv.includes('--sessions-only')) { report.status = 'sessions-prepared'; await persist(); }
   else if (diagnosticOnly) {
