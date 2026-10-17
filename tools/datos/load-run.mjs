@@ -117,7 +117,7 @@ async function renewBeforeLongMode() {
     // de pedir otra renovación evita dos canjes del mismo participante.
     let {data,error}=await client.auth.getSession();
     if(!error&&data.session&&needsTokenRefresh(s,50*60_000))({data,error}=await client.auth.refreshSession());
-    if(error||data.user?.id!==s.id||!data.session||needsTokenRefresh(s,50*60_000))
+    if(error||data.session?.user?.id!==s.id||!data.session||needsTokenRefresh(s,50*60_000))
       throw new Error('La preparación no pudo renovar una sesión ficticia; detalles privados omitidos.');
     renewal.prepared++;await saveCookies();
     if(renewal.prepared%25===0||renewal.prepared===204)console.log(`Renovación previa al modo largo: ${renewal.prepared}/204.`);
