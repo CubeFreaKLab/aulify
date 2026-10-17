@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { createSyncBatchQueue } from '@/lib/sync-batch';
 import { supabaseConfig } from './config';
 import { supabaseTransport } from './transport';
+import { databaseRpc, hasDatabaseTransport } from './database';
 
 let queue: ReturnType<typeof createSyncBatchQueue> | null = null;
 
@@ -18,9 +19,11 @@ export function readVerifiedSync(userId: string, activityId: string) {
     });
     queue = createSyncBatchQueue(
       async (requests) => {
-        const { data, error } = await service.rpc('aulify_service_sync_batch', {
-          p_requests: requests,
-        });
+        const { data, error } = hasDatabaseTransport()
+          ? await databaseRpc('sync', null, [requests])
+          : await service.rpc('aulify_service_sync_batch', {
+              p_requests: requests,
+            });
         if (error) throw error;
         if (!Array.isArray(data)) throw { code: 'XX000' };
         return data;

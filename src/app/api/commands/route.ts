@@ -4,6 +4,7 @@ import { authFailureResponse, isSameOrigin, jsonResponse, readJson } from '@/lib
 import { commandError } from '@/lib/command-errors';
 import { classifyRpcFailure, logRpcFailure } from '@/lib/rpc-failure';
 import { responseTiming } from '@/lib/response-timing';
+import { databaseRpc, hasDatabaseTransport } from '@/lib/supabase/database';
 
 function rpcFailureResponse(error: unknown, durationMs: number, upstreamStatus?: number) {
   const failure = classifyRpcFailure(error, upstreamStatus);
@@ -19,6 +20,7 @@ function rpcFailureResponse(error: unknown, durationMs: number, upstreamStatus?:
             ? commandError(String(error.message))
             : 'No pudimos completar el cambio. Actualiza la página para comprobar su estado.';
   const response = jsonResponse({ error: message }, failure.status);
+  response.headers.set('X-Aulify-Rpc-Failure', failure.category);
   if (failure.status === 503) response.headers.set('Retry-After', '30');
   return response;
 }
@@ -86,10 +88,12 @@ export async function POST(request: NextRequest) {
     const startedAt = performance.now();
     let result;
     try {
-      result = await supabase.rpc('aulify_command', {
-        p_action: body.action,
-        p_payload: { args: body.args },
-      });
+      result = hasDatabaseTransport()
+        ? await databaseRpc('command', identity.claims.sub, [body.action, { args: body.args }])
+        : await supabase.rpc('aulify_command', {
+            p_action: body.action,
+            p_payload: { args: body.args },
+          });
     } catch (error) {
       return rpcFailureResponse(error, performance.now() - startedAt);
     }
@@ -101,7 +105,14 @@ export async function POST(request: NextRequest) {
         { error: commandError(data.error.code || '') },
         data.error.code === 'RATE_LIMIT' ? 429 : 400,
       );
-    return responseTiming(jsonResponse({ result: data }), handlerStartedAt, startedAt, rpcEndedAt);
+    const response = responseTiming(
+      jsonResponse({ result: data }),
+      handlerStartedAt,
+      startedAt,
+      rpcEndedAt,
+    );
+    response.headers.set('X-Aulify-Data-Transport', hasDatabaseTransport() ? 'postgresql' : 'rest');
+    return response;
   } catch {
     return jsonResponse({ error: 'No pudimos procesar la solicitud.' }, 400);
   }

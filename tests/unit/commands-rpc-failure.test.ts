@@ -12,6 +12,10 @@ vi.mock('@/lib/http', () => import('../../src/lib/http'));
 vi.mock('@/lib/command-errors', () => import('../../src/lib/command-errors'));
 vi.mock('@/lib/rpc-failure', () => import('../../src/lib/rpc-failure'));
 vi.mock('@/lib/response-timing', () => import('../../src/lib/response-timing'));
+vi.mock('@/lib/supabase/database', () => ({
+  hasDatabaseTransport: () => false,
+  databaseRpc: vi.fn(),
+}));
 
 function request(
   action = 'submitAnswer',

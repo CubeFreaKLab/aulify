@@ -11,6 +11,10 @@ vi.mock('@/lib/supabase/server', () => ({
 vi.mock('@/lib/http', () => import('../../src/lib/http'));
 vi.mock('@/lib/rpc-failure', () => import('../../src/lib/rpc-failure'));
 vi.mock('@/lib/response-timing', () => import('../../src/lib/response-timing'));
+vi.mock('@/lib/supabase/database', () => ({
+  hasDatabaseTransport: () => false,
+  databaseRpc: vi.fn(),
+}));
 vi.mock('@/lib/supabase/sync-batch', () => ({ readVerifiedSync: mocks.batch }));
 
 const activity = '10000000-0000-4000-8000-000000000001';

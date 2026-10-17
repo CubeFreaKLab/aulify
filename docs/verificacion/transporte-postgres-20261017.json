@@ -1,0 +1,20 @@
+{
+  "startedAt": "2026-10-17T21:37:14.538Z",
+  "completedAt": "2026-10-17T21:37:18.916Z",
+  "transport": "Supavisor transaccional TLS con verificación de certificado, sin PostgREST",
+  "checks": [
+    "authorized_snapshot",
+    "foreign_class_denied",
+    "foreign_attempt_denied",
+    "idempotent_confirmation",
+    "transaction_context_reset",
+    "service_sync_separate_authorization",
+    "forty_identities_preserved"
+  ],
+  "tlsCertificateVerified": true,
+  "concurrency": 4,
+  "confirmationSamples": 40,
+  "confirmationP95Ms": 1843.3026999999997,
+  "firstSnapshotMs": 282.2762,
+  "scope": "Comprobación de transporte y permisos con datos ficticios; no es la medición completa Q06."
+}
