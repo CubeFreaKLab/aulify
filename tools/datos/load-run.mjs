@@ -3,6 +3,7 @@ import { retryAfterMs } from './load-waits.mjs';
 import { loadCriteria } from './load-criteria.mjs';
 import { parallel } from './load-workers.mjs';
 import { auditPublishedResults, temporaryLoadFailure } from './load-result-audit.mjs';
+import { openLoadEventStream } from './load-events.mjs';
 import {observeServerTiming,summarizeServerTiming} from './server-timing-aggregate.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import { loadTargetFromEnvironment } from './load-target.mjs';
@@ -32,6 +33,8 @@ const runId = crypto.randomUUID();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const report = { runId, startedAt: new Date().toISOString(), status: 'preparing', commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), compiledCommit: process.env.AULIFY_COMPILED_COMMIT || undefined, buildId: expectedBuild, target: loadTarget.metadata, environment: { application: loadTarget.local ? 'Next.js production local HTTP' : 'Next.js Vercel Preview HTTPS', base, database: 'Supabase Free, PostgreSQL 17, sa-east-1', generator: { node: process.version, os: `${os.platform()} ${os.release()}`, cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() }, activeSessions: 204, teachers: 4, students: 200, studentsPerClass: 50, questionsPerActivity: 10, pollingMs: 1000, polling: 'GET /api/sync cada segundo, suspendido durante respuesta propia; snapshot solo para cambios no proyectados por un ACK con base conocida y marca completa; reintento 1/2/4/8 s', warmupSeconds: 300, measurementSeconds: 900, logicalBodyBudgetBytes: 1_000_000_000 }, phases: [], authentication: { rateLimitWaits: 0, preparedSessions: 0 }, limitations: ['El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.', loadTarget.local ? 'La aplicación está en una computadora local, no en el alojamiento público.' : 'Vista previa protegida de Vercel; no es producción ni una liberación pública.', 'Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.', 'La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos.'] };
 report.environment.confirmation = 'ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.';
+report.environment.polling = 'Docente: cada segundo. Estudiante: avisos SSE de /api/events; comprobación cada 30 segundos y en el plazo del servidor. Sin canal: cada segundo. El mismo ACK y las mismas guardias de proyección siguen vigentes.';
+report.environment.events = {transport:'SSE autorizado por la aplicación; relé privado de servidor a Supabase',healthMs:30000,reconnectMs:1500,rotateMs:240000,preparationOutsideMeasurement:true};
 report.environment.logicalBodyBudgetBytes = budgetBytes;
 report.protocol = diagnosticOnly ? 'diagnostic-individual-warmup-and-next-preparation' : 'full-q06';
 if (diagnosticOnly) {
@@ -181,12 +184,17 @@ function startPolling() {
   const timers = [];
   const poll = s => {
     if (s.running || s.pendingAnswer || aborted || s.authorizationLost || Date.now() < s.retryAt) { if (phase) phase.skippedPollTicks++; return; }
+    const now=performance.now(),interval=s.role==='student'&&s.eventsConnected?30000:1000;
+    if(s.checkedHint===s.hints&&now-(s.lastRead||0)<interval&&now<(s.nextDeadline??Infinity))return;
+    const currentHint=s.hints;
     s.running = (async () => {
       try {
         const epoch=s.mutationEpoch;
         const result = (await request(s, `/api/sync?activity=${s.activityId}`, { tag: 'sync' })).value;
         if(epoch!==s.mutationEpoch)return;
-        if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(snapshot.applied)s.lastRevision = result.revision; }
+        if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(!snapshot.applied)return;s.lastRevision = result.revision; }
+        s.checkedHint=currentHint;s.lastRead=performance.now();
+        s.nextDeadline=result.nextDeadline?s.lastRead+Math.max(100,Date.parse(result.nextDeadline)-Date.parse(result.serverTime)):Infinity;
         s.retryAt=0;s.retryMs=1000;
       } catch (error) {
         // La recuperación del cliente vuelve a descargar la proyección,
@@ -201,9 +209,36 @@ function startPolling() {
     })().finally(() => { s.running = null; });
   };
   sessions.forEach((s, i) => {
-    timers.push(setTimeout(() => { poll(s); timers.push(setInterval(() => poll(s), 1000)); }, i * 1000 / 204));
+    s.onHint=()=>poll(s);
+    timers.push(setTimeout(() => { poll(s); timers.push(setInterval(() => poll(s), s.role==='student'?250:1000)); }, i * 1000 / 204));
   });
-  return async () => { timers.forEach(clearTimeout); await Promise.allSettled(sessions.map(s => s.running || Promise.resolve())); };
+  return async () => { timers.forEach(clearTimeout); for(const s of sessions)s.onHint=null; await Promise.allSettled(sessions.map(s => s.running || Promise.resolve())); };
+}
+async function prepareEventStreams(name) {
+  const streams=[],stats={name,opened:0,ready:0,rotations:0,unexpectedFailures:0,bytes:0,active:0,maximumActive:0,startedAt:new Date().toISOString()};
+  (report.eventStreams ||= []).push(stats);
+  const close=async()=>{await Promise.allSettled(streams.map(stream=>stream.stop()));stats.completedAt=new Date().toISOString();};
+  try {
+    await parallel(students,8,async s=>{
+      const stream=openLoadEventStream({
+        connect:async signal=>{const started=performance.now();const response=await loadTarget.request(`/api/events?activity=${s.activityId}`,{signal,headers:{Cookie:[...s.jar].map(([k,v])=>`${k}=${v}`).join('; '),Origin:base,'Sec-Fetch-Site':'same-origin'}});setCookies(s,response);s.eventHeaderMs=performance.now()-started;return response;},
+        opened:response=>{stats.opened++;record(phase,'eventsConnect',response.status,s.eventHeaderMs,0);},
+        failed:error=>{stats.unexpectedFailures++;if(!error.status||error.status===200)record(phase,'eventsDisconnected',0,0,0);},
+        bytes:n=>{stats.bytes+=n;bodyBytes+=n;if(phase)phase.bodyBytes+=n;},
+        event:event=>{
+          const connected=event==='ready';
+          if(connected&&!s.eventsConnected){s.eventsConnected=true;stats.active++;stats.maximumActive=Math.max(stats.maximumActive,stats.active);stats.ready++;s.hints++;s.onHint?.();}
+          else if(['unavailable','rotate','revoked','disconnected'].includes(event)&&s.eventsConnected){s.eventsConnected=false;stats.active--;}
+          if(event==='changed'||event==='revoked'){s.hints++;s.onHint?.();}
+          if(event==='rotate')stats.rotations++;
+        },
+      });
+      streams.push(stream);await stream.ready;
+    });
+    stats.preparedAt=new Date().toISOString();
+    if(stats.active!==200)throw new Error('SSE_PREPARATION_INCOMPLETE');
+    return close;
+  } catch(error){await close();throw error;}
 }
 async function until(target) { while (Date.now() < target) { if (aborted) throw new Error('LOAD_ABORTED'); await delay(Math.min(1000, target - Date.now())); } }
 const percentile = (values, p) => { if (!values.length) return null; const sorted = [...values].sort((a, b) => a - b); return Number(sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * p) - 1)].toFixed(2)); };
@@ -229,7 +264,7 @@ async function makeActivities(mode, stage) {
   for (const teacher of teachers) {
     const group = fixtures.groups.find(g => g.group === teacher.group);
     const activity = await command(teacher, 'createActivity', group.versionId, group.subjectId, settings, `Carga ${mode} · ${stage} · ${runId.slice(0, 8)}`);
-    for (const s of sessions.filter(s => s.group === teacher.group)) { s.activityId = activity.id; s.lastRevision = null; s.latest = null; s.wanted = null; s.retryAt=0; s.retryMs=1000;s.authorizationLost=false; }
+    for (const s of sessions.filter(s => s.group === teacher.group)) { s.activityId = activity.id; s.lastRevision = null; s.latest = null; s.wanted = null; s.retryAt=0; s.retryMs=1000;s.authorizationLost=false;s.hints=0;s.checkedHint=-1;s.lastRead=0;s.nextDeadline=Infinity;s.eventsConnected=false; }
   }
   await parallel(fixtures.groups, 4, async group => {
     for (const s of students.filter(s => s.group === group.group)) {
@@ -293,6 +328,7 @@ async function runPhase(mode, stage, seconds) {
   report.buildChecks.push(await verifyBuild());
   await makeActivities(mode, stage);
   await prepareSessions(`${mode}-${stage}`);
+  const stopEvents=await prepareEventStreams(`${mode}-${stage}`);
   const current = { name: `${mode}-${stage}`, mode, stage, targetSeconds: seconds, startedAt: new Date().toISOString(), requestCount: 0, failedRequests: 0, bodyBytes: 0, operations: {}, responseAckMs: [], confirmationMs: [], propagationMs: [], skippedPollTicks: 0, confirmed: new Map(), unsentAnswers: 0, unconfirmedAnswers: 0, unobservedConfirmations: 0, burst: null };
   report.phases.push(current); phase = current; recent.length = 0;
   const start = Date.now(), end = start + seconds * 1000, period = seconds * 100;
@@ -327,6 +363,7 @@ async function runPhase(mode, stage, seconds) {
     current.interrupted = true;
   } finally {
     await stopPolling();
+    await stopEvents();
     current.completedAt = new Date().toISOString(); current.elapsedSeconds = Number(((Date.now() - start) / 1000).toFixed(3));
     phase = null;
   }
