@@ -61,6 +61,8 @@ El transporte de servidor mantiene un máximo de 128 conexiones HTTP/1.1 por ori
 
 El lote de sincronización resuelve como conjuntos las identidades autorizadas y reutiliza el contexto de cada actividad dentro de la consulta. No mantiene una caché de permisos. Conserva las huellas y los plazos del contrato individual, el rechazo independiente de cada identidad y el acceso exclusivo desde el servidor. La [comparación aislada](docs/verificacion/sync-lotes-conjuntos.md) registra sus resultados y distingue esta optimización de la medición completa de capacidad.
 
+El servidor espera como máximo 160 ms para formar cada lote, con un máximo de 64 lecturas y 1.024 lecturas distintas en curso por instancia. La deduplicación solo dura mientras se resuelve la solicitud; no conserva resultados ni autorizaciones entre consultas. Las rutas de sincronización, lectura y comandos verifican y renuevan su propia sesión, sin una segunda pasada previa del proxy. Las páginas autenticadas, el acceso y los archivos conservan esa pasada cuando la necesitan. La reducción de trabajo y de invocaciones debe contrastarse con el ensayo de capacidad y las cuotas observadas.
+
 Q-06 conserva cuatro grupos de cincuenta estudiantes y cuatro docentes, diez preguntas por actividad y dos fases separadas de cinco minutos de calentamiento más quince de medición. Los objetivos y la ráfaga están en el [plan de calidad](docs/calidad/plan-de-calidad.md). No reducir umbrales después de medir.
 
 ## 6. Archivos y conservación

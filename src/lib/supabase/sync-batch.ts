@@ -16,14 +16,20 @@ export function readVerifiedSync(userId: string, activityId: string) {
       auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
       global: { fetch: supabaseTransport(url) },
     });
-    queue = createSyncBatchQueue(async (requests) => {
-      const { data, error } = await service.rpc('aulify_service_sync_batch', {
-        p_requests: requests,
-      });
-      if (error) throw error;
-      if (!Array.isArray(data)) throw { code: 'XX000' };
-      return data;
-    });
+    queue = createSyncBatchQueue(
+      async (requests) => {
+        const { data, error } = await service.rpc('aulify_service_sync_batch', {
+          p_requests: requests,
+        });
+        if (error) throw error;
+        if (!Array.isArray(data)) throw { code: 'XX000' };
+        return data;
+      },
+      // En un alojamiento con varias instancias, 40 ms producía muchos lotes
+      // casi individuales. Compartir hasta 160 ms reduce viajes al servicio;
+      // cada lote conserva la comprobación vigente de permisos por identidad.
+      160,
+    );
   }
   return queue.read(userId, activityId);
 }
