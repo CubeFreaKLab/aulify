@@ -47,7 +47,7 @@ lines.push(
   "",
   `Se prepararon ${data.authentication.preparedSessions} sesiones HTTP. La autenticación se espació para respetar los límites del servicio; hubo ${data.authentication.rateLimitWaits} esperas por respuestas temporales durante esta preparación. Las cuentas son ficticias, con confirmación administrativa y sin envío de correo. Sus credenciales y cookies permanecen en archivos locales excluidos de Git.`,
   "",
-  "Cada sesión consulta /api/sync cada segundo y solicita /api/workspace únicamente cuando cambia la huella de revisión. No se acumulan consultas simultáneas de sincronización de una misma sesión. Las respuestas se envían a /api/commands: atraviesan autorización, validación, RPC y persistencia. Los reintentos conservan la clave de idempotencia.",
+  `${data.environment.polling || 'Cada sesión consulta /api/sync cada segundo.'} Sólo se solicita la proyección de actividad cuando cambia la huella o se recupera la conexión. No se acumulan consultas simultáneas de sincronización de una misma sesión. Las respuestas se envían a /api/commands: atraviesan autorización, validación, RPC y persistencia. Los reintentos conservan la clave de idempotencia.`,
   ...(data.environment.fixtureHistory ? ["",data.environment.fixtureHistory] : []),
   "",
   "## Resultados por fase",
@@ -83,6 +83,14 @@ if (data.postStopRecoveryAudit) {
   const audit = data.postStopRecoveryAudit;
   lines.push("", `La auditoría HTTP posterior al corte también agotó su tiempo de espera. En una consulta de solo lectura posterior (registro: ${audit.recordedAt ?? audit.observedAt}) se encontraron ${audit.attempts} intentos y ${audit.persistedAnswers} respuestas, con ${audit.duplicateQuestionRows} preguntas duplicadas. ${audit.confirmedKeyCorrespondence==='verified' ? `Se contrastaron las ${audit.confirmedKeys} claves confirmadas conservadas en el checkpoint privado: ${audit.matchedConfirmedKeys} coincidieron y ${audit.missingOrChangedConfirmed} estaban ausentes o modificadas. Esta comprobación posterior acredita la persistencia de las confirmaciones observadas, pero no completa el escenario de carga interrumpido.` : 'El contraste exacto entre cada clave confirmada y la persistencia no quedó verificado: el conjunto en memoria no se había serializado. Por ello no se afirma que la prueba haya demostrado cero pérdida de respuestas confirmadas.'}`);
 }
+if (data.eventStreams?.length) {
+  lines.push('', '## Avisos y recuperación del transporte', '',
+    '| Fase | Estudiantes conectados simultáneamente | Conexiones HTTP abiertas | Renovaciones programadas | Interrupciones inesperadas |',
+    '|---|---:|---:|---:|---:|');
+  for (const stream of data.eventStreams)
+    lines.push(`| ${stream.name} | ${stream.maximumActive} | ${stream.opened} | ${stream.rotations} | ${stream.unexpectedFailures} |`);
+  lines.push('', 'Las conexiones SSE se preparan fuera de la medición y se renuevan antes del límite del alojamiento. Las renovaciones programadas no son fallos. Las interrupciones inesperadas durante la fase sí se registran; el estudiante utiliza sondeo de respaldo hasta recuperar los avisos. Estas conexiones HTTP no equivalen al número de sockets compartidos del servidor con Supabase.');
+}
 lines.push(
   "",
   "La auditoría de persistencia vuelve a consultar el estado del docente y contrasta identificadores de intento, pregunta y clave de idempotencia. El objetivo completo es de 2.000 respuestas por fase. La publicación y consulta final de notas se registran fuera de la ventana de carga y no se atribuyen a una fase cuando esta se interrumpe.",
@@ -93,7 +101,7 @@ lines.push(
   "",
   `El límite preventivo configurado para esta ejecución fue de ${number((data.environment.logicalBodyBudgetBytes ?? 1e9) / 1e9)} GB adicionales estimados. También se detiene si más del 10 % de solicitudes fallan en una ventana completa de un minuto, con al menos cien solicitudes. La estimación no equivale al tráfico facturado. No se activaron pagos ni se ampliaron cuotas para obtener un resultado.`,
   "",
-  "Este generador no consulta los paneles de facturación. Q-09 requiere contrastar las cuotas y los consumos observados de Supabase y Vercel en el informe de servicios asociado a la ejecución; los paneles pueden tener retraso. Esta sincronización utiliza HTTP y no abre conexiones Realtime. Un resultado favorable de Q-06 no acredita por sí solo Q-09.",
+  `Este generador no consulta los paneles de facturación. Q-09 requiere contrastar las cuotas y los consumos observados de Supabase y Vercel; los paneles pueden tener retraso. ${data.environment.events ? 'Los navegadores simulados utilizan SSE; el servidor comparte conexiones privadas a Realtime. Los contadores de conexiones, mensajes y transferencia se revisan por separado.' : 'Esta revisión utiliza sondeo HTTP sin conexiones Realtime.'} Un resultado favorable de Q-06 no acredita por sí solo Q-09.`,
   "",
   "## Alcance y límites de interpretación",
   "",
@@ -107,13 +115,19 @@ lines.push(
   "Se requiere autorización para utilizar el proyecto de pruebas, sus cuotas gratuitas y las cuentas ficticias privadas. La preparación no se ejecuta en integración continua ni utiliza datos de estudiantes reales.",
   "",
   "```powershell",
-  "node tools/datos/load-prepare.mjs",
-  "$env:AULIFY_LOAD_URL='http://127.0.0.1:3002'",
+  "$env:AULIFY_LOAD_URL='<origen autorizado>'",
+  "$env:AULIFY_EXPECTED_BUILD_ID='<build verificado>'",
+  ...(data.environment.events ? [
+    "$env:AULIFY_LOAD_PREVIEW_MANIFEST='<manifiesto privado verificado>'",
+    "$env:AULIFY_LOAD_PREVIEW_SECRET_FILE='<archivo privado del acceso temporal autorizado>'",
+  ] : []),
+  `$env:AULIFY_LOAD_BUDGET_BYTES='${data.environment.logicalBodyBudgetBytes ?? 1e9}'`,
+  "$env:AULIFY_COMPILED_COMMIT='<commit compilado identificado>'",
   "node tools/datos/load-run.mjs",
   "node tools/datos/load-report.mjs",
   "```",
   "",
-  "El servidor debe ser una construcción estable. Preparar una nueva ejecución completa si cambia el código, transporte o infraestructura; conservar por separado los informes anteriores. No recortar calentamiento ni medición, extrapolar una fase incompleta o relajar el criterio para declarar un aprobado.",
+  "Se requieren el conjunto ficticio y sus sesiones privadas previamente preparados; no volver a crear las cuentas si ya existen. La Preview necesita un manifiesto y un acceso temporal autorizado vigente. El acceso de esta ejecución ya fue revocado. El servidor debe ser una construcción estable. Preparar una nueva ejecución completa si cambia el código, transporte o infraestructura; conservar los informes anteriores. No recortar fases ni relajar criterios para declarar un aprobado.",
   "",
   "Cuotas y tasa de autenticación: [transferencia de Supabase](https://supabase.com/docs/guides/platform/manage-your-usage/egress) y [límites de Auth](https://supabase.com/docs/guides/auth/rate-limits).",
   "",
