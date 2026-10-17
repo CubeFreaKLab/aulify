@@ -1,0 +1,60 @@
+{
+  "observedAt": "2026-10-17T22:16:40.678Z",
+  "sourceCommit": "a27d55ed213f4a638f8d9656164fb047f395cfbe",
+  "warmupWindow": {
+    "start": "2026-10-17T22:03:00Z",
+    "end": "2026-10-17T22:06:30Z",
+    "events": [
+      {
+        "category": "other",
+        "events": 1219
+      },
+      {
+        "category": "termination",
+        "events": 804
+      },
+      {
+        "category": "pool_client_limit",
+        "events": 56
+      }
+    ]
+  },
+  "burstWindow": {
+    "start": "2026-10-17T22:10:00Z",
+    "end": "2026-10-17T22:12:30Z",
+    "events": [
+      {
+        "category": "other",
+        "events": 386,
+        "minute": "2026-10-17T22:10:00"
+      },
+      {
+        "category": "termination",
+        "events": 247,
+        "minute": "2026-10-17T22:10:00"
+      },
+      {
+        "category": "other",
+        "events": 174,
+        "minute": "2026-10-17T22:11:00"
+      },
+      {
+        "category": "termination",
+        "events": 105,
+        "minute": "2026-10-17T22:11:00"
+      },
+      {
+        "category": "other",
+        "events": 2,
+        "minute": "2026-10-17T22:12:00"
+      },
+      {
+        "category": "termination",
+        "events": 5,
+        "minute": "2026-10-17T22:12:00"
+      }
+    ]
+  },
+  "interpretation": "En la ventana de la ráfaga no se devolvieron eventos EMAXCONN ni ECHECKOUTFAILED. No demuestra que la adquisición ni las consultas cumplan el umbral; los registros HTTP de esa compilación aún no separaban ambos tiempos.",
+  "source": "Supabase query_logs; agregación de supavisor_logs, sin mensajes originales ni identificadores."
+}

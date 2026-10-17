@@ -1,0 +1,1221 @@
+{
+  "startedAt": "2026-10-17T22:02:46.936Z",
+  "sourceCommit": "a27d55ed213f4a638f8d9656164fb047f395cfbe",
+  "buildId": "HH62syQ6aAtXMcdSqViEg",
+  "sampleIntervalMs": 30000,
+  "scope": "Muestras SQL agregadas durante la carga HTTP. Son conexiones físicas de PostgreSQL; no número de clientes Supavisor ni de navegadores.",
+  "samples": [
+    {
+      "at": "2026-10-17T22:02:48.001265+00:00",
+      "active": [
+        {
+          "seconds": 694.079303,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 12,
+        "deadlocks": 69,
+        "tempBytes": 2212611637,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 6,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:03:18.860304+00:00",
+      "active": [
+        {
+          "seconds": 724.907135,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 14,
+        "deadlocks": 69,
+        "tempBytes": 2212611637,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 8,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:03:49.762469+00:00",
+      "active": [
+        {
+          "seconds": 755.809317,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 15,
+        "deadlocks": 69,
+        "tempBytes": 2215908721,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 9,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:04:20.686264+00:00",
+      "active": [
+        {
+          "seconds": 786.737494,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2217557263,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:04:51.730384+00:00",
+      "active": [
+        {
+          "seconds": 817.780387,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 26,
+        "deadlocks": 69,
+        "tempBytes": 2219205805,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 20,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:05:22.966198+00:00",
+      "active": [
+        {
+          "seconds": 849.020321,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2220854347,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:05:54.225912+00:00",
+      "active": [
+        {
+          "seconds": 0.761056,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.782655,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.781985,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.795861,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.783253,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.79167,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.787888,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 880.489266,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2222502889,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 7,
+          "scope": "other",
+          "state": "active",
+          "wait_event": null,
+          "wait_event_type": null
+        },
+        {
+          "n": 14,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:06:28.68213+00:00",
+      "active": [
+        {
+          "seconds": 1.883155,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 4.789486,
+          "operation": "sync",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 915.546664,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 24,
+        "deadlocks": 69,
+        "tempBytes": 2222502889,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 2,
+          "scope": "other",
+          "state": "active",
+          "wait_event": null,
+          "wait_event_type": null
+        },
+        {
+          "n": 16,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:07:01.327987+00:00",
+      "active": [
+        {
+          "seconds": 0.10909,
+          "operation": "snapshot",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 947.401264,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2222502889,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": null,
+          "wait_event_type": null
+        },
+        {
+          "n": 20,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:07:32.342351+00:00",
+      "active": [
+        {
+          "seconds": 978.392357,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2225799973,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:08:03.342979+00:00",
+      "active": [
+        {
+          "seconds": 1009.392053,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2225799973,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:08:34.265614+00:00",
+      "active": [
+        {
+          "seconds": 0.02785,
+          "operation": "snapshot",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.014596,
+          "operation": "command",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 1040.320423,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2225799973,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": null,
+          "wait_event_type": null
+        },
+        {
+          "n": 19,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:09:05.302403+00:00",
+      "active": [
+        {
+          "seconds": 0.203012,
+          "operation": "overview",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.141672,
+          "operation": "overview",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.104729,
+          "operation": "overview",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.115975,
+          "operation": "overview",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 0.020261,
+          "operation": "overview",
+          "wait_event": null,
+          "wait_event_type": null,
+          "blocking_processes": 0
+        },
+        {
+          "seconds": 1071.358524,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2225799973,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 5,
+          "scope": "other",
+          "state": "active",
+          "wait_event": null,
+          "wait_event_type": null
+        },
+        {
+          "n": 16,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:09:36.247195+00:00",
+      "active": [
+        {
+          "seconds": 1102.297372,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2229097941,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:10:07.195414+00:00",
+      "active": [
+        {
+          "seconds": 1133.244617,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2229097941,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:10:38.042039+00:00",
+      "active": [
+        {
+          "seconds": 1164.104253,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2230746925,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:11:08.970571+00:00",
+      "active": [
+        {
+          "seconds": 1195.022332,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2232395909,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:11:39.846975+00:00",
+      "active": [
+        {
+          "seconds": 1225.895913,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2232395909,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:12:02.716155+00:00",
+      "active": [
+        {
+          "seconds": 1248.765052,
+          "operation": "other",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client",
+          "blocking_processes": 0
+        }
+      ],
+      "database": {
+        "backends": 27,
+        "deadlocks": 69,
+        "tempBytes": 2232395909,
+        "blocksRead": 1826
+      },
+      "connections": [
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "active",
+          "wait_event": "WalSenderWaitForWal",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 21,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": "idle",
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 1,
+          "scope": "other",
+          "state": null,
+          "wait_event": "Extension",
+          "wait_event_type": "Extension"
+        },
+        {
+          "n": 2,
+          "scope": "postgrest",
+          "state": "idle",
+          "wait_event": "ClientRead",
+          "wait_event_type": "Client"
+        }
+      ]
+    }
+  ],
+  "migrations": {
+    "count": 35,
+    "latest": "20261017204006"
+  },
+  "exitCode": 4294967295,
+  "completedAt": "2026-10-17T22:12:02.077Z"
+}

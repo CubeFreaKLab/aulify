@@ -26,7 +26,7 @@ function databasePools() {
     connection.hash
   )
     throw { code: '08006' };
-  const create = () => {
+  const create = (max: number) => {
     const pool = new Pool({
       host: connection.hostname,
       port: 6543,
@@ -35,7 +35,7 @@ function databasePools() {
       password: decodeURIComponent(connection.password),
       ssl: { rejectUnauthorized: true, ca: SUPABASE_POSTGRES_CA },
       application_name: 'aulify-server',
-      max: 2,
+      max,
       connectionTimeoutMillis: 6_000,
       idleTimeoutMillis: 5_000,
       maxLifetimeSeconds: 180,
@@ -50,7 +50,7 @@ function databasePools() {
     if (process.env.VERCEL === '1') attachDatabasePool(pool);
     return pool;
   };
-  poolRegistry[poolKey] = { read: create(), command: create() };
+  poolRegistry[poolKey] = { read: create(4), command: create(8) };
   return poolRegistry[poolKey];
 }
 
@@ -60,11 +60,35 @@ export async function databaseRpc<T = unknown>(
   userId: string | null,
   args: unknown[],
 ) {
+  const startedAt = performance.now();
+  let pool: Pool | undefined;
+  let acquiredAt: number | undefined;
+  const observe = (code?: string) => {
+    const finishedAt = performance.now();
+    const acquireMs = Math.round((acquiredAt ?? finishedAt) - startedAt);
+    const queryMs = acquiredAt === undefined ? 0 : Math.round(finishedAt - acquiredAt);
+    if (code || acquireMs > 500 || queryMs > 1_000)
+      console.warn('aulify.database.pressure', {
+        operation,
+        stage: acquiredAt === undefined ? 'acquire' : 'query',
+        acquireMs,
+        queryMs,
+        total: pool?.totalCount ?? 0,
+        idle: pool?.idleCount ?? 0,
+        waiting: pool?.waitingCount ?? 0,
+        code: code ?? null,
+      });
+  };
   try {
-    const pool = databasePools()[operation === 'command' ? 'command' : 'read'];
+    pool = databasePools()[operation === 'command' ? 'command' : 'read'];
     const lease = await pool.connect();
-    return await executeDatabaseRpc<T>(lease, operation, userId, args);
+    acquiredAt = performance.now();
+    const result = await executeDatabaseRpc<T>(lease, operation, userId, args);
+    observe(result.error?.code);
+    return result;
   } catch (error) {
-    return { data: null, error: databaseFailure(error), status: 0 };
+    const failure = databaseFailure(error);
+    observe(failure.code);
+    return { data: null, error: failure, status: 0 };
   }
 }

@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-10-17T22:16:31.961Z",
+  "sourceCommit": "a27d55ed213f4a638f8d9656164fb047f395cfbe",
+  "buildId": "HH62syQ6aAtXMcdSqViEg",
+  "report": "docs/verificacion/datos-carga-20261017220248.json",
+  "reportSha256": "4376b4bd6fded2d5f56f6c8c7fe71682dbc97f0b664696686dbea16f3706e6a8",
+  "termination": "Se detuvo externamente el ejecutor al demostrar que el percentil de la medición ya no podía aprobar; no se completaron 900 segundos ni el modo guiado. El JSON original conserva el último checkpoint.",
+  "lastCheckpointSeconds": 99,
+  "requests": 1417,
+  "failedRequests": 58,
+  "acknowledgementsSaved": 200,
+  "acknowledgementsOver1500Ms": 122,
+  "maximumSlowAnswersFor2000Samples": 100,
+  "reason": "122 respuestas lentas de las primeras 200 ya superan las 100 permitidas entre 2000 para p95 <=1500 ms.",
+  "integrityAfterStop": {
+    "persisted": 357,
+    "duplicateQuestions": 0,
+    "checkpointConfirmed": 200,
+    "missingOrChangedConfirmed": 0
+  },
+  "limits": "La auditoría contrasta las claves guardadas en el checkpoint. Puede haber respuestas enviadas o confirmadas en vuelo tras ese checkpoint; no se afirma un conteo completo de esas confirmaciones."
+}
