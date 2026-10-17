@@ -20,7 +20,9 @@ Hay dos pools por proceso: cuatro conexiones máximas para lecturas y ocho para 
 
 El primer calentamiento con el transporte nativo alcanzó el límite de doscientos clientes del pooler y se cortó. Los registros de Supavisor identificaron `EMAXCONN`, incluida la espera fallida para obtener conexiones. Se conserva [el resultado fallido](../verificacion/capacidad-postgres-inicial-20261017.md). La corrección de ciclo de vida y tamaño de los pools responde a ese fallo concreto; todavía requiere medición.
 
-El siguiente ensayo terminó el calentamiento, pero volvió a fallar al enviar doscientas respuestas en ráfaga. Se detuvo anticipadamente: 122 de las primeras 200 confirmaciones superaron 1,5 segundos, lo que ya impedía cumplir el percentil sobre las 2.000 respuestas previstas. En esa ventana no se repitió `EMAXCONN`; los registros del servidor mostraron esperas de seis segundos y cancelaciones. Se amplía el pequeño pool de dos conexiones y se registran por separado la espera de conexión y la ejecución, mediante campos numéricos y categorías cerradas. No se registran consultas, respuestas, identidades ni excepciones originales. La comprobación acotada de la ráfaga debe preceder a otro ensayo completo.
+El siguiente ensayo terminó el calentamiento, pero volvió a fallar en la primera ronda de doscientas respuestas, distribuida en quince segundos. Se detuvo anticipadamente: 122 de las primeras 200 confirmaciones superaron 1,5 segundos, lo que ya impedía cumplir el percentil sobre las 2.000 respuestas previstas. En esa ventana no se repitió `EMAXCONN`; los registros del servidor mostraron esperas de seis segundos y cancelaciones. Se amplía el pequeño pool de dos conexiones y se registran por separado la espera de conexión y la ejecución, mediante campos numéricos y categorías cerradas. No se registran consultas, respuestas, identidades ni excepciones originales.
+
+Con los pools ampliados, un diagnóstico concentró doscientos envíos en 23 milisegundos: no tuvo fallos, pero superó el tiempo objetivo. La comprobación que reproduce la ventana original de hasta dos segundos y las lecturas docentes del cliente confirmó las doscientas respuestas sin errores, con p95 de 1,28 segundos. Ambos diagnósticos se conservan por separado; el ejecutor formal no se modificó. Este resultado justifica medir las ventanas completas y todavía no aprueba capacidad.
 
 Se utiliza el protocolo de consulta sin sentencias preparadas con nombre. Los nombres de las cuatro RPC y los roles son constantes del servidor. Cada valor se escapa con `pg.escapeLiteral`; no se interpolan valores del cliente sin ese escape. El certificado raíz público se obtuvo desde Database Settings y TLS verifica tanto la cadena como el servidor. La conexión privada no lleva prefijo `NEXT_PUBLIC_` y no se incluye en Git.
 
@@ -29,7 +31,7 @@ Se utiliza el protocolo de consulta sin sentencias preparadas con nombre. Los no
 - Comprobaciones unitarias de transacción, escape, confirmación posterior al cierre y selección de identidad en las rutas HTTP.
 - [Comprobación remota de transporte](../verificacion/transporte-postgres-20261017.json): lectura autorizada, denegación de otra materia e intento, reintento idempotente, limpieza de contexto, sincronización independiente y cuarenta identidades. No aprueba Q-06.
 - La medición completa debe conservar los cuatro docentes, doscientos estudiantes, ambos modos, duraciones, integridad y umbrales originales. Q-06, AP-35 y Q-09 siguen abiertos hasta tener ese resultado.
-- No se modificaron tablas, permisos SQL ni versiones de actividades. El modelo conserva treinta y cinco migraciones.
+- No se modificaron tablas, permisos SQL ni versiones de actividades. El transporte se midió con treinta y cinco migraciones. La migración posterior de revisión de proyección lleva el registro a treinta y seis; su capacidad todavía no está medida.
 
 ## Referencias
 

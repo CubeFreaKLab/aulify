@@ -240,6 +240,55 @@ try {
     )[0].value,
     'El visitante tampoco puede ejecutar el lote de servicio',
   );
+  await actor(users.student);
+  const seeded = (await rows('select public.aulify_activity_snapshot($1) value', [activity.id]))[0]
+    .value;
+  ok(
+    seeded.activitySync?.activityId === activity.id &&
+      seeded.activitySync?.revision === (await sync(activity.id)),
+    'La proyección inicial incluye la revisión autorizada que representa su estado',
+  );
+  await actor(users.peer);
+  const peerProjection = (
+    await rows('select public.aulify_activity_snapshot($1) value', [activity.id])
+  )[0].value;
+  ok(
+    peerProjection.userId === users.peer &&
+      peerProjection.activitySync?.revision !== seeded.activitySync.revision,
+    'Dos estudiantes conservan proyecciones y revisiones propias en la misma actividad',
+  );
+  await db.exec('reset role');
+  ok(
+    !(
+      await rows(
+        "select has_function_privilege('anon','public.aulify_activity_snapshot(uuid)','execute') value",
+      )
+    )[0].value,
+    'La nueva proyección no amplía el acceso de visitantes',
+  );
+  const projectionDefinition = (
+    await rows("select pg_get_functiondef('app.activity_snapshot(uuid)'::regprocedure) value")
+  )[0].value;
+  await db.exec(
+    projectionDefinition.replace(
+      'FUNCTION app.activity_snapshot(',
+      'FUNCTION app.test_projection_original(',
+    ),
+  );
+  await db.exec(`create or replace function app.activity_snapshot(p_activity_id uuid) returns jsonb
+    language plpgsql security definer set search_path='' as $$declare value jsonb;begin
+    value:=app.test_projection_original(p_activity_id);
+    update app.activity_sync_versions set public_revision=public_revision+1 where activity_id=p_activity_id;
+    return value;end $$;`);
+  await actor(users.student);
+  const changed = (await rows('select public.aulify_activity_snapshot($1) value', [activity.id]))[0]
+    .value;
+  ok(
+    !('activitySync' in changed) && changed.userId === users.student,
+    'Un cambio durante la lectura conserva el estado pero impide reutilizar una revisión incoherente',
+  );
+  await db.exec('reset role');
+  await db.exec(projectionDefinition);
   report.status = 'passed';
 } catch (error) {
   report.status = 'failed';

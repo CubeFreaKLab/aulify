@@ -1,0 +1,40 @@
+{
+  "startedAt": "2026-10-17T22:49:48.908Z",
+  "buildId": "lVEkPO6FqwMSXW-k3cQDU",
+  "sourceCommit": "c34d927742e0b721ee2f9862bb586828065a83bc",
+  "scope": "Preflight HTTP de Preview: transporte PostgreSQL, sesión y permisos; no Q06.",
+  "checks": [
+    {
+      "check": "anonymous_denied",
+      "status": 401
+    },
+    {
+      "check": "initial_projection_has_coherent_scoped_revision",
+      "passed": true
+    },
+    {
+      "check": "authorized_snapshot_native",
+      "status": 200,
+      "transport": "postgresql",
+      "ms": 1002.4103,
+      "timing": "prepare;dur=444.62, rpc;dur=139.71, encode;dur=0.41"
+    },
+    {
+      "check": "foreign_class_denied",
+      "status": 403
+    },
+    {
+      "check": "idempotent_commit_native",
+      "status": 200,
+      "transport": "postgresql",
+      "ms": 193.97580000000016,
+      "timing": "prepare;dur=6.34, rpc;dur=59.92, encode;dur=0.26"
+    },
+    {
+      "check": "scoped_sync",
+      "status": 200,
+      "ms": 414.90449999999964
+    }
+  ],
+  "completedAt": "2026-10-17T22:49:51.265Z"
+}

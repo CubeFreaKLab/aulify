@@ -1,0 +1,403 @@
+{
+  "startedAt": "2026-10-17T22:38:14.353Z",
+  "scope": "Observación de catálogo de 60 segundos durante el calentamiento ya activo; no genera respuestas ni otro ensayo. No almacena consultas ni identidades.",
+  "samples": [
+    {
+      "at": "2026-10-17T22:38:14.910Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:15.208Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:16.222Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "command",
+          "runningMs": 5.347,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:17.269Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:18.287Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:19.248Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:20.276Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "snapshot",
+          "runningMs": 17.261,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:21.267Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:22.276Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "snapshot",
+          "runningMs": 33.742,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:23.286Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:24.301Z",
+      "active": [
+        {
+          "wait": "ReplicationSlotSync",
+          "state": "active",
+          "blocking": 0,
+          "waitType": "IO",
+          "operation": "other",
+          "runningMs": 2830348.361,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:25.313Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:26.323Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:27.350Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:28.389Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:29.384Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "command",
+          "runningMs": 11.77,
+          "lastExecutionMs": null
+        },
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "other",
+          "runningMs": 40.188,
+          "lastExecutionMs": null
+        },
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "other",
+          "runningMs": 28.887,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:30.413Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "sync",
+          "runningMs": 94.354,
+          "lastExecutionMs": null
+        },
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "command",
+          "runningMs": 608.625,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:31.461Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:32.374Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:33.388Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:34.441Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:35.410Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:36.393Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "sync",
+          "runningMs": 155.811,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:37.390Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:38.401Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:39.428Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:40.451Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "other",
+          "runningMs": 2846497.78,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:41.414Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:42.426Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:43.440Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:44.451Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:45.468Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:46.492Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "snapshot",
+          "runningMs": 56.028,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:47.515Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:48.503Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:49.505Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:50.507Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "snapshot",
+          "runningMs": 5.089,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:51.508Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:52.535Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "snapshot",
+          "runningMs": 67.402,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:53.553Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:54.546Z",
+      "active": [
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "command",
+          "runningMs": 4.153,
+          "lastExecutionMs": null
+        },
+        {
+          "wait": null,
+          "state": "active",
+          "blocking": 0,
+          "waitType": null,
+          "operation": "snapshot",
+          "runningMs": 42.594,
+          "lastExecutionMs": null
+        }
+      ]
+    },
+    {
+      "at": "2026-10-17T22:38:55.544Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:56.561Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:57.568Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:58.582Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:38:59.600Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:00.626Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:01.613Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:02.623Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:03.633Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:04.636Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:05.644Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:06.666Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:07.658Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:08.670Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:09.678Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:10.682Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:11.686Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:12.711Z",
+      "active": []
+    },
+    {
+      "at": "2026-10-17T22:39:13.734Z",
+      "active": []
+    }
+  ],
+  "completedAt": "2026-10-17T22:39:14.864Z"
+}

@@ -137,6 +137,71 @@ afterEach(() => {
 });
 
 describe('adopción de revisión tras una proyección vigente', () => {
+  it('reutiliza la proyección inicial verificada y vuelve a leer ante un cambio externo', async () => {
+    let reads = 0;
+    let revision = 'a'.repeat(32);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync')) return Response.json({ revision });
+        reads++;
+        return Response.json({
+          ...workspace(reads),
+          activitySync: { activityId: 'activity', revision },
+        });
+      }),
+    );
+    await mount();
+    await tick(2000);
+    expect(reads).toBe(1);
+    revision = 'b'.repeat(32);
+    await tick();
+    expect(reads).toBe(2);
+    expect(mocks.read()?.state?.revision).toBe(2);
+  });
+
+  it.each([
+    { activityId: 'foreign', revision: 'a'.repeat(32) },
+    { activityId: 'activity', revision: 'invalid' },
+  ])(
+    'no reutiliza una revisión de otra actividad ni una revisión inválida: %j',
+    async (activitySync) => {
+      let reads = 0;
+      vi.stubGlobal(
+        'fetch',
+        vi.fn(async (url: string) => {
+          if (url.startsWith('/api/sync')) return Response.json({ revision: 'a'.repeat(32) });
+          reads++;
+          return Response.json({ ...workspace(reads), activitySync });
+        }),
+      );
+      await mount();
+      await tick();
+      expect(reads).toBe(2);
+    },
+  );
+
+  it('recarga tras un fallo aunque la revisión coincida con la proyección inicial', async () => {
+    let reads = 0;
+    let syncCalls = 0;
+    const revision = 'a'.repeat(32);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync'))
+          return ++syncCalls === 1 ? unavailable() : Response.json({ revision });
+        reads++;
+        return Response.json({
+          ...workspace(reads),
+          activitySync: { activityId: 'activity', revision },
+        });
+      }),
+    );
+    await mount();
+    await tick(3000);
+    expect(reads).toBe(2);
+  });
+
   it('un estudiante conectado lee por aviso y conserva la comprobación de respaldo', async () => {
     let polls = 0,
       revision = 'R';

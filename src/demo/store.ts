@@ -47,6 +47,7 @@ interface ServerSnapshot extends WorkspaceExtras {
   userId: string;
   studentActivities: Record<string, StudentActivity>;
   studentResults: Record<string, StudentResult[]>;
+  activitySync?: { activityId: string; revision: string };
 }
 const emptyExtras: WorkspaceExtras = {
   teams: [],
@@ -82,6 +83,7 @@ type ImmediateFeedback = {
 };
 const feedbackByAnswer = new Map<string, ImmediateFeedback>();
 const acknowledgedSyncRevisions = new Map<string, { before: string; after: string }>();
+const appliedActivityRevisions = new Map<string, string>();
 const syncReads = new Map<string, Promise<SyncRevision>>();
 function readActivityRevision(activityId: string) {
   const key = `${generation}:${activityId}`;
@@ -112,6 +114,7 @@ export function clearWorkspaceSession() {
   commandNotice = null;
   feedbackByAnswer.clear();
   acknowledgedSyncRevisions.clear();
+  appliedActivityRevisions.clear();
   emit();
 }
 const listeners = new Set<() => void>();
@@ -348,6 +351,14 @@ async function refreshProjection(): Promise<RefreshResult> {
       if (currentGeneration !== generation || currentProjection !== projectionEpoch)
         return { status: 'superseded' };
       remote = data;
+      if (activeActivityScope) {
+        if (
+          data.activitySync?.activityId === activeActivityScope &&
+          /^[a-f0-9]{32}$/.test(data.activitySync.revision)
+        )
+          appliedActivityRevisions.set(activeActivityScope, data.activitySync.revision);
+        else appliedActivityRevisions.delete(activeActivityScope);
+      }
       snapshot = {
         state: data.state,
         userId: data.userId,
@@ -519,7 +530,12 @@ export function useDemo() {
           return;
         const recovering = failures > 0;
         const acknowledged = acknowledgedSyncRevisions.get(activityId);
-        if (
+        if (revision === null) revision = appliedActivityRevisions.get(activityId) ?? null;
+        if (!recovering && appliedActivityRevisions.get(activityId) === value.revision) {
+          // El servidor contrastó la revisión antes y después de esta proyección.
+          revision = value.revision;
+          acknowledgedSyncRevisions.delete(activityId);
+        } else if (
           !recovering &&
           acknowledged?.before === revision &&
           acknowledged?.after === value.revision
@@ -562,6 +578,7 @@ export function useDemo() {
           refreshPending = null;
           feedbackByAnswer.clear();
           acknowledgedSyncRevisions.clear();
+          appliedActivityRevisions.clear();
           commandNotice = null;
           snapshot = { state: null, userId: '', live: true, error: error.message, message: null };
           emit();

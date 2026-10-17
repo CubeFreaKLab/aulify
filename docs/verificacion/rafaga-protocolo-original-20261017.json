@@ -1,0 +1,3464 @@
+{
+  "startedAt": "2026-10-17T22:24:07.890Z",
+  "sourceCommit": "c34d927742e0b721ee2f9862bb586828065a83bc",
+  "buildId": "lVEkPO6FqwMSXW-k3cQDU",
+  "scope": "Una ráfaga diagnóstica de 200 envíos distribuidos en 1900 ms, 4 lectores docentes con sync y snapshot cuando cambia su revisión, y 200 avisos SSE. Actividades existentes del ensayo interrumpido; no se borró historial. No equivale a Q06.",
+  "budgetBytes": 60000000,
+  "students": 200,
+  "teachers": 4,
+  "measurements": [
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 536.9529999999977,
+      "timing": "prepare;dur=1.37, rpc;dur=170.39, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 504.24229999999807,
+      "timing": "prepare;dur=1.40, rpc;dur=98.19, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 548.9290999999976,
+      "timing": "prepare;dur=1.53, rpc;dur=160.90, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 605.5958000000028,
+      "timing": "prepare;dur=1.55, rpc;dur=180.41, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 580.415100000002,
+      "timing": "prepare;dur=1.43, rpc;dur=185.18, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 508.2907000000014,
+      "timing": "prepare;dur=1.51, rpc;dur=97.26, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 436.9854000000014,
+      "timing": "prepare;dur=1.50, rpc;dur=59.62, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 441.2462000000014,
+      "timing": "prepare;dur=2.08, rpc;dur=83.15, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 473.8788999999997,
+      "timing": "prepare;dur=2.44, rpc;dur=84.76, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 488.53139999999985,
+      "timing": "prepare;dur=1.53, rpc;dur=94.21, encode;dur=0.01",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 412.01910000000134,
+      "timing": "prepare;dur=2.46, rpc;dur=58.26, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 585.9347000000016,
+      "timing": "prepare;dur=1.43, rpc;dur=188.10, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 525.2877000000008,
+      "timing": "prepare;dur=2.21, rpc;dur=71.82, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 524.9585999999981,
+      "timing": "prepare;dur=1.44, rpc;dur=80.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 615.2492999999995,
+      "timing": "prepare;dur=4.19, rpc;dur=187.03, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 602.6481000000022,
+      "timing": "prepare;dur=3.37, rpc;dur=186.87, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 462.3993999999984,
+      "timing": "prepare;dur=4.52, rpc;dur=85.05, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 494.65149999999994,
+      "timing": "prepare;dur=1.52, rpc;dur=97.02, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 574.1036000000022,
+      "timing": "prepare;dur=3.68, rpc;dur=186.90, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 414.6686000000009,
+      "timing": "prepare;dur=1.97, rpc;dur=70.00, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 455.6153000000013,
+      "timing": "prepare;dur=1.55, rpc;dur=98.27, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 534.2364999999991,
+      "timing": "prepare;dur=3.66, rpc;dur=98.46, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 500.2354000000014,
+      "timing": "prepare;dur=2.38, rpc;dur=97.86, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 471.40209999999934,
+      "timing": "prepare;dur=1.33, rpc;dur=110.96, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 517.5398999999998,
+      "timing": "prepare;dur=2.47, rpc;dur=106.56, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 424.5041000000019,
+      "timing": "prepare;dur=1.35, rpc;dur=62.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 612.4507999999987,
+      "timing": "prepare;dur=3.45, rpc;dur=197.53, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 454.5452000000005,
+      "timing": "prepare;dur=1.78, rpc;dur=91.86, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 625.899300000001,
+      "timing": "prepare;dur=1.49, rpc;dur=204.10, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 602.2838000000011,
+      "timing": "prepare;dur=4.81, rpc;dur=183.88, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 443.8621999999996,
+      "timing": "prepare;dur=2.12, rpc;dur=82.31, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 491.2468999999983,
+      "timing": "prepare;dur=1.46, rpc;dur=76.63, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 529.3076000000001,
+      "timing": "prepare;dur=3.58, rpc;dur=119.79, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 445.4228000000003,
+      "timing": "prepare;dur=2.30, rpc;dur=105.59, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 593.3581999999988,
+      "timing": "prepare;dur=13.34, rpc;dur=197.63, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 579.4896999999983,
+      "timing": "prepare;dur=7.31, rpc;dur=189.32, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 501.5040999999983,
+      "timing": "prepare;dur=3.67, rpc;dur=118.53, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 646.8111999999965,
+      "timing": "prepare;dur=8.35, rpc;dur=181.80, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 535.3959000000032,
+      "timing": "prepare;dur=4.95, rpc;dur=131.95, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 653.5249000000003,
+      "timing": "prepare;dur=6.93, rpc;dur=197.52, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 686.5385000000024,
+      "timing": "prepare;dur=12.87, rpc;dur=197.61, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 615.9002,
+      "timing": "prepare;dur=21.22, rpc;dur=184.67, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 509.03689999999915,
+      "timing": "prepare;dur=3.34, rpc;dur=107.06, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 634.0738999999994,
+      "timing": "prepare;dur=5.17, rpc;dur=185.19, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 622.1395999999986,
+      "timing": "prepare;dur=12.91, rpc;dur=190.18, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 598.3663000000015,
+      "timing": "prepare;dur=1.87, rpc;dur=171.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 564.3572999999997,
+      "timing": "prepare;dur=2.06, rpc;dur=159.88, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 203.04809999999998,
+      "timing": "prepare;dur=1.41, rpc;dur=48.04, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 575.6818999999996,
+      "timing": "prepare;dur=2.28, rpc;dur=170.45, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 404.77869999999893,
+      "timing": "prepare;dur=1.41, rpc;dur=32.57, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 475.52609999999913,
+      "timing": "prepare;dur=2.05, rpc;dur=50.29, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 440.3791000000019,
+      "timing": "prepare;dur=1.48, rpc;dur=54.58, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 548.7327000000005,
+      "timing": "prepare;dur=1.33, rpc;dur=167.43, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 419.9825000000019,
+      "timing": "prepare;dur=2.24, rpc;dur=41.45, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 594.9686999999976,
+      "timing": "prepare;dur=2.30, rpc;dur=171.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 485.8875000000007,
+      "timing": "prepare;dur=1.53, rpc;dur=67.54, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 525.4868000000024,
+      "timing": "prepare;dur=2.33, rpc;dur=138.25, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 467.77709999999934,
+      "timing": "prepare;dur=1.41, rpc;dur=81.89, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 455.53979999999865,
+      "timing": "prepare;dur=1.42, rpc;dur=36.41, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 547.3603999999978,
+      "timing": "prepare;dur=2.22, rpc;dur=188.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 592.1728000000003,
+      "timing": "prepare;dur=2.59, rpc;dur=189.13, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 196.53510000000097,
+      "timing": "prepare;dur=2.01, rpc;dur=61.18, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 411.11409999999887,
+      "timing": "prepare;dur=1.52, rpc;dur=47.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 592.6526000000013,
+      "timing": "prepare;dur=1.43, rpc;dur=195.74, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 526.5262000000002,
+      "timing": "prepare;dur=1.45, rpc;dur=160.11, encode;dur=0.01",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 565.6914999999972,
+      "timing": "prepare;dur=1.88, rpc;dur=196.41, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 541.8145000000004,
+      "timing": "prepare;dur=1.99, rpc;dur=180.93, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 532.9104000000007,
+      "timing": "prepare;dur=2.16, rpc;dur=165.40, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 511.34249999999884,
+      "timing": "prepare;dur=2.35, rpc;dur=102.21, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 217.27190000000337,
+      "timing": "prepare;dur=1.66, rpc;dur=79.57, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 429.28979999999865,
+      "timing": "prepare;dur=2.05, rpc;dur=75.57, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 440.20400000000154,
+      "timing": "prepare;dur=2.41, rpc;dur=48.97, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 539.0100999999995,
+      "timing": "prepare;dur=1.64, rpc;dur=173.01, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 568.017200000002,
+      "timing": "prepare;dur=5.26, rpc;dur=196.65, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 449.125799999998,
+      "timing": "prepare;dur=1.38, rpc;dur=89.38, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 457.9265000000014,
+      "timing": "prepare;dur=2.02, rpc;dur=67.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 524.0032000000028,
+      "timing": "prepare;dur=1.39, rpc;dur=106.82, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 183.66330000000016,
+      "timing": "prepare;dur=1.94, rpc;dur=48.57, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 448.8117999999995,
+      "timing": "prepare;dur=1.58, rpc;dur=50.22, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 583.0204000000012,
+      "timing": "prepare;dur=1.97, rpc;dur=186.28, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 194.85679999999775,
+      "timing": "prepare;dur=1.28, rpc;dur=63.39, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 245.53419999999824,
+      "timing": "prepare;dur=2.42, rpc;dur=109.63, encode;dur=0.95",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 610.7566999999981,
+      "timing": "prepare;dur=1.41, rpc;dur=150.73, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 578.2284,
+      "timing": "prepare;dur=3.06, rpc;dur=167.29, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 490.42239999999947,
+      "timing": "prepare;dur=2.16, rpc;dur=96.70, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 465.8608999999997,
+      "timing": "prepare;dur=2.08, rpc;dur=66.82, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 186.05159999999887,
+      "timing": "prepare;dur=1.38, rpc;dur=53.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 238.9860000000008,
+      "timing": "prepare;dur=1.41, rpc;dur=80.79, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 297.0642999999982,
+      "timing": "prepare;dur=2.22, rpc;dur=167.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 491.72879999999714,
+      "timing": "prepare;dur=1.56, rpc;dur=101.16, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 507.4935000000005,
+      "timing": "prepare;dur=2.13, rpc;dur=154.68, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 270.70820000000094,
+      "timing": "prepare;dur=1.55, rpc;dur=138.74, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 454.27540000000226,
+      "timing": "prepare;dur=2.41, rpc;dur=58.38, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 561.1422999999995,
+      "timing": "prepare;dur=1.73, rpc;dur=166.02, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 453.85629999999946,
+      "timing": "prepare;dur=1.47, rpc;dur=73.83, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 643.190499999997,
+      "timing": "prepare;dur=2.70, rpc;dur=134.69, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 442.1934000000001,
+      "timing": "prepare;dur=1.83, rpc;dur=86.57, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 443.70700000000215,
+      "timing": "prepare;dur=1.82, rpc;dur=86.18, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 439.45260000000053,
+      "timing": "prepare;dur=2.49, rpc;dur=69.46, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 296.7379000000001,
+      "timing": "prepare;dur=3.56, rpc;dur=167.95, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 326.6436999999969,
+      "timing": "prepare;dur=5.14, rpc;dur=167.84, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 250.52509999999893,
+      "timing": "prepare;dur=2.03, rpc;dur=93.87, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 306.5694999999978,
+      "timing": "prepare;dur=2.08, rpc;dur=108.12, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 587.6201000000001,
+      "timing": "prepare;dur=3.62, rpc;dur=155.45, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 186.3237999999983,
+      "timing": "prepare;dur=1.88, rpc;dur=31.78, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 602.8618999999999,
+      "timing": "prepare;dur=3.39, rpc;dur=166.49, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 452.130000000001,
+      "timing": "prepare;dur=1.45, rpc;dur=93.86, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 527.0504000000001,
+      "timing": "prepare;dur=2.37, rpc;dur=128.96, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 295.5447000000022,
+      "timing": "prepare;dur=5.21, rpc;dur=137.44, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 268.9292000000023,
+      "timing": "prepare;dur=3.71, rpc;dur=103.93, encode;dur=1.27",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 313.6409999999996,
+      "timing": "prepare;dur=1.44, rpc;dur=166.94, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 421.7675999999992,
+      "timing": "prepare;dur=1.86, rpc;dur=16.04, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 336.81890000000203,
+      "timing": "prepare;dur=1.48, rpc;dur=171.97, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 537.7235000000001,
+      "timing": "prepare;dur=1.38, rpc;dur=155.81, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 431.1232999999993,
+      "timing": "prepare;dur=1.48, rpc;dur=23.38, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 310.5089999999982,
+      "timing": "prepare;dur=1.62, rpc;dur=173.78, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 413.1705000000002,
+      "timing": "prepare;dur=1.58, rpc;dur=16.56, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 294.053100000001,
+      "timing": "prepare;dur=1.42, rpc;dur=156.63, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 284.46370000000024,
+      "timing": "prepare;dur=1.49, rpc;dur=141.94, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 213.36789999999746,
+      "timing": "prepare;dur=2.39, rpc;dur=64.91, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 584.9550000000017,
+      "timing": "prepare;dur=2.04, rpc;dur=175.41, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 487.5092000000004,
+      "timing": "prepare;dur=1.44, rpc;dur=33.76, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 416.6797000000006,
+      "timing": "prepare;dur=1.97, rpc;dur=21.50, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 194.64940000000206,
+      "timing": "prepare;dur=2.56, rpc;dur=34.79, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 496.295900000001,
+      "timing": "prepare;dur=1.89, rpc;dur=138.76, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 277.0154000000002,
+      "timing": "prepare;dur=1.48, rpc;dur=142.40, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 197.84399999999732,
+      "timing": "prepare;dur=1.55, rpc;dur=24.15, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 508.96610000000146,
+      "timing": "prepare;dur=1.73, rpc;dur=142.61, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 310.1231000000007,
+      "timing": "prepare;dur=1.98, rpc;dur=173.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 311.97929999999906,
+      "timing": "prepare;dur=5.38, rpc;dur=172.16, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 261.5625,
+      "timing": "prepare;dur=2.14, rpc;dur=127.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 184.53629999999976,
+      "timing": "prepare;dur=1.52, rpc;dur=34.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 458.59850000000006,
+      "timing": "prepare;dur=1.45, rpc;dur=39.39, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 306.0079000000005,
+      "timing": "prepare;dur=3.75, rpc;dur=171.93, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 171.0557000000008,
+      "timing": "prepare;dur=2.25, rpc;dur=24.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 431.6365000000005,
+      "timing": "prepare;dur=2.05, rpc;dur=19.81, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 352.42849999999817,
+      "timing": "prepare;dur=1.27, rpc;dur=90.66, encode;dur=1.35",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 563.4753999999994,
+      "timing": "prepare;dur=1.36, rpc;dur=156.64, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 543.1143999999986,
+      "timing": "prepare;dur=2.07, rpc;dur=168.29, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 179.36809999999969,
+      "timing": "prepare;dur=1.54, rpc;dur=39.76, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 409.9838000000018,
+      "timing": "prepare;dur=2.02, rpc;dur=45.07, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 569.2209000000003,
+      "timing": "prepare;dur=2.27, rpc;dur=172.33, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 251.91289999999935,
+      "timing": "prepare;dur=1.29, rpc;dur=91.78, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 207.3152000000009,
+      "timing": "prepare;dur=2.12, rpc;dur=52.61, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 490.57800000000134,
+      "timing": "prepare;dur=1.63, rpc;dur=54.08, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 267.9978999999985,
+      "timing": "prepare;dur=1.51, rpc;dur=142.93, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 236.40700000000288,
+      "timing": "prepare;dur=2.49, rpc;dur=89.61, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 186.29260000000068,
+      "timing": "prepare;dur=2.52, rpc;dur=38.01, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 295.15880000000107,
+      "timing": "prepare;dur=1.80, rpc;dur=168.69, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 513.6916999999994,
+      "timing": "prepare;dur=1.83, rpc;dur=146.49, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 689.3219000000026,
+      "timing": "prepare;dur=1.96, rpc;dur=64.24, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 541.5905000000021,
+      "timing": "prepare;dur=2.75, rpc;dur=154.84, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 503.1903999999995,
+      "timing": "prepare;dur=2.56, rpc;dur=126.67, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 568.2086999999992,
+      "timing": "prepare;dur=1.79, rpc;dur=128.46, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 238.85480000000098,
+      "timing": "prepare;dur=1.40, rpc;dur=75.97, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 212.5994000000028,
+      "timing": "prepare;dur=1.52, rpc;dur=71.09, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 308.2713999999978,
+      "timing": "prepare;dur=1.51, rpc;dur=134.53, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 324.20670000000246,
+      "timing": "prepare;dur=1.92, rpc;dur=166.23, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 339.875799999998,
+      "timing": "prepare;dur=6.14, rpc;dur=166.00, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 143.67659999999887,
+      "timing": "prepare;dur=1.48, rpc;dur=8.23, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 340.4586999999992,
+      "timing": "prepare;dur=7.69, rpc;dur=166.03, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 228.99559999999838,
+      "timing": "prepare;dur=1.38, rpc;dur=78.01, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 323.8123999999989,
+      "timing": "prepare;dur=1.52, rpc;dur=154.31, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 245.21270000000004,
+      "timing": "prepare;dur=2.59, rpc;dur=113.17, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 512.4801000000007,
+      "timing": "prepare;dur=5.77, rpc;dur=117.93, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 443.3279999999977,
+      "timing": "prepare;dur=1.62, rpc;dur=103.33, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 320.6195000000007,
+      "timing": "prepare;dur=2.51, rpc;dur=165.80, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 891.0757000000012,
+      "timing": "prepare;dur=2.13, rpc;dur=174.45, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 527.5561999999991,
+      "timing": "prepare;dur=1.43, rpc;dur=157.34, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 592.4447,
+      "timing": "prepare;dur=3.43, rpc;dur=166.45, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 579.0755000000026,
+      "timing": "prepare;dur=1.70, rpc;dur=168.07, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 324.91249999999854,
+      "timing": "prepare;dur=1.87, rpc;dur=169.34, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 163.3744000000006,
+      "timing": "prepare;dur=2.29, rpc;dur=37.62, encode;dur=0.03",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 536.112000000001,
+      "timing": "prepare;dur=1.62, rpc;dur=128.87, encode;dur=1.81",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 367.3048000000017,
+      "timing": "prepare;dur=1.63, rpc;dur=130.59, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 586.6555000000008,
+      "timing": "prepare;dur=3.99, rpc;dur=171.60, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 306.22899999999936,
+      "timing": "prepare;dur=2.11, rpc;dur=147.85, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 152.47720000000118,
+      "timing": "prepare;dur=1.57, rpc;dur=22.17, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 234.0518000000011,
+      "timing": "prepare;dur=1.48, rpc;dur=80.61, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 286.752999999997,
+      "timing": "prepare;dur=2.04, rpc;dur=142.43, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 332.2612999999983,
+      "timing": "prepare;dur=1.45, rpc;dur=167.25, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 254.63370000000214,
+      "timing": "prepare;dur=1.44, rpc;dur=96.49, encode;dur=0.04",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 881.7860000000001,
+      "timing": "prepare;dur=1.40, rpc;dur=68.41, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 316.03030000000217,
+      "timing": "prepare;dur=2.24, rpc;dur=170.51, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 223.95899999999892,
+      "timing": "prepare;dur=1.47, rpc;dur=66.27, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 209.27149999999892,
+      "timing": "prepare;dur=1.60, rpc;dur=68.07, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 349.40840000000026,
+      "timing": "prepare;dur=1.23, rpc;dur=170.58, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 292.27120000000286,
+      "timing": "prepare;dur=1.48, rpc;dur=154.77, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 345.115600000001,
+      "timing": "prepare;dur=1.41, rpc;dur=174.09, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 248.1349999999984,
+      "timing": "prepare;dur=2.23, rpc;dur=108.32, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 283.22969999999987,
+      "timing": "prepare;dur=1.32, rpc;dur=149.27, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 302.5017000000007,
+      "timing": "prepare;dur=1.74, rpc;dur=163.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 302.1979999999967,
+      "timing": "prepare;dur=1.57, rpc;dur=154.76, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 255.48010000000068,
+      "timing": "prepare;dur=2.22, rpc;dur=112.90, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 198.2487000000001,
+      "timing": "prepare;dur=1.73, rpc;dur=59.87, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 210.4252000000015,
+      "timing": "prepare;dur=1.38, rpc;dur=75.95, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 224.8149999999987,
+      "timing": "prepare;dur=1.56, rpc;dur=74.96, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 243.6804000000011,
+      "timing": "prepare;dur=2.26, rpc;dur=104.43, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 271.40160000000105,
+      "timing": "prepare;dur=1.37, rpc;dur=117.79, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 317.6395999999986,
+      "timing": "prepare;dur=1.57, rpc;dur=177.03, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 311.2523999999976,
+      "timing": "prepare;dur=1.51, rpc;dur=176.16, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 237.9972999999991,
+      "timing": "prepare;dur=2.71, rpc;dur=72.90, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 299.0661999999975,
+      "timing": "prepare;dur=1.45, rpc;dur=165.38, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 255.53199999999924,
+      "timing": "prepare;dur=1.61, rpc;dur=106.82, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 306.8666000000012,
+      "timing": "prepare;dur=1.52, rpc;dur=166.28, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 301.6176000000014,
+      "timing": "prepare;dur=1.44, rpc;dur=169.39, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 296.0637999999999,
+      "timing": "prepare;dur=2.57, rpc;dur=167.05, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 145.69420000000173,
+      "timing": "prepare;dur=1.64, rpc;dur=14.73, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 299.0089000000007,
+      "timing": "prepare;dur=3.56, rpc;dur=169.64, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 763.543099999999,
+      "timing": "prepare;dur=1.58, rpc;dur=65.70, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 919.5499000000018,
+      "timing": "prepare;dur=3.49, rpc;dur=167.52, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "initialSync",
+      "status": 200,
+      "ms": 1006.7721999999994,
+      "timing": "prepare;dur=1.70, rpc;dur=169.96, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 312.35289999999804,
+      "timing": "prepare;dur=1.41, rpc;dur=167.10, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 169.43700000000172,
+      "timing": "prepare;dur=1.79, rpc;dur=30.09, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 311.89540000000125,
+      "timing": "prepare;dur=2.80, rpc;dur=165.86, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 312.1270000000004,
+      "timing": "prepare;dur=3.53, rpc;dur=171.82, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 189.97220000000016,
+      "timing": "prepare;dur=1.95, rpc;dur=47.28, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 328.65269999999873,
+      "timing": "prepare;dur=1.44, rpc;dur=167.09, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 329.0665999999983,
+      "timing": "prepare;dur=1.47, rpc;dur=166.37, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 359.65070000000196,
+      "timing": "prepare;dur=2.10, rpc;dur=116.21, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 341.71580000000176,
+      "timing": "prepare;dur=2.14, rpc;dur=167.52, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 341.59249999999884,
+      "timing": "prepare;dur=2.00, rpc;dur=168.21, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 201.21939999999813,
+      "timing": "prepare;dur=1.99, rpc;dur=63.36, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 342.2988000000005,
+      "timing": "prepare;dur=1.44, rpc;dur=168.25, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 353.3201999999983,
+      "timing": "prepare;dur=1.52, rpc;dur=165.89, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 353.02520000000004,
+      "timing": "prepare;dur=1.35, rpc;dur=167.56, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 212.83929999999964,
+      "timing": "prepare;dur=1.44, rpc;dur=74.07, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 353.0521000000008,
+      "timing": "prepare;dur=1.55, rpc;dur=167.09, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 295.7510000000002,
+      "timing": "prepare;dur=1.46, rpc;dur=165.46, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 296.2042000000001,
+      "timing": "prepare;dur=1.93, rpc;dur=168.74, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 373.49159999999756,
+      "timing": "prepare;dur=1.64, rpc;dur=199.16, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 323.98249999999825,
+      "timing": "prepare;dur=2.11, rpc;dur=167.84, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 292.42879999999786,
+      "timing": "prepare;dur=1.97, rpc;dur=165.29, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 294.3119000000006,
+      "timing": "prepare;dur=1.83, rpc;dur=166.90, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 301.1863000000012,
+      "timing": "prepare;dur=1.99, rpc;dur=165.94, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 347.07520000000295,
+      "timing": "prepare;dur=1.41, rpc;dur=166.23, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 310.5167000000001,
+      "timing": "prepare;dur=2.32, rpc;dur=165.68, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 310.9066000000021,
+      "timing": "prepare;dur=1.42, rpc;dur=169.87, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 310.3516000000018,
+      "timing": "prepare;dur=1.93, rpc;dur=179.00, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 162.51529999999912,
+      "timing": "prepare;dur=1.42, rpc;dur=20.78, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 318.6857999999993,
+      "timing": "prepare;dur=2.20, rpc;dur=168.57, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 161.7595999999976,
+      "timing": "prepare;dur=1.74, rpc;dur=22.60, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 318.3631999999998,
+      "timing": "prepare;dur=2.40, rpc;dur=166.75, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 318.1734000000033,
+      "timing": "prepare;dur=1.85, rpc;dur=168.81, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 553.736399999998,
+      "timing": "prepare;dur=2.13, rpc;dur=192.05, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 564.2847999999976,
+      "timing": "prepare;dur=2.10, rpc;dur=200.73, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 1356.1448999999993,
+      "timing": "prepare;dur=2.05, rpc;dur=986.26, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 1206.6612999999998,
+      "timing": "prepare;dur=1.38, rpc;dur=785.42, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 1483.8417999999947,
+      "timing": "prepare;dur=1.36, rpc;dur=1346.70, encode;dur=1.30",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 1124.1298000000024,
+      "timing": "prepare;dur=1.59, rpc;dur=968.05, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 1479.1353999999992,
+      "timing": "prepare;dur=1.45, rpc;dur=1101.54, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 532.4037000000026,
+      "timing": "prepare;dur=1.41, rpc;dur=388.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 1331.9320999999982,
+      "timing": "prepare;dur=1.38, rpc;dur=1171.33, encode;dur=2.05",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 335.18529999999737,
+      "timing": "prepare;dur=1.44, rpc;dur=192.00, encode;dur=1.74",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 351.40819999999803,
+      "timing": "prepare;dur=1.96, rpc;dur=219.57, encode;dur=1.49",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 309.1542999999947,
+      "timing": "prepare;dur=1.56, rpc;dur=174.44, encode;dur=1.62",
+      "category": null
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 317.72479999999996,
+      "timing": "prepare;dur=2.41, rpc;dur=179.69, encode;dur=0.29",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 297.27370000000155,
+      "timing": "prepare;dur=2.43, rpc;dur=148.89, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 288.1767,
+      "timing": "prepare;dur=2.13, rpc;dur=106.36, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 278.9553999999989,
+      "timing": "prepare;dur=2.31, rpc;dur=143.44, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 412.35899999999674,
+      "timing": "prepare;dur=2.32, rpc;dur=19.00, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 872.5714999999982,
+      "timing": "prepare;dur=1.70, rpc;dur=244.11, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1197.832400000003,
+      "timing": "prepare;dur=1.60, rpc;dur=435.17, encode;dur=0.37",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 437.97350000000006,
+      "timing": "prepare;dur=2.66, rpc;dur=41.94, encode;dur=0.44",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 453.0160999999971,
+      "timing": "prepare;dur=2.41, rpc;dur=62.59, encode;dur=0.31",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 380.82590000000346,
+      "timing": "prepare;dur=2.12, rpc;dur=15.82, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 617.3078999999998,
+      "timing": "prepare;dur=3.92, rpc;dur=242.90, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 408.50940000000264,
+      "timing": "prepare;dur=1.72, rpc;dur=23.93, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 412.8538000000008,
+      "timing": "prepare;dur=6.01, rpc;dur=38.22, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 392.6258000000016,
+      "timing": "prepare;dur=3.34, rpc;dur=47.00, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1134.7179000000033,
+      "timing": "prepare;dur=3.92, rpc;dur=723.20, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 420.3099999999977,
+      "timing": "prepare;dur=1.93, rpc;dur=35.28, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 413.534300000003,
+      "timing": "prepare;dur=2.53, rpc;dur=31.87, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 448.1270999999979,
+      "timing": "prepare;dur=2.99, rpc;dur=59.05, encode;dur=0.31",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 430.9549999999981,
+      "timing": "prepare;dur=2.43, rpc;dur=46.75, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 430.33650000000125,
+      "timing": "prepare;dur=2.24, rpc;dur=52.38, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1275.5110000000022,
+      "timing": "prepare;dur=2.20, rpc;dur=926.99, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1280.5463999999993,
+      "timing": "prepare;dur=2.36, rpc;dur=935.34, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1581.9664999999986,
+      "timing": "prepare;dur=1.88, rpc;dur=1240.31, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1340.2694999999949,
+      "timing": "prepare;dur=2.08, rpc;dur=930.27, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 485.78229999999894,
+      "timing": "prepare;dur=1.74, rpc;dur=65.09, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1196.5275000000038,
+      "timing": "prepare;dur=1.73, rpc;dur=791.57, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 664.2245000000003,
+      "timing": "prepare;dur=2.30, rpc;dur=153.36, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 472.4269999999997,
+      "timing": "prepare;dur=2.10, rpc;dur=88.10, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 543.6159999999982,
+      "timing": "prepare;dur=1.62, rpc;dur=149.46, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1405.3987000000016,
+      "timing": "prepare;dur=2.56, rpc;dur=1044.35, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 502.7211999999963,
+      "timing": "prepare;dur=2.37, rpc;dur=121.35, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 440.3586000000032,
+      "timing": "prepare;dur=2.40, rpc;dur=86.87, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1559.642700000004,
+      "timing": "prepare;dur=2.28, rpc;dur=1211.24, encode;dur=0.37",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 199.83689999999842,
+      "timing": "prepare;dur=2.52, rpc;dur=49.53, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 435.13410000000295,
+      "timing": "prepare;dur=2.39, rpc;dur=298.27, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 181.51770000000033,
+      "timing": "prepare;dur=2.36, rpc;dur=40.44, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 168.74979999999778,
+      "timing": "prepare;dur=1.69, rpc;dur=44.46, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 617.4863000000005,
+      "timing": "prepare;dur=1.84, rpc;dur=241.19, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 645.0920000000006,
+      "timing": "prepare;dur=2.98, rpc;dur=249.09, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 780.0947000000015,
+      "timing": "prepare;dur=2.18, rpc;dur=406.00, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 758.9501999999993,
+      "timing": "prepare;dur=2.16, rpc;dur=401.10, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 670.3526999999958,
+      "timing": "prepare;dur=1.73, rpc;dur=309.39, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 757.9697999999989,
+      "timing": "prepare;dur=2.48, rpc;dur=407.44, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 915.8582000000024,
+      "timing": "prepare;dur=1.73, rpc;dur=515.47, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 816.9901000000027,
+      "timing": "prepare;dur=2.50, rpc;dur=451.80, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 795.9026999999987,
+      "timing": "prepare;dur=1.68, rpc;dur=422.25, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 886.6902000000046,
+      "timing": "prepare;dur=1.78, rpc;dur=504.47, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 950.8741999999984,
+      "timing": "prepare;dur=2.29, rpc;dur=563.77, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 176.53740000000107,
+      "timing": "prepare;dur=1.60, rpc;dur=49.94, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 210.00479999999516,
+      "timing": "prepare;dur=2.00, rpc;dur=84.04, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1310.7307999999975,
+      "timing": "prepare;dur=2.27, rpc;dur=941.15, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1051.2416000000012,
+      "timing": "prepare;dur=1.81, rpc;dur=685.90, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 936.4063999999998,
+      "timing": "prepare;dur=2.24, rpc;dur=556.29, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1028.394699999997,
+      "timing": "prepare;dur=1.67, rpc;dur=661.32, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 201.10160000000178,
+      "timing": "prepare;dur=1.63, rpc;dur=68.11, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1148.9582999999984,
+      "timing": "prepare;dur=1.64, rpc;dur=1019.52, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 282.80940000000555,
+      "timing": "prepare;dur=2.17, rpc;dur=154.47, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 364.9242000000013,
+      "timing": "prepare;dur=1.94, rpc;dur=212.20, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 364.23999999999796,
+      "timing": "prepare;dur=2.30, rpc;dur=208.56, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 299.82449999999517,
+      "timing": "prepare;dur=1.70, rpc;dur=174.53, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 350.6750000000029,
+      "timing": "prepare;dur=1.62, rpc;dur=210.49, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 488.32510000000184,
+      "timing": "prepare;dur=2.28, rpc;dur=342.24, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 319.72780000000057,
+      "timing": "prepare;dur=1.64, rpc;dur=143.95, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 346.9748000000036,
+      "timing": "prepare;dur=2.38, rpc;dur=216.25, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 413.1503999999986,
+      "timing": "prepare;dur=2.41, rpc;dur=289.74, encode;dur=0.34",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 412.7525999999998,
+      "timing": "prepare;dur=2.32, rpc;dur=269.05, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 498.0896000000066,
+      "timing": "prepare;dur=1.74, rpc;dur=377.14, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 591.1285999999964,
+      "timing": "prepare;dur=2.61, rpc;dur=456.04, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 544.258600000001,
+      "timing": "prepare;dur=1.69, rpc;dur=423.87, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 972.0971000000063,
+      "timing": "prepare;dur=2.33, rpc;dur=566.85, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1204.2130999999936,
+      "timing": "prepare;dur=1.67, rpc;dur=830.87, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 991.2798000000039,
+      "timing": "prepare;dur=7.20, rpc;dur=615.40, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 678.5895000000019,
+      "timing": "prepare;dur=2.20, rpc;dur=532.87, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1033.2786999999953,
+      "timing": "prepare;dur=1.79, rpc;dur=678.97, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 985.1961999999985,
+      "timing": "prepare;dur=1.73, rpc;dur=631.99, encode;dur=0.15",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 666.7286000000022,
+      "timing": "prepare;dur=2.15, rpc;dur=544.99, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 737.9749999999985,
+      "timing": "prepare;dur=1.64, rpc;dur=615.28, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 715.5037999999986,
+      "timing": "prepare;dur=1.70, rpc;dur=592.97, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1555.0950000000012,
+      "timing": "prepare;dur=2.36, rpc;dur=1394.31, encode;dur=0.36",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 728.4987999999939,
+      "timing": "prepare;dur=2.60, rpc;dur=603.73, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 867.2638000000006,
+      "timing": "prepare;dur=1.80, rpc;dur=724.44, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1020.2754999999961,
+      "timing": "prepare;dur=1.65, rpc;dur=653.58, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1001.0064000000057,
+      "timing": "prepare;dur=1.75, rpc;dur=630.71, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 793.6096000000034,
+      "timing": "prepare;dur=1.71, rpc;dur=643.09, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 974.3197,
+      "timing": "prepare;dur=2.37, rpc;dur=631.93, encode;dur=0.18",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1231.063399999999,
+      "timing": "prepare;dur=2.25, rpc;dur=861.25, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 725.783199999998,
+      "timing": "prepare;dur=1.67, rpc;dur=604.72, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 945.439999999995,
+      "timing": "prepare;dur=1.65, rpc;dur=807.61, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1201.5536999999968,
+      "timing": "prepare;dur=1.70, rpc;dur=772.25, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1336.5339999999997,
+      "timing": "prepare;dur=2.60, rpc;dur=945.84, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1003.5576999999976,
+      "timing": "prepare;dur=1.64, rpc;dur=617.76, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 728.7914000000019,
+      "timing": "prepare;dur=1.67, rpc;dur=606.84, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1216.1223000000027,
+      "timing": "prepare;dur=2.06, rpc;dur=799.75, encode;dur=0.62",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1016.8409000000029,
+      "timing": "prepare;dur=1.54, rpc;dur=618.31, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1064.3534999999974,
+      "timing": "prepare;dur=2.00, rpc;dur=711.58, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 984.2853999999934,
+      "timing": "prepare;dur=1.68, rpc;dur=627.61, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 718.5948999999964,
+      "timing": "prepare;dur=2.30, rpc;dur=593.48, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 821.0601999999999,
+      "timing": "prepare;dur=1.80, rpc;dur=698.68, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 832.9660000000003,
+      "timing": "prepare;dur=1.75, rpc;dur=687.23, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 722.4024999999965,
+      "timing": "prepare;dur=2.35, rpc;dur=597.84, encode;dur=0.29",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 802.5507999999973,
+      "timing": "prepare;dur=2.46, rpc;dur=663.78, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 786.6546000000017,
+      "timing": "prepare;dur=1.78, rpc;dur=655.48, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 723.0404000000053,
+      "timing": "prepare;dur=2.67, rpc;dur=601.01, encode;dur=0.30",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 989.6692000000039,
+      "timing": "prepare;dur=1.58, rpc;dur=866.75, encode;dur=0.18",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1154.200300000004,
+      "timing": "prepare;dur=1.64, rpc;dur=745.84, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1267.9002000000037,
+      "timing": "prepare;dur=2.18, rpc;dur=925.11, encode;dur=0.30",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 930.876400000001,
+      "timing": "prepare;dur=2.63, rpc;dur=579.45, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 820.4017999999996,
+      "timing": "prepare;dur=2.53, rpc;dur=684.76, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 856.7295000000013,
+      "timing": "prepare;dur=1.69, rpc;dur=735.49, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 830.8074000000051,
+      "timing": "prepare;dur=2.37, rpc;dur=706.27, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1200.6719999999987,
+      "timing": "prepare;dur=1.74, rpc;dur=837.79, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1114.225099999996,
+      "timing": "prepare;dur=2.61, rpc;dur=777.41, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 799.1128000000026,
+      "timing": "prepare;dur=1.60, rpc;dur=678.47, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1007.7742999999973,
+      "timing": "prepare;dur=1.75, rpc;dur=891.30, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 916.867600000005,
+      "timing": "prepare;dur=1.69, rpc;dur=543.56, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 911.9637000000002,
+      "timing": "prepare;dur=3.74, rpc;dur=557.22, encode;dur=0.18",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 893.7702999999965,
+      "timing": "prepare;dur=1.67, rpc;dur=541.06, encode;dur=0.18",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 975.3290999999954,
+      "timing": "prepare;dur=2.68, rpc;dur=621.44, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 859.7730999999985,
+      "timing": "prepare;dur=2.39, rpc;dur=511.13, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 765.6969000000026,
+      "timing": "prepare;dur=1.73, rpc;dur=642.89, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 939.1391000000003,
+      "timing": "prepare;dur=2.41, rpc;dur=597.17, encode;dur=0.16",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 789.1618999999992,
+      "timing": "prepare;dur=1.52, rpc;dur=642.63, encode;dur=0.15",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 844.2147000000041,
+      "timing": "prepare;dur=2.21, rpc;dur=716.68, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 814.4149000000034,
+      "timing": "prepare;dur=1.61, rpc;dur=684.33, encode;dur=0.31",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 969.5247999999992,
+      "timing": "prepare;dur=1.66, rpc;dur=550.49, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 894.2007999999987,
+      "timing": "prepare;dur=2.08, rpc;dur=518.85, encode;dur=0.41",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 730.6117999999988,
+      "timing": "prepare;dur=1.60, rpc;dur=575.22, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1145.5967999999993,
+      "timing": "prepare;dur=1.63, rpc;dur=784.14, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 985.5561000000016,
+      "timing": "prepare;dur=1.73, rpc;dur=631.04, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 853.8508000000002,
+      "timing": "prepare;dur=1.75, rpc;dur=724.17, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 753.6082999999999,
+      "timing": "prepare;dur=2.60, rpc;dur=625.01, encode;dur=0.16",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1066.8558000000048,
+      "timing": "prepare;dur=1.51, rpc;dur=944.91, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 914.2626000000018,
+      "timing": "prepare;dur=1.59, rpc;dur=537.19, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1332.842399999994,
+      "timing": "prepare;dur=1.67, rpc;dur=1211.33, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 694.0262000000002,
+      "timing": "prepare;dur=2.76, rpc;dur=568.53, encode;dur=0.16",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1164.8453999999983,
+      "timing": "prepare;dur=1.91, rpc;dur=790.18, encode;dur=0.19",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1287.4013999999952,
+      "timing": "prepare;dur=1.88, rpc;dur=877.82, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 947.6627000000008,
+      "timing": "prepare;dur=2.86, rpc;dur=595.72, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1192.3215000000055,
+      "timing": "prepare;dur=1.64, rpc;dur=849.90, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 944.8009999999995,
+      "timing": "prepare;dur=1.65, rpc;dur=816.42, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 668.2378000000026,
+      "timing": "prepare;dur=2.53, rpc;dur=538.37, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1077.0631999999969,
+      "timing": "prepare;dur=1.57, rpc;dur=738.05, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 896.4910000000018,
+      "timing": "prepare;dur=1.66, rpc;dur=513.04, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1298.5817000000025,
+      "timing": "prepare;dur=2.98, rpc;dur=905.05, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 720.1008000000002,
+      "timing": "prepare;dur=2.62, rpc;dur=593.00, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1283.4896999999983,
+      "timing": "prepare;dur=1.86, rpc;dur=875.74, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 694.7833000000028,
+      "timing": "prepare;dur=1.73, rpc;dur=572.63, encode;dur=0.14",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 689.4415999999983,
+      "timing": "prepare;dur=1.72, rpc;dur=538.04, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 870.0366999999969,
+      "timing": "prepare;dur=1.65, rpc;dur=510.54, encode;dur=0.32",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 925.7261999999973,
+      "timing": "prepare;dur=2.79, rpc;dur=536.10, encode;dur=0.43",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 924.4649999999965,
+      "timing": "prepare;dur=2.67, rpc;dur=539.28, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 709.3350999999966,
+      "timing": "prepare;dur=2.36, rpc;dur=553.48, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 730.5092000000004,
+      "timing": "prepare;dur=2.03, rpc;dur=600.10, encode;dur=0.18",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 638.1547999999966,
+      "timing": "prepare;dur=1.64, rpc;dur=514.87, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 901.460500000001,
+      "timing": "prepare;dur=1.68, rpc;dur=673.01, encode;dur=0.30",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 799.1009000000049,
+      "timing": "prepare;dur=1.63, rpc;dur=668.14, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 703.546699999999,
+      "timing": "prepare;dur=2.30, rpc;dur=569.43, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 662.5416000000041,
+      "timing": "prepare;dur=2.85, rpc;dur=514.23, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1055.9537999999957,
+      "timing": "prepare;dur=1.61, rpc;dur=660.21, encode;dur=0.62",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 833.0230999999985,
+      "timing": "prepare;dur=1.63, rpc;dur=466.85, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 835.6030000000028,
+      "timing": "prepare;dur=1.57, rpc;dur=488.53, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1026.4647999999943,
+      "timing": "prepare;dur=1.65, rpc;dur=647.78, encode;dur=0.29",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 912.908500000005,
+      "timing": "prepare;dur=2.39, rpc;dur=775.74, encode;dur=0.15",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 738.052300000003,
+      "timing": "prepare;dur=1.84, rpc;dur=611.54, encode;dur=0.35",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 742.7018000000025,
+      "timing": "prepare;dur=2.48, rpc;dur=590.16, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1015.6454000000012,
+      "timing": "prepare;dur=1.73, rpc;dur=890.68, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 876.114800000003,
+      "timing": "prepare;dur=3.01, rpc;dur=486.74, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1069.6912000000011,
+      "timing": "prepare;dur=1.57, rpc;dur=908.46, encode;dur=0.40",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 650.4892000000036,
+      "timing": "prepare;dur=2.47, rpc;dur=501.15, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 950.0370999999941,
+      "timing": "prepare;dur=2.56, rpc;dur=592.29, encode;dur=0.29",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 880.4804000000004,
+      "timing": "prepare;dur=2.42, rpc;dur=525.05, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 930.9516000000003,
+      "timing": "prepare;dur=1.68, rpc;dur=548.75, encode;dur=0.41",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 648.2067000000025,
+      "timing": "prepare;dur=1.69, rpc;dur=519.94, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1018.6233999999968,
+      "timing": "prepare;dur=2.51, rpc;dur=863.63, encode;dur=0.29",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 623.2719999999972,
+      "timing": "prepare;dur=1.70, rpc;dur=501.57, encode;dur=0.18",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 944.0430999999953,
+      "timing": "prepare;dur=1.64, rpc;dur=593.18, encode;dur=0.25",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 821.4017000000022,
+      "timing": "prepare;dur=1.67, rpc;dur=691.47, encode;dur=0.32",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 778.2751999999964,
+      "timing": "prepare;dur=1.77, rpc;dur=647.29, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 866.2436999999991,
+      "timing": "prepare;dur=1.64, rpc;dur=707.66, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 856.8614999999991,
+      "timing": "prepare;dur=1.66, rpc;dur=712.60, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 840.7649999999994,
+      "timing": "prepare;dur=1.66, rpc;dur=679.76, encode;dur=0.17",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 730.3157999999967,
+      "timing": "prepare;dur=1.68, rpc;dur=582.75, encode;dur=0.28",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 1264.866399999999,
+      "timing": "prepare;dur=2.19, rpc;dur=529.51, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 622.5086999999985,
+      "timing": "prepare;dur=2.60, rpc;dur=495.10, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 856.8485999999975,
+      "timing": "prepare;dur=1.61, rpc;dur=508.78, encode;dur=0.16",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 587.9616000000024,
+      "timing": "prepare;dur=3.76, rpc;dur=459.33, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 696.9958000000042,
+      "timing": "prepare;dur=14.90, rpc;dur=553.22, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 884.6839000000036,
+      "timing": "prepare;dur=1.55, rpc;dur=746.11, encode;dur=0.22",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 666.9310000000041,
+      "timing": "prepare;dur=1.74, rpc;dur=536.85, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 819.3611000000019,
+      "timing": "prepare;dur=2.46, rpc;dur=697.37, encode;dur=0.21",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 645.5844999999972,
+      "timing": "prepare;dur=1.78, rpc;dur=485.53, encode;dur=0.24",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 659.5800999999992,
+      "timing": "prepare;dur=1.70, rpc;dur=519.19, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 824.3852999999945,
+      "timing": "prepare;dur=1.77, rpc;dur=677.06, encode;dur=0.20",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 782.3818000000028,
+      "timing": "prepare;dur=1.60, rpc;dur=653.36, encode;dur=0.15",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 720.6618000000017,
+      "timing": "prepare;dur=1.96, rpc;dur=599.11, encode;dur=0.27",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 703.9497000000047,
+      "timing": "prepare;dur=3.24, rpc;dur=541.26, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 820.0908999999956,
+      "timing": "prepare;dur=1.64, rpc;dur=697.16, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 745.8929999999964,
+      "timing": "prepare;dur=1.53, rpc;dur=619.61, encode;dur=0.14",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 681.9922999999981,
+      "timing": "prepare;dur=1.63, rpc;dur=557.08, encode;dur=0.23",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "submitAnswer",
+      "status": 200,
+      "ms": 765.3294999999998,
+      "timing": "prepare;dur=1.71, rpc;dur=609.99, encode;dur=0.26",
+      "category": null,
+      "confirmed": true
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 304.24329999999463,
+      "timing": "prepare;dur=7.46, rpc;dur=179.48, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 171.85489999999845,
+      "timing": "prepare;dur=1.75, rpc;dur=47.47, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSync",
+      "status": 200,
+      "ms": 333.4178000000029,
+      "timing": "prepare;dur=2.93, rpc;dur=167.70, encode;dur=0.00",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 196.26499999999942,
+      "timing": "prepare;dur=1.42, rpc;dur=64.65, encode;dur=1.59",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 208.52599999999802,
+      "timing": "prepare;dur=1.54, rpc;dur=83.52, encode;dur=1.51",
+      "category": null
+    },
+    {
+      "operation": "teacherSnapshot",
+      "status": 200,
+      "ms": 193.07370000000083,
+      "timing": "prepare;dur=3.54, rpc;dur=52.40, encode;dur=1.88",
+      "category": null
+    }
+  ],
+  "eventStreams": {
+    "opened": 200,
+    "ready": 200,
+    "unexpectedFailures": 0
+  },
+  "burst": {
+    "dispatched": 200,
+    "windowMs": 1894.8974000000017
+  },
+  "result": {
+    "confirmed": 200,
+    "failed": 0,
+    "p95Ms": 1283.4896999999983,
+    "slowOver1500Ms": 3
+  },
+  "completedAt": "2026-10-17T22:24:42.120Z",
+  "bodyBytes": 6882089,
+  "requests": 666,
+  "estimatedBytes": 14446162
+}

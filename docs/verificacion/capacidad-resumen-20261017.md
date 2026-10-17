@@ -1,5 +1,7 @@
 # Capacidad de Aulify: resultado del 17 de octubre
 
+Actualización: el [resultado más reciente con transporte PostgreSQL](capacidad-postgres-pool-20261017.md) también sigue sin aprobar capacidad. La medición individual se cortó a los 61,397 segundos; conservó sus 200 confirmaciones pero incumplió tiempos y tasa de fallos. Después se corrigió la descarga duplicada de la proyección inicial, todavía sin medición de capacidad. El acceso temporal de esa ejecución está [revocado](acceso-native-capacidad-revocado-20261017.json). El apartado siguiente conserva el ensayo SSE anterior.
+
 La capacidad objetivo de cuatro docentes y 200 estudiantes **todavía no está aprobada**. Se aplicaron mejoras y se probó una nueva versión en la Preview protegida de Vercel, con Supabase Free. El ensayo tuvo que detenerse al aumentar las demoras y los errores.
 
 | Comprobación | Resultado |

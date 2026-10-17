@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-03T15:47:26.068Z",
+  "startedAt": "2026-10-17T22:47:33.902Z",
   "environment": "PGlite aislado, sin red",
   "checks": [
     {
@@ -53,6 +53,22 @@
     {
       "name": "El visitante tampoco puede ejecutar el lote de servicio",
       "status": "passed"
+    },
+    {
+      "name": "La proyección inicial incluye la revisión autorizada que representa su estado",
+      "status": "passed"
+    },
+    {
+      "name": "Dos estudiantes conservan proyecciones y revisiones propias en la misma actividad",
+      "status": "passed"
+    },
+    {
+      "name": "La nueva proyección no amplía el acceso de visitantes",
+      "status": "passed"
+    },
+    {
+      "name": "Un cambio durante la lectura conserva el estado pero impide reutilizar una revisión incoherente",
+      "status": "passed"
     }
   ],
   "migrations": [
@@ -84,8 +100,15 @@
     "20261003142000_aulify_answer_ack_revision.sql",
     "20261003144500_aulify_ack_projection_guard.sql",
     "20261003153300_aulify_ack_authorization_order.sql",
-    "20261003154500_aulify_service_sync_batch.sql"
+    "20261003154500_aulify_service_sync_batch.sql",
+    "20261017172026_aulify_set_based_service_sync.sql",
+    "20261017182121_aulify_reuse_rpc_query_plans.sql",
+    "20261017190116_aulify_set_based_workspace_history.sql",
+    "20261017192653_aulify_workspace_parameter_plans.sql",
+    "20261017203437_aulify_private_activity_hints.sql",
+    "20261017204006_aulify_coalesced_guided_hints.sql",
+    "20261017224614_aulify_projection_sync_seed.sql"
   ],
   "status": "passed",
-  "completedAt": "2026-10-03T15:47:27.876Z"
+  "completedAt": "2026-10-17T22:47:35.878Z"
 }

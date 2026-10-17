@@ -149,7 +149,11 @@ async function prepareSessions(preparationName = 'sessions-only') {
           const activity = value.state.activities.filter(a=>a.settings.pace==='individual').sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
           if (activity) activityByGroup.set(s.group, activity.id);
         }
-        if (context) observe(s, value, null);
+        if (context) {
+          observe(s, value, null);
+          s.lastRevision = value.activitySync?.activityId === context &&
+            /^[a-f0-9]{32}$/.test(value.activitySync.revision) ? value.activitySync.revision : null;
+        }
         ready=true; break;
       } catch(error) {
         if (![429,503].includes(error.status) && !['TimeoutError','TypeError'].includes(error.name)) throw error;
