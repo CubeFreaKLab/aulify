@@ -4,6 +4,7 @@ import os from 'node:os';
 import {performance,monitorEventLoopDelay} from 'node:perf_hooks';
 import {execFileSync} from 'node:child_process';
 import {retryAfterMs} from './load-waits.mjs';
+import {parallel} from './load-workers.mjs';
 import {rpcFailureCategory,transportFailureCategory} from './load-failure-category.mjs';
 import {serverTiming} from './server-timing.mjs';
 import {loadTargetFromEnvironment} from './load-target.mjs';
@@ -22,6 +23,7 @@ const teachers=sessions.filter(a=>a.role==='teacher'),students=sessions.filter(a
 const report={startedAt:new Date().toISOString(),scope:'Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.',buildId:expectedBuild,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sessions:204,teachers:4,students:200,pollMs:1000,seconds:60,records:[],activities:[],authentication:{prepared:0,temporaryWaits:0,spacingMs:2500},limitations:['Aplicación compilada local y base remota Free; no mide render de 204 navegadores.','Una pregunta single-choice por estudiante y sin sesión guiada.','Preparación y auditoría fuera de medición.','Consumo estimado, no contador facturable.']};
 report.buildChecks=[initialBuildCheck];
 report.target=target.metadata;
+report.preparation={outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparar cada clase en orden evita formar una cola artificial sobre el bloqueo de asignación de participantes. La medición mantiene las 204 sesiones y la ráfaga de 200 respuestas.'};
 if(!target.local) report.limitations[0]='Aplicación desplegada en una vista previa Vercel protegida y base remota Free; no mide render de 204 navegadores.';
 report.requestTiming={version:2,clock:'performance.timeOrigin + performance.now()',recordOrder:'completion',identitiesIncluded:false,serverTiming:{unit:'ms',fields:['prepare','rpc','encode'],scope:'Sólo respuestas correctas; prepare incluye validación y getClaims en la ruta, no proxy. rpc incluye transporte y lectura del servicio, no sólo SQL. encode mide creación de respuesta; no su transferencia al cliente.'}};
 const migrationFiles=(await fs.readdir('supabase/migrations')).filter(name=>name.endsWith('.sql')).sort();
@@ -35,7 +37,6 @@ report.confirmedProjection={version:'answer-ack-projection-guard-v2',scope:'Sond
 report.retryPolicy={initialMs:1000,maximumBackoffMs:8000,respectsRetryAfter:true,preparation:{readAttempts:3,minimumWaitMs:30000,retryable:[429,503,'client_timeout','client_transport'],commandsRetried:false}};
 let bytes=0,measuring=false,abortReason='',skipped=0;const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const p95=a=>a.length?[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1]:null;
-const parallel=async(items,n,fn)=>{let i=0;await Promise.all(Array.from({length:Math.min(n,items.length)},async()=>{while(i<items.length){const j=i++;await fn(items[j]);}}));};
 const request=async(s,path,body,stage)=>{if(abortReason&&measuring)return{error:'CUTOFF'};const start=performance.now(),measurement=measuring;try{
  const response=await target.request(path,{method:body?'POST':'GET',headers:{Cookie:[...s.jar].map(([k,v])=>`${k}=${v}`).join('; '),Origin:base,'Sec-Fetch-Site':'same-origin',...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000)});
  for(const h of response.headers.getSetCookie()){const pair=h.split(';',1)[0],i=pair.indexOf('=');if(pair.slice(i+1))s.jar.set(pair.slice(0,i),pair.slice(i+1));else s.jar.delete(pair.slice(0,i));}
@@ -64,7 +65,7 @@ try{
  }
  const settings={purpose:'practice',pace:'individual',maxGrade:100,weight:1,countsTowardAverage:false,maxAttempts:1,opensAt:new Date(Date.now()-60000).toISOString(),closesAt:new Date(Date.now()+3600000).toISOString(),timeLimitMinutes:null,timeZone:'America/La_Paz',feedback:'hidden',manualCorrection:false,shuffleQuestions:false,shuffleOptions:false,streaks:false,sound:false,ranking:false,teams:false,allowHint:false,allowDouble:false,bonusAffectsGrade:false,reportVisibility:false};
  for(const t of teachers){const g=fixtures.groups.find(g=>g.group===t.group);const a=await cmd(t,'createActivity',[g.versionId,g.subjectId,settings,'Diagnóstico escalonado · 60 segundos']);report.activities.push(a.id);for(const s of sessions.filter(s=>s.group===t.group))s.activityId=a.id;}
- await parallel(students,6,async s=>{s.attemptId=(await cmd(s,'startAttempt',[s.activityId])).id;});
+ await parallel(fixtures.groups,4,async group=>{for(const s of students.filter(s=>s.group===group.group))s.attemptId=(await cmd(s,'startAttempt',[s.activityId])).id;});
  report.buildChecks.push(await verifyBuild());
  report.measurementStartedAt=new Date().toISOString();const began=performance.now();measuring=true;loop.enable();
  const poll=s=>{if(s.running||s.pendingAnswer||performance.now()>=began+60000||abortReason||s.authorizationLost||Date.now()<s.retryAt){skipped++;return;}s.running=(async()=>{

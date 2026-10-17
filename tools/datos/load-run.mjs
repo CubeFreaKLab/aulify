@@ -47,6 +47,7 @@ report.localMigrations = await Promise.all(migrationFiles.map(async name => {
 report.expectedMigration = report.localMigrations.at(-1);
 report.migrationInventoryScope = 'Archivos locales; contrastar la última migración con el servicio antes de medir.';
 report.environment.preparation = 'Cookies ficticias existentes; lectura acotada por actividad tras una lectura docente por grupo. No se crean cuentas ni se usa contraseña como alternativa.';
+report.environment.participantPreparation = {outsideMeasurement:true,maximumConcurrentClasses:4,maximumConcurrentJoinsPerClass:1,reason:'Preparación ordenada por clase para evitar una cola artificial en el bloqueo de asignación de participantes. Se conservan las 204 sesiones activas, las ventanas completas y la ráfaga de 200 respuestas.'};
 report.environment.retryPolicy = { initialMs: 1000, maximumBackoffMs: 8000, respectsRetryAfter: true };
 report.sourceDiffSha256 = crypto.createHash('sha256').update(execFileSync('git',['diff','HEAD','--','src','package.json','package-lock.json','next.config.ts','tsconfig.json'],{encoding:'utf8'})).digest('hex');
 report.previousReport = 'datos-carga-20260928-0811.md';
@@ -222,9 +223,11 @@ async function makeActivities(mode, stage) {
     const activity = await command(teacher, 'createActivity', group.versionId, group.subjectId, settings, `Carga ${mode} · ${stage} · ${runId.slice(0, 8)}`);
     for (const s of sessions.filter(s => s.group === teacher.group)) { s.activityId = activity.id; s.lastRevision = null; s.latest = null; s.wanted = null; s.retryAt=0; s.retryMs=1000;s.authorizationLost=false; }
   }
-  await parallel(students, 6, async s => {
-    if (mode === 'guided') await command(s, 'joinGuidedRoom', s.activityId);
-    else s.attemptId = (await command(s, 'startAttempt', s.activityId)).id;
+  await parallel(fixtures.groups, 4, async group => {
+    for (const s of students.filter(s => s.group === group.group)) {
+      if (mode === 'guided') await command(s, 'joinGuidedRoom', s.activityId);
+      else s.attemptId = (await command(s, 'startAttempt', s.activityId)).id;
+    }
   });
 }
 async function answer(s, index, current) {
