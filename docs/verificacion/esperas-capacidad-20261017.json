@@ -1,0 +1,108 @@
+{
+  "recordedAt": "2026-10-17T18:05:52.378Z",
+  "sourceReport": "docs/verificacion/datos-protocolo-60s-20261017175457.json",
+  "sourceCommit": "7cc93e4caf9daa3b1ad55ff4617b085065042604",
+  "generatorCommit": "7cc93e4caf9daa3b1ad55ff4617b085065042604",
+  "buildId": "H3KJfiLqm43qlv4gCYP6-",
+  "expectedMigration": {
+    "path": "supabase/migrations/20261017172026_aulify_set_based_service_sync.sql",
+    "sha256": "27db28e894a5fd6c89751ff28307013bec5c6408bd038688a4736cd04216b3be"
+  },
+  "scope": "Diagnóstico de un minuto y observación SQL; no aprueba Q-06.",
+  "measurement": {
+    "start": "2026-10-17T17:59:54.375Z",
+    "end": "2026-10-17T18:00:54.592Z",
+    "operations": {
+      "sync": {
+        "count": 3805,
+        "failed": 97,
+        "p95Ms": 4384.200400000031
+      },
+      "snapshot": {
+        "count": 328,
+        "failed": 68,
+        "p95Ms": 13951.635099999956
+      },
+      "answer": {
+        "count": 200,
+        "failed": 0,
+        "p95Ms": 8387.101399999985
+      }
+    },
+    "burst": {
+      "target": 200,
+      "dispatched": 200,
+      "windowMs": 1884.959600000002,
+      "confirmed": 200,
+      "confirmationP95Ms": 8387.140200000023
+    },
+    "integrity": {
+      "persisted": 200,
+      "confirmed": 200,
+      "missingOrChangedConfirmed": 0
+    }
+  },
+  "sql": {
+    "start": "2026-10-17T17:59:52.746365+00:00",
+    "end": "2026-10-17T18:00:56.032145+00:00",
+    "samples": 13,
+    "counters": {
+      "sync": {
+        "calls": 2940,
+        "meanExecutionMs": 17.501710819048004
+      },
+      "snapshot": {
+        "calls": 332,
+        "meanExecutionMs": 164.84838148494003
+      },
+      "command": {
+        "calls": 217,
+        "meanExecutionMs": 67.80590960829441
+      },
+      "overview": {
+        "calls": 0,
+        "meanExecutionMs": null
+      }
+    },
+    "lockWaitSamples": 0,
+    "limitations": [
+      "Contadores acumulados comparados entre dos observaciones próximas a la ventana; pueden incluir operaciones adyacentes.",
+      "Solo patrones RPC establecidos con más de cien llamadas acumuladas; no es un conteo exhaustivo de consultas internas.",
+      "Una muestra sin Lock no demuestra ausencia de bloqueos entre muestras.",
+      "El SQL medio no equivale al p95 HTTP ni atribuye a una causa única la espera RPC.",
+      "La observación usa una conexión de lectura adicional."
+    ]
+  },
+  "httpTiming": {
+    "sync": {
+      "failures": {
+        "503:transport": 65,
+        "0:client_timeout": 32
+      },
+      "p95ServerTimingMs": {
+        "prepare": 4.62,
+        "rpc": 2774.55,
+        "encode": 0
+      }
+    },
+    "snapshot": {
+      "failures": {
+        "503:transport_timeout": 67,
+        "0:client_timeout": 1
+      },
+      "p95ServerTimingMs": {
+        "prepare": 221.45,
+        "rpc": 6505.78,
+        "encode": 1.27
+      }
+    },
+    "answer": {
+      "failures": {},
+      "p95ServerTimingMs": {
+        "prepare": 4.13,
+        "rpc": 8009.7,
+        "encode": 0.26
+      }
+    }
+  }
+}

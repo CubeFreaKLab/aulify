@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-17T19:27:06.263Z",
+  "scope": "Ocho consultas de historial completo en paralelo; comprobación puntual antes del ensayo, no acredita Q-06.",
+  "build": {
+    "base": "https://aulify-ppq2czt8y-jdanielchfhd-9543s-projects.vercel.app",
+    "expectedBuild": "o1gaqc9RVWTjw8Bk6VZW4",
+    "environment": "vercel-preview",
+    "sourceCommit": "a4145fb6def12f4b06ce4e4dd99b4fa7e4a95616",
+    "verifiedAt": "2026-10-17T19:27:06.257Z",
+    "diskMatches": null,
+    "servedHtmlMatches": true
+  },
+  "concurrency": 8,
+  "records": [
+    {
+      "status": 200,
+      "ms": 2224.3876,
+      "publishedGrades": 12,
+      "bytes": 229080,
+      "serverTiming": "prepare;dur=3.33, rpc;dur=2061.45, encode;dur=1.28"
+    },
+    {
+      "status": 200,
+      "ms": 2241.8214000000003,
+      "publishedGrades": 12,
+      "bytes": 191421,
+      "serverTiming": "prepare;dur=1.54, rpc;dur=1803.74, encode;dur=1.21"
+    },
+    {
+      "status": 200,
+      "ms": 2353.6791,
+      "publishedGrades": 12,
+      "bytes": 229870,
+      "serverTiming": "prepare;dur=1.78, rpc;dur=1932.75, encode;dur=0.84"
+    },
+    {
+      "status": 200,
+      "ms": 2354.0218,
+      "publishedGrades": 12,
+      "bytes": 191958,
+      "serverTiming": "prepare;dur=12.51, rpc;dur=1874.63, encode;dur=0.86"
+    },
+    {
+      "status": 200,
+      "ms": 2356.1554,
+      "publishedGrades": 12,
+      "bytes": 227742,
+      "serverTiming": "prepare;dur=1.87, rpc;dur=1959.19, encode;dur=1.34"
+    },
+    {
+      "status": 200,
+      "ms": 2357.0365,
+      "publishedGrades": 12,
+      "bytes": 191683,
+      "serverTiming": "prepare;dur=3.16, rpc;dur=1933.27, encode;dur=0.75"
+    },
+    {
+      "status": 200,
+      "ms": 2358.1458,
+      "publishedGrades": 12,
+      "bytes": 189665,
+      "serverTiming": "prepare;dur=2.39, rpc;dur=1944.46, encode;dur=0.81"
+    },
+    {
+      "status": 200,
+      "ms": 2364.7183999999997,
+      "publishedGrades": 12,
+      "bytes": 224238,
+      "serverTiming": "prepare;dur=1.74, rpc;dur=1951.82, encode;dur=1.32"
+    }
+  ],
+  "passed": true
+}

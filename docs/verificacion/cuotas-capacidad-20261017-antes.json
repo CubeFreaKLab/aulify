@@ -1,0 +1,201 @@
+{
+  "at": "2026-10-17T17:28:26.714Z",
+  "source": "Panel Usage de Supabase observado mediante navegador",
+  "billingCycle": "2026-09-28/2026-10-28",
+  "plan": "Free",
+  "egressGB": {
+    "used": 1.263,
+    "included": 5
+  },
+  "databaseGB": {
+    "used": 0.087,
+    "included": 0.5
+  },
+  "storageGB": {
+    "used": 0.002,
+    "included": 1
+  },
+  "mau": {
+    "used": 211,
+    "included": 50000
+  },
+  "realtimePeak": {
+    "used": 0,
+    "included": 200
+  },
+  "maximumAdditionalEstimatedBytes": 1600000000,
+  "limitation": "Contador con hasta una hora de retraso; estimación del ejecutor independiente del tráfico facturable.",
+  "vercel": {
+    "recordedAt": "2026-10-17T17:46:31.429Z",
+    "source": "Panel Usage de Vercel observado mediante navegador",
+    "plan": "Hobby",
+    "scope": "Proyecto Aulify",
+    "periodLabel": "Last 30 Days",
+    "periodDisplayed": "Sep 17, 11 a.m. - Oct 17, 11 a.m.",
+    "fastDataTransferMB": {
+      "used": 51.23,
+      "includedGB": 100
+    },
+    "fastOriginTransferMB": {
+      "used": 50.39,
+      "includedGB": 10
+    },
+    "cdnRequests": {
+      "used": 6254,
+      "included": 1000000
+    },
+    "functionInvocations": {
+      "used": 8561,
+      "included": 1000000
+    },
+    "fluidMemoryGBHours": {
+      "used": 0.89,
+      "included": 360
+    },
+    "fluidCpuSeconds": {
+      "used": 189,
+      "included": 14400
+    },
+    "limitation": "El panel indica hasta una hora de retraso. El período se conserva tal como aparece, sin atribuirle una zona horaria no indicada."
+  },
+  "beforeFullLoad": {
+    "recordedAt": "2026-10-17T18:24:57.007Z",
+    "source": "Panel Usage de Supabase, antes del calentamiento completo",
+    "scope": "Organización completa, todos sus proyectos",
+    "plan": "Free",
+    "billingCycle": "2026-09-28/2026-10-28",
+    "egressGB": {
+      "used": 1.302,
+      "included": 5
+    },
+    "cachedEgressGB": {
+      "used": 0.023,
+      "included": 5
+    },
+    "databaseGB": {
+      "used": 0.092,
+      "included": 0.5
+    },
+    "storageGB": {
+      "used": 0.002,
+      "included": 1
+    },
+    "mau": {
+      "used": 211,
+      "included": 50000
+    },
+    "edgeInvocations": {
+      "used": 18,
+      "included": 500000
+    },
+    "realtimePeak": {
+      "used": 0,
+      "included": 200
+    },
+    "realtimeMessages": {
+      "used": 0,
+      "included": 2000000
+    },
+    "activeQuotaExceeded": false,
+    "upcomingLogIngestionGB": {
+      "used": 1.768,
+      "included": 1,
+      "enforcement": "El panel indica un período de gracia hasta el inicio de 2027."
+    },
+    "limitation": "Los contadores pueden retrasarse una hora; la estimación preventiva del ejecutor es independiente.",
+    "vercel": {
+      "recordedAt": "2026-10-17T18:27:45.005Z",
+      "plan": "Hobby",
+      "scope": "Proyecto Aulify, últimos treinta días",
+      "fastDataTransferMB": 171.4,
+      "fastOriginTransferMB": 190.59,
+      "cdnRequestsDisplay": "33K",
+      "functionInvocationsDisplay": "46K",
+      "fluidMemoryGBHours": 3.9,
+      "fluidCpuSeconds": 804,
+      "limitation": "La tabla muestra recuentos abreviados; los datos pueden tener hasta una hora de retraso."
+    }
+  },
+  "observations": [
+    {
+      "observedAt": "2026-10-17T19:06:18.302Z",
+      "scope": "Panel de la organización Supabase durante preparación de la repetición; todos los proyectos, contadores con hasta una hora de retraso.",
+      "activeQuotaExceeded": false,
+      "egressGB": 1.302,
+      "egressLimitGB": 5,
+      "databaseGB": 0.098,
+      "databaseLimitGB": 0.5,
+      "cachedEgressGB": 0.023,
+      "cachedEgressLimitGB": 5,
+      "storageGB": 0.002,
+      "storageLimitGB": 1,
+      "monthlyActiveUsers": 211,
+      "monthlyActiveUserLimit": 50000,
+      "realtimePeakConnections": 0,
+      "realtimePeakLimit": 200,
+      "logIngestGB": 1.768,
+      "logIngestIncludedGB": 1,
+      "logIngestStatus": "Métrica futura, en periodo de gracia hasta el inicio de 2027 según el panel; no es una cuota activa excedida."
+    },
+    {
+      "observedAt": "2026-10-17T20:45:10.656Z",
+      "stage": "Antes del ensayo SSE",
+      "supabase": {
+        "scope": "Organización Aulify, ciclo actual, Free",
+        "egressGB": 1.529,
+        "egressLimitGB": 5,
+        "databaseGB": 0.108,
+        "databaseLimitGB": 0.5,
+        "cachedEgressGB": 0.023,
+        "storageGB": 0.002,
+        "MAU": 211,
+        "MAULimit": 50000,
+        "realtimePeak": 0,
+        "realtimePeakLimit": 200,
+        "realtimeMessages": 0,
+        "realtimeMessagesLimit": 2000000,
+        "activeQuotaExceeded": false,
+        "logIngestion": {
+          "GB": 1.953,
+          "limitGB": 1,
+          "status": "Upcoming: fuera de las cuotas activas; conserva el aviso del panel"
+        }
+      },
+      "vercel": {
+        "scope": "Equipo personal, últimos 30 días, Hobby",
+        "fastDataTransferGB": 1.61,
+        "fastDataTransferLimitGB": 100,
+        "fastOriginTransferGB": 1.41,
+        "fastOriginTransferLimitGB": 10,
+        "cdnRequests": 366584,
+        "cdnRequestsLimit": 1000000,
+        "functionInvocations": 379300,
+        "functionInvocationsLimit": 1000000,
+        "fluidMemoryGBHours": 24.3,
+        "fluidMemoryLimitGBHours": 360,
+        "fluidCPUDisplayed": "1h 4m / 4h"
+      },
+      "limitations": [
+        "Contadores agregados del servicio; no constituyen medición instantánea del ensayo.",
+        "Supabase informa actualización por hora; valores de Vercel redondeados según su panel."
+      ]
+    }
+  ],
+  "vercelBeforeLatestFull": {
+    "observedAt": "2026-10-17T19:09:12.520Z",
+    "scope": "Vista conjunta del equipo Hobby; últimos 30 días visibles. Incluye actividad previa al ensayo en curso; el panel puede retrasarse.",
+    "fastDataTransferMB": 639.58,
+    "fastDataTransferLimitGB": 100,
+    "fastOriginTransferMB": 591.54,
+    "fastOriginTransferLimitGB": 10,
+    "cdnRequests": 140809,
+    "cdnRequestLimit": 1000000,
+    "functionInvocations": 153563,
+    "functionInvocationLimit": 1000000,
+    "fluidMemoryGBHours": 10.6,
+    "fluidMemoryLimitGBHours": 360,
+    "fluidCpuSeconds": 1801,
+    "fluidCpuLimitSeconds": 14400,
+    "paidPlanActivated": false
+  }
+}

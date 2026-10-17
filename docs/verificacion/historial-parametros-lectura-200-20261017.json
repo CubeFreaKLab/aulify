@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-17T19:28:27.568Z",
+  "scope": "Reproducción puntual de publicación y lectura completa de 200 notas, sin calentamiento ni medición Q-06.",
+  "build": {
+    "base": "https://aulify-ppq2czt8y-jdanielchfhd-9543s-projects.vercel.app",
+    "expectedBuild": "o1gaqc9RVWTjw8Bk6VZW4",
+    "environment": "vercel-preview",
+    "sourceCommit": "a4145fb6def12f4b06ce4e4dd99b4fa7e4a95616",
+    "verifiedAt": "2026-10-17T19:28:27.564Z",
+    "diskMatches": null,
+    "servedHtmlMatches": true
+  },
+  "migrationCount": 33,
+  "operations": {
+    "teacherOverview": [
+      {
+        "status": 200,
+        "ms": 9893.6486,
+        "bytes": 7953327,
+        "serverTiming": "prepare;dur=191.36, rpc;dur=9212.20, encode;dur=65.07"
+      },
+      {
+        "status": 503,
+        "ms": 9006.808500000001,
+        "bytes": 55,
+        "serverTiming": null,
+        "failure": "database_cancelled"
+      }
+    ]
+  },
+  "checks": {
+    "published": 0,
+    "readCorrectly": 0
+  },
+  "passed": false,
+  "failure": "HTTP_503",
+  "completedAt": "2026-10-17T19:28:46.515Z"
+}

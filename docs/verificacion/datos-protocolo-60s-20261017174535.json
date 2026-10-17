@@ -1,0 +1,300 @@
+{
+  "startedAt": "2026-10-17T17:45:35.551Z",
+  "scope": "Diagnóstico de 60 segundos con protocolo escalonado de 204 sesiones; no es Q-06 ni contiene calentamiento/medición completa.",
+  "buildId": "t99Rg-7gnfwiuU1E5BOOl",
+  "commit": "287aada81d40b4cdccc28142027a3dd5b70410b3",
+  "sessions": 204,
+  "teachers": 4,
+  "students": 200,
+  "pollMs": 1000,
+  "seconds": 60,
+  "activities": [
+    "203f3f3a-60b9-4f10-a937-3cc0757ce1a6",
+    "04d2770d-d7c0-4e9e-b245-c9f40c47f66b",
+    "ad173b53-6cb5-43b6-9937-c11f0ed3cb0a",
+    "ed7da539-32ff-4575-ab66-6aa6c73b1f6e"
+  ],
+  "authentication": {
+    "prepared": 204,
+    "temporaryWaits": 2,
+    "spacingMs": 2500
+  },
+  "limitations": [
+    "Aplicación desplegada en una vista previa Vercel protegida y base remota Free; no mide render de 204 navegadores.",
+    "Una pregunta single-choice por estudiante y sin sesión guiada.",
+    "Preparación y auditoría fuera de medición.",
+    "Consumo estimado, no contador facturable."
+  ],
+  "buildChecks": [
+    {
+      "base": "https://aulify-s1bvj7u1f-jdanielchfhd-9543s-projects.vercel.app",
+      "expectedBuild": "t99Rg-7gnfwiuU1E5BOOl",
+      "environment": "vercel-preview",
+      "sourceCommit": "5a82990bfbf43b52127eeacc7fcc06cd785c9cf0",
+      "verifiedAt": "2026-10-17T17:45:35.549Z",
+      "diskMatches": null,
+      "servedHtmlMatches": true
+    },
+    {
+      "base": "https://aulify-s1bvj7u1f-jdanielchfhd-9543s-projects.vercel.app",
+      "expectedBuild": "t99Rg-7gnfwiuU1E5BOOl",
+      "environment": "vercel-preview",
+      "sourceCommit": "5a82990bfbf43b52127eeacc7fcc06cd785c9cf0",
+      "verifiedAt": "2026-10-17T17:48:40.703Z",
+      "diskMatches": null,
+      "servedHtmlMatches": true
+    }
+  ],
+  "target": {
+    "base": "https://aulify-s1bvj7u1f-jdanielchfhd-9543s-projects.vercel.app",
+    "expectedBuild": "t99Rg-7gnfwiuU1E5BOOl",
+    "environment": "vercel-preview",
+    "sourceCommit": "5a82990bfbf43b52127eeacc7fcc06cd785c9cf0"
+  },
+  "preparation": {
+    "outsideMeasurement": true,
+    "maximumConcurrentClasses": 4,
+    "maximumConcurrentJoinsPerClass": 1,
+    "reason": "Preparar cada clase en orden evita formar una cola artificial sobre el bloqueo de asignación de participantes. La medición mantiene las 204 sesiones y la ráfaga de 200 respuestas."
+  },
+  "requestTiming": {
+    "version": 2,
+    "clock": "performance.timeOrigin + performance.now()",
+    "recordOrder": "completion",
+    "identitiesIncluded": false,
+    "serverTiming": {
+      "unit": "ms",
+      "fields": [
+        "prepare",
+        "rpc",
+        "encode"
+      ],
+      "scope": "Sólo respuestas correctas; prepare incluye validación y getClaims en la ruta, no proxy. rpc incluye transporte y lectura del servicio, no sólo SQL. encode mide creación de respuesta; no su transferencia al cliente."
+    }
+  },
+  "localMigrations": [
+    {
+      "path": "supabase/migrations/20260928064804_aulify_relational_core.sql",
+      "sha256": "e1d28fb97669dc12533cc3feb9b2a7aac91b2dace27e9773e30ffa1400b01181"
+    },
+    {
+      "path": "supabase/migrations/20260928064810_aulify_commands.sql",
+      "sha256": "0dcd33f6f5e76d4edfb94ed189470d1d886331aa5826a4cfce9328cc06d6d448"
+    },
+    {
+      "path": "supabase/migrations/20260928064815_aulify_projections_storage.sql",
+      "sha256": "b8efde826282aaf71a0c4c9312f176509b174bb2c140d2816b01e612109167ec"
+    },
+    {
+      "path": "supabase/migrations/20260928064819_aulify_retention_hardening.sql",
+      "sha256": "958e71a40caca23e48afa1e835da7275b030909fe8cec61397d91ab4d4a0beb3"
+    },
+    {
+      "path": "supabase/migrations/20260928064824_aulify_join_rate_limit.sql",
+      "sha256": "9821fd7b7f15735ddbc55ba315c08f19804a711c09ff0e67244e147cb8718fea"
+    },
+    {
+      "path": "supabase/migrations/20260928064828_aulify_upload_reservations.sql",
+      "sha256": "b85eeb9ab40fcd5a45acc191d0ad100f223d6eb4255c206426164b709fbe4514"
+    },
+    {
+      "path": "supabase/migrations/20260928070919_aulify_resubmission_projection.sql",
+      "sha256": "5aa4204dd42805437ca5d9962584690ea68950be9674f3976d45dd47a70b675c"
+    },
+    {
+      "path": "supabase/migrations/20260928072137_aulify_activity_sync_digest.sql",
+      "sha256": "6b1cf2533b6fc28d1c6b6ac6d4feb73a2fcccd56090aac13f1cb23376319b0f1"
+    },
+    {
+      "path": "supabase/migrations/20260928074757_aulify_snapshot_authorized_sets.sql",
+      "sha256": "cd887b55ef3024631ae3ed149a1b72b120d20a976a1c24c1827cb111d2e732f8"
+    },
+    {
+      "path": "supabase/migrations/20260928080625_aulify_guided_answer_close_lock.sql",
+      "sha256": "16a5cb140f1bbb47efb0044988f669a66cce8fe583351cfe2e5a7205477403b2"
+    },
+    {
+      "path": "supabase/migrations/20260928083328_aulify_scoped_activity_sync.sql",
+      "sha256": "e7d3e3957bcb7ada38db53cb6cf37250ea283a01000e684a4c78434954febd34"
+    },
+    {
+      "path": "supabase/migrations/20260928083904_aulify_private_lock_revision.sql",
+      "sha256": "39d743f9a8136d9a5c5a6f43618c73d59a65481bb2f97245100a6d8c12bfeeb7"
+    },
+    {
+      "path": "supabase/migrations/20260928123500_aulify_independent_matching_answers.sql",
+      "sha256": "e1f5f3c74795baf66d678087fb45463912716cefa9a9e856d70306610db30b51"
+    },
+    {
+      "path": "supabase/migrations/20260928130653_aulify_teacher_attempt_projection.sql",
+      "sha256": "46c4145e4797d0b27587f9a361cf589212e655679dbbe88f0b6cca7ab4b2b5c0"
+    },
+    {
+      "path": "supabase/migrations/20260929221908_aulify_deferred_ranking_publication.sql",
+      "sha256": "62f5a233be8ff1965ac5e7ae815891720abe4a89e25b99ffb1cd6ee39c2ce946"
+    },
+    {
+      "path": "supabase/migrations/20260929224538_aulify_participant_teacher_revision.sql",
+      "sha256": "3575310698289b9543d02832e0634259f48e0edb120411be856880acf56b23a2"
+    },
+    {
+      "path": "supabase/migrations/20260929231531_aulify_editor_link_validation.sql",
+      "sha256": "c414dacd0c2d27335aefb9a3a981ac805f48997a3acb9e0fd5a390f876255132"
+    },
+    {
+      "path": "supabase/migrations/20260930000631_aulify_teacher_review_projection.sql",
+      "sha256": "75070a9dddba44f22a1b5e17af502d7662a0348f88402a5691b0f0a0e3be1b99"
+    },
+    {
+      "path": "supabase/migrations/20260930005228_aulify_sync_context_reads.sql",
+      "sha256": "9f902396491da6a509dd3268dfcd2c8ae66296b1eb5eae5353e3008bfa1947c9"
+    },
+    {
+      "path": "supabase/migrations/20260930011205_aulify_student_activity_projection.sql",
+      "sha256": "d3b41c91c645cf1ec69af3512fa9d638967037de0e108162c1cbabac33c80fb5"
+    },
+    {
+      "path": "supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql",
+      "sha256": "724e45231319644bc11069192ceac4886c74cebc41b6278f298623affd4d308e"
+    },
+    {
+      "path": "supabase/migrations/20260930040716_aulify_workspace_overview.sql",
+      "sha256": "259aff2e695a100203eabca39a9b37a089637c0a9da1edc091d68e0abacfe767"
+    },
+    {
+      "path": "supabase/migrations/20260930051014_aulify_completion_grade_existence.sql",
+      "sha256": "47e23bbf53ec3178e351a5feafd5866bb1d6a3bba0ba0611047b8404acab4469"
+    },
+    {
+      "path": "supabase/migrations/20261002215000_aulify_stable_group_shuffle.sql",
+      "sha256": "05fb92a2cc9b1179f27e8004557c93c0e50eada721951b72ba5f67149205e786"
+    },
+    {
+      "path": "supabase/migrations/20261002221000_aulify_scoped_purge_retry.sql",
+      "sha256": "e2749343342a5694cc577da7506b09d432cd9d068416d7335ef780f41cc3a4ad"
+    },
+    {
+      "path": "supabase/migrations/20261003142000_aulify_answer_ack_revision.sql",
+      "sha256": "2b0e967790f59b44d9fc16a5595c9db6010ca263725725562becbc5a09e57d2a"
+    },
+    {
+      "path": "supabase/migrations/20261003144500_aulify_ack_projection_guard.sql",
+      "sha256": "39e17ec6b1953e179898d55c477fca1e25d4a70d9e43677ae44c23a80d0ebbd0"
+    },
+    {
+      "path": "supabase/migrations/20261003153300_aulify_ack_authorization_order.sql",
+      "sha256": "54aeb0dea88d5f4f08cf941741caaa2fad6ba89c8eb74de15e26bbc5a2ab84d4"
+    },
+    {
+      "path": "supabase/migrations/20261003154500_aulify_service_sync_batch.sql",
+      "sha256": "de8741667d5dee30c149fb670321803109dd4b31ddaeffce3a4bb1bb5caef88a"
+    },
+    {
+      "path": "supabase/migrations/20261017172026_aulify_set_based_service_sync.sql",
+      "sha256": "27db28e894a5fd6c89751ff28307013bec5c6408bd038688a4736cd04216b3be"
+    }
+  ],
+  "expectedMigration": {
+    "path": "supabase/migrations/20261017172026_aulify_set_based_service_sync.sql",
+    "sha256": "27db28e894a5fd6c89751ff28307013bec5c6408bd038688a4736cd04216b3be"
+  },
+  "migrationInventoryScope": "Inventario de archivos locales; contrastar con las migraciones aplicadas del servicio antes de medir.",
+  "scriptSha256": "964fc38a4b342904a39035402cdd004a7ee92c5aab8398ce4b0ef30ebe208de1",
+  "targetAdapterSha256": "8c869bfe90e7088e3f73444f469aabc14158675cd0de19cb906e2fa04af1c748",
+  "instrumentation": {
+    "version": "rpc-failure-v1",
+    "header": "X-Aulify-Rpc-Failure",
+    "sources": {
+      "src/lib/rpc-failure.ts": "ecaf81ee7e5106b212e0a3e74e2b73f982ad7d15c2e6c7046716c91d3e1fa6eb",
+      "src/lib/response-timing.ts": "8c06b3f305fffa41f65c046e061b78bb2de5ab4695b2084498742f0d6424d1fb",
+      "src/lib/supabase/transport.ts": "1fc8528df5e6a06b814ec27545a71fa47a62d0fe3960adb0ed347c5bf9ce60a5",
+      "src/lib/supabase/auth-availability.ts": "a2dd28aebbab0cb0770c5bbadee9f1e566d8ec12ac388f7ad70d9854dd50a6bd",
+      "src/lib/supabase/server.ts": "79e1fe38c7a65e4c99b21cb9a5462648543a2e02d93aba9ace8aa4520f1e2bad",
+      "src/app/api/sync/route.ts": "b316a658c574ab773f963dc93c108df80337475e7ec4a48a26c7aeadb11a9430",
+      "src/app/api/workspace/route.ts": "14357e731fc7319f88002c4551cfbf323d08287b66de4cd7eda518fdc2729c8c",
+      "src/app/api/commands/route.ts": "bbafe21bedb15a0ed2cdbbb88c75528ad2b7cf57bd57f4af2608456d6afc98b9",
+      "tools/datos/load-failure-category.mjs": "66f5006d7d05c8fd89b4cee31eb8f1679f5ea5a9196a3ae2c907435d5f0573c5"
+    },
+    "limitations": [
+      "Cabecera disponible en fallosRPC de sync/workspace; comandos y Auth pueden quedar unclassified.",
+      "Hashes de fuente local; la correspondencia de fuente y compilado debe verificarse antes de autorizar una medición."
+    ]
+  },
+  "confirmedProjection": {
+    "version": "answer-ack-projection-guard-v2",
+    "scope": "Sondeo cada segundo cuando no hay respuesta en curso; no repite snapshot solo cuando la base conocida y los cambios proyectados coinciden con el ACK. Cambios externos y recuperación conservan sus lecturas."
+  },
+  "retryPolicy": {
+    "initialMs": 1000,
+    "maximumBackoffMs": 8000,
+    "respectsRetryAfter": true,
+    "preparation": {
+      "readAttempts": 3,
+      "minimumWaitMs": 30000,
+      "retryable": [
+        429,
+        503,
+        "client_timeout",
+        "client_transport"
+      ],
+      "commandsRetried": false
+    }
+  },
+  "measurementStartedAt": "2026-10-17T17:48:40.703Z",
+  "burst": {
+    "target": 200,
+    "dispatched": 200,
+    "windowMs": 1896.896700000012,
+    "confirmed": 200,
+    "confirmationP95Ms": 3741.8387999999977
+  },
+  "measurementEndedAt": "2026-10-17T17:49:40.916Z",
+  "elapsedMs": 60213.58249999999,
+  "skippedPollTicks": 2448,
+  "integrity": {
+    "persisted": 200,
+    "confirmed": 200,
+    "missingOrChangedConfirmed": 0
+  },
+  "status": "completed",
+  "completedAt": "2026-10-17T17:49:43.554Z",
+  "observedBodyBytes": 35272712,
+  "conservativeEstimatedBytes": 81344528,
+  "generator": {
+    "node": "v24.14.1",
+    "os": "win32",
+    "eventLoopP95Ms": 32.079871
+  },
+  "measurements": {
+    "sync": {
+      "count": 9720,
+      "failed": 0,
+      "p95Ms": 2431.256300000008
+    },
+    "snapshot": {
+      "count": 212,
+      "failed": 0,
+      "p95Ms": 5539.855300000025
+    },
+    "answer": {
+      "count": 200,
+      "failed": 0,
+      "p95Ms": 3741.800099999993
+    }
+  },
+  "failuresByCategory": {
+    "sync": {},
+    "snapshot": {},
+    "answer": {}
+  },
+  "archivedRawSource": "datos-protocolo-60s-20261017174535.json.gz",
+  "rawArchive": {
+    "format": "gzip",
+    "uncompressedSha256": "601b02590153e504ac22bd2bdef6123dd99e96f5b23227b1eab6f6b0933c69bd",
+    "compressedSha256": "88041a091f0c0d40af778fd4add7b2a2dd4678ce4baa3e9e57d46197c46adc5e",
+    "uncompressedBytes": 3466974,
+    "compressedBytes": 216588,
+    "requestRecords": 10546,
+    "scope": "Original íntegro comprimido sin cambiar sus datos; este JSON conserva los agregados y omite sólo la lista de solicitudes."
+  }
+}

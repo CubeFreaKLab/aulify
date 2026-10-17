@@ -1,0 +1,35 @@
+{
+  "startedAt": "2026-10-17T20:10:02.844Z",
+  "completedAt": "2026-10-17T20:16:53.765Z",
+  "source": "Observación nativa PostgreSQL concurrente con datos-carga-20261017201005.json",
+  "samples": 133,
+  "databaseDelta": {
+    "blocksRead": 0,
+    "readMs": 0,
+    "writeMs": 0,
+    "tempBytes": 0,
+    "deadlocks": 0
+  },
+  "samplesWithBlockers": 0,
+  "connectionSamplesByState": {
+    "idle / Client / ClientRead": 1678,
+    "idle / Extension / Extension": 133,
+    " / Extension / Extension": 132,
+    "active / sin espera declarada / ": 192,
+    "active / IO / WalSync": 1,
+    " / sin espera declarada / ": 1,
+    "idle / sin espera declarada / ": 7,
+    "active / Client / ClientRead": 12,
+    "idle in transaction / Client / ClientRead": 95,
+    "idle in transaction / sin espera declarada / ": 13,
+    "active / LWLock / BufferContent": 1,
+    "active / LWLock / WALInsert": 1
+  },
+  "limitations": [
+    "Observaciones discretas: no identifican por sí solas una causa única de la demora.",
+    "Las sumas de conexiones son muestras, no conexiones únicas ni tiempo de espera acumulado.",
+    "Los contadores de base son diferencias; sus acumulados históricos no se atribuyen al ensayo.",
+    "Sin texto de consultas, credenciales ni identificadores personales."
+  ],
+  "maximumObservedBlockingPids": 0
+}

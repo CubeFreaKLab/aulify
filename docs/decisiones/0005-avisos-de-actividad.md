@@ -1,10 +1,10 @@
 # 0005 · Avisos de actividad mediante el servidor
 
-Estado: implementación en curso; capacidad pendiente de medir.
+Estado: implementado y comprobado funcionalmente; el [ensayo sostenido](../verificacion/capacidad-200-20261017.md) no acredita la capacidad objetivo.
 
 El diagnóstico con cuatro docentes y doscientos estudiantes reproduce demoras después de varios minutos de sondeo. Las muestras no muestran bloqueo entre transacciones ni nuevas lecturas de bloques durante ese tramo. Esta observación no identifica por sí sola una causa única, pero justifica reducir las consultas que se repiten cuando no cambia ningún dato.
 
-El servidor de Aulify escuchará avisos privados de Supabase Broadcast y los distribuirá mediante eventos HTTP (SSE) a los estudiantes que ya tengan acceso a la actividad. Compartirá una suscripción por actividad e instancia del servidor. Los navegadores no abrirán doscientos sockets adicionales con Supabase.
+El servidor de Aulify escucha avisos privados de Supabase Broadcast y los distribuye mediante eventos HTTP (SSE) a los estudiantes que tienen acceso a la actividad. Comparte una suscripción por actividad e instancia del servidor. Los navegadores conectan con Aulify, sin abrir sus propios sockets con Supabase.
 
 Los avisos contienen identificadores de encaminamiento y revocación, nunca respuestas, soluciones ni notas. El navegador vuelve a consultar los endpoints autorizados para obtener datos. Una respuesta propia continúa confirmándose mediante el comando transaccional; no depende de la llegada del aviso.
 

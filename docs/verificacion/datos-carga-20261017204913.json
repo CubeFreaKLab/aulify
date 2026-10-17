@@ -1,0 +1,584 @@
+{
+  "runId": "3d841bea-c6dd-4862-a84e-0a91803f640f",
+  "startedAt": "2026-10-17T20:49:13.736Z",
+  "status": "stopped-at-safety-limit",
+  "commit": "6eb7101e77e13e1127f66f2805aa38a797fff44e",
+  "compiledCommit": "2cfe9d35ac3db0218dfb32951dc350df2595d0ce",
+  "buildId": "ym5EdbpfNHtsHdWqZorOU",
+  "target": {
+    "base": "https://aulify-nzs9wxzv1-jdanielchfhd-9543s-projects.vercel.app",
+    "expectedBuild": "ym5EdbpfNHtsHdWqZorOU",
+    "environment": "vercel-preview",
+    "sourceCommit": "2cfe9d35ac3db0218dfb32951dc350df2595d0ce"
+  },
+  "environment": {
+    "application": "Next.js Vercel Preview HTTPS",
+    "base": "https://aulify-nzs9wxzv1-jdanielchfhd-9543s-projects.vercel.app",
+    "database": "Supabase Free, PostgreSQL 17, sa-east-1",
+    "generator": {
+      "node": "v24.14.1",
+      "os": "win32 10.0.26220",
+      "cpu": "Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 34257453056
+    },
+    "activeSessions": 204,
+    "teachers": 4,
+    "students": 200,
+    "studentsPerClass": 50,
+    "questionsPerActivity": 10,
+    "pollingMs": 1000,
+    "polling": "Docente: cada segundo. Estudiante: avisos SSE de /api/events; comprobación cada 30 segundos y en el plazo del servidor. Sin canal: cada segundo. El mismo ACK y las mismas guardias de proyección siguen vigentes.",
+    "warmupSeconds": 300,
+    "measurementSeconds": 900,
+    "logicalBodyBudgetBytes": 1600000000,
+    "confirmation": "ACK después de persistir, con Attempt autorizado aplicado al estado del cliente. La auditoría posterior contrasta cada clave; no se espera un snapshot redundante para avanzar.",
+    "events": {
+      "transport": "SSE autorizado por la aplicación; relé privado de servidor a Supabase",
+      "healthMs": 30000,
+      "reconnectMs": 1500,
+      "rotateMs": 240000,
+      "preparationOutsideMeasurement": true
+    },
+    "preparation": "Cookies ficticias existentes; creación y acceso autorizados a las actividades de la fase, seguidos de la carga inicial del estado de ambos perfiles, como hydrate/refreshProjection del cliente. Preparación fuera de medición; no descarga el historial general para comprobar la sesión. No se crean cuentas ni se usa contraseña como alternativa.",
+    "resultAudit": "Después de cada fase los cuatro docentes publican en paralelo, una nota a la vez por docente, y se consultan historiales completos con ocho lectores. La publicación serializa la actividad; no se envían varias escrituras simultáneas del mismo docente para preparar la auditoría. Los fallos temporales de publicación o lectura quedan registrados y no impiden recoger el resto del ensayo. Las 200 publicaciones sin fallo y los 200 resultados correctos siguen siendo obligatorios; una denegación de autorización sigue deteniendo el ensayo.",
+    "participantPreparation": {
+      "outsideMeasurement": true,
+      "maximumConcurrentClasses": 4,
+      "maximumConcurrentJoinsPerClass": 1,
+      "reason": "Preparación ordenada por clase para evitar una cola artificial en el bloqueo de asignación de participantes. Se conservan las 204 sesiones activas, las ventanas completas y la ráfaga de 200 respuestas."
+    },
+    "retryPolicy": {
+      "initialMs": 1000,
+      "maximumBackoffMs": 8000,
+      "respectsRetryAfter": true
+    },
+    "fixtureHistory": "Las cuentas conservan el calentamiento fallido previo; el primer grupo conserva además las actividades cerradas de las pruebas de concurrencia guiada. No se borró ese historial para reducir el costo de lectura."
+  },
+  "phases": [
+    {
+      "name": "individual-warmup",
+      "mode": "individual",
+      "stage": "warmup",
+      "targetSeconds": 300,
+      "startedAt": "2026-10-17T20:50:30.114Z",
+      "requestCount": 3537,
+      "failedRequests": 95,
+      "bodyBytes": 19288577,
+      "operations": {
+        "sync": {
+          "count": 1793,
+          "failed": 38,
+          "p50Ms": 528.55,
+          "p95Ms": 10461.58,
+          "maxMs": 12581,
+          "statuses": {
+            "200": 1755,
+            "503": 38
+          },
+          "serverTiming": {
+            "samples": 1755,
+            "p95Ms": {
+              "prepare": 394.16,
+              "rpc": 7907.74,
+              "encode": 0.03,
+              "outsideHandler": 1038.04
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "snapshot": {
+          "count": 309,
+          "failed": 2,
+          "p50Ms": 792.63,
+          "p95Ms": 6429.09,
+          "maxMs": 12145,
+          "statuses": {
+            "200": 307,
+            "503": 2
+          },
+          "serverTiming": {
+            "samples": 307,
+            "p95Ms": {
+              "prepare": 2686.08,
+              "rpc": 5607.5,
+              "encode": 1.63,
+              "outsideHandler": 810.79
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "submitAnswer": {
+          "count": 1235,
+          "failed": 55,
+          "p50Ms": 223.36,
+          "p95Ms": 11469.93,
+          "maxMs": 12671,
+          "statuses": {
+            "200": 1180,
+            "503": 55
+          },
+          "serverTiming": {
+            "samples": 1180,
+            "p95Ms": {
+              "prepare": 4.02,
+              "rpc": 7712.57,
+              "encode": 0.23,
+              "outsideHandler": 394.44
+            },
+            "negativeResiduals": 0
+          }
+        },
+        "eventsConnect": {
+          "count": 200,
+          "failed": 0,
+          "p50Ms": 369.1,
+          "p95Ms": 747.38,
+          "maxMs": 1417,
+          "statuses": {
+            "200": 200
+          },
+          "serverTiming": {
+            "samples": 0
+          }
+        }
+      },
+      "skippedPollTicks": 42853,
+      "unsentAnswers": 0,
+      "unconfirmedAnswers": 0,
+      "unobservedConfirmations": 0,
+      "burst": null,
+      "responseAckByQuestion": {
+        "1": {
+          "samples": 200,
+          "p50Ms": 195.85,
+          "p95Ms": 617.83
+        },
+        "2": {
+          "samples": 200,
+          "p50Ms": 187.15,
+          "p95Ms": 281.16
+        },
+        "3": {
+          "samples": 200,
+          "p50Ms": 203.72,
+          "p95Ms": 325.02
+        },
+        "4": {
+          "samples": 200,
+          "p50Ms": 203.3,
+          "p95Ms": 4319.45
+        },
+        "5": {
+          "samples": 200,
+          "p50Ms": 374.19,
+          "p95Ms": 6070.34
+        },
+        "6": {
+          "samples": 180,
+          "p50Ms": 5779.32,
+          "p95Ms": 48312.69
+        }
+      },
+      "interrupted": true,
+      "completedAt": "2026-10-17T20:54:34.582Z",
+      "elapsedSeconds": 244.468,
+      "integrity": {
+        "expectedAnswers": 2000,
+        "persistedAnswers": 1200,
+        "confirmedAnswers": 1180,
+        "missingOrChangedConfirmed": 0,
+        "duplicateQuestions": 0
+      },
+      "successfulAcknowledgementSamples": 1180,
+      "observedConfirmationSamples": 1180,
+      "observedPropagationSamples": 0,
+      "confirmationP95Ms": 8809.6,
+      "responseAckP95Ms": 8809.6,
+      "propagationP95Ms": null,
+      "failureRate": 0.02685891998869098,
+      "criteria": {
+        "durationCompleted": false,
+        "confirmationP95": false,
+        "propagationP95": true,
+        "validRequestFailureRate": false,
+        "integrity": false,
+        "publishedResults": false,
+        "burst": true
+      }
+    }
+  ],
+  "authentication": {
+    "rateLimitWaits": 0,
+    "preparedSessions": 204,
+    "activityPreparations": [
+      {
+        "name": "individual-warmup",
+        "startedAt": "2026-10-17T20:49:29.918Z",
+        "prepared": 204,
+        "outsideMeasurement": true,
+        "completedAt": "2026-10-17T20:50:13.836Z"
+      }
+    ]
+  },
+  "limitations": [
+    "El generador simula el protocolo HTTP de la aplicación; no ejecuta 204 navegadores ni mide dibujo de pantalla.",
+    "Vista previa protegida de Vercel; no es producción ni una liberación pública.",
+    "Los bytes JSON descomprimidos y una estimación conservadora no sustituyen el contador facturable de Supabase, que tiene retraso.",
+    "La preparación y el inicio de sesión quedan fuera de los quince minutos de medición. No se envían correos ni se habilitan pagos."
+  ],
+  "protocol": "full-q06",
+  "buildChecks": [
+    {
+      "base": "https://aulify-nzs9wxzv1-jdanielchfhd-9543s-projects.vercel.app",
+      "expectedBuild": "ym5EdbpfNHtsHdWqZorOU",
+      "environment": "vercel-preview",
+      "sourceCommit": "2cfe9d35ac3db0218dfb32951dc350df2595d0ce",
+      "verifiedAt": "2026-10-17T20:49:13.731Z",
+      "diskMatches": null,
+      "servedHtmlMatches": true
+    },
+    {
+      "base": "https://aulify-nzs9wxzv1-jdanielchfhd-9543s-projects.vercel.app",
+      "expectedBuild": "ym5EdbpfNHtsHdWqZorOU",
+      "environment": "vercel-preview",
+      "sourceCommit": "2cfe9d35ac3db0218dfb32951dc350df2595d0ce",
+      "verifiedAt": "2026-10-17T20:49:13.958Z",
+      "diskMatches": null,
+      "servedHtmlMatches": true
+    }
+  ],
+  "scriptSha256": "29119284ee40be78e42978440b3fccd9145e2399ee76173debe322645b87b05d",
+  "localMigrations": [
+    {
+      "path": "supabase/migrations/20260928064804_aulify_relational_core.sql",
+      "sha256": "e1d28fb97669dc12533cc3feb9b2a7aac91b2dace27e9773e30ffa1400b01181"
+    },
+    {
+      "path": "supabase/migrations/20260928064810_aulify_commands.sql",
+      "sha256": "0dcd33f6f5e76d4edfb94ed189470d1d886331aa5826a4cfce9328cc06d6d448"
+    },
+    {
+      "path": "supabase/migrations/20260928064815_aulify_projections_storage.sql",
+      "sha256": "b8efde826282aaf71a0c4c9312f176509b174bb2c140d2816b01e612109167ec"
+    },
+    {
+      "path": "supabase/migrations/20260928064819_aulify_retention_hardening.sql",
+      "sha256": "958e71a40caca23e48afa1e835da7275b030909fe8cec61397d91ab4d4a0beb3"
+    },
+    {
+      "path": "supabase/migrations/20260928064824_aulify_join_rate_limit.sql",
+      "sha256": "9821fd7b7f15735ddbc55ba315c08f19804a711c09ff0e67244e147cb8718fea"
+    },
+    {
+      "path": "supabase/migrations/20260928064828_aulify_upload_reservations.sql",
+      "sha256": "b85eeb9ab40fcd5a45acc191d0ad100f223d6eb4255c206426164b709fbe4514"
+    },
+    {
+      "path": "supabase/migrations/20260928070919_aulify_resubmission_projection.sql",
+      "sha256": "5aa4204dd42805437ca5d9962584690ea68950be9674f3976d45dd47a70b675c"
+    },
+    {
+      "path": "supabase/migrations/20260928072137_aulify_activity_sync_digest.sql",
+      "sha256": "6b1cf2533b6fc28d1c6b6ac6d4feb73a2fcccd56090aac13f1cb23376319b0f1"
+    },
+    {
+      "path": "supabase/migrations/20260928074757_aulify_snapshot_authorized_sets.sql",
+      "sha256": "cd887b55ef3024631ae3ed149a1b72b120d20a976a1c24c1827cb111d2e732f8"
+    },
+    {
+      "path": "supabase/migrations/20260928080625_aulify_guided_answer_close_lock.sql",
+      "sha256": "16a5cb140f1bbb47efb0044988f669a66cce8fe583351cfe2e5a7205477403b2"
+    },
+    {
+      "path": "supabase/migrations/20260928083328_aulify_scoped_activity_sync.sql",
+      "sha256": "e7d3e3957bcb7ada38db53cb6cf37250ea283a01000e684a4c78434954febd34"
+    },
+    {
+      "path": "supabase/migrations/20260928083904_aulify_private_lock_revision.sql",
+      "sha256": "39d743f9a8136d9a5c5a6f43618c73d59a65481bb2f97245100a6d8c12bfeeb7"
+    },
+    {
+      "path": "supabase/migrations/20260928123500_aulify_independent_matching_answers.sql",
+      "sha256": "e1f5f3c74795baf66d678087fb45463912716cefa9a9e856d70306610db30b51"
+    },
+    {
+      "path": "supabase/migrations/20260928130653_aulify_teacher_attempt_projection.sql",
+      "sha256": "46c4145e4797d0b27587f9a361cf589212e655679dbbe88f0b6cca7ab4b2b5c0"
+    },
+    {
+      "path": "supabase/migrations/20260929221908_aulify_deferred_ranking_publication.sql",
+      "sha256": "62f5a233be8ff1965ac5e7ae815891720abe4a89e25b99ffb1cd6ee39c2ce946"
+    },
+    {
+      "path": "supabase/migrations/20260929224538_aulify_participant_teacher_revision.sql",
+      "sha256": "3575310698289b9543d02832e0634259f48e0edb120411be856880acf56b23a2"
+    },
+    {
+      "path": "supabase/migrations/20260929231531_aulify_editor_link_validation.sql",
+      "sha256": "c414dacd0c2d27335aefb9a3a981ac805f48997a3acb9e0fd5a390f876255132"
+    },
+    {
+      "path": "supabase/migrations/20260930000631_aulify_teacher_review_projection.sql",
+      "sha256": "75070a9dddba44f22a1b5e17af502d7662a0348f88402a5691b0f0a0e3be1b99"
+    },
+    {
+      "path": "supabase/migrations/20260930005228_aulify_sync_context_reads.sql",
+      "sha256": "9f902396491da6a509dd3268dfcd2c8ae66296b1eb5eae5353e3008bfa1947c9"
+    },
+    {
+      "path": "supabase/migrations/20260930011205_aulify_student_activity_projection.sql",
+      "sha256": "d3b41c91c645cf1ec69af3512fa9d638967037de0e108162c1cbabac33c80fb5"
+    },
+    {
+      "path": "supabase/migrations/20260930024809_aulify_visibility_effective_closure.sql",
+      "sha256": "724e45231319644bc11069192ceac4886c74cebc41b6278f298623affd4d308e"
+    },
+    {
+      "path": "supabase/migrations/20260930040716_aulify_workspace_overview.sql",
+      "sha256": "259aff2e695a100203eabca39a9b37a089637c0a9da1edc091d68e0abacfe767"
+    },
+    {
+      "path": "supabase/migrations/20260930051014_aulify_completion_grade_existence.sql",
+      "sha256": "47e23bbf53ec3178e351a5feafd5866bb1d6a3bba0ba0611047b8404acab4469"
+    },
+    {
+      "path": "supabase/migrations/20261002215000_aulify_stable_group_shuffle.sql",
+      "sha256": "05fb92a2cc9b1179f27e8004557c93c0e50eada721951b72ba5f67149205e786"
+    },
+    {
+      "path": "supabase/migrations/20261002221000_aulify_scoped_purge_retry.sql",
+      "sha256": "e2749343342a5694cc577da7506b09d432cd9d068416d7335ef780f41cc3a4ad"
+    },
+    {
+      "path": "supabase/migrations/20261003142000_aulify_answer_ack_revision.sql",
+      "sha256": "2b0e967790f59b44d9fc16a5595c9db6010ca263725725562becbc5a09e57d2a"
+    },
+    {
+      "path": "supabase/migrations/20261003144500_aulify_ack_projection_guard.sql",
+      "sha256": "39e17ec6b1953e179898d55c477fca1e25d4a70d9e43677ae44c23a80d0ebbd0"
+    },
+    {
+      "path": "supabase/migrations/20261003153300_aulify_ack_authorization_order.sql",
+      "sha256": "54aeb0dea88d5f4f08cf941741caaa2fad6ba89c8eb74de15e26bbc5a2ab84d4"
+    },
+    {
+      "path": "supabase/migrations/20261003154500_aulify_service_sync_batch.sql",
+      "sha256": "de8741667d5dee30c149fb670321803109dd4b31ddaeffce3a4bb1bb5caef88a"
+    },
+    {
+      "path": "supabase/migrations/20261017172026_aulify_set_based_service_sync.sql",
+      "sha256": "27db28e894a5fd6c89751ff28307013bec5c6408bd038688a4736cd04216b3be"
+    },
+    {
+      "path": "supabase/migrations/20261017182121_aulify_reuse_rpc_query_plans.sql",
+      "sha256": "35da1fb96f19f3b7c30af105ce03539ca3bee735f51f401b7bc90f6267411e78"
+    },
+    {
+      "path": "supabase/migrations/20261017190116_aulify_set_based_workspace_history.sql",
+      "sha256": "c5ec86b64870718bebe64863d64a3e60cc46439d25f5aacd2460fad47a211f4b"
+    },
+    {
+      "path": "supabase/migrations/20261017192653_aulify_workspace_parameter_plans.sql",
+      "sha256": "d15e8034532236750814051ce526909e78892e50680c171d23d92e2f16b78c22"
+    },
+    {
+      "path": "supabase/migrations/20261017203437_aulify_private_activity_hints.sql",
+      "sha256": "81f4c921c0c9dacd68e16d0eb4d909f8b347233a78253b36dac67e6cb01ca4f7"
+    },
+    {
+      "path": "supabase/migrations/20261017204006_aulify_coalesced_guided_hints.sql",
+      "sha256": "d27ca2dd0d6f0c22432599ae1f8a3086ecd1f0747cafda0004de79cf46ea4329"
+    }
+  ],
+  "expectedMigration": {
+    "path": "supabase/migrations/20261017204006_aulify_coalesced_guided_hints.sql",
+    "sha256": "d27ca2dd0d6f0c22432599ae1f8a3086ecd1f0747cafda0004de79cf46ea4329"
+  },
+  "migrationInventoryScope": "Archivos locales; contrastar la última migración con el servicio antes de medir.",
+  "sourceDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "previousReport": "datos-carga-20260928-0811.md",
+  "setupOperations": {
+    "createActivity": {
+      "count": 4,
+      "failed": 0,
+      "p50Ms": 307.27,
+      "p95Ms": 687.46,
+      "maxMs": 687,
+      "statuses": {
+        "200": 4
+      },
+      "serverTiming": {
+        "samples": 4,
+        "p95Ms": {
+          "prepare": 16.74,
+          "rpc": 532.16,
+          "encode": 0.22,
+          "outsideHandler": 209.49
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "startAttempt": {
+      "count": 200,
+      "failed": 0,
+      "p50Ms": 229.38,
+      "p95Ms": 307.78,
+      "maxMs": 1434,
+      "statuses": {
+        "200": 200
+      },
+      "serverTiming": {
+        "samples": 200,
+        "p95Ms": {
+          "prepare": 4.46,
+          "rpc": 139.47,
+          "encode": 0.28,
+          "outsideHandler": 188.6
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=7215d512-53eb-48a2-b48c-6a9b601b8e86": {
+      "count": 51,
+      "failed": 0,
+      "p50Ms": 202.11,
+      "p95Ms": 208.64,
+      "maxMs": 294,
+      "statuses": {
+        "200": 51
+      },
+      "serverTiming": {
+        "samples": 51,
+        "p95Ms": {
+          "prepare": 3.57,
+          "rpc": 64.25,
+          "encode": 0.29,
+          "outsideHandler": 170.13
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=aa053052-3c60-4e68-97b2-1bfc2764a8fc": {
+      "count": 51,
+      "failed": 0,
+      "p50Ms": 202.57,
+      "p95Ms": 209.43,
+      "maxMs": 222,
+      "statuses": {
+        "200": 51
+      },
+      "serverTiming": {
+        "samples": 51,
+        "p95Ms": {
+          "prepare": 2.83,
+          "rpc": 54.79,
+          "encode": 0.29,
+          "outsideHandler": 172.97
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=fe576b44-248b-4ec2-a1a2-c4f46789bcff": {
+      "count": 51,
+      "failed": 0,
+      "p50Ms": 202.54,
+      "p95Ms": 206.93,
+      "maxMs": 610,
+      "statuses": {
+        "200": 51
+      },
+      "serverTiming": {
+        "samples": 51,
+        "p95Ms": {
+          "prepare": 1.91,
+          "rpc": 66.9,
+          "encode": 0.31,
+          "outsideHandler": 170.52
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "/api/workspace?activity=75d39234-f5f4-4608-a4de-5fd55db56b1a": {
+      "count": 51,
+      "failed": 0,
+      "p50Ms": 202.69,
+      "p95Ms": 321.98,
+      "maxMs": 1430,
+      "statuses": {
+        "200": 51
+      },
+      "serverTiming": {
+        "samples": 51,
+        "p95Ms": {
+          "prepare": 3.71,
+          "rpc": 84.56,
+          "encode": 0.23,
+          "outsideHandler": 170.95
+        },
+        "negativeResiduals": 0
+      }
+    },
+    "eventsConnect": {
+      "count": 200,
+      "failed": 0,
+      "p50Ms": 568.51,
+      "p95Ms": 829.2,
+      "maxMs": 1502,
+      "statuses": {
+        "200": 200
+      },
+      "serverTiming": {
+        "samples": 0
+      }
+    },
+    "integrityAudit": {
+      "count": 4,
+      "failed": 0,
+      "p50Ms": 801.7,
+      "p95Ms": 1660.62,
+      "maxMs": 1661,
+      "statuses": {
+        "200": 4
+      },
+      "serverTiming": {
+        "samples": 4,
+        "p95Ms": {
+          "prepare": 2.72,
+          "rpc": 1157.23,
+          "encode": 2.48,
+          "outsideHandler": 499.25
+        },
+        "negativeResiduals": 0
+      }
+    }
+  },
+  "eventStreams": [
+    {
+      "name": "individual-warmup",
+      "opened": 400,
+      "ready": 400,
+      "rotations": 200,
+      "unexpectedFailures": 0,
+      "bytes": 65570,
+      "active": 0,
+      "maximumActive": 200,
+      "startedAt": "2026-10-17T20:50:13.836Z",
+      "preparedAt": "2026-10-17T20:50:30.114Z",
+      "completedAt": "2026-10-17T20:54:34.582Z"
+    }
+  ],
+  "failure": {
+    "type": "Error",
+    "reason": "Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto."
+  },
+  "completedAt": "2026-10-17T20:54:38.863Z",
+  "generatorEventLoop": {
+    "p95Ms": 32.06,
+    "maxMs": 104.01
+  },
+  "observedApplicationBodyBytes": 23960209,
+  "totalRequests": 4149,
+  "conservativeEstimatedBytes": 52168994,
+  "interruptedReason": "Corte preventivo: más de 10 % de fallos técnicos en la última ventana de un minuto."
+}

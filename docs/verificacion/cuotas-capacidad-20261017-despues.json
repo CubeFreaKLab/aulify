@@ -1,0 +1,51 @@
+{
+  "recordedAt": "2026-10-17T21:00:07.109Z",
+  "stage": "Después del ensayo detenido de244.468segundos",
+  "execution": "datos-carga-20261017204913.json",
+  "supabase": {
+    "plan": "Free",
+    "scope": "Organización Aulify; ciclo de facturación actual",
+    "egressGB": 1.529,
+    "egressLimitGB": 5,
+    "databaseGB": 0.109,
+    "databaseLimitGB": 0.5,
+    "storageGB": 0.002,
+    "storageLimitGB": 1,
+    "cachedEgressGB": 0.023,
+    "cachedEgressLimitGB": 5,
+    "MAU": 211,
+    "MAULimit": 50000,
+    "realtimeDisplayedPeakConnections": 0,
+    "realtimeConnectionLimit": 200,
+    "realtimeDisplayedMessages": 0,
+    "realtimeMessageLimit": 2000000,
+    "displayedRealtimeCountersAreDelayed": true,
+    "activeQuotaExceeded": false,
+    "logIngestion": {
+      "displayedGB": 1.953,
+      "displayedLimitGB": 1,
+      "status": "Upcoming; el panel no lo aplica como cuota activa excedida"
+    }
+  },
+  "vercel": {
+    "plan": "Hobby",
+    "scope": "Equipo personal; últimos30días, agregado de servicios",
+    "fastDataTransferGB": 1.63,
+    "fastDataTransferLimitGB": 100,
+    "fastOriginTransferGB": 1.43,
+    "fastOriginTransferLimitGB": 10,
+    "cdnRequests": 370838,
+    "cdnRequestsLimit": 1000000,
+    "functionInvocations": 383293,
+    "functionInvocationsLimit": 1000000,
+    "fluidMemoryGBHours": 25.3,
+    "fluidMemoryLimitGBHours": 360,
+    "fluidCPUDisplayed": "1h 6m / 4h"
+  },
+  "conclusion": "Sin cuota activa excedida en las lecturas. Q09 no aprobado: la carga completa no terminó y los contadores de Realtime todavía no reflejan las conexiones observadas.",
+  "limitations": [
+    "Valores agregados y redondeados del panel; no facturación atribuida exactamente a esta ejecución.",
+    "Supabase actualiza por hora. El valor mostrado0 de Realtime no significa que no hubo conexiones o mensajes.",
+    "No se activaron planes de pago ni se ampliaron los límites para obtener un aprobado."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-17T20:46:10.439Z",
+  "buildId": "nBYVKOMvFDHcApBrQHiuS",
+  "sourceCommit": "0d1af5f9d574d06a4a1ce7a18fe85c2e7e91d9b4",
+  "checks": [
+    {
+      "name": "Sin sesión no se abre el flujo",
+      "passed": true
+    },
+    {
+      "name": "Una cuenta de otra materia no abre el flujo",
+      "passed": true
+    },
+    {
+      "name": "Dos cuentas autorizadas reciben ready",
+      "passed": true
+    },
+    {
+      "name": "El aviso de apertura permite leer la pregunta y el intento persistidos",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Recorrido HTTP de dos estudiantes ficticios; no es la prueba de 200 ni una prueba de navegador."
+  ],
+  "openHintMs": [
+    621,
+    622
+  ],
+  "passed": false,
+  "failure": "Comando withdrawMembership: HTTP 403\n\n403 !== 200\n",
+  "fixtureArchived": true,
+  "completedAt": "2026-10-17T20:46:20.973Z"
+}

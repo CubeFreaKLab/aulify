@@ -1,0 +1,45 @@
+{
+  "startedAt": "2026-10-17T20:48:48.775Z",
+  "buildId": "ym5EdbpfNHtsHdWqZorOU",
+  "sourceCommit": "2cfe9d35ac3db0218dfb32951dc350df2595d0ce",
+  "checks": [
+    {
+      "name": "Sin sesión no se abre el flujo",
+      "passed": true
+    },
+    {
+      "name": "Una cuenta de otra materia no abre el flujo",
+      "passed": true
+    },
+    {
+      "name": "Dos cuentas autorizadas reciben ready",
+      "passed": true
+    },
+    {
+      "name": "El aviso de apertura permite leer la pregunta y el intento persistidos",
+      "passed": true
+    },
+    {
+      "name": "Retirar la matrícula cierra el flujo y rechaza una nueva conexión",
+      "passed": true
+    },
+    {
+      "name": "La revocación no se envía al compañero ni le quita acceso",
+      "passed": true
+    },
+    {
+      "name": "El recorrido no tuvo desconexiones inesperadas",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Recorrido HTTP de dos estudiantes ficticios; no es la prueba de 200 ni una prueba de navegador."
+  ],
+  "openHintMs": [
+    504,
+    499
+  ],
+  "passed": true,
+  "fixtureArchived": true,
+  "completedAt": "2026-10-17T20:48:57.544Z"
+}

@@ -1,0 +1,87 @@
+{
+  "observedAt": "2026-10-17T20:56:19.844Z",
+  "scope": "Una respuesta ficticia pendiente tras el ensayo. Transacción revertida, sin HTTP ni concurrencia; no demuestra capacidad.",
+  "timingsMs": [
+    190.031
+  ],
+  "functions": [
+    {
+      "name": "app.require_user",
+      "calls": 3,
+      "totalMs": 44.08400000000006,
+      "selfMs": 44.08400000000006
+    },
+    {
+      "name": "app.submit_answer_persisted",
+      "calls": 1,
+      "totalMs": 75.42499999999995,
+      "selfMs": 34.109999999999985
+    },
+    {
+      "name": "app.submit_answer",
+      "calls": 1,
+      "totalMs": 133.74199999999996,
+      "selfMs": 29.716999999999985
+    },
+    {
+      "name": "app.activity_sync",
+      "calls": 2,
+      "totalMs": 21.763000000000034,
+      "selfMs": 21.591999999999985
+    },
+    {
+      "name": "app.score_answer",
+      "calls": 1,
+      "totalMs": 26.891000000000005,
+      "selfMs": 19.293000000000006
+    },
+    {
+      "name": "app.attempt_json",
+      "calls": 1,
+      "totalMs": 12.487999999999374,
+      "selfMs": 11.505000000001019
+    },
+    {
+      "name": "app.question_json",
+      "calls": 1,
+      "totalMs": 7.597999999999956,
+      "selfMs": 7.597999999999956
+    },
+    {
+      "name": "app.command",
+      "calls": 1,
+      "totalMs": 183.01600000000008,
+      "selfMs": 5.359999999999985
+    },
+    {
+      "name": "public.aulify_command",
+      "calls": 1,
+      "totalMs": 188.29799999999977,
+      "selfMs": 5.282
+    },
+    {
+      "name": "app.track_sync_revision",
+      "calls": 2,
+      "totalMs": 6.8359999999999985,
+      "selfMs": 5.024000000000001
+    },
+    {
+      "name": "app.bump_sync_revision",
+      "calls": 2,
+      "totalMs": 1.811,
+      "selfMs": 1.811
+    },
+    {
+      "name": "app.deadline",
+      "calls": 2,
+      "totalMs": 1.7799999999997453,
+      "selfMs": 1.7799999999997453
+    },
+    {
+      "name": "app.require_student",
+      "calls": 1,
+      "totalMs": 1.1360000000000028,
+      "selfMs": 1.1360000000000028
+    }
+  ]
+}

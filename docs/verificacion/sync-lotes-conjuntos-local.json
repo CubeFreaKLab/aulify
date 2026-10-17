@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-17T17:22:20.899Z",
+  "at": "2026-10-17T18:20:32.199Z",
   "environment": "PGlite aislado; sin red ni concurrencia real",
   "migration": "20261017172026_aulify_set_based_service_sync.sql",
   "checks": [
@@ -59,13 +59,13 @@
   "benchmark": {
     "legacy": {
       "samples": 12,
-      "p50Ms": 14.041900000000169,
-      "p95Ms": 15.33680000000004
+      "p50Ms": 14.957400000000234,
+      "p95Ms": 16.594800000000305
     },
     "candidate": {
       "samples": 12,
-      "p50Ms": 2.510699999999815,
-      "p95Ms": 2.5997000000002117
+      "p50Ms": 2.543399999999565,
+      "p95Ms": 2.878900000000158
     }
   },
   "status": "passed"
