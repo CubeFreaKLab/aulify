@@ -24,8 +24,7 @@ let subject;
 try {
  subject=await command(teacher,'createSubject',{name:'Verificación de avisos',course:'Prueba técnica',year:2026,description:'Datos ficticios del transporte SSE'});
  const {code}=await command(teacher,'renewCode',subject.id,true);
- const memberships=[];
- for(const s of students){const m=await command(s,'requestMembership',code);memberships.push(m.id);await command(teacher,'decideMembership',m.id,'approved');}
+ for(const s of students){const m=await command(s,'requestMembership',code);await command(teacher,'decideMembership',m.id,'approved');}
  const settings={purpose:'practice',pace:'guided',maxGrade:100,weight:1,countsTowardAverage:false,maxAttempts:1,opensAt:new Date(Date.now()-60000).toISOString(),closesAt:new Date(Date.now()+3600000).toISOString(),timeLimitMinutes:null,timeZone:'America/La_Paz',feedback:'immediate',manualCorrection:false,shuffleQuestions:false,shuffleOptions:false,streaks:false,sound:false,ranking:false,teams:false,allowHint:false,allowDouble:false,bonusAffectsGrade:false,reportVisibility:false};
  const activity=await command(teacher,'createActivity',group.versionId,subject.id,settings,'Recorrido de avisos');
  for(const s of students)await command(s,'joinGuidedRoom',activity.id);
@@ -43,7 +42,9 @@ try {
  for(const s of students){const r=await request(s,`/api/workspace?activity=${activity.id}`);assert.equal(r.status,200);const data=await r.json();assert.equal(data.studentActivities[activity.id].activity.guided.questionOpen,true);assert.ok(data.studentActivities[activity.id].attempt.id);}
  check('El aviso de apertura permite leer la pregunta y el intento persistidos');
  await new Promise(r=>setTimeout(r,250));const peerBefore=events[1].filter(e=>e.event==='changed'||e.event==='revoked').length;
- await command(teacher,'withdrawMembership',memberships[0],'Verificación controlada de revocación');
+ const teacherView=await request(teacher,`/api/workspace?activity=${activity.id}`);assert.equal(teacherView.status,200);
+ const membership=(await teacherView.json()).state.memberships.find(m=>m.studentId===students[0].id&&m.status==='approved');assert.ok(membership);
+ await command(teacher,'withdrawMembership',membership.id,'Verificación controlada de revocación');
  await waitFor(()=>events[0].some(e=>e.event==='revoked'));
  assert.equal((await request(students[0],`/api/events?activity=${activity.id}`)).status,403);
  check('Retirar la matrícula cierra el flujo y rechaza una nueva conexión');
