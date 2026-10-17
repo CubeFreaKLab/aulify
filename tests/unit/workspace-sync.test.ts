@@ -6,6 +6,7 @@ const mocks = vi.hoisted(() => ({
   path: '/aula/actividad/activity',
   effects: [] as (() => (() => void) | void)[],
   read: (() => null) as () => DemoSnapshot | null,
+  events: null as null | { changed: () => void; connected: (value: boolean) => void },
 }));
 vi.mock('react', () => ({
   useEffect: (effect: () => (() => void) | void) => mocks.effects.push(effect),
@@ -17,6 +18,15 @@ vi.mock('react', () => ({
 vi.mock('next/navigation', () => ({ usePathname: () => mocks.path }));
 vi.mock('@/domain', () => import('../../src/domain'));
 vi.mock('@/lib/retry-after', () => import('../../src/lib/retry-after'));
+vi.mock('@/lib/activity-event-source', () => ({
+  listenActivityEvents: (_user: string, _activity: string, listener: typeof mocks.events) => {
+    mocks.events = listener;
+    return () => {
+      if (mocks.events === listener) mocks.events = null;
+    };
+  },
+}));
+vi.mock('@/lib/activity-events', () => import('../../src/lib/activity-events'));
 
 function attempt(answered = false): Attempt {
   return {
@@ -109,13 +119,14 @@ beforeEach(async () => {
   mocks.effects = [];
   mocks.read = () => null;
   cleanups = [];
+  mocks.events = null;
   const browser = Object.assign(new EventTarget(), {
     location: { search: '' },
     setInterval,
     clearInterval,
   });
   vi.stubGlobal('window', browser);
-  vi.stubGlobal('document', { visibilityState: 'visible' });
+  vi.stubGlobal('document', Object.assign(new EventTarget(), { visibilityState: 'visible' }));
   store = await import('../../src/demo/store');
 });
 afterEach(() => {
@@ -126,6 +137,83 @@ afterEach(() => {
 });
 
 describe('adopción de revisión tras una proyección vigente', () => {
+  it('un estudiante conectado lee por aviso y conserva la comprobación de respaldo', async () => {
+    let polls = 0,
+      revision = 'R';
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url.startsWith('/api/sync')) {
+          polls++;
+          return Response.json({
+            revision,
+            serverTime: new Date().toISOString(),
+            nextDeadline: null,
+          });
+        }
+        const value = workspace();
+        value.state.users = [
+          { id: 'student', name: 'Ficticio', role: 'student', email: 'example@example.test' },
+        ];
+        return Response.json(value);
+      }),
+    );
+    await mount();
+    cleanups.splice(0).forEach((cleanup) => cleanup());
+    await mount(); // React vuelve a ejecutar el efecto al conocerse el perfil.
+    mocks.events!.connected(true);
+    await tick(0);
+    expect(polls).toBe(1);
+    await tick(29_000);
+    expect(polls).toBe(1);
+    revision = 'S';
+    mocks.events!.changed();
+    await tick(0);
+    expect(polls).toBe(2);
+    await tick(30_000);
+    expect(polls).toBe(3);
+    mocks.events!.connected(false);
+    await tick(1000);
+    expect(polls).toBe(4);
+  });
+  it('un aviso recibido durante la respuesta propia se procesa al terminar el comando', async () => {
+    let polls = 0;
+    const reply = deferred();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (url === '/api/commands') return reply.promise;
+        if (url.startsWith('/api/sync')) {
+          polls++;
+          return Response.json({
+            revision: 'R',
+            nextDeadline: null,
+            serverTime: new Date().toISOString(),
+          });
+        }
+        const value = workspace();
+        value.state.users = [
+          { id: 'student', name: 'Ficticio', role: 'student', email: 'example@example.test' },
+        ];
+        return Response.json(value);
+      }),
+    );
+    await mount();
+    cleanups.splice(0).forEach((cleanup) => cleanup());
+    await mount();
+    mocks.events!.connected(true);
+    await tick(0);
+    const pending = store
+      .getDemoRepository()
+      .submitAnswer('attempt', 'question', { type: 'single', optionId: 'one' }, 'key', false);
+    mocks.events!.changed();
+    await tick(1000);
+    expect(polls).toBe(1);
+    reply.resolve(Response.json({ result: { attempt: attempt(true), feedback: null } }));
+    await pending;
+    await tick(250);
+    expect(polls).toBe(2);
+  });
   it('conserva el aviso de una operación rechazada al recibir una actualización automática', async () => {
     const message = 'Quedan respuestas pendientes. Confirma su cierre para continuar.';
     vi.stubGlobal(

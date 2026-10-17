@@ -2,6 +2,9 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { usePathname } from 'next/navigation';
 import { retryAfterDeadline } from '@/lib/retry-after';
+import { listenActivityEvents } from '@/lib/activity-event-source';
+import { ACTIVITY_EVENT_HEALTH_MS } from '@/lib/activity-events';
+import type { SyncRevision } from '@/lib/sync-batch';
 import {
   createDemoRepository,
   DEMO_IDS,
@@ -79,6 +82,20 @@ type ImmediateFeedback = {
 };
 const feedbackByAnswer = new Map<string, ImmediateFeedback>();
 const acknowledgedSyncRevisions = new Map<string, { before: string; after: string }>();
+const syncReads = new Map<string, Promise<SyncRevision>>();
+function readActivityRevision(activityId: string) {
+  const key = `${generation}:${activityId}`;
+  let pending = syncReads.get(key);
+  if (!pending) {
+    pending = requestJson<SyncRevision>(
+      `/api/sync?activity=${encodeURIComponent(activityId)}`,
+    ).finally(() => {
+      syncReads.delete(key);
+    });
+    syncReads.set(key, pending);
+  }
+  return pending;
+}
 export function getImmediateFeedback(attemptId: string, questionId: string) {
   return feedbackByAnswer.get(`${attemptId}:${questionId}`);
 }
@@ -447,6 +464,11 @@ export function useDemo() {
   const live = path.startsWith('/aula');
   const activityId = path.startsWith('/aula/actividad/') ? path.split('/')[3] : null;
   const data = useSyncExternalStore(subscribe, getSnapshot, serverSnapshot);
+  const userId = data?.userId || '';
+  const studentEvents =
+    live &&
+    !!activityId &&
+    data?.state?.users.find((user) => user.id === userId)?.role === 'student';
   useEffect(() => {
     void hydrate(live, activityId);
     let failures = 0,
@@ -464,14 +486,24 @@ export function useDemo() {
     let revision: string | null = null,
       syncing = false,
       cancelled = false;
+    let connected = false,
+      hinted = 0,
+      checkedHint = -1,
+      lastRead = 0,
+      nextDeadline = Infinity;
     const synchronize = async () => {
       if (
+        cancelled ||
         document.visibilityState !== 'visible' ||
         syncing ||
         pendingAnswers > 0 ||
         authorizationLost ||
         Date.now() < Math.max(retryAt, automaticRetryAt)
       )
+        return;
+      const now = performance.now();
+      const interval = studentEvents && connected ? ACTIVITY_EVENT_HEALTH_MS : 1000;
+      if (activityId && hinted === checkedHint && now - lastRead < interval && now < nextDeadline)
         return;
       if (!activityId) {
         refresh();
@@ -480,10 +512,9 @@ export function useDemo() {
       syncing = true;
       const currentGeneration = generation;
       const currentProjection = projectionEpoch;
+      const currentHint = hinted;
       try {
-        const value = await requestJson<{ revision: string }>(
-          `/api/sync?activity=${encodeURIComponent(activityId)}`,
-        );
+        const value = await readActivityRevision(activityId);
         if (cancelled || currentGeneration !== generation || currentProjection !== projectionEpoch)
           return;
         const recovering = failures > 0;
@@ -515,6 +546,11 @@ export function useDemo() {
         }
         failures = 0;
         retryAt = 0;
+        checkedHint = currentHint;
+        lastRead = performance.now();
+        nextDeadline = value.nextDeadline
+          ? lastRead + Math.max(100, Date.parse(value.nextDeadline) - Date.parse(value.serverTime))
+          : Infinity;
       } catch (error) {
         if (cancelled || currentGeneration !== generation) return;
         if (error instanceof WorkspaceHttpError && [401, 403].includes(error.status)) {
@@ -537,20 +573,40 @@ export function useDemo() {
         syncing = false;
       }
     };
+    const hint = () => {
+      hinted++;
+      void synchronize();
+    };
+    const releaseEvents =
+      studentEvents && activityId
+        ? listenActivityEvents(userId, activityId, {
+            changed: hint,
+            connected(value) {
+              connected = value;
+              if (value) hint();
+            },
+          })
+        : () => undefined;
+    const visible = () => {
+      if (document.visibilityState === 'visible') hint();
+    };
+    document.addEventListener('visibilitychange', visible);
     const timer = live
       ? window.setInterval(
           () => {
             void synchronize();
           },
-          activityId ? 1000 : 4000,
+          activityId ? (studentEvents ? 250 : 1000) : 4000,
         )
       : null;
     return () => {
       cancelled = true;
+      releaseEvents();
+      document.removeEventListener('visibilitychange', visible);
       window.removeEventListener('storage', refresh);
       window.removeEventListener('online', refresh);
       if (timer) window.clearInterval(timer);
     };
-  }, [live, path, activityId]);
+  }, [live, path, activityId, userId, studentEvents]);
   return data?.live === live && activeActivityScope === activityId ? data : null;
 }
