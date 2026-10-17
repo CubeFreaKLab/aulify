@@ -13,6 +13,10 @@ await db.exec(`create role anon; create role authenticated; create role service_
  create schema storage; create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);
  create table storage.objects(id uuid default gen_random_uuid(),bucket_id text,name text,owner_id text,metadata jsonb);
  alter table storage.objects enable row level security; grant all on storage.objects to authenticated; grant usage on schema storage to authenticated;`);
+// Adaptador transaccional del servicio de avisos: no abre conexiones externas.
+await db.exec(`create schema realtime; create table realtime.test_messages(payload jsonb,event text,topic text,private boolean);
+ create function realtime.send(payload jsonb,event text,topic text,private boolean default true) returns void language sql as $$
+ insert into realtime.test_messages values(payload,event,topic,private); $$;`);
 for(const f of (await fs.readdir('supabase/migrations')).filter(f=>f.endsWith('.sql')).sort()){
  try{await db.exec(await fs.readFile(`supabase/migrations/${f}`,'utf8'));console.log(`APPLIED ${f}`);}catch(e){console.error(`FAILED ${f}: ${e.message}\n${e.where??''}\n${e.query?.slice(Math.max(0,Number(e.position)-180),Number(e.position)+180)??''}`);process.exit(1);}
 }
@@ -22,6 +26,7 @@ await db.exec('set role authenticated');
 const as=async(name)=>{await db.query(`select set_config('request.jwt.claim.sub',$1,false)`,[users[name]]);};
 const command=async(action,...args)=>(await db.query('select public.aulify_command($1,$2) result',[action,{args}])).rows[0].result;
 const assert=(b,msg)=>{if(!b)throw new Error(msg);checks.push({case:msg,result:'passed'});console.log(`PASS ${msg}`);};
+const messages=async()=>{await db.exec('reset role');const rows=(await db.query('select * from realtime.test_messages')).rows;await db.exec('set role authenticated');return rows;};
 const reject=async(fn,label)=>{try{await fn();throw new Error('unexpected-success');}catch(e){if(e.message==='unexpected-success'||['42702','42703','42883','42P01'].includes(e.code))throw e;checks.push({case:label,result:'rejected-as-expected',code:e.code});console.log(`PASS rechazo ${label}: ${e.message.split(':')[0]}`);}};
 if(process.argv.includes('--compile-only'))process.exit(0);
 await as('teacher');
@@ -56,6 +61,7 @@ await reject(()=>command('saveDraft',draft,1),'conflicto de borrador');
 const version=await command('publishResource',draft.id); assert(version.blocks[0].questions.length===8,'ocho tipos publicados en filas');
 const settings={purpose:'practice',pace:'individual',maxGrade:20,weight:2,countsTowardAverage:true,maxAttempts:3,opensAt:new Date(Date.now()-60000).toISOString(),closesAt:new Date(Date.now()+3600000).toISOString(),timeLimitMinutes:null,timeZone:'America/La_Paz',feedback:'hidden',manualCorrection:false,shuffleQuestions:false,shuffleOptions:true,streaks:false,sound:false,ranking:false,teams:false,allowHint:true,allowDouble:true,bonusAffectsGrade:true,reportVisibility:true};
 const activity=await command('createActivity',version.id,subject.id,settings,'Práctica'); assert(activity.id,'crear actividad');
+assert((await messages()).some(m=>m.payload.activityId===activity.id&&!m.payload.studentId&&m.private&&m.event==='changed'),'actividad publicada genera aviso común privado');
 const sync=async()=>(await db.query('select public.aulify_sync($1) result',[activity.id])).rows[0].result;
 const teacherSync=await sync();assert(/^[a-f0-9]{32}$/.test(teacherSync.revision)&&Object.keys(teacherSync).length===3,'sync retorna solo huella, hora y plazo');
 const scoped=async()=>(await db.query('select public.aulify_activity_snapshot($1) result',[activity.id])).rows[0].result;
@@ -83,7 +89,9 @@ await as('teacher');const peerMembership=(await scoped()).state.memberships.find
 await reject(()=>command('submitAnswer',attempt.id,questions[1].id,answers[1],id(),false),'orden de pregunta');
 await command('useHint',attempt.id,questions[0].id);await command('useHint',attempt.id,questions[0].id);
 const beforeResponseSync=await sync();
+const beforeOwnHint=(await messages()).length;
 const key=id(); let response=await command('submitAnswer',attempt.id,questions[0].id,answers[0],key,true);assert(response.feedback===null,'acierto oculto no se filtra');
+assert((await messages()).length===beforeOwnHint,'respuesta propia usa ACK y no genera avisos redundantes');
 assert(beforeResponseSync.revision!==(await sync()).revision,'respuesta confirmada cambia huella');
 await command('submitAnswer',attempt.id,questions[0].id,answers[0],key,true);
 await reject(()=>command('submitAnswer',attempt.id,questions[0].id,{type:'single',optionId:a[1].id},key,true),'idempotencia con contenido distinto');
@@ -165,6 +173,7 @@ await as('student');const second=await command('startAttempt',activity.id);await
 snapshot=(await db.query('select public.aulify_snapshot() result')).rows[0].result;
 const membership=snapshot.state.memberships.find(m=>m.studentId===users.student&&m.status==='approved');
 await command('withdrawMembership',membership.id,'Prueba controlada');
+assert((await messages()).some(m=>m.payload.activityId===activity.id&&m.payload.studentId===users.student&&m.payload.revoked===true),'retiro avisa sólo al estudiante afectado');
 await as('student');await reject(()=>sync(),'retiro revoca sincronización');await as('teacher');
 await as('student');await reject(()=>scoped(),'retiro revoca snapshot de actividad');await as('teacher');
 await command('allowResubmission',task.id,users.student,settings.closesAt,'Verificar revocación de pertenencia');
@@ -188,6 +197,15 @@ await reject(()=>db.query('select public.aulify_maintenance($1,$2)',['tick',{}])
 await reject(()=>db.query('select public.aulify_reserve_upload($1,$2,$3,$4,$5,$6)',[users.student,id(),'x.pdf','submission',1,'application/pdf']),'cliente no reserva usando privilegios de servicio');
 await db.exec('reset role');
 const catalog=(await db.query(`select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='app' and c.relkind='r'`)).rows;
+const hints=(await db.query('select * from realtime.test_messages')).rows;
+assert(hints.length>0&&hints.every(m=>Object.keys(m.payload).every(k=>['activityId','studentId','revoked'].includes(k))&&m.private),'avisos no contienen respuestas, soluciones, notas ni nombres');
+await reject(()=>db.exec("set role authenticated; select app.emit_activity_hint(null,null,false)"),'cliente no emite avisos privilegiados');await db.exec('reset role');
+const beforeRollback=(await db.query('select count(*)::int n from realtime.test_messages')).rows[0].n;
+await db.exec('begin');await db.query('select app.emit_activity_hint($1,null,false)',[activity.id]);await db.exec('rollback');
+assert((await db.query('select count(*)::int n from realtime.test_messages')).rows[0].n===beforeRollback,'transacción revertida no publica aviso');
+await db.exec('drop schema realtime cascade');
+await db.query('select app.emit_activity_hint($1,null,false)',[activity.id]);
+assert(true,'servicio de avisos ausente no impide conservar el comando');
 assert(catalog.length===47&&catalog.every(x=>x.relrowsecurity),'RLS en las 47 tablas propias');
 const publicFunctions=(await db.query(`select p.proname,p.prosecdef,has_function_privilege('anon',p.oid,'EXECUTE') anon,has_function_privilege('authenticated',p.oid,'EXECUTE') authenticated,has_function_privilege('service_role',p.oid,'EXECUTE') service from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'aulify_%'`)).rows;
 const expectedFunctions=['aulify_activity_snapshot','aulify_command','aulify_file','aulify_maintenance','aulify_register_file','aulify_reserve_upload','aulify_service_sync_batch','aulify_snapshot','aulify_sync','aulify_workspace_overview'];
