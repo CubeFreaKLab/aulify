@@ -26,7 +26,7 @@ function request() {
   const encoded = Buffer.from(
     JSON.stringify(session(Math.floor(Date.now() / 1000) - 120)),
   ).toString('base64url');
-  return new NextRequest('https://aulify.example/api/workspace', {
+  return new NextRequest('https://aulify.example/aula', {
     headers: { cookie: `sb-unit-auth-token=base64-${encoded}` },
   });
 }

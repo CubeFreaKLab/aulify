@@ -34,4 +34,8 @@ export async function proxy(request: NextRequest) {
   return response;
 }
 
-export const config = { matcher: ['/aula/:path*', '/api/:path*', '/auth/:path*', '/restablecer'] };
+// Las rutas de sondeo, lectura y comandos renuevan y verifican la sesión dentro
+// de su propio handler. No necesitan una segunda ejecución previa del proxy.
+export const config = {
+  matcher: ['/aula/:path*', '/api/auth', '/api/files/:path*', '/auth/:path*', '/restablecer'],
+};
