@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-18T00:15:37.583Z",
+  "projectRef": "bnqyyumfmyexsqszglab",
+  "migration": "20261018001349_aulify_membership_decision_receipt.sql",
+  "counts": {
+    "INFO": 1,
+    "WARN": 1
+  },
+  "notices": [
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ],
+  "limitations": [
+    "El asesor no sustituye las pruebas de autorización.",
+    "Los avisos preexistentes no se consideran corregidos por esta migración."
+  ]
+}

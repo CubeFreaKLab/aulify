@@ -1,0 +1,49 @@
+{
+  "startedAt": "2026-10-18T00:10:02.192Z",
+  "revision": "dc7cf0ccaea032d7ecb9a8c345c2168e34156f31",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "7c7721cc4d73dfefa9965f04d06cbc992bb866278a41500fe89c9ba5dc411f23"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AC-04 y AC-05 · solicitud repetida y renovación sin pérdida de acceso",
+      "checks": [
+        {
+          "label": "Repetir la solicitud recupera la misma fila",
+          "result": "passed"
+        },
+        {
+          "label": "Existe una sola solicitud para el estudiante",
+          "result": "passed"
+        },
+        {
+          "label": "Continúa pendiente de aprobación",
+          "result": "passed"
+        },
+        {
+          "label": "Pendiente no recibe actividades privadas",
+          "result": "passed"
+        }
+      ],
+      "status": "failed",
+      "failure": {
+        "code": "ERR_ASSERTION",
+        "message": "Pendiente no puede abrir la actividad por su identificador"
+      }
+    }
+  ],
+  "maximumRuntimeMs": 300000,
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-18T00:10:13.374Z",
+  "status": "failed"
+}

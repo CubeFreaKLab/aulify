@@ -1,0 +1,54 @@
+{
+  "startedAt": "2026-10-18T00:11:43.126Z",
+  "revision": "dc7cf0ccaea032d7ecb9a8c345c2168e34156f31",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "2918aff234cf3fea2c0a9647aeb7c1dd20092ebe81ef35c1111ea8639917f070"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AC-04 y AC-05 · solicitud repetida y renovación sin pérdida de acceso",
+      "checks": [
+        {
+          "label": "Repetir la solicitud recupera la misma fila",
+          "result": "passed"
+        },
+        {
+          "label": "Existe una sola solicitud para el estudiante",
+          "result": "passed"
+        },
+        {
+          "label": "Continúa pendiente de aprobación",
+          "result": "passed"
+        },
+        {
+          "label": "Pendiente no recibe actividades privadas",
+          "result": "passed"
+        },
+        {
+          "label": "Pendiente no puede abrir la actividad por su identificador",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        }
+      ],
+      "status": "failed",
+      "failure": {
+        "code": "ERR_ASSERTION",
+        "message": "Aprobación repetida conserva la misma membresía\n+ actual - expected\n\n+ '82a260b4-29c7-4226-bc59-ac5490dbced5'\n- '9e3ca625-dc08-4fbb-a4a9-74e43a4e7251'\n"
+      }
+    }
+  ],
+  "maximumRuntimeMs": 300000,
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-18T00:11:55.773Z",
+  "status": "failed"
+}

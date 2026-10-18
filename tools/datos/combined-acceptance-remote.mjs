@@ -21,13 +21,18 @@ assert.equal(env.NEXT_PUBLIC_SUPABASE_URL, 'https://bnqyyumfmyexsqszglab.supabas
 const client = () =>
   createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, {
     auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
-    global: { fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(20_000) }) },
+    global: { fetch: (url, init) => fetch(url, { ...init, signal: cleaning ? AbortSignal.timeout(20_000) : AbortSignal.any([AbortSignal.timeout(20_000), deadline.signal]) }) },
   });
 const clients = {};
 const only = process.argv
   .find((arg) => arg.startsWith('--only='))
   ?.slice(7)
   .split(',');
+const deadline = new AbortController();
+let cleaning = false;
+const maximumRuntimeMs = only ? 5 * 60_000 : 10 * 60_000;
+const deadlineTimer = setTimeout(() => deadline.abort(new Error('Se agotó el tiempo del lote de aceptación.')), maximumRuntimeMs);
+deadlineTimer.unref();
 const subjects = [];
 const report = {
   startedAt: new Date().toISOString(),
@@ -41,6 +46,7 @@ const report = {
   environment:
     'Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real',
   cases: [],
+  maximumRuntimeMs,
   limitations: [
     'No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.',
     'Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo.',
@@ -166,6 +172,99 @@ const questions = () =>
   }));
 try {
   for (const role of ['teacher', 'teacherOther', 'student', 'studentOther']) await login(role);
+  await scenario('AC-04 y AC-05 · solicitud repetida y renovación sin pérdida de acceso', async () => {
+    const s = await subject(false);
+    const first = await cmd('student', 'requestMembership', s.code);
+    const repeated = await cmd('student', 'requestMembership', s.code);
+    equal(repeated.id, first.id, 'Repetir la solicitud recupera la misma fila');
+    const pending = (await snapshot('teacher')).state.memberships.filter(m => m.subjectId === s.id && m.studentId === accounts.users.student.id);
+    equal(pending.length, 1, 'Existe una sola solicitud para el estudiante');
+    equal(pending[0].status, 'pending', 'Continúa pendiente de aprobación');
+    const privateActivity = await activity(s, questions());
+    const pendingView = await snapshot('student');
+    check(!pendingView.state.activities.some(row => row.id === privateActivity.id), 'Pendiente no recibe actividades privadas');
+    await reject(() => rpc('student', 'aulify_activity_snapshot', { p_activity_id: privateActivity.id }), /ACTIVITY_UNAVAILABLE/, 'Pendiente no puede abrir la actividad por su identificador');
+    const approved = await cmd('teacher', 'decideMembership', first.id, 'approved');
+    const again = await cmd('teacher', 'decideMembership', first.id, 'approved');
+    equal(again.id, approved.id, 'Aprobación repetida conserva la misma membresía');
+    check((await rpc('student', 'aulify_activity_snapshot', { p_activity_id: privateActivity.id })).state.activities.some(row => row.id === privateActivity.id), 'Solo después de aprobar se puede abrir la actividad');
+    const second = await cmd('studentOther', 'requestMembership', s.code);
+    const renewed = await cmd('teacher', 'renewCode', s.id);
+    check(renewed.code !== s.code, 'La invitación cambia al renovarse');
+    await reject(() => cmd('studentOther', 'requestMembership', s.code), /CODE_INVALID/, 'La invitación anterior deja de admitir solicitudes');
+    check((await snapshot('student')).state.subjects.some(row => row.id === s.id), 'Estudiante aprobado conserva acceso');
+    const memberships = (await snapshot('teacher')).state.memberships.filter(m => m.subjectId === s.id);
+    equal(memberships.filter(m => m.studentId === accounts.users.student.id).length, 1, 'Renovar no duplica la membresía aprobada');
+    check(memberships.some(m => m.id === second.id && m.status === 'pending'), 'Solicitud anterior de otro estudiante sigue identificable');
+    await cmd('teacher', 'decideMembership', second.id, 'approved');
+    check((await snapshot('studentOther')).state.subjects.some(row => row.id === s.id), 'Solicitud conservada puede aprobarse después de renovar');
+  });
+  await scenario('AC-10 · versión respondida y nota permanecen al publicar otra versión', async () => {
+    const s = await subject();
+    const question = { id: id(), type: 'true-false', prompt: 'La planta utiliza luz.', points: 2, correct: true };
+    const draft = { id: id(), title: 'Versiones independientes', kind: 'quiz', revision: 1,
+      blocks: [{ id: id(), type: 'quiz', questions: [question] }] };
+    const saved = await cmd('teacher', 'saveDraft', draft, 0);
+    const firstVersion = await cmd('teacher', 'publishResource', draft.id);
+    const a = await cmd('teacher', 'createActivity', firstVersion.id, s.id, { ...settings, maxGrade: 20 }, 'Primera versión');
+    const attempt = await cmd('student', 'startAttempt', a.id);
+    await cmd('student', 'submitAnswer', attempt.id, question.id, { type: 'true-false', value: true }, id(), false);
+    await cmd('teacher', 'publishGrade', a.id, accounts.users.student.id);
+    const edited = { ...saved, revision: saved.revision + 1,
+      blocks: [{ ...draft.blocks[0], questions: [{ ...question, points: 7, correct: false }] }] };
+    await cmd('teacher', 'saveDraft', edited, saved.revision);
+    const secondVersion = await cmd('teacher', 'publishResource', draft.id);
+    check(firstVersion.id !== secondVersion.id, 'Publicación nueva tiene identificador propio');
+    const teacherView = await snapshot('teacher');
+    const oldQuestion = teacherView.state.versions.find(v => v.id === firstVersion.id).blocks[0].questions[0];
+    const newQuestion = teacherView.state.versions.find(v => v.id === secondVersion.id).blocks[0].questions[0];
+    equal({ correct: oldQuestion.correct, points: oldQuestion.points }, { correct: true, points: 2 }, 'V1 conserva solución y valor originales');
+    equal({ correct: newQuestion.correct, points: newQuestion.points }, { correct: false, points: 7 }, 'V2 conserva sus nuevos valores');
+    equal(teacherView.state.attempts.find(row => row.id === attempt.id).versionId, firstVersion.id, 'Intento previo sigue asociado a V1');
+    equal(teacherView.state.activities.find(row => row.id === a.id).versionId, firstVersion.id, 'Actividad previa sigue asociada a V1');
+    const studentView = await snapshot('student');
+    const oldResult = studentView.studentResults[s.id].find(row => row.activityId === a.id);
+    equal(oldResult.grade, 20, 'La nota publicada permanece en 20 de 20');
+    const b = await cmd('teacher', 'createActivity', secondVersion.id, s.id, { ...settings, maxGrade: 70 }, 'Segunda versión');
+    const newAttempt = await cmd('student', 'startAttempt', b.id);
+    await cmd('student', 'submitAnswer', newAttempt.id, question.id, { type: 'true-false', value: false }, id(), false);
+    await cmd('teacher', 'publishGrade', b.id, accounts.users.student.id);
+    const results = (await snapshot('student')).studentResults[s.id];
+    equal(results.find(row => row.activityId === a.id).grade, 20, 'Responder V2 no altera la nota de V1');
+    equal(results.find(row => row.activityId === b.id).grade, 70, 'La nueva actividad corrige con la solución de V2');
+  });
+  await scenario('AC-11 · inicio y actualización concurrentes conservan reglas íntegras', async () => {
+    const s = await subject(), qs = questions().slice(0, 1);
+    const a = await activity(s, qs, { maxGrade: 20 });
+    const changed = { ...a.settings, maxGrade: 40, weight: 2, maxAttempts: 2 };
+    const [updated, started] = await Promise.allSettled([
+      cmd('teacher', 'updateActivity', a.id, changed),
+      cmd('student', 'startAttempt', a.id),
+    ]);
+    equal(started.status, 'fulfilled', 'El primer intento inicia correctamente');
+    if (updated.status === 'rejected') check(/ACTIVITY_LOCKED/.test(updated.reason.message), 'Si inicia primero, el cambio se rechaza por reglas bloqueadas');
+    else equal(updated.status, 'fulfilled', 'La actualización anterior al inicio puede completarse');
+    const after = (await snapshot('teacher')).state.activities.find(row => row.id === a.id);
+    equal(after.settings, updated.status === 'fulfilled' ? changed : a.settings, 'No se mezclan campos de las dos configuraciones');
+    equal(started.value.versionId, a.versionId, 'El intento conserva una versión completa');
+    await cmd('student', 'submitAnswer', started.value.id, qs[0].id, { type: 'true-false', value: true }, id(), false);
+    await cmd('teacher', 'publishGrade', a.id, accounts.users.student.id);
+    const result = (await snapshot('student')).studentResults[s.id].find(row => row.activityId === a.id);
+    equal(result.grade, after.settings.maxGrade, 'La nota utiliza la configuración resultante íntegra');
+    equal(result.maxGrade, after.settings.maxGrade, 'El máximo publicado coincide con la configuración bloqueada');
+    active.observedOrdering = updated.status === 'fulfilled' ? 'update-before-start' : 'start-before-update';
+    active.limitation = 'Una carrera real; no demuestra todas las intercalaciones posibles.';
+  });
+  await scenario('AC-36 · cada regla académica queda bloqueada después del inicio', async () => {
+    const s = await subject(), a = await activity(s, questions(), { maxGrade: 20 });
+    await cmd('student', 'startAttempt', a.id);
+    for (const delta of [{ maxGrade: 40 }, { weight: 2 }, { maxAttempts: 2 }, { feedback: 'hidden' },
+      { countsTowardAverage: false }, { purpose: 'exam' }, { shuffleQuestions: true }])
+      await reject(() => cmd('teacher', 'updateActivity', a.id, { ...a.settings, ...delta }), /ACTIVITY_LOCKED/, `Se conserva ${Object.keys(delta)[0]} después del inicio`);
+    const after = (await snapshot('teacher')).state.activities.find(row => row.id === a.id);
+    equal(after.settings, a.settings, 'Todos los valores originales permanecen intactos');
+    equal(after.versionId, a.versionId, 'La versión de la actividad permanece intacta');
+  });
   await scenario('AP-08 · mezcla y reconexión JWT', async () => {
     const s = await subject(),
       group = id();
@@ -490,6 +589,8 @@ try {
   report.setupFailure = { code: error.code || error.name, message: error.message.slice(0, 500) };
   process.exitCode = 1;
 } finally {
+  clearTimeout(deadlineTimer);
+  cleaning = true;
   report.cleanup = [];
   for (const subjectId of subjects) {
     try {
@@ -502,7 +603,8 @@ try {
   for (const c of Object.values(clients)) await c.auth.signOut({ scope: 'local' });
   report.completedAt = new Date().toISOString();
   report.status =
-    report.setupFailure || report.cases.some((c) => c.status !== 'passed') ? 'failed' : 'passed';
+    report.setupFailure || !report.cases.length || report.cases.some((c) => c.status !== 'passed') || report.cleanup.some(c => c.result !== 'archived') ? 'failed' : 'passed';
+  if (report.status === 'failed') process.exitCode = 1;
   const reportName = only
     ? `aceptacion-remota-${only.join('-').toLowerCase()}.json`
     : 'aceptacion-combinada-remota.json';

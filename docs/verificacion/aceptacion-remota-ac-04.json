@@ -1,0 +1,83 @@
+{
+  "startedAt": "2026-10-18T00:14:54.059Z",
+  "revision": "dc7cf0ccaea032d7ecb9a8c345c2168e34156f31",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "2918aff234cf3fea2c0a9647aeb7c1dd20092ebe81ef35c1111ea8639917f070"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AC-04 y AC-05 · solicitud repetida y renovación sin pérdida de acceso",
+      "checks": [
+        {
+          "label": "Repetir la solicitud recupera la misma fila",
+          "result": "passed"
+        },
+        {
+          "label": "Existe una sola solicitud para el estudiante",
+          "result": "passed"
+        },
+        {
+          "label": "Continúa pendiente de aprobación",
+          "result": "passed"
+        },
+        {
+          "label": "Pendiente no recibe actividades privadas",
+          "result": "passed"
+        },
+        {
+          "label": "Pendiente no puede abrir la actividad por su identificador",
+          "result": "rejected-as-expected",
+          "code": "42501"
+        },
+        {
+          "label": "Aprobación repetida conserva la misma membresía",
+          "result": "passed"
+        },
+        {
+          "label": "Solo después de aprobar se puede abrir la actividad",
+          "result": "passed"
+        },
+        {
+          "label": "La invitación cambia al renovarse",
+          "result": "passed"
+        },
+        {
+          "label": "La invitación anterior deja de admitir solicitudes",
+          "result": "rejected-as-expected",
+          "code": "CODE_INVALID"
+        },
+        {
+          "label": "Estudiante aprobado conserva acceso",
+          "result": "passed"
+        },
+        {
+          "label": "Renovar no duplica la membresía aprobada",
+          "result": "passed"
+        },
+        {
+          "label": "Solicitud anterior de otro estudiante sigue identificable",
+          "result": "passed"
+        },
+        {
+          "label": "Solicitud conservada puede aprobarse después de renovar",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "maximumRuntimeMs": 300000,
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-18T00:15:10.952Z",
+  "status": "passed"
+}

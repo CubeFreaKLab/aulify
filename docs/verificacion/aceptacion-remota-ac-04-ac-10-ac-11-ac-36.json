@@ -1,0 +1,173 @@
+{
+  "startedAt": "2026-10-18T00:08:28.658Z",
+  "revision": "dc7cf0ccaea032d7ecb9a8c345c2168e34156f31",
+  "script": {
+    "path": "tools/datos/combined-acceptance-remote.mjs",
+    "sha256": "e4b5cec08aed901677a9036175ba19daa014e33febd02af509137946750c5b6b"
+  },
+  "environment": "Supabase remoto; cuatro cuentas ficticias, sesiones JWT independientes y reconexión real",
+  "cases": [
+    {
+      "name": "AC-04 y AC-05 · solicitud repetida y renovación sin pérdida de acceso",
+      "checks": [
+        {
+          "label": "Repetir la solicitud recupera la misma fila",
+          "result": "passed"
+        },
+        {
+          "label": "Existe una sola solicitud para el estudiante",
+          "result": "passed"
+        },
+        {
+          "label": "Continúa pendiente de aprobación",
+          "result": "passed"
+        }
+      ],
+      "status": "failed",
+      "failure": {
+        "code": "ERR_ASSERTION",
+        "message": "Pendiente no accede a la materia"
+      }
+    },
+    {
+      "name": "AC-10 · versión respondida y nota permanecen al publicar otra versión",
+      "checks": [
+        {
+          "label": "Publicación nueva tiene identificador propio",
+          "result": "passed"
+        },
+        {
+          "label": "V1 conserva solución y valor originales",
+          "result": "passed"
+        },
+        {
+          "label": "V2 conserva sus nuevos valores",
+          "result": "passed"
+        },
+        {
+          "label": "Intento previo sigue asociado a V1",
+          "result": "passed"
+        },
+        {
+          "label": "Actividad previa sigue asociada a V1",
+          "result": "passed"
+        },
+        {
+          "label": "La nota publicada permanece en 20 de 20",
+          "result": "passed"
+        },
+        {
+          "label": "Responder V2 no altera la nota de V1",
+          "result": "passed"
+        },
+        {
+          "label": "La nueva actividad corrige con la solución de V2",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "AC-11 · inicio y actualización concurrentes conservan reglas íntegras",
+      "checks": [
+        {
+          "label": "El primer intento inicia correctamente",
+          "result": "passed"
+        },
+        {
+          "label": "La actualización anterior al inicio puede completarse",
+          "result": "passed"
+        },
+        {
+          "label": "No se mezclan campos de las dos configuraciones",
+          "result": "passed"
+        },
+        {
+          "label": "El intento conserva una versión completa",
+          "result": "passed"
+        },
+        {
+          "label": "La nota utiliza la configuración resultante íntegra",
+          "result": "passed"
+        },
+        {
+          "label": "El máximo publicado coincide con la configuración bloqueada",
+          "result": "passed"
+        }
+      ],
+      "observedOrdering": "update-before-start",
+      "limitation": "Una carrera real; no demuestra todas las intercalaciones posibles.",
+      "status": "passed"
+    },
+    {
+      "name": "AC-36 · cada regla académica queda bloqueada después del inicio",
+      "checks": [
+        {
+          "label": "Se conserva maxGrade después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Se conserva weight después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Se conserva maxAttempts después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Se conserva feedback después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Se conserva countsTowardAverage después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Se conserva purpose después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Se conserva shuffleQuestions después del inicio",
+          "result": "rejected-as-expected",
+          "code": "P0001"
+        },
+        {
+          "label": "Todos los valores originales permanecen intactos",
+          "result": "passed"
+        },
+        {
+          "label": "La versión de la actividad permanece intacta",
+          "result": "passed"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "maximumRuntimeMs": 300000,
+  "limitations": [
+    "No evalúa capacidad, correo, presentación visual ni confirmaciones de interfaz.",
+    "Las materias creadas se archivan al terminar; no se purgan datos ni se altera el historial previo."
+  ],
+  "cleanup": [
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    },
+    {
+      "result": "archived"
+    }
+  ],
+  "completedAt": "2026-10-18T00:08:59.236Z",
+  "status": "failed"
+}

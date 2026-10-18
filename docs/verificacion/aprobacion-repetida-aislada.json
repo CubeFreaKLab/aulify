@@ -1,0 +1,92 @@
+{
+  "executedAt": "2026-10-18T00:14:27.605Z",
+  "environment": "PostgreSQL aislado PGlite",
+  "migrationFiles": [
+    "20260928064804_aulify_relational_core.sql",
+    "20260928064810_aulify_commands.sql",
+    "20260928064815_aulify_projections_storage.sql",
+    "20260928064819_aulify_retention_hardening.sql",
+    "20260928064824_aulify_join_rate_limit.sql",
+    "20260928064828_aulify_upload_reservations.sql",
+    "20260928070919_aulify_resubmission_projection.sql",
+    "20260928072137_aulify_activity_sync_digest.sql",
+    "20260928074757_aulify_snapshot_authorized_sets.sql",
+    "20260928080625_aulify_guided_answer_close_lock.sql",
+    "20260928083328_aulify_scoped_activity_sync.sql",
+    "20260928083904_aulify_private_lock_revision.sql",
+    "20260928123500_aulify_independent_matching_answers.sql",
+    "20260928130653_aulify_teacher_attempt_projection.sql",
+    "20260929221908_aulify_deferred_ranking_publication.sql",
+    "20260929224538_aulify_participant_teacher_revision.sql",
+    "20260929231531_aulify_editor_link_validation.sql",
+    "20260930000631_aulify_teacher_review_projection.sql",
+    "20260930005228_aulify_sync_context_reads.sql",
+    "20260930011205_aulify_student_activity_projection.sql",
+    "20260930024809_aulify_visibility_effective_closure.sql",
+    "20260930040716_aulify_workspace_overview.sql",
+    "20260930051014_aulify_completion_grade_existence.sql",
+    "20261002215000_aulify_stable_group_shuffle.sql",
+    "20261002221000_aulify_scoped_purge_retry.sql",
+    "20261003142000_aulify_answer_ack_revision.sql",
+    "20261003144500_aulify_ack_projection_guard.sql",
+    "20261003153300_aulify_ack_authorization_order.sql",
+    "20261003154500_aulify_service_sync_batch.sql",
+    "20261017172026_aulify_set_based_service_sync.sql",
+    "20261017182121_aulify_reuse_rpc_query_plans.sql",
+    "20261017190116_aulify_set_based_workspace_history.sql",
+    "20261017192653_aulify_workspace_parameter_plans.sql",
+    "20261017203437_aulify_private_activity_hints.sql",
+    "20261017204006_aulify_coalesced_guided_hints.sql",
+    "20261017224614_aulify_projection_sync_seed.sql",
+    "20261018001349_aulify_membership_decision_receipt.sql"
+  ],
+  "checks": [
+    {
+      "case": "crear materia",
+      "result": "passed"
+    },
+    {
+      "case": "snapshot docente",
+      "result": "passed"
+    },
+    {
+      "case": "solicitar sin acceso",
+      "result": "passed"
+    },
+    {
+      "case": "estudiante no archiva",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "docente ajeno no aprueba",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "repetir aprobación devuelve la misma membresía",
+      "result": "passed"
+    },
+    {
+      "case": "reintento conserva una membresía y un evento de aprobación",
+      "result": "passed"
+    },
+    {
+      "case": "docente ajeno no reproduce aprobación resuelta",
+      "result": "rejected-as-expected",
+      "code": "42501"
+    },
+    {
+      "case": "reintento antiguo conserva identificador después de retirar",
+      "result": "passed"
+    },
+    {
+      "case": "reintentar una aprobación antigua no readmite al estudiante",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "No comprueba Auth, correo ni despliegue remoto.",
+    "Datos ficticios; ninguna modificación remota en esta ejecución."
+  ]
+}

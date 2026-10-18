@@ -39,7 +39,26 @@ await as('student');
 const request=await command('requestMembership',code); assert(request.status==='pending','solicitar sin acceso');
 await reject(()=>command('archiveSubject',subject.id),'estudiante no archiva');
 await as('other');await reject(()=>command('decideMembership',request.id,'approved'),'docente ajeno no aprueba');
-await as('teacher');await command('decideMembership',request.id,'approved');
+await as('teacher');
+const approvedMembership=await command('decideMembership',request.id,'approved');
+const repeatedDecision=await command('decideMembership',request.id,'approved');
+assert(approvedMembership.id===repeatedDecision.id&&repeatedDecision.status==='approved','repetir aprobación devuelve la misma membresía');
+if(process.argv.includes('--membership-only')) {
+ await db.exec('reset role');
+ let count=(await db.query("select (select count(*) from app.memberships where subject_id=$1) memberships,(select count(*) from app.membership_events where membership_id=$2 and event_type='approved') approvals",[subject.id,approvedMembership.id])).rows[0];
+ assert(Number(count.memberships)===1&&Number(count.approvals)===1,'reintento conserva una membresía y un evento de aprobación');
+ await db.exec('set role authenticated');await as('other');
+ await reject(()=>command('decideMembership',request.id,'approved'),'docente ajeno no reproduce aprobación resuelta');
+ await as('teacher');await command('withdrawMembership',approvedMembership.id,'Retiro ficticio de verificación');
+ const oldReceipt=await command('decideMembership',request.id,'approved');
+ assert(oldReceipt.id===approvedMembership.id,'reintento antiguo conserva identificador después de retirar');
+ await db.exec('reset role');
+ const withdrawn=(await db.query('select status from app.memberships where id=$1',[approvedMembership.id])).rows[0];
+ count=(await db.query("select count(*) approvals from app.membership_events where membership_id=$1 and event_type='approved'",[approvedMembership.id])).rows[0];
+ assert(withdrawn.status==='withdrawn'&&Number(count.approvals)===1,'reintentar una aprobación antigua no readmite al estudiante');
+ await fs.writeFile('docs/verificacion/aprobacion-repetida-aislada.json',JSON.stringify({executedAt:new Date().toISOString(),environment:'PostgreSQL aislado PGlite',migrationFiles:(await fs.readdir('supabase/migrations')).filter(f=>f.endsWith('.sql')).sort(),checks,limitations:['No comprueba Auth, correo ni despliegue remoto.','Datos ficticios; ninguna modificación remota en esta ejecución.']},null,2)+'\n');
+ console.log(`FINISHED ${checks.length} checks de aprobación y permisos`);await db.close();process.exit(0);
+}
 const id=()=>crypto.randomUUID();
 const opts=()=>[{id:id(),text:'A'},{id:id(),text:'B'}];
 const a=opts(),b=opts(),l=opts(),r=opts(),o=opts(),g=opts(),blank=id(),textBlank=id();
