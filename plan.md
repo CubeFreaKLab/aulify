@@ -87,6 +87,8 @@ Playwright y axe comprueban vistas concretas. Las pruebas con lector de pantalla
 
 ## 8. Verificación y liberación
 
+La revisión del 17 de octubre fija la carga de la versión en una clase de treinta estudiantes y su docente, en ambos modos. El [perfil classroom-30-v1](docs/calidad/escenario-clase-30.md) mantiene los límites de tiempos, errores e integridad, acota duración y consumo y todavía no está aprobado. El objetivo histórico de 200 permanece no validado; no se repetirán sus ensayos largos como parte de este cierre.
+
 Las [pruebas aisladas](docs/verificacion/datos-aislados.md), [remotas](docs/verificacion/datos-remotos.md) y [web](docs/verificacion/integracion-web.md) identifican entorno, casos y resultados. Los 76 escenarios AC/AP se relacionan en la [trazabilidad](docs/calidad/trazabilidad.md); sus criterios completos siguen vigentes.
 
 El CI público usa Node.js 24, dependencias fijadas y acciones fijadas por commit, con permisos de lectura. Ejecuta SQL en PGlite y recorridos públicos sin credenciales de usuarios. Los ensayos autenticados se habilitan expresamente en un entorno privado, con cuatro cuentas ficticias y sin trazas o vídeos del acceso.

@@ -37,12 +37,14 @@ Asistencia, matrícula institucional, portal familiar, mensajería, boletines of
 | RF-17 | Ayuda inicial y contextual por rol. | Opcional, reabrible, accesible y sin consumir intentos ni alterar datos. |
 | RNF-01 | Adaptación a celular y computadora. | Recorridos completos, reflujo y controles operables en ambos. |
 | RNF-02 | Usabilidad y accesibilidad evaluables. | Teclado, foco, semántica, contraste, tiempo y tareas de uso con evidencia. |
-| RNF-03 | Meta de cuatro actividades de 50 estudiantes, más sus cuatro docentes. | Prueba reproducible con tiempos, errores, persistencia y consumo. |
+| RNF-03 | Meta de una actividad con 30 estudiantes y su docente, en avance individual y guiado. | Prueba acotada y reproducible con tiempos, errores, persistencia y consumo; capacidad no aprobada hasta medirla. |
 | RNF-04 | Inicio con servicios gratuitos. | Planes, cuotas y elegibilidad comprobados; sin activar cobros. |
 | RNF-05 | Integridad, privacidad y autorización. | Rechazo de accesos ajenos y protección de soluciones, archivos y credenciales. |
 | RNF-06 | Desarrollo y operación reproducibles. | Migraciones, pruebas, CI, documentación y recuperación asociadas a una versión. |
 
 Los umbrales, métodos y criterios de liberación están en el [plan de calidad](docs/calidad/plan-de-calidad.md). Ninguno se considera alcanzado hasta medirlo.
+
+Revisión de alcance del 17 de octubre: la validación vigente de RNF-03 utiliza el [perfil de una clase de 30 estudiantes](docs/calidad/escenario-clase-30.md). La meta histórica de cuatro clases y 200 estudiantes no se validó y conserva sus resultados; no se considera aprobada por reducir el escenario.
 
 ## 3. Cuentas, materias y pertenencia
 

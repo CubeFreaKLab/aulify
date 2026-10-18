@@ -1,6 +1,12 @@
 # Estado del desarrollo
 
-Actualizado el 17 de octubre de 2026. La recuperación de datos, cuentas, archivos y aplicación está comprobada en una copia aislada. Aulify funciona con una aplicación compilada local y Supabase; la capacidad de 200 estudiantes, el correo y la liberación de producción siguen pendientes.
+Actualizado el 17 de octubre de 2026. La recuperación de datos, cuentas, archivos y aplicación está comprobada en una copia aislada. Aulify funciona con una aplicación compilada local y Supabase. La validación vigente se acota a una clase de treinta estudiantes; su capacidad, el correo y la liberación de producción siguen pendientes. El objetivo histórico de 200 estudiantes no se aprobó.
+
+## Cierre de la clase de treinta estudiantes
+
+El [perfil classroom-30-v1](calidad/escenario-clase-30.md) prepara ambos modos con un límite global de doce minutos. Sus comprobaciones aisladas verifican selección de la cohorte, conservación de las sesiones ajenas y rechazo de aprobaciones incompletas. Se identificaron un docente, treinta estudiantes y sus 31 sesiones existentes sin abrir conexiones. Esto es preparación, no una medición aprobada.
+
+El [CI 39076915117](https://github.com/CubeFreaKLab/aulify/actions/runs/39076915117) aprobó la corrección de proyección inicial sobre `d9754d7`. La capacidad del nuevo cliente sigue por comprobar; no se repiten ensayos largos de 200. Los resultados anteriores se conservan debajo como antecedentes de sus revisiones.
 
 ## Versión y servicios
 

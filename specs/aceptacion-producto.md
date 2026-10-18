@@ -38,7 +38,7 @@ Catálogo de criterios de aceptación, versión 1.0. El estado ejecutado y sus l
 | AP-32 | IN-05 | Archivo referenciado por biblioteca y entrega de materia vencida. | No eliminar objeto compartido autorizado; referencias exclusivas de materia sí se eliminan. |
 | AP-33 | RE-06 | Imagen sin alternativa requerida, enlace no seguro o contenido con script. | Validación y orientación; no ejecutar código; enlace no seguro rechazado. |
 | AP-34 | RF-17 | Repetir ayuda desde otro dispositivo; versión nueva del tutorial; intento en curso. | Preferencia de cuenta coherente; nueva invitación discreta; sin guía superpuesta durante intento. |
-| AP-35 | RNF-03, RNF-04 | Ejecutar escenario de carga individual y guiado del plan de calidad. | Medir Q-04, Q-06 y Q-09; no declarar capacidad si incumple tiempos, integridad o cuotas. |
+| AP-35 | RNF-03, RNF-04 | Ejecutar classroom-30-v1: un docente y treinta estudiantes, avance individual y guiado, según el plan de calidad. | Medir Q-04, Q-06 y Q-09 con respuestas y notas completas; no declarar capacidad si incumple tiempos, integridad o cuotas. No aprueba el escenario histórico de 200. |
 | AP-36 | RNF-06 | Reconstruir entorno de prueba, restaurar respaldo ficticio y comprobar despliegue. | Misma estructura/versión, datos y permisos esperados; informe real de recuperación y prueba posterior. |
 | AP-37 | CU-06 | Exceder diez solicitudes de código en diez minutos y renovar código mientras hay solicitudes pendientes. | Rechazo temporal sin filtrar datos; renovación no borra pendientes existentes. |
 | AP-38 | RNF-01, RNF-02 | Ejecutar matriz de dispositivos, teclado, lector de pantalla y tareas de uso. | Registrar resultados Q-02, Q-03 y Q-07 por separado; emulación no presentada como dispositivo físico. |

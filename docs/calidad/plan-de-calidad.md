@@ -1,6 +1,6 @@
 # Plan de calidad y evidencia
 
-Versión 1.0 · criterios del 26 de septiembre de 2026; estado actualizado el 28 de septiembre. Existen pruebas aisladas, remotas y de navegador ejecutadas. Carga, correo, operación y cobertura completa se cierran con sus resultados específicos; los umbrales siguientes se mantienen.
+Versión 1.1 · criterios iniciales del 26 de septiembre de 2026; alcance de carga revisado el 17 de octubre. Existen pruebas aisladas, remotas y de navegador ejecutadas. Carga, correo, operación y cobertura completa se cierran con sus resultados específicos. Se mantienen los umbrales de tiempos, errores e integridad; el escenario vigente es una clase de treinta estudiantes.
 
 ## Propósito
 
@@ -22,7 +22,7 @@ ISO/IEC 25010:2023 se usa como referencia para organizar atributos pertinentes, 
 | Q-08 | Operación | Instalación y migraciones reproducibles; recuperación de datos ficticios comprobada; purga activa en un máximo de 24 h desde el vencimiento de 30 días. | Registro de despliegue, respaldo/recuperación y eliminación. |
 | Q-09 | Costos | Funcionamiento del escenario sin activar planes de pago y con consumo dentro de cuotas medidas. | Configuración de servicios y registro de consumo. |
 
-Q-06 y Q-09 son metas simultáneas: no aprobar capacidad si para alcanzarla se exceden cuotas. Si no se cumplen, registrar limitación y cambio de diseño; no cambiar umbrales después de medir para declarar un éxito. La entrega 001 demuestra el recorrido, pero no cierra por sí sola la meta de concurrencia del producto completo.
+Q-06 y Q-09 son metas simultáneas: no aprobar capacidad si para alcanzarla se exceden cuotas. Si no se cumplen, registrar limitación y cambio de diseño; no cambiar umbrales después de medir para declarar un éxito. Se aplican al escenario vigente fijado antes de ejecutarlo. Reducir el alcance no aprueba la meta histórica de 200 estudiantes, cuyos fallos se conservan.
 
 Q-03 toma 44 × 44 píxeles CSS como objetivo de diseño para controles táctiles; verificar el criterio de tamaño/espaciado aplicable en cada caso. Documentar por separado defectos de contenido creado por el docente y los mecanismos del editor para prevenirlos, como texto alternativo e instrucciones.
 
@@ -36,7 +36,7 @@ Q-03 toma 44 × 44 píxeles CSS como objetivo de diseño para controles táctile
 | Recorridos | Acceso, aprobación, autoría, participación, corrección y publicación. | Playwright. |
 | Accesibilidad | Errores detectables automáticamente, teclado, foco, lectura, zoom, táctil, tiempo y movimiento. | axe con Playwright y revisión manual. |
 | Continuidad | Fallo antes/después de persistir, dos pestañas, vencimiento y desconexión docente/estudiante. | Fallos simulados y registros de servidor. |
-| Carga | Cuatro actividades simultáneas y sus docentes; presión sobre operaciones relevantes. | Herramienta a seleccionar al definir el transporte. |
+| Carga | Una clase con treinta estudiantes y un docente; avance individual y guiado. | Perfil HTTP classroom-30-v1 con auditoría de respuestas y notas. |
 | Uso con personas | Comprender instrucciones, publicar, participar y consultar notas. | Observación de tareas sin encuesta obligatoria. Si no se realiza, queda pendiente explícitamente. |
 | Liberación | Migraciones, pruebas breves tras despliegue y restauración. | Procedimientos reproducibles y datos ficticios. |
 
@@ -44,7 +44,11 @@ Vitest, axe, Playwright, PGlite y GitHub Actions están configurados. Sus versio
 
 ## Escenario de carga
 
-Datos: cuatro materias/actividades, 50 estudiantes de prueba en cada una y cuatro docentes. Preparar diez preguntas válidas por actividad. Calentar cinco minutos y medir durante quince minutos con las 204 sesiones activas; escalonar respuestas para representar el uso y ejecutar además una ráfaga donde los 200 estudiantes responden en dos segundos. Separar datos del calentamiento y medición. Si hacen falta rondas adicionales, configurar intentos de práctica para avance individual y crear nuevas actividades para sesiones guiadas; no reabrir intentos cerrados ni alterar sus reglas para prolongar la carga.
+El escenario vigente es el [perfil de una clase de 30 estudiantes](escenario-clase-30.md): diez preguntas, un minuto de calentamiento y dos minutos de medición por modo; límite global de doce minutos y presupuesto preventivo de 150 MB estimados. Exige todas las respuestas y notas, ambos modos y los umbrales Q-06. Estado: preparado, todavía no aprobado. El código y las comprobaciones aisladas no sustituyen la ejecución con servicios.
+
+### Escenario histórico de 200 estudiantes, no aprobado
+
+El protocolo anterior definía cuatro materias/actividades, 50 estudiantes por materia y cuatro docentes: diez preguntas, cinco minutos de calentamiento y quince de medición por modo, además de una ráfaga de 200 respuestas en dos segundos. Se conserva como referencia histórica y posible ampliación, junto con sus resultados fallidos. No forma parte de la ejecución vigente ni se repite automáticamente.
 
 Medir por separado avance individual y guiado, confirmación persistente, apertura de pregunta, lectura de resultados y consumo por servicio. No incluir cargas de archivos en esos umbrales; medirlas por tamaño en un escenario adicional. Los datos inválidos rechazados intencionalmente no cuentan como fallo técnico de solicitudes válidas.
 
