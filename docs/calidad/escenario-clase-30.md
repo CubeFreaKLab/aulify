@@ -1,6 +1,6 @@
 # Comprobación de una clase de 30 estudiantes
 
-Perfil `classroom-30-v1`, fijado el 17 de octubre de 2026 antes de medir. Estado: preparado; capacidad todavía no aprobada.
+Perfil `classroom-30-v1`, fijado el 17 de octubre de 2026 antes de medir. Estado: preparado y ejecutado; recorrido funcional completo, objetivo de velocidad guiada todavía no aprobado. Resultados y límites en el [resumen del ensayo](../verificacion/clase-30-20261017.md).
 
 El alcance de esta versión es una materia con un docente y treinta estudiantes ficticios activos a la vez. Se reutilizan cuentas de prueba existentes sin borrar su historial. Las otras cuentas del conjunto histórico no participan.
 

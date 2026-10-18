@@ -1,0 +1,9 @@
+{
+  "checkedAt": "2026-10-18T00:53:44.256Z",
+  "id": 39083990249,
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "e69d272f2ca84d911b96b7feec654a53287c77ce",
+  "html_url": "https://github.com/CubeFreaKLab/aulify/actions/runs/39083990249",
+  "scope": "CI de la revisión estable; no sustituye Supabase remoto, correo, carga en Vercel ni revisión manual."
+}
