@@ -1,0 +1,18 @@
+{
+  "executedAt": "2026-10-18T00:27:16.732Z",
+  "case": "AC-08",
+  "result": "passed",
+  "environment": "Navegador Chromium, aplicación compilada local y Supabase real",
+  "scriptSha256": "d970fdf362ac78b115e3ebfff5935bea1884deab1cce0fc4d5e08ea9734a95dd",
+  "checks": [
+    "Edición en dos pestañas con la misma revisión",
+    "Primera edición confirmada",
+    "Segunda edición rechazada con aviso visible y texto conservado",
+    "Copia independiente conservada",
+    "Original y contenido intactos"
+  ],
+  "limitations": [
+    "Se retuvo una solicitud para fijar el orden; respuestas reales del servidor, sin simulación.",
+    "Escritorio automatizado; no representa lector de pantalla ni evaluación con personas."
+  ]
+}
