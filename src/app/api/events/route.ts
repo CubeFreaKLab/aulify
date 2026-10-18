@@ -55,8 +55,9 @@ export async function GET(request: NextRequest) {
       try {
         release = subscribeActivityHints(activityId, {
           userId: data.claims.sub,
-          changed(revoked) {
-            push(`event: ${revoked ? 'revoked' : 'changed'}\ndata: {}\n\n`);
+          changed(revoked, activityChanged) {
+            const notice = !revoked && activityChanged ? { activityChanged: true } : {};
+            push(`event: ${revoked ? 'revoked' : 'changed'}\ndata: ${JSON.stringify(notice)}\n\n`);
             if (revoked) dispose();
           },
           connected(value) {

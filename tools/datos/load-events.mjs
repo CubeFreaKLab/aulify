@@ -14,7 +14,8 @@ export async function consumeEventFrames(body, event, bytes = () => {}) {
         const frame = pending.slice(0, boundary);
         pending = pending.slice(boundary + 2);
         const name = frame.split('\n').find(line => line.startsWith('event:'))?.slice(6).trim();
-        if (name) event(name);
+        const data = frame.split('\n').filter(line => line.startsWith('data:')).map(line => line.slice(5).trimStart()).join('\n');
+        if (name) event(name, data);
       }
     }
   } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
@@ -36,11 +37,11 @@ export function openLoadEventStream({ connect, opened, failed, event, bytes }) {
         opened(response);
         if (!response.ok || !response.body || !response.headers.get('content-type')?.includes('text/event-stream'))
           throw Object.assign(new Error('SSE_HTTP_FAILURE'), { status: response.status });
-        await consumeEventFrames(response.body, name => {
+        await consumeEventFrames(response.body, (name, data) => {
           if (name === 'ready' && !hasReady) { hasReady = true; clearTimeout(timeout); readyResolve(); }
           if (name === 'rotate') rotated = true;
           if (name === 'revoked') revoked = true;
-          event(name);
+          event(name, data);
         }, bytes);
         if (!stopped && !rotated && !revoked) failed({ name: 'SSE_UNEXPECTED_END' });
         if (revoked) { stopped = true; break; }

@@ -1,13 +1,13 @@
 import fs from 'node:fs/promises';
 
-const localOrigin = 'http://127.0.0.1:3001';
+const localOrigins = new Set(['http://127.0.0.1:3001', 'http://127.0.0.1:3002']);
 const previewHost = /^aulify-[a-z0-9]+-jdanielchfhd-9543s-projects\.vercel\.app$/;
 
 export function createLoadTarget({ base, expectedBuild, manifest, secret, fetchImpl = fetch }) {
   if (!expectedBuild || !/^[\w-]+$/.test(expectedBuild))
     throw new Error('Falta identificar el compilado.');
   const url = new URL(base);
-  const local = base === localOrigin;
+  const local = localOrigins.has(base);
   if (url.origin !== base)
     throw new Error('El destino debe ser un origen sin ruta ni credenciales.');
   if (
@@ -64,7 +64,7 @@ export function createLoadTarget({ base, expectedBuild, manifest, secret, fetchI
 }
 
 export async function loadTargetFromEnvironment(base, env = process.env) {
-  const local = base === localOrigin;
+  const local = localOrigins.has(base);
   const manifestPath = env.AULIFY_LOAD_PREVIEW_MANIFEST;
   const secretPath = env.AULIFY_LOAD_PREVIEW_SECRET_FILE;
   if (!local && (!manifestPath || !secretPath))

@@ -61,9 +61,10 @@ test('rechaza producción, otro proyecto, metadatos incompletos y falta de autor
 });
 
 test('el servidor local no recibe credenciales del alojamiento', async () => {
+  for (const localBase of ['http://127.0.0.1:3001', 'http://127.0.0.1:3002']) {
   let headers;
   const target = createLoadTarget({
-    base: 'http://127.0.0.1:3001',
+    base: localBase,
     expectedBuild: 'fixture',
     fetchImpl: async (_url, init) => {
       headers = init.headers;
@@ -72,7 +73,8 @@ test('el servidor local no recibe credenciales del alojamiento', async () => {
   });
   await target.request('/', { headers: { 'x-vercel-protection-bypass': secret } });
   assert.equal(headers.has('x-vercel-protection-bypass'), false);
-  assert.throws(() => createLoadTarget({ ...config, base: 'http://127.0.0.1:3001' }));
+  assert.throws(() => createLoadTarget({ ...config, base: localBase }));
+  }
 });
 
 test('el manifiesto remoto exige verificar el compilado realmente servido', async () => {

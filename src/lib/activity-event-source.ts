@@ -1,4 +1,9 @@
-type Listener = { changed: () => void; connected: (value: boolean) => void };
+import { isActivityChangeData } from './activity-events';
+
+type Listener = {
+  changed: (activityChanged?: boolean) => void;
+  connected: (value: boolean) => void;
+};
 type Shared = { source: EventSource; connected: boolean; listeners: Set<Listener> };
 const sources = new Map<string, Shared>();
 
@@ -19,8 +24,9 @@ export function listenActivityEvents(userId: string, activityId: string, listene
     source.addEventListener('ready', () => state(true));
     source.addEventListener('unavailable', () => state(false));
     source.addEventListener('rotate', () => state(false));
-    source.addEventListener('changed', () => {
-      for (const item of current.listeners) item.changed();
+    source.addEventListener('changed', (event) => {
+      const activityChanged = isActivityChangeData((event as MessageEvent | undefined)?.data);
+      for (const item of current.listeners) item.changed(activityChanged);
     });
     source.addEventListener('revoked', () => {
       state(false);

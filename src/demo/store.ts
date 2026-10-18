@@ -500,6 +500,8 @@ export function useDemo() {
     let connected = false,
       hinted = 0,
       checkedHint = -1,
+      activityHinted = 0,
+      checkedActivityHint = 0,
       lastRead = 0,
       nextDeadline = Infinity;
     const synchronize = async () => {
@@ -524,7 +526,36 @@ export function useDemo() {
       const currentGeneration = generation;
       const currentProjection = projectionEpoch;
       const currentHint = hinted;
+      const currentActivityHint = activityHinted;
       try {
+        if (
+          studentEvents &&
+          connected &&
+          currentActivityHint !== checkedActivityHint &&
+          failures === 0
+        ) {
+          if (refreshPending) return;
+          // El aviso común ya exige contenido nuevo. La proyección vuelve a
+          // autorizar la lectura; no hay que esperar un sondeo anterior a ella.
+          const refreshed = await refreshProjection();
+          if (refreshed.status === 'failed') throw refreshed.error;
+          if (
+            cancelled ||
+            refreshed.status !== 'applied' ||
+            currentGeneration !== generation ||
+            refreshed.generation !== generation ||
+            refreshed.projectionEpoch !== projectionEpoch
+          )
+            return;
+          revision = appliedActivityRevisions.get(activityId) ?? null;
+          acknowledgedSyncRevisions.delete(activityId);
+          checkedHint = currentHint;
+          checkedActivityHint = currentActivityHint;
+          lastRead = performance.now();
+          // Conservar la actualización de plazos, después de mostrar el cambio.
+          nextDeadline = 0;
+          return;
+        }
         const value = await readActivityRevision(activityId);
         if (cancelled || currentGeneration !== generation || currentProjection !== projectionEpoch)
           return;
@@ -563,6 +594,7 @@ export function useDemo() {
         failures = 0;
         retryAt = 0;
         checkedHint = currentHint;
+        checkedActivityHint = currentActivityHint;
         lastRead = performance.now();
         nextDeadline =
           value.nextDeadline && Date.parse(value.nextDeadline) > Date.parse(value.serverTime)
@@ -599,7 +631,10 @@ export function useDemo() {
     const releaseEvents =
       studentEvents && activityId
         ? listenActivityEvents(userId, activityId, {
-            changed: hint,
+            changed(activityChanged) {
+              if (activityChanged) activityHinted++;
+              hint();
+            },
             connected(value) {
               connected = value;
               if (value) hint();

@@ -1,20 +1,20 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { listenActivityEvents } from '../../src/lib/activity-event-source';
-import { isActivityHint } from '../../src/lib/activity-events';
+import { isActivityHint, isActivityChangeData } from '../../src/lib/activity-events';
 
 class Source {
   static all: Source[] = [];
-  events = new Map<string, () => void>();
+  events = new Map<string, (event?: { data: string }) => void>();
   close = vi.fn();
   onerror: (() => void) | null = null;
   constructor(readonly url: string) {
     Source.all.push(this);
   }
-  addEventListener(name: string, fn: () => void) {
+  addEventListener(name: string, fn: (event?: { data: string }) => void) {
     this.events.set(name, fn);
   }
-  emit(name: string) {
-    this.events.get(name)?.();
+  emit(name: string, data?: string) {
+    this.events.get(name)?.(data === undefined ? undefined : { data });
   }
 }
 afterEach(() => {
@@ -22,6 +22,19 @@ afterEach(() => {
   Source.all = [];
 });
 describe('Avisos compartidos del navegador', () => {
+  it('distingue cambios comunes sin aceptar mensajes inválidos como una instrucción', () => {
+    expect(isActivityChangeData('{"activityChanged":true}')).toBe(true);
+    for (const input of [undefined, '{}', 'null', 'no json', '{"activityChanged":"true"}'])
+      expect(isActivityChangeData(input)).toBe(false);
+    vi.stubGlobal('EventSource', Source);
+    const listener = { changed: vi.fn(), connected: vi.fn() };
+    const leave = listenActivityEvents('student', 'activity', listener);
+    Source.all[0].emit('changed', '{"activityChanged":true}');
+    expect(listener.changed).toHaveBeenLastCalledWith(true);
+    Source.all[0].emit('changed', '{}');
+    expect(listener.changed).toHaveBeenLastCalledWith(false);
+    leave();
+  });
   it('comparte una conexión por identidad/actividad y la cierra al salir el último componente', () => {
     vi.stubGlobal('EventSource', Source);
     const a = { changed: vi.fn(), connected: vi.fn() };

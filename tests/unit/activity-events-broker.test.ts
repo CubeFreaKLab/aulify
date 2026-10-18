@@ -50,12 +50,12 @@ it('comparte el canal de servidor, filtra el destinatario y libera la última co
   mocks.status!('SUBSCRIBED');
   expect(a.connected).toHaveBeenLastCalledWith(true);
   mocks.broadcast!({ payload: { activityId: activity, studentId: one, revoked: true } });
-  expect(a.changed).toHaveBeenCalledWith(true);
+  expect(a.changed).toHaveBeenCalledWith(true, false);
   expect(b.changed).not.toHaveBeenCalled();
   mocks.broadcast!({ payload: { activityId: 'invalid' } });
   expect(a.changed).toHaveBeenCalledOnce();
   mocks.broadcast!({ payload: { activityId: activity } });
-  expect(b.changed).toHaveBeenCalledWith(false);
+  expect(b.changed).toHaveBeenCalledWith(false, true);
   leaveA();
   expect(mocks.remove).not.toHaveBeenCalled();
   leaveB();

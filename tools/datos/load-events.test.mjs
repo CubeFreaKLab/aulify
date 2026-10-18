@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import { consumeEventFrames,openLoadEventStream } from './load-events.mjs';
 
 test('interpreta eventos fragmentados y comentarios sin tratar cada latido como cambio',async()=>{
- const frames=[': ok\r','\n\r','\nevent: rea','dy\r\ndata: {}\r\n\r\n:event: changed\n\nevent: changed\ndata: {}\n\n'];
+ const frames=[': ok\r','\n\r','\nevent: rea','dy\r\ndata: {}\r\n\r\n:event: changed\n\nevent: changed\ndata: {"activityChanged":true}\n\n'];
  const body=new ReadableStream({start(c){for(const f of frames)c.enqueue(new TextEncoder().encode(f));c.close();}});
- const events=[];let bytes=0;
- await consumeEventFrames(body,name=>events.push(name),n=>bytes+=n);
+ const events=[],data=[];let bytes=0;
+ await consumeEventFrames(body,(name,payload)=>{events.push(name);data.push(payload);},n=>bytes+=n);
  assert.deepEqual(events,['ready','changed']);assert.ok(bytes>0);
+ assert.deepEqual(data,['{}','{"activityChanged":true}']);
 });
 test('una cancelación voluntaria cierra el flujo sin registrar un fallo técnico',async()=>{
  let aborts=0,failed=0;
