@@ -5,7 +5,7 @@ import { supabaseConfig } from './config';
 
 type Listener = {
   userId: string;
-  changed: (revoked: boolean, activityChanged: boolean) => void;
+  changed: (revoked: boolean) => void;
   connected: (value: boolean) => void;
 };
 type Entry = { channel: RealtimeChannel; connected: boolean; listeners: Map<symbol, Listener> };
@@ -42,7 +42,7 @@ export function subscribeActivityHints(activityId: string, listener: Listener) {
       if (!isActivityHint(payload) || payload.activityId !== activityId) return;
       for (const target of current.listeners.values()) {
         if (!payload.studentId || payload.studentId === target.userId)
-          target.changed(payload.revoked === true, payload.studentId === undefined);
+          target.changed(payload.revoked === true);
       }
     });
     channel.subscribe((status) => {

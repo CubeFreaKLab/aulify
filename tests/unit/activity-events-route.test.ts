@@ -49,14 +49,12 @@ describe('Flujo privado del aula', () => {
     expect(listener.userId).toBe('verified');
     listener.connected(true);
     listener.changed(false);
-    listener.changed(false, true);
     const reader = response.body!.getReader();
     const decoder = new TextDecoder();
     const chunks = [];
-    for (let i = 0; i < 4; i++) chunks.push(decoder.decode((await reader.read()).value));
+    for (let i = 0; i < 3; i++) chunks.push(decoder.decode((await reader.read()).value));
     expect(chunks.join('')).toContain('event: ready');
     expect(chunks.join('')).toContain('event: changed\ndata: {}');
-    expect(chunks.join('')).toContain('event: changed\ndata: {"activityChanged":true}');
     await reader.cancel();
     expect(mocks.release).toHaveBeenCalledOnce();
     expect(vi.getTimerCount()).toBe(0);

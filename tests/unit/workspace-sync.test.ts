@@ -6,10 +6,7 @@ const mocks = vi.hoisted(() => ({
   path: '/aula/actividad/activity',
   effects: [] as (() => (() => void) | void)[],
   read: (() => null) as () => DemoSnapshot | null,
-  events: null as null | {
-    changed: (activityChanged?: boolean) => void;
-    connected: (value: boolean) => void;
-  },
+  events: null as null | { changed: () => void; connected: (value: boolean) => void },
 }));
 vi.mock('react', () => ({
   useEffect: (effect: () => (() => void) | void) => mocks.effects.push(effect),
@@ -244,50 +241,6 @@ describe('adopción de revisión tras una proyección vigente', () => {
     await tick(1000);
     expect(polls).toBe(4);
   });
-  it('muestra un cambio común antes del sondeo y conserva plazos y revocación', async () => {
-    let revision = 'a'.repeat(32),
-      denied = false;
-    const calls: string[] = [];
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(async (url: string) => {
-        calls.push(url);
-        if (url.startsWith('/api/sync'))
-          return Response.json({
-            revision,
-            serverTime: new Date().toISOString(),
-            nextDeadline: '2026-09-30T02:00:00Z',
-          });
-        if (denied) return Response.json({ error: 'Acceso retirado.' }, { status: 403 });
-        const value = workspace(revision.startsWith('a') ? 1 : 2);
-        value.state.users = [
-          { id: 'student', name: 'Ficticio', role: 'student', email: 'example@example.test' },
-        ];
-        return Response.json({ ...value, activitySync: { activityId: 'activity', revision } });
-      }),
-    );
-    await mount();
-    cleanups.splice(0).forEach((cleanup) => cleanup());
-    await mount();
-    mocks.events!.connected(true);
-    await tick(0);
-    const beforeHint = calls.length;
-    revision = 'b'.repeat(32);
-    mocks.events!.changed(true);
-    await tick(0);
-    expect(calls.slice(beforeHint)).toEqual(['/api/workspace?activity=activity']);
-    expect(mocks.read()?.state?.revision).toBe(2);
-    await tick(250);
-    expect(calls.slice(beforeHint)).toEqual([
-      '/api/workspace?activity=activity',
-      '/api/sync?activity=activity',
-    ]);
-    denied = true;
-    mocks.events!.changed(true);
-    await tick(0);
-    expect(mocks.read()?.state).toBeNull();
-  });
-
   it('un aviso recibido durante la respuesta propia se procesa al terminar el comando', async () => {
     let polls = 0;
     const reply = deferred();

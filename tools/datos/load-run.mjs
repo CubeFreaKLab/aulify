@@ -14,7 +14,6 @@ import { execFileSync } from 'node:child_process';
 import { performance, monitorEventLoopDelay } from 'node:perf_hooks';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { loadScenarioFromArgs, selectLoadCohort, mergeLoadCookies, measuredScenarioPassed } from './load-scenario.mjs';
-import { isActivityChangeData } from '../../src/lib/activity-events.ts';
 
 const args = process.argv.slice(2);
 if (!args.length || args.includes('--help')) {
@@ -63,7 +62,6 @@ report.limitations[0] = `El generador simula el protocolo HTTP de ${accounts.use
 report.limitations[3] = 'Preparación y auditoría fuera de las ventanas medidas, pero incluidas en el límite global. No se envían correos ni se habilitan pagos.';
 report.environment.polling = 'Docente: cada segundo. Estudiante: avisos SSE de /api/events; comprobación cada 30 segundos y en el plazo del servidor. Sin canal: cada segundo. El mismo ACK y las mismas guardias de proyección siguen vigentes.';
 report.environment.events = {transport:'SSE autorizado por la aplicación; relé privado de servidor a Supabase',healthMs:30000,reconnectMs:1500,rotateMs:240000,preparationOutsideMeasurement:true};
-report.environment.commonChange = 'Un aviso de cambio común obtiene primero la proyección autorizada y luego comprueba revisión y plazos. Los avisos individuales conservan el contraste del ACK; el generador aplica la misma secuencia que la interfaz.';
 report.environment.logicalBodyBudgetBytes = budgetBytes;
 report.protocol = diagnosticOnly ? 'diagnostic-individual-warmup-and-next-preparation' : scenario.id;
 if (scenario.id === 'classroom-30-v1') report.limitations.push('Esta clase reducida no aprueba el objetivo histórico de 200 estudiantes ni acredita una carga sostenida más larga.');
@@ -233,22 +231,14 @@ function startPolling() {
     if (s.running || s.pendingAnswer || aborted || s.authorizationLost || Date.now() < s.retryAt) { if (phase) phase.skippedPollTicks++; return; }
     const now=performance.now(),interval=s.role==='student'&&s.eventsConnected?30000:1000;
     if(s.checkedHint===s.hints&&now-(s.lastRead||0)<interval&&now<(s.nextDeadline??Infinity))return;
-    const currentHint=s.hints,currentActivityHint=s.activityHints;
+    const currentHint=s.hints;
     s.running = (async () => {
       try {
         const epoch=s.mutationEpoch;
-        if(s.role==='student'&&s.eventsConnected&&currentActivityHint!==s.checkedActivityHint&&!s.retryAt){
-          if(s.refresh)return;
-          const snapshot=await refresh(s);if(!snapshot.applied)return;
-          const token=s.latest?.activitySync;
-          s.lastRevision=token?.activityId===s.activityId&&/^[a-f0-9]{32}$/.test(token.revision)?token.revision:null;
-          s.checkedActivityHint=currentActivityHint;s.checkedHint=currentHint;s.lastRead=performance.now();s.nextDeadline=0;
-          return;
-        }
         const result = (await request(s, `/api/sync?activity=${s.activityId}`, { tag: 'sync' })).value;
         if(epoch!==s.mutationEpoch)return;
         if (s.lastRevision !== result.revision) { const snapshot=await refresh(s); if(!snapshot.applied)return;s.lastRevision = result.revision; }
-        s.checkedHint=currentHint;s.checkedActivityHint=currentActivityHint;s.lastRead=performance.now();
+        s.checkedHint=currentHint;s.lastRead=performance.now();
         s.nextDeadline=result.nextDeadline&&Date.parse(result.nextDeadline)>Date.parse(result.serverTime)?s.lastRead+Math.max(100,Date.parse(result.nextDeadline)-Date.parse(result.serverTime)):Infinity;
         s.retryAt=0;s.retryMs=1000;
       } catch (error) {
@@ -280,12 +270,12 @@ async function prepareEventStreams(name) {
         opened:response=>{stats.opened++;record(phase,'eventsConnect',response.status,s.eventHeaderMs,0);},
         failed:error=>{stats.unexpectedFailures++;if(!error.status||error.status===200)record(phase,'eventsDisconnected',0,0,0);},
         bytes:n=>{stats.bytes+=n;bodyBytes+=n;if(phase)phase.bodyBytes+=n;},
-        event:(event,data)=>{
+        event:event=>{
           const connected=event==='ready';
           if(event==='unavailable'&&s.eventsConnected){stats.unexpectedFailures++;record(phase,'eventsUnavailable',0,0,0);}
           if(connected&&!s.eventsConnected){s.eventsConnected=true;stats.active++;stats.maximumActive=Math.max(stats.maximumActive,stats.active);stats.ready++;s.hints++;s.onHint?.();}
           else if(['unavailable','rotate','revoked','disconnected'].includes(event)&&s.eventsConnected){s.eventsConnected=false;stats.active--;}
-          if(event==='changed'||event==='revoked'){if(event==='changed'&&isActivityChangeData(data))s.activityHints++;s.hints++;s.onHint?.();}
+          if(event==='changed'||event==='revoked'){s.hints++;s.onHint?.();}
           if(event==='rotate')stats.rotations++;
         },
       });
@@ -320,7 +310,7 @@ async function makeActivities(mode, stage) {
   for (const teacher of teachers) {
     const group = fixtures.groups.find(g => g.group === teacher.group);
     const activity = await command(teacher, 'createActivity', group.versionId, group.subjectId, settings, `Carga ${mode} · ${stage} · ${runId.slice(0, 8)}`);
-    for (const s of sessions.filter(s => s.group === teacher.group)) { s.activityId = activity.id; s.lastRevision = null; s.latest = null; s.wanted = null; s.retryAt=0; s.retryMs=1000;s.authorizationLost=false;s.hints=0;s.checkedHint=-1;s.activityHints=0;s.checkedActivityHint=0;s.lastRead=0;s.nextDeadline=Infinity;s.eventsConnected=false; }
+    for (const s of sessions.filter(s => s.group === teacher.group)) { s.activityId = activity.id; s.lastRevision = null; s.latest = null; s.wanted = null; s.retryAt=0; s.retryMs=1000;s.authorizationLost=false;s.hints=0;s.checkedHint=-1;s.lastRead=0;s.nextDeadline=Infinity;s.eventsConnected=false; }
   }
   await parallel(fixtures.groups, scenario.teachers, async group => {
     for (const s of students.filter(s => s.group === group.group)) {
