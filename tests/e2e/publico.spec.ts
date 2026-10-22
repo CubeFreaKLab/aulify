@@ -2,18 +2,22 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { expectLoadedImages, expectNoHorizontalOverflow } from './helpers';
 
-test('inicio mínimo: marca y accesos operativos', async ({ page }, testInfo) => {
+test('presentación: marca y accesos operativos', async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1, name: 'Aulify' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'El aula digital, más simple e interactiva.' }),
+  ).toBeVisible();
   for (const [name, href] of [
     ['Entrar', '/acceso'],
-    ['Registrarse', '/registro'],
+    ['Crear cuenta', '/registro'],
     ['Demo docente', '/demo?perfil=docente'],
     ['Demo estudiante', '/demo?perfil=estudiante'],
   ]) {
-    await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute('href', href);
+    const links = page.getByRole('link', { name, exact: true });
+    await expect(links.first()).toBeVisible();
+    for (const link of await links.all()) await expect(link).toHaveAttribute('href', href);
   }
   await expect(page.locator('.theme-switcher')).toHaveCount(1);
   await expectLoadedImages(page);

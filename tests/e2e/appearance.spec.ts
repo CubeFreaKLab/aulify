@@ -39,7 +39,7 @@ test('apariencia por teclado, persistencia y preferencia del sistema', async ({
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('inicio mínimo conserva contraste en ambos temas y respeta movimiento reducido', async ({
+test('presentación conserva contraste en ambos temas y respeta movimiento reducido', async ({
   page,
 }) => {
   await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });

@@ -167,7 +167,9 @@ test.describe('Resultados integrados con datos ficticios', () => {
       }
 
       await page.goto('/aula/resultados');
-      await expect(page.getByRole('heading', { name: 'Cada paso cuenta.' })).toBeVisible();
+      await expect(
+        page.getByRole('heading', { name: 'Mis resultados', exact: true }),
+      ).toBeVisible();
       await dismissGuide(page);
       const table = page.getByRole('region', {
         name: 'Tabla de calificaciones, desplazable horizontalmente',
@@ -306,7 +308,7 @@ test.describe('Resultados integrados con datos ficticios', () => {
       );
 
       await page.goto('/aula/resultados');
-      await expect(page.getByRole('heading', { name: 'El progreso, con contexto.' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Resultados', exact: true })).toBeVisible();
       await dismissGuide(page);
       await page.getByLabel('Curso', { exact: true }).selectOption(`Curso A ${marker}`);
       const results = page
@@ -409,7 +411,9 @@ test.describe('Resultados integrados con datos ficticios', () => {
 
       await login(page.request, students[0]);
       await page.goto('/aula/resultados');
-      await expect(page.getByRole('heading', { name: 'Cada paso cuenta.' })).toBeVisible();
+      await expect(
+        page.getByRole('heading', { name: 'Mis resultados', exact: true }),
+      ).toBeVisible();
       await dismissGuide(page);
       await expect(page.getByRole('heading', { name: 'Distribución por actividad' })).toHaveCount(
         0,

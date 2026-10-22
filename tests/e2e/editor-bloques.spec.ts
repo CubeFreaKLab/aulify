@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { enterDemo, expectNoHorizontalOverflow, openResourceQuestions } from './helpers';
 import { decodeDemoState } from '../../src/domain';
 import type { DemoState } from '../../src/domain/types';
 
@@ -19,6 +19,7 @@ async function createResource(page: Page) {
   await page.getByLabel('Título del recurso').fill('Nuestro ecosistema en bloques');
 }
 async function addQuestion(page: Page, name: string) {
+  await openResourceQuestions(page);
   await page.getByRole('button', { name: 'Añadir pregunta', exact: true }).click();
   await page.getByRole('dialog').getByRole('button', { name, exact: true }).click();
 }

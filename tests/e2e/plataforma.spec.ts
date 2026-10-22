@@ -1,7 +1,12 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import type { DemoState } from '../../src/domain/types';
-import { dismissGuide, enterDemo, expectNoHorizontalOverflow } from './helpers';
+import {
+  dismissGuide,
+  enterDemo,
+  expectNoHorizontalOverflow,
+  openResourceQuestions,
+} from './helpers';
 
 test('ayuda opcional, navegación por rol y acceso no concedido a herramientas docentes', async ({
   page,
@@ -209,7 +214,7 @@ test('recurso existente conserva negrita, bloque quiz y orden después de recarg
     '1. Un ecosistema está formado',
   );
   await expect(page.locator('.block-order-row').nth(1)).toContainText('2. Todo está conectado');
-  await expect(page.getByText('8 preguntas', { exact: true })).toBeVisible();
+  await expect(page.locator('.editor-questions-panel > summary')).toContainText('8 preguntas');
   await testInfo.attach('editor-existente-negrita-y-orden', {
     body: await page.screenshot({ fullPage: true }),
     contentType: 'image/png',
@@ -230,6 +235,7 @@ test('recurso → publicación → quiz oculto → revisión → nota publicada'
   await richEditor.getByText('Escribe una explicación para tu clase.', { exact: true }).click();
   await page.keyboard.press('End');
   await page.keyboard.type(' Las plantas transforman la luz en alimento para el ecosistema.');
+  await openResourceQuestions(page);
   await page.getByRole('button', { name: 'Añadir pregunta', exact: true }).click();
   await page
     .getByRole('dialog')
@@ -327,7 +333,7 @@ test('recurso → publicación → quiz oculto → revisión → nota publicada'
     page.getByRole('heading', { name: '¡Participación completada!', exact: true }),
   ).toBeVisible();
   await page.getByRole('link', { name: 'Ver mis resultados', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Cada paso cuenta.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Mis resultados', exact: true })).toBeVisible();
   const ownRow = page.getByRole('row').filter({ has: page.getByText(title, { exact: true }) });
   await expect(ownRow).toContainText('Por revisar');
   await expect(ownRow).not.toContainText('0 / 100');
@@ -340,6 +346,13 @@ test('recurso → publicación → quiz oculto → revisión → nota publicada'
   await review
     .getByLabel('Comentario para el estudiante', { exact: true })
     .fill('La consecuencia es correcta; desarrolla cómo circula la energía.');
+  const questionIndex = review.getByRole('navigation', { name: 'Preguntas del intento' });
+  await questionIndex.getByRole('button').first().click();
+  await questionIndex.getByRole('button').last().click();
+  await expect(review.getByLabel('Puntos, de 0 a 1', { exact: true })).toHaveValue('0.5');
+  await expect(review.getByLabel('Comentario para el estudiante', { exact: true })).toHaveValue(
+    'La consecuencia es correcta; desarrolla cómo circula la energía.',
+  );
   await review.getByRole('button', { name: 'Guardar corrección', exact: true }).click();
   await review.getByRole('button', { name: 'Publicar nota de Camila', exact: true }).click();
   await expect(review.getByText('Nota publicada', { exact: true })).toBeVisible();
@@ -349,7 +362,7 @@ test('recurso → publicación → quiz oculto → revisión → nota publicada'
   await expect(page.getByText('Borrador guardado', { exact: true })).toBeVisible();
   await enterDemo(page, 'estudiante');
   await page.goto('/demo/resultados');
-  await expect(page.getByRole('heading', { name: 'Cada paso cuenta.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Mis resultados', exact: true })).toBeVisible();
   const publishedRow = page
     .getByRole('row')
     .filter({ has: page.getByText(title, { exact: true }) });

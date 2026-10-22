@@ -32,20 +32,26 @@ export async function expectNoHorizontalOverflow(page: Page): Promise<void> {
 }
 
 export async function expectLoadedImages(page: Page): Promise<void> {
-  const images = page.locator('img');
-  await expect
-    .poll(async () =>
-      images.evaluateAll((elements) =>
-        elements
-          .filter(
-            (image) =>
-              !(image as HTMLImageElement).complete ||
-              (image as HTMLImageElement).naturalWidth === 0,
-          )
-          .map((image) => image.getAttribute('src')),
-      ),
-    )
-    .toEqual([]);
+  const position = await page.evaluate(() => ({ x: scrollX, y: scrollY }));
+  for (const image of await page.locator('img:visible').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate(
+          (element) =>
+            (element as HTMLImageElement).complete &&
+            (element as HTMLImageElement).naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+  }
+  await page.evaluate(({ x, y }) => scrollTo({ left: x, top: y, behavior: 'instant' }), position);
+}
+
+export async function openResourceQuestions(page: Page): Promise<void> {
+  const panel = page.locator('.editor-questions-panel');
+  if ((await panel.getAttribute('open')) === null) await panel.locator('summary').click();
+  await expect(panel.getByRole('button', { name: 'Añadir pregunta', exact: true })).toBeVisible();
 }
 
 export async function clickNav(page: Page, name: string): Promise<void> {

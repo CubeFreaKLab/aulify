@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import type { DemoState } from '../../src/domain/types';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { enterDemo, expectNoHorizontalOverflow, openResourceQuestions } from './helpers';
 
 async function answerAndContinue(page: Page, nextPrompt: string) {
   await page.getByRole('button', { name: 'Responder', exact: true }).click();
@@ -107,9 +107,10 @@ test('sesión guiada creada en interfaz coordina dos pestañas del mismo navegad
   await enterDemo(page, 'docente');
   await page.goto('/demo/editor/resource-ecosystems');
   await page.getByLabel('Título del recurso').fill('Ecosistema en grupo');
+  await openResourceQuestions(page);
   for (let index = 7; index >= 2; index--)
     await page.getByRole('button', { name: `Eliminar pregunta ${index}`, exact: true }).click();
-  await expect(page.getByText('2 preguntas', { exact: true })).toBeVisible();
+  await expect(page.locator('.editor-questions-panel > summary')).toContainText('2 preguntas');
   await page.getByRole('button', { name: 'Publicar', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Comparte una nueva experiencia' });
   await dialog.getByText('Configuración avanzada', { exact: true }).click();
