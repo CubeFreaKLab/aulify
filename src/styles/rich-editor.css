@@ -200,6 +200,7 @@
 }
 .reader-table-scroll th {
   background: var(--surface-muted);
+  color: var(--ink);
   text-align: left;
 }
 .author-item-row {

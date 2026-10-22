@@ -4,6 +4,8 @@ Actualizado el 22 de octubre de 2026. La recuperación de datos, cuentas, archiv
 
 ## Identidad visual y recorridos
 
+La revisión posterior simplifica la presentación y el inicio, reduce las ilustraciones repetidas y conserva el tema oscuro en grises neutros. Se retiró el fundido del texto al entrar en pantalla para mantener el contraste durante la animación; el desplazamiento breve se conserva. Los encabezados de tablas del lector utilizan el color principal del texto. La comprobación local se concentra en la portada y el lector enriquecido; la ejecución de GitHub Actions se consulta por separado antes de afirmar su aprobación.
+
 La [revisión visual del 22 de octubre](diseno/identidad-visual-20261022.md) incorpora treinta y cuatro SVG reales de personajes y objetos, Inter, verde hoja moderado y modo oscuro de carbón. La landing integra tres planos, un ejemplo interactivo y una composición móvil propia. La plataforma conserva sus funciones; las preguntas del editor se despliegan y la revisión abre primero una respuesta pendiente sin perder lo escrito al navegar.
 
 Se guardaron capturas comparables de las treinta y cuatro vistas y se comprobaron móvil, contraste automático en las pantallas indicadas, movimiento reducido y los recorridos afectados. TypeScript, lint de los componentes modificados y la construcción local pasaron. El catálogo y el [perfil visual](diseno/design-dna.json) describen la entrega. Esta revisión no añade una prueba de capacidad, un cambio de datos ni una nueva liberación pública; las limitaciones de los servicios que siguen debajo conservan su estado.
