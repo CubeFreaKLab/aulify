@@ -1,6 +1,12 @@
 # Estado del desarrollo
 
-Actualizado el 17 de octubre de 2026. La recuperación de datos, cuentas, archivos y aplicación está comprobada en una copia aislada. Aulify funciona con una aplicación compilada local y Supabase. La validación vigente se acota a una clase de treinta estudiantes; su capacidad, el correo y la liberación de producción siguen pendientes. El objetivo histórico de 200 estudiantes no se aprobó.
+Actualizado el 22 de octubre de 2026. La recuperación de datos, cuentas, archivos y aplicación está comprobada en una copia aislada. Aulify funciona con una aplicación compilada local y Supabase. La validación vigente se acota a una clase de treinta estudiantes; su capacidad, el correo y la liberación de producción siguen pendientes. El objetivo histórico de 200 estudiantes no se aprobó.
+
+## Identidad visual y recorridos
+
+La [revisión visual del 22 de octubre](diseno/identidad-visual-20261022.md) incorpora treinta y cuatro SVG reales de personajes y objetos, Inter, verde hoja moderado y modo oscuro de carbón. La landing integra tres planos, un ejemplo interactivo y una composición móvil propia. La plataforma conserva sus funciones; las preguntas del editor se despliegan y la revisión abre primero una respuesta pendiente sin perder lo escrito al navegar.
+
+Se guardaron capturas comparables de las treinta y cuatro vistas y se comprobaron móvil, contraste automático en las pantallas indicadas, movimiento reducido y los recorridos afectados. TypeScript, lint de los componentes modificados y la construcción local pasaron. El catálogo y el [perfil visual](diseno/design-dna.json) describen la entrega. Esta revisión no añade una prueba de capacidad, un cambio de datos ni una nueva liberación pública; las limitaciones de los servicios que siguen debajo conservan su estado.
 
 ## Cierre de la clase de treinta estudiantes
 

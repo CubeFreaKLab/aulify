@@ -223,6 +223,9 @@ function AnswerReviewForm({
 }
 
 function ReviewDetail({ state, user, attempt }: ScreenProps & { attempt: Attempt }) {
+  const [questionId, setQuestionId] = useState(
+    () => attempt.answers.find((answer) => !answer.reviews.length)?.questionId ?? '',
+  );
   const activity = state.activities.find((item) => item.id === attempt.activityId)!;
   const version = state.versions.find((item) => item.id === attempt.versionId)!;
   const score = scoreAttempt(state, attempt);
@@ -288,25 +291,50 @@ function ReviewDetail({ state, user, attempt }: ScreenProps & { attempt: Attempt
           </span>
         )}
       </div>
-      {questions.map((question) => {
-        const answer = attempt.answers.find((item) => item.questionId === question.id);
-        return answer ? (
-          <AnswerReviewForm
-            key={`${attempt.id}-${question.id}-${answer.reviews.length}`}
-            question={question}
-            answer={answer}
-            attempt={attempt}
-            user={user}
-          />
-        ) : (
-          <div className="review-answer" key={question.id}>
-            <h3>{question.prompt}</h3>
-            <p className="results-note">
-              Sin respuesta al cerrar el intento · 0 / {number(question.points)} puntos.
-            </p>
-          </div>
-        );
-      })}
+      <div className="review-question-layout">
+        <nav className="review-question-index" aria-label="Preguntas del intento">
+          {questions.map((question, index) => (
+            <button
+              key={question.id}
+              className="review-question-link"
+              aria-current={(questionId || questions[0]?.id) === question.id ? 'true' : undefined}
+              onClick={() => setQuestionId(question.id)}
+            >
+              <span>{index + 1}</span>
+              <span>{question.prompt}</span>
+            </button>
+          ))}
+        </nav>
+        <div>
+          {questions.map((question) => {
+            const answer = attempt.answers.find((item) => item.questionId === question.id);
+            return (
+              <div
+                className="review-question-content"
+                key={question.id}
+                hidden={(questionId || questions[0]?.id) !== question.id}
+              >
+                {answer ? (
+                  <AnswerReviewForm
+                    key={`${attempt.id}-${question.id}-${answer.reviews.length}`}
+                    question={question}
+                    answer={answer}
+                    attempt={attempt}
+                    user={user}
+                  />
+                ) : (
+                  <div className="review-answer" key={question.id}>
+                    <h3>{question.prompt}</h3>
+                    <p className="results-note">
+                      Sin respuesta al cerrar el intento · 0 / {number(question.points)} puntos.
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
       <form onSubmit={publish} className="stack results-publish-form">
         <h3>Publicar la nota individual</h3>
         <p className="muted">
@@ -383,7 +411,7 @@ export function ReviewScreen({ state, user }: ScreenProps) {
   return (
     <>
       <PageHeading
-        title="Una respuesta, una oportunidad."
+        title="Por revisar"
         description="Revisa lo que aprendieron, acompaña con un comentario y publica cada nota cuando esté lista."
       />
       {!selected ? (
@@ -670,7 +698,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
   return (
     <>
       <PageHeading
-        title={teacher ? 'El progreso, con contexto.' : 'Cada paso cuenta.'}
+        title={teacher ? 'Resultados' : 'Mis resultados'}
         description={
           teacher
             ? 'Filtra tus grupos y observa las notas publicadas. Lo pendiente no equivale a un cero.'
@@ -1356,7 +1384,7 @@ export function TasksScreen({ state, user }: ScreenProps) {
   return (
     <>
       <PageHeading
-        title={teacher ? 'Aprender también es crear.' : 'Tu trabajo tiene un lugar.'}
+        title="Tareas"
         description={
           teacher
             ? 'Comparte una consigna, recibe entregas y acompaña con una revisión.'

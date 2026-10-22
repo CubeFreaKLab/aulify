@@ -39,6 +39,7 @@ import { Button, Badge, EmptyState, PageHeading } from './ui';
 import { QuestionInput } from './question-input';
 import { ResourceReader } from './resource-reader';
 import { StaticAttemptHelp } from './help-guide';
+import { BrandArt } from './brand-art';
 import '../styles/quiz.css';
 
 export function ActivityScreen({
@@ -530,9 +531,12 @@ function QuizPlayer({
                 </span>
               )}
             </div>
-            <h1 className="quiz-question" ref={heading} tabIndex={-1}>
-              {question.prompt}
-            </h1>
+            <div className="quiz-question-heading">
+              <BrandArt name="student-thinking" className="quiz-character" />
+              <h1 className="quiz-question" ref={heading} tabIndex={-1}>
+                {question.prompt}
+              </h1>
+            </div>
             {hint && (
               <div className="quiz-hint" role="status">
                 <Lightbulb size={17} /> {hint}

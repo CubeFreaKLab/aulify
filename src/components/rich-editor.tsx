@@ -141,13 +141,16 @@ const quizBlock = createReactBlockSpec(
         <button
           type="button"
           className="button ghost small"
-          onClick={() =>
-            document.getElementById('preguntas')?.scrollIntoView({
+          onClick={() => {
+            const questions = document.getElementById('preguntas');
+            const disclosure = questions?.closest('details');
+            if (disclosure) disclosure.open = true;
+            questions?.scrollIntoView({
               behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
                 ? 'instant'
                 : 'smooth',
-            })
-          }
+            });
+          }}
         >
           Editar las preguntas ↓
         </button>

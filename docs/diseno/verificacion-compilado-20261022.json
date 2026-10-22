@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-22T11:07:25.256Z",
+  "local": true,
+  "errors": [],
+  "focus": {
+    "active": "<h1 class=\"quiz-question\" tabindex=\"-1\">¿Quién produce su propio alimento en este ecosistema?</h1>",
+    "skipVisible": false,
+    "heading": {
+      "x": 100,
+      "y": 155.734375,
+      "width": 270,
+      "height": 88.5,
+      "top": 155.734375,
+      "right": 370,
+      "bottom": 244.234375,
+      "left": 100
+    }
+  },
+  "compactHeader": [
+    {
+      "theme": {
+        "x": 264,
+        "y": 14,
+        "width": 44,
+        "height": 44,
+        "top": 14,
+        "right": 308,
+        "bottom": 58,
+        "left": 264
+      },
+      "logo": {
+        "x": 12,
+        "y": 21.03125,
+        "width": 90,
+        "height": 29.921875,
+        "top": 21.03125,
+        "right": 102,
+        "bottom": 50.953125,
+        "left": 12
+      },
+      "overflow": 0
+    },
+    {
+      "theme": {
+        "x": 264,
+        "y": 14,
+        "width": 44,
+        "height": 44,
+        "top": 14,
+        "right": 308,
+        "bottom": 58,
+        "left": 264
+      },
+      "logo": {
+        "x": 12,
+        "y": 21.03125,
+        "width": 90,
+        "height": 29.921875,
+        "top": 21.03125,
+        "right": 102,
+        "bottom": 50.953125,
+        "left": 12
+      },
+      "overflow": 0
+    }
+  ],
+  "checks": [
+    "pregunta de presentación",
+    "acceso: mostrar contraseña sin enviar",
+    "inicio estudiante",
+    "abrir quiz",
+    "cabecera de landing a 320px en ambos temas",
+    "transición entre destinos y a detalle"
+  ]
+}

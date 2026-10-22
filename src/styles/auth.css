@@ -33,10 +33,26 @@
 }
 .auth-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   min-height: calc(100svh - 98px);
-  max-width: 1800px;
+  max-width: 1120px;
   margin: auto;
+}
+.auth-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.auth-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 10px 40px 38px;
+}
+.auth-art .brand-art {
+  width: 100%;
+  max-width: 400px;
+  height: 380px;
 }
 .auth-panel {
   padding: clamp(36px, 4.3vw, 70px) clamp(26px, 4vw, 68px);
@@ -53,7 +69,7 @@
   margin: 0 0 28px;
 }
 .auth-heading h1 {
-  font-size: clamp(30px, 3vw, 36px);
+  font-size: clamp(30px, 3vw, 42px);
   line-height: 1.05;
   letter-spacing: -0.045em;
 }
@@ -160,9 +176,13 @@
 }
 .auth-demo-actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 9px;
   margin-top: 17px;
+}
+.auth-demo-actions .button {
+  flex: 1;
+  justify-content: center;
 }
 .auth-demo-actions .button {
   min-height: 45px;
@@ -263,6 +283,12 @@
   }
 }
 @media (max-width: 760px) {
+  .auth-art {
+    display: none;
+  }
+  .auth-header-actions {
+    gap: 12px;
+  }
   .auth-header {
     height: 76px;
     padding: 14px 22px;

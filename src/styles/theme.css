@@ -45,8 +45,7 @@ html[data-theme-transition='circle']::view-transition-new(root) {
 :root[data-theme='dark'] .subject-card-head,
 :root[data-theme='dark'] .subject-card:nth-child(2) .subject-card-head,
 :root[data-theme='dark'] .subject-card:nth-child(3) .subject-card-head,
-:root[data-theme='dark'] .auth-story,
-:root[data-theme='dark'] .welcome-art {
+:root[data-theme='dark'] .auth-story {
   background: #282828;
 }
 :root[data-theme='dark'] .auth-illustration img {
@@ -78,6 +77,10 @@ html[data-theme-transition='circle']::view-transition-new(root) {
 :root[data-theme='dark'] .welcome-panel {
   background: var(--white);
   border-color: var(--line);
+}
+:root[data-theme='dark'] .welcome-panel-teacher {
+  background: transparent;
+  border: 0;
 }
 :root[data-theme='dark'] .notice,
 :root[data-theme='dark'] .auth-status,

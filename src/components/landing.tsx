@@ -1,31 +1,178 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeSwitcher } from './theme';
+import { ArrowRight } from 'lucide-react';
+import { BrandArt } from './brand-art';
+import { LandingMotion, LandingQuestion } from './landing-interaction';
 
 export function Landing() {
   return (
-    <div className="home-minimal">
-      <header className="home-toolbar">
-        <h1>
-          <Image src="/brand/aulify-logo.svg" alt="Aulify" width={148} height={49} priority />
-        </h1>
-        <nav className="home-actions" aria-label="Acceso a Aulify">
-          <Link className="button" href="/acceso">
-            Entrar
-          </Link>
-          <Link className="button secondary" href="/registro">
-            Registrarse
+    <LandingMotion>
+      <header className="landing-header">
+        <Link href="/" className="landing-logo" aria-label="Aulify, inicio">
+          <Image src="/brand/aulify-logo.svg" alt="Aulify" width={180} height={60} priority />
+        </Link>
+        <nav className="landing-nav" aria-label="Acceso a Aulify">
+          <a className="landing-section-link" href="#plataforma">
+            La plataforma
+          </a>
+          <a className="landing-section-link" href="#como-funciona">
+            Cómo funciona
+          </a>
+          <Link href="/acceso">Entrar</Link>
+          <Link className="button" href="/registro">
+            Crear cuenta
           </Link>
         </nav>
         <ThemeSwitcher compact />
       </header>
-      <main id="contenido" className="home-entry" aria-label="Inicio" />
-      <footer>
-        <nav className="home-demos" aria-label="Demostración sin cuenta">
+      <main id="contenido">
+        <section className="landing-hero" aria-labelledby="landing-title">
+          <div className="landing-hero-stage" aria-hidden="true">
+            <div className="landing-wordmark">
+              Aul<span className="landing-wordmark-i">ı</span>fy
+            </div>
+            <BrandArt
+              name="hero-boy-notebook"
+              className="hero-character hero-character-notebook"
+              eager
+            />
+            <BrandArt
+              name="hero-girl-laptop"
+              className="hero-character hero-character-laptop"
+              width={1024}
+              height={600}
+              eager
+            />
+            <BrandArt
+              name="hero-boy-pencil"
+              className="hero-character hero-character-pencil"
+              eager
+            />
+          </div>
+          <div className="landing-hero-copy">
+            <h1 id="landing-title">El aula digital, más simple e interactiva.</h1>
+            <p>Crea recursos de clase, comparte preguntas y acompaña el aprendizaje.</p>
+            <div className="landing-cta-row">
+              <Link href="/registro" className="button">
+                Crear cuenta <ArrowRight size={18} aria-hidden="true" />
+              </Link>
+              <a href="#como-funciona" className="landing-text-link">
+                Ver cómo funciona <ArrowRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
+        <section id="como-funciona" className="landing-journey" aria-label="Cómo funciona Aulify">
+          {[
+            {
+              title: 'Prepara tu clase',
+              text: 'Organiza explicaciones, imágenes y preguntas en un mismo recurso.',
+              art: 'teacher-laptop',
+            },
+            {
+              title: 'Hazla interactiva',
+              text: 'Comparte una actividad y deja que cada estudiante participe.',
+              art: 'student-phone',
+            },
+            {
+              title: 'Revisa el progreso',
+              text: 'Lee las respuestas, da retroalimentación y publica las notas.',
+              art: 'student-progress',
+            },
+          ].map((step) => (
+            <article className="landing-step" key={step.title}>
+              <div className="landing-step-copy">
+                <h2>{step.title}</h2>
+                <p>{step.text}</p>
+              </div>
+              <BrandArt
+                name={step.art}
+                className="landing-step-art landing-reveal"
+                width={800}
+                height={600}
+              />
+            </article>
+          ))}
+        </section>
+        <section id="plataforma" className="landing-product" aria-labelledby="product-title">
+          <div className="landing-product-copy">
+            <h2 id="product-title">
+              Una explicación.
+              <br />
+              Muchas formas
+              <br />
+              de participar.
+            </h2>
+            <p>Crea tu contenido, agrega preguntas y material de apoyo en un solo lugar.</p>
+            <div className="landing-cta-row">
+              <Link href="/registro" className="button">
+                Crear cuenta <ArrowRight size={18} aria-hidden="true" />
+              </Link>
+              <Link href="/demo?perfil=docente" className="landing-text-link">
+                Explorar la plataforma <ArrowRight size={18} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <div className="landing-product-surface">
+            <figure className="landing-editor-preview landing-reveal">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="preview-light"
+                src="/previews/editor-light.webp"
+                width={960}
+                height={720}
+                alt="Vista real del editor de Aulify con una explicación de ecosistemas y su actividad integrada"
+                loading="lazy"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="preview-dark"
+                src="/previews/editor-dark.webp"
+                width={960}
+                height={720}
+                alt="Vista real del editor de Aulify en modo oscuro"
+                loading="lazy"
+              />
+              <figcaption>Editor de recursos de la demostración</figcaption>
+            </figure>
+            <LandingQuestion />
+          </div>
+        </section>
+        <section className="landing-close" aria-labelledby="close-title">
+          <BrandArt
+            name="friends-high-five"
+            className="landing-close-art landing-reveal"
+            width={900}
+            height={650}
+          />
+          <div>
+            <h2 id="close-title">
+              Tu próxima clase
+              <br />
+              empieza aquí.
+            </h2>
+            <p>Un espacio para enseñar, participar y aprender juntos.</p>
+            <Link href="/registro" className="button">
+              Crear cuenta <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+      </main>
+      <footer className="landing-footer">
+        <Link href="/" aria-label="Aulify, inicio">
+          <Image src="/brand/aulify-logo-white.svg" alt="Aulify" width={132} height={44} />
+        </Link>
+        <nav aria-label="Enlaces de la presentación">
+          <a href="#plataforma">La plataforma</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <Link href="/demo/ayuda">Ayuda</Link>
+        </nav>
+        <nav className="landing-demo-links" aria-label="Demostración sin cuenta">
           <Link href="/demo?perfil=docente">Demo docente</Link>
           <Link href="/demo?perfil=estudiante">Demo estudiante</Link>
         </nav>
       </footer>
-    </div>
+    </LandingMotion>
   );
 }

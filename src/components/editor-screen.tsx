@@ -60,6 +60,7 @@ function EditorForm({
   const [draft, setDraft] = useState<Resource>(() => structuredClone(resource));
   const [saving, setSaving] = useState<'saved' | 'pending' | 'error'>('saved');
   const [publishing, setPublishing] = useState(false);
+  const [questionsOpen, setQuestionsOpen] = useState(false);
   const [conflict, setConflict] = useState(false);
   const [editorKey, setEditorKey] = useState(0);
   const dirty = useRef(false),
@@ -271,22 +272,35 @@ function EditorForm({
               })
             }
           />
-          <QuestionAuthor
-            questions={questions}
-            onChange={(questions) =>
-              update({
-                ...draft,
-                blocks: [
-                  ...draft.blocks.filter((b) => b.type !== 'quiz'),
-                  {
-                    id: draft.blocks.find((b) => b.type === 'quiz')?.id || crypto.randomUUID(),
-                    type: 'quiz',
-                    questions,
-                  },
-                ],
-              })
-            }
-          />
+          <details
+            className="editor-questions-panel"
+            open={questionsOpen}
+            onToggle={(event) => setQuestionsOpen(event.currentTarget.open)}
+          >
+            <summary>
+              <span>
+                <strong>Preguntas del recurso</strong>
+                <span>{questions.length} preguntas</span>
+              </span>
+              <span>Editar preguntas</span>
+            </summary>
+            <QuestionAuthor
+              questions={questions}
+              onChange={(questions) =>
+                update({
+                  ...draft,
+                  blocks: [
+                    ...draft.blocks.filter((b) => b.type !== 'quiz'),
+                    {
+                      id: draft.blocks.find((b) => b.type === 'quiz')?.id || crypto.randomUUID(),
+                      type: 'quiz',
+                      questions,
+                    },
+                  ],
+                })
+              }
+            />
+          </details>
         </div>
       </div>
       <details className="editor-writing-help">

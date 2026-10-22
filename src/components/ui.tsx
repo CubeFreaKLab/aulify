@@ -97,21 +97,28 @@ export function PageHeading({
   eyebrow,
   title,
   description,
+  illustration,
   children,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
+  illustration?: ReactNode;
   children?: ReactNode;
 }) {
   return (
-    <header className="page-heading">
-      <div>
+    <header className={`page-heading${illustration ? ' page-heading-illustrated' : ''}`}>
+      <div className="page-heading-copy">
         {eyebrow && <div className="eyebrow">{eyebrow}</div>}
         <h1>{title}</h1>
         {description && <p>{description}</p>}
       </div>
       {children && <div className="row">{children}</div>}
+      {illustration && (
+        <div className="page-heading-art" aria-hidden="true">
+          {illustration}
+        </div>
+      )}
     </header>
   );
 }

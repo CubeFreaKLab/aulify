@@ -1,5 +1,4 @@
 'use client';
-/* eslint-disable @next/next/no-img-element */
 import Link, { useWorkspaceRouter as useRouter } from './workspace-link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -42,6 +41,7 @@ import { WorkspaceNavigation } from './workspace-navigation';
 import { ResourceReader } from './resource-reader';
 import { HelpGuide, HelpSteps } from './help-guide';
 import { SubjectManagement, ManualActivities } from './classroom-management';
+import { BrandArt } from './brand-art';
 
 export function Workspace() {
   const data = useDemo();
@@ -296,9 +296,11 @@ function Dashboard({
         )}
       </PageHeading>
       <HelpGuide state={state} user={user} placement="dashboard" />
-      <section className="welcome-panel">
+      <section className={`welcome-panel ${teacher ? 'welcome-panel-teacher' : ''}`}>
         <div className="welcome-copy">
-          <h2>{teacher ? 'Una explicación puede ser el comienzo.' : 'Todo está conectado.'}</h2>
+          <h2>
+            {teacher ? 'Prepara tu próxima clase.' : activities[0]?.title || 'Tu próxima clase.'}
+          </h2>
           <p>
             {teacher
               ? 'Añade una pregunta y deja que tus estudiantes sean parte de la historia.'
@@ -320,10 +322,12 @@ function Dashboard({
             <ArrowRight size={17} />
           </Link>
         </div>
-        <div className="welcome-art">
-          <img
-            src="/illustrations/cuaderno.svg"
-            alt="Cuaderno abierto de ciencias con hojas y un lápiz verde"
+        <div className="welcome-art" aria-hidden="true">
+          <BrandArt
+            name={teacher ? 'teacher-welcome' : 'student-welcome'}
+            className="brand-art--greet"
+            width={1000}
+            height={600}
           />
         </div>
       </section>
@@ -607,6 +611,15 @@ function SubjectScreen({
         eyebrow={`${s.course} · ${s.year}`}
         title={s.name}
         description={s.description || 'Cada recurso es una nueva forma de aprender.'}
+        illustration={
+          tab === 'recursos' ? (
+            <BrandArt
+              name={teacher ? 'science-teacher' : 'student-nature'}
+              width={800}
+              height={600}
+            />
+          ) : undefined
+        }
       >
         {teacher && s.status === 'active' && (
           <Link href="/demo/biblioteca" className="button">
@@ -828,13 +841,22 @@ function HelpScreen({
     <>
       <PageHeading
         title={preferences ? 'Aulify, a tu manera.' : 'Una mano para empezar.'}
+        illustration={
+          !preferences ? (
+            <BrandArt
+              name={user.role === 'teacher' ? 'teacher-welcome' : 'student-reader'}
+              width={1000}
+              height={600}
+            />
+          ) : undefined
+        }
         description={
           preferences
             ? 'Tu perfil, apariencia y opciones de accesibilidad.'
             : 'Ayuda breve para encontrar tu próximo paso.'
         }
       />
-      <div className="surface" style={{ maxWidth: 820 }}>
+      <div className={`surface ${preferences ? 'preferences-surface' : 'help-surface'}`}>
         {preferences ? (
           <>
             <h2>{live ? 'Tu perfil' : 'Tu perfil de muestra'}</h2>

@@ -7,6 +7,8 @@ import { useRef, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Field } from './ui';
 import { clearWorkspaceSession } from '@/demo/store';
+import { BrandArt } from './brand-art';
+import { ThemeSwitcher } from './theme';
 import '../styles/auth.css';
 
 type AuthMode = 'access' | 'register' | 'recover' | 'update-password';
@@ -136,12 +138,30 @@ export function AuthScreen({
         <Link href="/" aria-label="Aulify, volver al inicio" className="auth-logo">
           <Image src="/brand/aulify-logo.svg" alt="Aulify" width={866} height={288} priority />
         </Link>
-        <Link className="auth-home-link" href="/">
-          <ArrowLeft size={16} aria-hidden="true" /> Volver al inicio
-        </Link>
+        <div className="auth-header-actions">
+          <ThemeSwitcher compact />
+          <Link className="auth-home-link" href="/">
+            <ArrowLeft size={16} aria-hidden="true" /> Volver al inicio
+          </Link>
+        </div>
       </header>
 
       <main id="contenido" className="auth-layout">
+        <div className="auth-art" aria-hidden="true">
+          <BrandArt
+            name={
+              registering
+                ? 'classroom-team'
+                : recovering
+                  ? 'student-recovery'
+                  : updating
+                    ? 'student-password'
+                    : 'student-reader'
+            }
+            eager
+            className="brand-art--greet"
+          />
+        </div>
         <section className="auth-panel" aria-labelledby="auth-title">
           <div className="auth-form-container">
             <div className="auth-heading">

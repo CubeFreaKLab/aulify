@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-22T07:59:56.783Z",
+  "environment": "Next dev local 3004, Chromium, datos ficticios; sin servicios remotos",
+  "results": [
+    {
+      "name": "light landing: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "light acceso: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "light registro: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "light materia: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "light revision: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "light ayuda: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "Pregunta de la landing: respuesta, explicación y reinicio",
+      "ok": true
+    },
+    {
+      "name": "Editor: abrir preguntas, autoguardado y vista previa",
+      "ok": true
+    },
+    {
+      "name": "Revisión: conservar borrador al navegar y publicar tras corregir",
+      "ok": true
+    },
+    {
+      "name": "dark landing: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "dark acceso: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "dark registro: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "dark materia: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "dark revision: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "dark ayuda: contenido, imágenes y contraste",
+      "ok": true
+    },
+    {
+      "name": "light 390 landing: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 acceso: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 inicio: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 editor: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 materia: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 revision: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 resultados: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 390 ayuda: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 landing: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 acceso: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 inicio: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 editor: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 materia: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 revision: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 resultados: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light 320 ayuda: reflujo",
+      "ok": true
+    },
+    {
+      "name": "light quiz móvil: responder y avanzar",
+      "ok": true
+    },
+    {
+      "name": "dark 390 landing: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 acceso: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 inicio: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 editor: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 materia: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 revision: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 resultados: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 390 ayuda: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 landing: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 acceso: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 inicio: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 editor: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 materia: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 revision: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 resultados: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark 320 ayuda: reflujo",
+      "ok": true
+    },
+    {
+      "name": "dark quiz móvil: responder y avanzar",
+      "ok": true
+    },
+    {
+      "name": "Movimiento: tres planos, revelado y círculo de tema",
+      "ok": true
+    }
+  ],
+  "pageErrors": []
+}
