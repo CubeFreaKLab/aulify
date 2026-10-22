@@ -1,53 +1,168 @@
 {
-  "version": "1.1-refinamiento",
+  "meta": {
+    "name": "Aulify · Cuaderno ilustrado",
+    "description": "Perfil aplicado a la presentación y a la plataforma de recursos de secundaria. Los tokens son decisiones del producto, salvo el acento medido en la referencia de personajes.",
+    "source_references": [
+      "Referencia de personajes de Aulify",
+      "Composición de landing seleccionada",
+      "Logotipo original de Aulify",
+      "Pantallas y recorridos existentes"
+    ],
+    "created_at": "2026-10-22"
+  },
   "design_system": {
     "color": {
-      "green": "#049A4E",
-      "mint": "#B8FAC6",
-      "paper": "#FAFAF8",
-      "lightGray": "#ECECE7",
-      "muted": "#60615A",
-      "ink": "#0F0F0F",
-      "white": "#FFFFFF",
-      "source": "Tokens originales de marca; decisiones semánticas en src/styles/tokens.css",
-      "themes": {
-        "default": "system",
-        "light": {
-          "paper": "#FAFAF8",
-          "ink": "#0F0F0F",
-          "surface": "#FFFFFF"
+      "palette_type": "monochromatic",
+      "primary": {
+        "hex": "#20231F",
+        "role": "Tipografía y acciones principales claras"
+      },
+      "secondary": {
+        "hex": "#F7F7F2",
+        "role": "Papel de fondo"
+      },
+      "accent": {
+        "hex": "#85BD6E",
+        "role": "Personajes y acentos moderados; no usar como texto sobre blanco"
+      },
+      "neutral": {
+        "scale": [
+          "#FFFFFF",
+          "#F7F7F2",
+          "#EEEFE9",
+          "#DDE0D7",
+          "#A4AD9C",
+          "#62695E",
+          "#20231F",
+          "#2B2B2B",
+          "#222222",
+          "#171717"
+        ],
+        "usage": "Superficies claras neutras y modo oscuro en carbón; el verde no es el fondo de la aplicación"
+      },
+      "semantic": {
+        "success": "#385B2D",
+        "warning": "#785112",
+        "error": "#A42B20",
+        "info": "#62695E"
+      },
+      "surface": {
+        "background": "#F7F7F2",
+        "card": "#FFFFFF",
+        "elevated": "#FFFFFF"
+      },
+      "contrast_strategy": "Texto oscuro sobre claro; #385B2D para acentos legibles; modo oscuro #F2F3F1 sobre #171717, acción #B1CD9E sobre carbón.",
+      "measurement": {
+        "k": 8,
+        "sampling": {
+          "method": "deterministic_stratified",
+          "max_pixels": 160000,
+          "sampled_pixels": 160000
+        }
+      },
+      "measured_palette": [
+        {
+          "hex": "#020202",
+          "coverage": 0.466,
+          "role": "background"
         },
-        "dark": {
-          "paper": "#131813",
-          "ink": "#F2F5EF",
-          "surface": "#1C231D",
-          "muted": "#B7C2B7"
+        {
+          "hex": "#fdfdfd",
+          "coverage": 0.2665,
+          "role": "text"
         },
-        "persistence": "Preferencia local del navegador, sincronizada entre pestañas"
-      }
+        {
+          "hex": "#85bd6e",
+          "coverage": 0.1907,
+          "role": "accent"
+        },
+        {
+          "hex": "#abafa8",
+          "coverage": 0.0202,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#1c2419",
+          "coverage": 0.0181,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#455040",
+          "coverage": 0.0136,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#71806c",
+          "coverage": 0.0125,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#e0dddc",
+          "coverage": 0.0125,
+          "role": "unassigned"
+        }
+      ]
     },
     "typography": {
-      "family": "Inter Variable",
-      "weights": {
-        "display": [
-          800,
-          900
-        ],
-        "heading": [
-          700,
-          750
-        ],
-        "control": 650,
-        "body": [
-          400,
-          500
-        ]
+      "type_scale": {
+        "display": {
+          "size": "clamp(120px,25vw,355px)",
+          "weight": 900,
+          "line_height": 1,
+          "tracking": "-0.075em"
+        },
+        "heading_1": {
+          "size": "clamp(30px,2.7vw,38px)",
+          "weight": 800,
+          "line_height": 1.12,
+          "tracking": "-0.04em"
+        },
+        "heading_2": {
+          "size": "20–42px según contexto",
+          "weight": 800,
+          "line_height": 1.15,
+          "tracking": "-0.04em"
+        },
+        "heading_3": {
+          "size": "16–20px",
+          "weight": 700,
+          "line_height": 1.3,
+          "tracking": "-0.02em"
+        },
+        "body": {
+          "size": "15px",
+          "weight": 400,
+          "line_height": 1.6,
+          "tracking": "normal"
+        },
+        "body_small": {
+          "size": "13–14px",
+          "weight": 400,
+          "line_height": 1.55,
+          "tracking": "normal"
+        },
+        "caption": {
+          "size": "11–12px",
+          "weight": 500,
+          "line_height": 1.45,
+          "tracking": "normal"
+        },
+        "overline": {
+          "size": "11px",
+          "weight": 700,
+          "line_height": 1.4,
+          "tracking": "0.14em"
+        }
       },
-      "displayScale": "clamp adaptable por composición",
-      "bodyPx": 15,
-      "readingLineHeight": 1.85
+      "font_families": {
+        "heading": "Inter Variable",
+        "body": "Inter Variable",
+        "mono": "ui-monospace, monospace"
+      },
+      "font_style_notes": "Inter en toda la interfaz. Pesos altos para títulos; no reemplazar el logotipo SVG por texto en la navegación."
     },
     "spacing": {
+      "base_unit": "4px",
       "scale": [
         4,
         8,
@@ -58,85 +173,296 @@
         48,
         64
       ],
-      "density": "Amplia en portada; funcional en plataforma"
+      "content_density": "comfortable",
+      "section_rhythm": "Landing con escenas amplias; plataforma con cabeceras breves, listas y documento abierto."
     },
     "layout": {
-      "marketing": "Apertura lateral con cuaderno y planos escolares; demostración de preguntas y pequeño editor operables",
-      "workspace": "Navegación lateral y área central",
-      "mobile": "Composición vertical; navegación desplegable",
-      "maxReadingWidthPx": 800
+      "grid_system": "CSS Grid y Flexbox; lectura en una columna y opciones del quiz en dos columnas de escritorio",
+      "max_content_width": "1440px landing, 1500px plataforma, 880px editor",
+      "columns": {
+        "desktop": "220px de navegación + espacio flexible",
+        "mobile": "Una columna; navegación en diálogo"
+      },
+      "gutter": "15–38px en plataforma; 20–76px en presentación",
+      "breakpoints": {
+        "small": 500,
+        "landing_mobile": 700,
+        "navigation_mobile": 800,
+        "tablet": 1150
+      },
+      "alignment_tendency": "mixed"
     },
     "shape": {
-      "buttonRadiusPx": 10,
-      "cardRadiusPx": 16,
-      "illustration": "Contorno negro y curvas orgánicas"
+      "border_radius": {
+        "small": "6px",
+        "medium": "8px",
+        "large": "12–16px",
+        "pill": "50% solo tema/avatares; 30px potenciadores"
+      },
+      "border_usage": "1px discreto; contraste mayor en opciones de quiz e inputs",
+      "divider_style": "Líneas neutras de 1px"
     },
     "elevation": {
-      "cards": "Borde tenue, sombra contenida",
-      "overlay": "Fondo atenuado y panel flotante"
+      "shadow_style": "soft diffused",
+      "levels": {
+        "low": "0 6px 24px #0f0f0f06",
+        "medium": "0 12px 30px #20231f12",
+        "high": "0 16px 70px #0f0f0f18"
+      },
+      "depth_cues": "Solapamiento de personajes y muestra del editor; sombras reservadas a elementos flotantes"
+    },
+    "iconography": {
+      "style": "Contorno simple consistente; ilustraciones con trazo manual grueso",
+      "stroke_weight": "Lucide 2px; dibujos vectorizados según origen",
+      "size_scale": [
+        16,
+        18,
+        20,
+        24
+      ],
+      "preferred_set": "Lucide React existente"
     },
     "motion": {
-      "durationMs": {
-        "fast": 150,
-        "medium": 250,
-        "long": 350
+      "easing": "cubic-bezier(0.2,0,0,1)",
+      "duration_scale": {
+        "micro": "150ms",
+        "normal": "250–300ms",
+        "macro": "550–700ms"
       },
-      "easing": {
-        "standard": "cubic-bezier(.2,0,0,1)",
-        "enter": "cubic-bezier(0,0,0,1)",
-        "exit": "cubic-bezier(.3,0,1,1)"
-      },
-      "reference": "https://m3.material.io/styles/motion/transitions/transition-patterns",
-      "reducedMotion": "Composición estática y transiciones inmediatas"
+      "entrance_pattern": "Fade through entre destinos; desplazamiento corto hacia detalle",
+      "exit_pattern": "Dirección inversa al volver; sin pantalla de carga artificial",
+      "philosophy": "Movimiento moderado con propósito; respetar prefers-reduced-motion"
     },
     "components": {
-      "controls": "React Aria con estilos Aulify",
-      "editor": "BlockNote con Ariakit y bloque de actividad",
-      "questions": "Una consigna y alternativas amplias",
-      "feedback": "Según política de visibilidad de actividad"
+      "button_style": "Acción principal negra en claro y clara en oscuro; secundarios con borde neutro",
+      "input_style": "Etiquetas persistentes, fondo de superficie y borde legible",
+      "card_style": "Solo agrupaciones con sentido; materia compacta y documento de editor abierto",
+      "navigation_pattern": "Barra lateral persistente y móvil en diálogo; cabecera de quiz separada",
+      "modal_style": "React Aria con foco contenido, salida y tamaños adaptables",
+      "list_style": "Filas claras con una acción contextual",
+      "component_notes": "Conservar nombres, permisos, guardado, corrección y publicación; una maqueta no añade funciones al producto."
     }
   },
   "design_style": {
-    "mood": [
-      "cercano",
-      "curioso",
-      "claro"
-    ],
-    "audience": "Docentes y estudiantes de secundaria",
-    "composition": "Materiales escolares organizados hasta formar una clase; superficies de trabajo tranquilas",
-    "imagery": "Ilustración lineal negra con verde, sin infantilización",
-    "voice": "Español directo, acciones comprensibles",
-    "ornamentation": "Concentrada en la portada; orientada a la tarea dentro del aula"
+    "aesthetic": {
+      "mood": [
+        "cercana",
+        "clara",
+        "escolar",
+        "tranquila"
+      ],
+      "visual_metaphor": "La clase sale del cuaderno",
+      "era_influence": "Ilustración editorial plana contemporánea",
+      "genre": "Producto educativo ilustrado",
+      "personality_traits": [
+        "amigable",
+        "directa",
+        "ordenada"
+      ],
+      "adjectives": [
+        "legible",
+        "humana",
+        "sobria en el trabajo"
+      ]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "subtle accents",
+      "whitespace_usage": "Amplio en presentación; controlado en tareas",
+      "visual_weight_distribution": "Marca y personajes en landing; contenido en plataforma",
+      "focal_strategy": "single hero element",
+      "contrast_level": "high contrast",
+      "texture_usage": "Sin grano, degradados ni texturas artificiales"
+    },
+    "composition": {
+      "hierarchy_method": "typographic hierarchy",
+      "balance_type": "asymmetric",
+      "flow_direction": "vertical",
+      "grouping_strategy": "Por tarea real: preparar, participar y revisar",
+      "negative_space_role": "Separar decisiones y dar descanso al contenido"
+    },
+    "imagery": {
+      "photo_treatment": "Sin fotografías decorativas",
+      "illustration_style": "Blanco opaco, negro y verde hoja apagado; contorno grueso; SVG con paths",
+      "graphic_elements": "Docentes, adolescentes y útiles de clase",
+      "pattern_usage": "Sin patrones de fondo",
+      "image_shape": "Recortes transparentes con figuras completas"
+    },
+    "interaction_feel": {
+      "feedback_style": "Respuesta cercana a la acción; estado y explicación textual",
+      "hover_behavior": "Cambios discretos de borde/superficie y 3px en tarjetas",
+      "transition_personality": "smooth glide",
+      "loading_style": "Esqueleto breve cuando es necesario; sin demoras simuladas",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "Español cercano y concreto",
+      "formality": "Moderada",
+      "cta_style": "direct imperative",
+      "empty_state_approach": "Explicar el siguiente paso sin culpar al usuario",
+      "error_tone": "Indicar qué ocurrió y cómo continuar"
+    }
   },
   "visual_effects": {
     "overview": {
-      "effect_intensity": "moderada en portada, baja en plataforma",
-      "performance_tier": "CSS y DOM"
+      "effect_intensity": "moderate",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "Composición estática completa en móvil, movimiento reducido o sin soporte",
+      "primary_technology": "CSS scroll timelines e IntersectionObserver con limpieza al desmontar"
     },
-    "scroll": {
+    "background_effects": {
+      "type": "none",
+      "description": "Papel o carbón plano",
+      "technology": "CSS",
+      "params": {
+        "color_palette": [
+          "#F7F7F2",
+          "#171717"
+        ],
+        "speed": 0,
+        "density": 0,
+        "opacity": 1,
+        "blend_mode": "normal"
+      }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "No hay partículas",
+      "technology": "none",
+      "params": {
+        "count": 0,
+        "shape": "none",
+        "size_range": [
+          0,
+          0
+        ],
+        "movement_pattern": "none",
+        "color_behavior": "none",
+        "interaction": "none",
+        "spawn_area": "none"
+      }
+    },
+    "3d_elements": {
+      "enabled": false,
+      "type": "none",
+      "description": "No hay 3D",
+      "technology": "none",
+      "params": {
+        "renderer": "none",
+        "lighting": "none",
+        "camera": "none",
+        "materials": "none",
+        "geometry": "none",
+        "post_processing": "none",
+        "interaction_model": "none"
+      }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "No hay shaders",
+      "technology": "none",
+      "params": {
+        "uniforms": {},
+        "vertex_manipulation": "none",
+        "fragment_output": "none",
+        "noise_type": "none",
+        "distortion": 0
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": true,
+        "layers": [
+          "Marca fija",
+          "Estudiante con cuaderno: -38px y -3°",
+          "Estudiante con portátil: -12px y escala 1.025",
+          "Estudiante con lápiz: -60px y 2°"
+        ],
+        "depth_range": "12–60px",
+        "speed_curve": "Lineal con la salida de la escena; solo escritorio y sin reducción de movimiento"
+      },
+      "scroll_triggered_animations": {
+        "enabled": true,
+        "trigger_points": "12% visible, una vez por ilustración",
+        "animation_type": "Opacity/translate y revelado de tinta en cierre",
+        "scrub_behavior": "Solo parallax; apariciones puntuales sin secuestrar el scroll"
+      },
+      "scroll_morphing": {
+        "enabled": false,
+        "description": "No se deforman los personajes ni las letras"
+      }
+    },
+    "text_effects": {
+      "type": "none",
+      "description": "Texto real estable",
+      "technology": "HTML/CSS",
+      "params": {
+        "split_strategy": "none",
+        "animation_per_unit": "none",
+        "stagger": 0,
+        "effect_style": "none"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "Cursor nativo",
+      "params": {
+        "shape": "native",
+        "size": "native",
+        "blend_mode": "normal",
+        "trail": false,
+        "interaction_zone": "none"
+      }
+    },
+    "image_effects": {
+      "type": "SVG transparentes",
+      "description": "Figuras completas, filtro de contorno claro en oscuro",
+      "technology": "SVG paths y CSS",
+      "params": {
+        "filter_pipeline": "Cuatro drop-shadow de 0.7px en oscuro para conservar siluetas negras",
+        "hover_transform": "none",
+        "reveal_animation": "450–650ms una vez",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false,
+      "style": "none",
+      "params": {
+        "blur_radius": 0,
+        "transparency": 1,
+        "border_treatment": "solid",
+        "shadow_type": "soft",
+        "light_source_angle": "none"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": false,
+      "type": "none",
+      "description": "No hay lienzo ni lazo de dibujo",
+      "technology": "none",
+      "params": {
+        "draw_method": "none",
+        "animation_loop": false,
+        "color_scheme": "none",
+        "responsiveness": "CSS",
+        "interaction": "none"
+      }
+    },
+    "svg_animations": {
       "enabled": true,
-      "effect": "Líneas de tiempo CSS por plano, composición móvil con desplazamiento acotado; alternativa estática sin soporte o con movimiento reducido"
+      "type": "Transformaciones y revelado de SVG completos",
+      "description": "Tres planos en hero, saludo puntual y tinta en cierre",
+      "params": {
+        "animation_method": "CSS transform/opacity/clip-path",
+        "path_morphing": false,
+        "stroke_animation": false,
+        "filter_effects": "Contorno discreto en oscuro"
+      }
     },
-    "webgl": {
-      "enabled": false
-    },
-    "particles": {
-      "enabled": false
-    },
-    "cursorEffects": {
-      "enabled": false
-    },
-    "transitions": {
-      "enabled": true,
-      "patterns": [
-        "container transform",
-        "forward/backward",
-        "lateral",
-        "top level",
-        "enter/exit",
-        "skeleton"
-      ]
-    },
-    "composite_notes": "Logo SVG original y cuaderno vectorizado en 427 trazados; preguntas HTML. Cambio de tema con View Transitions cuando existe soporte y no se solicita movimiento reducido."
+    "composite_notes": "Un único botón alterna sol/luna mediante View Transition circular de 700ms; fallback inmediato con movimiento reducido. Los dibujos siguen siendo imágenes SVG, mientras los controles y textos son HTML funcional. No se utiliza Lottie, GSAP, WebGL ni la runtime genérica de scroll-craft en el bundle."
   }
 }

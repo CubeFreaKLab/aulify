@@ -1,0 +1,616 @@
+{
+  "date": "2026-10-22",
+  "accent": "#85BD6E",
+  "vectorizer": {
+    "name": "@visioncortex/vtracer",
+    "version": "1.0.0-alpha.4"
+  },
+  "assets": [
+    {
+      "id": "avatar-boy-heart",
+      "svg": "avatar-boy-heart.svg",
+      "paths": 5,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 3122,
+      "png": {
+        "width": 1748,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 124325
+      }
+    },
+    {
+      "id": "avatar-boy-suit",
+      "svg": "avatar-boy-suit.svg",
+      "paths": 6,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#EEF3E8",
+        "#85BD6E"
+      ],
+      "svgBytes": 2798,
+      "png": {
+        "width": 1766,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 127997
+      }
+    },
+    {
+      "id": "avatar-boy-tie",
+      "svg": "avatar-boy-tie.svg",
+      "paths": 6,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 4473,
+      "png": {
+        "width": 1784,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 152850
+      }
+    },
+    {
+      "id": "avatar-boy-white",
+      "svg": "avatar-boy-white.svg",
+      "paths": 11,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#EEF3E8",
+        "#D2D3CF"
+      ],
+      "svgBytes": 4474,
+      "png": {
+        "width": 1709,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 158622
+      }
+    },
+    {
+      "id": "avatar-girl-blouse",
+      "svg": "avatar-girl-blouse.svg",
+      "paths": 4,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 3670,
+      "png": {
+        "width": 1732,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 145111
+      }
+    },
+    {
+      "id": "avatar-girl-braids",
+      "svg": "avatar-girl-braids.svg",
+      "paths": 9,
+      "colors": [
+        "#202020",
+        "#EEF3E8",
+        "#FFFFFF",
+        "#D2D3CF"
+      ],
+      "svgBytes": 5284,
+      "png": {
+        "width": 1631,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 179190
+      }
+    },
+    {
+      "id": "avatar-girl-collar",
+      "svg": "avatar-girl-collar.svg",
+      "paths": 8,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 3678,
+      "png": {
+        "width": 1662,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 141204
+      }
+    },
+    {
+      "id": "avatar-girl-striped",
+      "svg": "avatar-girl-striped.svg",
+      "paths": 4,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 3189,
+      "png": {
+        "width": 1550,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 141943
+      }
+    },
+    {
+      "id": "avatar-teacher",
+      "svg": "avatar-teacher.svg",
+      "paths": 7,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#D2D3CF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 3706,
+      "png": {
+        "width": 1750,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 156536
+      }
+    },
+    {
+      "id": "classroom-team",
+      "svg": "classroom-team.svg",
+      "paths": 32,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8",
+        "#D2D3CF"
+      ],
+      "svgBytes": 20281,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 241116
+      }
+    },
+    {
+      "id": "ecosystem",
+      "svg": "ecosystem.svg",
+      "paths": 29,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E"
+      ],
+      "svgBytes": 29511,
+      "png": {
+        "width": 2048,
+        "height": 1365,
+        "alpha": true,
+        "bytes": 233596
+      }
+    },
+    {
+      "id": "friends-high-five",
+      "svg": "friends-high-five.svg",
+      "paths": 34,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 20529,
+      "png": {
+        "width": 2048,
+        "height": 1365,
+        "alpha": true,
+        "bytes": 225147
+      }
+    },
+    {
+      "id": "hero-boy-notebook",
+      "svg": "hero-boy-notebook.svg",
+      "paths": 27,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 16868,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 221591
+      }
+    },
+    {
+      "id": "hero-boy-pencil",
+      "svg": "hero-boy-pencil.svg",
+      "paths": 37,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8",
+        "#D2D3CF"
+      ],
+      "svgBytes": 15278,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 198696
+      }
+    },
+    {
+      "id": "hero-girl-laptop",
+      "svg": "hero-girl-laptop.svg",
+      "paths": 29,
+      "colors": [
+        "#202020",
+        "#D2D3CF",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 15798,
+      "png": {
+        "width": 2048,
+        "height": 1024,
+        "alpha": true,
+        "bytes": 140575
+      }
+    },
+    {
+      "id": "object-book",
+      "svg": "object-book.svg",
+      "paths": 5,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 4497,
+      "png": {
+        "width": 2048,
+        "height": 1263,
+        "alpha": true,
+        "bytes": 167723
+      }
+    },
+    {
+      "id": "object-books",
+      "svg": "object-books.svg",
+      "paths": 7,
+      "colors": [
+        "#202020",
+        "#85BD6E",
+        "#FFFFFF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 3501,
+      "png": {
+        "width": 2048,
+        "height": 1545,
+        "alpha": true,
+        "bytes": 166310
+      }
+    },
+    {
+      "id": "object-laptop",
+      "svg": "object-laptop.svg",
+      "paths": 4,
+      "colors": [
+        "#EEF3E8",
+        "#202020",
+        "#85BD6E"
+      ],
+      "svgBytes": 2297,
+      "png": {
+        "width": 2048,
+        "height": 1156,
+        "alpha": true,
+        "bytes": 87095
+      }
+    },
+    {
+      "id": "object-notebook",
+      "svg": "object-notebook.svg",
+      "paths": 5,
+      "colors": [
+        "#85BD6E",
+        "#202020",
+        "#EEF3E8"
+      ],
+      "svgBytes": 5077,
+      "png": {
+        "width": 1859,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 197617
+      }
+    },
+    {
+      "id": "object-pencil",
+      "svg": "object-pencil.svg",
+      "paths": 6,
+      "colors": [
+        "#202020",
+        "#85BD6E",
+        "#FFFFFF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 2015,
+      "png": {
+        "width": 1547,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 122110
+      }
+    },
+    {
+      "id": "object-phone",
+      "svg": "object-phone.svg",
+      "paths": 2,
+      "colors": [
+        "#85BD6E",
+        "#202020"
+      ],
+      "svgBytes": 1875,
+      "png": {
+        "width": 1501,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 109203
+      }
+    },
+    {
+      "id": "object-plant",
+      "svg": "object-plant.svg",
+      "paths": 3,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E"
+      ],
+      "svgBytes": 2498,
+      "png": {
+        "width": 1749,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 135087
+      }
+    },
+    {
+      "id": "object-worksheets",
+      "svg": "object-worksheets.svg",
+      "paths": 2,
+      "colors": [
+        "#202020",
+        "#FFFFFF"
+      ],
+      "svgBytes": 1787,
+      "png": {
+        "width": 2048,
+        "height": 1806,
+        "alpha": true,
+        "bytes": 125302
+      }
+    },
+    {
+      "id": "science-teacher",
+      "svg": "science-teacher.svg",
+      "paths": 16,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 11404,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 213318
+      }
+    },
+    {
+      "id": "student-nature",
+      "svg": "student-nature.svg",
+      "paths": 14,
+      "colors": [
+        "#202020",
+        "#85BD6E",
+        "#FFFFFF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 14453,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 243132
+      }
+    },
+    {
+      "id": "student-password",
+      "svg": "student-password.svg",
+      "paths": 19,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#D2D3CF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 11036,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 149287
+      }
+    },
+    {
+      "id": "student-phone",
+      "svg": "student-phone.svg",
+      "paths": 9,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 11216,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 194398
+      }
+    },
+    {
+      "id": "student-progress",
+      "svg": "student-progress.svg",
+      "paths": 20,
+      "colors": [
+        "#202020",
+        "#D2D3CF",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 11878,
+      "png": {
+        "width": 2048,
+        "height": 1365,
+        "alpha": true,
+        "bytes": 138156
+      }
+    },
+    {
+      "id": "student-reader",
+      "svg": "student-reader.svg",
+      "paths": 25,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 11722,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 190808
+      }
+    },
+    {
+      "id": "student-recovery",
+      "svg": "student-recovery.svg",
+      "paths": 14,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 9888,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 169465
+      }
+    },
+    {
+      "id": "student-thinking",
+      "svg": "student-thinking.svg",
+      "paths": 14,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E"
+      ],
+      "svgBytes": 7871,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 166545
+      }
+    },
+    {
+      "id": "student-welcome",
+      "svg": "student-welcome.svg",
+      "paths": 19,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#85BD6E",
+        "#EEF3E8"
+      ],
+      "svgBytes": 13358,
+      "png": {
+        "width": 2048,
+        "height": 1024,
+        "alpha": true,
+        "bytes": 140300
+      }
+    },
+    {
+      "id": "teacher-laptop",
+      "svg": "teacher-laptop.svg",
+      "paths": 33,
+      "colors": [
+        "#202020",
+        "#FFFFFF",
+        "#EEF3E8",
+        "#85BD6E"
+      ],
+      "svgBytes": 15347,
+      "png": {
+        "width": 2048,
+        "height": 2048,
+        "alpha": true,
+        "bytes": 205901
+      }
+    },
+    {
+      "id": "teacher-welcome",
+      "svg": "teacher-welcome.svg",
+      "paths": 27,
+      "colors": [
+        "#FFFFFF",
+        "#202020",
+        "#85BD6E",
+        "#D2D3CF",
+        "#EEF3E8"
+      ],
+      "svgBytes": 18240,
+      "png": {
+        "width": 2048,
+        "height": 1153,
+        "alpha": true,
+        "bytes": 157794
+      }
+    }
+  ]
+}

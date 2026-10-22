@@ -1,6 +1,7 @@
 @import '../styles/tokens.css';
 @import '../styles/workspace.css';
 @import '../styles/theme.css';
+@import '../styles/brand-art.css';
 
 * {
   box-sizing: border-box;

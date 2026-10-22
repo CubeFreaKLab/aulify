@@ -1,0 +1,33 @@
+.brand-art {
+  display: block;
+  min-width: 0;
+}
+.brand-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+:root[data-theme='dark'] .brand-art img {
+  filter: drop-shadow(0.7px 0 0 #f2f3ef) drop-shadow(-0.7px 0 0 #f2f3ef)
+    drop-shadow(0 0.7px 0 #f2f3ef) drop-shadow(0 -0.7px 0 #f2f3ef);
+}
+.brand-art--greet {
+  transform-origin: 50% 90%;
+  animation: illustration-greet 550ms var(--ease-emphasized) both;
+}
+@keyframes illustration-greet {
+  from {
+    opacity: 0;
+    transform: translateY(10px) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-art--greet {
+    animation: none;
+  }
+}
