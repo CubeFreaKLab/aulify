@@ -54,18 +54,19 @@
   --muted: #b5b5b5;
   --line: #3b3b3b;
   --line-strong: #7a7a7a;
-  --green-text: #b1cd9e;
+  --green: #aaa;
+  --green-text: #dedede;
   --mint-soft: #292929;
   --danger: #ffb0a3;
   --danger-soft: #40251f;
   --amber: #f1d28f;
   --amber-soft: #3d331d;
-  --focus: #b1cd9e;
+  --focus: #dedede;
   --on-ink: #18191b;
-  --action-green: #b1cd9e;
+  --action-green: #dedede;
   --on-green: #20231f;
-  --mint: #31382d;
-  --on-mint: #edf1e8;
+  --mint: #303030;
+  --on-mint: #f2f2f2;
   --shadow-card: 0 6px 24px #00000018;
   --shadow-float: 0 16px 70px #00000038;
 }

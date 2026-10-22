@@ -9,8 +9,8 @@
   object-fit: contain;
 }
 :root[data-theme='dark'] .brand-art img {
-  filter: drop-shadow(0.7px 0 0 #f2f3ef) drop-shadow(-0.7px 0 0 #f2f3ef)
-    drop-shadow(0 0.7px 0 #f2f3ef) drop-shadow(0 -0.7px 0 #f2f3ef);
+  filter: grayscale(1) drop-shadow(0.4px 0 0 #dedede) drop-shadow(-0.4px 0 0 #dedede)
+    drop-shadow(0 0.4px 0 #dedede) drop-shadow(0 -0.4px 0 #dedede);
 }
 .brand-art--greet {
   transform-origin: 50% 90%;

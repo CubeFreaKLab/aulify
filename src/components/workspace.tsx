@@ -283,9 +283,7 @@ function Dashboard({
       <PageHeading
         title={`Hola, ${user.name.split(' ')[0]}.`}
         description={
-          teacher
-            ? 'Todo listo para tu próxima clase.'
-            : 'Tu próxima idea empieza con una pregunta.'
+          teacher ? 'Todo listo para tu próxima clase.' : 'Tus materias, actividades y entregas.'
         }
       >
         {teacher && (
@@ -303,7 +301,7 @@ function Dashboard({
           </h2>
           <p>
             {teacher
-              ? 'Añade una pregunta y deja que tus estudiantes sean parte de la historia.'
+              ? 'Continúa un recurso de tu biblioteca o prepara una actividad para tu materia.'
               : 'Explora los recursos de tus materias y participa a tu ritmo.'}
           </p>
           <Link

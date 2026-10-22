@@ -64,46 +64,45 @@ export function Landing() {
           </div>
         </section>
         <section id="como-funciona" className="landing-journey" aria-label="Cómo funciona Aulify">
-          {[
-            {
-              title: 'Prepara tu clase',
-              text: 'Organiza explicaciones, imágenes y preguntas en un mismo recurso.',
-              art: 'teacher-laptop',
-            },
-            {
-              title: 'Hazla interactiva',
-              text: 'Comparte una actividad y deja que cada estudiante participe.',
-              art: 'student-phone',
-            },
-            {
-              title: 'Revisa el progreso',
-              text: 'Lee las respuestas, da retroalimentación y publica las notas.',
-              art: 'student-progress',
-            },
-          ].map((step) => (
-            <article className="landing-step" key={step.title}>
-              <div className="landing-step-copy">
-                <h2>{step.title}</h2>
-                <p>{step.text}</p>
-              </div>
-              <BrandArt
-                name={step.art}
-                className="landing-step-art landing-reveal"
-                width={800}
-                height={600}
-              />
-            </article>
-          ))}
+          <div className="landing-journey-intro">
+            <h2>De la explicación a la práctica</h2>
+            <BrandArt
+              name="teacher-laptop"
+              className="landing-journey-art landing-reveal"
+              width={800}
+              height={600}
+            />
+          </div>
+          <div className="landing-journey-steps">
+            {[
+              {
+                title: 'Prepara tu clase',
+                text: 'Organiza explicaciones, imágenes y preguntas en un mismo recurso.',
+                art: 'teacher-laptop',
+              },
+              {
+                title: 'Hazla interactiva',
+                text: 'Comparte una actividad y deja que cada estudiante participe.',
+                art: 'student-phone',
+              },
+              {
+                title: 'Revisa el progreso',
+                text: 'Lee las respuestas, da retroalimentación y publica las notas.',
+                art: 'student-progress',
+              },
+            ].map((step) => (
+              <article className="landing-step" key={step.title}>
+                <div className="landing-step-copy">
+                  <h2>{step.title}</h2>
+                  <p>{step.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
         <section id="plataforma" className="landing-product" aria-labelledby="product-title">
           <div className="landing-product-copy">
-            <h2 id="product-title">
-              Una explicación.
-              <br />
-              Muchas formas
-              <br />
-              de participar.
-            </h2>
+            <h2 id="product-title">Explicaciones y preguntas en el mismo recurso</h2>
             <p>Crea tu contenido, agrega preguntas y material de apoyo en un solo lugar.</p>
             <div className="landing-cta-row">
               <Link href="/registro" className="button">
@@ -147,12 +146,8 @@ export function Landing() {
             height={650}
           />
           <div>
-            <h2 id="close-title">
-              Tu próxima clase
-              <br />
-              empieza aquí.
-            </h2>
-            <p>Un espacio para enseñar, participar y aprender juntos.</p>
+            <h2 id="close-title">Prepara una clase con Aulify</h2>
+            <p>Empieza con un recurso, invita a tu curso y revisa sus respuestas.</p>
             <Link href="/registro" className="button">
               Crear cuenta <ArrowRight size={18} aria-hidden="true" />
             </Link>

@@ -154,7 +154,9 @@
   margin-bottom: 30px;
 }
 .page-heading h1 {
-  font-size: clamp(30px, 2.7vw, 38px);
+  font-size: clamp(28px, 2.4vw, 34px);
+  font-weight: 750;
+  letter-spacing: -0.025em;
 }
 .page-heading p {
   color: var(--muted);
@@ -186,14 +188,18 @@
   border: 0;
 }
 .welcome-panel-teacher {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 230px;
+  min-height: 180px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
 }
 .welcome-panel-teacher .welcome-copy {
   padding-left: 0;
 }
 .welcome-panel-teacher .welcome-copy h2 {
-  font-size: clamp(30px, 3vw, 42px);
-  max-width: 13ch;
+  font-size: 26px;
+  max-width: 28ch;
+  letter-spacing: -0.025em;
 }
 .welcome-copy {
   padding: 30px;
@@ -219,7 +225,7 @@
 }
 .welcome-art .brand-art {
   width: 100%;
-  height: 290px;
+  height: 180px;
 }
 .welcome-art img {
   display: block;
@@ -815,8 +821,8 @@ tr:last-child td {
 }
 .page-heading-illustrated {
   position: relative;
-  min-height: 190px;
-  padding-bottom: 28px;
+  min-height: 110px;
+  padding-bottom: 12px;
 }
 .page-heading-illustrated .page-heading-copy {
   max-width: 60%;
@@ -829,9 +835,9 @@ tr:last-child td {
 .page-heading-art {
   position: absolute;
   right: 18px;
-  bottom: -18px;
-  width: 300px;
-  height: 190px;
+  bottom: 0;
+  width: 170px;
+  height: 110px;
   pointer-events: none;
 }
 .page-heading-art .brand-art {
