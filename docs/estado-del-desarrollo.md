@@ -1,5 +1,9 @@
 # Estado del desarrollo
 
+## Navegación del 23 de octubre
+
+La [navegación adaptable](diseno/navegacion-fluid.md) incorpora una barra lateral contraíble con preferencia persistente y una barra móvil con indicador curvo. Los fondos de uso general son neutros y se conserva la marca ilustrada. Las comprobaciones puntuales de escritorio, móvil, foco y movimiento reducido pasaron localmente. Esta actualización no acredita una nueva publicación pública, entrega de correo ni capacidad alojada; esas condiciones se verifican por separado.
+
 Actualizado el 22 de octubre de 2026. La recuperación de datos, cuentas, archivos y aplicación está comprobada en una copia aislada. Aulify funciona con una aplicación compilada local y Supabase. La validación vigente se acota a una clase de treinta estudiantes; su capacidad, el correo y la liberación de producción siguen pendientes. El objetivo histórico de 200 estudiantes no se aprobó.
 
 ## Identidad visual y recorridos

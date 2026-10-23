@@ -170,7 +170,7 @@
 .quiz-feedback {
   margin-top: 20px;
   padding: 22px 25px;
-  border: 1px solid #a2cbae;
+  border: 1px solid var(--line-strong);
   border-radius: 13px;
   background: var(--mint-soft);
 }

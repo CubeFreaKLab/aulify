@@ -155,7 +155,7 @@ select:focus-visible {
   color: var(--on-mint);
 }
 .button.mint:hover {
-  background: #a0f3b3;
+  background: var(--line);
 }
 .button.ghost {
   background: transparent;
@@ -279,7 +279,7 @@ select:focus-visible {
 .notice {
   padding: 13px 16px;
   background: var(--mint-soft);
-  border: 1px solid #b2d7bc;
+  border: 1px solid var(--line-strong);
   border-radius: 10px;
   font-size: 14px;
 }
