@@ -1,4 +1,5 @@
 'use client';
+import { DateControl } from './date-control';
 import { SelectControl } from './select-control';
 import { ProfileAvatar } from './profile-avatar';
 
@@ -753,7 +754,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
           </SelectControl>
         </Field>
         <Field label="Desde la fecha" id="result-from">
-          <input
+          <DateControl
             id="result-from"
             type="date"
             value={fromDate}
@@ -763,7 +764,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
           />
         </Field>
         <Field label="Hasta la fecha" id="result-through">
-          <input
+          <DateControl
             id="result-through"
             type="date"
             value={throughDate}
@@ -1050,7 +1051,7 @@ function NewTaskForm({
         </Field>
         <div className="grid-two">
           <Field label="Disponible desde" id="new-task-opens">
-            <input
+            <DateControl
               id="new-task-opens"
               name="opens"
               type="datetime-local"
@@ -1059,7 +1060,7 @@ function NewTaskForm({
             />
           </Field>
           <Field label="Cierre de entrega" id="new-task-closes">
-            <input
+            <DateControl
               id="new-task-closes"
               name="closes"
               type="datetime-local"

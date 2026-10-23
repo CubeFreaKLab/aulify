@@ -5,7 +5,7 @@
 - Todos los selectores de la aplicación abren listas con el mismo estilo de Aulify. Conservan valores, campos obligatorios, envío de formularios, navegación con flechas y cierre con Escape.
 - Las casillas conservan su semántica y muestran verde con una marca negra al activarse.
 - Las tarjetas de portada permanecen por debajo de la navegación. La barra lateral se contrae y expande con una transición breve, desactivable mediante movimiento reducido.
-- Las herramientas flotantes del editor muestran iconos legibles y ejecutan formato y acciones de tabla; la selección usa verde suave en ambos temas.
+- Las herramientas flotantes del editor muestran iconos legibles y ejecutan formato y acciones de tabla; la selección usa un tono neutro suave en ambos temas, independiente del fondo elegido para el contenido.
 - El cursor cambia suavemente entre lápiz e inserción de texto, también en acceso y registro. Se conserva la posición real del clic y el cursor nativo en dispositivos sin ratón.
 - La ilustración de entrada al quiz pierde únicamente sus tres trazos de énfasis. Las imágenes de las preguntas ganan tamaño sin desbordar móvil.
 - El QR conserva margen de lectura, módulos negros, localizadores verdes y símbolo central de Aulify. Debe decodificarse a la URL original después de incorporar la marca.
@@ -14,9 +14,26 @@
 
 ## Alcance de verificación
 
+### Calendario, columnas y color del editor
+
+- Fecha y fecha/hora usan calendario propio en español, navegación por teclado, límites mínimo/máximo y los mismos valores ISO locales y nombres de FormData que los campos anteriores.
+- Las columnas contienen palabras largas, tablas y desplegables; sus títulos son editables y se pueden vaciar. Los nuevos bloques no incluyen rótulos obligatorios.
+- Texto y celdas admiten un selector visual con tono y código hexadecimal. Se puede restaurar el color automático y conservar colores al guardar, recargar y leer el recurso.
+- Los desplegables y herramientas usan selección neutra; el fondo elegido para una celda no se confunde con el indicador temporal de selección.
+
 Verificar controles, edición, navegación y QR localmente; registrar por separado compilación, CI y vista previa. La nueva prueba de carga se omite por decisión del solicitante; esta omisión no acredita capacidad. Correo transaccional, Figma y materiales de presentación pertenecen a entregas posteriores.
 
 ## Implementación y evidencia
+
+### Calendario y color libre
+
+Los once campos de fecha y fecha/hora comparten DateControl con React Aria y @internationalized/date 3.12.4. El calendario comienza en lunes, usa español y mantiene fechas locales, nombres de formulario, límites y estados deshabilitados. La hora se puede editar en el campo y en el panel.
+
+BlockNote tenía deshabilitados los colores de celda. Se habilitaron y su paleta se sustituyó por un diálogo con área de saturación/brillo, tono, muestras y HEX. Ariakit 0.4.40 mantiene posicionamiento y cierre. Los colores literales se renderizan con los mismos valores validados del lector; las decoraciones del editor cubren propiedades de bloques y celdas. Los títulos de columna son opcionales y editables; al insertar columnas, el cursor entra en el primer párrafo. Las palabras largas se ajustan dentro de su columna.
+
+Verificación local: cuatro recorridos nuevos en Chromium de escritorio/móvil para fechas, hora, límites, borrado, títulos borrables, desbordamiento y colores de texto/celda después de recargar y leer. Dos recorridos existentes de agrupar/apilar columnas también pasaron. Axe no detectó infracciones en el calendario ni en el selector de color de las vistas examinadas. Una primera ejecución se detuvo por un localizador antiguo; la comprobación de accesibilidad detectó un atributo de menú incompatible con un diálogo, corregido usando Popover. No se contabilizan esas ejecuciones como aprobadas. Chrome confirmó el fondo de celda, la escritura dentro de nuevas columnas y el valor ISO local del campo de plazo, incluidos sus estados deshabilitados. Tipos, lint y formato pasaron; compilación local aprobada antes del ajuste final del contenedor accesible. El CI y el despliegue final se registran en el estado del desarrollo.
+
+### Entrega anterior de controles y marca
 
 Los selectores usan React Aria con listas de opciones visibles y campos ocultos para FormData. Insertar bloque ejecuta la acción después de desmontar el menú y restaurar el foco, para continuar escribiendo en el documento. No se alteran los valores ni los contratos de comandos. La selección de celdas y las herramientas de BlockNote conservan sus acciones; el ajuste evita que los SVG se compriman a ancho cero.
 

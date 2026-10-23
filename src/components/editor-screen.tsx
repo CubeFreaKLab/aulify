@@ -1,4 +1,5 @@
 'use client';
+import { DateControl } from './date-control';
 import { SelectControl } from './select-control';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
@@ -392,7 +393,7 @@ function EditorForm({
                 </Field>
               </div>
               <Field id="open-date" label="Disponible desde">
-                <input
+                <DateControl
                   id="open-date"
                   type="datetime-local"
                   required
@@ -404,7 +405,7 @@ function EditorForm({
                 />
               </Field>
               <Field id="close-date" label="Disponible hasta">
-                <input
+                <DateControl
                   id="close-date"
                   type="datetime-local"
                   required

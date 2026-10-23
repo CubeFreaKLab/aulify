@@ -1,0 +1,193 @@
+.brand-date {
+  width: 100%;
+  min-width: 0;
+}
+.brand-date-field {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 8px 6px 12px;
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--white);
+  color: var(--ink);
+}
+.brand-date-field[data-focus-within] {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.brand-date[data-disabled] {
+  opacity: 0.55;
+}
+.brand-date[data-invalid] .brand-date-field {
+  border-color: #b94c40;
+}
+.brand-date-input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.brand-date-segment {
+  padding: 3px 1px;
+  border-radius: 3px;
+  outline: none;
+}
+.brand-date-segment[data-type='literal'] {
+  padding-inline: 0;
+  white-space: pre;
+}
+.brand-date-segment[data-placeholder] {
+  color: var(--muted);
+}
+.brand-date-segment[data-focused] {
+  background: var(--ink);
+  color: var(--white);
+}
+.brand-date-trigger,
+.brand-calendar-nav {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink);
+}
+.brand-date-trigger:hover,
+.brand-calendar-nav:hover {
+  background: var(--surface-muted);
+}
+.brand-calendar-nav[data-disabled] {
+  opacity: 0.35;
+}
+.brand-date-popover {
+  width: min(330px, calc(100vw - 24px));
+  max-height: var(--available-height);
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+  transform-origin: var(--trigger-anchor-point);
+}
+.brand-date-dialog {
+  outline: none;
+}
+.brand-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.brand-calendar-header h2 {
+  font-size: 15px;
+  font-weight: 650;
+  margin: 0;
+}
+.brand-calendar-header h2::first-letter {
+  text-transform: uppercase;
+}
+.brand-calendar-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+  font-size: 14px;
+}
+.brand-calendar-grid th {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  text-align: center;
+}
+.brand-calendar-grid td {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.brand-calendar-day {
+  display: grid;
+  place-items: center;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  outline-offset: -2px;
+}
+.brand-calendar-day[data-outside-month] {
+  color: var(--muted);
+  opacity: 0.55;
+}
+.brand-calendar-day[data-hovered] {
+  background: var(--surface-muted);
+}
+.brand-calendar-day[data-today] {
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.brand-calendar-day[data-selected] {
+  background: var(--ink);
+  color: var(--white);
+  font-weight: 700;
+}
+.brand-calendar-day[data-disabled],
+.brand-calendar-day[data-unavailable] {
+  opacity: 0.28;
+  cursor: default;
+}
+.brand-calendar-day[data-focus-visible] {
+  outline: 2px solid var(--focus);
+}
+.brand-calendar-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+.brand-calendar-time > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.brand-calendar-time > .brand-date-input {
+  flex: 0 0 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  padding: 3px 12px;
+}
+.brand-calendar-footer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 16px;
+}
+.brand-calendar-footer > :last-child {
+  margin-left: auto;
+}
+.brand-date-popover[data-entering] {
+  animation: select-in 160ms ease-out;
+}
+.brand-date-popover[data-exiting] {
+  animation: select-in 120ms ease-in reverse;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-date-popover {
+    animation: none !important;
+  }
+}

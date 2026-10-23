@@ -16,7 +16,7 @@ import {
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
 } from '@blocknote/react';
-import { BlockNoteView } from '@blocknote/ariakit';
+import { BlockNoteViewRaw as BlockNoteView, EditorColorProvider } from './editor-color-picker';
 import { BlockSticker } from './illustrated-actions';
 import {
   ArrowUp,
@@ -38,6 +38,7 @@ import type { Block } from '@/domain/types';
 import { safeImageUrl } from '@/domain';
 import { isAllowedEditorHref } from '@/domain/editor-links';
 import { duplicateTree, semanticBlocks, textOf } from '@/lib/rich-document';
+import { editorBlockColors, editorStyleSpecs } from '@/lib/editor-colors';
 import { uploadFile } from '@/lib/upload';
 import {
   resourceImageLayout,
@@ -243,10 +244,20 @@ const columnsBlock = createReactBlockSpec(
   },
 );
 const columnBlock = createReactBlockSpec(
-  { type: 'column', propSchema: { label: { default: 'Columna' } }, content: 'none' },
-  { render: ({ block }) => <span className="editor-column-label">{block.props.label}</span> },
+  { type: 'column', propSchema: { label: { default: '' } }, content: 'none' },
+  {
+    render: ({ block, editor }) => (
+      <input
+        className="editor-column-label"
+        aria-label="Título de columna (opcional)"
+        value={block.props.label}
+        onChange={(event) => editor.updateBlock(block, { props: { label: event.target.value } })}
+      />
+    ),
+  },
 );
 const schema = BlockNoteSchema.create({
+  styleSpecs: editorStyleSpecs,
   blockSpecs: {
     paragraph: defaultBlockSpecs.paragraph,
     heading: createHeadingBlockSpec({ levels: [1, 2, 3, 4] }),
@@ -383,6 +394,8 @@ export default function RichEditor({
   }, [file]);
   const editor = useCreateBlockNote({
     schema,
+    extensions: [editorBlockColors],
+    tables: { cellBackgroundColor: true, cellTextColor: true },
     dictionary: {
       ...es,
       placeholders: { ...es.placeholders, default: 'Escribe o usa / para añadir un bloque' },
@@ -506,13 +519,11 @@ export default function RichEditor({
             children: [
               {
                 type: 'column',
-                props: { label: 'Primera columna' },
-                children: [{ type: 'paragraph', content: 'Escribe aquí.' }],
+                children: [{ type: 'paragraph', content: '' }],
               },
               {
                 type: 'column',
-                props: { label: 'Segunda columna' },
-                children: [{ type: 'paragraph', content: 'Añade otra idea.' }],
+                children: [{ type: 'paragraph', content: '' }],
               },
             ],
           }
@@ -527,7 +538,11 @@ export default function RichEditor({
           : ({ type } as EditorBlock);
     const block = insertOrUpdateBlockForSlashMenu(editor, value);
     if (type === 'image') openImage(block.id);
-    else editor.focus();
+    else {
+      if (type === 'columns' && block.children[0]?.children[0])
+        editor.setTextCursorPosition(block.children[0].children[0], 'start');
+      editor.focus();
+    }
   }
   function outline(items: typeof editor.document, depth = 0): React.ReactNode {
     return items.map((block, i) => (
@@ -560,12 +575,10 @@ export default function RichEditor({
                             children: [
                               {
                                 type: 'column',
-                                props: { label: 'Primera columna' },
                                 children: [duplicateTree(block) as EditorBlock],
                               },
                               {
                                 type: 'column',
-                                props: { label: 'Segunda columna' },
                                 children: [duplicateTree(items[i + 1]) as EditorBlock],
                               },
                             ],
@@ -701,68 +714,71 @@ export default function RichEditor({
         <p className="editor-help">
           Escribe <kbd>/</kbd> para añadir un bloque o selecciona texto para darle formato.
         </p>
-        <BlockNoteView
-          editor={editor}
-          theme={theme}
-          slashMenu={false}
-          filePanel={false}
-          onChange={() => {
-            const doc = JSON.parse(JSON.stringify(editor.document)) as unknown[];
-            onChange(doc, semanticBlocks(doc));
-            setRevision((n) => n + 1);
-          }}
-        >
-          <SuggestionMenuController
-            triggerCharacter="/"
-            getItems={async (query) =>
-              filterSuggestionItems(
-                [
-                  ...getDefaultReactSlashMenuItems(editor)
-                    .filter(
-                      (item) =>
-                        ![es.slash_menu.image.title, es.slash_menu.video.title].includes(
-                          item.title,
-                        ),
-                    )
-                    .map((item) => ({ ...item, icon: <BlockSticker kind={item.title} /> })),
-                  {
-                    title: 'Dos columnas',
-                    subtext: 'Dos bloques lado a lado; apilados en celular',
-                    aliases: ['columnas', 'lado', 'columns'],
-                    group: 'Estructura',
-                    icon: <BlockSticker kind="columnas" />,
-                    onItemClick: () => insert('columns'),
-                  },
-                  {
-                    title: 'Imagen',
-                    subtext: 'Sube una imagen con descripción',
-                    aliases: ['foto', 'imagen', 'image'],
-                    group: 'Materiales',
-                    icon: <BlockSticker kind="imagen" />,
-                    onItemClick: () => insert('image'),
-                  },
-                  {
-                    title: 'Video',
-                    subtext: 'Enlace a un video de la clase',
-                    aliases: ['video', 'youtube'],
-                    icon: <BlockSticker kind="video" />,
-                    group: 'Materiales',
-                    onItemClick: () => insert('video'),
-                  },
-                  {
-                    title: 'Actividad interactiva',
-                    subtext: 'Acceso a las preguntas del recurso',
-                    aliases: ['quiz', 'preguntas', 'actividad'],
-                    group: 'Participación',
-                    icon: <BlockSticker kind="pregunta" />,
-                    onItemClick: () => insert('quiz'),
-                  },
-                ],
-                query,
-              )
-            }
-          />
-        </BlockNoteView>
+        <EditorColorProvider>
+          <BlockNoteView
+            className="bn-ariakit"
+            editor={editor}
+            theme={theme}
+            slashMenu={false}
+            filePanel={false}
+            onChange={() => {
+              const doc = JSON.parse(JSON.stringify(editor.document)) as unknown[];
+              onChange(doc, semanticBlocks(doc));
+              setRevision((n) => n + 1);
+            }}
+          >
+            <SuggestionMenuController
+              triggerCharacter="/"
+              getItems={async (query) =>
+                filterSuggestionItems(
+                  [
+                    ...getDefaultReactSlashMenuItems(editor)
+                      .filter(
+                        (item) =>
+                          ![es.slash_menu.image.title, es.slash_menu.video.title].includes(
+                            item.title,
+                          ),
+                      )
+                      .map((item) => ({ ...item, icon: <BlockSticker kind={item.title} /> })),
+                    {
+                      title: 'Dos columnas',
+                      subtext: 'Dos bloques lado a lado; apilados en celular',
+                      aliases: ['columnas', 'lado', 'columns'],
+                      group: 'Estructura',
+                      icon: <BlockSticker kind="columnas" />,
+                      onItemClick: () => insert('columns'),
+                    },
+                    {
+                      title: 'Imagen',
+                      subtext: 'Sube una imagen con descripción',
+                      aliases: ['foto', 'imagen', 'image'],
+                      group: 'Materiales',
+                      icon: <BlockSticker kind="imagen" />,
+                      onItemClick: () => insert('image'),
+                    },
+                    {
+                      title: 'Video',
+                      subtext: 'Enlace a un video de la clase',
+                      aliases: ['video', 'youtube'],
+                      icon: <BlockSticker kind="video" />,
+                      group: 'Materiales',
+                      onItemClick: () => insert('video'),
+                    },
+                    {
+                      title: 'Actividad interactiva',
+                      subtext: 'Acceso a las preguntas del recurso',
+                      aliases: ['quiz', 'preguntas', 'actividad'],
+                      group: 'Participación',
+                      icon: <BlockSticker kind="pregunta" />,
+                      onItemClick: () => insert('quiz'),
+                    },
+                  ],
+                  query,
+                )
+              }
+            />
+          </BlockNoteView>
+        </EditorColorProvider>
         <details className="advanced editor-outline">
           <summary>Ordenar bloques con botones</summary>
           <div className="advanced-content">{outline(editor.document)}</div>

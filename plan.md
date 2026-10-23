@@ -8,6 +8,8 @@ La [entrega de carrusel y guías contextuales](docs/diseno/carrusel-y-guia-conte
 
 ## 1. Arquitectura implementada
 
+Los controles de fecha usan React Aria con @internationalized/date 3.12.4 para conservar valores locales y validación. El color libre del editor usa el Popover de Ariakit 0.4.40, la misma familia de controles instalada por BlockNote; ambos paquetes se declaran como dependencias directas al importarlos. La selección visual y el código HEX comparten renderizado validado con el lector. No cambia el formato persistido ni requiere migraciones. Criterios y evidencia en [controles y marca](docs/diseno/controles-y-marca.md).
+
 Una aplicación Next.js organiza interfaz, endpoints y contratos de dominio en módulos del mismo repositorio. PostgreSQL ejecuta las operaciones sensibles de forma transaccional. No hay microservicios ni despliegues independientes por módulo.
 
 | Componente | Implementación | Responsabilidad |

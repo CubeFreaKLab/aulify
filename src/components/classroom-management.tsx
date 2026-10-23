@@ -1,4 +1,5 @@
 'use client';
+import { DateControl } from './date-control';
 import { SelectControl } from './select-control';
 
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
@@ -550,8 +551,9 @@ export function ManualActivities({
               <textarea id={`${uid}-description`} name="description" rows={3} maxLength={3000} />
             </Field>
             <Field label="Fecha de la actividad" id={`${uid}-date`}>
-              <input
+              <DateControl
                 id={`${uid}-date`}
+                disabled={action.busy}
                 type="date"
                 name="occursAt"
                 defaultValue={inputDate(new Date().toISOString()).slice(0, 10)}
@@ -783,9 +785,10 @@ export function TaskResubmission({
                   </SelectControl>
                 </Field>
                 <Field label="Nueva fecha límite (hora local)" id={`${uid}-deadline`}>
-                  <input
+                  <DateControl
                     id={`${uid}-deadline`}
                     type="datetime-local"
+                    disabled={!live || action.busy}
                     name="deadline"
                     defaultValue={futureDate()}
                     min={inputDate(new Date().toISOString())}
@@ -905,9 +908,10 @@ export function ActivityManagement({
                   </SelectControl>
                 </Field>
                 <Field label="Nuevo límite (hora local)" id={`${uid}-deadline`}>
-                  <input
+                  <DateControl
                     id={`${uid}-deadline`}
                     name="deadline"
+                    disabled={!live || action.busy || archived}
                     type="datetime-local"
                     min={inputDate(new Date().toISOString())}
                     defaultValue={inputDate(

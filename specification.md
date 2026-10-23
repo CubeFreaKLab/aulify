@@ -216,6 +216,8 @@ Preferencias permite elegir entre 30 retratos circulares (15 masculinos y 15 fem
 
 ### 11.2. Formularios de acceso
 
+Los campos de fecha y fecha/hora de Aulify comparten un calendario en español con teclado, límites y estilo de marca. El editor permite vaciar títulos de columna, contiene palabras largas y ofrece selección visual de colores con HEX para texto y fondo de celdas. La selección de controles es neutra y no sustituye el color del contenido. Criterios detallados en [controles y marca](docs/diseno/controles-y-marca.md).
+
 Nombre, correo y contraseña conservan etiquetas visibles al enfocar o contener un valor, autocompletado y validación accesible. La animación al escribir respeta movimiento reducido y no sustituye la interacción nativa. Docente y estudiante se identifican mediante retratos de marca y controles de radio con teclado; las imágenes no asignan permisos. Una X con nombre accesible permite regresar a portada. El [diseño de acceso](docs/diseno/acceso-ilustrado.md) contiene los criterios y las comprobaciones.
 
 ## 12. Estados y permisos para modelar

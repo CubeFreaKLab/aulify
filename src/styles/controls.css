@@ -78,11 +78,11 @@
   flex-shrink: 0;
 }
 .brand-select-option[data-selected] {
-  background: color-mix(in srgb, #85bd6e 22%, var(--white));
+  background: var(--surface-muted);
   font-weight: 600;
 }
 .brand-select-option[data-focused] {
-  background: color-mix(in srgb, #85bd6e 34%, var(--white));
+  background: color-mix(in srgb, var(--ink) 9%, var(--white));
 }
 .brand-select-option[data-disabled] {
   opacity: 0.45;
@@ -154,7 +154,7 @@ input[type='radio'] {
   accent-color: #578344;
 }
 ::selection {
-  background: #85bd6e55;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
 }
 @media (prefers-reduced-motion: reduce) {
   .brand-select-trigger,

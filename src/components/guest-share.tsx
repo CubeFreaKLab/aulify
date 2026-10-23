@@ -1,4 +1,5 @@
 'use client';
+import { DateControl } from './date-control';
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { QrCode, Copy, ExternalLink } from 'lucide-react';
@@ -177,7 +178,7 @@ export function GuestShare({ activity, live }: { activity: Activity; live: boole
             }}
           >
             <Field label="Disponible desde" id="guest-start">
-              <input
+              <DateControl
                 required
                 id="guest-start"
                 type="datetime-local"
@@ -186,7 +187,7 @@ export function GuestShare({ activity, live }: { activity: Activity; live: boole
               />
             </Field>
             <Field label="Disponible hasta" id="guest-end">
-              <input
+              <DateControl
                 required
                 id="guest-end"
                 type="datetime-local"

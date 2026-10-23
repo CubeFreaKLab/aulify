@@ -1,3 +1,4 @@
+import { setDate } from './date-helpers';
 import { chooseOption } from './select-helpers';
 import { test, expect, type APIRequestContext } from '@playwright/test';
 import fs from 'node:fs';
@@ -358,8 +359,8 @@ test.describe('Resultados integrados con datos ficticios', () => {
       await expect(pending).toHaveCount(1);
       await expect(pending.getByRole('cell').nth(4)).toHaveText('—');
 
-      await page.getByLabel('Desde la fecha', { exact: true }).fill('2026-09-25');
-      await page.getByLabel('Hasta la fecha', { exact: true }).fill('2026-09-25');
+      await setDate(page, 'Desde la fecha', '2026-09-25');
+      await setDate(page, 'Hasta la fecha', '2026-09-25');
       await expect(results).toHaveCount(5);
       await expect(page.getByRole('heading', { name: /Promedio del intervalo/ })).toBeVisible();
       await expectDistribution([1, 1, 0, 0, 2]);
@@ -379,17 +380,17 @@ test.describe('Resultados integrados con datos ficticios', () => {
         fullPage: true,
       });
 
-      await page.getByLabel('Hasta la fecha', { exact: true }).fill('2026-09-26');
+      await setDate(page, 'Hasta la fecha', '2026-09-26');
       await expect(results).toHaveCount(10);
       await expectAverageAgreement(['20', '30', '60', '70', '40']);
-      await page.getByLabel('Desde la fecha', { exact: true }).fill('2026-09-26');
+      await setDate(page, 'Desde la fecha', '2026-09-26');
       await expect(results).toHaveCount(5);
       await expect(page.getByLabel('Actividad para distribución')).toContainText(beta.title);
       await expectDistribution([0, 0, 5, 0, 0]);
       await expectAverageAgreement(['40', '40', '40', '40', '40']);
 
-      await page.getByLabel('Desde la fecha', { exact: true }).fill('');
-      await page.getByLabel('Hasta la fecha', { exact: true }).fill('');
+      await setDate(page, 'Desde la fecha', '');
+      await setDate(page, 'Hasta la fecha', '');
       await chooseOption(page.getByLabel('Curso', { exact: true }), 'all');
       await chooseOption(page.getByLabel('Materia', { exact: true }), other.id);
       await expect(results).toHaveCount(1);
@@ -401,7 +402,7 @@ test.describe('Resultados integrados con datos ficticios', () => {
       await chooseOption(page.getByLabel('Año', { exact: true }), '2025');
       await expect(results).toHaveCount(1);
       await expectAverageAgreement(['10']);
-      await page.getByLabel('Desde la fecha', { exact: true }).fill('2026-09-26');
+      await setDate(page, 'Desde la fecha', '2026-09-26');
       await expect(
         page.getByRole('heading', { name: 'Todavía no hay resultados en este grupo' }),
       ).toBeVisible();
@@ -419,8 +420,8 @@ test.describe('Resultados integrados con datos ficticios', () => {
       await expect(page.getByRole('heading', { name: 'Distribución por actividad' })).toHaveCount(
         0,
       );
-      await page.getByLabel('Desde la fecha', { exact: true }).fill('2026-09-25');
-      await page.getByLabel('Hasta la fecha', { exact: true }).fill('2026-09-25');
+      await setDate(page, 'Desde la fecha', '2026-09-25');
+      await setDate(page, 'Hasta la fecha', '2026-09-25');
       await expect(results).toHaveCount(2);
       await expectAverageAgreement(['0', '10']);
     } finally {

@@ -607,6 +607,12 @@
 .editor-column-label {
   color: var(--muted);
   font-size: 11px;
+  width: 100%;
+  min-width: 0;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  border-radius: 3px;
 }
 .bn-block:has(> .node-columns) > .bn-block-group {
   display: grid;
@@ -634,6 +640,18 @@
 }
 .reader-column,
 .reader-columns > .reader-block {
+  min-width: 0;
+}
+.block-editor
+  .bn-block:has(> .node-columns)
+  :is(.bn-block-outer, .bn-block, .bn-block-content, .bn-inline-content, .bn-toggle-wrapper) {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.block-editor .bn-block:has(> .node-columns) .bn-inline-content,
+.reader-column :is(p, h2, h3, h4, h5, summary, a) {
+  overflow-wrap: anywhere;
   min-width: 0;
 }
 @media (max-width: 600px) {
@@ -794,21 +812,12 @@
 }
 .bn-container .bn-toolbar .bn-ak-button:is([data-selected], :hover),
 .bn-container .bn-ak-menu-item:is(:hover, [data-active-item], [aria-selected='true']) {
-  background: color-mix(in srgb, #85bd6e 24%, var(--white));
+  background: var(--surface-muted);
   color: var(--ink);
 }
-.bn-container .bn-color-picker-dropdown {
-  overflow: auto;
-  scrollbar-width: thin;
-}
 .bn-container .ProseMirror .selectedCell::after {
-  background: #85bd6e40 !important;
-}
-.bn-container .ProseMirror .selectedCell {
-  background: #85bd6e30;
-}
-.bn-container {
-  --bn-colors-highlights-gray-background: #85bd6e40;
+  background: color-mix(in srgb, var(--ink) 10%, transparent) !important;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 .editor-insert-label .brand-select-trigger {
   border: 0;
