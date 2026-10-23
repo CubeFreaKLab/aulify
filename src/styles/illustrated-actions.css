@@ -1,0 +1,75 @@
+.preview-glasses {
+  gap: 10px;
+}
+.preview-glasses > svg {
+  flex-shrink: 0;
+  overflow: visible;
+}
+.glasses-pupils {
+  transition: transform 0.15s ease-out;
+  transform-origin: center;
+}
+.preview-glasses:active .glasses-pupils {
+  transform: scaleY(0.3) !important;
+}
+.document-confirm {
+  position: relative;
+  overflow: hidden;
+  min-width: 162px;
+  gap: 12px;
+  touch-action: pan-y;
+}
+.document-token {
+  flex-shrink: 0;
+  object-fit: contain;
+  transform: translateX(var(--travel));
+  transition: transform 0.15s ease-out;
+  z-index: 1;
+}
+.document-action-label,
+.document-arrow {
+  position: relative;
+  transition: opacity 0.15s;
+}
+.document-confirm[data-moving='true'] .document-action-label {
+  opacity: 0.3;
+}
+.document-road {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.document-road i {
+  width: 17px;
+  border-top: 2px solid var(--on-ink);
+}
+.document-confirm[data-moving='true'] .document-road {
+  opacity: 0.7;
+}
+.document-confirm[aria-busy='true'] .document-token {
+  animation: document-send 0.8s ease-in-out infinite alternate;
+}
+@keyframes document-send {
+  to {
+    transform: translateX(65px) rotate(-8deg);
+  }
+}
+.bn-container .block-sticker {
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glasses-pupils,
+  .document-token,
+  .document-action-label,
+  .document-road {
+    transition: none;
+  }
+  .document-confirm[aria-busy='true'] .document-token {
+    animation: none;
+  }
+}

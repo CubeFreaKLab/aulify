@@ -1,8 +1,8 @@
 import { expect, test, type APIRequestContext, type BrowserContext } from '@playwright/test';
 import fs from 'node:fs';
-import { HELP_STEPS, HELP_VERSION } from '../../src/domain/help';
+import { HELP_VERSION } from '../../src/domain/help';
 import type { DemoState } from '../../src/domain';
-import { expectNoHorizontalOverflow } from './helpers';
+import { finishPageGuide } from './helpers';
 
 test.use({ trace: 'off', screenshot: 'off', video: 'off' });
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:3001';
@@ -65,22 +65,7 @@ test('AC-31/AP-34 remoto: primera visita de ambos perfiles confirmados y persist
       ).toBe(false);
       const page = await context.newPage();
       await page.goto('/aula');
-      const dialog = page.getByRole('dialog');
-      await expect(dialog).toBeVisible();
-      await dialog.getByRole('button', { name: 'Conocer Aulify', exact: true }).click();
-      for (let index = 0; index < HELP_STEPS[role].length; index++) {
-        await expect(
-          dialog.getByRole('heading', { name: HELP_STEPS[role][index][0], exact: true }),
-        ).toBeFocused();
-        await expectNoHorizontalOverflow(page);
-        const next = dialog.getByRole('button', {
-          name: index === 4 ? 'Terminar guía' : 'Siguiente',
-          exact: true,
-        });
-        await expect(next).toBeInViewport();
-        await next.click();
-      }
-      await expect(dialog).toHaveCount(0);
+      const steps = await finishPageGuide(page);
       const after = await snapshot(context.request);
       expect(after.state.helpPreferences).toEqual([
         { userId: account.id, status: 'completed', version: HELP_VERSION },
@@ -97,7 +82,7 @@ test('AC-31/AP-34 remoto: primera visita de ambos perfiles confirmados y persist
       await nextVisit.goto('/aula');
       await expect(nextVisit.getByRole('heading', { name: /^Hola,/ })).toBeVisible();
       await expect(nextVisit.getByRole('dialog')).toHaveCount(0);
-      outcomes.push({ role, steps: 5, firstVisit: true, recovered: true, domainUnchanged: true });
+      outcomes.push({ role, steps, firstVisit: true, recovered: true, domainUnchanged: true });
     } finally {
       for (const context of contexts) {
         await context.request

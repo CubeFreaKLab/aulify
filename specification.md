@@ -200,13 +200,15 @@ Revisión de alcance del 17 de octubre: la validación vigente de RNF-03 utiliza
 
 ## 11. Ayuda inicial por rol
 
-**AY-01.** Primera entrada tras confirmar correo: ofrecer «Conocer Aulify» y «Ahora no». Hasta cinco pasos breves por recorrido, con cierre, retroceso y repetición desde Ayuda. Persistir ofrecida, omitida o completada por cuenta/rol/versión; no interrumpir cada acceso. Nueva versión ofrece invitación discreta, sin abrirse automáticamente.
+**AY-01.** Primera visita a cada tipo de página: abrir una guía breve del rol con cierre, retroceso y repetición desde «Guía de esta página». Se puede desactivar la apertura de próximas guías. Conservar la preferencia inicial por cuenta y versión; registrar las páginas vistas y la apertura manual por perfil y navegador. No repetir automáticamente una página ya omitida o completada.
 
-**AY-02.** Docente: crear materia, invitar/aprobar, preparar recurso, previsualizar/publicar y revisar. Estudiante: ingresar código, reconocer espera, abrir actividad, responder y consultar resultado. Si una pantalla o permiso no existe aún, explicar el próximo paso sin apuntar a elementos ausentes. Dividir guías por momento de uso.
+**AY-02.** Docente: crear materia, invitar/aprobar, preparar recurso, previsualizar/publicar y revisar. Estudiante: ingresar código, reconocer espera, abrir actividad, responder y consultar resultado. Dividir guías por página y momento de uso, iluminando el control real y oscureciendo el resto. Omitir pasos cuyo control no esté disponible para ese rol o estado. No ejecutar la acción explicada al avanzar.
 
 **AY-03.** Avanzar en guía no crea materias, publica, envía respuestas ni consume intentos. Demostraciones con datos ficticios identificados. No abrir guía superpuesta durante intento; ayuda estática sin pausar plazos. Teclado, foco restaurado al cerrar, lectura comprensible, movimiento reducido y móvil sin tapar el control explicado.
 
 **AY-04.** Estados vacíos con siguiente acción útil; explicar intento, peso y publicación. Ayuda permanente sin exigir completar tutorial. Omitir o cerrar no limita funciones.
+
+**UI-23.** La portada presenta siete ilustraciones en un carrusel en arco con texto cinético verde. Ofrecer botones y arrastre, pausa y movimiento reducido. El acceso utiliza imágenes amplias y cierre X accesible. El editor admite dos columnas, apiladas en celular, con guardado y lectura equivalentes y posibilidad de volver a apilar el contenido. Vista previa utiliza anteojos animados; publicar admite deslizar un documento o activar con clic/teclado, conservando configuración y confirmación explícita. Criterios y evidencia en [carrusel y guía contextual](docs/diseno/carrusel-y-guia-contextual.md).
 
 ### 11.1. Avatar y apariencia
 

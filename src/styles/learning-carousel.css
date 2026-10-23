@@ -1,0 +1,176 @@
+.learning-carousel {
+  max-width: 1440px;
+  margin: 20px auto 100px;
+  overflow: hidden;
+  padding-top: 20px;
+}
+.learning-reel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+  font-size: clamp(28px, 4.7vw, 68px);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+.learning-reel-window {
+  position: relative;
+  width: 5.7em;
+  height: 3.15em;
+  perspective: 700px;
+  mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+}
+.learning-reel-window > span {
+  position: absolute;
+  left: 0;
+  top: calc(50% - 0.5em);
+  transform: translateY(calc(var(--slot) * 1.05em)) rotateX(calc(var(--slot) * -30deg));
+  transform-origin: left center;
+  color: #54873e;
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.6s;
+}
+:root[data-theme='dark'] .learning-reel-window > span {
+  color: #85bd6e;
+}
+.learning-arch {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.learning-arch[data-dragging='true'] {
+  cursor: grabbing;
+}
+.learning-arch-horizon {
+  position: absolute;
+  width: 1800px;
+  height: 1800px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  top: 210px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.learning-card {
+  position: absolute;
+  width: 250px;
+  height: 334px;
+  margin: 0;
+  left: calc(50% - 125px);
+  top: 32px;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  transform: translate(var(--x), var(--y)) rotate(var(--angle));
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: drop-shadow(0 9px 8px #00000016);
+  user-select: none;
+}
+.learning-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+:root[data-theme='dark'] .learning-card {
+  filter: drop-shadow(1px 0 0 #eee) drop-shadow(-1px 0 0 #eee) drop-shadow(0 1px 0 #eee)
+    drop-shadow(0 -1px 0 #eee);
+}
+.learning-arch[data-dragging='true'] .learning-card {
+  transition: none;
+}
+.learning-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: -20px;
+  position: relative;
+}
+.learning-carousel-controls p {
+  min-width: 210px;
+  text-align: center;
+  font-weight: 650;
+}
+.learning-carousel-controls p span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 450;
+}
+.learning-carousel-controls button {
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.learning-carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin: 12px;
+}
+.learning-carousel-dots button {
+  border: 0;
+  background: none;
+  padding: 14px 10px;
+}
+.learning-carousel-dots span {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.learning-carousel-dots [aria-current] span {
+  background: var(--ink);
+  transform: scale(1.4);
+}
+@media (max-width: 600px) {
+  .learning-carousel {
+    margin-bottom: 64px;
+  }
+  .learning-reel {
+    flex-direction: column;
+    gap: 0;
+  }
+  .learning-reel-window {
+    height: 2.8em;
+    text-align: center;
+  }
+  .learning-reel-window > span {
+    width: 100%;
+    transform-origin: center;
+  }
+  .learning-arch {
+    height: 360px;
+  }
+  .learning-card {
+    width: 190px;
+    height: 254px;
+    left: calc(50% - 95px);
+    top: 12px;
+  }
+  .learning-arch-horizon {
+    top: 170px;
+  }
+  .learning-carousel-controls {
+    gap: 5px;
+    margin-top: 0;
+  }
+  .learning-carousel-controls p {
+    min-width: 170px;
+    font-size: 13px;
+  }
+  .learning-carousel-controls .icon-button {
+    width: 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .learning-card,
+  .learning-reel-window > span {
+    transition: none;
+  }
+}

@@ -4,6 +4,8 @@
 
 Los comportamientos del producto están en [specification.md](specification.md), el recorrido inicial en [entrega 001](specs/001-recurso-interactivo/spec.md) y las decisiones de alcance en sus casos de aceptación. Este plan explica cómo se construye y verifica la solución.
 
+La [entrega de carrusel y guías contextuales](docs/diseno/carrusel-y-guia-contextual.md) del 23 de octubre utiliza React/CSS y React Aria existentes. El foco visual mide controles reales; la preferencia inicial conserva el contrato por cuenta y las páginas se recuerdan localmente por perfil. Las columnas son bloques anidados del documento JSON existente, con lectura equivalente y apilado móvil; no requieren tablas ni migraciones nuevas. Los controles animados mantienen alternativas de clic y teclado y respetan movimiento reducido.
+
 ## 1. Arquitectura implementada
 
 Una aplicación Next.js organiza interfaz, endpoints y contratos de dominio en módulos del mismo repositorio. PostgreSQL ejecuta las operaciones sensibles de forma transaccional. No hay microservicios ni despliegues independientes por módulo.

@@ -1,13 +1,38 @@
 import { expect, type Page } from '@playwright/test';
 
+export async function finishPageGuide(page: Page): Promise<number> {
+  const guide = page.locator('.page-guide-dialog');
+  await expect(guide).toBeVisible();
+  let steps = 0;
+  while (await guide.count()) {
+    if (++steps > 15) throw new Error('La guía no terminó en el número esperado de pasos.');
+    const heading = guide.getByRole('heading');
+    await expect(heading).toBeFocused();
+    const title = await heading.innerText();
+    await expectNoHorizontalOverflow(page);
+    const next = guide.getByRole('button', { name: 'Siguiente', exact: true });
+    if (await next.count()) {
+      await expect(next).toBeInViewport();
+      await next.click();
+      await expect(heading).not.toHaveText(title);
+    } else {
+      await guide.getByRole('button', { name: 'Terminar guía', exact: true }).click();
+      await expect(guide).toHaveCount(0);
+    }
+  }
+  return steps;
+}
+
 export async function dismissGuide(page: Page): Promise<void> {
   const exitingModals = page.locator('.dialog[data-exiting], .dialog-overlay[data-exiting]');
   await expect(exitingModals).toHaveCount(0);
-  const guide = page.getByRole('dialog', { includeHidden: true }).filter({
-    has: page.getByRole('button', { name: 'Ahora no', exact: true, includeHidden: true }),
-  });
+  const guide = page.locator('.page-guide-dialog');
+  await guide.waitFor({ state: 'visible', timeout: 1500 }).catch(() => {});
   if (await guide.isVisible()) {
-    await guide.getByRole('button', { name: 'Ahora no', exact: true }).click();
+    await guide
+      .getByRole('checkbox', { name: 'Abrir las próximas guías solo cuando las pida' })
+      .check();
+    await guide.getByRole('button', { name: 'Cerrar guía', exact: true }).click();
     // Wait for removal, not just invisibility: an exiting dialog still affects an axe scan.
     await expect(guide).toHaveCount(0);
   }

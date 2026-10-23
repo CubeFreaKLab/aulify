@@ -40,6 +40,7 @@ import { ThemeSwitcher } from './theme';
 import { WorkspaceNavigation } from './workspace-navigation';
 import { ResourceReader } from './resource-reader';
 import { HelpGuide, HelpSteps } from './help-guide';
+import { OpenPageGuide, PageGuide } from './page-guide';
 import { SubjectManagement, ManualActivities } from './classroom-management';
 import { BrandArt } from './brand-art';
 import { AvatarProvider, AvatarPicker, ProfileAvatar } from './profile-avatar';
@@ -120,7 +121,12 @@ export function Workspace() {
     </>
   );
   if (page === 'actividad' && id)
-    return <ActivityScreen activityId={id} user={user} state={state} notices={notices} />;
+    return (
+      <>
+        <ActivityScreen activityId={id} user={user} state={state} notices={notices} />
+        <PageGuide key={`${user.id}:actividad`} page="actividad" user={user} state={state} />
+      </>
+    );
   return (
     <AvatarProvider userId={user.id} live={data.live}>
       <div className="app-shell">
@@ -171,6 +177,7 @@ export function Workspace() {
               </span>
             </div>
             <div className="row">
+              <OpenPageGuide />
               {data.live ? (
                 <Button
                   variant="ghost small"
@@ -238,6 +245,7 @@ export function Workspace() {
             )}
           </WorkspaceTransition>
         </div>
+        <PageGuide key={`${user.id}:${page}`} page={page} user={user} state={state} />
         <DialogPanel
           open={profiles}
           onClose={() => setProfiles(false)}

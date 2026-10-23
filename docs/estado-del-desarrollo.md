@@ -1,8 +1,14 @@
 # Estado del desarrollo
 
+## Carrusel, guías por página y editor — 23 de octubre
+
+La [entrega de carrusel y guía contextual](diseno/carrusel-y-guia-contextual.md) integra las siete ilustraciones aprobadas como SVG, texto cinético verde y controles accesibles. Acceso y registro amplían ilustraciones y cierre X y eliminan la línea de cabecera. Las guías señalan controles reales con oscurecimiento del resto y contenido por página y rol; se pueden cerrar, repetir o dejar en apertura manual. Durante intentos activos se conserva ayuda estática.
+
+El editor añade anteojos animados para vista previa, documento deslizable con alternativa de clic/teclado para publicar, márgenes en preguntas, pictogramas de marca y dos columnas con lectura equivalente y apilado móvil. El lápiz permanece como propuesta de asset, sin cursor instalado. Tipos, lint y construcción local pasaron; ocho recorridos de ayuda y cuatro de columnas/publicación pasaron en escritorio y móvil. La evidencia y límites están en el diseño enlazado; no se repitieron pruebas de carga ni correo.
+
 ## Acceso y encuadres del 23 de octubre
 
-El [acceso ilustrado](diseno/acceso-ilustrado.md) incorpora etiquetas flotantes, una animación breve al escribir, retratos SVG de docente y estudiante y cierre con X. La barra mantiene tamaños independientes para símbolo y logotipo; los encabezados ilustrados separan la acción del dibujo. TypeScript, ESLint, compilación, diez casos de acceso y accesibilidad y la revisión visual puntual pasaron localmente. Las siete propuestas de cards y la ampliación de landing siguen pendientes de aprobación; no se añadieron a la aplicación.
+El [acceso ilustrado](diseno/acceso-ilustrado.md) incorpora etiquetas flotantes, una animación breve al escribir, retratos SVG de docente y estudiante y cierre con X. La barra mantiene tamaños independientes para símbolo y logotipo; los encabezados ilustrados separan la acción del dibujo. TypeScript, ESLint, compilación, diez casos de acceso y accesibilidad y la revisión visual puntual pasaron localmente. Las siete propuestas de cards, inicialmente pendientes, se aprobaron e integraron en la entrega de carrusel descrita arriba.
 
 ## Avatares y presentación del 23 de octubre
 
@@ -73,7 +79,7 @@ El inicio y las pantallas de acceso se simplificaron. La cabecera sitúa la marc
 - Ocho tipos de pregunta, práctica y examen, avance individual o guiado, intentos y plazos de servidor, respuestas definitivas e idempotencia. Pista y doble con consumo único, sonidos opcionales, rachas, equipos y clasificación configurable.
 - Tareas con archivos reales, comprobación de tipo y tamaño, reentrega autorizada y versiones conservadas. Evaluación manual y publicación separadas; los pendientes no se convierten automáticamente en cero.
 - Resultados propios, promedio ponderado, filtros y distribución docente por actividad, con tablas equivalentes. Las incidencias de visibilidad de pestaña requieren revisión docente y no producen sanción automática.
-- Ayuda de cinco pasos por rol, opcional y reabrible, con progreso por cuenta y versión. Durante un intento se presenta ayuda estática sin alterar el reloj.
+- Guías contextuales por página y rol, opcionales y reabribles, con preferencia inicial por cuenta y páginas recordadas por perfil/navegador. Durante un intento se presenta ayuda estática sin alterar el reloj.
 
 ## Diseño e interacción
 

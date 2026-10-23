@@ -4,7 +4,8 @@ import { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Link from './workspace-link';
 import { ArrowRight, ImageOff } from 'lucide-react';
-import { DialogPanel, Button } from './ui';
+import { DialogPanel } from './ui';
+import { PreviewButton } from './illustrated-actions';
 import { questionsOf, safeImageUrl, type Resource } from '@/domain';
 import '@/styles/library.css';
 
@@ -119,9 +120,7 @@ export function ResourcePreview({ resource }: { resource: Resource }) {
   return (
     <>
       <div ref={button}>
-        <Button variant="ghost small" onPress={() => toggle(true)}>
-          Vista previa
-        </Button>
+        <PreviewButton small onPress={() => toggle(true)} />
       </div>
       <DialogPanel open={open} onClose={() => toggle(false)} title="Vista previa">
         <div

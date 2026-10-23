@@ -16,6 +16,7 @@ import {
   SuggestionMenuController,
 } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/ariakit';
+import { BlockSticker } from './illustrated-actions';
 import {
   ArrowUp,
   ArrowDown,
@@ -23,9 +24,9 @@ import {
   Trash2,
   Undo2,
   Redo2,
-  ImagePlus,
   Plus,
   MessageCircleQuestion,
+  Columns2,
 } from 'lucide-react';
 import { createContext, useContext, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -218,6 +219,32 @@ const accessibleToggle: typeof defaultBlockSpecs.toggleListItem = {
     },
   },
 };
+const columnsBlock = createReactBlockSpec(
+  { type: 'columns', propSchema: {}, content: 'none' },
+  {
+    render: ({ block, editor }) => (
+      <div className="editor-columns-label">
+        <Columns2 size={15} aria-hidden="true" />
+        <span>Dos columnas</span>
+        <button
+          type="button"
+          onClick={() =>
+            editor.replaceBlocks(
+              [block],
+              block.children.flatMap((column) => column.children),
+            )
+          }
+        >
+          Apilar contenido
+        </button>
+      </div>
+    ),
+  },
+);
+const columnBlock = createReactBlockSpec(
+  { type: 'column', propSchema: { label: { default: 'Columna' } }, content: 'none' },
+  { render: ({ block }) => <span className="editor-column-label">{block.props.label}</span> },
+);
 const schema = BlockNoteSchema.create({
   blockSpecs: {
     paragraph: defaultBlockSpecs.paragraph,
@@ -233,6 +260,8 @@ const schema = BlockNoteSchema.create({
     image: imageBlock(),
     video: videoBlock(),
     quiz: quizBlock(),
+    columns: columnsBlock(),
+    column: columnBlock(),
   },
 });
 type EditorBlock = PartialBlock<typeof schema.blockSchema>;
@@ -302,6 +331,7 @@ const blockNames: Record<string, string> = {
   checkListItem: 'Lista de tareas',
   quote: 'Cita',
   divider: 'Separador',
+  columns: 'Dos columnas',
 };
 
 export default function RichEditor({
@@ -418,15 +448,31 @@ export default function RichEditor({
   }
   function insert(type: keyof typeof schema.blockSchema) {
     const value: EditorBlock =
-      type === 'table'
+      type === 'columns'
         ? {
-            type: 'table',
-            content: {
-              type: 'tableContent',
-              rows: [{ cells: ['', '', ''] }, { cells: ['', '', ''] }],
-            },
+            type: 'columns',
+            children: [
+              {
+                type: 'column',
+                props: { label: 'Primera columna' },
+                children: [{ type: 'paragraph', content: 'Escribe aquí.' }],
+              },
+              {
+                type: 'column',
+                props: { label: 'Segunda columna' },
+                children: [{ type: 'paragraph', content: 'Añade otra idea.' }],
+              },
+            ],
           }
-        : ({ type } as EditorBlock);
+        : type === 'table'
+          ? {
+              type: 'table',
+              content: {
+                type: 'tableContent',
+                rows: [{ cells: ['', '', ''] }, { cells: ['', '', ''] }],
+              },
+            }
+          : ({ type } as EditorBlock);
     const block = insertOrUpdateBlockForSlashMenu(editor, value);
     if (type === 'image') openImage(block.id);
     else editor.focus();
@@ -443,6 +489,46 @@ export default function RichEditor({
             {i + 1}. {textOf(block.content).slice(0, 70) || blockNames[block.type] || 'Lista'}
           </span>
           <div className="row block-controls">
+            {depth === 0 &&
+              i < items.length - 1 &&
+              block.type !== 'columns' &&
+              items[i + 1].type !== 'columns' && (
+                <button
+                  type="button"
+                  className="icon-button"
+                  title="Colocar junto al siguiente"
+                  aria-label={`Colocar bloque ${i + 1} junto al siguiente`}
+                  onClick={() => {
+                    command(() =>
+                      editor.replaceBlocks(
+                        [block, items[i + 1]],
+                        [
+                          {
+                            type: 'columns',
+                            children: [
+                              {
+                                type: 'column',
+                                props: { label: 'Primera columna' },
+                                children: [duplicateTree(block) as EditorBlock],
+                              },
+                              {
+                                type: 'column',
+                                props: { label: 'Segunda columna' },
+                                children: [duplicateTree(items[i + 1]) as EditorBlock],
+                              },
+                            ],
+                          },
+                        ],
+                      ),
+                    );
+                    setMessage(
+                      'Dos bloques colocados lado a lado. En celular se muestran uno debajo del otro.',
+                    );
+                  }}
+                >
+                  <Columns2 size={16} />
+                </button>
+              )}
             <button
               type="button"
               className="icon-button"
@@ -564,22 +650,35 @@ export default function RichEditor({
             getItems={async (query) =>
               filterSuggestionItems(
                 [
-                  ...getDefaultReactSlashMenuItems(editor).filter(
-                    (item) =>
-                      ![es.slash_menu.image.title, es.slash_menu.video.title].includes(item.title),
-                  ),
+                  ...getDefaultReactSlashMenuItems(editor)
+                    .filter(
+                      (item) =>
+                        ![es.slash_menu.image.title, es.slash_menu.video.title].includes(
+                          item.title,
+                        ),
+                    )
+                    .map((item) => ({ ...item, icon: <BlockSticker kind={item.title} /> })),
+                  {
+                    title: 'Dos columnas',
+                    subtext: 'Dos bloques lado a lado; apilados en celular',
+                    aliases: ['columnas', 'lado', 'columns'],
+                    group: 'Estructura',
+                    icon: <BlockSticker kind="columnas" />,
+                    onItemClick: () => insert('columns'),
+                  },
                   {
                     title: 'Imagen',
                     subtext: 'Sube una imagen con descripción',
                     aliases: ['foto', 'imagen', 'image'],
                     group: 'Materiales',
-                    icon: <ImagePlus size={18} />,
+                    icon: <BlockSticker kind="imagen" />,
                     onItemClick: () => insert('image'),
                   },
                   {
                     title: 'Video',
                     subtext: 'Enlace a un video de la clase',
                     aliases: ['video', 'youtube'],
+                    icon: <BlockSticker kind="video" />,
                     group: 'Materiales',
                     onItemClick: () => insert('video'),
                   },
@@ -588,7 +687,7 @@ export default function RichEditor({
                     subtext: 'Acceso a las preguntas del recurso',
                     aliases: ['quiz', 'preguntas', 'actividad'],
                     group: 'Participación',
-                    icon: <MessageCircleQuestion size={18} />,
+                    icon: <BlockSticker kind="pregunta" />,
                     onItemClick: () => insert('quiz'),
                   },
                 ],

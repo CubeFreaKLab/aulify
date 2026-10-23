@@ -1,0 +1,98 @@
+.page-guide-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  isolation: isolate;
+}
+@media (max-width: 700px) {
+  .app-topbar .page-guide-trigger span {
+    display: none;
+  }
+  .app-topbar .page-guide-trigger {
+    padding: 8px;
+    min-width: 44px;
+  }
+}
+.page-guide-shade {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.page-guide-modal {
+  position: fixed;
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+}
+.page-guide-dialog {
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-top: 4px solid #85bd6e;
+  border-radius: 16px;
+  padding: 18px 22px 20px;
+  box-shadow: 0 12px 64px #0004;
+  outline: none;
+}
+.page-guide-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.page-guide-meta .button {
+  margin-right: -12px;
+  min-width: 44px;
+}
+.page-guide-dialog h2 {
+  font-size: 22px;
+  margin: 8px 0 14px;
+  line-height: 1.15;
+}
+.page-guide-dialog h2:focus {
+  outline: none;
+}
+.page-guide-dialog p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.page-guide-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+}
+.page-guide-auto {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+.page-guide-auto input {
+  flex-shrink: 0;
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  accent-color: #4c793a;
+}
+@media (max-width: 600px) {
+  .page-guide-dialog {
+    padding: 12px 17px 16px;
+  }
+  .page-guide-dialog h2 {
+    font-size: 20px;
+  }
+  .page-guide-dialog p {
+    font-size: 13px;
+  }
+  .page-guide-actions {
+    margin-top: 15px;
+  }
+  .page-guide-auto {
+    margin-top: 13px;
+  }
+}

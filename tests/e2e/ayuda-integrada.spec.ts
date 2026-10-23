@@ -1,7 +1,8 @@
 import { expect, test, type APIRequestContext, type BrowserContext } from '@playwright/test';
 import fs from 'node:fs';
-import { HELP_STEPS, HELP_VERSION } from '../../src/domain/help';
+import { HELP_VERSION } from '../../src/domain/help';
 import type { DemoState } from '../../src/domain';
+import { finishPageGuide } from './helpers';
 
 test.use({ trace: 'off', screenshot: 'off', video: 'off' });
 const enabled = process.env.AULIFY_REMOTE_E2E === '1';
@@ -54,9 +55,9 @@ test('AP-34 remoto: preferencia de la misma cuenta en sesiones independientes de
     const page = await first.newPage();
     await page.goto('/aula');
     await expect(page.getByRole('heading', { name: /^Hola,/ })).toBeVisible();
-    await expect(page.getByRole('dialog')).toHaveCount(0);
-    await page.getByRole('button', { name: 'Ahora no', exact: true }).click();
-    await expect(page.getByRole('button', { name: 'Conocer Aulify', exact: true })).toHaveCount(0);
+    await expect(page.locator('.page-guide-dialog')).toBeVisible();
+    await page.getByRole('button', { name: 'Cerrar guía', exact: true }).click();
+    await expect(page.locator('.page-guide-dialog')).toHaveCount(0);
     const omitted = await snapshot(first.request);
     expect(
       omitted.state.helpPreferences.find((item) => item.version === HELP_VERSION)?.status,
@@ -79,21 +80,8 @@ test('AP-34 remoto: preferencia de la misma cuenta en sesiones independientes de
     await mobile.goto('/aula');
     await expect(mobile.getByRole('heading', { name: /^Hola,/ })).toBeVisible();
     await expect(mobile.getByRole('dialog')).toHaveCount(0);
-    await expect(mobile.getByRole('button', { name: 'Conocer Aulify', exact: true })).toHaveCount(
-      0,
-    );
-    await mobile.goto('/aula/ayuda');
-    await mobile.getByRole('button', { name: 'Repetir la guía', exact: true }).click();
-    const guide = mobile.getByRole('dialog');
-    for (let index = 0; index < HELP_STEPS.teacher.length; index++) {
-      await expect(
-        guide.getByRole('heading', { name: HELP_STEPS.teacher[index][0], exact: true }),
-      ).toBeVisible();
-      await guide
-        .getByRole('button', { name: index === 4 ? 'Terminar guía' : 'Siguiente', exact: true })
-        .click();
-    }
-    await expect(guide).toHaveCount(0);
+    await mobile.getByRole('button', { name: 'Guía de esta página', exact: true }).click();
+    await finishPageGuide(mobile);
     const completed = await snapshot(second.request);
     expect(
       completed.state.helpPreferences.find((item) => item.version === HELP_VERSION)?.status,

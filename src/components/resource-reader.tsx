@@ -119,7 +119,13 @@ function NativeBlocks({ blocks, depth = 0 }: { blocks: unknown[]; depth?: number
       </div>
     ) : null;
     let node: ReactNode;
-    if (b.type === 'heading') {
+    if (b.type === 'columns' || b.type === 'column') {
+      node = (
+        <div className={b.type === 'columns' ? 'reader-columns' : 'reader-column'}>
+          <NativeBlocks blocks={b.children || []} depth={depth + 1} />
+        </div>
+      );
+    } else if (b.type === 'heading') {
       const Heading =
         Number(b.props?.level) <= 1
           ? 'h2'

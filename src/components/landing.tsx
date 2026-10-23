@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { LandingHeader } from './landing-header';
+import { LearningCarousel } from './learning-carousel';
 import { ArrowRight } from 'lucide-react';
 import { BrandArt } from './brand-art';
 import { LandingMotion, LandingQuestion } from './landing-interaction';
@@ -83,6 +84,7 @@ export function Landing() {
             ))}
           </div>
         </section>
+        <LearningCarousel />
         <section id="plataforma" className="landing-product" aria-labelledby="product-title">
           <div className="landing-product-copy">
             <h2 id="product-title">Explicaciones y preguntas en el mismo recurso</h2>

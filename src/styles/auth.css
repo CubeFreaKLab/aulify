@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 0;
 }
 .auth-logo {
   display: block;
@@ -33,9 +33,9 @@
 }
 .auth-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   min-height: calc(100svh - 98px);
-  max-width: 1120px;
+  max-width: 1320px;
   margin: auto;
 }
 .auth-header-actions {
@@ -47,12 +47,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 10px 40px 38px;
+  padding: 28px 12px;
 }
 .auth-art .brand-art {
   width: 100%;
-  max-width: 400px;
-  height: 380px;
+  max-width: 640px;
+  height: 580px;
 }
 .auth-panel {
   padding: clamp(36px, 4.3vw, 70px) clamp(26px, 4vw, 68px);
@@ -266,8 +266,8 @@
 }
 @media (min-width: 1600px) {
   .auth-panel {
-    padding-right: 110px;
-    padding-left: 110px;
+    padding-right: 64px;
+    padding-left: 64px;
   }
 }
 @media (max-width: 1000px) {
@@ -362,8 +362,8 @@
 }
 /* Floating labels keep a native input for autocomplete, selection and password managers. */
 .auth-home-link {
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   justify-content: center;
   color: var(--ink);
   border-radius: 8px;

@@ -1,5 +1,7 @@
 # Tareas de desarrollo de Aulify
 
+T-12, T-19 y T-22 incorporan [carrusel, columnas y guía contextual](docs/diseno/carrusel-y-guia-contextual.md): siete tarjetas aprobadas, texto cinético verde, acceso ampliado, ayuda por página y rol, vista previa ilustrada y confirmación con documento. El lápiz queda como propuesta de asset, sin cursor activo. La verificación local y su alcance se registran en esa entrega; las pruebas remotas históricas pertenecen a su revisión original.
+
 T-19 incorpora la [revisión de avatares, encuadre y cabecera](docs/diseno/avatares-y-navegacion.md) del 23 de octubre: selector de 30 personajes, conservación de color en modo oscuro, símbolo sin recorte y navegación flotante adaptable. Verificación local registrada; publicación y correo mantienen sus controles independientes.
 
 **Estado: base funcional 1.0, modelo 1.3 e implementación integrada con Supabase disponibles. T-02 documental completada; la verificación de entrega y operación sigue abierta.**
@@ -60,7 +62,7 @@ El candidato `27e4df6` tiene CI aprobado con 157 pruebas y 88 recorridos, ademá
 
 No marcar una tarea como completada solo porque exista código. Enlazar su evidencia y actualizar la especificación cuando una decisión cambie el comportamiento previsto.
 
-La [revisión de acceso y encuadres](docs/diseno/acceso-ilustrado.md) aporta a T-04/T-19 la comprobación local de etiquetas flotantes, selección de rol con retratos, navegación de cierre, movimiento reducido y proporciones de marca. La ampliación de landing queda como propuesta pendiente de aprobación.
+La [revisión de acceso y encuadres](docs/diseno/acceso-ilustrado.md) aporta a T-04/T-19 la comprobación local de etiquetas flotantes, selección de rol con retratos, navegación de cierre, movimiento reducido y proporciones de marca. Las siete propuestas de landing se aprobaron e integraron en la entrega posterior de carrusel enlazada al inicio.
 
 La [matriz de trazabilidad](docs/calidad/trazabilidad.md) y el [plan de calidad](docs/calidad/plan-de-calidad.md) completan los criterios y su evidencia.
 

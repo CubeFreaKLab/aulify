@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link, { useWorkspaceRouter as useRouter } from './workspace-link';
-import { Eye, ArrowUpRight, Check, Cloud, ArrowLeft, HelpCircle, BookOpen } from 'lucide-react';
+import { Check, Cloud, ArrowLeft, HelpCircle, BookOpen } from 'lucide-react';
 import {
   defaultActivitySettings,
   questionsOf,
@@ -15,6 +15,7 @@ import {
 import { runDemo, getDemoRepository, remoteCommand } from '@/demo/store';
 import { Button, DialogPanel, Field, EmptyState } from './ui';
 import { QuestionAuthor } from './question-author';
+import { PreviewButton, DocumentConfirm, BlockSticker } from './illustrated-actions';
 const RichEditor = dynamic(() => import('./rich-editor'), {
   ssr: false,
   loading: () => (
@@ -53,6 +54,7 @@ function EditorForm({
   state: DemoState;
   user: User;
 }) {
+  const publishForm = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const live = usePathname().startsWith('/aula');
   const [publishPending, setPublishPending] = useState(false);
@@ -167,23 +169,19 @@ function EditorForm({
               : 'No se pudo guardar'}
         </span>
         <div className="editor-publish-actions">
-          <Button
-            variant="secondary"
+          <PreviewButton
             onPress={async () => {
               if (await save()) router.push(`/demo/previa/${draft.id}`);
             }}
-          >
-            <Eye size={16} />
-            Vista previa
-          </Button>
-          <Button
-            onPress={async () => {
+          />
+          <DocumentConfirm
+            guide="publish"
+            onConfirm={async () => {
               if (await save()) setPublishing(true);
             }}
           >
             Publicar
-            <ArrowUpRight size={16} />
-          </Button>
+          </DocumentConfirm>
         </div>
       </header>
       {conflict && (
@@ -279,6 +277,7 @@ function EditorForm({
           >
             <summary>
               <span>
+                <BlockSticker kind="pregunta" />
                 <strong>Preguntas del recurso</strong>
                 <span>{questions.length} preguntas</span>
               </span>
@@ -325,6 +324,7 @@ function EditorForm({
       >
         <form
           className="stack"
+          ref={publishForm}
           onSubmit={(e) => {
             e.preventDefault();
             publish();
@@ -579,12 +579,14 @@ function EditorForm({
             <Button variant="secondary" onPress={() => setPublishing(false)}>
               Seguir editando
             </Button>
-            <Button
-              type="submit"
-              isDisabled={!subjectId || publishPending || (!questions.length && !live)}
+            <DocumentConfirm
+              onConfirm={async () => {
+                if (publishForm.current?.reportValidity()) await publish();
+              }}
+              disabled={!subjectId || publishPending || (!questions.length && !live)}
             >
               Publicar en la materia
-            </Button>
+            </DocumentConfirm>
           </div>
         </form>
       </DialogPanel>

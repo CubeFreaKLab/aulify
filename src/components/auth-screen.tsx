@@ -147,7 +147,7 @@ export function AuthScreen({
             aria-label="Cerrar y volver al inicio"
             title="Volver al inicio"
           >
-            <X size={26} strokeWidth={2.7} aria-hidden="true" />
+            <X size={36} strokeWidth={3} aria-hidden="true" />
           </Link>
         </div>
       </header>

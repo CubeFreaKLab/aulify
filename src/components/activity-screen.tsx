@@ -39,6 +39,7 @@ import { Button, Badge, EmptyState, PageHeading } from './ui';
 import { QuestionInput } from './question-input';
 import { ResourceReader } from './resource-reader';
 import { StaticAttemptHelp } from './help-guide';
+import { OpenPageGuide } from './page-guide';
 import { BrandArt } from './brand-art';
 import '../styles/quiz.css';
 
@@ -240,6 +241,7 @@ function QuizHeader() {
         <img src="/brand/aulify-logo.svg" alt="Aulify" />
       </Link>
       <Badge>{live ? 'Tu aula' : 'Clase de ejemplo'}</Badge>
+      <OpenPageGuide />
       <Link href="/demo" className="button ghost small">
         <ArrowLeft size={16} />
         Mi inicio
@@ -667,7 +669,7 @@ function TeacherRoom({
           extras={getWorkspaceExtras()}
         />
         {guided ? (
-          <section className="surface">
+          <section className="surface" data-guide="guided-room">
             <div className="row between">
               <Badge tone="green">
                 {activity.guided?.status === 'running'
@@ -691,7 +693,7 @@ function TeacherRoom({
             {activity.guided?.status === 'running' && (
               <p className="muted">{count} estudiantes respondieron esta pregunta.</p>
             )}
-            <div className="row wrap" style={{ marginTop: 24 }}>
+            <div className="row wrap" data-guide="guided-controls" style={{ marginTop: 24 }}>
               {!activity.guided || activity.guided.status === 'waiting' ? (
                 <Button
                   onPress={() =>

@@ -1,6 +1,6 @@
 import type { DemoState, User } from './types';
 
-export const HELP_VERSION = 2;
+export const HELP_VERSION = 3;
 
 export function helpState(state: DemoState, user: User) {
   // El rol principal es inmutable en 1.0; la cuenta identifica también su recorrido.
