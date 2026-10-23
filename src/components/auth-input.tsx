@@ -39,6 +39,7 @@ export function AuthInput({ label, hint, error, trailing, id, onChange, ...props
           id={id}
           placeholder=" "
           data-echo={!!echo}
+          aria-label={label}
           aria-invalid={!!error}
           aria-describedby={
             [hint ? `${id}-hint` : '', error ? `${id}-error` : ''].filter(Boolean).join(' ') ||
@@ -84,7 +85,7 @@ export function AuthInput({ label, hint, error, trailing, id, onChange, ...props
               clearEcho();
           }}
         />
-        <label htmlFor={id} className="auth-floating-label">
+        <label htmlFor={id} className="auth-floating-label" aria-hidden="true">
           {[...label].map((letter, index) => (
             <span key={index} style={{ '--letter': index } as CSSProperties}>
               {letter === ' ' ? '\u00a0' : letter}
