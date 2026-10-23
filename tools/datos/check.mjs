@@ -227,10 +227,12 @@ assert((await db.query('select count(*)::int n from realtime.test_messages')).ro
 await db.exec('drop schema realtime cascade');
 await db.query('select app.emit_activity_hint($1,null,false)',[activity.id]);
 assert(true,'servicio de avisos ausente no impide conservar el comando');
-assert(catalog.length===47&&catalog.every(x=>x.relrowsecurity),'RLS en las 47 tablas propias');
+assert(catalog.length===49&&catalog.every(x=>x.relrowsecurity),'RLS en las 49 tablas propias');
 const publicFunctions=(await db.query(`select p.proname,p.prosecdef,has_function_privilege('anon',p.oid,'EXECUTE') anon,has_function_privilege('authenticated',p.oid,'EXECUTE') authenticated,has_function_privilege('service_role',p.oid,'EXECUTE') service from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'aulify_%'`)).rows;
-const expectedFunctions=['aulify_activity_snapshot','aulify_command','aulify_file','aulify_maintenance','aulify_register_file','aulify_reserve_upload','aulify_service_sync_batch','aulify_snapshot','aulify_sync','aulify_workspace_overview'];
-assert(JSON.stringify(publicFunctions.map(x=>x.proname).sort())===JSON.stringify(expectedFunctions)&&publicFunctions.every(x=>!x.anon&&(x.proname==='aulify_service_sync_batch'?x.prosecdef&&!x.authenticated&&x.service:!x.prosecdef)),'nueve wrappers invoker y lote definer exclusivo del servicio, sin ejecución anónima');
+const expectedFunctions=['aulify_activity_snapshot','aulify_command','aulify_file','aulify_guest','aulify_guest_manage','aulify_maintenance','aulify_member_avatars','aulify_register_file','aulify_reserve_upload','aulify_service_sync_batch','aulify_snapshot','aulify_sync','aulify_workspace_overview'];
+const serverDefiners=new Set(['aulify_service_sync_batch','aulify_guest']);
+const accountDefiners=new Set(['aulify_guest_manage','aulify_member_avatars']);
+assert(JSON.stringify(publicFunctions.map(x=>x.proname).sort())===JSON.stringify(expectedFunctions)&&publicFunctions.every(x=>!x.anon&&(serverDefiners.has(x.proname)?x.prosecdef&&!x.authenticated&&x.service:accountDefiners.has(x.proname)?x.prosecdef&&x.authenticated&&!x.service:!x.prosecdef)),'nueve wrappers invoker, dos definer de servicio y dos proyecciones autenticadas, sin ejecución anónima');
 await db.exec('set role anon');
 await reject(()=>db.query('select public.aulify_snapshot()'),'anon no obtiene snapshot');
 await reject(()=>db.query('select public.aulify_workspace_overview()'),'anon no obtiene resumen del aula');
