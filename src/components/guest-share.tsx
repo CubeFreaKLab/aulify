@@ -138,6 +138,7 @@ export function GuestShare({ activity, live }: { activity: Activity; live: boole
               <img src={qr} alt="Código QR para abrir esta práctica" width={240} height={240} />
             )}
             <input
+              className="input"
               aria-label="Enlace para invitados"
               readOnly
               value={url}
