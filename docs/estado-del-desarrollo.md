@@ -1,5 +1,9 @@
 # Estado del desarrollo
 
+## Avatares y presentación del 23 de octubre
+
+La [actualización de avatares y cabecera](diseno/avatares-y-navegacion.md) añade 30 SVG seleccionables en Preferencias, mantiene los colores de las ilustraciones en modo oscuro, corrige el símbolo de la barra contraída y amplía los dibujos de bienvenida y presentación. La cabecera se transforma en una barra flotante al desplazar. La compilación y las comprobaciones locales de escritorio, móvil, apariencia y permisos del endpoint pasaron. El guardado alojado se distingue de las pruebas con un proveedor controlado.
+
 ## Navegación del 23 de octubre
 
 La [navegación adaptable](diseno/navegacion-fluid.md) incorpora una barra lateral contraíble con preferencia persistente y una barra móvil con indicador curvo. Los fondos de uso general son neutros y se conserva la marca ilustrada. Las comprobaciones puntuales de escritorio, móvil, foco y movimiento reducido pasaron localmente. Esta actualización no acredita una nueva publicación pública, entrega de correo ni capacidad alojada; esas condiciones se verifican por separado.

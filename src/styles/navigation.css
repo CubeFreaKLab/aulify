@@ -62,8 +62,13 @@
     margin-bottom: 20px;
   }
   .app-sidebar[data-collapsed='true'] .app-logo {
-    width: 43px;
-    overflow: hidden;
+    width: 48px;
+    overflow: visible;
+  }
+  .app-sidebar[data-collapsed='true'] .app-logo img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
   }
   .app-sidebar[data-collapsed='true'] .nav-label,
   .app-sidebar[data-collapsed='true'] .sidebar-subjects,

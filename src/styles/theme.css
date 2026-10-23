@@ -6,14 +6,14 @@
   height: 44px;
   padding: 0;
   flex-shrink: 0;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--paper);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: var(--ink);
   cursor: pointer;
 }
 .theme-switcher:hover {
-  background: var(--surface-muted);
+  color: var(--green-text);
 }
 .theme-switcher:focus-visible {
   outline-offset: 3px;
@@ -41,6 +41,9 @@ html[data-theme-transition='circle']::view-transition-new(root) {
 }
 :root[data-theme='dark'] img[src='/brand/aulify-logo.svg'] {
   content: url('/brand/aulify-logo-white.svg');
+}
+:root[data-theme='dark'] img[src='/brand/aulify-symbol.svg'] {
+  content: url('/brand/aulify-symbol-white.svg');
 }
 :root[data-theme='dark'] .subject-card-head,
 :root[data-theme='dark'] .subject-card:nth-child(2) .subject-card-head,

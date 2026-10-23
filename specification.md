@@ -208,6 +208,10 @@ Revisión de alcance del 17 de octubre: la validación vigente de RNF-03 utiliza
 
 **AY-04.** Estados vacíos con siguiente acción útil; explicar intento, peso y publicación. Ayuda permanente sin exigir completar tutorial. Omitir o cerrar no limita funciones.
 
+### 11.1. Avatar y apariencia
+
+Preferencias permite elegir entre 30 retratos circulares (15 masculinos y 15 femeninos), disponibles para ambos roles sin restricciones de elección. La demostración conserva la selección por perfil en el navegador; una cuenta autenticada conserva su preferencia de apariencia al volver a entrar. Un fallo de guardado se informa y no se presenta como éxito. Elegir un avatar no modifica el nombre, el rol ni los permisos. El [diseño de avatares y navegación](docs/diseno/avatares-y-navegacion.md) define su presentación y comprobaciones.
+
 ## 12. Estados y permisos para modelar
 
 | Objeto | Estados o dimensiones |

@@ -9,7 +9,7 @@
   object-fit: contain;
 }
 :root[data-theme='dark'] .brand-art img {
-  filter: grayscale(1) drop-shadow(0.4px 0 0 #dedede) drop-shadow(-0.4px 0 0 #dedede)
+  filter: drop-shadow(0.4px 0 0 #dedede) drop-shadow(-0.4px 0 0 #dedede)
     drop-shadow(0 0.4px 0 #dedede) drop-shadow(0 -0.4px 0 #dedede);
 }
 .brand-art--greet {

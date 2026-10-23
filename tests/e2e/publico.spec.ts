@@ -16,9 +16,14 @@ test('presentación: marca y accesos operativos', async ({ page }, testInfo) => 
     ['Demo estudiante', '/demo?perfil=estudiante'],
   ]) {
     const links = page.getByRole('link', { name, exact: true });
+    if (name === 'Entrar' && !(await links.first().isVisible())) {
+      await page.getByRole('button', { name: 'Abrir menú', exact: true }).click();
+    }
     await expect(links.first()).toBeVisible();
     for (const link of await links.all()) await expect(link).toHaveAttribute('href', href);
   }
+  const closeMenu = page.getByRole('button', { name: 'Cerrar menú', exact: true });
+  if (await closeMenu.isVisible()) await closeMenu.click();
   await expect(page.locator('.theme-switcher')).toHaveCount(1);
   await expectLoadedImages(page);
   await expectNoHorizontalOverflow(page);

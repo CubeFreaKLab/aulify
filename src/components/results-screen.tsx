@@ -1,4 +1,5 @@
 'use client';
+import { ProfileAvatar } from './profile-avatar';
 
 import Link from './workspace-link';
 import {
@@ -430,13 +431,7 @@ export function ReviewScreen({ state, user }: ScreenProps) {
                   aria-pressed={selected.id === attempt.id}
                   onClick={() => setSelectedId(attempt.id)}
                 >
-                  <span className="avatar">
-                    {studentName(state, attempt.studentId)
-                      .split(' ')
-                      .map((part) => part[0])
-                      .slice(0, 2)
-                      .join('')}
-                  </span>
+                  <ProfileAvatar userId={attempt.studentId} />
                   <span>
                     <strong>{studentName(state, attempt.studentId)}</strong>
                     <small>

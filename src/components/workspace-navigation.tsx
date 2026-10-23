@@ -20,6 +20,7 @@ import {
 import Link, { workspacePath } from './workspace-link';
 import { Button } from './ui';
 import { ThemeSwitcher } from './theme';
+import { ProfileAvatar } from './profile-avatar';
 import type { DemoState, Subject, User } from '@/domain';
 import '@/styles/navigation.css';
 
@@ -98,7 +99,10 @@ function NavigationContents({
     <>
       <div className="sidebar-heading">
         <Link href="/" className="app-logo" aria-label="Aulify, portada" onClick={onNavigate}>
-          <img src="/brand/aulify-logo.svg" alt="Aulify" />
+          <img
+            src={collapsed ? '/brand/aulify-symbol.svg' : '/brand/aulify-logo.svg'}
+            alt="Aulify"
+          />
         </Link>
         {onCollapse && (
           <button
@@ -189,13 +193,7 @@ function NavigationContents({
           <span className="nav-label">Preferencias</span>
         </Link>
         <div className="user-line" title={`${user.name} · ${teacher ? 'Docente' : 'Estudiante'}`}>
-          <span className="avatar" aria-hidden="true">
-            {user.name
-              .split(' ')
-              .map((n) => n[0])
-              .slice(0, 2)
-              .join('')}
-          </span>
+          <ProfileAvatar userId={user.id} />
           <div className="user-details">
             <div className="user-name">{user.name}</div>
             <div className="user-role">{teacher ? 'Docente' : 'Estudiante'}</div>

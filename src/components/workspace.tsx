@@ -42,6 +42,7 @@ import { ResourceReader } from './resource-reader';
 import { HelpGuide, HelpSteps } from './help-guide';
 import { SubjectManagement, ManualActivities } from './classroom-management';
 import { BrandArt } from './brand-art';
+import { AvatarProvider, AvatarPicker, ProfileAvatar } from './profile-avatar';
 
 export function Workspace() {
   const data = useDemo();
@@ -121,147 +122,150 @@ export function Workspace() {
   if (page === 'actividad' && id)
     return <ActivityScreen activityId={id} user={user} state={state} notices={notices} />;
   return (
-    <div className="app-shell">
-      <WorkspaceNavigation
-        state={state}
-        user={user}
-        subjects={subjects}
-        open={mobile}
-        onOpenChange={setMobile}
-      />
+    <AvatarProvider userId={user.id} live={data.live}>
+      <div className="app-shell">
+        <WorkspaceNavigation
+          state={state}
+          user={user}
+          subjects={subjects}
+          open={mobile}
+          onOpenChange={setMobile}
+        />
 
-      <div style={{ minWidth: 0 }}>
-        <header className="app-topbar">
-          <div className="row">
-            <button
-              className="icon-button app-mobile-menu"
-              onClick={(event) => {
-                // WebKit does not focus native buttons on pointer activation.
-                event.currentTarget.focus({ preventScroll: true });
-                setMobile(!mobile);
-              }}
-              aria-label={mobile ? 'Cerrar navegación' : 'Abrir navegación'}
-              aria-expanded={mobile}
-              aria-controls={mobile ? 'mobile-navigation' : undefined}
-              aria-haspopup="dialog"
-            >
-              {mobile ? <X size={21} /> : <Menu size={21} />}
-            </button>
-            <span className="crumb">
-              <span className="crumb-context">Tu espacio /</span>{' '}
-              <strong>
-                {(
-                  {
-                    inicio: 'Inicio',
-                    materias: 'Materias',
-                    materia: 'Materia',
-                    biblioteca: 'Biblioteca',
-                    editor: 'Editor',
-                    revision: 'Revisión',
-                    resultados: 'Resultados',
-                    tareas: 'Tareas',
-                    ayuda: 'Ayuda',
-                    preferencias: 'Preferencias',
-                    previa: 'Vista previa',
-                  } as Record<string, string>
-                )[page] || 'Aulify'}
-              </strong>
-            </span>
-          </div>
-          <div className="row">
-            {data.live ? (
-              <Button
-                variant="ghost small"
-                onPress={async () => {
-                  const result = await fetch('/api/auth', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'signout' }),
-                  });
-                  if (result.ok) {
-                    clearWorkspaceSession();
-                    router.replace('/acceso');
-                    router.refresh();
-                  }
+        <div style={{ minWidth: 0 }}>
+          <header className="app-topbar">
+            <div className="row">
+              <button
+                className="icon-button app-mobile-menu"
+                onClick={(event) => {
+                  // WebKit does not focus native buttons on pointer activation.
+                  event.currentTarget.focus({ preventScroll: true });
+                  setMobile(!mobile);
                 }}
+                aria-label={mobile ? 'Cerrar navegación' : 'Abrir navegación'}
+                aria-expanded={mobile}
+                aria-controls={mobile ? 'mobile-navigation' : undefined}
+                aria-haspopup="dialog"
               >
-                Cerrar sesión
-              </Button>
-            ) : (
-              <>
-                <span className="demo-tag">Demostración</span>
+                {mobile ? <X size={21} /> : <Menu size={21} />}
+              </button>
+              <span className="crumb">
+                <span className="crumb-context">Tu espacio /</span>{' '}
+                <strong>
+                  {(
+                    {
+                      inicio: 'Inicio',
+                      materias: 'Materias',
+                      materia: 'Materia',
+                      biblioteca: 'Biblioteca',
+                      editor: 'Editor',
+                      revision: 'Revisión',
+                      resultados: 'Resultados',
+                      tareas: 'Tareas',
+                      ayuda: 'Ayuda',
+                      preferencias: 'Preferencias',
+                      previa: 'Vista previa',
+                    } as Record<string, string>
+                  )[page] || 'Aulify'}
+                </strong>
+              </span>
+            </div>
+            <div className="row">
+              {data.live ? (
                 <Button
                   variant="ghost small"
-                  aria-label="Cambiar perfil"
-                  onPress={() => setProfiles(true)}
+                  onPress={async () => {
+                    const result = await fetch('/api/auth', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ action: 'signout' }),
+                    });
+                    if (result.ok) {
+                      clearWorkspaceSession();
+                      router.replace('/acceso');
+                      router.refresh();
+                    }
+                  }}
                 >
-                  <span className="role-label">Cambiar perfil</span>
-                  <Users size={17} />
-                  <ChevronDown size={13} />
+                  Cerrar sesión
                 </Button>
-              </>
+              ) : (
+                <>
+                  <span className="demo-tag">Demostración</span>
+                  <Button
+                    variant="ghost small"
+                    aria-label="Cambiar perfil"
+                    onPress={() => setProfiles(true)}
+                  >
+                    <span className="role-label">Cambiar perfil</span>
+                    <Users size={17} />
+                    <ChevronDown size={13} />
+                  </Button>
+                </>
+              )}
+            </div>
+          </header>
+          <WorkspaceTransition path={path}>
+            {notices}
+            {page === 'inicio' ? (
+              <Dashboard key={user.id} state={state} user={user} subjects={subjects} />
+            ) : page === 'materias' ? (
+              <SubjectsScreen state={state} user={user} subjects={subjects} />
+            ) : page === 'materia' && id ? (
+              <SubjectScreen state={state} user={user} subjectId={id} />
+            ) : page === 'biblioteca' && teacher ? (
+              <LibraryScreen
+                state={state}
+                user={user}
+                onCreate={() => createResource(user, router.push)}
+              />
+            ) : page === 'editor' && id && teacher ? (
+              <EditorScreen resourceId={id} state={state} user={user} />
+            ) : page === 'previa' && id && teacher ? (
+              <ActivityScreen previewId={id} state={state} user={user} notices={null} />
+            ) : page === 'revision' && teacher ? (
+              <ReviewScreen state={state} user={user} />
+            ) : page === 'resultados' ? (
+              <ResultsScreen state={state} user={user} />
+            ) : page === 'tareas' ? (
+              <TasksScreen state={state} user={user} />
+            ) : page === 'ayuda' || page === 'preferencias' ? (
+              <HelpScreen state={state} user={user} preferences={page === 'preferencias'} />
+            ) : (
+              <EmptyState icon={BookOpen} title="Este espacio no está disponible">
+                Puedes volver a tu inicio o consultar tus materias.
+              </EmptyState>
             )}
-          </div>
-        </header>
-        <WorkspaceTransition path={path}>
-          {notices}
-          {page === 'inicio' ? (
-            <Dashboard key={user.id} state={state} user={user} subjects={subjects} />
-          ) : page === 'materias' ? (
-            <SubjectsScreen state={state} user={user} subjects={subjects} />
-          ) : page === 'materia' && id ? (
-            <SubjectScreen state={state} user={user} subjectId={id} />
-          ) : page === 'biblioteca' && teacher ? (
-            <LibraryScreen
-              state={state}
-              user={user}
-              onCreate={() => createResource(user, router.push)}
-            />
-          ) : page === 'editor' && id && teacher ? (
-            <EditorScreen resourceId={id} state={state} user={user} />
-          ) : page === 'previa' && id && teacher ? (
-            <ActivityScreen previewId={id} state={state} user={user} notices={null} />
-          ) : page === 'revision' && teacher ? (
-            <ReviewScreen state={state} user={user} />
-          ) : page === 'resultados' ? (
-            <ResultsScreen state={state} user={user} />
-          ) : page === 'tareas' ? (
-            <TasksScreen state={state} user={user} />
-          ) : page === 'ayuda' || page === 'preferencias' ? (
-            <HelpScreen state={state} user={user} preferences={page === 'preferencias'} />
-          ) : (
-            <EmptyState icon={BookOpen} title="Este espacio no está disponible">
-              Puedes volver a tu inicio o consultar tus materias.
-            </EmptyState>
-          )}
-        </WorkspaceTransition>
-      </div>
-      <DialogPanel
-        open={profiles}
-        onClose={() => setProfiles(false)}
-        title="Explora otro lado de la clase"
-      >
-        <p className="muted" style={{ marginBottom: 22 }}>
-          Estos perfiles son ficticios. Tus cambios se conservan en esta demostración del navegador.
-        </p>
-        <div className="stack">
-          {state.users.map((u) => (
-            <Button
-              key={u.id}
-              variant="secondary"
-              style={{ justifyContent: 'start' }}
-              onPress={() => onProfile(u.id)}
-            >
-              <span className="avatar">{u.name[0]}</span>
-              <span>
-                {u.name} · {u.role === 'teacher' ? 'Docente' : 'Estudiante'}
-              </span>
-              {user.id === u.id && <Check size={17} />}
-            </Button>
-          ))}
+          </WorkspaceTransition>
         </div>
-      </DialogPanel>
-    </div>
+        <DialogPanel
+          open={profiles}
+          onClose={() => setProfiles(false)}
+          title="Explora otro lado de la clase"
+        >
+          <p className="muted" style={{ marginBottom: 22 }}>
+            Estos perfiles son ficticios. Tus cambios se conservan en esta demostración del
+            navegador.
+          </p>
+          <div className="stack">
+            {state.users.map((u) => (
+              <Button
+                key={u.id}
+                variant="secondary"
+                style={{ justifyContent: 'start' }}
+                onPress={() => onProfile(u.id)}
+              >
+                <ProfileAvatar userId={u.id} />
+                <span>
+                  {u.name} · {u.role === 'teacher' ? 'Docente' : 'Estudiante'}
+                </span>
+                {user.id === u.id && <Check size={17} />}
+              </Button>
+            ))}
+          </div>
+        </DialogPanel>
+      </div>
+    </AvatarProvider>
   );
 }
 
@@ -861,6 +865,7 @@ function HelpScreen({
             <p>
               {user.name} · {user.role === 'teacher' ? 'Docente' : 'Estudiante'}
             </p>
+            <AvatarPicker key={user.id} userId={user.id} />
             <div className="divider" />
             <h2>Apariencia</h2>
             <ThemeSwitcher />

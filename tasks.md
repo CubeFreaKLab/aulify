@@ -1,5 +1,7 @@
 # Tareas de desarrollo de Aulify
 
+T-19 incorpora la [revisión de avatares, encuadre y cabecera](docs/diseno/avatares-y-navegacion.md) del 23 de octubre: selector de 30 personajes, conservación de color en modo oscuro, símbolo sin recorte y navegación flotante adaptable. Verificación local registrada; publicación y correo mantienen sus controles independientes.
+
 **Estado: base funcional 1.0, modelo 1.3 e implementación integrada con Supabase disponibles. T-02 documental completada; la verificación de entrega y operación sigue abierta.**
 
 Las tareas se apoyan en [specification.md](specification.md) y [plan.md](plan.md). La existencia de estos documentos no acredita funciones implementadas. Resolver las decisiones que afecten una tarea antes de iniciar su construcción.

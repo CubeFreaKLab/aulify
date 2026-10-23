@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ThemeSwitcher } from './theme';
+import { LandingHeader } from './landing-header';
 import { ArrowRight } from 'lucide-react';
 import { BrandArt } from './brand-art';
 import { LandingMotion, LandingQuestion } from './landing-interaction';
@@ -8,24 +8,7 @@ import { LandingMotion, LandingQuestion } from './landing-interaction';
 export function Landing() {
   return (
     <LandingMotion>
-      <header className="landing-header">
-        <Link href="/" className="landing-logo" aria-label="Aulify, inicio">
-          <Image src="/brand/aulify-logo.svg" alt="Aulify" width={180} height={60} priority />
-        </Link>
-        <nav className="landing-nav" aria-label="Acceso a Aulify">
-          <a className="landing-section-link" href="#plataforma">
-            La plataforma
-          </a>
-          <a className="landing-section-link" href="#como-funciona">
-            Cómo funciona
-          </a>
-          <Link href="/acceso">Entrar</Link>
-          <Link className="button" href="/registro">
-            Crear cuenta
-          </Link>
-        </nav>
-        <ThemeSwitcher compact />
-      </header>
+      <LandingHeader />
       <main id="contenido">
         <section className="landing-hero" aria-labelledby="landing-title">
           <div className="landing-hero-stage" aria-hidden="true">
