@@ -31,7 +31,7 @@ export const HELP_STEPS = {
     ],
     [
       'Prepara un recurso',
-      'En Biblioteca, combina explicaciones y preguntas. El borrador se guarda sin publicarse para los estudiantes.',
+      'En Biblioteca, usa Crear recurso para combinar explicaciones y preguntas, o Crear quiz para empezar solo con preguntas. En el editor, abre Quiz y preguntas. El borrador todavía no lo ven tus estudiantes.',
     ],
     [
       'Previsualiza y publica',

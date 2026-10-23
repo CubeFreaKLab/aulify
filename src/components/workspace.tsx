@@ -44,6 +44,7 @@ import { OpenPageGuide, PageGuide } from './page-guide';
 import { SubjectManagement, ManualActivities } from './classroom-management';
 import { BrandArt } from './brand-art';
 import { AvatarProvider, AvatarPicker, ProfileAvatar } from './profile-avatar';
+import { WorkspaceBreadcrumb } from './workspace-breadcrumb';
 
 export function Workspace() {
   const data = useDemo();
@@ -155,26 +156,7 @@ export function Workspace() {
               >
                 {mobile ? <X size={21} /> : <Menu size={21} />}
               </button>
-              <span className="crumb">
-                <span className="crumb-context">Tu espacio /</span>{' '}
-                <strong>
-                  {(
-                    {
-                      inicio: 'Inicio',
-                      materias: 'Materias',
-                      materia: 'Materia',
-                      biblioteca: 'Biblioteca',
-                      editor: 'Editor',
-                      revision: 'Revisión',
-                      resultados: 'Resultados',
-                      tareas: 'Tareas',
-                      ayuda: 'Ayuda',
-                      preferencias: 'Preferencias',
-                      previa: 'Vista previa',
-                    } as Record<string, string>
-                  )[page] || 'Aulify'}
-                </strong>
-              </span>
+              <WorkspaceBreadcrumb page={page} id={id} state={state} />
             </div>
             <div className="row">
               <OpenPageGuide />
@@ -225,6 +207,7 @@ export function Workspace() {
                 state={state}
                 user={user}
                 onCreate={() => createResource(user, router.push)}
+                onCreateQuiz={() => createResource(user, router.push, 'quiz')}
               />
             ) : page === 'editor' && id && teacher ? (
               <EditorScreen resourceId={id} state={state} user={user} />
@@ -443,19 +426,35 @@ function SubjectCard({ subject: s, state }: { subject: Subject; state: DemoState
     </Link>
   );
 }
-async function createResource(user: User, navigate: (path: string) => void) {
+async function createResource(
+  user: User,
+  navigate: (path: string) => void,
+  kind: 'resource' | 'quiz' = 'resource',
+) {
   const id = crypto.randomUUID();
   const resource = await runDemo((r) =>
     r.saveDraft(
       {
         id,
         ownerId: user.id,
-        title: 'Mi nuevo recurso',
-        kind: 'resource',
-        blocks: [
-          { id: crypto.randomUUID(), type: 'heading', level: 2, text: 'Empecemos con una idea' },
-          { id: crypto.randomUUID(), type: 'text', text: 'Escribe una explicación para tu clase.' },
-        ],
+        title: kind === 'quiz' ? 'Mi nuevo quiz' : 'Mi nuevo recurso',
+        kind,
+        blocks:
+          kind === 'quiz'
+            ? [{ id: crypto.randomUUID(), type: 'quiz', questions: [] }]
+            : [
+                {
+                  id: crypto.randomUUID(),
+                  type: 'heading',
+                  level: 2,
+                  text: 'Empecemos con una idea',
+                },
+                {
+                  id: crypto.randomUUID(),
+                  type: 'text',
+                  text: 'Escribe una explicación para tu clase.',
+                },
+              ],
         revision: 0,
         updatedAt: new Date().toISOString(),
       },
@@ -849,23 +848,25 @@ function HelpScreen({
   const live = usePathname().startsWith('/aula');
   return (
     <>
-      <PageHeading
-        title={preferences ? 'Aulify, a tu manera.' : 'Una mano para empezar.'}
-        illustration={
-          !preferences ? (
-            <BrandArt
-              name={user.role === 'teacher' ? 'teacher-welcome' : 'student-reader'}
-              width={1000}
-              height={600}
-            />
-          ) : undefined
-        }
-        description={
-          preferences
-            ? 'Tu perfil, apariencia y opciones de accesibilidad.'
-            : 'Ayuda breve para encontrar tu próximo paso.'
-        }
-      />
+      <div className={preferences ? '' : 'help-heading'}>
+        <PageHeading
+          title={preferences ? 'Aulify, a tu manera.' : 'Una mano para empezar.'}
+          illustration={
+            !preferences ? (
+              <BrandArt
+                name={user.role === 'teacher' ? 'teacher-welcome' : 'student-reader'}
+                width={1000}
+                height={600}
+              />
+            ) : undefined
+          }
+          description={
+            preferences
+              ? 'Tu perfil, apariencia y opciones de accesibilidad.'
+              : 'Ayuda breve para encontrar tu próximo paso.'
+          }
+        />
+      </div>
       <div className={`surface ${preferences ? 'preferences-surface' : 'help-surface'}`}>
         {preferences ? (
           <>

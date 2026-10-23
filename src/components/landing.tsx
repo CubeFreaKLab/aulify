@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LandingHeader } from './landing-header';
 import { LearningCarousel } from './learning-carousel';
+import { PencilCursor } from './pencil-cursor';
 import { ArrowRight } from 'lucide-react';
 import { BrandArt } from './brand-art';
 import { LandingMotion, LandingQuestion } from './landing-interaction';
@@ -9,6 +10,7 @@ import { LandingMotion, LandingQuestion } from './landing-interaction';
 export function Landing() {
   return (
     <LandingMotion>
+      <PencilCursor />
       <LandingHeader />
       <main id="contenido">
         <section className="landing-hero" aria-labelledby="landing-title">

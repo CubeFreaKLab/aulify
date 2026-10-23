@@ -6,13 +6,21 @@ import { HELP_STEPS, helpState } from '@/domain/help';
 import { OpenPageGuide } from './page-guide';
 
 export function HelpSteps({ teacher }: { teacher: boolean }) {
+  const icons = teacher
+    ? ['materias', 'personas', 'lapiz', 'documento', 'resultados']
+    : ['materias', 'personas', 'documento', 'lapiz', 'resultados'];
   return (
     <div>
       {HELP_STEPS[teacher ? 'teacher' : 'student'].map(([title, text], index) => (
         <div className="help-step" key={title}>
-          <span className="step-number" aria-hidden="true">
-            {index + 1}
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="help-step-icon"
+            src={`/illustrations/actions/${icons[index]}.svg`}
+            alt=""
+            width={68}
+            height={68}
+          />
           <div>
             <h3>{title}</h3>
             <p>{text}</p>

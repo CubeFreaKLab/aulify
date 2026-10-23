@@ -28,9 +28,7 @@
   transform: translateY(calc(var(--slot) * 1.05em)) rotateX(calc(var(--slot) * -30deg));
   transform-origin: left center;
   color: #54873e;
-  transition:
-    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 0.6s;
+  will-change: transform;
 }
 :root[data-theme='dark'] .learning-reel-window > span {
   color: #85bd6e;
@@ -68,7 +66,7 @@
   overflow: visible;
   transform-origin: 50% 100%;
   transform: translate(var(--x), var(--y)) rotate(var(--angle));
-  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
   filter: drop-shadow(0 9px 8px #00000016);
   user-select: none;
 }
@@ -84,49 +82,25 @@
 .learning-arch[data-dragging='true'] .learning-card {
   transition: none;
 }
-.learning-carousel-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: -20px;
+.carousel-pause-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.carousel-pause-accessible:focus-visible {
   position: relative;
-}
-.learning-carousel-controls p {
-  min-width: 210px;
-  text-align: center;
-  font-weight: 650;
-}
-.learning-carousel-controls p span {
+  width: auto;
+  height: auto;
+  clip-path: none;
+  margin: 8px auto;
   display: block;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 450;
+  padding: 10px 18px;
 }
-.learning-carousel-controls button {
-  border: 1px solid var(--line);
-  background: var(--paper);
-}
-.learning-carousel-dots {
-  display: flex;
-  justify-content: center;
-  margin: 12px;
-}
-.learning-carousel-dots button {
-  border: 0;
-  background: none;
-  padding: 14px 10px;
-}
-.learning-carousel-dots span {
-  display: block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--line-strong);
-}
-.learning-carousel-dots [aria-current] span {
-  background: var(--ink);
-  transform: scale(1.4);
+.learning-arch:focus-visible {
+  outline: 2px solid var(--green-text);
+  outline-offset: -3px;
 }
 @media (max-width: 600px) {
   .learning-carousel {

@@ -58,7 +58,47 @@ const emptyExtras: WorkspaceExtras = {
   resubmissionWindows: [],
 };
 export function getWorkspaceExtras(): WorkspaceExtras {
-  return remote || emptyExtras;
+  if (remote) return remote;
+  const state = snapshot?.state;
+  return {
+    ...emptyExtras,
+    readings: demoReadings.flatMap((item) => {
+      const content = state?.versions.find((v) => v.id === item.versionId);
+      const subject = state?.subjects.find((s) => s.id === item.subjectId);
+      const allowed =
+        subject &&
+        (subject.ownerId === snapshot?.userId ||
+          state?.memberships.some(
+            (m) =>
+              m.subjectId === subject.id &&
+              m.studentId === snapshot?.userId &&
+              m.status === 'approved',
+          ));
+      return content && allowed
+        ? [{ id: item.id, subjectId: item.subjectId, title: content.title, content }]
+        : [];
+    }),
+  };
+}
+const demoReadingKey = 'aulify.demo.readings.v1';
+let demoReadings: { id: string; subjectId: string; versionId: string }[] = [];
+export async function publishWorkspaceReading(versionId: string, subjectId: string) {
+  if (activeMode) return remoteCommand('publishReading', [versionId, subjectId]);
+  const state = repository?.load();
+  const version = state?.versions.find((v) => v.id === versionId && v.ownerId === snapshot?.userId);
+  const subject = state?.subjects.find(
+    (s) => s.id === subjectId && s.ownerId === snapshot?.userId && !s.archivedAt,
+  );
+  if (!version || !subject) throw new Error('Elige una materia propia y un recurso disponible.');
+  const existing = demoReadings.find(
+    (item) => item.versionId === versionId && item.subjectId === subjectId,
+  );
+  if (existing) return existing;
+  const reading = { id: crypto.randomUUID(), subjectId, versionId };
+  const next = [...demoReadings, reading];
+  window.localStorage.setItem(demoReadingKey, JSON.stringify(next));
+  demoReadings = next;
+  return reading;
 }
 let snapshot: DemoSnapshot | null = null;
 let repository: WorkspaceRepository | null = null;
@@ -311,6 +351,20 @@ async function hydrate(live: boolean, activityScope: string | null = null) {
   } else {
     try {
       repository = createDemoRepository(window.localStorage);
+      try {
+        const stored: unknown = JSON.parse(window.localStorage.getItem(demoReadingKey) || '[]');
+        demoReadings = Array.isArray(stored)
+          ? stored.filter(
+              (item) =>
+                item &&
+                typeof item.id === 'string' &&
+                typeof item.subjectId === 'string' &&
+                typeof item.versionId === 'string',
+            )
+          : [];
+      } catch {
+        demoReadings = [];
+      }
       const userId = readProfile();
       window.sessionStorage.setItem('aulify.demo.profile', userId);
       snapshot = { state: repository.load(), userId, error: null, message: null, live: false };
@@ -450,6 +504,8 @@ export async function resetDemo() {
   if (activeMode || !repository) return;
   try {
     await repository.reset();
+    window.localStorage.removeItem(demoReadingKey);
+    demoReadings = [];
     clearWorkspaceSession();
     await hydrate(false);
     if (snapshot)

@@ -1,0 +1,64 @@
+@media (hover: hover) and (pointer: fine) {
+  html.pencil-cursor-active,
+  .pencil-cursor-active body,
+  .pencil-cursor-active body * {
+    cursor: none !important;
+  }
+}
+.pencil-cursor {
+  position: fixed;
+  width: 0;
+  height: 0;
+  z-index: 2147483646;
+  pointer-events: none;
+}
+.pencil-cursor[hidden] {
+  display: none;
+}
+.pencil-cursor img {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  max-width: none;
+  /* SVG tip (3,585) in a 600x592 viewBox, contained in a 48px square. */
+  left: -0.24px;
+  bottom: -0.88px;
+  transform-origin: 0.24px 47.12px;
+  transform: rotate(var(--pencil-lean, 0deg));
+  filter: drop-shadow(1px 1px 1px #ffffffa0);
+}
+.pencil-click-mark {
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #85bd6e;
+  border-radius: 50%;
+  opacity: 0;
+}
+.pencil-tap img {
+  animation: pencil-press 0.24s ease-out;
+}
+.pencil-tap .pencil-click-mark {
+  animation: pencil-mark 0.35s ease-out;
+}
+@keyframes pencil-press {
+  45% {
+    transform: rotate(-12deg) scale(0.88);
+  }
+}
+@keyframes pencil-mark {
+  20% {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pencil-cursor * {
+    animation: none !important;
+  }
+}

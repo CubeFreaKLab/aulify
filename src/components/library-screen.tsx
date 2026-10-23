@@ -19,10 +19,12 @@ export function LibraryScreen({
   state,
   user,
   onCreate,
+  onCreateQuiz,
 }: {
   state: DemoState;
   user: User;
   onCreate: () => void;
+  onCreateQuiz: () => void;
 }) {
   const router = useWorkspaceRouter();
   const [search, setSearch] = useState('');
@@ -72,7 +74,11 @@ export function LibraryScreen({
         title="Biblioteca"
         description="Tus recursos y quizzes, listos para seguir trabajando o compartir en clase."
       >
-        <Button onPress={onCreate}>
+        <Button variant="secondary" data-guide="create-quiz" onPress={onCreateQuiz}>
+          <Plus size={17} />
+          Crear quiz
+        </Button>
+        <Button data-guide="create-resource" onPress={onCreate}>
           <Plus size={17} />
           Crear recurso
         </Button>

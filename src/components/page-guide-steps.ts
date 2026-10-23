@@ -107,9 +107,14 @@ export function pageGuideSteps(page: string, teacher: boolean): GuideStep[] {
     case 'biblioteca':
       return [
         step(
-          '.page-heading .button',
+          '[data-guide="create-resource"]',
           'Crea un borrador',
           'Prepara explicaciones, imágenes y preguntas en un mismo recurso. Guardar no lo publica.',
+        ),
+        step(
+          '[data-guide="create-quiz"]',
+          'Empieza un quiz',
+          'Crear quiz abre directamente las preguntas. Elige el tipo, escribe la consigna y configura las respuestas antes de publicar.',
         ),
         step(
           '.library-search',
@@ -145,9 +150,9 @@ export function pageGuideSteps(page: string, teacher: boolean): GuideStep[] {
           'Haz clic en un bloque y escribe. Enter crea otro bloque; al seleccionar texto puedes darle formato.',
         ),
         step(
-          '.editor-insert-label',
+          '.editor-quick-insert',
           'Añade un bloque',
-          'Usa Insertar bloque o escribe / dentro del documento. Elige títulos, listas, imágenes, tablas o Dos columnas para colocar contenido lado a lado.',
+          'Usa Imagen, Dos columnas o Tabla. También puedes escribir / y pegar una captura con Ctrl+V; añade su descripción antes de insertarla.',
         ),
         step(
           '.editor-outline',

@@ -12,7 +12,7 @@ import {
   type Resource,
   type User,
 } from '@/domain';
-import { runDemo, getDemoRepository, remoteCommand } from '@/demo/store';
+import { runDemo, getDemoRepository, publishWorkspaceReading } from '@/demo/store';
 import { Button, DialogPanel, Field, EmptyState } from './ui';
 import { QuestionAuthor } from './question-author';
 import { PreviewButton, DocumentConfirm, BlockSticker } from './illustrated-actions';
@@ -62,7 +62,7 @@ function EditorForm({
   const [draft, setDraft] = useState<Resource>(() => structuredClone(resource));
   const [saving, setSaving] = useState<'saved' | 'pending' | 'error'>('saved');
   const [publishing, setPublishing] = useState(false);
-  const [questionsOpen, setQuestionsOpen] = useState(false);
+  const [questionsOpen, setQuestionsOpen] = useState(resource.kind === 'quiz');
   const [conflict, setConflict] = useState(false);
   const [editorKey, setEditorKey] = useState(0);
   const dirty = useRef(false),
@@ -135,11 +135,7 @@ function EditorForm({
       const activity = await runDemo(async (repo) => {
         const version = await repo.publishResource(saved.id, user.id);
         if (!questionsOf(saved).length) {
-          if (!live)
-            throw new Error(
-              'Publica un recurso de lectura desde tu cuenta, o añade preguntas para explorar el quiz de demostración.',
-            );
-          return remoteCommand('publishReading', [version.id, subjectId]);
+          return publishWorkspaceReading(version.id, subjectId);
         }
         return repo.createActivity(version.id, subjectId, settings, saved.title, user.id);
       }, 'Recurso publicado en tu materia.');
@@ -169,6 +165,20 @@ function EditorForm({
               : 'No se pudo guardar'}
         </span>
         <div className="editor-publish-actions">
+          <Button
+            variant="ghost small"
+            onPress={() => {
+              setQuestionsOpen(true);
+              requestAnimationFrame(() =>
+                document
+                  .getElementById('preguntas')
+                  ?.scrollIntoView({ block: 'center', behavior: 'smooth' }),
+              );
+            }}
+          >
+            <BlockSticker kind="quiz" />
+            Quiz y preguntas
+          </Button>
           <PreviewButton
             onPress={async () => {
               if (await save()) router.push(`/demo/previa/${draft.id}`);
@@ -278,10 +288,10 @@ function EditorForm({
             <summary>
               <span>
                 <BlockSticker kind="pregunta" />
-                <strong>Preguntas del recurso</strong>
+                <strong>Quiz y preguntas</strong>
                 <span>{questions.length} preguntas</span>
               </span>
-              <span>Editar preguntas</span>
+              <span>{questions.length ? 'Editar preguntas' : 'Crear preguntas'} ↓</span>
             </summary>
             <QuestionAuthor
               questions={questions}
@@ -559,6 +569,7 @@ function EditorForm({
           {!questions.length && (
             <p className="notice">
               Se compartirá como lectura. No genera intentos ni calificación.
+              {!live && ' Puedes probar la publicación; se guarda solo en esta demostración.'}
             </p>
           )}
           <div className="notice">
@@ -583,7 +594,7 @@ function EditorForm({
               onConfirm={async () => {
                 if (publishForm.current?.reportValidity()) await publish();
               }}
-              disabled={!subjectId || publishPending || (!questions.length && !live)}
+              disabled={!subjectId || publishPending}
             >
               Publicar en la materia
             </DocumentConfirm>

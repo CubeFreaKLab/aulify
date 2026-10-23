@@ -78,6 +78,8 @@ export function DocumentConfirm({
     lock.current = true;
     setBusy(true);
     try {
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+        await new Promise((resolve) => setTimeout(resolve, 400));
       await onConfirm();
     } finally {
       lock.current = false;

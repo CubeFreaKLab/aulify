@@ -1,10 +1,16 @@
 # Estado del desarrollo
 
+## Movimiento continuo y descubrimiento del editor — 23 de octubre
+
+La portada incorpora carrusel y reel infinitos con arrastre, inercia, rueda y movimiento suave en reposo; se retiró la franja de controles inferiores y se conservó interacción de teclado y pausa al enfocar. El lápiz aprobado se activa solo con ratón en portada, con punto de clic en su punta. El editor muestra accesos a imágenes, columnas, tablas y preguntas; Ctrl+V recibe imágenes, solicita descripción y conserva inserción, guardado y recarga. Biblioteca ofrece Crear quiz. Las rutas superiores son enlaces y Ayuda amplía su ilustración y usa iconos SVG de marca.
+
+La demo permite publicar lecturas sin preguntas y abrirlas tras recargar, sin crear intentos ni notas. Compilación, tipos y lint correctos. Cuatro casos nuevos aprobados: rueda/bucle/arrastre/cursor y portapapeles en escritorio, lectura/rutas/quiz en escritorio y móvil; dos casos existentes de confirmación de publicación también pasaron. Los casos de ratón y portapapeles se excluyen explícitamente en móvil. Capturas locales revisadas de portada, Ayuda, editor y biblioteca. No se repitieron cargas ni pruebas de cuentas alojadas; la carga de imágenes de cuenta conserva el flujo existente, sin nueva validación remota. La revisión publicada y GitHub Actions se verifican por separado.
+
 ## Carrusel, guías por página y editor — 23 de octubre
 
 La [entrega de carrusel y guía contextual](diseno/carrusel-y-guia-contextual.md) integra las siete ilustraciones aprobadas como SVG, texto cinético verde y controles accesibles. Acceso y registro amplían ilustraciones y cierre X y eliminan la línea de cabecera. Las guías señalan controles reales con oscurecimiento del resto y contenido por página y rol; se pueden cerrar, repetir o dejar en apertura manual. Durante intentos activos se conserva ayuda estática.
 
-El editor añade anteojos animados para vista previa, documento deslizable con alternativa de clic/teclado para publicar, márgenes en preguntas, pictogramas de marca y dos columnas con lectura equivalente y apilado móvil. El lápiz permanece como propuesta de asset, sin cursor instalado. Tipos, lint y construcción local pasaron; ocho recorridos de ayuda y cuatro de columnas/publicación pasaron en escritorio y móvil. La evidencia y límites están en el diseño enlazado; no se repitieron pruebas de carga ni correo.
+El editor añade anteojos animados para vista previa, documento deslizable con alternativa de clic/teclado para publicar, márgenes en preguntas, pictogramas de marca y dos columnas con lectura equivalente y apilado móvil. El lápiz, inicialmente propuesto como asset, se aprobó e integró en la revisión de movimiento descrita arriba. Tipos, lint y construcción local pasaron; ocho recorridos de ayuda y cuatro de columnas/publicación pasaron en escritorio y móvil. La evidencia y límites están en el diseño enlazado; no se repitieron pruebas de carga ni correo.
 
 ## Acceso y encuadres del 23 de octubre
 

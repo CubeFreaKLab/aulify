@@ -28,7 +28,7 @@ import {
   MessageCircleQuestion,
   Columns2,
 } from 'lucide-react';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import '@blocknote/ariakit/style.css';
 import '@/styles/rich-editor.css';
@@ -354,6 +354,14 @@ export default function RichEditor({
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const pasteAnchor = useRef<string | null>(null);
+  const filePreview = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    if (!file || !filePreview.current) return;
+    const url = URL.createObjectURL(file);
+    filePreview.current.src = url;
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
   const editor = useCreateBlockNote({
     schema,
     dictionary: {
@@ -366,6 +374,22 @@ export default function RichEditor({
       ? initialDocument
       : nativeBlocks(blocks)) as EditorBlock[],
     link: { isValidLink: isAllowedEditorHref },
+    pasteHandler: ({ event, editor: pasteEditor, defaultPasteHandler }) => {
+      const image = Array.from(event.clipboardData?.items || [])
+        .find((item) => item.kind === 'file' && item.type.startsWith('image/'))
+        ?.getAsFile();
+      if (!image) return defaultPasteHandler();
+      event.preventDefault();
+      pasteAnchor.current = pasteEditor.getTextCursorPosition().block.id;
+      setFile(image);
+      setImageUrl('');
+      setImageAlt('');
+      setImageCaption('');
+      setError('');
+      setImageTarget('__paste__');
+      setMessage('Imagen del portapapeles lista. Añade su descripción para insertarla.');
+      return true;
+    },
   });
   function command(action: () => void) {
     editor.transact((tr) => {
@@ -433,7 +457,16 @@ export default function RichEditor({
         await validateImageLoad(url);
         fileId = url.match(/^\/api\/files\/([0-9a-f-]{36})$/i)?.[1] || '';
       }
-      if (imageTarget)
+      if (imageTarget === '__paste__') {
+        const anchor = pasteAnchor.current && editor.getBlock(pasteAnchor.current);
+        const value: EditorBlock = {
+          type: 'image',
+          props: { url, alt: imageAlt.trim(), caption: imageCaption.trim(), fileId },
+        };
+        if (anchor && anchor.type === 'paragraph' && !textOf(anchor.content).trim())
+          editor.replaceBlocks([anchor], [value]);
+        else editor.insertBlocks([value], anchor || editor.getTextCursorPosition().block, 'after');
+      } else if (imageTarget)
         editor.updateBlock(imageTarget, {
           type: 'image',
           props: { url, alt: imageAlt.trim(), caption: imageCaption.trim(), fileId },
@@ -631,6 +664,21 @@ export default function RichEditor({
             </select>
           </label>
         </div>
+        <div className="editor-quick-insert" role="group" aria-label="Añadir al documento">
+          <button type="button" onClick={() => insert('image')}>
+            <BlockSticker kind="imagen" />
+            Imagen
+          </button>
+          <button type="button" onClick={() => insert('columns')}>
+            <Columns2 size={19} />
+            Dos columnas
+          </button>
+          <button type="button" onClick={() => insert('table')}>
+            <BlockSticker kind="tabla" />
+            Tabla
+          </button>
+          <span>Pega imágenes con Ctrl + V</span>
+        </div>
         <p className="editor-help">
           Escribe <kbd>/</kbd> para añadir un bloque o selecciona texto para darle formato.
         </p>
@@ -710,6 +758,18 @@ export default function RichEditor({
           }}
           title="Imagen del recurso"
         >
+          {file && (
+            <img
+              ref={filePreview}
+              className="pasted-image-preview"
+              alt="Vista de la imagen que vas a insertar"
+            />
+          )}
+          {imageTarget === '__paste__' && (
+            <p className="notice">
+              Imagen recibida del portapapeles. Describe qué muestra y pulsa Guardar imagen.
+            </p>
+          )}
           <Field
             id="resource-image-file"
             label="Subir imagen"
