@@ -38,7 +38,7 @@ test('calendario: fechas por teclado, límites, borrado y hora local', async ({ 
   await expectNoHorizontalOverflow(page);
 });
 
-test('editor: columnas contenidas, títulos borrables y colores persistentes en celdas y texto', async ({
+test('editor: recuperar contenido de columnas retiradas y conservar colores en celdas y texto', async ({
   page,
 }) => {
   await enterDemo(page, 'docente');
@@ -90,13 +90,17 @@ test('editor: columnas contenidas, títulos borrables y colores persistentes en 
     ];
     localStorage.setItem('aulify.demo.v1', JSON.stringify(state));
   });
+  await page.goto('/demo/previa/resource-ecosystems');
+  await expect(
+    page.locator('.rich-reader').getByText('Nuestra segunda idea', { exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('.reader-columns, .reader-column')).toHaveCount(0);
   await page.goto('/demo/editor/resource-ecosystems');
   const editor = page.locator('.bn-editor[contenteditable="true"]');
-  const labels = page.getByRole('textbox', { name: 'Título de columna (opcional)' });
-  await labels.nth(0).fill('Título opcional');
-  await expect(labels.nth(0)).toHaveValue('Título opcional');
-  await labels.nth(0).fill('');
-  await labels.nth(1).fill('');
+  await expect(page.getByRole('button', { name: 'Dos columnas', exact: true })).toHaveCount(0);
+  await expect(editor.locator('.node-columns, .node-column')).toHaveCount(0);
+  await expect(editor.getByText('Nuestra segunda idea', { exact: true })).toBeVisible();
+  await expect(editor).not.toContainText('Primera columna');
   const longText = editor.getByRole('heading', { name: /PalabrasSinEspacios/ });
   expect(await longText.evaluate((el) => el.scrollWidth - el.clientWidth)).toBeLessThanOrEqual(1);
   await expectNoHorizontalOverflow(page);
@@ -124,8 +128,7 @@ test('editor: columnas contenidas, títulos borrables y colores persistentes en 
   );
   await expect(page.getByText('Borrador guardado', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(labels.nth(0)).toHaveValue('');
-  await expect(labels.nth(1)).toHaveValue('');
+  await expect(editor.locator('.node-columns, .node-column')).toHaveCount(0);
   await expect(editor.locator('td').first()).toHaveCSS('background-color', 'rgb(244, 230, 185)');
   await page.getByRole('button', { name: 'Vista previa', exact: true }).click();
   await expect(page.locator('.rich-reader td').first()).toHaveCSS(

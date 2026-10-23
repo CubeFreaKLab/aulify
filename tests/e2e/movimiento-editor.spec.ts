@@ -122,7 +122,7 @@ test('Lectura en demo, navegación por ruta y acceso directo al quiz', async ({ 
   await page.goto('/demo/biblioteca');
   await page.getByRole('button', { name: 'Crear recurso', exact: true }).click();
   await expect(page.locator('.bn-editor')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Dos columnas', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Tabla', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Publicar', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Comparte una nueva experiencia' });
   await expect(

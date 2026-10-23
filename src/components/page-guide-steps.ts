@@ -152,7 +152,7 @@ export function pageGuideSteps(page: string, teacher: boolean): GuideStep[] {
         step(
           '.editor-quick-insert',
           'Añade un bloque',
-          'Usa Imagen, Dos columnas o Tabla. También puedes escribir / y pegar una captura con Ctrl+V; añade su descripción antes de insertarla.',
+          'Usa Imagen o Tabla. También puedes escribir / y pegar una captura con Ctrl+V; añade su descripción antes de insertarla.',
         ),
         step(
           '.editor-outline',

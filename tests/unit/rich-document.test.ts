@@ -1,7 +1,73 @@
 import { describe, expect, it } from 'vitest';
-import { blankIds, duplicateTree, semanticBlocks, textOf } from '../../src/lib/rich-document';
+import {
+  blankIds,
+  duplicateTree,
+  semanticBlocks,
+  textOf,
+  unwrapLegacyColumns,
+} from '../../src/lib/rich-document';
 
 describe('documento enriquecido del recurso', () => {
+  it('retira columnas sin alterar contenidos, orden, colores, archivos ni anidación de listas', () => {
+    const image = {
+      id: 'image',
+      type: 'image',
+      props: { fileId: 'file-1', url: '/api/files/file-1', alt: 'Hoja' },
+    };
+    const table = {
+      id: 'table',
+      type: 'table',
+      content: {
+        rows: [
+          {
+            cells: [
+              {
+                type: 'tableCell',
+                props: { backgroundColor: '#f4e6b9' },
+                content: [{ text: 'Luz' }],
+              },
+            ],
+          },
+        ],
+      },
+    };
+    const text = {
+      id: 'text',
+      type: 'paragraph',
+      content: [{ text: 'Primero', styles: { bold: true } }],
+    };
+    const source = [
+      {
+        id: 'layout',
+        type: 'columns',
+        children: [
+          { type: 'column', props: { label: 'Primera columna' }, children: [text, image] },
+          {
+            id: 'right',
+            type: 'column',
+            props: { label: 'Observaciones' },
+            children: [
+              {
+                id: 'toggle',
+                type: 'toggleListItem',
+                content: [{ text: 'Detalle' }],
+                children: [{ type: 'columns', children: [{ type: 'column', children: [table] }] }],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    const snapshot = structuredClone(source);
+    expect(unwrapLegacyColumns(source)).toEqual([
+      text,
+      image,
+      { id: 'right-title', type: 'paragraph', content: 'Observaciones' },
+      { id: 'toggle', type: 'toggleListItem', content: [{ text: 'Detalle' }], children: [table] },
+    ]);
+    expect(source).toEqual(snapshot);
+    expect(unwrapLegacyColumns([{ type: 'columns', children: [] }])).toEqual([]);
+  });
   it('conserva texto anidado, casillas y tablas en la representación de búsqueda', () => {
     const document = [
       {

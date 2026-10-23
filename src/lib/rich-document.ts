@@ -9,6 +9,24 @@ export type RichBlock = {
   children?: RichBlock[];
 };
 
+/** Retired layouts remain readable/editable as ordinary blocks, in their original order. */
+export function unwrapLegacyColumns(blocks: unknown[]): RichBlock[] {
+  return blocks.flatMap((raw): RichBlock[] => {
+    if (!raw || typeof raw !== 'object') return [];
+    const block = raw as RichBlock;
+    const children = block.children ? unwrapLegacyColumns(block.children) : undefined;
+    if (block.type === 'columns' || block.type === 'column') {
+      const label = typeof block.props?.label === 'string' ? block.props.label.trim() : '';
+      const title: RichBlock[] =
+        label && !['Primera columna', 'Segunda columna', 'Columna'].includes(label)
+          ? [{ id: block.id ? `${block.id}-title` : undefined, type: 'paragraph', content: label }]
+          : [];
+      return [...title, ...(children ?? [])];
+    }
+    return [{ ...block, ...(children ? { children } : {}) }];
+  });
+}
+
 export function textOf(content: unknown): string {
   if (typeof content === 'string') return content;
   if (Array.isArray(content)) return content.map(textOf).join('');
