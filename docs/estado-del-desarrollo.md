@@ -1,5 +1,7 @@
 # Estado del desarrollo
 
+Corrección puntual del 23 de octubre: la opción de abrir las guías solo manualmente refleja ahora su valor guardado y permite reactivar la apertura automática al desmarcarla. Verificada la secuencia manual → automática → guía de otra página con Playwright en escritorio; build y lint de este ajuste aprobados.
+
 ## Movimiento continuo y descubrimiento del editor — 23 de octubre
 
 La portada incorpora carrusel y reel infinitos con arrastre, inercia, rueda y movimiento suave en reposo; se retiró la franja de controles inferiores y se conservó interacción de teclado y pausa al enfocar. El lápiz aprobado se activa solo con ratón en portada, con punto de clic en su punta. El editor muestra accesos a imágenes, columnas, tablas y preguntas; Ctrl+V recibe imágenes, solicita descripción y conserva inserción, guardado y recarga. Biblioteca ofrece Crear quiz. Las rutas superiores son enlaces y Ayuda amplía su ilustración y usa iconos SVG de marca.

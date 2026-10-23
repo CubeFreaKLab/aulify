@@ -54,6 +54,11 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
         visibleTarget(s.target),
       );
       if (!available.length) return;
+      try {
+        setDisableAuto(localStorage.getItem(autoKey) === 'true');
+      } catch {
+        setDisableAuto(false);
+      }
       returnFocus.current =
         document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setIndex(0);
@@ -119,6 +124,7 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
     try {
       localStorage.setItem(storageKey, completed ? 'completed' : 'skipped');
       if (disableAuto) localStorage.setItem(autoKey, 'true');
+      else localStorage.removeItem(autoKey);
     } catch {
       /* Storage is optional. */
     }

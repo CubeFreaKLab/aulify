@@ -1,6 +1,22 @@
 import { expect, test } from '@playwright/test';
 import { enterDemo, expectNoHorizontalOverflow } from './helpers';
 
+test('La preferencia de guías manuales puede volver a automática', async ({ page }) => {
+  await enterDemo(page, 'docente');
+  await page.getByRole('button', { name: 'Guía de esta página', exact: true }).click();
+  const guide = page.locator('.page-guide-dialog');
+  const manual = guide.getByRole('checkbox', {
+    name: 'Abrir las próximas guías solo cuando las pida',
+  });
+  await expect(manual).toBeChecked();
+  await manual.uncheck();
+  await guide.getByRole('button', { name: 'Cerrar guía', exact: true }).click();
+  await expect(guide).toHaveCount(0);
+  await page.goto('/demo/biblioteca');
+  await expect(guide).toBeVisible();
+  await expect(manual).not.toBeChecked();
+});
+
 test('Carrusel infinito: rueda, vuelta completa, arrastre y punta del lápiz', async ({
   page,
 }, info) => {
