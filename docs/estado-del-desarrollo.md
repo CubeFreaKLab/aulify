@@ -1,5 +1,15 @@
 # Estado del desarrollo
 
+## Calendario, color libre y retirada de doble columna
+
+La doble columna se retiró del editor, sus menús y la ayuda. Los documentos existentes se leen y editan como bloques apilados, conservando el orden, formato, imágenes, tablas y títulos propios. Los rótulos genéricos desaparecen; las versiones publicadas se interpretan sin reescribir sus datos.
+
+Los once campos de fecha y fecha/hora comparten calendario propio en español con límites, teclado y hora local. El editor incorpora un selector visual de texto y fondo con HEX y habilita el color de las celdas. Los colores se conservan al guardar, recargar y abrir el lector; la selección de controles es neutra. Detalles y criterios en [controles y marca](diseno/controles-y-marca.md).
+
+Verificación local aprobada: cuatro recorridos afectados en escritorio/móvil, nueve pruebas de documento y lector, accesibilidad automática de calendario y paleta, tipos, lint, formato y compilación. La [Preview de 032a8dc](https://aulify-hizdtm92y-jdanielchfhd-9543s-projects.vercel.app/demo?perfil=docente) está Ready; Chrome confirmó ausencia de doble columna, calendario de publicación con hora y paleta visual en modo oscuro. El [CI de esta revisión](https://github.com/CubeFreaKLab/aulify/actions/runs/40033835982) completó formato, lint, tipos, reglas, permisos y compilación; los recorridos de navegador seguían en curso al registrar la entrega. No se atribuye aprobación completa a esa ejecución.
+
+La siguiente etapa conserva correo transaccional, Figma y materiales de presentación pendientes. Esta entrega no incluye promoción a producción ni una prueba nueva de carga.
+
 ## Acceso a actividades y separación del recurso
 
 La vista docente conserva 20 px entre los controles de gestión y el recurso o la sala guiada. Comprobado en Chrome local y Preview con Clasificación cerrada y desplegada; formato aprobado.
