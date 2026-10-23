@@ -1,5 +1,15 @@
 # Estado del desarrollo
 
+## Correos de marca y separación de producción
+
+Confirmación con agradecimiento, recuperación y bienvenida independiente disponen de HTML con tablas, estilos en línea, logo e ilustraciones PNG. Los dos correos de Auth usan `/auth/confirm` y `TokenHash`; la bienvenida independiente no tiene un disparador automático en Supabase. La [guía sin dominio propio](operacion/correo-sin-dominio.md) explica Gmail SMTP, las URLs de Vercel y los campos que completa el propietario. Plantillas preparadas no equivalen a correo entregado: SMTP y recepción real siguen pendientes.
+
+En el aula autenticada, el logo abre el inicio de la cuenta. Cerrar sesión invalida la sesión local, limpia el estado y vuelve a la landing; los fallos muestran un aviso y permiten reintentar. Una compilación de producción oculta los accesos de prueba y deshabilita `/demo` y la práctica fija, mientras Preview conserva la muestra. La salida también está disponible en la cabecera de actividades. Producción necesita su propia compilación, sin promover el artefacto de Preview.
+
+Verificación local: compilación con configuración de producción, tipos, lint y formato aprobados; seis pruebas de enlaces de correo y política de demostración, y cuatro recorridos de navegador en escritorio/móvil aprobados. Los recorridos comprueban logo, ausencia de controles ficticios, fallo y reintento de salida, denegación del área privada tras salir y rutas de muestra deshabilitadas. Revisión visual de los tres HTML en Chrome y de confirmación/recuperación a 375 px. La apariencia y entrega en clientes de correo reales requieren la configuración SMTP del propietario.
+
+Código `b62b236` publicado. [Preview Ready](https://aulify-4hjgvqj0t-jdanielchfhd-9543s-projects.vercel.app/registro), despliegue `EivVxZhvc5toJTBSzZ6NMvdYKYyt`; Chrome confirmó el registro de muestra propio de Preview y el PNG de marca publicado. El [CI del candidato](https://github.com/CubeFreaKLab/aulify/actions/runs/40037623263) seguía en curso al registrar esta entrega; no se atribuye aprobación completa. No se configuró SMTP ni se liberó producción; no se realizó carga. Figma y materiales de presentación permanecen como etapa posterior.
+
 ## Calendario, color libre y retirada de doble columna
 
 La doble columna se retiró del editor, sus menús y la ayuda. Los documentos existentes se leen y editan como bloques apilados, conservando el orden, formato, imágenes, tablas y títulos propios. Los rótulos genéricos desaparecen; las versiones publicadas se interpretan sin reescribir sus datos.
