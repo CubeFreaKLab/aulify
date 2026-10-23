@@ -21,6 +21,7 @@ export function LearningCarousel() {
   const [reduced, setReduced] = useState(true);
   const [visible, setVisible] = useState(false);
   const [hover, setHover] = useState(false);
+  const [focusWithin, setFocusWithin] = useState(false);
   const [width, setWidth] = useState(1100);
   const [drag, setDrag] = useState(0);
   const section = useRef<HTMLElement>(null);
@@ -45,10 +46,10 @@ export function LearningCarousel() {
     };
   }, []);
   useEffect(() => {
-    if (paused || reduced || !visible || hover) return;
+    if (paused || reduced || !visible || hover || focusWithin) return;
     const timer = setInterval(() => setIndex((i) => wrap(i + 1)), 4200);
     return () => clearInterval(timer);
-  }, [paused, reduced, visible, hover]);
+  }, [paused, reduced, visible, hover, focusWithin]);
   const select = (n: number) => {
     setPaused(true);
     setIndex(wrap(n));
@@ -64,7 +65,10 @@ export function LearningCarousel() {
       aria-roledescription="carrusel"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onFocusCapture={() => setPaused(true)}
+      onFocusCapture={() => setFocusWithin(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setFocusWithin(false);
+      }}
     >
       <h2 className="sr-only">
         Una clase para preparar, preguntar, participar, organizar, aprender, acompañar y compartir.
