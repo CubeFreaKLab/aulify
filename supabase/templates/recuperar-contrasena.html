@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>Recupera tu acceso · Aulify</title>
+  <style>
+    body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+    table,td{mso-table-lspace:0;mso-table-rspace:0}
+    img{border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic}
+    a:focus-visible{outline:3px solid #426b36;outline-offset:4px}
+    @media(max-width:620px){.outer{padding:16px 12px!important}.content{padding:28px 24px!important}.title{font-size:30px!important;line-height:35px!important}.art{width:230px!important;max-width:100%!important}}
+  </style>
+</head>
+<body style="margin:0;padding:0;width:100%;background-color:#f6f6f2;color:#202020;font-family:Arial,Helvetica,sans-serif;">
+  <div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">Recibimos una solicitud para recuperar tu acceso. Usa el botón para elegir una nueva contraseña y volver a tu aula.</div>
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f6f6f2;">
+    <tr><td class="outer" align="center" style="padding:40px 16px;">
+      <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;background-color:#ffffff;border:1px solid #deded7;border-radius:20px;overflow:hidden;">
+        <tr><td class="content" style="padding:36px 44px 24px;border-bottom:1px solid #e7e7df;">
+          <a href="{{ .SiteURL }}" style="text-decoration:none;"><img src="{{ .SiteURL }}/brand/email/aulify-logo.png" width="144" height="48" alt="Aulify" style="display:block;width:144px;height:48px;background-color:#ffffff;"></a>
+        </td></tr>
+        <tr><td class="content" style="padding:32px 44px 20px;">
+          <p style="margin:0 0 14px;color:#426b36;font-size:11px;line-height:16px;letter-spacing:2px;font-weight:bold;">VOLVAMOS A TU AULA</p>
+          <h1 class="title" style="margin:0 0 22px;font-size:37px;line-height:41px;letter-spacing:-1.2px;font-weight:700;color:#202020;">Una nueva contraseña.<br>Tu misma cuenta.</h1>
+          <p style="margin:0;font-size:16px;line-height:25px;color:#51514b;">Recibimos una solicitud para recuperar tu acceso. Usa el botón para elegir una nueva contraseña y volver a tu aula.</p>
+        </td></tr>
+        <tr><td align="center" style="padding:4px 24px 22px;">
+          <img class="art" src="{{ .SiteURL }}/brand/email/recuperar.png" alt="" width="280" style="display:block;width:280px;max-width:100%;height:auto;background-color:#ffffff;">
+        </td></tr>
+        <tr><td class="content" style="padding:0 44px 32px;">
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#202020" style="border-radius:9px;mso-padding-alt:17px 20px;">
+            <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=recovery" style="display:block;padding:17px 20px;color:#ffffff;background-color:#202020;border-radius:9px;font-size:16px;line-height:22px;font-weight:bold;text-decoration:none;">Elegir nueva contraseña</a>
+          </td></tr></table>
+          <p style="margin:22px 0 0;font-size:13px;line-height:20px;color:#68685f;">Si no pediste este cambio, ignora el mensaje. Tu contraseña seguirá siendo la misma. El enlace es personal y de un solo uso.</p>
+        </td></tr>
+        <tr><td class="content" style="padding:24px 44px;background-color:#f1f3ed;border-top:1px solid #e1e5db;">
+          <p style="margin:0 0 8px;font-size:12px;line-height:19px;color:#5c6056;">Si el botón no abre, copia este enlace en tu navegador:</p>
+          <p style="margin:0;font-size:11px;line-height:18px;word-break:break-all;overflow-wrap:anywhere;"><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=recovery" style="color:#365d2b;text-decoration:underline;word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=recovery</a></p>
+        </td></tr>
+      </table>
+      <!--[if mso]></td></tr></table><![endif]-->
+      <p style="margin:24px 0 0;font-size:12px;line-height:19px;color:#77776d;">Aulify · Un espacio para aprender y compartir.</p>
+    </td></tr>
+  </table>
+</body>
+</html>

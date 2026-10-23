@@ -1,0 +1,17 @@
+[
+  {
+    "file": "confirmar-correo.html",
+    "subject": "Confirma tu correo · Aulify",
+    "section": "Confirm sign up"
+  },
+  {
+    "file": "recuperar-contrasena.html",
+    "subject": "Recupera tu acceso · Aulify",
+    "section": "Reset password"
+  },
+  {
+    "file": "bienvenida.html",
+    "subject": "Gracias por sumarte a Aulify",
+    "section": "Plantilla independiente; Supabase no tiene un evento de bienvenida posterior a la confirmación."
+  }
+]
