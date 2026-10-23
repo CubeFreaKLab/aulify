@@ -756,7 +756,12 @@ describe('adaptador de demostración y restauración', () => {
     const second = createDemoRepository(storage, options);
     expect(second.load().resources.find((item) => item.id === 'new-resource')?.revision).toBe(1);
     expect(() => second.saveDraft(resource, 0)).toThrow(/otra pestaña/);
-    expect(second.reset().resources).toHaveLength(1);
+    expect(
+      second
+        .reset()
+        .resources.map((item) => item.id)
+        .sort(),
+    ).toEqual(['resource-ecosystems', 'resource-quiz-ilustrado']);
     expect(
       second.load().attempts.find((item) => item.id === DEMO_IDS.pendingAttempt)?.answers,
     ).toHaveLength(8);

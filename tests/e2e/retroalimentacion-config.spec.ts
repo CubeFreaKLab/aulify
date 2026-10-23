@@ -30,7 +30,7 @@ test('ocultamiento explica la reserva de respuestas y desactiva rachas y clasifi
   await expect(ranking).toBeChecked();
 
   await feedback.selectOption('hidden');
-  const explanation = dialog.getByRole('status');
+  const explanation = dialog.locator('#feedback-visibility-help');
   await expect(explanation).toBeVisible();
   await expect(explanation).toContainText(
     'se desactivan las rachas y la clasificación para estudiantes porque pueden revelar aciertos',

@@ -12,7 +12,7 @@ Una aplicación Next.js organiza interfaz, endpoints y contratos de dominio en m
 
 | Componente | Implementación | Responsabilidad |
 |---|---|---|
-| Web | Next.js 16.3.6, React 19.3.0, TypeScript 6.0.3 | Rutas públicas, aula autenticada, interfaz y endpoints del servidor. |
+| Web | Next.js 16.4.3, React 19.3.0, TypeScript 6.0.3 | Rutas públicas, aula autenticada, interfaz y endpoints del servidor. |
 | Controles y editor | React Aria Components 1.21.1; BlockNote 0.55.0; Inter | Controles accesibles compuestos con estilos propios y editor por bloques. |
 | Identidad | Supabase Auth, Free | Correo/contraseña y sesiones; confirmación y recuperación requieren SMTP operativo. |
 | Base de datos | PostgreSQL 17 de Supabase, Free | Relaciones, restricciones, operaciones, versiones, evaluación y permisos. |
@@ -100,3 +100,7 @@ La [ejecución anterior](https://github.com/CubeFreaKLab/aulify/actions/runs/363
 Antes de cerrar producción: verificar SMTP, carga y cuotas, despliegue HTTPS, recorridos esenciales y recuperación. El correo predeterminado de Supabase no sirve para registro general. No activar facturación para resolver una limitación. [SMTP](https://supabase.com/docs/guides/auth/auth-smtp), [planes y costos](docs/costos-servicios.md).
 
 El [estado del desarrollo](docs/estado-del-desarrollo.md) y las [tareas](tasks.md) registran qué queda abierto.
+
+## Práctica por enlace y edición
+
+La [entrega de publicación y quiz](docs/diseno/publicacion-y-quiz-invitado.md) añade dos tablas privadas y RPC separadas para propietarios y servidor. La URL es una capacidad revocable; las sesiones invitadas no ingresan en el modelo académico. El navegador genera QR con `qrcode` 1.5.4 (MIT), sin proveedor externo. Next 16.4.3 y Vitest 5.0.5 sustituyen versiones con avisos de seguridad; compilación y pruebas se vuelven a comprobar. La [extensión del modelo](docs/modelado/invitados.md) describe permisos, copia de preguntas y conservación.

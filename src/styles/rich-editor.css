@@ -438,8 +438,25 @@
   padding-block: 5px;
 }
 .block-editor .bn-block-content[data-content-type='table'] {
+  min-width: 0;
   max-width: 100%;
-  overflow-x: auto;
+  overflow: visible;
+}
+.block-editor .bn-block-content[data-content-type='table'] .tableWrapper {
+  min-width: 0;
+  max-width: 100%;
+  overflow: auto;
+  overscroll-behavior-x: contain;
+  /* Keep the add-column and add-row widgets inside the scrolling canvas. */
+  padding-right: 30px;
+  padding-bottom: 30px;
+  scrollbar-gutter: stable;
+}
+.block-editor .tableWrapper-inner {
+  width: max-content;
+  min-width: 100%;
+  padding-right: 30px;
+  padding-bottom: 8px;
 }
 .editor-image img {
   margin-inline: auto;

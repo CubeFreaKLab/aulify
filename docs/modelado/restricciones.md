@@ -74,3 +74,8 @@ Desde el modelo 1.3, el contador docente personal pertenece a `participant_sync_
 ## Destinos del documento editorial
 
 La migración 17 conserva la validación estructural del borrador y la aplica también antes de insertar una versión publicada. Los `href` deben ser cadenas HTTPS, con esquema sin distinción de mayúsculas, autoridad no vacía, hasta 8192 caracteres y sin espacios ni controles. Los ejemplos escritos de código permanecen como texto. Las restricciones de soluciones privadas y archivos internos se conservan. No se modifican versiones existentes ni se añaden relaciones o campos; [pruebas y alcance](../verificacion/enlaces-editor.md).
+
+
+## Restricciones implementadas de invitados
+
+La migración 38 aplica GI-01/GI-02: enlace activo único por actividad, capacidad única, sesión única por copia/hash, nombre y avatar acotados, fechas ordenadas, duración de 1 a 120 minutos y JSON limitado. El servidor comprueba orden e idempotencia bajo bloqueo; la revocación o archivo de materia anula el acceso. Evidencias en [invitados](invitados.md).

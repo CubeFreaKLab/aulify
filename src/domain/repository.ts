@@ -10,7 +10,7 @@ import type {
   SubmissionFile,
   Task,
 } from './types';
-import { createDemoState, DEMO_IDS } from './demo-data';
+import { createDemoState, DEMO_IDS, ensureIllustratedQuiz } from './demo-data';
 import * as operations from './operations';
 import {
   clone,
@@ -489,6 +489,7 @@ export function createDemoRepository(
       );
     }
     const beforeRevision = state.revision;
+    ensureIllustratedQuiz(state, now());
     for (const attempt of state.attempts)
       if (attempt.status === 'in-progress')
         state = operations.closeExpiredAttempt(state, attempt.id, now()).state;

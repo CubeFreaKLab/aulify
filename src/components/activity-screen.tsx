@@ -3,6 +3,8 @@
 import Link from './workspace-link';
 import { usePathname } from 'next/navigation';
 import { ActivityManagement, ActivityRanking } from './classroom-management';
+import { QuizTimeline } from './quiz-timeline';
+import { GuestShare } from './guest-share';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   ArrowLeft,
@@ -481,6 +483,9 @@ function QuizPlayer({
           Salir
         </Link>
       </header>
+      {activity.settings.timeLimitMinutes && (
+        <QuizTimeline startedAt={attempt.startedAt} deadline={attempt.deadline} clock={clock} />
+      )}
       <main id="contenido" className="quiz-canvas">
         {notices}
         <StaticAttemptHelp />
@@ -543,6 +548,9 @@ function QuizPlayer({
               <div className="quiz-hint" role="status">
                 <Lightbulb size={17} /> {hint}
               </div>
+            )}
+            {question.image && (
+              <img className="quiz-scene" src={question.image.src} alt={question.image.alt} />
             )}
             <QuestionInput
               key={question.id}
@@ -660,6 +668,7 @@ function TeacherRoom({
           <Link href="/demo/revision" className="button secondary">
             Revisar respuestas
           </Link>
+          <GuestShare activity={activity} live={live} />
         </PageHeading>
         <ActivityManagement
           state={state}

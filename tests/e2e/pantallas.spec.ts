@@ -20,7 +20,7 @@ for (const theme of ['light', 'dark'] as const) {
       expect(bounds!.x).toBeGreaterThanOrEqual(0);
       expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
       await page.goto('/demo/materia/subject-biology');
-      const activity = page.getByRole('link', { name: 'Ver actividad', exact: true });
+      const activity = page.locator('a[href="/demo/actividad/activity-ecosystems"]');
       await expect(activity).toBeVisible();
       await expectNoHorizontalOverflow(page);
       if (width === 320) {

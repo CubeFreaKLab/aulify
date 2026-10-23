@@ -1,0 +1,11 @@
+{
+  "executedAt": "2026-10-23T19:09:24.854Z",
+  "project": "bnqyyumfmyexsqszglab",
+  "migration": "supabase/migrations/20261023190019_aulify_guest_practice_and_member_avatars.sql",
+  "sha256": "7f57ab47474e305939bb5b9d3d44bbad037f962b80767f82b0c9ceccb57c6d51",
+  "previousMigrations": 37,
+  "result": "applied",
+  "limitations": [
+    "No prueba de carga ni de correo; no se cambió producción de Vercel."
+  ]
+}

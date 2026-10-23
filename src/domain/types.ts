@@ -39,6 +39,7 @@ interface QuestionBase {
   manual?: boolean;
   groupId?: Id;
   manualGuide?: string;
+  image?: { src: string; alt: string };
 }
 export type Question =
   | (QuestionBase & { type: 'single'; options: Choice[]; correctOptionId: Id })

@@ -1,4 +1,8 @@
-# Verificación del modelo 1.3
+# Verificación del modelo 1.4
+
+El generador valida 49 tablas propias, una identidad externa, 314 campos incluyendo esa identidad y 81 claves foráneas. DBML, diccionario y diagramas son coherentes con [modelo.json](modelo.json). Las 18 [pruebas de invitados](../verificacion/invitados-aislado.json) y la [migración remota](../verificacion/invitados-migracion-remota.json) corresponden a esta extensión. Las evidencias siguientes se conservan como historial de la base anterior y no acreditan funciones nuevas.
+
+## Historial del modelo 1.3
 
 29 de septiembre de 2026. El modelo conserva 44 relaciones del dominio y tres técnicas: comprobaciones de código y revisiones de sincronización por actividad/participante. Son 47 tablas propias, una identidad externa, 295 campos y 78 claves foráneas. El [informe estructural](verificacion-estructural.json) identifica la fuente validada y el [manifiesto](diagramas/manifest.json) sus exportaciones. La versión 1.3 añade un contador docente por participante; su migración está aplicada y tiene pruebas aisladas y una regresión remota acotada, sin acreditar capacidad.
 

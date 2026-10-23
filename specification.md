@@ -241,3 +241,11 @@ Esta versión cierra reglas funcionales del alcance descrito. Los valores inicia
 Sigue el modelo conceptual/relacional/físico, contratos, migraciones, diseño y selección técnica comprobada. SMTP, transporte guiado, eliminación programada, respaldo, bibliotecas y elegibilidad del alojamiento requieren decisiones de implementación y evidencia. No resolver activando cobros o reduciendo alcance implícitamente.
 
 Trazabilidad y construcción: [tareas](tasks.md), [aceptación](specs/aceptacion-producto.md) y [calidad](docs/calidad/plan-de-calidad.md). Una función se completa solo al comprobarla y documentar resultados reales.
+
+## Práctica pública con invitados
+
+**GI-01.** El propietario puede crear una URL y QR de práctica individual a partir de un quiz publicado con corrección automática. Define apertura, cierre y duración; puede desactivar el enlace. Se conserva una copia inmutable de sus preguntas. El ejemplo público de demostración es independiente de los datos privados.
+
+**GI-02.** El invitado entra con nombre y avatar aleatorio, sin cuenta ni matrícula. El servidor controla plazo, orden, corrección e idempotencia. Solo se presenta la pregunta actual sin su solución; el resultado devuelve puntos de práctica y nunca crea un intento académico ni una evaluación. La sesión se identifica con una cookie HttpOnly y su secreto se almacena como hash.
+
+**GI-03.** El editor diferencia abrir el diálogo y confirmar publicación. La animación se completa antes de enviar, bloquea envíos repetidos y muestra éxito antes de navegar; los errores permiten reintentar. El tiempo del quiz tiene representación textual y barra superior; las microanimaciones respetan movimiento reducido.

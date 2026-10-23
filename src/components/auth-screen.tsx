@@ -10,6 +10,7 @@ import { clearWorkspaceSession } from '@/demo/store';
 import { BrandArt } from './brand-art';
 import { ThemeSwitcher } from './theme';
 import { AuthInput } from './auth-input';
+import { PencilCursor } from './pencil-cursor';
 import '../styles/auth.css';
 
 type AuthMode = 'access' | 'register' | 'recover' | 'update-password';
@@ -135,6 +136,7 @@ export function AuthScreen({
 
   return (
     <div className={`auth-page auth-page-${mode}`}>
+      <PencilCursor />
       <header className="auth-header">
         <Link href="/" aria-label="Aulify, volver al inicio" className="auth-logo">
           <Image src="/brand/aulify-logo.svg" alt="Aulify" width={866} height={288} priority />

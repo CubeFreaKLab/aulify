@@ -68,6 +68,17 @@ export function AvatarProvider({
   useEffect(() => {
     if (!live) return;
     let active = true;
+    void fetch('/api/profile/avatars', { cache: 'no-store', signal: AbortSignal.timeout(10000) })
+      .then(async (response) => {
+        if (!response.ok) return;
+        const body = await response.json();
+        if (active && body.avatars && typeof body.avatars === 'object')
+          for (const [id, avatar] of Object.entries(body.avatars))
+            if (id !== userId && isAvatarId(avatar)) saveAvatar(id, avatar);
+      })
+      .catch(() => {
+        /* Keep deterministic placeholders if the connection is unavailable. */
+      });
     void fetch('/api/profile/avatar', { cache: 'no-store', signal: AbortSignal.timeout(10000) })
       .then(async (response) => {
         const data = await response.json();

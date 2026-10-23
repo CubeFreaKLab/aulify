@@ -62,7 +62,7 @@ test('Carrusel infinito: rueda, vuelta completa, arrastre y punta del lápiz', a
   await expect(page.locator('.pencil-cursor')).toHaveClass(/pencil-tap/);
   await page.mouse.up();
   await page.getByRole('link', { name: 'Crear cuenta', exact: true }).first().click();
-  await expect(page.locator('.pencil-cursor')).toHaveCount(0);
+  await expect(page.locator('.pencil-cursor')).toHaveCount(1);
   await expect(page.locator('html')).not.toHaveClass(/pencil-cursor-active/);
 });
 

@@ -59,7 +59,10 @@ export async function expectNoHorizontalOverflow(page: Page): Promise<void> {
 export async function expectLoadedImages(page: Page): Promise<void> {
   const position = await page.evaluate(() => ({ x: scrollX, y: scrollY }));
   for (const image of await page.locator('img:visible').all()) {
-    await image.scrollIntoViewIfNeeded();
+    // Transformed carousel cards and the fixed cursor cannot be scrolled into view.
+    // They preload their SVGs so looping or moving the pointer never shows an empty asset.
+    if (!(await image.evaluate((element) => element.closest('.learning-card, .pencil-cursor'))))
+      await image.scrollIntoViewIfNeeded();
     await expect
       .poll(() =>
         image.evaluate(

@@ -143,6 +143,14 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .learning-reel-window > span {
+    visibility: hidden !important;
+  }
+  .learning-reel-window > span[data-current='true'] {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none;
+  }
   .learning-card,
   .learning-reel-window > span {
     transition: none;

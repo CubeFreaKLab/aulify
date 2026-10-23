@@ -1,0 +1,28 @@
+{
+  "executedAt": "2026-10-23T19:06:46.396Z",
+  "environment": "PGlite aislado",
+  "checks": [
+    "Avatares: elección del integrante, sin perfiles ajenos",
+    "Estudiante solo consulta su avatar",
+    "Crear enlace devuelve metadatos sin soluciones",
+    "Crear de nuevo conserva el mismo enlace activo",
+    "Docente ajeno no administra el enlace",
+    "Estudiante no crea enlaces públicos",
+    "Authenticated no puede leer claves de corrección",
+    "Anon no ejecuta el RPC privado",
+    "Ingresar asigna avatar y plazo del servidor",
+    "Reintento de ingreso no duplica la partida",
+    "Otra cookie no obtiene la partida",
+    "Confirmar registra una respuesta",
+    "Reintento idempotente no duplica puntos",
+    "No se puede reemplazar una respuesta confirmada",
+    "Invitados no crean intentos académicos ni notas",
+    "Servidor rechaza respuestas fuera de plazo",
+    "Revocar desactiva el enlace para todos",
+    "Programación impide entrar antes de la apertura"
+  ],
+  "limitations": [
+    "No acredita entrega de correo ni capacidad alojada.",
+    "El RPC privado se prueba con rol service_role; la proyección HTTP se verifica aparte."
+  ]
+}

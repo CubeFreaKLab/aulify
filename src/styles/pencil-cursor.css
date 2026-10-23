@@ -24,7 +24,7 @@
   left: -0.24px;
   bottom: -0.88px;
   transform-origin: 0.24px 47.12px;
-  transform: rotate(var(--pencil-lean, 0deg));
+  transform: rotate(calc(90deg + var(--pencil-lean, 0deg)));
   filter: drop-shadow(1px 1px 1px #ffffffa0);
 }
 .pencil-click-mark {
@@ -45,7 +45,7 @@
 }
 @keyframes pencil-press {
   45% {
-    transform: rotate(-12deg) scale(0.88);
+    transform: rotate(78deg) scale(0.88);
   }
 }
 @keyframes pencil-mark {

@@ -271,7 +271,12 @@ function Dashboard({
 }) {
   const teacher = user.role === 'teacher';
   const router = useRouter();
-  const activities = state.activities.filter((a) => subjects.some((s) => s.id === a.subjectId));
+  const activities = state.activities
+    .filter((a) => subjects.some((s) => s.id === a.subjectId))
+    .sort(
+      (a, b) =>
+        Number(b.id === 'activity-quiz-ilustrado') - Number(a.id === 'activity-quiz-ilustrado'),
+    );
   const firstResource = state.resources.find((resource) => resource.ownerId === user.id);
   return (
     <>
@@ -759,7 +764,12 @@ function SubjectScreen({
                     .filter((m) => m.subjectId === s.id)
                     .map((m) => (
                       <tr key={m.id}>
-                        <td>{state.users.find((u) => u.id === m.studentId)?.name}</td>
+                        <td>
+                          <span className="row" style={{ gap: 12 }}>
+                            <ProfileAvatar userId={m.studentId} size={38} />
+                            {state.users.find((u) => u.id === m.studentId)?.name}
+                          </span>
+                        </td>
                         <td>
                           <Badge tone={m.status === 'approved' ? 'green' : 'amber'}>
                             {m.status === 'approved'

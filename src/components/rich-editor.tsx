@@ -356,6 +356,24 @@ export default function RichEditor({
   const [error, setError] = useState('');
   const pasteAnchor = useRef<string | null>(null);
   const filePreview = useRef<HTMLImageElement>(null);
+  const canvas = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const root = canvas.current;
+    if (!root) return;
+    const columns = new WeakMap<Element, number>();
+    const revealAddedColumn = () => {
+      for (const wrapper of root.querySelectorAll<HTMLElement>('.tableWrapper')) {
+        const count = wrapper.querySelector('tr')?.children.length ?? 0;
+        const previous = columns.get(wrapper);
+        columns.set(wrapper, count);
+        if (previous !== undefined && count > previous) wrapper.scrollLeft = wrapper.scrollWidth;
+      }
+    };
+    revealAddedColumn();
+    const observer = new MutationObserver(revealAddedColumn);
+    observer.observe(root, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     if (!file || !filePreview.current) return;
     const url = URL.createObjectURL(file);
@@ -617,7 +635,7 @@ export default function RichEditor({
   void revision;
   return (
     <ImageEditorContext.Provider value={openImage}>
-      <div className="block-editor">
+      <div className="block-editor" ref={canvas}>
         <div className="editor-controls" role="group" aria-label="Herramientas del documento">
           <button
             className="icon-button editor-history-button"
@@ -828,9 +846,11 @@ export default function RichEditor({
               {error}
             </p>
           )}
-          <Button isDisabled={busy} onPress={() => void saveImage()}>
-            {busy ? 'Comprobando imagen…' : 'Guardar imagen'}
-          </Button>
+          <div className="dialog-actions">
+            <Button isDisabled={busy} onPress={() => void saveImage()}>
+              {busy ? 'Comprobando imagen…' : 'Guardar imagen'}
+            </Button>
+          </div>
         </DialogPanel>
       </div>
     </ImageEditorContext.Provider>

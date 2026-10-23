@@ -77,7 +77,12 @@ for (const motion of ['no-preference', 'reduce'] as const) {
     await page.goto('/demo/biblioteca');
     // La navegación enfoca el h1 en el siguiente frame; termina antes de probar otro foco.
     await expect(page.getByRole('heading', { name: 'Biblioteca', exact: true })).toBeFocused();
-    const trigger = page.getByRole('button', { name: 'Vista previa', exact: true }).first();
+    const trigger = page
+      .locator('.library-item')
+      .filter({
+        has: page.getByRole('heading', { name: 'Ecosistemas: todo está conectado', exact: true }),
+      })
+      .getByRole('button', { name: 'Vista previa', exact: true });
     const dialog = page.getByRole('dialog', { name: 'Vista previa', exact: true });
     await trigger.focus();
     await expect(trigger).toBeFocused();
@@ -86,6 +91,9 @@ for (const motion of ['no-preference', 'reduce'] as const) {
     await expect(
       dialog.getByRole('heading', { name: 'Ecosistemas: todo está conectado' }),
     ).toBeVisible();
+    await expect
+      .poll(() => dialog.evaluate((element) => element.contains(document.activeElement)))
+      .toBe(true);
     await page.keyboard.press('Escape');
     await expect(dialog).toHaveCount(0);
     await expect(trigger).toBeFocused();

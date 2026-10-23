@@ -34,7 +34,7 @@ test('Columnas: conservar contenido al guardar, leer y volver a apilar', async (
   await expect(page.getByText('Borrador guardado', { exact: true })).toBeVisible();
 });
 
-test('Publicar: arrastre parcial no confirma; teclado abre configuración y confirma una sola actividad', async ({
+test('Publicar: apertura estática; teclado y arrastre parcial en la confirmación', async ({
   page,
 }, info) => {
   await enterDemo(page, 'docente');
@@ -46,23 +46,27 @@ test('Publicar: arrastre parcial no confirma; teclado abre configuración y conf
     );
   const before = await count();
   const publish = page.getByRole('button', { name: 'Publicar', exact: true });
-  if (!info.project.name.includes('movil')) {
-    const box = (await publish.boundingBox())!;
-    await page.mouse.move(box.x + 20, box.y + box.height / 2);
-    await page.mouse.down();
-    await page.mouse.move(box.x + 50, box.y + box.height / 2, { steps: 4 });
-    await page.mouse.up();
-    await expect(page.getByRole('dialog')).toHaveCount(0);
-  }
   await publish.focus();
   await page.keyboard.press('Enter');
   const dialog = page.getByRole('dialog', { name: 'Comparte una nueva experiencia' });
   await expect(dialog).toBeVisible();
   expect(await count()).toBe(before);
   await dialog.getByRole('button', { name: 'Seguir editando', exact: true }).click();
+  await expect(dialog).toHaveCount(0);
   expect(await count()).toBe(before);
   await publish.click();
   await expect(dialog).toBeVisible();
+  if (!info.project.name.includes('movil')) {
+    const confirm = dialog.getByRole('button', { name: 'Publicar en la materia', exact: true });
+    await confirm.hover();
+    const box = (await confirm.boundingBox())!;
+    await page.mouse.move(box.x + 20, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + 50, box.y + box.height / 2, { steps: 4 });
+    await page.mouse.up();
+    expect(await count()).toBe(before);
+    await expect(dialog).toBeVisible();
+  }
   await dialog.getByRole('button', { name: 'Publicar en la materia', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/demo\/materia\/subject-biology$/);

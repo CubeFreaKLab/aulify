@@ -69,3 +69,8 @@ Estos casos complementan AC-06, AC-26 y AP-20 a AP-33. Solo las ejecuciones real
 ## Lectura por actividad
 
 `aulify_activity_snapshot` comprueba identidad y pertenencia actual en cada llamada. El docente recibe únicamente el ámbito solicitado; el estudiante, su proyección sin soluciones ni correcciones ocultas. Los contadores internos de sincronización carecen de lectura y escritura directa para clientes. Una retirada revoca la consulta aunque el cliente conserve una revisión antigua.
+
+
+## Invitados y avatares
+
+Las tablas nuevas no dan acceso directo a `anon` ni `authenticated`. La RPC de propietario comprueba identidad y materia; la de participación es exclusiva del servidor y este devuelve una proyección sin soluciones. La cookie se limita a la práctica; el plazo lo verifica PostgreSQL. Los avatares se proyectan para la cuenta y sus integrantes autorizados. Véanse [permisos, conservación y pruebas](invitados.md).

@@ -75,3 +75,13 @@ La [reutilización y configuración](docs/verificacion/reutilizacion-y-configura
 La [preferencia de sonido](docs/verificacion/preferencia-sonido.md) corrige en T-15 una continuación que utilizaba el estado anterior al silenciamiento. Cuatro ejecuciones locales con audio nativo e intercalación controlada verifican sonido activo y desactivado antes de confirmar. La [secuencia de AP-17](docs/verificacion/racha-revision-manual.md) aprobó después en escritorio y móvil emulado, con escritura manual, sin bonificación y con movimiento reducido.
 
 La [comprobación conjunta](docs/verificacion/aceptacion-combinada.md) y la [secuencia de entregas](docs/verificacion/entregas-secuencia.md) amplían los casos remotos de T-07/T-11/T-13/T-14/T-15/T-18. El [respaldo remoto y la restauración nativa](docs/verificacion/restauracion-postgres-nativa.md) recuperaron 83 tablas y 42 archivos con huellas y políticas coincidentes. La [recuperación de servicios](docs/verificacion/recuperacion-servicios.md) del 3 de octubre añade Auth, PostgREST, Storage y una aplicación compilada contra el destino aislado, con acceso de ambos perfiles y descarga verificados. AP-36 cubierto para esta recuperación local. T-21 continúa abierta por publicación, correo y criterios de liberación.
+
+
+## Publicación y práctica por enlace
+
+- T-12/T-19: abrir Publicar sin movimiento; confirmación completa, mensaje de éxito, lápiz en acceso/registro, campos animados y tablas contenidas.
+- T-15: ejemplo ilustrado jugable y barra de tiempo; invitados por enlace/QR sin notas, programación y revocación.
+- T-02: modelo 1.4, migración 38, diccionario, permisos y diagramas actualizados.
+- T-21: correo general, dominio público, límites alojados y separación de producción/demostración siguen pendientes. La entrega de navegador no los acredita.
+
+Criterios y resultados: [publicación y quiz](docs/diseno/publicacion-y-quiz-invitado.md) y [modelo de invitados](docs/modelado/invitados.md).

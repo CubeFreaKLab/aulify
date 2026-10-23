@@ -6,6 +6,9 @@ import { enterDemo, expectNoHorizontalOverflow } from './helpers';
 
 test.beforeEach(async ({ page }) => {
   const state = createDemoState();
+  state.resources.forEach((resource) => {
+    resource.updatedAt = '2026-09-01T12:00:00.000Z';
+  });
   state.resources[0].updatedAt = '2026-09-20T12:00:00.000Z';
   state.resources.push(
     {
@@ -75,7 +78,7 @@ test('biblioteca: búsqueda, tipo y orden; vista previa y copia independientes',
   page,
 }) => {
   const rows = page.locator('.library-item');
-  await expect(rows).toHaveCount(3);
+  await expect(rows).toHaveCount(4);
   await expect(rows.first().getByRole('heading')).toHaveText('Zoología: ¿cuánto sabes?');
   await expect(page.getByText('Recurso de otra cuenta', { exact: true })).toHaveCount(0);
   await page.getByLabel('Ordenar recursos').selectOption('title');
@@ -87,6 +90,8 @@ test('biblioteca: búsqueda, tipo y orden; vista previa y copia independientes',
   await expect(rows.first()).toContainText('Busca un lugar sin luces');
   await page.getByRole('button', { name: 'Limpiar búsqueda' }).click();
   await page.getByLabel('Tipo de recurso').selectOption('quiz');
+  await expect(rows).toHaveCount(2);
+  await page.getByLabel('Buscar recursos').fill('Zoología');
   await expect(rows).toHaveCount(1);
   await expect(rows).toContainText('¿Cuál de estos animales es un mamífero?');
   await expectNoHorizontalOverflow(page);
@@ -146,7 +151,7 @@ test('biblioteca: lectura, filtros vacíos y reflujo en ambos temas', async ({ p
   await page.getByLabel('Buscar recursos').fill('Sin coincidencias');
   await expect(page.getByRole('heading', { name: 'No encontramos ese recurso' })).toBeVisible();
   await page.getByRole('button', { name: 'Quitar filtros' }).click();
-  await expect(page.locator('.library-item')).toHaveCount(3);
+  await expect(page.locator('.library-item')).toHaveCount(4);
   await page.setViewportSize({ width: 320, height: 700 });
   await expectNoHorizontalOverflow(page);
   for (const label of ['Tipo de recurso', 'Ordenar recursos']) {

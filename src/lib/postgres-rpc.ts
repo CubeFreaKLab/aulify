@@ -1,8 +1,8 @@
 import { escapeLiteral, type PoolClient, type QueryResult } from 'pg';
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-export type UserDatabaseOperation = 'command' | 'activity' | 'overview';
-export type DatabaseOperation = UserDatabaseOperation | 'sync';
+export type UserDatabaseOperation = 'command' | 'activity' | 'overview' | 'guestManage' | 'avatars';
+export type DatabaseOperation = UserDatabaseOperation | 'sync' | 'guest';
 export type DatabaseFailure = { code: string; message: string };
 
 /** Fixed RPCs only. Every value uses the driver's PostgreSQL literal escaping. */
@@ -11,7 +11,8 @@ export function databaseRpcSql(
   userId: string | null,
   args: unknown[],
 ) {
-  if (operation !== 'sync' && (!userId || !uuid.test(userId))) throw new Error('INVALID_IDENTITY');
+  if (!['sync', 'guest'].includes(operation) && (!userId || !uuid.test(userId)))
+    throw new Error('INVALID_IDENTITY');
   const literal = (value: unknown) => {
     const json = JSON.stringify(value);
     if (json === undefined || json.includes('\u0000')) throw new Error('INVALID_PAYLOAD');
@@ -32,6 +33,20 @@ export function databaseRpcSql(
       if (args.length) throw new Error('INVALID_PAYLOAD');
       call = 'public.aulify_workspace_overview()';
       break;
+    case 'avatars':
+      if (args.length) throw new Error('INVALID_PAYLOAD');
+      call = 'public.aulify_member_avatars()';
+      break;
+    case 'guestManage':
+    case 'guest':
+      if (
+        args.length !== 2 ||
+        typeof args[0] !== 'string' ||
+        (operation === 'guest' && userId !== null)
+      )
+        throw new Error('INVALID_PAYLOAD');
+      call = `public.${operation === 'guest' ? 'aulify_guest' : 'aulify_guest_manage'}(${escapeLiteral(args[0])},${literal(args[1])})`;
+      break;
     case 'sync':
       if (userId !== null || args.length !== 1 || !Array.isArray(args[0]))
         throw new Error('INVALID_PAYLOAD');
@@ -40,7 +55,7 @@ export function databaseRpcSql(
     default:
       throw new Error('INVALID_OPERATION');
   }
-  const role = operation === 'sync' ? 'service_role' : 'authenticated';
+  const role = ['sync', 'guest'].includes(operation) ? 'service_role' : 'authenticated';
   const claims = { sub: userId, role };
   // One round trip, unnamed simple-query protocol (Supavisor transaction mode).
   // LOCAL role, claims and limits are reset on COMMIT or ROLLBACK. No session identity.

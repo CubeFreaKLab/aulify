@@ -984,3 +984,53 @@ Reglas: AC-07.
 | `teacher_revision` | `bigint` | No | Revisión de cambios personales visibles al docente, incluidas correcciones privadas. Se agrega con identidad y orden estable para la huella docente; no altera la huella estudiantil. Contador no negativo, valor inicial cero. |
 
 - FK `participant_id` → `participants(id)`; eliminación prevista: `cascade`.
+
+## Práctica pública sin cuenta
+
+### guest_quizzes
+
+Copia inmutable de un quiz para práctica individual por enlace revocable, sin matrícula.
+
+PK: `id`.
+UK: `token`.
+Acceso: Sin lectura ni escritura directa; gestión del propietario autenticado y servicio de participación..
+Reglas: GI-01, GI-02.
+
+| Campo | Tipo previsto | Admite nulo | Descripción |
+|---|---|---|---|
+| `id` | `uuid` | No | Identificador de la práctica pública. |
+| `token` | `text` | No | Capacidad aleatoria de acceso; única. El ejemplo tiene una clave estable. |
+| `owner_id` | `uuid` | Sí | Propietario autenticado; nulo solo para el ejemplo público. |
+| `activity_id` | `uuid` | Sí | Actividad de origen; nula solo para el ejemplo público. |
+| `title` | `text` | No | Título visible, de 1 a 120 caracteres. |
+| `questions` | `jsonb` | No | Copia inmutable de 1 a 50 preguntas y claves privadas, inferior a 256 KiB. |
+| `opens_at` | `timestamptz` | No | Apertura comprobada por el servidor. |
+| `closes_at` | `timestamptz` | No | Cierre posterior a la apertura. |
+| `duration_seconds` | `integer` | No | Duración de la partida, entre 60 y 7200 segundos. |
+| `revoked_at` | `timestamptz` | Sí | Desactivación del enlace. |
+| `created_at` | `timestamptz` | No | Creación de la copia. |
+
+- FK `owner_id` → `profiles(id)`; eliminación prevista: `cascade`.
+- FK `activity_id` → `activities(id)`; eliminación prevista: `cascade`.
+
+### guest_runs
+
+Partida de un invitado, sin referencia a inscripción, participante académico o nota.
+
+PK: `id`.
+UK: `quiz_id, secret_hash`.
+Acceso: Servicio de participación; ninguna lectura directa de anon o authenticated..
+Reglas: GI-02.
+
+| Campo | Tipo previsto | Admite nulo | Descripción |
+|---|---|---|---|
+| `id` | `uuid` | No | Identificador de la partida. |
+| `quiz_id` | `uuid` | No | Práctica pública de pertenencia. |
+| `secret_hash` | `text` | No | SHA-256 del secreto aleatorio de cookie; el secreto original no se almacena. |
+| `display_name` | `text` | No | Nombre elegido de 2 a 60 caracteres, no acredita identidad. |
+| `avatar_id` | `text` | No | Identificador validado de los 30 personajes de marca. |
+| `started_at` | `timestamptz` | No | Inicio registrado por el servidor. |
+| `deadline` | `timestamptz` | No | Menor fecha entre cierre de práctica y duración desde el inicio. |
+| `answers` | `jsonb` | No | Secuencia acotada de recibos idempotentes y puntos de práctica; no contiene texto libre. |
+
+- FK `quiz_id` → `guest_quizzes(id)`; eliminación prevista: `cascade`.

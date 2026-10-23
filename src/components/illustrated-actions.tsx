@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import '@/styles/illustrated-actions.css';
 
 export function PreviewButton({
@@ -62,94 +62,157 @@ export function DocumentConfirm({
   disabled = false,
   children = 'Publicar',
   guide,
+  validate,
+  onComplete,
+  onBusyChange,
 }: {
-  onConfirm: () => void | Promise<unknown>;
+  onConfirm: () => unknown | Promise<unknown>;
+  validate?: () => boolean;
+  onComplete?: () => void;
+  onBusyChange?: (busy: boolean) => void;
   disabled?: boolean;
   children?: ReactNode;
   guide?: string;
 }) {
   const [travel, setTravel] = useState(0);
   const [busy, setBusy] = useState(false);
+  const [phase, setPhase] = useState('idle');
+  const [error, setError] = useState('');
+  const button = useRef<HTMLButtonElement>(null);
+  const token = useRef<HTMLImageElement>(null);
+  const road = useRef<HTMLSpanElement>(null);
   const origin = useRef<number | null>(null);
   const suppressed = useRef(false);
   const lock = useRef(false);
   async function confirm() {
-    if (disabled || lock.current) return;
+    if (disabled || lock.current || (validate && !validate())) return;
     lock.current = true;
     setBusy(true);
+    setError('');
+    setPhase('sending');
+    onBusyChange?.(true);
     try {
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
-        await new Promise((resolve) => setTimeout(resolve, 400));
-      await onConfirm();
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && token.current) {
+        const distance = (button.current?.clientWidth ?? 240) - 50;
+        road.current?.animate(
+          [
+            { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+            { clipPath: 'inset(0 0 0 0)', opacity: 0.8 },
+          ],
+          { duration: 760, fill: 'forwards', easing: 'ease-in' },
+        );
+        await token.current.animate(
+          [
+            { transform: `translateX(${travel}px) rotate(0deg)`, opacity: 1 },
+            { transform: `translateX(${distance}px) rotate(-9deg)`, opacity: 1, offset: 0.85 },
+            { transform: `translateX(${distance + 45}px) rotate(-9deg)`, opacity: 0 },
+          ],
+          { duration: 850, fill: 'forwards', easing: 'cubic-bezier(.45,0,.7,1)' },
+        ).finished;
+      }
+      setPhase('saving');
+      if ((await onConfirm()) === false)
+        throw new Error('No se publicó. Revisa los datos e intenta de nuevo.');
+      setPhase('sent');
+      await new Promise((resolve) => setTimeout(resolve, 650));
+      onComplete?.();
+    } catch (cause) {
+      setPhase('idle');
+      setError(cause instanceof Error ? cause.message : 'No se publicó. Intenta de nuevo.');
     } finally {
+      token.current?.getAnimations().forEach((animation) => animation.cancel());
+      road.current?.getAnimations().forEach((animation) => animation.cancel());
       lock.current = false;
       setBusy(false);
       setTravel(0);
+      onBusyChange?.(false);
     }
   }
   return (
-    <button
-      type="button"
-      className="button document-confirm"
-      disabled={disabled || busy}
-      aria-busy={busy}
-      data-guide={guide}
-      data-moving={busy || travel > 0}
-      style={{ '--travel': `${travel}px` } as CSSProperties}
-      title="Desliza hacia la derecha o pulsa para continuar"
-      onPointerDown={(e) => {
-        if (e.button !== 0 || disabled || busy) return;
-        origin.current = e.clientX;
-        suppressed.current = false;
-        e.currentTarget.setPointerCapture(e.pointerId);
-      }}
-      onPointerMove={(e) => {
-        if (origin.current === null) return;
-        setTravel(Math.max(0, Math.min(100, e.clientX - origin.current)));
-      }}
-      onPointerCancel={() => {
-        origin.current = null;
-        setTravel(0);
-        suppressed.current = true;
-      }}
-      onPointerUp={(e) => {
-        if (origin.current === null) return;
-        const moved = e.clientX - origin.current;
-        origin.current = null;
-        e.currentTarget.releasePointerCapture(e.pointerId);
-        if (moved > 65) {
-          suppressed.current = true;
-          void confirm();
-        } else if (Math.abs(moved) > 8) {
-          suppressed.current = true;
-          setTravel(0);
-        }
-      }}
-      onClick={(event) => {
-        if (suppressed.current && event.detail !== 0) {
+    <span className="document-confirm-wrap">
+      <button
+        ref={button}
+        type="button"
+        className="button document-confirm"
+        disabled={disabled || busy || phase === 'sent'}
+        aria-busy={busy}
+        aria-label={typeof children === 'string' ? children : 'Publicar'}
+        data-phase={phase}
+        data-guide={guide}
+        data-moving={busy || travel > 0}
+        style={{ '--travel': `${travel}px` } as CSSProperties}
+        title="Desliza hacia la derecha o pulsa para continuar"
+        onPointerDown={(e) => {
+          if (e.button !== 0 || disabled || busy) return;
+          origin.current = e.clientX;
           suppressed.current = false;
-          return;
-        }
-        suppressed.current = false;
-        void confirm();
-      }}
-    >
-      <span className="document-road" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </span>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        className="document-token"
-        src="/illustrations/actions/documento.svg"
-        width="32"
-        height="34"
-        alt=""
-      />
-      <span className="document-action-label">{busy ? 'Un momento…' : children}</span>
-      <ArrowRight size={17} className="document-arrow" aria-hidden="true" />
-    </button>
+          e.currentTarget.setPointerCapture(e.pointerId);
+        }}
+        onPointerMove={(e) => {
+          if (origin.current === null) return;
+          setTravel(Math.max(0, Math.min(100, e.clientX - origin.current)));
+        }}
+        onPointerCancel={() => {
+          origin.current = null;
+          setTravel(0);
+          suppressed.current = true;
+        }}
+        onPointerUp={(e) => {
+          if (origin.current === null) return;
+          const moved = e.clientX - origin.current;
+          origin.current = null;
+          e.currentTarget.releasePointerCapture(e.pointerId);
+          if (moved > 65) {
+            suppressed.current = true;
+            void confirm();
+          } else if (Math.abs(moved) > 8) {
+            suppressed.current = true;
+            setTravel(0);
+          }
+        }}
+        onClick={(event) => {
+          if (suppressed.current && event.detail !== 0) {
+            suppressed.current = false;
+            return;
+          }
+          suppressed.current = false;
+          void confirm();
+        }}
+      >
+        <span ref={road} className="document-road" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          ref={token}
+          className="document-token"
+          src="/illustrations/actions/documento.svg"
+          width="32"
+          height="34"
+          alt=""
+        />
+        <span className="document-action-label">{children}</span>
+        <ArrowRight size={17} className="document-arrow" aria-hidden="true" />
+        <span className="document-feedback" role="status">
+          {phase === 'saving' ? (
+            'Publicando…'
+          ) : phase === 'sent' ? (
+            <>
+              <Check size={22} aria-hidden="true" /> Publicado
+            </>
+          ) : (
+            ''
+          )}
+        </span>
+      </button>
+      {error && (
+        <span className="field-error" role="alert">
+          {error}
+        </span>
+      )}
+    </span>
   );
 }
 

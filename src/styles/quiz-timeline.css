@@ -1,0 +1,39 @@
+.quiz-timeline {
+  position: relative;
+  width: 100%;
+}
+.quiz-timeline-track {
+  height: 6px;
+  background: var(--line);
+  overflow: hidden;
+}
+.quiz-timeline-track > span {
+  display: block;
+  height: 100%;
+  background: #85bd6e;
+  transition: width 1s linear;
+}
+.quiz-timeline[data-urgent='true'] .quiz-timeline-track > span {
+  background: #bd672b;
+}
+.quiz-timeline-time {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 9px 24px 0;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.quiz-scene {
+  display: block;
+  max-width: 100%;
+  width: 360px;
+  max-height: 180px;
+  object-fit: contain;
+  margin: 0 auto 24px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz-timeline-track > span {
+    transition: none;
+  }
+}

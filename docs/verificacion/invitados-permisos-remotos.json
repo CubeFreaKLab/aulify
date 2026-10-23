@@ -1,0 +1,15 @@
+{
+  "executedAt": "2026-10-23T19:19:32.274Z",
+  "project": "bnqyyumfmyexsqszglab",
+  "checks": {
+    "anon_blocked": true,
+    "authenticated_blocked": true,
+    "server_allowed": true,
+    "anonymous_management_blocked": true,
+    "owner_management_allowed": true,
+    "rls_enabled": true,
+    "runs_private": true,
+    "quizzes_private": true
+  },
+  "scope": "Consulta SQL de permisos y RLS de las nuevas funciones y tablas; no es una auditoría global ni prueba de carga."
+}

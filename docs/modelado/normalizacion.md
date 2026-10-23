@@ -54,3 +54,8 @@ PostgreSQL admite JSONB junto con relaciones; aquí su uso se limita a agregados
 ## Comprobación al implementar
 
 Intentar introducir membresías duplicadas, preguntas de otra versión, respuestas repetidas, dos correcciones seleccionadas para la misma pregunta y evaluaciones ajenas. Verificar que cada excepción conserve su invariante, incluso con operaciones simultáneas. La validación del archivo JSON no demuestra estas restricciones en PostgreSQL; las pruebas ejecutadas y sus límites se registran en [verificación](verificacion.md).
+
+
+## Agregados de invitados
+
+La versión 1.4 conserva propietario, actividad, copia y sesión en claves relacionales. Las preguntas inmutables y los recibos acotados usan JSON como agregados independientes del modelo académico; sus límites y excepción a la descomposición se explican en [invitados](invitados.md).

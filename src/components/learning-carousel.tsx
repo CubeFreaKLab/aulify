@@ -155,10 +155,12 @@ export function LearningCarousel() {
             return (
               <span
                 key={card[0]}
+                data-current={Math.abs(offset) < 0.5}
                 style={
                   {
                     '--slot': offset,
-                    opacity: Math.max(0, 1 - Math.abs(offset) * 0.78),
+                    opacity: Math.max(0.9, 1 - Math.abs(offset) * 0.1),
+                    visibility: Math.abs(offset) > 1.5 ? 'hidden' : 'visible',
                   } as CSSProperties
                 }
               >
@@ -236,7 +238,7 @@ export function LearningCarousel() {
                 alt={card[1]}
                 width={660}
                 height={880}
-                loading="lazy"
+                loading="eager"
                 draggable={false}
               />
             </figure>

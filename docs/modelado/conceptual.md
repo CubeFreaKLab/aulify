@@ -56,3 +56,8 @@ El docente organiza una materia para un grupo y año. El estudiante solicita ing
 Usar hora del servidor y `timestamptz` para instantes; conservar la zona IANA elegida para presentación. `occurs_on` expresa la fecha de una actividad manual. La fecha de cierre efectiva resulta del cierre inicial y las ampliaciones registradas; el tiempo del dispositivo no decide admisión.
 
 Puntos parciales se representan como fracciones de enteros, y la nota publicada como decimal de dos cifras. Por ejemplo, un elemento acertado de tres en una pregunta de valor 1 aporta `1/3`, no `0,33` prematuramente. Esta decisión evita acumular redondeos antes del cálculo final; las operaciones se definirán y probarán al implementar.
+
+
+## Práctica pública
+
+La [extensión 1.4](invitados.md) separa copias de quizzes y partidas de invitados. El propietario puede compartir una copia; cada copia tiene múltiples partidas. No hay relación entre partida invitada y nota académica. Véase [el diagrama de invitados](diagramas/10-invitados.svg).

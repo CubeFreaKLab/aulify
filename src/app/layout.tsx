@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import '@fontsource-variable/inter';
 import { ThemeProvider } from '@/components/theme';
+import { InputMotion } from '@/components/input-motion';
 import { themeInit } from '@/lib/theme-init';
 import './globals.css';
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Saltar al contenido
         </a>
         <ThemeProvider>{children}</ThemeProvider>
+        <InputMotion />
       </body>
     </html>
   );

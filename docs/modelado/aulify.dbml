@@ -2,7 +2,7 @@
 // CHECK, índices parciales, transacciones y permisos: restricciones.md y permisos.md.
 Project aulify {
   database_type: 'PostgreSQL'
-  Note: 'Modelo lógico 1.3; app es un esquema no expuesto. Auth es externo.'
+  Note: 'Modelo lógico 1.4; app es un esquema no expuesto. Auth es externo.'
 }
 
 Table auth.users {
@@ -661,6 +661,41 @@ Table app.participant_sync_versions {
   }
 }
 
+Table app.guest_quizzes {
+  Note: "Copia inmutable de un quiz para práctica individual por enlace revocable, sin matrícula."
+  id uuid [not null, note: "Identificador de la práctica pública."]
+  token text [not null, note: "Capacidad aleatoria de acceso; única. El ejemplo tiene una clave estable."]
+  owner_id uuid [null, note: "Propietario autenticado; nulo solo para el ejemplo público."]
+  activity_id uuid [null, note: "Actividad de origen; nula solo para el ejemplo público."]
+  title text [not null, note: "Título visible, de 1 a 120 caracteres."]
+  questions jsonb [not null, note: "Copia inmutable de 1 a 50 preguntas y claves privadas, inferior a 256 KiB."]
+  opens_at timestamptz [not null, note: "Apertura comprobada por el servidor."]
+  closes_at timestamptz [not null, note: "Cierre posterior a la apertura."]
+  duration_seconds integer [not null, note: "Duración de la partida, entre 60 y 7200 segundos."]
+  revoked_at timestamptz [null, note: "Desactivación del enlace."]
+  created_at timestamptz [not null, note: "Creación de la copia."]
+  indexes {
+    id [pk]
+    token [unique]
+  }
+}
+
+Table app.guest_runs {
+  Note: "Partida de un invitado, sin referencia a inscripción, participante académico o nota."
+  id uuid [not null, note: "Identificador de la partida."]
+  quiz_id uuid [not null, note: "Práctica pública de pertenencia."]
+  secret_hash text [not null, note: "SHA-256 del secreto aleatorio de cookie; el secreto original no se almacena."]
+  display_name text [not null, note: "Nombre elegido de 2 a 60 caracteres, no acredita identidad."]
+  avatar_id text [not null, note: "Identificador validado de los 30 personajes de marca."]
+  started_at timestamptz [not null, note: "Inicio registrado por el servidor."]
+  deadline timestamptz [not null, note: "Menor fecha entre cierre de práctica y duración desde el inicio."]
+  answers jsonb [not null, note: "Secuencia acotada de recibos idempotentes y puntos de práctica; no contiene texto libre."]
+  indexes {
+    id [pk]
+    (quiz_id, secret_hash) [unique]
+  }
+}
+
 Ref: app.profiles.id > auth.users.id [delete: restrict]
 Ref: app.subjects.owner_id > app.profiles.id [delete: restrict]
 Ref: app.invitation_codes.subject_id > app.subjects.id [delete: cascade]
@@ -739,3 +774,6 @@ Ref: app.purge_jobs.subject_id > app.subjects.id [delete: set null]
 Ref: app.join_request_checks.profile_id > app.profiles.id [delete: cascade]
 Ref: app.activity_sync_versions.activity_id > app.activities.id [delete: cascade]
 Ref: app.participant_sync_versions.participant_id > app.participants.id [delete: cascade]
+Ref: app.guest_quizzes.owner_id > app.profiles.id [delete: cascade]
+Ref: app.guest_quizzes.activity_id > app.activities.id [delete: cascade]
+Ref: app.guest_runs.quiz_id > app.guest_quizzes.id [delete: cascade]

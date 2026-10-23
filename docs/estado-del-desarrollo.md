@@ -1,5 +1,13 @@
 # Estado del desarrollo
 
+## Publicación, editor y quiz invitado — 23 de octubre
+
+La [entrega de publicación y quiz](diseno/publicacion-y-quiz-invitado.md) corrige la confirmación animada, extiende el lápiz a acceso/registro con punta arriba a la izquierda, anima los campos de texto, estiliza carga de archivos y contiene tablas con sus controles. Integrantes muestra el avatar elegido. La demo incluye «Reto del ecosistema» con seis preguntas ilustradas y barra de tiempo; `/jugar/ecosistema-demo` permite jugar sin cuenta de Aulify con avatar aleatorio y sin nota. Una cuenta docente puede crear URL/QR de sus quizzes automáticos y programar apertura, cierre y duración.
+
+Modelo vigente **1.4: 49 tablas propias, 314 columnas contando la identidad externa y 81 relaciones**. Treinta y ocho migraciones locales/remotas, incluida `20261023190019_aulify_guest_practice_and_member_avatars.sql`. Compilación y tipos, 232 pruebas unitarias, 18 comprobaciones aisladas de invitados y ocho permisos remotos aprobados. Los recorridos de navegador y sus repeticiones se detallan en el diseño enlazado; no se atribuyen a CI ni a una prueba de carga. Dependencias actualizadas a Next.js 16.4.3 y Vitest 5.0.5, sin avisos en la auditoría ejecutada.
+
+Producción sigue pendiente: [correo, cuentas, capacidad, conservación y separación de entornos](operacion/revision-produccion.md). La Preview y el resultado de CI del candidato se registran por separado. Los apartados siguientes conservan evidencia histórica; sus cifras de modelo y compilados pertenecen a sus respectivas revisiones.
+
 Corrección puntual del 23 de octubre: la opción de abrir las guías solo manualmente refleja ahora su valor guardado y permite reactivar la apertura automática al desmarcarla. Verificada la secuencia manual → automática → guía de otra página con Playwright en escritorio; build y lint de este ajuste aprobados.
 
 ## Movimiento continuo y descubrimiento del editor — 23 de octubre

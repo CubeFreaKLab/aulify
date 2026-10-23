@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link, { useWorkspaceRouter as useRouter } from './workspace-link';
-import { Check, Cloud, ArrowLeft, HelpCircle, BookOpen } from 'lucide-react';
+import { Check, Cloud, ArrowLeft, ArrowRight, HelpCircle, BookOpen } from 'lucide-react';
 import {
   defaultActivitySettings,
   questionsOf,
@@ -128,10 +128,9 @@ function EditorForm({
   const publish = async () => {
     if (publishLock.current) return;
     publishLock.current = true;
-    setPublishPending(true);
     try {
       const saved = await save();
-      if (!saved) return;
+      if (!saved) return false;
       const activity = await runDemo(async (repo) => {
         const version = await repo.publishResource(saved.id, user.id);
         if (!questionsOf(saved).length) {
@@ -139,13 +138,9 @@ function EditorForm({
         }
         return repo.createActivity(version.id, subjectId, settings, saved.title, user.id);
       }, 'Recurso publicado en tu materia.');
-      if (activity) {
-        setPublishing(false);
-        router.push(`/demo/materia/${subjectId}`);
-      }
+      return Boolean(activity);
     } finally {
       publishLock.current = false;
-      setPublishPending(false);
     }
   };
   const questions = questionsOf(draft);
@@ -184,14 +179,17 @@ function EditorForm({
               if (await save()) router.push(`/demo/previa/${draft.id}`);
             }}
           />
-          <DocumentConfirm
-            guide="publish"
-            onConfirm={async () => {
+          <Button
+            data-guide="publish"
+            onPress={async () => {
               if (await save()) setPublishing(true);
             }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/illustrations/actions/documento.svg" alt="" width="27" height="29" />
             Publicar
-          </DocumentConfirm>
+            <ArrowRight size={17} aria-hidden="true" />
+          </Button>
         </div>
       </header>
       {conflict && (
@@ -329,7 +327,9 @@ function EditorForm({
       </details>
       <DialogPanel
         open={publishing}
-        onClose={() => setPublishing(false)}
+        onClose={() => {
+          if (!publishPending) setPublishing(false);
+        }}
         title="Comparte una nueva experiencia"
       >
         <form
@@ -337,7 +337,7 @@ function EditorForm({
           ref={publishForm}
           onSubmit={(e) => {
             e.preventDefault();
-            publish();
+            publishForm.current?.querySelector<HTMLButtonElement>('.document-confirm')?.click();
           }}
         >
           <Field id="publish-subject" label="Materia">
@@ -587,12 +587,20 @@ function EditorForm({
             </p>
           </div>
           <div className="dialog-actions">
-            <Button variant="secondary" onPress={() => setPublishing(false)}>
+            <Button
+              variant="secondary"
+              isDisabled={publishPending}
+              onPress={() => setPublishing(false)}
+            >
               Seguir editando
             </Button>
             <DocumentConfirm
-              onConfirm={async () => {
-                if (publishForm.current?.reportValidity()) await publish();
+              validate={() => publishForm.current?.reportValidity() ?? false}
+              onConfirm={publish}
+              onBusyChange={setPublishPending}
+              onComplete={() => {
+                setPublishing(false);
+                router.push(`/demo/materia/${subjectId}`);
               }}
               disabled={!subjectId || publishPending}
             >

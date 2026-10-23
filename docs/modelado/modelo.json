@@ -1,7 +1,7 @@
 {
-  "version": "1.3",
+  "version": "1.4",
   "specification": "1.0",
-  "status": "Modelo de 44 relaciones de dominio y 3 técnicas. Estado de aplicación de migraciones y pruebas en docs/verificacion; la validación estructural no acredita capacidad.",
+  "status": "Modelo de 46 relaciones de dominio y 3 técnicas; invitados separados de las notas. Verificación y migraciones en docs/verificacion.",
   "groups": {
     "externo": "Identidad externa",
     "01-identidad": "Identidad y pertenencia",
@@ -9,7 +9,8 @@
     "03-actividades": "Actividades y disponibilidad",
     "04-participacion": "Participación y juego",
     "05-evaluacion": "Entregas y evaluación",
-    "06-operacion": "Integridad y conservación"
+    "06-operacion": "Integridad y conservación",
+    "10-invitados": "Práctica pública sin cuenta"
   },
   "tables": [
     {
@@ -3612,6 +3613,194 @@
         }
       ],
       "introduced_in": "physical-1.2"
+    },
+    {
+      "name": "guest_quizzes",
+      "group": "10-invitados",
+      "purpose": "Copia inmutable de un quiz para práctica individual por enlace revocable, sin matrícula.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de la práctica pública."
+        },
+        {
+          "name": "token",
+          "type": "text",
+          "nullable": false,
+          "description": "Capacidad aleatoria de acceso; única. El ejemplo tiene una clave estable."
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Propietario autenticado; nulo solo para el ejemplo público."
+        },
+        {
+          "name": "activity_id",
+          "type": "uuid",
+          "nullable": true,
+          "description": "Actividad de origen; nula solo para el ejemplo público."
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": false,
+          "description": "Título visible, de 1 a 120 caracteres."
+        },
+        {
+          "name": "questions",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Copia inmutable de 1 a 50 preguntas y claves privadas, inferior a 256 KiB."
+        },
+        {
+          "name": "opens_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Apertura comprobada por el servidor."
+        },
+        {
+          "name": "closes_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Cierre posterior a la apertura."
+        },
+        {
+          "name": "duration_seconds",
+          "type": "integer",
+          "nullable": false,
+          "description": "Duración de la partida, entre 60 y 7200 segundos."
+        },
+        {
+          "name": "revoked_at",
+          "type": "timestamptz",
+          "nullable": true,
+          "description": "Desactivación del enlace."
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Creación de la copia."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "token"
+        ]
+      ],
+      "rules": [
+        "GI-01",
+        "GI-02"
+      ],
+      "access": "Sin lectura ni escritura directa; gestión del propietario autenticado y servicio de participación.",
+      "foreign_keys": [
+        {
+          "columns": [
+            "owner_id"
+          ],
+          "target": "profiles",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        },
+        {
+          "columns": [
+            "activity_id"
+          ],
+          "target": "activities",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
+    },
+    {
+      "name": "guest_runs",
+      "group": "10-invitados",
+      "purpose": "Partida de un invitado, sin referencia a inscripción, participante académico o nota.",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Identificador de la partida."
+        },
+        {
+          "name": "quiz_id",
+          "type": "uuid",
+          "nullable": false,
+          "description": "Práctica pública de pertenencia."
+        },
+        {
+          "name": "secret_hash",
+          "type": "text",
+          "nullable": false,
+          "description": "SHA-256 del secreto aleatorio de cookie; el secreto original no se almacena."
+        },
+        {
+          "name": "display_name",
+          "type": "text",
+          "nullable": false,
+          "description": "Nombre elegido de 2 a 60 caracteres, no acredita identidad."
+        },
+        {
+          "name": "avatar_id",
+          "type": "text",
+          "nullable": false,
+          "description": "Identificador validado de los 30 personajes de marca."
+        },
+        {
+          "name": "started_at",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Inicio registrado por el servidor."
+        },
+        {
+          "name": "deadline",
+          "type": "timestamptz",
+          "nullable": false,
+          "description": "Menor fecha entre cierre de práctica y duración desde el inicio."
+        },
+        {
+          "name": "answers",
+          "type": "jsonb",
+          "nullable": false,
+          "description": "Secuencia acotada de recibos idempotentes y puntos de práctica; no contiene texto libre."
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "unique": [
+        [
+          "quiz_id",
+          "secret_hash"
+        ]
+      ],
+      "rules": [
+        "GI-02"
+      ],
+      "access": "Servicio de participación; ninguna lectura directa de anon o authenticated.",
+      "foreign_keys": [
+        {
+          "columns": [
+            "quiz_id"
+          ],
+          "target": "guest_quizzes",
+          "target_columns": [
+            "id"
+          ],
+          "on_delete": "cascade"
+        }
+      ]
     }
   ]
 }

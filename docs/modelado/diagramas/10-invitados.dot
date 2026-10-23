@@ -1,0 +1,12 @@
+digraph modelo {
+graph [rankdir=LR, bgcolor="#ffffff", pad=0.4, nodesep=0.4, ranksep=1.1, splines=polyline, fontname="Arial", fontsize=20, labelloc=t, label="Práctica pública sin cuenta · modelo lógico 1.4"];
+node [shape=plain, fontname="Arial"];
+edge [fontname="Arial", fontsize=10, color="#668076", arrowsize=0.6];
+"activities" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>activities</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"guest_quizzes" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>guest_quizzes</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK owner_id ?</TD></TR><TR><TD ALIGN="LEFT">FK activity_id ?</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">11 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"guest_runs" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#087F5B"><FONT COLOR="white"><B>guest_runs</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD ALIGN="LEFT">FK quiz_id</TD></TR><TR><TD ALIGN="LEFT"><FONT COLOR="#63716B">8 campos · ver diccionario</FONT></TD></TR></TABLE>>];
+"profiles" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#CDDAD4"><TR><TD BGCOLOR="#63716B"><FONT COLOR="white"><B>profiles</B></FONT></TD></TR><TR><TD ALIGN="LEFT">PK: id</TD></TR><TR><TD><FONT COLOR="#63716B">referencia a otro módulo</FONT></TD></TR></TABLE>>];
+"profiles" -> "guest_quizzes" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"activities" -> "guest_quizzes" [dir=none, taillabel="0..1", headlabel="0..N", labeldistance=1.6];
+"guest_quizzes" -> "guest_runs" [dir=none, taillabel="1", headlabel="0..N", labeldistance=1.6];
+}

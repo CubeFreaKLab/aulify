@@ -31,8 +31,11 @@
   position: relative;
   transition: opacity 0.15s;
 }
-.document-confirm[data-moving='true'] .document-action-label {
-  opacity: 0.3;
+.document-confirm[data-moving='true'] .document-action-label,
+.document-confirm[data-moving='true'] .document-arrow,
+.document-confirm[data-phase='sent'] .document-action-label,
+.document-confirm[data-phase='sent'] .document-arrow {
+  opacity: 0;
 }
 .document-road {
   position: absolute;
@@ -51,13 +54,31 @@
 .document-confirm[data-moving='true'] .document-road {
   opacity: 0.7;
 }
-.document-confirm[aria-busy='true'] .document-token {
-  animation: document-send 0.8s ease-in-out infinite alternate;
+.document-confirm-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
 }
-@keyframes document-send {
-  to {
-    transform: translateX(65px) rotate(-8deg);
-  }
+.document-confirm[aria-busy='true'],
+.document-confirm[data-phase='sent'] {
+  opacity: 1;
+}
+.document-confirm[data-phase='saving'] .document-token,
+.document-confirm[data-phase='sent'] .document-token {
+  opacity: 0;
+}
+.document-confirm[data-phase='saving'] .document-road,
+.document-confirm[data-phase='sent'] .document-road {
+  visibility: hidden;
+}
+.document-feedback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  pointer-events: none;
 }
 .bn-container .block-sticker {
   flex-shrink: 0;

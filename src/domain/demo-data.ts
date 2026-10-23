@@ -335,5 +335,72 @@ export function createDemoState(now = new Date().toISOString()): DemoState {
       ctx,
     ).state;
   });
+  ensureIllustratedQuiz(state, now);
   return state;
+}
+
+export const ILLUSTRATED_QUIZ_ID = 'activity-quiz-ilustrado';
+export function illustratedQuestions(): Question[] {
+  return ecosystemQuestions()
+    .slice(0, 6)
+    .map((question) => ({
+      ...question,
+      image: {
+        src: '/illustrations/aulify/ecosystem.svg',
+        alt: 'Un ecosistema con vegetación y seres vivos conectados con su entorno.',
+      },
+    }));
+}
+
+/** Add only the new example; never reset existing drafts, answers or avatar choices. */
+export function ensureIllustratedQuiz(state: DemoState, now: string): boolean {
+  if (
+    state.activities.some((a) => a.id === ILLUSTRATED_QUIZ_ID) ||
+    !state.subjects.some((s) => s.id === DEMO_IDS.subject && s.status === 'active')
+  )
+    return false;
+  const resourceId = 'resource-quiz-ilustrado',
+    versionId = 'version-quiz-ilustrado-1';
+  const title = 'Reto del ecosistema';
+  const blocks = [
+    { id: 'quiz-ilustrado', type: 'quiz' as const, questions: illustratedQuestions() },
+  ];
+  if (!state.resources.some((r) => r.id === resourceId))
+    state.resources.push({
+      id: resourceId,
+      ownerId: DEMO_IDS.teacher,
+      title,
+      kind: 'quiz',
+      blocks: structuredClone(blocks),
+      revision: 1,
+      updatedAt: now,
+    });
+  if (!state.versions.some((v) => v.id === versionId))
+    state.versions.push({
+      id: versionId,
+      resourceId,
+      ownerId: DEMO_IDS.teacher,
+      title,
+      blocks,
+      number: 1,
+      publishedAt: now,
+    });
+  state.activities.push({
+    id: ILLUSTRATED_QUIZ_ID,
+    subjectId: DEMO_IDS.subject,
+    versionId,
+    title,
+    createdAt: now,
+    settings: {
+      ...defaultActivitySettings(now),
+      closesAt: '2099-12-31T23:59:59.000Z',
+      timeLimitMinutes: 4,
+      maxAttempts: 10,
+      streaks: true,
+      allowHint: true,
+      countsTowardAverage: false,
+    },
+  });
+  state.revision++;
+  return true;
 }
