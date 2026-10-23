@@ -2,9 +2,11 @@
 
 ## Acceso a actividades y separación del recurso
 
-La vista docente conserva 20 px entre los controles de gestión y el recurso o la sala guiada. Comprobado en Chrome local con Clasificación cerrada y desplegada; formato aprobado. La verificación CI y Preview de este ajuste se registra al publicarlo, sin atribuirle los resultados de la entrega anterior.
+La vista docente conserva 20 px entre los controles de gestión y el recurso o la sala guiada. Comprobado en Chrome local y Preview con Clasificación cerrada y desplegada; formato aprobado.
 
 Los títulos de las actividades del inicio enlazan a su actividad específica, con la ruta de demostración o autenticada que corresponde a la sesión. En Chrome local se comprobó el acceso al quiz con clic y a la lectura con Enter. Formato aprobado; no se añadieron pruebas automáticas para este enlace.
+
+La [Preview de b547747](https://aulify-nvwwtsldx-jdanielchfhd-9543s-projects.vercel.app/demo) está Ready; se verificaron el enlace del título al quiz y los 20 px en ambos estados de Clasificación. El [CI de esta revisión](https://github.com/CubeFreaKLab/aulify/actions/runs/40028754129) estaba en curso al registrar la entrega; no se le atribuye el resultado de revisiones anteriores.
 
 ## Controles coherentes y QR de marca
 
