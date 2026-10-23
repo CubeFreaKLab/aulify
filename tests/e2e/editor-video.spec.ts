@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { enterDemo, expectNoHorizontalOverflow } from './helpers';
@@ -17,7 +18,7 @@ test('video conserva título y enlace; se carga solo al pedirlo y mantiene alter
   await enterDemo(page, 'docente');
   await page.goto('/demo/editor/resource-ecosystems');
   await expect(page.locator('.bn-editor')).toBeVisible();
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('video');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'video');
   await page
     .getByLabel('Enlace al video (HTTPS)', { exact: true })
     .fill('https://youtu.be/M7lc1UVf-VE');

@@ -26,15 +26,8 @@ export function GuestShare({ activity, live }: { activity: Activity; live: boole
     if (!link) return;
     let active = true;
     const href = new URL(`/jugar/${link.token}`, window.location.origin).href;
-    void import('qrcode')
-      .then((module) =>
-        module.toDataURL(href, {
-          width: 280,
-          margin: 3,
-          errorCorrectionLevel: 'M',
-          color: { dark: '#191919', light: '#ffffff' },
-        }),
-      )
+    void import('@/lib/branded-qr')
+      .then((module) => module.createBrandedQr(href))
       .then((data) => {
         if (active) {
           setQr(data);

@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 import { Plus, Trash2, ArrowUp, ArrowDown, Copy } from 'lucide-react';
 import { Button, Field, DialogPanel } from './ui';
 import { useState } from 'react';
@@ -202,7 +203,7 @@ export function QuestionAuthor({
                 label="Grupo de preguntas"
                 hint="Las preguntas del mismo grupo conservan su orden interno cuando se mezclan. Úsalo si comparten una lectura o dependen unas de otras."
               >
-                <select
+                <SelectControl
                   id={`group-${q.id}`}
                   value={q.groupId || ''}
                   aria-describedby={`group-${q.id}-hint`}
@@ -223,7 +224,7 @@ export function QuestionAuthor({
                     </option>
                   ))}
                   <option value="new">Crear otro grupo</option>
-                </select>
+                </SelectControl>
               </Field>
               <QuestionDetails question={q} update={update} />
               {q.type !== 'open' && q.type !== 'fill-text' && (
@@ -424,14 +425,14 @@ function QuestionDetails({
   if (q.type === 'true-false')
     return (
       <Field id={`correct-${q.id}`} label="Respuesta correcta">
-        <select
+        <SelectControl
           id={`correct-${q.id}`}
           value={String(q.correct)}
           onChange={(e) => update({ ...q, correct: e.target.value === 'true' })}
         >
           <option value="true">Verdadero</option>
           <option value="false">Falso</option>
-        </select>
+        </SelectControl>
       </Field>
     );
   if (q.type === 'matching')

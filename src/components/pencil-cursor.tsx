@@ -21,11 +21,15 @@ export function PencilCursor() {
         return;
       }
       const target = event.target as HTMLElement;
-      if (target.closest('input, textarea, [contenteditable="true"], iframe')) {
+      if (target.closest('iframe')) {
         hide();
         return;
       }
       el.hidden = false;
+      const textTarget = target.closest(
+        'textarea, [contenteditable="true"], input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):not([type="button"]):not([type="submit"])',
+      );
+      el.dataset.mode = textTarget ? 'text' : 'pencil';
       document.documentElement.classList.add('pencil-cursor-active');
       // The SVG's graphite tip is the fixed origin. Only the body leans.
       el.style.left = event.clientX + 'px';
@@ -66,7 +70,23 @@ export function PencilCursor() {
     <div ref={cursor} className="pencil-cursor" aria-hidden="true" hidden>
       <span className="pencil-click-mark" />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/illustrations/actions/lapiz.svg" alt="" width="48" height="48" draggable={false} />
+      <img
+        className="cursor-pencil-glyph"
+        src="/illustrations/actions/lapiz.svg"
+        alt=""
+        width="48"
+        height="48"
+        draggable={false}
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="cursor-text-glyph"
+        src="/illustrations/actions/cursor-texto.svg"
+        alt=""
+        width="18"
+        height="38"
+        draggable={false}
+      />
     </div>
   );
 }

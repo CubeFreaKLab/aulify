@@ -23,7 +23,7 @@
   font-weight: 700;
 }
 .fill-slot input,
-.fill-slot select {
+.fill-slot .brand-select-trigger {
   background: var(--white);
   color: var(--ink);
   border: 1px solid var(--line-strong);
@@ -38,7 +38,7 @@
   padding: 8px 10px;
 }
 .fill-slot input:disabled,
-.fill-slot select:disabled {
+.fill-slot .brand-select-trigger:disabled {
   opacity: 0.75;
 }
 @media (max-width: 600px) {
@@ -49,7 +49,21 @@
     margin: 5px 1px;
   }
   .fill-slot input,
-  .fill-slot select {
+  .fill-slot .brand-select-trigger {
+    width: 150px;
+  }
+}
+
+.fill-slot .brand-select {
+  width: clamp(130px, 16vw, 210px);
+  max-width: calc(100% - 30px);
+}
+.fill-slot .brand-select-trigger {
+  width: 100%;
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .fill-slot .brand-select {
     width: 150px;
   }
 }

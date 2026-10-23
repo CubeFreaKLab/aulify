@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 import { useState } from 'react';
 import { ArrowUp, ArrowDown, Check, ListOrdered, Link2 } from 'lucide-react';
 import type { AnswerValue, StudentQuestion } from '@/domain/types';
@@ -112,7 +113,7 @@ export function QuestionInput({
           <div className="match-row" key={item.id}>
             <span>{item.text}</span>
             <Link2 size={17} aria-hidden="true" />
-            <select
+            <SelectControl
               className="input"
               aria-label={`Relacionar ${item.text}`}
               disabled={disabled}
@@ -133,7 +134,7 @@ export function QuestionInput({
                   {r.text}
                 </option>
               ))}
-            </select>
+            </SelectControl>
           </div>
         ))}
       </div>
@@ -186,7 +187,7 @@ export function QuestionInput({
     const parts = question.template.split(/(\{[^{}]+\})/g);
     return (
       <div className="fill-question">
-        <p className="fill-template fill-inline">
+        <div className="fill-template fill-inline">
           {parts.map((part, index) => {
             if (!/^\{[^{}]+\}$/.test(part)) return <span key={index}>{part}</span>;
             const blankId = part.slice(1, -1);
@@ -201,15 +202,16 @@ export function QuestionInput({
             if (question.type === 'fill-options') {
               const blank = question.blanks[number];
               return (
-                <span className="fill-slot" key={index}>
+                <div className="fill-slot" key={index}>
                   <span className="fill-slot-number" aria-hidden="true">
                     {number + 1}
                   </span>
                   <label className="sr-only" htmlFor={id}>
                     Espacio {number + 1}
                   </label>
-                  <select
+                  <SelectControl
                     id={id}
+                    aria-label={`Espacio ${number + 1}`}
                     disabled={disabled}
                     value={value?.type === 'fill-options' ? value.choices[blank.id] || '' : ''}
                     onChange={(event) =>
@@ -228,8 +230,8 @@ export function QuestionInput({
                         {option.text}
                       </option>
                     ))}
-                  </select>
-                </span>
+                  </SelectControl>
+                </div>
               );
             }
             const blank = question.blanks[number];
@@ -261,7 +263,7 @@ export function QuestionInput({
               </span>
             );
           })}
-        </p>
+        </div>
         {question.type === 'fill-text' && (
           <p className="muted">Las palabras escritas requieren revisión de tu docente.</p>
         )}

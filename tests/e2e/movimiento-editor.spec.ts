@@ -54,13 +54,24 @@ test('Carrusel infinito: rueda, vuelta completa, arrastre y punta del lápiz', a
   await expect.poll(position).not.toBe(before);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.mouse.move(350, 350);
-  await expect(page.locator('.pencil-cursor img')).toBeVisible();
+  await expect(page.locator('.pencil-cursor .cursor-pencil-glyph')).toBeVisible();
   expect(
     await page.locator('.pencil-cursor').evaluate((el) => [el.style.left, el.style.top]),
   ).toEqual(['350px', '350px']);
   await page.mouse.down();
   await expect(page.locator('.pencil-cursor')).toHaveClass(/pencil-tap/);
   await page.mouse.up();
+  await page.evaluate(() => {
+    const carousel = document.querySelector('.learning-carousel')!;
+    scrollTo({ top: carousel.getBoundingClientRect().top + scrollY + 340, behavior: 'instant' });
+  });
+  const nav = page.locator('.hero-nav');
+  expect(
+    await nav.evaluate((el) => {
+      const box = el.getBoundingClientRect();
+      return el.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
+    }),
+  ).toBe(true);
   await page.getByRole('link', { name: 'Crear cuenta', exact: true }).first().click();
   await expect(page.locator('.pencil-cursor')).toHaveCount(1);
   await expect(page.locator('html')).not.toHaveClass(/pencil-cursor-active/);

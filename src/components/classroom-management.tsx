@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { Archive, Clock, Plus, RotateCcw, Settings, Users } from 'lucide-react';
@@ -473,7 +474,7 @@ export function ManualActivities({
       {active ? (
         <>
           <Field label="Actividad para calificar" id={`${uid}-activity`}>
-            <select
+            <SelectControl
               id={`${uid}-activity`}
               value={active.id}
               onChange={(e) => setSelected(e.target.value)}
@@ -483,7 +484,7 @@ export function ManualActivities({
                   {a.title} · {state.subjects.find((s) => s.id === a.subjectId)?.name}
                 </option>
               ))}
-            </select>
+            </SelectControl>
           </Field>
           <p>
             Máximo: <strong>{number(active.maxGrade)}</strong> · Peso: {number(active.weight)} ·{' '}
@@ -523,7 +524,7 @@ export function ManualActivities({
         <form onSubmit={create} style={stack}>
           <fieldset disabled={action.busy} style={fieldset}>
             <Field label="Materia" id={`${uid}-subject`}>
-              <select
+              <SelectControl
                 id={`${uid}-subject`}
                 name="subjectId"
                 defaultValue={subjectId || subjects[0]?.id}
@@ -534,7 +535,7 @@ export function ManualActivities({
                     {s.name} · {s.course}
                   </option>
                 ))}
-              </select>
+              </SelectControl>
             </Field>
             <Field label="Título" id={`${uid}-title`}>
               <input
@@ -773,13 +774,13 @@ export function TaskResubmission({
             <fieldset disabled={!live || action.busy} style={fieldset}>
               <div style={columns}>
                 <Field label="Estudiante" id={`${uid}-student`}>
-                  <select id={`${uid}-student`} name="student" required>
+                  <SelectControl id={`${uid}-student`} name="student" required>
                     {studentIds.map((id) => (
                       <option key={id} value={id}>
                         {nameOf(state, id)}
                       </option>
                     ))}
-                  </select>
+                  </SelectControl>
                 </Field>
                 <Field label="Nueva fecha límite (hora local)" id={`${uid}-deadline`}>
                   <input
@@ -894,14 +895,14 @@ export function ActivityManagement({
             <fieldset disabled={!live || action.busy || archived} style={fieldset}>
               <div style={columns}>
                 <Field label="Aplicar la ampliación" id={`${uid}-participant`}>
-                  <select id={`${uid}-participant`} name="participant">
+                  <SelectControl id={`${uid}-participant`} name="participant">
                     <option value="">Cierre general de la actividad</option>
                     {participants.map((p) => (
                       <option key={p.id} value={p.id}>
                         {nameOf(state, p.studentId)} · intento en curso
                       </option>
                     ))}
-                  </select>
+                  </SelectControl>
                 </Field>
                 <Field label="Nuevo límite (hora local)" id={`${uid}-deadline`}>
                   <input
@@ -1040,7 +1041,7 @@ export function NonparticipationGrades({
         <form onSubmit={submit} style={stack}>
           <fieldset disabled={!live || action.busy} style={fieldset}>
             <Field label="Estudiante sin participación" id={`${uid}-student`}>
-              <select id={`${uid}-student`} name="student" required defaultValue="">
+              <SelectControl id={`${uid}-student`} name="student" required defaultValue="">
                 <option value="" disabled>
                   Selecciona un estudiante
                 </option>
@@ -1049,7 +1050,7 @@ export function NonparticipationGrades({
                     {nameOf(state, m.studentId)}
                   </option>
                 ))}
-              </select>
+              </SelectControl>
             </Field>
             <Field label="Motivo de la nota de cero" id={`${uid}-reason`}>
               <textarea
@@ -1160,13 +1161,13 @@ function AttemptResolution({
       </p>
       <fieldset disabled={!live || action.busy} style={fieldset}>
         <Field label="Decisión" id={`${uid}-decision`}>
-          <select id={`${uid}-decision`} name="decision" required defaultValue="">
+          <SelectControl id={`${uid}-decision`} name="decision" required defaultValue="">
             <option value="" disabled>
               Selecciona una decisión
             </option>
             <option value="evaluate">Evaluar las respuestas confirmadas; omisiones con cero</option>
             <option value="exclude">Excluir este intento de nota y clasificación</option>
-          </select>
+          </SelectControl>
         </Field>
         <p className="muted">
           Excluir no publica un cero ni devuelve intentos o potenciadores consumidos.
@@ -1222,7 +1223,7 @@ function IncidentReview({
       <form onSubmit={submit} style={{ ...stack, marginTop: 16 }}>
         <fieldset disabled={!live || action.busy} style={fieldset}>
           <Field label="Resultado de la revisión" id={`${uid}-status`}>
-            <select
+            <SelectControl
               id={`${uid}-status`}
               name="status"
               defaultValue={incident.status === 'pending' ? '' : incident.status}
@@ -1233,7 +1234,7 @@ function IncidentReview({
               </option>
               <option value="reviewed_no_action">Revisada, sin observación</option>
               <option value="reviewed_observation">Revisada, con observación</option>
-            </select>
+            </SelectControl>
           </Field>
           <Field label="Comentario de revisión" id={`${uid}-comment`}>
             <textarea
@@ -1403,7 +1404,7 @@ function TeamsManagement({
             ))}
             {students.map((id) => (
               <Field key={id} label={nameOf(state, id)} id={`${uid}-${id}`}>
-                <select
+                <SelectControl
                   id={`${uid}-${id}`}
                   value={draft.findIndex((t) => t.studentIds.includes(id))}
                   onChange={(e) => {
@@ -1428,7 +1429,7 @@ function TeamsManagement({
                       {t.name || `Equipo ${i + 1}`}
                     </option>
                   ))}
-                </select>
+                </SelectControl>
               </Field>
             ))}
           </fieldset>

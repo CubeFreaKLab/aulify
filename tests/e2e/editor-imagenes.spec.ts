@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Locator, type Page } from '@playwright/test';
 import path from 'node:path';
@@ -53,7 +54,7 @@ test('imagen: ancho y alineación persisten y conservan la proporción en editor
   await page.getByRole('button', { name: 'Crear recurso', exact: true }).click();
   await expect(page.locator('.bn-editor[contenteditable="true"]')).toBeVisible();
   await page.getByLabel('Título del recurso').fill('Nuestro cuaderno de observaciones');
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('image');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'image');
   const dialog = page.getByRole('dialog', { name: 'Imagen del recurso' });
   await dialog.getByRole('button', { name: 'Guardar imagen', exact: true }).click();
   await expect(dialog.getByRole('alert')).toContainText('Describe');

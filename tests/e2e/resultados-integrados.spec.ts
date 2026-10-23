@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { test, expect, type APIRequestContext } from '@playwright/test';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -176,7 +177,7 @@ test.describe('Resultados integrados con datos ficticios', () => {
       });
       const rows = table.locator('tbody > tr');
       for (const subject of [subjects[0], subjects[1], subjects[0], subjects[1]]) {
-        await page.getByLabel('Materia', { exact: true }).selectOption(subject.id);
+        await chooseOption(page.getByLabel('Materia', { exact: true }), subject.id);
         await expect(rows).toHaveCount(4);
         for (const activity of subject.activities) {
           const row = rows.filter({ has: page.getByText(activity.title, { exact: true }) });
@@ -194,14 +195,14 @@ test.describe('Resultados integrados con datos ficticios', () => {
         await expect(table.getByText(other.title, { exact: true })).toHaveCount(0);
         await expectNoHorizontalOverflow(page);
       }
-      await page.getByLabel('Materia', { exact: true }).selectOption('all');
+      await chooseOption(page.getByLabel('Materia', { exact: true }), 'all');
       for (const subject of subjects)
         for (const activity of subject.activities)
           await expect(
             rows.filter({ has: page.getByText(activity.title, { exact: true }) }),
           ).toHaveCount(1);
       expect(duplicateKeyErrors).toEqual([]);
-      await page.getByLabel('Materia', { exact: true }).selectOption(subjects[0].id);
+      await chooseOption(page.getByLabel('Materia', { exact: true }), subjects[0].id);
       await page.screenshot({
         path: testInfo.outputPath('resultados-filtrados.png'),
         fullPage: true,
@@ -310,7 +311,7 @@ test.describe('Resultados integrados con datos ficticios', () => {
       await page.goto('/aula/resultados');
       await expect(page.getByRole('heading', { name: 'Resultados', exact: true })).toBeVisible();
       await dismissGuide(page);
-      await page.getByLabel('Curso', { exact: true }).selectOption(`Curso A ${marker}`);
+      await chooseOption(page.getByLabel('Curso', { exact: true }), `Curso A ${marker}`);
       const results = page
         .getByRole('region', { name: 'Tabla de calificaciones, desplazable horizontalmente' })
         .locator('tbody > tr');
@@ -342,7 +343,7 @@ test.describe('Resultados integrados con datos ficticios', () => {
         expect(tableValues.sort()).toEqual([...expected].sort());
       }
       await expect(results).toHaveCount(10);
-      await page.getByLabel('Actividad para distribución').selectOption(alpha.id);
+      await chooseOption(page.getByLabel('Actividad para distribución'), alpha.id);
       await expectDistribution([1, 1, 0, 0, 2]);
       await expect(distribution.locator('tfoot td')).toHaveText('4');
       await expect(
@@ -383,21 +384,21 @@ test.describe('Resultados integrados con datos ficticios', () => {
       await expectAverageAgreement(['20', '30', '60', '70', '40']);
       await page.getByLabel('Desde la fecha', { exact: true }).fill('2026-09-26');
       await expect(results).toHaveCount(5);
-      await expect(page.getByLabel('Actividad para distribución')).toHaveValue(beta.id);
+      await expect(page.getByLabel('Actividad para distribución')).toContainText(beta.title);
       await expectDistribution([0, 0, 5, 0, 0]);
       await expectAverageAgreement(['40', '40', '40', '40', '40']);
 
       await page.getByLabel('Desde la fecha', { exact: true }).fill('');
       await page.getByLabel('Hasta la fecha', { exact: true }).fill('');
-      await page.getByLabel('Curso', { exact: true }).selectOption('all');
-      await page.getByLabel('Materia', { exact: true }).selectOption(other.id);
+      await chooseOption(page.getByLabel('Curso', { exact: true }), 'all');
+      await chooseOption(page.getByLabel('Materia', { exact: true }), other.id);
       await expect(results).toHaveCount(1);
       await expectAverageAgreement(['10']);
-      await page.getByLabel('Año', { exact: true }).selectOption('2026');
+      await chooseOption(page.getByLabel('Año', { exact: true }), '2026');
       await expect(
         page.getByRole('heading', { name: 'Todavía no hay resultados en este grupo' }),
       ).toBeVisible();
-      await page.getByLabel('Año', { exact: true }).selectOption('2025');
+      await chooseOption(page.getByLabel('Año', { exact: true }), '2025');
       await expect(results).toHaveCount(1);
       await expectAverageAgreement(['10']);
       await page.getByLabel('Desde la fecha', { exact: true }).fill('2026-09-26');
@@ -405,7 +406,7 @@ test.describe('Resultados integrados con datos ficticios', () => {
         page.getByRole('heading', { name: 'Todavía no hay resultados en este grupo' }),
       ).toBeVisible();
       await page.getByRole('button', { name: 'Restablecer filtros' }).click();
-      await page.getByLabel('Curso', { exact: true }).selectOption(`Curso A ${marker}`);
+      await chooseOption(page.getByLabel('Curso', { exact: true }), `Curso A ${marker}`);
       await expect(results).toHaveCount(10);
       await expectAverageAgreement(['20', '30', '60', '70', '40']);
 

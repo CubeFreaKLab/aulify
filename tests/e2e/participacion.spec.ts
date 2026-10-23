@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { expect, test, type Page } from '@playwright/test';
 import type { DemoState } from '../../src/domain/types';
 import { enterDemo, expectNoHorizontalOverflow, openResourceQuestions } from './helpers';
@@ -33,11 +34,13 @@ test('ocho tipos de pregunta, pista y doble únicos, escritura pendiente', async
   await answerAndContinue(page, 'La energía pasa de los productores a los consumidores.');
   await page.getByRole('radio', { name: /Verdadero/ }).check();
   await answerAndContinue(page, 'Relaciona cada ser vivo con su función.');
-  await page.getByLabel('Relacionar Planta', { exact: true }).selectOption({ label: 'Productor' });
-  await page.getByLabel('Relacionar Venado', { exact: true }).selectOption({ label: 'Consumidor' });
-  await page
-    .getByLabel('Relacionar Hongo', { exact: true })
-    .selectOption({ label: 'Descomponedor' });
+  await chooseOption(page.getByLabel('Relacionar Planta', { exact: true }), { label: 'Productor' });
+  await chooseOption(page.getByLabel('Relacionar Venado', { exact: true }), {
+    label: 'Consumidor',
+  });
+  await chooseOption(page.getByLabel('Relacionar Hongo', { exact: true }), {
+    label: 'Descomponedor',
+  });
   await answerAndContinue(page, 'Ordena la cadena alimentaria desde el origen de la energía.');
   // Move each desired element to the top in reverse order, using the keyboard alternative to dragging.
   for (const label of ['Zorro', 'Conejo', 'Pasto', 'Sol']) {
@@ -45,8 +48,8 @@ test('ocho tipos de pregunta, pista y doble únicos, escritura pendiente', async
     for (let movement = 0; movement < 4 && (await up.isEnabled()); movement++) await up.click();
   }
   await answerAndContinue(page, 'Completa la idea sobre los ecosistemas.');
-  await page.getByLabel('Espacio 1', { exact: true }).selectOption({ label: 'bióticos' });
-  await page.getByLabel('Espacio 2', { exact: true }).selectOption({ label: 'abióticos' });
+  await chooseOption(page.getByLabel('Espacio 1', { exact: true }), { label: 'bióticos' });
+  await chooseOption(page.getByLabel('Espacio 2', { exact: true }), { label: 'abióticos' });
   await answerAndContinue(page, 'Completa con tus propias palabras.');
   await page
     .getByLabel('Tu explicación', { exact: true })
@@ -114,10 +117,10 @@ test('sesión guiada creada en interfaz coordina dos pestañas del mismo navegad
   await page.getByRole('button', { name: 'Publicar', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Comparte una nueva experiencia' });
   await dialog.getByText('Configuración avanzada', { exact: true }).click();
-  await dialog.getByLabel('Ritmo de participación').selectOption('guided');
+  await chooseOption(dialog.getByLabel('Ritmo de participación'), 'guided');
   await expect(dialog.getByLabel('Intentos por estudiante')).toHaveValue('1');
   await expect(dialog.getByLabel('Mezclar preguntas')).not.toBeChecked();
-  await dialog.getByLabel('Cuándo mostrar las respuestas').selectOption('hidden');
+  await chooseOption(dialog.getByLabel('Cuándo mostrar las respuestas'), 'hidden');
   await dialog.getByRole('button', { name: 'Publicar en la materia', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Biología', exact: true })).toBeVisible();
   const activityId = await page.evaluate(

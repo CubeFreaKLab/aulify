@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import type { DemoState } from '../../src/domain/types';
@@ -296,7 +297,7 @@ test('recurso → publicación → quiz oculto → revisión → nota publicada'
   const publishDialog = page.getByRole('dialog', { name: 'Comparte una nueva experiencia' });
   await publishDialog.getByLabel('Incluir en el promedio de la materia').check();
   await publishDialog.getByText('Configuración avanzada', { exact: true }).click();
-  await publishDialog.getByLabel('Cuándo mostrar las respuestas').selectOption('hidden');
+  await chooseOption(publishDialog.getByLabel('Cuándo mostrar las respuestas'), 'hidden');
   await publishDialog.getByRole('button', { name: 'Publicar en la materia', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Biología', exact: true })).toBeVisible();
   const activityId = await page.evaluate(

@@ -27,8 +27,8 @@
 .quiz-scene {
   display: block;
   max-width: 100%;
-  width: 360px;
-  max-height: 180px;
+  width: 440px;
+  max-height: 240px;
   object-fit: contain;
   margin: 0 auto 24px;
 }

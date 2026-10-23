@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="282 297 460 940" width="460" height="940">
+<!-- Clean vector tracing of the approved generated I-beam; the center is the text hotspot. -->
+<path d="M316 331H447Q455 331 466 342L499 376Q512 390 525 376L558 342Q569 331 577 331H708M512 385V1150M316 1204H447Q455 1204 466 1193L499 1159Q512 1145 525 1159L558 1193Q569 1204 577 1204H708" fill="none" stroke="#202020" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M316 331H447Q455 331 466 342L499 376Q512 390 525 376L558 342Q569 331 577 331H708M512 385V1150M316 1204H447Q455 1204 466 1193L499 1159Q512 1145 525 1159L558 1193Q569 1204 577 1204H708" fill="none" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M498 355Q512 365 526 355L512 386ZM498 1180Q512 1170 526 1180L512 1149Z" fill="#85bd6e"/>
+</svg>

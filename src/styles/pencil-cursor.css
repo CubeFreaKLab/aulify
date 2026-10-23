@@ -15,7 +15,7 @@
 .pencil-cursor[hidden] {
   display: none;
 }
-.pencil-cursor img {
+.pencil-cursor .cursor-pencil-glyph {
   position: absolute;
   width: 48px;
   height: 48px;
@@ -37,7 +37,7 @@
   border-radius: 50%;
   opacity: 0;
 }
-.pencil-tap img {
+.pencil-tap[data-mode='pencil'] .cursor-pencil-glyph {
   animation: pencil-press 0.24s ease-out;
 }
 .pencil-tap .pencil-click-mark {
@@ -60,5 +60,38 @@
 @media (prefers-reduced-motion: reduce) {
   .pencil-cursor * {
     animation: none !important;
+  }
+}
+
+.pencil-cursor .cursor-pencil-glyph {
+  transition:
+    opacity 140ms ease,
+    scale 140ms ease;
+}
+.pencil-cursor .cursor-text-glyph {
+  position: absolute;
+  width: 18px;
+  height: 38px;
+  max-width: none;
+  left: -9px;
+  top: -19px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+  filter: drop-shadow(0 0 1px #fff);
+}
+.pencil-cursor[data-mode='text'] .cursor-pencil-glyph {
+  opacity: 0;
+  scale: 0.8;
+}
+.pencil-cursor[data-mode='text'] .cursor-text-glyph {
+  opacity: 1;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pencil-cursor img {
+    transition: none !important;
   }
 }

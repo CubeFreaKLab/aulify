@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { expect, test } from '@playwright/test';
 import { enterDemo, expectNoHorizontalOverflow } from './helpers';
 
@@ -23,13 +24,13 @@ test('ocultamiento explica la reserva de respuestas y desactiva rachas y clasifi
     name: 'Compartir clasificación con alias',
     exact: true,
   });
-  await feedback.selectOption('immediate');
+  await chooseOption(feedback, 'immediate');
   await streaks.check();
   await ranking.check();
   await expect(streaks).toBeChecked();
   await expect(ranking).toBeChecked();
 
-  await feedback.selectOption('hidden');
+  await chooseOption(feedback, 'hidden');
   const explanation = dialog.locator('#feedback-visibility-help');
   await expect(explanation).toBeVisible();
   await expect(explanation).toContainText(
@@ -52,7 +53,7 @@ test('ocultamiento explica la reserva de respuestas y desactiva rachas y clasifi
     contentType: 'image/png',
   });
 
-  await feedback.selectOption('immediate');
+  await chooseOption(feedback, 'immediate');
   await expect(explanation).not.toContainText('se desactivan');
   await expect(feedback).toHaveAccessibleDescription(
     'La publicación de la nota es independiente de cuándo se muestran las respuestas.',

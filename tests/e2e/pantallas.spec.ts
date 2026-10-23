@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import { enterDemo, expectNoHorizontalOverflow } from './helpers';
@@ -35,7 +36,7 @@ for (const theme of ['light', 'dark'] as const) {
       await page.goto('/demo/resultados');
       const filters = page.locator('.results-filters');
       await expect(filters.getByLabel('Materia', { exact: true })).toBeVisible();
-      for (const select of await filters.locator('select').all())
+      for (const select of await filters.locator('.brand-select-trigger').all())
         expect((await select.boundingBox())!.width).toBeGreaterThanOrEqual(isMobile ? 280 : 160);
       await expectNoHorizontalOverflow(page);
       const table = page.getByRole('region', {
@@ -97,7 +98,7 @@ test('quiz: cabecera estable y relaciones legibles en ancho pequeño', async ({
     ['Hongo', 'Descomponedor'],
   ]) {
     const select = page.getByLabel(`Relacionar ${left}`, { exact: true });
-    await select.selectOption({ label: right });
+    await chooseOption(select, { label: right });
     if (isMobile) expect((await select.boundingBox())!.width).toBeGreaterThan(240);
   }
   await expectNoHorizontalOverflow(page);

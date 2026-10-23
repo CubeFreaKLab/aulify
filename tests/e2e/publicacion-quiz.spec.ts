@@ -121,7 +121,7 @@ test('Docente: el QR abre una práctica sin cuenta y la lista muestra los avatar
   await expectNoHorizontalOverflow(page);
 });
 
-test('Lápiz: acceso y registro apuntan arriba a la izquierda; el campo conserva su cursor', async ({
+test('Lápiz: acceso y registro apuntan arriba a la izquierda; el campo cambia al cursor ilustrado de texto', async ({
   page,
 }, info) => {
   test.skip(info.project.name.includes('movil'), 'El cursor ilustrado solo corresponde al ratón.');
@@ -132,19 +132,21 @@ test('Lápiz: acceso y registro apuntan arriba a la izquierda; el campo conserva
       .poll(async () => {
         await page.mouse.move(280, 200);
         await page.mouse.move(300, 200, { steps: 4 });
-        return cursor.locator('img').isVisible();
+        return cursor.locator('.cursor-pencil-glyph').isVisible();
       })
       .toBe(true);
     await expect
       .poll(() =>
-        cursor.locator('img').evaluate((el) => {
+        cursor.locator('.cursor-pencil-glyph').evaluate((el) => {
           const matrix = new DOMMatrix(getComputedStyle(el).transform);
           return Math.round((Math.atan2(matrix.b, matrix.a) * 180) / Math.PI);
         }),
       )
       .toBe(90);
     await page.getByRole('textbox', { name: 'Correo electrónico', exact: true }).hover();
-    await expect(cursor.locator('img')).toBeHidden();
+    await expect(cursor).toHaveAttribute('data-mode', 'text');
+    await expect(cursor.locator('.cursor-text-glyph')).toHaveCSS('opacity', '1');
+    await expect(cursor.locator('.cursor-pencil-glyph')).toHaveCSS('opacity', '0');
   }
 });
 

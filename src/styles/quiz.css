@@ -366,7 +366,7 @@
   .match-row > span {
     overflow-wrap: anywhere;
   }
-  .match-row > select {
+  .match-row > .brand-select {
     grid-column: 1 / -1;
     width: 100%;
     min-width: 0;

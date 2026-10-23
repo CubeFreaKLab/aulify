@@ -156,3 +156,10 @@
     transition: none;
   }
 }
+
+/* Keep each card z-index inside the carousel, below the fixed navigation. */
+.learning-carousel {
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+}

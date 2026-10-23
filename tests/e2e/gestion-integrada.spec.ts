@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { test, expect, type APIRequestContext, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs';
@@ -155,9 +156,9 @@ test.describe('Gestión integrada con datos ficticios', () => {
         allowLate: false,
       });
       await page.goto('/aula/tareas');
-      await page.getByLabel('Materia', { exact: true }).selectOption(subject.id);
+      await chooseOption(page.getByLabel('Materia', { exact: true }), subject.id);
       const zero = await openDetails(page, 'Revisar a quienes no participaron');
-      await zero.getByLabel('Estudiante sin participación').selectOption(accounts.student.id);
+      await chooseOption(zero.getByLabel('Estudiante sin participación'), accounts.student.id);
       await zero
         .getByLabel('Motivo de la nota de cero')
         .fill('No participó en la actividad de prueba y se registró la decisión.');
@@ -304,7 +305,7 @@ test.describe('Gestión integrada con datos ficticios', () => {
       await page.reload();
       const incidents = await openDetails(page, 'Señales para revisar (1)');
       await incidents.locator('summary').filter({ hasText: accounts.student.name }).click();
-      await incidents.getByLabel('Resultado de la revisión').selectOption('reviewed_no_action');
+      await chooseOption(incidents.getByLabel('Resultado de la revisión'), 'reviewed_no_action');
       await incidents
         .getByLabel('Comentario de revisión')
         .fill('Se revisó la señal; no corresponde una observación.');
@@ -317,7 +318,7 @@ test.describe('Gestión integrada con datos ficticios', () => {
       await finish.getByRole('checkbox').check();
       await finish.getByRole('button', { name: 'Finalizar sesión', exact: true }).click();
       await expect(page.getByText('Finalizada', { exact: true })).toBeVisible();
-      await page.getByLabel('Decisión', { exact: true }).selectOption('exclude');
+      await chooseOption(page.getByLabel('Decisión', { exact: true }), 'exclude');
       await page
         .getByLabel('Motivo', { exact: true })
         .fill('Se excluye este intento de prueba sin modificar oportunidades.');
@@ -373,7 +374,7 @@ test.describe('Gestión integrada con datos ficticios', () => {
       });
       await studentPage.goto('/aula/tareas');
       await dismissGuide(studentPage);
-      await studentPage.getByLabel('Materia', { exact: true }).selectOption(subject.id);
+      await chooseOption(studentPage.getByLabel('Materia', { exact: true }), subject.id);
       const png = Buffer.from(
         'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1kAAAAASUVORK5CYII=',
         'base64',
@@ -397,12 +398,12 @@ test.describe('Gestión integrada con datos ficticios', () => {
       );
       await command(page.request, 'publishTaskGrade', submission.id);
       await studentPage.reload();
-      await studentPage.getByLabel('Materia', { exact: true }).selectOption(subject.id);
+      await chooseOption(studentPage.getByLabel('Materia', { exact: true }), subject.id);
       await expect(studentPage.getByText(/Esta entrega ya fue corregida/)).toBeVisible();
       await page.goto('/aula/tareas');
-      await page.getByLabel('Materia', { exact: true }).selectOption(subject.id);
+      await chooseOption(page.getByLabel('Materia', { exact: true }), subject.id);
       const resubmit = await openDetails(page, 'Autorizar una reentrega');
-      await resubmit.getByLabel('Estudiante', { exact: true }).selectOption(accounts.student.id);
+      await chooseOption(resubmit.getByLabel('Estudiante', { exact: true }), accounts.student.id);
       await resubmit
         .getByLabel('Motivo de la reentrega')
         .fill('Mejora las conexiones entre los conceptos.');
@@ -415,7 +416,7 @@ test.describe('Gestión integrada con datos ficticios', () => {
         )
         .toBe(true);
       await studentPage.reload();
-      await studentPage.getByLabel('Materia', { exact: true }).selectOption(subject.id);
+      await chooseOption(studentPage.getByLabel('Materia', { exact: true }), subject.id);
       await studentPage
         .getByLabel('Archivos para reemplazar la entrega')
         .setInputFiles({ name: 'mapa-revisado.png', mimeType: 'image/png', buffer: png });

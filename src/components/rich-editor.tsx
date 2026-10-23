@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 /* eslint-disable @next/next/no-img-element -- User images include authenticated URLs and local demo data; they are loaded directly with a validated source. */
 import {
   BlockNoteSchema,
@@ -659,14 +660,14 @@ export default function RichEditor({
           >
             <Redo2 size={17} />
           </button>
-          <label className="editor-insert-label">
+          <div className="editor-insert-label">
             <Plus size={16} />
             <span className="sr-only">Insertar bloque</span>
-            <select
+            <SelectControl
               aria-label="Insertar bloque"
               value=""
-              onChange={(e) => {
-                if (e.target.value) insert(e.target.value as keyof typeof schema.blockSchema);
+              onAction={(value) => {
+                if (value) insert(value as keyof typeof schema.blockSchema);
               }}
             >
               <option value="">Insertar bloque</option>
@@ -679,8 +680,8 @@ export default function RichEditor({
                   {label}
                 </option>
               ))}
-            </select>
-          </label>
+            </SelectControl>
+          </div>
         </div>
         <div className="editor-quick-insert" role="group" aria-label="Añadir al documento">
           <button type="button" onClick={() => insert('image')}>

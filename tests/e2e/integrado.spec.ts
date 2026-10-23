@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { test, expect, type APIRequestContext, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -420,7 +421,7 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
     await expect(page.getByText('Borrador guardado', { exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Publicar', exact: true }).click();
     const dialog = page.getByRole('dialog');
-    await dialog.getByLabel('Materia', { exact: true }).selectOption(fixture.subjectId);
+    await chooseOption(dialog.getByLabel('Materia', { exact: true }), fixture.subjectId);
     await expect(dialog.getByText('Se compartirá como lectura.', { exact: false })).toBeVisible();
     await dialog.getByRole('button', { name: 'Publicar en la materia', exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`/aula/materia/${fixture.subjectId}$`));
@@ -454,7 +455,7 @@ test.describe('Integración con cuentas ficticias y servicios reales', () => {
     await login(page, account.teacher);
     await page.goto('/aula/tareas');
     await page.getByRole('button', { name: 'Crear tarea', exact: true }).click();
-    await page.getByLabel('Materia', { exact: true }).first().selectOption(fixture.subjectId);
+    await chooseOption(page.getByLabel('Materia', { exact: true }).first(), fixture.subjectId);
     await page.getByLabel('Título', { exact: true }).fill(title);
     await page
       .getByLabel('Consigna', { exact: true })

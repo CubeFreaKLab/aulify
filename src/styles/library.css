@@ -36,7 +36,7 @@
   font-size: 12px;
   font-weight: 500;
 }
-.library-select select {
+.library-select .brand-select-trigger {
   width: 100%;
   color: var(--ink);
   font-size: 13px;
@@ -246,7 +246,7 @@
     flex: 1;
     min-width: 0;
   }
-  .library-select select {
+  .library-select .brand-select-trigger {
     min-width: 0;
   }
   .library-item {
@@ -284,7 +284,7 @@
   .library-select {
     font-size: 11px;
   }
-  .library-select select {
+  .library-select .brand-select-trigger {
     padding: 10px 8px;
     font-size: 12px;
   }

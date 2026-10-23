@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 
 import { useState } from 'react';
 import type { StudentResult } from '@/domain';
@@ -44,7 +45,7 @@ export function ResultDistribution({ rows }: { rows: DistributionRow[] }) {
           </p>
         </div>
         <Field label="Actividad para distribución" id="distribution-activity">
-          <select
+          <SelectControl
             id="distribution-activity"
             value={selectedId}
             onChange={(event) => setSelection(event.target.value)}
@@ -54,7 +55,7 @@ export function ResultDistribution({ rows }: { rows: DistributionRow[] }) {
                 {activity.title} · {activity.subject.name} · {activity.subject.course}
               </option>
             ))}
-          </select>
+          </SelectControl>
         </Field>
       </div>
       <div className="results-distribution-chart" aria-hidden="true">

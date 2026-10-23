@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -341,7 +342,7 @@ function EditorForm({
           }}
         >
           <Field id="publish-subject" label="Materia">
-            <select
+            <SelectControl
               id="publish-subject"
               value={subjectId}
               required
@@ -354,13 +355,13 @@ function EditorForm({
                     {s.name} · {s.course}
                   </option>
                 ))}
-            </select>
+            </SelectControl>
           </Field>
           {questions.length > 0 && (
             <>
               <div className="grid-two">
                 <Field id="purpose" label="¿Para qué usarás la actividad?">
-                  <select
+                  <SelectControl
                     id="purpose"
                     value={settings.purpose}
                     onChange={(e) =>
@@ -376,7 +377,7 @@ function EditorForm({
                   >
                     <option value="practice">Práctica</option>
                     <option value="exam">Examen</option>
-                  </select>
+                  </SelectControl>
                 </Field>
                 <Field id="max-grade" label="Nota máxima">
                   <input
@@ -465,7 +466,7 @@ function EditorForm({
                     </Field>
                   </div>
                   <Field id="feedback" label="Cuándo mostrar las respuestas">
-                    <select
+                    <SelectControl
                       id="feedback"
                       aria-describedby="feedback-visibility-help"
                       value={settings.feedback}
@@ -482,7 +483,7 @@ function EditorForm({
                       <option value="immediate">Después de responder</option>
                       <option value="after-close">Después del cierre y publicación</option>
                       <option value="hidden">Mantener ocultas</option>
-                    </select>
+                    </SelectControl>
                     <p
                       id="feedback-visibility-help"
                       className="notice"
@@ -495,7 +496,7 @@ function EditorForm({
                     </p>
                   </Field>
                   <Field id="pace" label="Ritmo de participación">
-                    <select
+                    <SelectControl
                       id="pace"
                       value={settings.pace}
                       onChange={(e) =>
@@ -510,7 +511,7 @@ function EditorForm({
                     >
                       <option value="individual">Cada estudiante a su ritmo</option>
                       <option value="guided">Guiado por el docente</option>
-                    </select>
+                    </SelectControl>
                   </Field>
                   <Field id="weight" label="Peso en el promedio">
                     <input

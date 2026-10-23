@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import { test, expect, type APIRequestContext, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import { createHash, randomUUID } from 'node:crypto';
@@ -48,7 +49,7 @@ async function snapshot(request: APIRequestContext, activityId?: string): Promis
 async function publishFromEditor(page: Page, subjectId: string, quiz: boolean) {
   await page.getByRole('button', { name: 'Publicar', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Comparte una nueva experiencia' });
-  await dialog.getByLabel('Materia', { exact: true }).selectOption(subjectId);
+  await chooseOption(dialog.getByLabel('Materia', { exact: true }), subjectId);
   if (quiz) {
     await dialog.getByLabel('Nota máxima', { exact: true }).fill('30');
     await dialog.getByText('Configuración avanzada', { exact: true }).click();

@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 import { useState } from 'react';
 import { Copy, FolderOpen, Plus, Search, X } from 'lucide-react';
 import Link, { useWorkspaceRouter } from './workspace-link';
@@ -104,9 +105,9 @@ export function LibraryScreen({
             </Button>
           )}
         </div>
-        <label className="library-select">
+        <div className="library-select">
           Tipo
-          <select
+          <SelectControl
             className="input"
             aria-label="Tipo de recurso"
             value={filter}
@@ -115,11 +116,11 @@ export function LibraryScreen({
             <option value="all">Todos los tipos</option>
             <option value="resource">Recursos de clase</option>
             <option value="quiz">Quizzes</option>
-          </select>
-        </label>
-        <label className="library-select">
+          </SelectControl>
+        </div>
+        <div className="library-select">
           Ordenar por
-          <select
+          <SelectControl
             className="input"
             aria-label="Ordenar recursos"
             value={order}
@@ -127,8 +128,8 @@ export function LibraryScreen({
           >
             <option value="modified">Última modificación</option>
             <option value="title">Título: A a Z</option>
-          </select>
-        </label>
+          </SelectControl>
+        </div>
       </div>
       <p className="library-count" role="status">
         {resources.length === owned.length

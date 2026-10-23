@@ -2,6 +2,7 @@
 @import '../styles/workspace.css';
 @import '../styles/theme.css';
 @import '../styles/brand-art.css';
+@import '../styles/controls.css';
 
 * {
   box-sizing: border-box;

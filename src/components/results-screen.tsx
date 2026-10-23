@@ -1,4 +1,5 @@
 'use client';
+import { SelectControl } from './select-control';
 import { ProfileAvatar } from './profile-avatar';
 
 import Link from './workspace-link';
@@ -710,7 +711,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
       )}
       <div className="filters results-filters">
         <Field label="Materia" id="result-subject">
-          <select
+          <SelectControl
             id="result-subject"
             value={subjectId}
             onChange={(event) => setSubjectId(event.target.value)}
@@ -721,10 +722,10 @@ export function ResultsScreen({ state, user }: ScreenProps) {
                 {subject.name} · {subject.course}
               </option>
             ))}
-          </select>
+          </SelectControl>
         </Field>
         <Field label="Curso" id="result-course">
-          <select
+          <SelectControl
             id="result-course"
             value={course}
             onChange={(event) => setCourse(event.target.value)}
@@ -733,10 +734,14 @@ export function ResultsScreen({ state, user }: ScreenProps) {
             {[...new Set(subjects.map((subject) => subject.course))].map((value) => (
               <option key={value}>{value}</option>
             ))}
-          </select>
+          </SelectControl>
         </Field>
         <Field label="Año" id="result-year">
-          <select id="result-year" value={year} onChange={(event) => setYear(event.target.value)}>
+          <SelectControl
+            id="result-year"
+            value={year}
+            onChange={(event) => setYear(event.target.value)}
+          >
             <option value="all">Todos los años</option>
             {[...new Set(subjects.map((subject) => subject.year))]
               .sort((a, b) => b - a)
@@ -745,7 +750,7 @@ export function ResultsScreen({ state, user }: ScreenProps) {
                   {value}
                 </option>
               ))}
-          </select>
+          </SelectControl>
         </Field>
         <Field label="Desde la fecha" id="result-from">
           <input
@@ -1028,13 +1033,13 @@ function NewTaskForm({
       <form className="stack" onSubmit={submit}>
         <div className="grid-two">
           <Field label="Materia" id="new-task-subject">
-            <select id="new-task-subject" name="subject" required>
+            <SelectControl id="new-task-subject" name="subject" required>
               {subjects.map((subject) => (
                 <option key={subject.id} value={subject.id}>
                   {subject.name} · {subject.course} · {subject.year}
                 </option>
               ))}
-            </select>
+            </SelectControl>
           </Field>
           <Field label="Título" id="new-task-title">
             <input id="new-task-title" name="title" required maxLength={120} />
@@ -1398,7 +1403,7 @@ export function TasksScreen({ state, user }: ScreenProps) {
       )}
       <div className="filters results-filters">
         <Field label="Materia" id="tasks-subject">
-          <select
+          <SelectControl
             id="tasks-subject"
             value={selectedSubject}
             onChange={(event) => setSelectedSubject(event.target.value)}
@@ -1409,7 +1414,7 @@ export function TasksScreen({ state, user }: ScreenProps) {
                 {subject.name} · {subject.course}
               </option>
             ))}
-          </select>
+          </SelectControl>
         </Field>
       </div>
       {!tasks.length ? (

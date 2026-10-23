@@ -12,7 +12,7 @@
   gap: 4px;
   margin-left: auto;
 }
-.editor-insert-label select {
+.editor-insert-label .brand-select-trigger {
   max-width: 180px;
   padding: 9px 4px;
   border: 0;
@@ -566,7 +566,7 @@
     padding: 0 24px 12px;
     flex-wrap: nowrap;
   }
-  .editor-insert-label select {
+  .editor-insert-label .brand-select-trigger {
     max-width: 165px;
     font-size: 14px;
   }
@@ -762,4 +762,56 @@
     margin-left: 0;
     width: 100%;
   }
+}
+
+/* Floating controls must not shrink their icon-only children to zero width. */
+.bn-container .bn-toolbar {
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 5px;
+  overflow: visible;
+  border: 1px solid var(--line);
+}
+.bn-container .bn-toolbar .bn-ak-button {
+  flex: 0 0 auto;
+  min-width: 34px;
+  height: 36px;
+  padding: 7px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 5px;
+}
+.bn-container :is(.bn-toolbar, .bn-ak-menu, .bn-ak-popover) svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  max-width: none;
+  flex-shrink: 0;
+}
+.bn-container .bn-toolbar .bn-ak-button:is([data-selected], :hover),
+.bn-container .bn-ak-menu-item:is(:hover, [data-active-item], [aria-selected='true']) {
+  background: color-mix(in srgb, #85bd6e 24%, var(--white));
+  color: var(--ink);
+}
+.bn-container .bn-color-picker-dropdown {
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.bn-container .ProseMirror .selectedCell::after {
+  background: #85bd6e40 !important;
+}
+.bn-container .ProseMirror .selectedCell {
+  background: #85bd6e30;
+}
+.bn-container {
+  --bn-colors-highlights-gray-background: #85bd6e40;
+}
+.editor-insert-label .brand-select-trigger {
+  border: 0;
+  padding-inline: 5px;
+  background: transparent;
 }

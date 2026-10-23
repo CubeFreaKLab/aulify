@@ -1,5 +1,11 @@
 # Estado del desarrollo
 
+## Controles coherentes y QR de marca
+
+La [entrega de controles y marca](diseno/controles-y-marca.md) unifica los desplegables y casillas; corrige la superposición del carrusel y los iconos de las herramientas del editor; aplica selección verde, transición de barra lateral y cursor de escritura vectorial con cambio suave. Las imágenes del quiz ganan tamaño y la ilustración de entrada pierde los tres trazos de énfasis. El QR incorpora el símbolo y localizadores verdes y conserva lectura verificada a 240 px. La prueba de carga queda omitida por decisión del solicitante, sin nueva aprobación de capacidad.
+
+Compilación, tipos, lint, formato y 232 pruebas unitarias aprobadas localmente; recorridos afectados y revisión manual descritos en el diseño. Correo y liberación de producción siguen pendientes. La auditoría actual detecta cuatro avisos altos de una cadena transitiva de Zod/Vercel; revisar su actualización antes de liberar. Este resultado actualiza el alcance del informe anterior que no mostraba avisos. CI y Preview de esta entrega se documentan al comprobarlos.
+
 ## Publicación, editor y quiz invitado — 23 de octubre
 
 La [entrega de publicación y quiz](diseno/publicacion-y-quiz-invitado.md) corrige la confirmación animada, extiende el lápiz a acceso/registro con punta arriba a la izquierda, anima los campos de texto, estiliza carga de archivos y contiene tablas con sus controles. Integrantes muestra el avatar elegido. La demo incluye «Reto del ecosistema» con seis preguntas ilustradas y barra de tiempo; `/jugar/ecosistema-demo` permite jugar sin cuenta de Aulify con avatar aleatorio y sin nota. Una cuenta docente puede crear URL/QR de sus quizzes automáticos y programar apertura, cierre y duración.

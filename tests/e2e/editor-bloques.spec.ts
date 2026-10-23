@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import { enterDemo, expectNoHorizontalOverflow, openResourceQuestions } from './helpers';
@@ -46,15 +47,15 @@ test('bloques: slash buscable, formato, controles por teclado y recuperación', 
   await page.keyboard.press('Control+b');
   await page.keyboard.type(' Evidencia.');
   await page.keyboard.press('Control+b');
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('table');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'table');
   await expect(editor.locator('table')).toBeVisible();
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('checkListItem');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'checkListItem');
   await page.keyboard.type('Observar el entorno');
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('toggleListItem');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'toggleListItem');
   await page.keyboard.type('Pista para la actividad');
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('codeBlock');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'codeBlock');
   await page.keyboard.type('energia = luz + agua');
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('paragraph');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'paragraph');
   await editor.locator('[data-content-type="paragraph"]').last().click();
   await page.keyboard.type('Última idea.');
   await editor.evaluate((element) => {
@@ -126,7 +127,7 @@ test('preguntas escritas: varios espacios UUID, guía privada y grupos', async (
   await page
     .getByLabel('Guía de corrección (solo docente)', { exact: true })
     .fill('Un punto por planta y un punto por luz.');
-  await page.getByLabel('Grupo de preguntas', { exact: true }).selectOption('new');
+  await chooseOption(page.getByLabel('Grupo de preguntas', { exact: true }), 'new');
   await page.getByRole('button', { name: 'Listo', exact: true }).click();
   await addQuestion(page, 'Ordenar');
   await page.getByLabel('Pregunta', { exact: true }).fill('Ordena las etapas.');
@@ -137,7 +138,7 @@ test('preguntas escritas: varios espacios UUID, guía privada y grupos', async (
   await page.getByRole('button', { name: 'Adelantar elemento 3', exact: true }).click();
   await expect(page.getByLabel('Elemento en posición 2', { exact: true })).toHaveValue('Fruto');
   await page.getByRole('button', { name: 'Atrasar elemento 2', exact: true }).click();
-  await page.getByLabel('Grupo de preguntas', { exact: true }).selectOption({ label: 'Grupo 1' });
+  await chooseOption(page.getByLabel('Grupo de preguntas', { exact: true }), { label: 'Grupo 1' });
   await page.getByRole('button', { name: 'Listo', exact: true }).click();
   await expect(page.getByText('Borrador guardado', { exact: true })).toBeVisible();
   const resource = await page.evaluate(() => {
@@ -171,7 +172,7 @@ test('imagen: descripción obligatoria, carga local sin API y vista previa segur
   page.on('request', (r) => {
     if (r.url().includes('/api/files')) uploaded.push(r.url());
   });
-  await page.getByLabel('Insertar bloque', { exact: true }).selectOption('image');
+  await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'image');
   const dialog = page.getByRole('dialog', { name: 'Imagen del recurso' });
   await dialog.getByRole('button', { name: 'Guardar imagen', exact: true }).click();
   await expect(dialog.getByRole('alert')).toContainText('Describe');

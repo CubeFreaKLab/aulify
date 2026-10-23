@@ -1,3 +1,4 @@
+import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { createDemoState, DEMO_IDS } from '../../src/domain/demo-data';
@@ -81,7 +82,7 @@ test('biblioteca: búsqueda, tipo y orden; vista previa y copia independientes',
   await expect(rows).toHaveCount(4);
   await expect(rows.first().getByRole('heading')).toHaveText('Zoología: ¿cuánto sabes?');
   await expect(page.getByText('Recurso de otra cuenta', { exact: true })).toHaveCount(0);
-  await page.getByLabel('Ordenar recursos').selectOption('title');
+  await chooseOption(page.getByLabel('Ordenar recursos'), 'title');
   await expect(rows.first().getByRole('heading')).toHaveText(
     'Astronomía: una noche de observación',
   );
@@ -89,7 +90,7 @@ test('biblioteca: búsqueda, tipo y orden; vista previa y copia independientes',
   await expect(rows).toHaveCount(1);
   await expect(rows.first()).toContainText('Busca un lugar sin luces');
   await page.getByRole('button', { name: 'Limpiar búsqueda' }).click();
-  await page.getByLabel('Tipo de recurso').selectOption('quiz');
+  await chooseOption(page.getByLabel('Tipo de recurso'), 'quiz');
   await expect(rows).toHaveCount(2);
   await page.getByLabel('Buscar recursos').fill('Zoología');
   await expect(rows).toHaveCount(1);

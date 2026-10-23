@@ -2,6 +2,7 @@
 import { Button as AriaButton, Dialog, Heading, Modal, ModalOverlay } from 'react-aria-components';
 import { X, type LucideIcon } from 'lucide-react';
 import type { ComponentProps, ReactNode } from 'react';
+import { ControlLabelContext } from './select-control';
 
 export function Button({
   variant = '',
@@ -29,7 +30,7 @@ export function Field({
   return (
     <div className="field">
       <label htmlFor={id}>{label}</label>
-      {children}
+      <ControlLabelContext value={label}>{children}</ControlLabelContext>
       {hint && <small id={`${id}-hint`}>{hint}</small>}
       {error && (
         <span id={`${id}-error`} className="field-error">
