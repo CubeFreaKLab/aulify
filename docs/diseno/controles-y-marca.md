@@ -10,6 +10,7 @@
 - La ilustración de entrada al quiz pierde únicamente sus tres trazos de énfasis. Las imágenes de las preguntas ganan tamaño sin desbordar móvil.
 - El QR conserva margen de lectura, módulos negros, localizadores verdes y símbolo central de Aulify. Debe decodificarse a la URL original después de incorporar la marca.
 - La gestión docente de una actividad conserva 20 px de separación respecto al recurso o a la sala guiada siguiente, también al abrir Clasificación y en móvil.
+- Los títulos de las actividades del inicio abren su actividad mediante enlace, tanto para docentes como estudiantes y en demostración o sesión autenticada. Conservan el estilo del título, con subrayado al pasar el puntero y foco visible para teclado.
 
 ## Alcance de verificación
 

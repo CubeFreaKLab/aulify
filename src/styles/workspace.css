@@ -366,6 +366,14 @@
 .list-item:last-child {
   border-bottom: 0;
 }
+.activity-title-link {
+  text-decoration: none;
+  border-radius: 3px;
+}
+.activity-title-link:hover,
+.activity-title-link:focus-visible {
+  text-decoration: underline;
+}
 .list-item h3 {
   font-size: 15px;
   letter-spacing: -0.02em;

@@ -385,7 +385,11 @@ function Dashboard({
                 <FileText size={21} />
               </span>
               <div>
-                <h3>{a.title}</h3>
+                <h3>
+                  <Link href={`/demo/actividad/${a.id}`} className="activity-title-link">
+                    {a.title}
+                  </Link>
+                </h3>
                 <p>
                   {state.subjects.find((s) => s.id === a.subjectId)?.name} ·{' '}
                   {a.settings.purpose === 'practice' ? 'Práctica' : 'Examen'}

@@ -1,8 +1,10 @@
 # Estado del desarrollo
 
-## Separación de gestión y recurso
+## Acceso a actividades y separación del recurso
 
 La vista docente conserva 20 px entre los controles de gestión y el recurso o la sala guiada. Comprobado en Chrome local con Clasificación cerrada y desplegada; formato aprobado. La verificación CI y Preview de este ajuste se registra al publicarlo, sin atribuirle los resultados de la entrega anterior.
+
+Los títulos de las actividades del inicio enlazan a su actividad específica, con la ruta de demostración o autenticada que corresponde a la sesión. En Chrome local se comprobó el acceso al quiz con clic y a la lectura con Enter. Formato aprobado; no se añadieron pruebas automáticas para este enlace.
 
 ## Controles coherentes y QR de marca
 
