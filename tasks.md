@@ -1,5 +1,7 @@
 # Tareas de desarrollo de Aulify
 
+Entrega de acceso y correo: retirar demo de producción, enlazar el logo al aula, hacer visible y verificable la salida a portada; preparar HTML de confirmación con bienvenida, recuperación y bienvenida independiente, junto con guía de SMTP sin dominio propio. Verificar artefactos y comportamiento antes de configurar servicios. El envío real queda pendiente de la intervención privada del propietario en SMTP y de una recepción comprobada.
+
 T-04, T-08 y T-19 incorporan calendario propio, retirada de la doble columna con conservación de contenido, selección neutra y color libre de texto/celdas. Los recorridos de escritorio/móvil y sus límites están en [controles y marca](docs/diseno/controles-y-marca.md).
 
 T-12, T-19 y T-22 incorporan [carrusel, columnas y guía contextual](docs/diseno/carrusel-y-guia-contextual.md): siete tarjetas con movimiento continuo infinito, rueda y arrastre, texto cinético verde, lápiz activo solo en portada, acceso ampliado y ayuda por página/rol con iconos de marca. El editor ofrece pegado de imágenes, acceso al quiz, vista previa ilustrada y confirmación con documento habilitada también para lecturas locales de demo. Las rutas superiores permiten volver a materias y biblioteca. La verificación local y su alcance se registran en esa entrega; las pruebas remotas históricas pertenecen a su revisión original.

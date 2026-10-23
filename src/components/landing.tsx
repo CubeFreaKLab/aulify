@@ -6,8 +6,10 @@ import { PencilCursor } from './pencil-cursor';
 import { ArrowRight } from 'lucide-react';
 import { BrandArt } from './brand-art';
 import { LandingMotion, LandingQuestion } from './landing-interaction';
+import { isDemoEnabled } from '@/lib/demo-availability';
 
 export function Landing() {
+  const demoEnabled = isDemoEnabled();
   return (
     <LandingMotion>
       <PencilCursor />
@@ -95,9 +97,11 @@ export function Landing() {
               <Link href="/registro" className="button">
                 Crear cuenta <ArrowRight size={18} aria-hidden="true" />
               </Link>
-              <Link href="/demo?perfil=docente" className="landing-text-link">
-                Explorar la plataforma <ArrowRight size={18} aria-hidden="true" />
-              </Link>
+              {demoEnabled && (
+                <Link href="/demo?perfil=docente" className="landing-text-link">
+                  Explorar la plataforma <ArrowRight size={18} aria-hidden="true" />
+                </Link>
+              )}
             </div>
           </div>
           <div className="landing-product-surface">
@@ -120,7 +124,7 @@ export function Landing() {
                 alt="Vista real del editor de Aulify en modo oscuro"
                 loading="lazy"
               />
-              <figcaption>Editor de recursos de la demostración</figcaption>
+              <figcaption>Editor de recursos de Aulify</figcaption>
             </figure>
             <LandingQuestion />
           </div>
@@ -148,12 +152,14 @@ export function Landing() {
         <nav aria-label="Enlaces de la presentación">
           <a href="#plataforma">La plataforma</a>
           <a href="#como-funciona">Cómo funciona</a>
-          <Link href="/demo/ayuda">Ayuda</Link>
+          <Link href={demoEnabled ? '/demo/ayuda' : '/aula/ayuda'}>Ayuda</Link>
         </nav>
-        <nav className="landing-demo-links" aria-label="Demostración sin cuenta">
-          <Link href="/demo?perfil=docente">Demo docente</Link>
-          <Link href="/demo?perfil=estudiante">Demo estudiante</Link>
-        </nav>
+        {demoEnabled && (
+          <nav className="landing-demo-links" aria-label="Demostración sin cuenta">
+            <Link href="/demo?perfil=docente">Demo docente</Link>
+            <Link href="/demo?perfil=estudiante">Demo estudiante</Link>
+          </nav>
+        )}
       </footer>
     </LandingMotion>
   );

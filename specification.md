@@ -50,6 +50,10 @@ Revisión de alcance del 17 de octubre: la validación vigente de RNF-03 utiliza
 
 **CU-01.** Registro con nombre visible, correo, contraseña y un perfil principal. Confirmar correo antes de crear materias o solicitar ingreso. Recuperación por enlace; enlaces inválidos, vencidos o usados no modifican la cuenta. El mensaje público de recuperación no revela si un correo existe. Admitir pegado y gestores de contraseñas.
 
+**CU-01a.** En el aula autenticada, el símbolo de Aulify enlaza al inicio de la cuenta. Cerrar sesión invalida la sesión local, limpia el estado de la aplicación y regresa a la portada; un fallo se informa y permite reintentar. Demostración, cambio de perfil y reinicio de muestra pertenecen exclusivamente a `/demo`. Producción no ofrece accesos de muestra en portada ni formularios y deshabilita las rutas de demostración.
+
+**CU-01b.** Confirmación y recuperación usan correos HTML con marca, texto legible sin imágenes y enlace alternativo. La confirmación incluye el agradecimiento por registrarse. Configurar y comprobar SMTP y URLs antes de afirmar entrega de correo: disponer de una plantilla no acredita envío. El subdominio gratuito del alojamiento puede ser el destino web; el remitente requiere una cuenta habilitada para SMTP.
+
 **CU-02.** El docente es propietario de sus materias. Nombre, curso y año son editables; dos materias pueden tener el mismo nombre. Los identificadores y relaciones, no los nombres, separan integrantes y resultados. No hay un módulo adicional de cursos institucionales.
 
 **CU-03.** Cada materia activa tiene un código aleatorio de ocho caracteres sin caracteres ambiguos. No caduca automáticamente; el docente puede renovarlo o desactivarlo. El código identifica la solicitud, no concede acceso al contenido. Renovarlo no elimina solicitudes existentes ni membresías.

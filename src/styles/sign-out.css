@@ -1,0 +1,16 @@
+.sign-out-control {
+  position: relative;
+  flex-shrink: 0;
+}
+.sign-out-control .field-error {
+  position: absolute;
+  top: 100%;
+  inset-inline-end: 0;
+  z-index: 40;
+  width: min(280px, calc(100vw - 32px));
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px #0002;
+}

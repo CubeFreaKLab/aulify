@@ -43,6 +43,7 @@ import { ResourceReader } from './resource-reader';
 import { StaticAttemptHelp } from './help-guide';
 import { OpenPageGuide } from './page-guide';
 import { BrandArt } from './brand-art';
+import { SignOutButton } from './sign-out-button';
 import '../styles/quiz.css';
 
 export function ActivityScreen({
@@ -239,7 +240,7 @@ function QuizHeader() {
   const live = usePathname().startsWith('/aula');
   return (
     <header className="quiz-topbar">
-      <Link href="/" className="quiz-logo">
+      <Link href="/demo" className="quiz-logo" aria-label="Aulify, mi inicio">
         <img src="/brand/aulify-logo.svg" alt="Aulify" />
       </Link>
       <Badge>{live ? 'Tu aula' : 'Clase de ejemplo'}</Badge>
@@ -248,6 +249,7 @@ function QuizHeader() {
         <ArrowLeft size={16} />
         Mi inicio
       </Link>
+      {live && <SignOutButton />}
     </header>
   );
 }

@@ -98,7 +98,7 @@ function NavigationContents({
   return (
     <>
       <div className="sidebar-heading">
-        <Link href="/" className="app-logo" aria-label="Aulify, portada" onClick={onNavigate}>
+        <Link href="/demo" className="app-logo" aria-label="Aulify, mi inicio" onClick={onNavigate}>
           <img
             className="sidebar-wordmark"
             src="/brand/aulify-logo.svg"

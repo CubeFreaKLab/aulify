@@ -42,9 +42,11 @@ const content: Record<AuthMode, { title: string; description: string; action: st
 export function AuthScreen({
   mode,
   initialStatus = '',
+  demoEnabled,
 }: {
   mode: AuthMode;
   initialStatus?: string;
+  demoEnabled: boolean;
 }) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
@@ -309,7 +311,7 @@ export function AuthScreen({
               {status && (
                 <div role="status" tabIndex={-1} ref={statusRef} className="auth-status">
                   <p>{status}</p>
-                  {registering && selectedProfile && (
+                  {demoEnabled && registering && selectedProfile && (
                     <Link href={`/demo?perfil=${selectedProfile}`} className="auth-status-link">
                       Explorar como {selectedProfile}
                       <ArrowRight size={16} aria-hidden="true" />
@@ -335,24 +337,31 @@ export function AuthScreen({
               )}
             </p>
 
-            <div className="auth-explore">
-              <div className="auth-explore-heading">
-                <span />
-                Explora sin una cuenta
-                <span />
+            {demoEnabled && (
+              <div className="auth-explore">
+                <div className="auth-explore-heading">
+                  <span />
+                  Explora sin una cuenta
+                  <span />
+                </div>
+                <div className="auth-demo-actions">
+                  <Link href="/demo?perfil=docente" className="button secondary">
+                    <Image src="/illustrations/roles/docente.svg" alt="" width={40} height={40} />
+                    Explorar como docente
+                  </Link>
+                  <Link href="/demo?perfil=estudiante" className="button secondary">
+                    <Image
+                      src="/illustrations/roles/estudiante.svg"
+                      alt=""
+                      width={40}
+                      height={40}
+                    />
+                    Explorar como estudiante
+                  </Link>
+                </div>
+                <p>Prueba una clase con datos ficticios.</p>
               </div>
-              <div className="auth-demo-actions">
-                <Link href="/demo?perfil=docente" className="button secondary">
-                  <Image src="/illustrations/roles/docente.svg" alt="" width={40} height={40} />
-                  Explorar como docente
-                </Link>
-                <Link href="/demo?perfil=estudiante" className="button secondary">
-                  <Image src="/illustrations/roles/estudiante.svg" alt="" width={40} height={40} />
-                  Explorar como estudiante
-                </Link>
-              </div>
-              <p>Prueba una clase con datos ficticios.</p>
-            </div>
+            )}
           </div>
         </section>
       </main>

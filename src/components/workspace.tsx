@@ -25,7 +25,6 @@ import {
   clearNotice,
   resetDemo,
   refreshDemo,
-  clearWorkspaceSession,
   getWorkspaceExtras,
   getDemoRepository,
 } from '@/demo/store';
@@ -45,6 +44,7 @@ import { SubjectManagement, ManualActivities } from './classroom-management';
 import { BrandArt } from './brand-art';
 import { AvatarProvider, AvatarPicker, ProfileAvatar } from './profile-avatar';
 import { WorkspaceBreadcrumb } from './workspace-breadcrumb';
+import { SignOutButton } from './sign-out-button';
 
 export function Workspace() {
   const data = useDemo();
@@ -161,23 +161,7 @@ export function Workspace() {
             <div className="row">
               <OpenPageGuide />
               {data.live ? (
-                <Button
-                  variant="ghost small"
-                  onPress={async () => {
-                    const result = await fetch('/api/auth', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ action: 'signout' }),
-                    });
-                    if (result.ok) {
-                      clearWorkspaceSession();
-                      router.replace('/acceso');
-                      router.refresh();
-                    }
-                  }}
-                >
-                  Cerrar sesión
-                </Button>
+                <SignOutButton />
               ) : (
                 <>
                   <span className="demo-tag">Demostración</span>

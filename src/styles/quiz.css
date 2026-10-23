@@ -263,6 +263,11 @@
     flex-wrap: wrap;
     gap: 10px;
   }
+  .quiz-topbar:has(.sign-out-control) {
+    height: auto;
+    min-height: 75px;
+    padding-block: 12px;
+  }
   .quiz-topbar:has(.quiz-progress-wrap) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;

@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { databaseRpc, hasDatabaseTransport } from './supabase/database';
 import { supabaseConfig } from './supabase/config';
 import { illustratedQuestions } from '@/domain/demo-data';
+import { isDemoEnabled } from './demo-availability';
 
 import type { GuestRecord } from '@/domain/guest-practice';
 export { guestProjection } from '@/domain/guest-practice';
@@ -12,6 +13,7 @@ export async function guestStore(
   action: 'read' | 'join' | 'answer',
   payload: Record<string, unknown>,
 ): Promise<GuestRecord> {
+  if (payload.token === 'ecosistema-demo' && !isDemoEnabled()) throw new Error('GUEST_NOT_FOUND');
   if (payload.token === 'ecosistema-demo')
     payload = { ...payload, demoQuestions: illustratedQuestions() };
   const result = hasDatabaseTransport()

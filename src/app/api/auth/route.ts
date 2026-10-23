@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       });
       if (error && error.status === 429)
         return jsonResponse(
-          { error: 'Hay demasiados solicitudes. Espera unos minutos y vuelve a intentarlo.' },
+          { error: 'Hay demasiadas solicitudes. Espera unos minutos y vuelve a intentarlo.' },
           429,
         );
       if (error && error.status && error.status >= 500)
