@@ -35,3 +35,11 @@ El [modelo 1.4](../modelado/invitados.md) documenta las dos tablas privadas, res
 - Las capturas locales están en `output/publicacion-quiz`, fuera del repositorio. El CI incorpora la prueba aislada de invitados; el caso HTTP con PostgreSQL alojado se ejecuta localmente y se excluye de CI sin credenciales. El resultado de GitHub Actions y la Preview se registran por separado.
 
 La [revisión previa a producción](../operacion/revision-produccion.md) concentra los pendientes operativos. No se ejecutaron nuevas cargas ni envío de correo, ni se promovió producción.
+
+## Preview de revisión
+
+La revisión `affb1a8a0167588249e6ae530f299d66088dc568` está en [Preview](https://aulify-qdxul8hs6-jdanielchfhd-9543s-projects.vercel.app/), despliegue `GEokzaD7J54gXEkVeqsQ1xdGpMV6`, Ready. La entrada [sin cuenta de Aulify](https://aulify-qdxul8hs6-jdanielchfhd-9543s-projects.vercel.app/jugar/ecosistema-demo) carga desde el servicio real. El QR se genera con el dominio de esa Preview y su campo de enlace usa el mismo control visual que los demás inputs. Se guardó `preview-final-qr.png` fuera del repositorio, en `output/publicacion-quiz`.
+
+El estudiante encuentra el reto en Inicio → Reto del ecosistema; el docente, en Biología → Reto del ecosistema → Invitar por QR. La protección del alojamiento Preview es independiente del acceso de invitado de Aulify. El resultado de CI del candidato se registra en [la evidencia de entrega](../verificacion/entrega-publicacion-quiz.json), sin atribuirle pruebas de correo o carga.
+
+GitHub Actions `40014612671` terminó aprobado sobre `affb1a8`: 113 recorridos, 39 exclusiones explícitas y cero fallos, además de formato, lint, tipos, reglas, permisos y compilación. Esta ejecución completa de CI es posterior a las repeticiones locales descritas arriba. El artefacto `12528561917` conserva los informes de la ejecución; las integraciones privadas excluidas mantienen su evidencia y límites por separado.

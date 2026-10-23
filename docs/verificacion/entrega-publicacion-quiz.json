@@ -1,0 +1,41 @@
+{
+  "revision": "affb1a8a0167588249e6ae530f299d66088dc568",
+  "preview": {
+    "deployment": "GEokzaD7J54gXEkVeqsQ1xdGpMV6",
+    "url": "https://aulify-qdxul8hs6-jdanielchfhd-9543s-projects.vercel.app",
+    "environment": "preview",
+    "status": "READY",
+    "visualChecks": [
+      "Entrada invitada disponible con servicio real",
+      "QR con dominio actual",
+      "Campo de enlace con estilo compartido"
+    ]
+  },
+  "ci": {
+    "runId": 40014612671,
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/40014612671",
+    "status": "completed",
+    "conclusion": "success",
+    "completedAt": "2026-10-23T19:58:52Z",
+    "browserPassed": 113,
+    "browserSkipped": 39,
+    "browserFailed": 0,
+    "artifactId": 12528561917
+  },
+  "local": {
+    "unitTestsPassed": 232,
+    "guestDatabaseChecksPassed": 18,
+    "generalDatabaseChecksPassed": 94,
+    "remotePrivilegeChecksPassed": 8,
+    "browserEvidence": "Ver docs/diseno/publicacion-y-quiz-invitado.md: ejecución inicial y repeticiones dirigidas; no se afirma una nueva ejecución completa de integraciones privadas."
+  },
+  "productionPromoted": false,
+  "pending": [
+    "Correo SMTP: confirmación y recuperación",
+    "Cuenta docente: crear y programar quiz propio con invitados",
+    "QR desde teléfono ajeno al entorno Preview",
+    "Capacidad y cuotas del alojamiento definitivo",
+    "Mantenimiento periódico y restauración de partidas invitadas",
+    "Separación de producción limpia y demostración"
+  ]
+}
