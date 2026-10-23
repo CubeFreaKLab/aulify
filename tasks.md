@@ -60,6 +60,8 @@ El candidato `27e4df6` tiene CI aprobado con 157 pruebas y 88 recorridos, ademá
 
 No marcar una tarea como completada solo porque exista código. Enlazar su evidencia y actualizar la especificación cuando una decisión cambie el comportamiento previsto.
 
+La [revisión de acceso y encuadres](docs/diseno/acceso-ilustrado.md) aporta a T-04/T-19 la comprobación local de etiquetas flotantes, selección de rol con retratos, navegación de cierre, movimiento reducido y proporciones de marca. La ampliación de landing queda como propuesta pendiente de aprobación.
+
 La [matriz de trazabilidad](docs/calidad/trazabilidad.md) y el [plan de calidad](docs/calidad/plan-de-calidad.md) completan los criterios y su evidencia.
 
 La [revisión de biblioteca, editor y lector del 29 de septiembre](docs/diseno/revision-biblioteca-editor-2026-09-29.md) aporta evidencia adicional a T-04, T-08, T-09 y T-19: navegación por teclado, imágenes sin deformación, formato compartido, persistencia local y adaptación de las vistas comprobadas. La integración autenticada y los criterios completos de liberación mantienen sus comprobaciones separadas.

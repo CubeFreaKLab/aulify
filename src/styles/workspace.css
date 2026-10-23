@@ -1261,3 +1261,37 @@ tr:last-child td {
     display: none;
   }
 }
+/* Each illustrated heading reserves its own layout cells; actions never cover the drawing. */
+.page-heading-illustrated {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-areas: 'copy art' 'action art';
+  align-items: center;
+  gap: 14px 30px;
+  min-height: 200px;
+}
+.page-heading-illustrated .page-heading-copy {
+  grid-area: copy;
+  max-width: none;
+}
+.page-heading-illustrated > .row {
+  grid-area: action;
+  align-self: start;
+}
+.page-heading-illustrated .page-heading-art {
+  grid-area: art;
+  position: static;
+  width: 220px;
+  height: 200px;
+}
+@media (max-width: 600px) {
+  .page-heading-illustrated {
+    grid-template-columns: minmax(0, 1fr) 120px;
+    grid-template-areas: 'copy art' 'action action';
+    gap: 18px 12px;
+  }
+  .page-heading-illustrated .page-heading-art {
+    width: 120px;
+    height: 140px;
+  }
+}

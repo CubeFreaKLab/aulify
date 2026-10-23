@@ -212,6 +212,10 @@ Revisión de alcance del 17 de octubre: la validación vigente de RNF-03 utiliza
 
 Preferencias permite elegir entre 30 retratos circulares (15 masculinos y 15 femeninos), disponibles para ambos roles sin restricciones de elección. La demostración conserva la selección por perfil en el navegador; una cuenta autenticada conserva su preferencia de apariencia al volver a entrar. Un fallo de guardado se informa y no se presenta como éxito. Elegir un avatar no modifica el nombre, el rol ni los permisos. El [diseño de avatares y navegación](docs/diseno/avatares-y-navegacion.md) define su presentación y comprobaciones.
 
+### 11.2. Formularios de acceso
+
+Nombre, correo y contraseña conservan etiquetas visibles al enfocar o contener un valor, autocompletado y validación accesible. La animación al escribir respeta movimiento reducido y no sustituye la interacción nativa. Docente y estudiante se identifican mediante retratos de marca y controles de radio con teclado; las imágenes no asignan permisos. Una X con nombre accesible permite regresar a portada. El [diseño de acceso](docs/diseno/acceso-ilustrado.md) contiene los criterios y las comprobaciones.
+
 ## 12. Estados y permisos para modelar
 
 | Objeto | Estados o dimensiones |

@@ -360,3 +360,164 @@
     transition: none;
   }
 }
+/* Floating labels keep a native input for autocomplete, selection and password managers. */
+.auth-home-link {
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  color: var(--ink);
+  border-radius: 8px;
+}
+.auth-field {
+  display: grid;
+  gap: 7px;
+}
+.auth-input-shell {
+  position: relative;
+}
+.auth-input-shell > input {
+  display: block;
+  width: 100%;
+  height: 58px;
+  padding: 22px 14px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  line-height: 22px;
+  caret-color: var(--ink);
+  transition: border-color 160ms;
+}
+.auth-input-shell.has-trailing > input {
+  padding-right: 52px;
+}
+.auth-input-shell > input:focus {
+  border-color: var(--green-text);
+  outline: 2px solid var(--green-text);
+  outline-offset: 2px;
+}
+.auth-input-shell > input[aria-invalid='true'] {
+  border-color: var(--danger, #b91c1c);
+}
+.auth-floating-label {
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  pointer-events: none;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--muted);
+  transition: font-size 180ms;
+}
+.auth-floating-label > span {
+  display: inline-block;
+  white-space: pre;
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.8, 0.3, 1.2),
+    color 180ms;
+  transition-delay: calc(var(--letter) * 9ms);
+  transform-origin: left top;
+}
+.auth-input-shell > input:focus ~ .auth-floating-label,
+.auth-input-shell > input:not(:placeholder-shown) ~ .auth-floating-label,
+.auth-input-shell > input:autofill ~ .auth-floating-label {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+.auth-input-shell > input:focus ~ .auth-floating-label > span,
+.auth-input-shell > input:not(:placeholder-shown) ~ .auth-floating-label > span {
+  transform: translateY(-13px);
+}
+.auth-input-shell > input:autofill ~ .auth-floating-label > span {
+  transform: translateY(-13px);
+}
+.auth-input-shell .auth-password-toggle {
+  top: 7px;
+}
+.auth-input-shell > input[data-echo='true'] {
+  color: transparent;
+}
+.auth-input-echo {
+  position: absolute;
+  pointer-events: none;
+  top: 23px;
+  left: 15px;
+  right: 15px;
+  height: 25px;
+  overflow: hidden;
+  font: inherit;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink);
+  white-space: pre;
+}
+.has-trailing .auth-input-echo {
+  right: 53px;
+}
+.auth-input-echo > span {
+  display: block;
+}
+.auth-letter-enter {
+  display: inline-block;
+  animation: auth-letter-up 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes auth-letter-up {
+  from {
+    transform: translateY(7px);
+    opacity: 0.25;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.auth-profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  min-height: 132px;
+}
+.auth-profile > input {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.auth-profile > img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transition: transform 180ms;
+}
+.auth-profile:hover > img,
+.auth-profile.selected > img {
+  transform: translateY(-3px);
+}
+.auth-profile:has(:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.auth-demo-actions .button {
+  gap: 8px;
+  padding: 8px;
+}
+.auth-demo-actions img {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-floating-label,
+  .auth-floating-label > span,
+  .auth-profile > img {
+    transition: none;
+  }
+  .auth-letter-enter {
+    animation: none;
+  }
+}

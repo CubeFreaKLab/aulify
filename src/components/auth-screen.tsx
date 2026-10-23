@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff, GraduationCap } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Eye, EyeOff, X } from 'lucide-react';
 import { useRef, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Field } from './ui';
+import { Button } from './ui';
 import { clearWorkspaceSession } from '@/demo/store';
 import { BrandArt } from './brand-art';
 import { ThemeSwitcher } from './theme';
+import { AuthInput } from './auth-input';
 import '../styles/auth.css';
 
 type AuthMode = 'access' | 'register' | 'recover' | 'update-password';
@@ -140,8 +141,13 @@ export function AuthScreen({
         </Link>
         <div className="auth-header-actions">
           <ThemeSwitcher compact />
-          <Link className="auth-home-link" href="/">
-            <ArrowLeft size={16} aria-hidden="true" /> Volver al inicio
+          <Link
+            className="auth-home-link"
+            href="/"
+            aria-label="Cerrar y volver al inicio"
+            title="Volver al inicio"
+          >
+            <X size={26} strokeWidth={2.7} aria-hidden="true" />
           </Link>
         </div>
       </header>
@@ -171,66 +177,50 @@ export function AuthScreen({
 
             <form className="auth-form" noValidate onSubmit={submit} aria-busy={pending}>
               {registering && (
-                <Field label="Tu nombre" id="auth-name" error={errors.name}>
-                  <input
-                    id="auth-name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    placeholder="Cómo te llamas"
-                    required
-                    maxLength={100}
-                    aria-invalid={!!errors.name}
-                    aria-describedby={describe('name')}
-                    onChange={() => clearError('name')}
-                  />
-                </Field>
+                <AuthInput
+                  label="Tu nombre"
+                  id="auth-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  maxLength={100}
+                  error={errors.name}
+                  onChange={() => clearError('name')}
+                />
               )}
               {!updating && (
-                <Field label="Correo electrónico" id="auth-email" error={errors.email}>
-                  <input
-                    id="auth-email"
-                    name="email"
-                    type="email"
-                    inputMode="email"
-                    autoComplete="email"
-                    placeholder="nombre@ejemplo.com"
-                    required
-                    maxLength={254}
-                    aria-invalid={!!errors.email}
-                    aria-describedby={describe('email')}
-                    onChange={() => clearError('email')}
-                  />
-                </Field>
+                <AuthInput
+                  label="Correo electrónico"
+                  id="auth-email"
+                  name="email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required
+                  maxLength={254}
+                  error={errors.email}
+                  onChange={() => clearError('email')}
+                />
               )}
-
               {!recovering && (
-                <Field
+                <AuthInput
                   label="Contraseña"
                   id="auth-password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete={registering || updating ? 'new-password' : 'current-password'}
+                  required
+                  minLength={registering || updating ? 8 : undefined}
+                  maxLength={128}
                   hint={
                     registering || updating
                       ? 'Al menos ocho caracteres. Puedes pegar tu contraseña.'
                       : undefined
                   }
                   error={errors.password}
-                >
-                  <div className="auth-password">
-                    <input
-                      id="auth-password"
-                      name="password"
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete={registering || updating ? 'new-password' : 'current-password'}
-                      placeholder={
-                        registering || updating ? 'Crea una contraseña' : 'Tu contraseña'
-                      }
-                      required
-                      minLength={registering || updating ? 8 : undefined}
-                      maxLength={128}
-                      aria-invalid={!!errors.password}
-                      aria-describedby={describe('password', registering || updating)}
-                      onChange={() => clearError('password')}
-                    />
+                  onChange={() => clearError('password')}
+                  trailing={
                     <button
                       type="button"
                       className="icon-button auth-password-toggle"
@@ -244,8 +234,8 @@ export function AuthScreen({
                         <Eye size={20} aria-hidden="true" />
                       )}
                     </button>
-                  </div>
-                </Field>
+                  }
+                />
               )}
 
               {mode === 'access' && (
@@ -276,7 +266,7 @@ export function AuthScreen({
                         }}
                         required
                       />
-                      <BookOpen size={20} aria-hidden="true" />
+                      <Image src="/illustrations/roles/docente.svg" alt="" width={88} height={88} />
                       <span>Docente</span>
                     </label>
                     <label
@@ -293,7 +283,12 @@ export function AuthScreen({
                         }}
                         required
                       />
-                      <GraduationCap size={22} aria-hidden="true" />
+                      <Image
+                        src="/illustrations/roles/estudiante.svg"
+                        alt=""
+                        width={88}
+                        height={88}
+                      />
                       <span>Estudiante</span>
                     </label>
                   </div>
@@ -346,11 +341,11 @@ export function AuthScreen({
               </div>
               <div className="auth-demo-actions">
                 <Link href="/demo?perfil=docente" className="button secondary">
-                  <BookOpen size={17} aria-hidden="true" />
+                  <Image src="/illustrations/roles/docente.svg" alt="" width={40} height={40} />
                   Explorar como docente
                 </Link>
                 <Link href="/demo?perfil=estudiante" className="button secondary">
-                  <GraduationCap size={19} aria-hidden="true" />
+                  <Image src="/illustrations/roles/estudiante.svg" alt="" width={40} height={40} />
                   Explorar como estudiante
                 </Link>
               </div>

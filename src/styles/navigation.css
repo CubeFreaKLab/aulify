@@ -16,7 +16,14 @@
 }
 .sidebar-heading .app-logo img {
   width: 130px;
+  height: 44px;
+  object-fit: contain;
   max-width: none;
+}
+.sidebar-heading .app-logo .sidebar-symbol {
+  display: none;
+  width: 48px;
+  height: 48px;
 }
 .sidebar-toggle {
   width: 32px;
@@ -69,6 +76,12 @@
     width: 48px;
     height: 48px;
     object-fit: contain;
+  }
+  .app-sidebar[data-collapsed='true'] .app-logo .sidebar-wordmark {
+    display: none;
+  }
+  .app-sidebar[data-collapsed='true'] .app-logo .sidebar-symbol {
+    display: block;
   }
   .app-sidebar[data-collapsed='true'] .nav-label,
   .app-sidebar[data-collapsed='true'] .sidebar-subjects,

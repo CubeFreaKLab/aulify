@@ -100,8 +100,18 @@ function NavigationContents({
       <div className="sidebar-heading">
         <Link href="/" className="app-logo" aria-label="Aulify, portada" onClick={onNavigate}>
           <img
-            src={collapsed ? '/brand/aulify-symbol.svg' : '/brand/aulify-logo.svg'}
-            alt="Aulify"
+            className="sidebar-wordmark"
+            src="/brand/aulify-logo.svg"
+            alt=""
+            width={130}
+            height={44}
+          />
+          <img
+            className="sidebar-symbol"
+            src="/brand/aulify-symbol.svg"
+            alt=""
+            width={48}
+            height={48}
           />
         </Link>
         {onCollapse && (
