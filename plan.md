@@ -1,5 +1,7 @@
 # Plan técnico de Aulify
 
+Para la liberación con correo se fija Undici 7.30.1 y se aplica una sustitución acotada de Zod 4.6.6 bajo `@vercel/cli-config`, que mantiene una versión vulnerable fijada en sus dependencias. Se conserva la API y versión de `@vercel/functions`; el cambio se valida con las pruebas de transporte y pool, compilación y auditoría del árbol instalado. No se usa `npm audit fix --force` ni se atribuye la auditoría a una revisión integral de seguridad.
+
 La separación de muestra y producción se resuelve en el servidor: `VERCEL_ENV=production` deshabilita la demo; `AULIFY_DEMO_ENABLED=false` permite verificar el mismo comportamiento fuera de Vercel. El resultado se pasa como prop a los formularios y se verifica también en las rutas de muestra. Producción requiere una compilación con su entorno, no promover un artefacto de Preview compilado con la demo habilitada. Los correos usan HTML con tablas, estilos en línea y assets PNG de marca; confirmación y recuperación reutilizan `/auth/confirm` con `TokenHash`, sin depender del navegador que inició la solicitud. La configuración SMTP permanece en Supabase, fuera del código y de Vercel.
 
 **Actualizado el 17 de octubre de 2026.** Aplicación integrada con Supabase, migraciones aplicadas y verificaciones de datos y navegador realizadas. Hay una vista previa HTTPS protegida; capacidad, correo general y liberación de producción continúan en comprobación. El [estado del desarrollo](docs/estado-del-desarrollo.md) identifica resultados y límites.

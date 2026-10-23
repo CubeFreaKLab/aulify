@@ -1,5 +1,7 @@
 # Tareas de desarrollo de Aulify
 
+Preparación de la liberación con correo: actualizar las dependencias señaladas por la auditoría, verificar transporte/pool y compilación, ejecutar CI para el candidato exacto y compilarlo en Production conservando el control bloqueante. Después, comprobar recursos PNG públicos y ausencia de demo; confirmación y recuperación requieren recepción real. No repetir la prueba de carga omitida del alcance.
+
 Entrega de acceso y correo: retirar demo de producción, enlazar el logo al aula, hacer visible y verificable la salida a portada; preparar HTML de confirmación con bienvenida, recuperación y bienvenida independiente, junto con guía de SMTP sin dominio propio. Verificar artefactos y comportamiento antes de configurar servicios. El envío real queda pendiente de la intervención privada del propietario en SMTP y de una recepción comprobada.
 
 T-04, T-08 y T-19 incorporan calendario propio, retirada de la doble columna con conservación de contenido, selección neutra y color libre de texto/celdas. Los recorridos de escritorio/móvil y sus límites están en [controles y marca](docs/diseno/controles-y-marca.md).

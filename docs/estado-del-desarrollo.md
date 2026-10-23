@@ -1,5 +1,11 @@
 # Estado del desarrollo
 
+## Preparación de liberación con correo
+
+El operador confirmó que guardó SMTP, URLs y las dos plantillas de Auth. La recepción real continúa pendiente. El CI de `b62b236` terminó aprobado; los cambios posteriores de presentación de los correos no activaron ese flujo por sus filtros de rutas.
+
+La auditoría previa a liberar detectó cuatro avisos altos en la cadena de Zod/Vercel y uno moderado en Undici. Se fijó Undici 7.30.1 y Zod 4.6.6 únicamente en la dependencia de `@vercel/cli-config`, conservando `@vercel/functions`. La instalación informa cero vulnerabilidades; doce pruebas de transporte, pool y enlaces de correo y el formato de los manifiestos están aprobados. La compilación local con demostración desactivada también pasó. El CI del nuevo candidato y la publicación se registrarán por separado. No se realizó una prueba de carga nueva.
+
 ## Correos de marca y separación de producción
 
 Confirmación con agradecimiento, recuperación y bienvenida independiente disponen de HTML con tablas, estilos en línea, logo e ilustraciones PNG. Los dos correos de Auth usan `/auth/confirm` y `TokenHash`; la bienvenida independiente no tiene un disparador automático en Supabase. La [guía sin dominio propio](operacion/correo-sin-dominio.md) explica Gmail SMTP, las URLs de Vercel y los campos que completa el propietario. Plantillas preparadas no equivalen a correo entregado: SMTP y recepción real siguen pendientes.
