@@ -4,7 +4,9 @@
 
 La [entrega de controles y marca](diseno/controles-y-marca.md) unifica los desplegables y casillas; corrige la superposición del carrusel y los iconos de las herramientas del editor; aplica selección verde, transición de barra lateral y cursor de escritura vectorial con cambio suave. Las imágenes del quiz ganan tamaño y la ilustración de entrada pierde los tres trazos de énfasis. El QR incorpora el símbolo y localizadores verdes y conserva lectura verificada a 240 px. La prueba de carga queda omitida por decisión del solicitante, sin nueva aprobación de capacidad.
 
-Compilación, tipos, lint, formato y 232 pruebas unitarias aprobadas localmente; recorridos afectados y revisión manual descritos en el diseño. Correo y liberación de producción siguen pendientes. La auditoría actual detecta cuatro avisos altos de una cadena transitiva de Zod/Vercel; revisar su actualización antes de liberar. Este resultado actualiza el alcance del informe anterior que no mostraba avisos. CI y Preview de esta entrega se documentan al comprobarlos.
+Compilación, tipos, lint, formato y 232 pruebas unitarias aprobadas localmente; recorridos afectados y revisión manual descritos en el diseño. [CI 40026651195](https://github.com/CubeFreaKLab/aulify/actions/runs/40026651195) de la revisión `4d7ce35` aprobado: 118 recorridos de navegador, 40 exclusiones previstas y cero fallos; también reglas, permisos y compilación. [Preview Ready](https://aulify-6dbrn5ss7-jdanielchfhd-9543s-projects.vercel.app/demo?perfil=docente) comprobada en Chrome: navegación por encima del carrusel, selector y filtro Quizzes, QR con marca y URL del despliegue. [Evidencia de entrega](verificacion/entrega-controles-marca.json).
+
+Correo y liberación de producción siguen pendientes. La auditoría actual detecta cuatro avisos altos de una cadena transitiva de Zod/Vercel; revisar su corrección antes de liberar. Este resultado actualiza el alcance del informe anterior que no mostraba avisos. No se promovió producción ni se cambiaron SMTP, credenciales o protecciones.
 
 ## Publicación, editor y quiz invitado — 23 de octubre
 

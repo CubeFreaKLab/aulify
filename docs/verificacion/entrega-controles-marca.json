@@ -1,0 +1,51 @@
+{
+  "revision": "4d7ce355110fcd78835a6a98ab8456f695dacfa4",
+  "preview": {
+    "deployment": "3bpME6KVCDVgRyzNPF6MNqWZQg4R",
+    "url": "https://aulify-6dbrn5ss7-jdanielchfhd-9543s-projects.vercel.app",
+    "environment": "preview",
+    "status": "READY",
+    "visualChecks": [
+      "Navegación por encima de las tarjetas al desplazar la portada",
+      "Selector personalizado visible y filtro Quizzes operativo",
+      "QR con localizadores verdes, símbolo central y URL del despliegue"
+    ]
+  },
+  "ci": {
+    "runId": 40026651195,
+    "url": "https://github.com/CubeFreaKLab/aulify/actions/runs/40026651195",
+    "status": "completed",
+    "conclusion": "success",
+    "completedAt": "2026-10-23T21:32:13Z",
+    "browserPassed": 118,
+    "browserSkipped": 40,
+    "browserFailed": 0,
+    "artifactId": 12533660831,
+    "exclusions": "Integraciones que requieren configuración privada y controles específicos de dispositivo; la selección de texto con ratón se verifica en escritorio."
+  },
+  "local": {
+    "unitTestsPassed": 232,
+    "build": "passed",
+    "types": "passed",
+    "lint": "passed",
+    "format": "passed",
+    "browserEvidence": "Recorridos afectados y repeticiones descritos en docs/diseno/controles-y-marca.md. La acción de añadir fila se comprobó manualmente en Chrome; no se atribuye a un caso automatizado aprobado.",
+    "qrDecoding": "Dos longitudes de URL, SVG renderizado a 240 px y leído con jsQR, en escritorio y móvil."
+  },
+  "dependencyAudit": {
+    "highWarnings": 4,
+    "distinctAdvisories": 1,
+    "advisory": "GHSA-mrhx-c7xc-m3w5",
+    "chain": "@vercel/functions → @vercel/oidc → @vercel/cli-config → zod",
+    "status": "Pendiente de revisar antes de producción"
+  },
+  "loadTestExecuted": false,
+  "productionPromoted": false,
+  "databaseChanges": false,
+  "pending": [
+    "Correo SMTP: plantillas de confirmación, bienvenida y recuperación; guía de configuración y entrega real",
+    "Corrección de la dependencia señalada antes de producción",
+    "Lectura física del QR desde teléfono y acceso fuera de la sesión de Vercel",
+    "Separación de producción y demostración"
+  ]
+}
