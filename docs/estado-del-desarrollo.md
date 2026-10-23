@@ -1,5 +1,9 @@
 # Estado del desarrollo
 
+## Separación de gestión y recurso
+
+La vista docente conserva 20 px entre los controles de gestión y el recurso o la sala guiada. Comprobado en Chrome local con Clasificación cerrada y desplegada; formato aprobado. La verificación CI y Preview de este ajuste se registra al publicarlo, sin atribuirle los resultados de la entrega anterior.
+
 ## Controles coherentes y QR de marca
 
 La [entrega de controles y marca](diseno/controles-y-marca.md) unifica los desplegables y casillas; corrige la superposición del carrusel y los iconos de las herramientas del editor; aplica selección verde, transición de barra lateral y cursor de escritura vectorial con cambio suave. Las imágenes del quiz ganan tamaño y la ilustración de entrada pierde los tres trazos de énfasis. El QR incorpora el símbolo y localizadores verdes y conserva lectura verificada a 240 px. La prueba de carga queda omitida por decisión del solicitante, sin nueva aprobación de capacidad.

@@ -9,6 +9,7 @@
 - El cursor cambia suavemente entre lápiz e inserción de texto, también en acceso y registro. Se conserva la posición real del clic y el cursor nativo en dispositivos sin ratón.
 - La ilustración de entrada al quiz pierde únicamente sus tres trazos de énfasis. Las imágenes de las preguntas ganan tamaño sin desbordar móvil.
 - El QR conserva margen de lectura, módulos negros, localizadores verdes y símbolo central de Aulify. Debe decodificarse a la URL original después de incorporar la marca.
+- La gestión docente de una actividad conserva 20 px de separación respecto al recurso o a la sala guiada siguiente, también al abrir Clasificación y en móvil.
 
 ## Alcance de verificación
 

@@ -865,7 +865,7 @@ export function ActivityManagement({
     );
   }
   return (
-    <div style={stack}>
+    <div style={{ ...stack, marginBlockEnd: 20 }}>
       <DemoNotice live={live} />
       {archived && (
         <p className="notice">
