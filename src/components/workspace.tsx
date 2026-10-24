@@ -159,7 +159,7 @@ export function Workspace() {
               <WorkspaceBreadcrumb page={page} id={id} state={state} />
             </div>
             <div className="row">
-              <OpenPageGuide />
+              {page !== 'ayuda' && <OpenPageGuide />}
               {data.live ? (
                 <SignOutButton />
               ) : (
@@ -212,7 +212,9 @@ export function Workspace() {
             )}
           </WorkspaceTransition>
         </div>
-        <PageGuide key={`${user.id}:${page}`} page={page} user={user} state={state} />
+        {page !== 'ayuda' && (
+          <PageGuide key={`${user.id}:${page}`} page={page} user={user} state={state} />
+        )}
         <DialogPanel
           open={profiles}
           onClose={() => setProfiles(false)}
@@ -472,6 +474,9 @@ function SubjectsScreen({
   const [year, setYear] = useState(2026);
   const [code, setCode] = useState('');
   const teacher = user.role === 'teacher';
+  const pendingMemberships = state.memberships.filter(
+    (m) => m.studentId === user.id && m.status === 'pending',
+  );
   return (
     <>
       <PageHeading
@@ -483,6 +488,33 @@ function SubjectsScreen({
           {teacher ? 'Crear materia' : 'Unirme a una materia'}
         </Button>
       </PageHeading>
+      {subjects.length === 0 && (
+        <div className="empty-state subjects-empty">
+          <BrandArt name="object-books" width={200} height={170} />
+          <h2>
+            {teacher
+              ? 'Crea tu primera materia'
+              : pendingMemberships.length
+                ? 'Esperando la aprobación de tu docente'
+                : 'Todavía no estás en ninguna materia'}
+          </h2>
+          <p className="muted">
+            {teacher
+              ? 'Organiza tu grupo y empieza a compartir recursos con tu clase.'
+              : pendingMemberships.length
+                ? 'Cuando tu docente apruebe la solicitud, encontrarás tu materia aquí.'
+                : 'Pídele el código a tu docente y solicita unirte a tu clase.'}
+          </p>
+          <Button variant="secondary" onPress={() => setOpen(true)}>
+            <Plus size={17} />
+            {teacher
+              ? 'Crear mi primera materia'
+              : pendingMemberships.length
+                ? 'Unirme a otra materia'
+                : 'Tengo un código'}
+          </Button>
+        </div>
+      )}
       <div className="subjects-grid">
         {subjects.map((s) => (
           <SubjectCard subject={s} state={state} key={s.id} />

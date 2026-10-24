@@ -27,15 +27,22 @@ export async function proxy(request: NextRequest) {
       },
     },
   });
-  const { error } = await client.auth.getClaims();
+  const { data, error } = await client.auth.getClaims();
   if (availability.failure || isAuthUnavailable(error))
     return authFailureResponse(availability.failure ?? error);
   response.headers.set('Cache-Control', 'private, no-store');
+  if (request.nextUrl.pathname === '/' && !error && data?.claims?.sub) {
+    const home = NextResponse.redirect(new URL('/aula', request.url));
+    // Keep rotated session cookies when returning through the public address.
+    response.cookies.getAll().forEach((cookie) => home.cookies.set(cookie));
+    home.headers.set('Cache-Control', 'private, no-store');
+    return home;
+  }
   return response;
 }
 
 // Las rutas de sondeo, lectura y comandos renuevan y verifican la sesión dentro
 // de su propio handler. No necesitan una segunda ejecución previa del proxy.
 export const config = {
-  matcher: ['/aula/:path*', '/api/auth', '/api/files/:path*', '/auth/:path*', '/restablecer'],
+  matcher: ['/', '/aula/:path*', '/api/auth', '/api/files/:path*', '/auth/:path*', '/restablecer'],
 };

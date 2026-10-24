@@ -1,5 +1,21 @@
 # Estado del desarrollo
 
+## Liberación de registro, primer uso y resultados vacíos
+
+La revisión final añade una ilustración SVG generada y vectorizada al estado vacío de Resultados. Registro y cambio de contraseña omiten el texto fijo: los requisitos aparecen en rojo cuando se envía un valor inválido, sin anunciar el máximo técnico. 22 pruebas de registro y cuatro recorridos de primer uso en escritorio/móvil aprobados localmente; tipos y lint de los archivos afectados aprobados. El conjunto está preparado para publicación mediante el [PR 1](https://github.com/CubeFreaKLab/aulify/pull/1), conservando CI y la compilación propia de Production. La sección siguiente documenta la revisión anterior; la liberación se confirma con el resultado de CI y Vercel, no con esta preparación.
+
+## Registro y primer uso en revisión
+
+La rama `fix/registro-y-primer-uso` incorpora la [revisión de acceso y primer uso](diseno/registro-y-primer-uso.md): contraseñas comprobadas en cliente/API/proveedor, aviso de correo confirmado o pendiente, confirmación central con carta SVG generada y vectorizada, tema claro inicial, Materias vacías, Ayuda sin superposición y guías animadas. La dirección principal de esta versión vuelve al aula cuando la sesión persiste, propagando cookies renovadas; sin sesión conserva la portada. La política de contraseña se guardó en Supabase y se verificó con rechazos directos por longitud y composición. El código `7f52908` está disponible en [Preview](https://aulify-eb6djzryo-jdanielchfhd-9543s-projects.vercel.app), con [PR de revisión](https://github.com/CubeFreaKLab/aulify/pull/1). Se comprobó el formulario publicado y su nuevo texto de requisitos. La aplicación en producción conserva `cdd0a03` hasta revisar estos cambios; el resultado de CI se consulta en el PR.
+
+46 comprobaciones unitarias y doce recorridos afectados en escritorio/móvil aprobados, con el alcance y corrección del fixture descritos en el diseño; tipos, lint de los archivos modificados y compilación aprobados. Recepción de confirmación con imágenes comprobada por el propietario en la versión publicada anterior. Bienvenida independiente sin envío automático; recuperación por correo todavía no comprobada. No se realizaron pruebas de carga nuevas.
+
+## Producción publicada; confirmación recibida
+
+El candidato `cdd0a03e529e175e284dbbfbbde4e3947bf66ae2` completó el [CI 40042323685](https://github.com/CubeFreaKLab/aulify/actions/runs/40042323685) con resultado aprobado. Vercel compiló el despliegue de Production `3UGLmDTBRjnr8inkenyptWyendQB`, mantuvo la promoción bloqueada hasta la aprobación de GitHub y después lo marcó Ready. El dominio [Aulify](https://aulify-cubefreaklab.vercel.app) responde 200; también `/registro` y los tres PNG de los correos. El registro público se comprobó en Chrome sin accesos de demostración. `/api/workspace` sin sesión devuelve 401, la práctica fija devuelve 404 y `/demo` presenta la pantalla de página inexistente (respuesta transmitida con estado 200).
+
+Supabase conserva Site URL y las dos redirecciones de producción; confirmación de correo y registro están habilitados. Las plantillas de confirmación y recuperación están guardadas; el asunto de recuperación se corrigió a «Recupera tu acceso · Aulify». El propietario informó que guardó Gmail SMTP y confirmó la recepción del correo con logo e ilustración. El enlace de confirmación, la recuperación por correo y el cierre de sesión de esa cuenta no se verificaron por separado en esta intervención. No se enviaron correos ni se crearon cuentas durante las comprobaciones automatizadas. La bienvenida independiente continúa sin disparador automático. No se realizaron pruebas de carga nuevas.
+
 ## Preparación de liberación con correo
 
 El operador confirmó que guardó SMTP, URLs y las dos plantillas de Auth. La recepción real continúa pendiente. El CI de `b62b236` terminó aprobado; los cambios posteriores de presentación de los correos no activaron ese flujo por sus filtros de rutas.

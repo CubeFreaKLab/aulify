@@ -22,11 +22,11 @@ function session(expires: number) {
     user,
   };
 }
-function request() {
+function request(path = '/aula') {
   const encoded = Buffer.from(
     JSON.stringify(session(Math.floor(Date.now() / 1000) - 120)),
   ).toString('base64url');
-  return new NextRequest('https://aulify.example/aula', {
+  return new NextRequest(`https://aulify.example${path}`, {
     headers: { cookie: `sb-unit-auth-token=base64-${encoded}` },
   });
 }
@@ -40,6 +40,47 @@ describe('renovación SSR con el cliente Supabase real y transporte simulado', (
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
+  });
+
+  it('abrir el dominio con sesión persistente renueva la cookie y vuelve al aula', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (input: RequestInfo | URL) => {
+        if (String(input).includes('/auth/v1/token?grant_type=refresh_token'))
+          return Response.json(session(Math.floor(Date.now() / 1000) + 3600));
+        if (String(input).endsWith('/auth/v1/user')) return Response.json(user);
+        throw new Error('Solicitud inesperada.');
+      }),
+    );
+    const response = await proxy(request('/'));
+    expect(response.status).toBe(307);
+    expect(response.headers.get('location')).toBe('https://aulify.example/aula');
+    expect(response.headers.get('set-cookie')).toContain('sb-unit-auth-token=base64-');
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
+  });
+
+  it('el dominio muestra la portada sin sesión y no consulta usuarios remotos', async () => {
+    const transport = vi.fn();
+    vi.stubGlobal('fetch', transport);
+    const response = await proxy(new NextRequest('https://aulify.example/'));
+    expect(response.status).toBe(200);
+    expect(response.headers.get('location')).toBeNull();
+    expect(transport).not.toHaveBeenCalled();
+  });
+
+  it('una cookie revocada en la portada se elimina sin redirigir al aula', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () =>
+        Response.json(
+          { code: 'refresh_token_not_found', msg: 'Invalid Refresh Token' },
+          { status: 400 },
+        ),
+      ),
+    );
+    const response = await proxy(request('/'));
+    expect(response.headers.get('location')).toBeNull();
+    expect(response.headers.get('set-cookie')).toContain('Max-Age=0');
   });
 
   it('mantiene cookies ante 429 y corta la solicitud sin autorizar datos', async () => {

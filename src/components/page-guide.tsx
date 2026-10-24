@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Dialog, Heading, Modal, ModalOverlay } from 'react-aria-components';
 import { ArrowLeft, ArrowRight, Compass, X } from 'lucide-react';
 import type { DemoState, User } from '@/domain';
@@ -35,6 +35,8 @@ const visibleTarget = (selector: string) =>
 
 export function PageGuide({ page, user, state }: { page: string; user: User; state: DemoState }) {
   const [steps, setSteps] = useState<GuideStep[]>([]);
+  const [open, setOpen] = useState(false);
+  const maskId = useId();
   const [index, setIndex] = useState(0);
   const [box, setBox] = useState<Box | null>(null);
   const [disableAuto, setDisableAuto] = useState(false);
@@ -45,7 +47,6 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
   const storageKey = `aulify:page-guide:v1:${user.id}:${user.role}:${page}`;
   const autoKey = `aulify:page-guide:manual:${user.id}:${user.role}`;
   const { activeAttempt, current } = helpState(state, user);
-  const open = steps.length > 0;
 
   useEffect(() => {
     function start() {
@@ -63,6 +64,7 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
         document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setIndex(0);
       setSteps(available);
+      setOpen(true);
     }
     const timer = setTimeout(() => {
       if (activeAttempt) return;
@@ -84,7 +86,13 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
   useEffect(() => {
     if (!open) return;
     const element = visibleTarget(steps[index].target);
-    if (element) element.scrollIntoView({ block: 'center', behavior: 'instant' });
+    if (element)
+      element.scrollIntoView({
+        block: 'center',
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'instant'
+          : 'smooth',
+      });
     const measure = () => {
       const rect = element?.getBoundingClientRect();
       setBox({
@@ -136,8 +144,7 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
           HELP_VERSION,
         ),
       );
-    setSteps([]);
-    setBox(null);
+    setOpen(false);
     requestAnimationFrame(() => {
       if (returnFocus.current?.isConnected && returnFocus.current !== document.body)
         returnFocus.current.focus({ preventScroll: true });
@@ -173,13 +180,23 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
     >
       {box && (
         <svg className="page-guide-shade" width="100%" height="100%" aria-hidden="true">
-          <path
-            fill="#000"
-            fillOpacity=".67"
-            fillRule="evenodd"
-            d={`M0 0H${box.vw}V${box.vh}H0Z M${box.x} ${box.y}h${box.w}v${box.h}h-${box.w}Z`}
-          />
+          <defs>
+            <mask id={maskId}>
+              <rect width="100%" height="100%" fill="white" />
+              <rect
+                className="page-guide-hole"
+                x={box.x}
+                y={box.y}
+                width={box.w}
+                height={box.h}
+                rx="10"
+                fill="black"
+              />
+            </mask>
+          </defs>
+          <rect width="100%" height="100%" fill="#000" fillOpacity=".67" mask={`url(#${maskId})`} />
           <rect
+            className="page-guide-highlight"
             x={box.x}
             y={box.y}
             width={box.w}
@@ -202,10 +219,12 @@ export function PageGuide({ page, user, state }: { page: string; user: User; sta
               <X size={21} />
             </Button>
           </div>
-          <Heading ref={heading} tabIndex={-1} slot="title">
-            {steps[index]?.title}
-          </Heading>
-          <p id="page-guide-description">{steps[index]?.body}</p>
+          <div key={index} className="page-guide-copy">
+            <Heading ref={heading} tabIndex={-1} slot="title">
+              {steps[index]?.title}
+            </Heading>
+            <p id="page-guide-description">{steps[index]?.body}</p>
+          </div>
           <div className="page-guide-actions">
             <Button
               variant="secondary small"

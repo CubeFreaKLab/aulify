@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { chooseTheme, enterDemo, expectNoHorizontalOverflow } from './helpers';
 
 test('barra lateral: contraer, navegar y conservar la preferencia', async ({ page }, info) => {
   test.skip(info.project.name.includes('movil'), 'La barra lateral pertenece a escritorio.');
@@ -38,6 +38,7 @@ test('barra móvil: destinos por rol, más opciones y movimiento reducido', asyn
   test.skip(!info.project.name.includes('movil'), 'Recorrido táctil en el perfil móvil.');
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
   await enterDemo(page, 'docente');
+  await chooseTheme(page, 'dark');
   const dock = page.getByRole('navigation', { name: 'Accesos rápidos' });
   await expect(dock).toBeVisible();
   await dock.getByRole('link', { name: 'Biblioteca', exact: true }).click();

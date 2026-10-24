@@ -3,8 +3,6 @@
 import type { DemoState, User } from '@/domain';
 import { HELP_STEPS, helpState } from '@/domain/help';
 
-import { OpenPageGuide } from './page-guide';
-
 export function HelpSteps({ teacher }: { teacher: boolean }) {
   const icons = teacher
     ? ['materias', 'personas', 'lapiz', 'documento', 'resultados']
@@ -59,5 +57,5 @@ export function HelpGuide({
   if (helpState(state, user).activeAttempt)
     return placement === 'help' ? <StaticAttemptHelp /> : null;
   if (placement === 'dashboard') return null;
-  return <OpenPageGuide>Repetir la guía</OpenPageGuide>;
+  return null;
 }

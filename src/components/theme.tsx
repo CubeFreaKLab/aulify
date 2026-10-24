@@ -7,13 +7,13 @@ import { Moon, Sun } from 'lucide-react';
 type Theme = 'system' | 'light' | 'dark';
 const storageKey = 'aulify.theme';
 const ThemeContext = createContext<{ theme: Theme; setTheme: (theme: Theme) => void }>({
-  theme: 'system',
+  theme: 'light',
   setTheme: () => {},
 });
 
 function readPreference(): Theme {
   const value = document.documentElement.dataset.themePreference;
-  return value === 'light' || value === 'dark' ? value : 'system';
+  return value === 'system' || value === 'dark' ? value : 'light';
 }
 
 function applyTheme(preference: Theme) {
@@ -33,7 +33,7 @@ function subscribe(onChange: () => void) {
   const onStorage = (event: StorageEvent) => {
     if (event.key === storageKey || event.key === null) {
       applyTheme(
-        event.newValue === 'light' || event.newValue === 'dark' ? event.newValue : 'system',
+        event.newValue === 'system' || event.newValue === 'dark' ? event.newValue : 'light',
       );
     }
   };
@@ -46,7 +46,7 @@ function subscribe(onChange: () => void) {
     window.removeEventListener('aulify:theme', onChange);
   };
 }
-const serverSnapshot = (): Theme => 'system';
+const serverSnapshot = (): Theme => 'light';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const theme = useSyncExternalStore(subscribe, readPreference, serverSnapshot);

@@ -54,6 +54,10 @@ Revisión de alcance del 17 de octubre: la validación vigente de RNF-03 utiliza
 
 **CU-01b.** Confirmación y recuperación usan correos HTML con marca, texto legible sin imágenes y enlace alternativo. La confirmación incluye el agradecimiento por registrarse. Configurar y comprobar SMTP y URLs antes de afirmar entrega de correo: disponer de una plantilla no acredita envío. El subdominio gratuito del alojamiento puede ser el destino web; el remitente requiere una cuenta habilitada para SMTP.
 
+**CU-01c.** Registro y cambio de contraseña exigen entre 8 y 128 caracteres, mayúscula, minúscula, número y símbolo en formulario y servidor. El registro informa del correo ya confirmado o con registro pendiente, sin presentar un envío inexistente, y ofrece acceso/recuperación. El envío correcto sustituye el formulario por una confirmación central ilustrada. La dirección principal con sesión válida vuelve al aula conservando renovación de cookies. Primera visita clara; una preferencia guardada prevalece. Ayuda sin guía superpuesta; las otras guías conservan transición suave y alternativa sin movimiento. Materias sin grupos explica el estado y ofrece incorporación. [Criterios de primer uso](docs/diseno/registro-y-primer-uso.md).
+
+**CU-01d.** Los requisitos de contraseña aparecen en rojo solo al enviar un valor inválido; el mensaje indica el mínimo de ocho caracteres y la composición requerida, sin mostrar el máximo técnico. Resultados sin filas usa una ilustración vectorial de marca y conserva su explicación y filtros.
+
 **CU-02.** El docente es propietario de sus materias. Nombre, curso y año son editables; dos materias pueden tener el mismo nombre. Los identificadores y relaciones, no los nombres, separan integrantes y resultados. No hay un módulo adicional de cursos institucionales.
 
 **CU-03.** Cada materia activa tiene un código aleatorio de ocho caracteres sin caracteres ambiguos. No caduca automáticamente; el docente puede renovarlo o desactivarlo. El código identifica la solicitud, no concede acceso al contenido. Renovarlo no elimina solicitudes existentes ni membresías.

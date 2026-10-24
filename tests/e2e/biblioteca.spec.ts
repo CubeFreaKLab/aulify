@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { createDemoState, DEMO_IDS } from '../../src/domain/demo-data';
 import type { DemoState } from '../../src/domain/types';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { chooseTheme, enterDemo, expectNoHorizontalOverflow } from './helpers';
 
 test.beforeEach(async ({ page }) => {
   const state = createDemoState();
@@ -130,7 +130,8 @@ test('biblioteca: búsqueda, tipo y orden; vista previa y copia independientes',
 test('biblioteca: lectura, filtros vacíos y reflujo en ambos temas', async ({ page }, testInfo) => {
   await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: testInfo.outputPath('biblioteca-clara.png'), fullPage: true });
-  await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await chooseTheme(page, 'dark');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await expectNoHorizontalOverflow(page);
   const scan = await new AxeBuilder({ page }).include('.library-screen').analyze();
