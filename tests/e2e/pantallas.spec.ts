@@ -1,7 +1,7 @@
 import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { chooseTheme, enterDemo, expectNoHorizontalOverflow } from './helpers';
 
 for (const theme of ['light', 'dark'] as const) {
   test(`pantallas: reflujo de materia, revisión y resultados en ${theme}`, async ({
@@ -10,6 +10,7 @@ for (const theme of ['light', 'dark'] as const) {
   }) => {
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
     await enterDemo(page, 'docente');
+    await chooseTheme(page, theme);
     for (const width of isMobile ? [320, 390] : [1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto('/demo');
@@ -73,6 +74,7 @@ test('quiz: cabecera estable y relaciones legibles en ancho pequeño', async ({
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
   await page.setViewportSize({ width: isMobile ? 320 : 1440, height: 900 });
   await enterDemo(page, 'estudiante');
+  await chooseTheme(page, 'dark');
   await page.goto('/demo/actividad/activity-ecosystems');
   await page.getByRole('button', { name: 'Empezar actividad', exact: true }).click();
   const logo = page.locator('.quiz-logo');

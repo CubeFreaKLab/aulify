@@ -1,7 +1,7 @@
 import { chooseOption } from './select-helpers';
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { chooseTheme, enterDemo, expectNoHorizontalOverflow } from './helpers';
 
 test('video conserva título y enlace; se carga solo al pedirlo y mantiene alternativa externa', async ({
   page,
@@ -16,6 +16,7 @@ test('video conserva título y enlace; se carga solo al pedirlo y mantiene alter
   });
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
   await enterDemo(page, 'docente');
+  await chooseTheme(page, 'dark');
   await page.goto('/demo/editor/resource-ecosystems');
   await expect(page.locator('.bn-editor')).toBeVisible();
   await chooseOption(page.getByLabel('Insertar bloque', { exact: true }), 'video');

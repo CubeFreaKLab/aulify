@@ -1,5 +1,22 @@
 import { expect, type Page } from '@playwright/test';
 
+export async function chooseTheme(page: Page, theme: 'light' | 'dark'): Promise<void> {
+  if ((await page.locator('html').getAttribute('data-theme')) === theme) return;
+  const toggle = page.getByRole('button', {
+    name: theme === 'dark' ? 'Tema oscuro' : 'Tema claro',
+    exact: true,
+  });
+  const openMenu = !(await toggle.isVisible());
+  if (openMenu) await page.getByRole('button', { name: 'Abrir navegación', exact: true }).click();
+  await toggle.click();
+  if (openMenu) {
+    const menu = page.getByRole('dialog', { name: 'Menú de navegación', exact: true });
+    await menu.getByRole('button', { name: 'Cerrar navegación', exact: true }).click();
+    await expect(menu).toHaveCount(0);
+  }
+  await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+}
+
 export async function finishPageGuide(page: Page): Promise<number> {
   const guide = page.locator('.page-guide-dialog');
   await expect(guide).toBeVisible();

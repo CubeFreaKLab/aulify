@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Locator, type Page } from '@playwright/test';
 import path from 'node:path';
 import type { DemoState } from '../../src/domain/types';
-import { enterDemo, expectNoHorizontalOverflow } from './helpers';
+import { chooseTheme, enterDemo, expectNoHorizontalOverflow } from './helpers';
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -123,7 +123,7 @@ test('imagen: ancho y alineación persisten y conservan la proporción en editor
   await figure.getByText('Tamaño y posición', { exact: true }).click();
   await expect(page.getByRole('slider', { name: 'Ancho de la imagen' })).toHaveValue('60');
   for (const theme of ['light', 'dark'] as const) {
-    await page.emulateMedia({ colorScheme: theme });
+    await chooseTheme(page, theme);
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
     await expectNoHorizontalOverflow(page);
     const scan = await new AxeBuilder({ page })
@@ -154,7 +154,7 @@ test('imagen: ancho y alineación persisten y conservan la proporción en editor
   await expect(readImage.getByRole('button')).toHaveCount(0);
   await imageGeometry(readImage, 60, 'right');
   for (const theme of ['light', 'dark'] as const) {
-    await page.emulateMedia({ colorScheme: theme });
+    await chooseTheme(page, theme);
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
     await expectNoHorizontalOverflow(page);
     const screenshotPath = testInfo.outputPath(`imagen-lectura-${theme}.png`);

@@ -1,7 +1,12 @@
 import { chooseOption } from './select-helpers';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { enterDemo, expectNoHorizontalOverflow, openResourceQuestions } from './helpers';
+import {
+  chooseTheme,
+  enterDemo,
+  expectNoHorizontalOverflow,
+  openResourceQuestions,
+} from './helpers';
 import { decodeDemoState } from '../../src/domain';
 import type { DemoState } from '../../src/domain/types';
 
@@ -88,7 +93,8 @@ test('bloques: slash buscable, formato, controles por teclado y recuperación', 
   await expect(editor.getByText('Observar el entorno', { exact: true })).toBeVisible();
   await expectNoHorizontalOverflow(page);
   expect(errors).toEqual([]);
-  await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await chooseTheme(page, 'dark');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await expect(editor.getByText('Pista para la actividad', { exact: true })).toHaveCSS(
     'color',
@@ -332,6 +338,7 @@ test('lector conserva colores, resaltado y alineación del editor en ambos temas
   for (const theme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
     await page.goto('/demo/editor/resource-ecosystems');
+    await chooseTheme(page, theme);
     const original = page.locator('.bn-editor').getByText('Plantas y luz', { exact: true });
     await expect(original).toBeVisible();
     const styles = await original.evaluate((e) => ({

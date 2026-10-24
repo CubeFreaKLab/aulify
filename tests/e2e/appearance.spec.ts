@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { enterDemo, expectNoHorizontalOverflow, expectLoadedImages } from './helpers';
+import { chooseTheme, enterDemo, expectNoHorizontalOverflow, expectLoadedImages } from './helpers';
 
 test.beforeEach(async ({ context }) => {
   await context.addInitScript(() => {
@@ -34,6 +34,10 @@ test('apariencia por teclado, persistencia y preferencia del sistema', async ({
   await page.evaluate(() => localStorage.removeItem('aulify.theme'));
   await page.reload();
   await page.emulateMedia({ colorScheme: 'dark' });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  // An explicitly saved system preference still follows the operating system.
+  await page.evaluate(() => localStorage.setItem('aulify.theme', 'system'));
+  await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.emulateMedia({ colorScheme: 'light' });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
@@ -59,6 +63,7 @@ test('presentación conserva contraste en ambos temas y respeta movimiento reduc
 test('contraste del espacio docente y de la participación en tema oscuro', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
   await enterDemo(page, 'docente');
+  await chooseTheme(page, 'dark');
   await expectNoHorizontalOverflow(page);
   const workspace = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
