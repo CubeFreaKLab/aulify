@@ -22,6 +22,56 @@
   position: fixed;
   max-height: calc(100dvh - 24px);
   overflow: auto;
+  transition:
+    left 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    top 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page-guide-hole,
+.page-guide-highlight {
+  transition:
+    x 360ms ease,
+    y 360ms ease,
+    width 360ms ease,
+    height 360ms ease;
+}
+.page-guide-copy {
+  animation: guide-copy-in 220ms ease both;
+}
+.page-guide-overlay[data-entering] {
+  animation: guide-fade 220ms ease both;
+}
+.page-guide-overlay[data-exiting] {
+  animation: guide-fade 180ms ease reverse both;
+}
+@keyframes guide-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes guide-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-guide-modal,
+  .page-guide-hole,
+  .page-guide-highlight {
+    transition: none;
+  }
+  .page-guide-copy,
+  .page-guide-overlay[data-entering],
+  .page-guide-overlay[data-exiting] {
+    animation: none;
+  }
 }
 .page-guide-dialog {
   background: var(--white);

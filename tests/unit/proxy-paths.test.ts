@@ -11,6 +11,7 @@ describe('rutas que requieren el proxy de sesión', () => {
   );
 
   it.each([
+    '/',
     '/aula',
     '/aula/materias',
     '/api/auth',

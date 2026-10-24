@@ -319,25 +319,7 @@ export function pageGuideSteps(page: string, teacher: boolean): GuideStep[] {
         ),
       ];
     case 'ayuda':
-      return [
-        step(
-          '.page-heading',
-          'Ayuda a mano',
-          teacher
-            ? 'Aquí puedes repasar cómo preparar, compartir y evaluar tus clases.'
-            : 'Aquí puedes repasar cómo entrar a tu materia, responder y consultar tus notas.',
-        ),
-        step(
-          '[data-guide="repeat"]',
-          'Repite el recorrido',
-          'Cada pantalla tiene su propia guía. Usa «Guía de esta página» para volver a señalar sus controles.',
-        ),
-        step(
-          '.help-step',
-          'Consulta los pasos por escrito',
-          'También tienes instrucciones que puedes leer a tu ritmo, sin animaciones ni ventanas superpuestas.',
-        ),
-      ];
+      return [];
     case 'actividad':
       if (teacher)
         return [

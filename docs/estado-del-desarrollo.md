@@ -1,5 +1,11 @@
 # Estado del desarrollo
 
+## Registro y primer uso en revisión
+
+La rama `fix/registro-y-primer-uso` incorpora la [revisión de acceso y primer uso](diseno/registro-y-primer-uso.md): contraseñas comprobadas en cliente/API/proveedor, aviso de correo confirmado o pendiente, confirmación central con carta SVG generada y vectorizada, tema claro inicial, Materias vacías, Ayuda sin superposición y guías animadas. El dominio principal vuelve al aula cuando la sesión persiste, propagando cookies renovadas; sin sesión conserva la portada. La política de contraseña se guardó en Supabase y se verificó con rechazos directos por longitud y composición. El resto requiere publicación de esta rama y revisión de Preview antes de actualizar la aplicación en producción.
+
+46 comprobaciones unitarias y doce recorridos afectados en escritorio/móvil aprobados, con el alcance y corrección del fixture descritos en el diseño; tipos, lint de los archivos modificados y compilación aprobados. Recepción de confirmación con imágenes comprobada por el propietario en la versión publicada anterior. Bienvenida independiente sin envío automático; recuperación por correo todavía no comprobada. No se realizaron pruebas de carga nuevas.
+
 ## Producción publicada; recepción de correo pendiente
 
 El candidato `cdd0a03e529e175e284dbbfbbde4e3947bf66ae2` completó el [CI 40042323685](https://github.com/CubeFreaKLab/aulify/actions/runs/40042323685) con resultado aprobado. Vercel compiló el despliegue de Production `3UGLmDTBRjnr8inkenyptWyendQB`, mantuvo la promoción bloqueada hasta la aprobación de GitHub y después lo marcó Ready. El dominio [Aulify](https://aulify-cubefreaklab.vercel.app) responde 200; también `/registro` y los tres PNG de los correos. El registro público se comprobó en Chrome sin accesos de demostración. `/api/workspace` sin sesión devuelve 401, la práctica fija devuelve 404 y `/demo` presenta la pantalla de página inexistente (respuesta transmitida con estado 200).

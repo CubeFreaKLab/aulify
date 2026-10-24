@@ -2,6 +2,63 @@
   min-height: 100svh;
   background: var(--paper);
 }
+.auth-sent-layout {
+  min-height: calc(100svh - 98px);
+  display: grid;
+  place-items: center;
+  padding: 28px 20px 60px;
+}
+.auth-sent-card {
+  width: min(100%, 640px);
+  padding: clamp(24px, 4vw, 48px);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: auth-reveal var(--motion-long) var(--ease-enter);
+}
+.auth-sent-card .brand-art {
+  width: min(68%, 250px);
+  height: auto;
+  aspect-ratio: 1;
+}
+.auth-sent-card h1 {
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+.auth-sent-card h1:focus {
+  outline: none;
+}
+.auth-sent-card p {
+  max-width: 48ch;
+  overflow-wrap: anywhere;
+}
+.auth-sent-card .button {
+  min-height: 46px;
+}
+.auth-sent-card .muted {
+  font-size: 14px;
+}
+.auth-existing-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font-size: 14px;
+}
+.auth-existing-links a {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+}
+.auth-status-error {
+  background: var(--white);
+  border-color: var(--line-strong);
+}
 .auth-header {
   height: 98px;
   padding: 24px clamp(24px, 4.4vw, 72px);
