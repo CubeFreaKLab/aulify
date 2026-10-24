@@ -1,5 +1,11 @@
 # Estado del desarrollo
 
+## Producción publicada; recepción de correo pendiente
+
+El candidato `cdd0a03e529e175e284dbbfbbde4e3947bf66ae2` completó el [CI 40042323685](https://github.com/CubeFreaKLab/aulify/actions/runs/40042323685) con resultado aprobado. Vercel compiló el despliegue de Production `3UGLmDTBRjnr8inkenyptWyendQB`, mantuvo la promoción bloqueada hasta la aprobación de GitHub y después lo marcó Ready. El dominio [Aulify](https://aulify-cubefreaklab.vercel.app) responde 200; también `/registro` y los tres PNG de los correos. El registro público se comprobó en Chrome sin accesos de demostración. `/api/workspace` sin sesión devuelve 401, la práctica fija devuelve 404 y `/demo` presenta la pantalla de página inexistente (respuesta transmitida con estado 200).
+
+Supabase conserva Site URL y las dos redirecciones de producción; confirmación de correo y registro están habilitados. Las plantillas de confirmación y recuperación están guardadas; el asunto de recuperación se corrigió a «Recupera tu acceso · Aulify». El propietario informó que guardó Gmail SMTP. Falta comprobar con su registro real la recepción, las imágenes y el enlace de confirmación; después, recuperación y cierre de sesión. No se enviaron correos ni se crearon cuentas durante esta verificación. La bienvenida independiente continúa sin disparador automático. No se realizaron pruebas de carga nuevas.
+
 ## Preparación de liberación con correo
 
 El operador confirmó que guardó SMTP, URLs y las dos plantillas de Auth. La recepción real continúa pendiente. El CI de `b62b236` terminó aprobado; los cambios posteriores de presentación de los correos no activaron ese flujo por sus filtros de rutas.
