@@ -11,7 +11,7 @@ import { BrandArt } from './brand-art';
 import { ThemeSwitcher } from './theme';
 import { AuthInput } from './auth-input';
 import { PencilCursor } from './pencil-cursor';
-import { PASSWORD_HINT, passwordError } from '@/lib/password-policy';
+import { passwordError } from '@/lib/password-policy';
 import '../styles/auth.css';
 
 type AuthMode = 'access' | 'register' | 'recover' | 'update-password';
@@ -269,7 +269,6 @@ export function AuthScreen({
                     required
                     minLength={registering || updating ? 8 : undefined}
                     maxLength={128}
-                    hint={registering || updating ? PASSWORD_HINT : undefined}
                     error={errors.password}
                     onChange={() => clearError('password')}
                     trailing={

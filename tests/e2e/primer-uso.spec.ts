@@ -24,6 +24,8 @@ test('registro: rechaza clave débil, avisa correo ocupado y confirma el envío 
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/registro');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('#auth-password-hint')).toHaveCount(0);
+  await expect(page.locator('#auth-password-error')).toHaveCount(0);
   await page.getByLabel('Tu nombre', { exact: true }).fill('Persona de prueba');
   await page.getByLabel('Correo electrónico', { exact: true }).fill('ocupado@example.test');
   await page.getByLabel('Contraseña', { exact: true }).fill('aaaaaaaa');
@@ -34,7 +36,11 @@ test('registro: rechaza clave débil, avisa correo ocupado y confirma el envío 
     'true',
   );
   expect(requests).toBe(0);
+  await expect(page.locator('#auth-password-error')).toContainText('al menos 8 caracteres');
+  await expect(page.locator('#auth-password-error')).toHaveCSS('color', 'rgb(164, 43, 32)');
+  await expect(page.locator('#auth-password-error')).not.toContainText('128');
   await page.getByLabel('Contraseña', { exact: true }).fill('Clave-de-prueba-27!');
+  await expect(page.locator('#auth-password-error')).toHaveCount(0);
   await page.getByRole('button', { name: 'Crear cuenta', exact: true }).click();
   await expect(page.getByLabel('Correo electrónico', { exact: true })).toBeFocused();
   await expect(page.getByText('Este correo ya está registrado.', { exact: false })).toBeVisible();
@@ -84,6 +90,20 @@ test('materias vacías y ayuda directa del estudiante', async ({ page }, testInf
   await page.getByRole('button', { name: 'Tengo un código', exact: true }).click();
   await expect(page.getByRole('dialog', { name: 'Únete a tu clase' })).toBeVisible();
   await page.keyboard.press('Escape');
+  await page.goto('/demo/resultados');
+  await expect(
+    page.getByRole('heading', { name: 'Todavía no hay resultados en este grupo' }),
+  ).toBeVisible();
+  await expect(page.locator('.results-empty img')).toHaveAttribute(
+    'src',
+    '/illustrations/aulify/results-empty.svg',
+  );
+  await expectLoadedImages(page);
+  await expectNoHorizontalOverflow(page);
+  await testInfo.attach('resultados-vacios', {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: 'image/png',
+  });
   await page.goto('/demo/ayuda');
   await expect(page.getByRole('heading', { name: 'Una mano para empezar.' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Guía de esta página' })).toHaveCount(0);

@@ -2,17 +2,10 @@
 import { DateControl } from './date-control';
 import { SelectControl } from './select-control';
 import { ProfileAvatar } from './profile-avatar';
+import { BrandArt } from './brand-art';
 
 import Link from './workspace-link';
-import {
-  ArrowLeftRight,
-  BarChart3,
-  Check,
-  ClipboardCheck,
-  FileText,
-  Plus,
-  Upload,
-} from 'lucide-react';
+import { ArrowLeftRight, Check, ClipboardCheck, FileText, Plus, Upload } from 'lucide-react';
 import { useRef, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { uploadFile } from '@/lib/upload';
@@ -794,9 +787,11 @@ export function ResultsScreen({ state, user }: ScreenProps) {
         <p role="alert">La fecha inicial debe ser anterior o igual a la fecha final.</p>
       )}
       {!rows.length ? (
-        <EmptyState icon={BarChart3} title="Todavía no hay resultados en este grupo">
-          Prueba otros filtros o espera la primera actividad de la materia.
-        </EmptyState>
+        <div className="empty-state results-empty">
+          <BrandArt name="results-empty" width={1280} height={1280} />
+          <h2>Todavía no hay resultados en este grupo</h2>
+          <p className="muted">Prueba otros filtros o espera la primera actividad de la materia.</p>
+        </div>
       ) : (
         <>
           <section className="surface results-overview" aria-labelledby="average-heading">

@@ -2,11 +2,12 @@
 
 ## Comportamiento y aceptación
 
-- RF-01: registro y recuperación exigen entre 8 y 128 caracteres, mayúscula, minúscula, número y símbolo. Verificar en formulario, API y Supabase; el acceso de cuentas existentes conserva su contraseña. No guardar contraseñas en Web Storage.
+- RF-01: registro y recuperación exigen entre 8 y 128 caracteres, mayúscula, minúscula, número y símbolo. Mostrar los requisitos solo como error rojo al enviar una contraseña incompleta, indicando el mínimo sin anunciar el máximo técnico. Verificar en formulario, API y Supabase; el acceso de cuentas existentes conserva su contraseña. No guardar contraseñas en Web Storage.
 - RF-01: el error de cuenta existente y la identidad vacía de Supabase se presentan como correo ocupado, junto al campo y con accesos a iniciar sesión/recuperar. No mostrar éxito en esos casos ni consultar una lista administrativa. Una cuenta sin confirmar puede recibir de nuevo el enlace mediante el proveedor, conservando una sola cuenta.
 - RF-01: el envío correcto sustituye el formulario por una tarjeta centrada, con carta SVG, correo de destino, explicación, acceso y corrección de dirección; foco en el título y reflujo móvil. Bienvenida independiente sin envío automático.
 - RF-01: abrir `/` con sesión válida redirige a `/aula`, incluso tras cerrar la pestaña; conservar cookies renovadas. Sin sesión o con sesión revocada aparece la portada. Una avería de Auth no se interpreta como cierre de sesión.
 - RF-02: Materias sin grupos muestra ilustración, explicación por rol y acción real de crear/unirse. Las solicitudes pendientes explican la espera de aprobación.
+- RF-13: Resultados sin filas muestra una ilustración SVG de informe y lápiz en lugar del icono pequeño, con la explicación y los filtros existentes. La imagen decorativa no repite el título al lector de pantalla.
 - RF-17: Ayuda conserva instrucciones escritas sin guía superpuesta ni botón para abrirla. Las otras guías animan posición, foco visual, contenido, entrada y salida; respetan movimiento reducido y teclado.
 - RNF-01/RNF-02: primera visita clara incluso con sistema oscuro. Una elección guardada de tema se conserva.
 
@@ -21,6 +22,8 @@ La navegación inicial usa el proxy SSR existente, respuesta privada sin caché,
 Herramienta integrada de generación de imágenes y trazado con `tools/diseno/vectorizar-correo.py` (VTracer). SVG de 16 trazados, sin bitmap incrustado, negro, blanco y verde. PNG original conservado en artefactos de trabajo. Prompt: sobre abierto con carta y marca de comprobación, pequeño avión de papel, trazo negro grueso ligeramente irregular, blanco y verde #85bd6e, fondo transparente, sin texto, degradados ni sombras. La vectorización aplana los colores.
 
 ## Verificación
+
+La revisión final sustituye el icono vacío de Resultados por una ilustración generada y trazada con VTracer: 16 trazados, sin bitmap incrustado, en los tres colores de la marca. Se reutiliza el script de vectorización de la carta. El formulario de registro y cambio de contraseña omite el aviso fijo; la validación conserva el mínimo y las clases requeridas, con errores rojos junto al campo. 22 pruebas unitarias de registro y cuatro recorridos de primer uso aprobados localmente; estos comprueban aviso condicional, color rojo, ausencia de «128», desaparición al editar, SVG cargado y reflujo en escritorio y móvil. Tipos y lint de los archivos modificados aprobados. La publicación conserva los controles de CI y la compilación propia de Production.
 
 46 comprobaciones unitarias aprobadas sobre registro, recuperación, duplicado confirmado/pendiente, enlaces de correo, renovación y rutas de proxy. Ocho recorridos de guías y cuatro de primer uso aprobados en escritorio/móvil; los primeros usan también movimiento reducido y navegación por teclado. Revisión visual de la tarjeta y del estado vacío, sin desbordamiento, imágenes cargadas y accesibilidad automática de confirmación sin incidencias. El primer ensayo del nuevo fixture navegó antes de terminar la selección de perfil; se corrigió esperando el inicio estudiantil y pasó en ambos tamaños. Tipos, lint de archivos modificados y compilación aprobados.
 

@@ -3,6 +3,12 @@
   color: var(--muted);
   line-height: 1.6;
 }
+.results-empty .brand-art {
+  display: block;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+}
 .review-detail {
   min-width: 0;
 }

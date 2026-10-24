@@ -25,7 +25,13 @@ export async function POST(request: NextRequest) {
     )
       return jsonResponse({ error: 'Escribe un correo electrónico válido.' }, 400);
     if (action !== 'recover' && (!password || password.length > 128))
-      return jsonResponse({ error: 'La contraseña debe tener entre 8 y 128 caracteres.' }, 400);
+      return jsonResponse(
+        {
+          error: !password ? 'Escribe tu contraseña.' : 'Usa una contraseña más corta.',
+          field: 'password',
+        },
+        400,
+      );
     if (action === 'register' || action === 'update-password') {
       const error = passwordError(password);
       if (error) return jsonResponse({ error, field: 'password' }, 400);

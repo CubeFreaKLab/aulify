@@ -1,5 +1,7 @@
 # Tareas de desarrollo de Aulify
 
+T-06/T-13/T-19: ilustración vectorizada de Resultados y aviso condicional rojo de contraseña implementados; 22 pruebas de registro y cuatro recorridos de primer uso aprobados localmente. Liberar junto con el conjunto revisado mediante el PR, comprobar CI y despliegue de Production.
+
 T-06/T-19: completar [registro y primer uso](docs/diseno/registro-y-primer-uso.md), verificar rechazo de contraseñas incompletas en servidor, duplicado explícito/identidad vacía, recuperación sin bloquear accesos existentes, retorno al aula con renovación de cookies, tarjeta central, Materias vacías y guía accesible. Publicar en Preview para revisión antes de producción.
 
 Preparación de la liberación con correo: actualizar las dependencias señaladas por la auditoría, verificar transporte/pool y compilación, ejecutar CI para el candidato exacto y compilarlo en Production conservando el control bloqueante. Después, comprobar recursos PNG públicos y ausencia de demo; confirmación y recuperación requieren recepción real. No repetir la prueba de carga omitida del alcance.

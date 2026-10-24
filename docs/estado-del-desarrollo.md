@@ -1,5 +1,9 @@
 # Estado del desarrollo
 
+## Liberación de registro, primer uso y resultados vacíos
+
+La revisión final añade una ilustración SVG generada y vectorizada al estado vacío de Resultados. Registro y cambio de contraseña omiten el texto fijo: los requisitos aparecen en rojo cuando se envía un valor inválido, sin anunciar el máximo técnico. 22 pruebas de registro y cuatro recorridos de primer uso en escritorio/móvil aprobados localmente; tipos y lint de los archivos afectados aprobados. El conjunto está preparado para publicación mediante el [PR 1](https://github.com/CubeFreaKLab/aulify/pull/1), conservando CI y la compilación propia de Production. La sección siguiente documenta la revisión anterior; la liberación se confirma con el resultado de CI y Vercel, no con esta preparación.
+
 ## Registro y primer uso en revisión
 
 La rama `fix/registro-y-primer-uso` incorpora la [revisión de acceso y primer uso](diseno/registro-y-primer-uso.md): contraseñas comprobadas en cliente/API/proveedor, aviso de correo confirmado o pendiente, confirmación central con carta SVG generada y vectorizada, tema claro inicial, Materias vacías, Ayuda sin superposición y guías animadas. La dirección principal de esta versión vuelve al aula cuando la sesión persiste, propagando cookies renovadas; sin sesión conserva la portada. La política de contraseña se guardó en Supabase y se verificó con rechazos directos por longitud y composición. El código `7f52908` está disponible en [Preview](https://aulify-eb6djzryo-jdanielchfhd-9543s-projects.vercel.app), con [PR de revisión](https://github.com/CubeFreaKLab/aulify/pull/1). Se comprobó el formulario publicado y su nuevo texto de requisitos. La aplicación en producción conserva `cdd0a03` hasta revisar estos cambios; el resultado de CI se consulta en el PR.

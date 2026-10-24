@@ -1,5 +1,7 @@
 # Plan técnico de Aulify
 
+La revisión final de primer uso incorpora SVG generado y vectorizado para Resultados sin filas. Los requisitos de contraseña se presentan únicamente en el error del campo, con el mínimo visible y máximo técnico interno. Publicar el conjunto revisado con CI aprobado y compilación de Production.
+
 La [revisión de registro y primer uso](docs/diseno/registro-y-primer-uso.md) comparte política de contraseña entre cliente/API y configuración de Supabase, interpreta duplicados del proveedor, centra la confirmación ilustrada y redirige la portada con sesión mediante el proxy SSR conservando cookies. Tema claro inicial; guías con movimiento reducido y sin superposición en Ayuda; estado vacío de Materias. Trabajar en Preview antes de actualizar producción.
 
 Para la liberación con correo se fija Undici 7.30.1 y se aplica una sustitución acotada de Zod 4.6.6 bajo `@vercel/cli-config`, que mantiene una versión vulnerable fijada en sus dependencias. Se conserva la API y versión de `@vercel/functions`; el cambio se valida con las pruebas de transporte y pool, compilación y auditoría del árbol instalado. No se usa `npm audit fix --force` ni se atribuye la auditoría a una revisión integral de seguridad.
